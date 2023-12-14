@@ -1,0 +1,72 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x8411b2cfc6de030c9e51683d52035d802040cc81.sol:
+/sb/0x8411b2cfc6de030c9e51683d52035d802040cc81.sol:67:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function AITCToken () public {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x8411b2cfc6de030c9e51683d52035d802040cc81.sol:95:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Transfer(msg.sender, _to, _amount);
+        ^--------------------------------^
+/sb/0x8411b2cfc6de030c9e51683d52035d802040cc81.sol:108:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Transfer(_from, _to, _amount);
+        ^---------------------------^
+/sb/0x8411b2cfc6de030c9e51683d52035d802040cc81.sol:114:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Approval(msg.sender, _spender, _value);
+        ^------------------------------------^
+/sb/0x8411b2cfc6de030c9e51683d52035d802040cc81.sol:123:32: Warning: Using contract member "balance" inherited from the address type is deprecated. Convert the contract to "address" type to access the member, for example use "address(contract).balance" instead.
+        uint256 etherBalance = this.balance;
+                               ^----------^
+/sb/0x8411b2cfc6de030c9e51683d52035d802040cc81.sol:133:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Burn(burner, _value);
+        ^------------------^
+/sb/0x8411b2cfc6de030c9e51683d52035d802040cc81.sol:138:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Approval(msg.sender, _spender, _value);
+        ^------------------------------------^
+
+INFO:Detectors:[93m
+AITCToken.totalSupply (/sb/0x8411b2cfc6de030c9e51683d52035d802040cc81.sol#58) shadows:
+	- ERC20Basic.totalSupply (/sb/0x8411b2cfc6de030c9e51683d52035d802040cc81.sol#33)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variable-shadowing-from-abstract-contracts[0m
+INFO:Detectors:[92m
+ERC20Basic.totalSupply should be constant (/sb/0x8411b2cfc6de030c9e51683d52035d802040cc81.sol#33)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+ERC20Basic.balanceOf (/sb/0x8411b2cfc6de030c9e51683d52035d802040cc81.sol#33-34) should be declared external
+AITCToken.balanceOf (/sb/0x8411b2cfc6de030c9e51683d52035d802040cc81.sol#79-83) should be declared external
+ERC20Basic.transfer (/sb/0x8411b2cfc6de030c9e51683d52035d802040cc81.sol#34-35) should be declared external
+AITCToken.transfer (/sb/0x8411b2cfc6de030c9e51683d52035d802040cc81.sol#88-99) should be declared external
+ERC20.allowance (/sb/0x8411b2cfc6de030c9e51683d52035d802040cc81.sol#39-40) should be declared external
+AITCToken.allowance (/sb/0x8411b2cfc6de030c9e51683d52035d802040cc81.sol#119-124) should be declared external
+AITCToken.transferFrom (/sb/0x8411b2cfc6de030c9e51683d52035d802040cc81.sol#99-113) should be declared external
+ERC20.transferFrom (/sb/0x8411b2cfc6de030c9e51683d52035d802040cc81.sol#40-41) should be declared external
+ERC20.approve (/sb/0x8411b2cfc6de030c9e51683d52035d802040cc81.sol#41-42) should be declared external
+AITCToken.approve (/sb/0x8411b2cfc6de030c9e51683d52035d802040cc81.sol#113-119) should be declared external
+AITCToken.transferOwnership (/sb/0x8411b2cfc6de030c9e51683d52035d802040cc81.sol#73-78) should be declared external
+AITCToken.withdraw (/sb/0x8411b2cfc6de030c9e51683d52035d802040cc81.sol#124-130) should be declared external
+AITCToken.burn (/sb/0x8411b2cfc6de030c9e51683d52035d802040cc81.sol#130-137) should be declared external
+AITCToken.approveAndCall (/sb/0x8411b2cfc6de030c9e51683d52035d802040cc81.sol#137-143) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x8411b2cfc6de030c9e51683d52035d802040cc81.sol:
+	- pragma solidity^0.4.18 (/sb/0x8411b2cfc6de030c9e51683d52035d802040cc81.sol#5-7): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Low level call in AITCToken.approveAndCall (/sb/0x8411b2cfc6de030c9e51683d52035d802040cc81.sol#137-143):
+	-require(bool)(_spender.call(bytes4(bytes32(keccak256()(receiveApproval(address,uint256,address,bytes)))),msg.sender,_value,this,_extraData)) /sb/0x8411b2cfc6de030c9e51683d52035d802040cc81.sol#140-143
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Parameter '_owner' of AITCToken.balanceOf (/sb/0x8411b2cfc6de030c9e51683d52035d802040cc81.sol#79-82) is not in mixedCase
+Parameter '_to' of AITCToken.transfer (/sb/0x8411b2cfc6de030c9e51683d52035d802040cc81.sol#90) is not in mixedCase
+Parameter '_amount' of AITCToken.transfer (/sb/0x8411b2cfc6de030c9e51683d52035d802040cc81.sol#90) is not in mixedCase
+Parameter '_owner' of AITCToken.allowance (/sb/0x8411b2cfc6de030c9e51683d52035d802040cc81.sol#120-122) is not in mixedCase
+Parameter '_spender' of AITCToken.allowance (/sb/0x8411b2cfc6de030c9e51683d52035d802040cc81.sol#122) is not in mixedCase
+Parameter '_from' of AITCToken.transferFrom (/sb/0x8411b2cfc6de030c9e51683d52035d802040cc81.sol#99-101) is not in mixedCase
+Parameter '_to' of AITCToken.transferFrom (/sb/0x8411b2cfc6de030c9e51683d52035d802040cc81.sol#101) is not in mixedCase
+Parameter '_amount' of AITCToken.transferFrom (/sb/0x8411b2cfc6de030c9e51683d52035d802040cc81.sol#101-102) is not in mixedCase
+Parameter '_spender' of AITCToken.approve (/sb/0x8411b2cfc6de030c9e51683d52035d802040cc81.sol#113-114) is not in mixedCase
+Parameter '_value' of AITCToken.approve (/sb/0x8411b2cfc6de030c9e51683d52035d802040cc81.sol#114) is not in mixedCase
+Function 'AITCToken.AITCToken' (/sb/0x8411b2cfc6de030c9e51683d52035d802040cc81.sol#69-72) is not in mixedCase
+Parameter '_value' of AITCToken.burn (/sb/0x8411b2cfc6de030c9e51683d52035d802040cc81.sol#131) is not in mixedCase
+Parameter '_spender' of AITCToken.approveAndCall (/sb/0x8411b2cfc6de030c9e51683d52035d802040cc81.sol#138) is not in mixedCase
+Parameter '_value' of AITCToken.approveAndCall (/sb/0x8411b2cfc6de030c9e51683d52035d802040cc81.sol#138) is not in mixedCase
+Parameter '_extraData' of AITCToken.approveAndCall (/sb/0x8411b2cfc6de030c9e51683d52035d802040cc81.sol#138-139) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x8411b2cfc6de030c9e51683d52035d802040cc81.sol analyzed (4 contracts), 33 result(s) found

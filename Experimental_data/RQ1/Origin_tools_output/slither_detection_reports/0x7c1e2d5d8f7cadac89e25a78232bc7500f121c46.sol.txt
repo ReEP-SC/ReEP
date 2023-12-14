@@ -1,0 +1,87 @@
+INFO:Detectors:[91m
+Ownable.______gap (/sb/0x7c1e2d5d8f7cadac89e25a78232bc7500f121c46.sol#337-340) shadows:
+	- Initializable.______gap (/sb/0x7c1e2d5d8f7cadac89e25a78232bc7500f121c46.sol#227)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variable-shadowing[0m
+INFO:Detectors:[93m
+Initializable.isConstructor (/sb/0x7c1e2d5d8f7cadac89e25a78232bc7500f121c46.sol#210-226) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+Reentrancy in AskoStaking.unregisterStakeHandler (/sb/0x7c1e2d5d8f7cadac89e25a78232bc7500f121c46.sol#579-585):
+	External calls:
+	- stakeHandlers.pop() (/sb/0x7c1e2d5d8f7cadac89e25a78232bc7500f121c46.sol#583-584)
+	State variables written after the call(s):
+	- stakeHandlers (/sb/0x7c1e2d5d8f7cadac89e25a78232bc7500f121c46.sol#584-585)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+AskoStaking.withdraw (/sb/0x7c1e2d5d8f7cadac89e25a78232bc7500f121c46.sol#522-530) does not use the value returned by external calls:
+	-askoToken.transfer(msg.sender,amount) (/sb/0x7c1e2d5d8f7cadac89e25a78232bc7500f121c46.sol#529-530)
+AskoStaking.unregisterStakeHandler (/sb/0x7c1e2d5d8f7cadac89e25a78232bc7500f121c46.sol#579-585) does not use the value returned by external calls:
+	-stakeHandlers.pop() (/sb/0x7c1e2d5d8f7cadac89e25a78232bc7500f121c46.sol#583-584)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+AskoStaking.initialize.owner (local variable @ /sb/0x7c1e2d5d8f7cadac89e25a78232bc7500f121c46.sol#489) shadows:
+	- Ownable.owner (function @ /sb/0x7c1e2d5d8f7cadac89e25a78232bc7500f121c46.sol#289-292)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+AskoStaking.unstake has external calls inside a loop:
+	- stakeHandlers[i].handleUnstake(msg.sender,amount,stakeValue[msg.sender]) (/sb/0x7c1e2d5d8f7cadac89e25a78232bc7500f121c46.sol#516)
+AskoStaking._addStake has external calls inside a loop:
+	- stakeHandlers[i].handleStake(msg.sender,stakeAmount,stakeValue[msg.sender]) (/sb/0x7c1e2d5d8f7cadac89e25a78232bc7500f121c46.sol#610-612)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in AskoStaking.distribute (/sb/0x7c1e2d5d8f7cadac89e25a78232bc7500f121c46.sol#540-552):
+	External calls:
+	- require(bool,string)(askoToken.balanceOf(msg.sender) >= amount,Cannot distribute more ASKO than you hold unstaked.) (/sb/0x7c1e2d5d8f7cadac89e25a78232bc7500f121c46.sol#541-543)
+	State variables written after the call(s):
+	- emptyStakeTokens (/sb/0x7c1e2d5d8f7cadac89e25a78232bc7500f121c46.sol#546-547)
+	- profitPerShare (/sb/0x7c1e2d5d8f7cadac89e25a78232bc7500f121c46.sol#546-547)
+	- totalDistributions (/sb/0x7c1e2d5d8f7cadac89e25a78232bc7500f121c46.sol#544-546)
+Reentrancy in AskoStaking.stake (/sb/0x7c1e2d5d8f7cadac89e25a78232bc7500f121c46.sol#493-503):
+	External calls:
+	- require(bool,string)(askoToken.balanceOf(msg.sender) >= amount,Cannot stake more ASKO than you hold unstaked.) (/sb/0x7c1e2d5d8f7cadac89e25a78232bc7500f121c46.sol#497-498)
+	State variables written after the call(s):
+	- totalStakers (/sb/0x7c1e2d5d8f7cadac89e25a78232bc7500f121c46.sol#499)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Initializable.isConstructor uses assembly (/sb/0x7c1e2d5d8f7cadac89e25a78232bc7500f121c46.sol#210-226)
+	- /sb/0x7c1e2d5d8f7cadac89e25a78232bc7500f121c46.sol#225
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+Ownable.owner (/sb/0x7c1e2d5d8f7cadac89e25a78232bc7500f121c46.sol#289-292) should be declared external
+Ownable.renounceOwnership (/sb/0x7c1e2d5d8f7cadac89e25a78232bc7500f121c46.sol#312-317) should be declared external
+Ownable.transferOwnership (/sb/0x7c1e2d5d8f7cadac89e25a78232bc7500f121c46.sol#320-322) should be declared external
+AskoStaking.initialize (/sb/0x7c1e2d5d8f7cadac89e25a78232bc7500f121c46.sol#487-493) should be declared external
+AskoStaking.stake (/sb/0x7c1e2d5d8f7cadac89e25a78232bc7500f121c46.sol#493-503) should be declared external
+AskoStaking.unstake (/sb/0x7c1e2d5d8f7cadac89e25a78232bc7500f121c46.sol#503-522) should be declared external
+AskoStaking.withdraw (/sb/0x7c1e2d5d8f7cadac89e25a78232bc7500f121c46.sol#522-530) should be declared external
+AskoStaking.reinvest (/sb/0x7c1e2d5d8f7cadac89e25a78232bc7500f121c46.sol#530-540) should be declared external
+AskoStaking.distribute (/sb/0x7c1e2d5d8f7cadac89e25a78232bc7500f121c46.sol#540-552) should be declared external
+AskoStaking.handleTaxDistribution (/sb/0x7c1e2d5d8f7cadac89e25a78232bc7500f121c46.sol#552-560) should be declared external
+AskoStaking.numberStakeHandlersRegistered (/sb/0x7c1e2d5d8f7cadac89e25a78232bc7500f121c46.sol#570-575) should be declared external
+AskoStaking.registerStakeHandler (/sb/0x7c1e2d5d8f7cadac89e25a78232bc7500f121c46.sol#575-579) should be declared external
+AskoStaking.unregisterStakeHandler (/sb/0x7c1e2d5d8f7cadac89e25a78232bc7500f121c46.sol#579-585) should be declared external
+AskoStaking.setStakingBP (/sb/0x7c1e2d5d8f7cadac89e25a78232bc7500f121c46.sol#585-591) should be declared external
+AskoStaking.setUnstakingBP (/sb/0x7c1e2d5d8f7cadac89e25a78232bc7500f121c46.sol#592-595) should be declared external
+AskoStaking.setStartTime (/sb/0x7c1e2d5d8f7cadac89e25a78232bc7500f121c46.sol#595-597) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x7c1e2d5d8f7cadac89e25a78232bc7500f121c46.sol:
+	- pragma solidity^0.5.0 (/sb/0x7c1e2d5d8f7cadac89e25a78232bc7500f121c46.sol#5-7): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Variable 'Initializable.______gap' (/sb/0x7c1e2d5d8f7cadac89e25a78232bc7500f121c46.sol#227) is not in mixedCase
+Function 'Context._msgSender' (/sb/0x7c1e2d5d8f7cadac89e25a78232bc7500f121c46.sol#245-253) is not in mixedCase
+Function 'Context._msgData' (/sb/0x7c1e2d5d8f7cadac89e25a78232bc7500f121c46.sol#253-257) is not in mixedCase
+Function 'Ownable._transferOwnership' (/sb/0x7c1e2d5d8f7cadac89e25a78232bc7500f121c46.sol#330-337) is not in mixedCase
+Variable 'Ownable.______gap' (/sb/0x7c1e2d5d8f7cadac89e25a78232bc7500f121c46.sol#337-340) is not in mixedCase
+Parameter '_stakingTaxBP' of AskoStaking.initialize (/sb/0x7c1e2d5d8f7cadac89e25a78232bc7500f121c46.sol#488) is not in mixedCase
+Parameter '_ustakingTaxBP' of AskoStaking.initialize (/sb/0x7c1e2d5d8f7cadac89e25a78232bc7500f121c46.sol#488-489) is not in mixedCase
+Parameter '_askoToken' of AskoStaking.initialize (/sb/0x7c1e2d5d8f7cadac89e25a78232bc7500f121c46.sol#489) is not in mixedCase
+Parameter '_startTime' of AskoStaking.setStartTime (/sb/0x7c1e2d5d8f7cadac89e25a78232bc7500f121c46.sol#595) is not in mixedCase
+Function 'AskoStaking._addStake' (/sb/0x7c1e2d5d8f7cadac89e25a78232bc7500f121c46.sol#601-616) is not in mixedCase
+Function 'AskoStaking._increaseProfitPerShare' (/sb/0x7c1e2d5d8f7cadac89e25a78232bc7500f121c46.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+Ownable.______gap (/sb/0x7c1e2d5d8f7cadac89e25a78232bc7500f121c46.sol#337-340) is never used in AskoStaking
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0x7c1e2d5d8f7cadac89e25a78232bc7500f121c46.sol analyzed (8 contracts), 40 result(s) found

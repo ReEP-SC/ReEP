@@ -1,0 +1,58 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xc621c5dc44eb12cacebd5959e07d8fec508f868e.sol:
+Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+   --> /sb/0xc621c5dc44eb12cacebd5959e07d8fec508f868e.sol:251:37:
+    |
+251 |     function remainingTokensForUser(address _addr) external view hasActiveSwap returns (uint256) {
+    |                                     ^^^^^^^^^^^^^
+
+
+INFO:Detectors:[93m
+Reentrancy in DittoTokenSwap.addInputToken (/sb/0xc621c5dc44eb12cacebd5959e07d8fec508f868e.sol#370-395):
+	External calls:
+	- decimals = token.decimals() (/sb/0xc621c5dc44eb12cacebd5959e07d8fec508f868e.sol#385)
+	- symbol = token.symbol() (/sb/0xc621c5dc44eb12cacebd5959e07d8fec508f868e.sol#385-387)
+	State variables written after the call(s):
+	- inputs (/sb/0xc621c5dc44eb12cacebd5959e07d8fec508f868e.sol#387-394)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+DittoTokenSwap.removeAddressFromInputsList (/sb/0xc621c5dc44eb12cacebd5959e07d8fec508f868e.sol#423-437) does not use the value returned by external calls:
+	-inputAddresses.pop() (/sb/0xc621c5dc44eb12cacebd5959e07d8fec508f868e.sol#437)
+DittoTokenSwap.withdrawTokens (/sb/0xc621c5dc44eb12cacebd5959e07d8fec508f868e.sol) does not use the value returned by external calls:
+	-IERC20(token).transfer(to,amount) (/sb/0xc621c5dc44eb12cacebd5959e07d8fec508f868e.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in DittoTokenSwap.addInputToken (/sb/0xc621c5dc44eb12cacebd5959e07d8fec508f868e.sol#370-395):
+	External calls:
+	- decimals = token.decimals() (/sb/0xc621c5dc44eb12cacebd5959e07d8fec508f868e.sol#385)
+	- symbol = token.symbol() (/sb/0xc621c5dc44eb12cacebd5959e07d8fec508f868e.sol#385-387)
+	State variables written after the call(s):
+	- inputAddresses (/sb/0xc621c5dc44eb12cacebd5959e07d8fec508f868e.sol#394-395)
+Reentrancy in DittoTokenSwap.swap (/sb/0xc621c5dc44eb12cacebd5959e07d8fec508f868e.sol#311-333):
+	External calls:
+	- require(bool,string)(IERC20(inputTokenAddress).transferFrom(msg.sender,address(this),amount),Transferring input tokens from user failed) (/sb/0xc621c5dc44eb12cacebd5959e07d8fec508f868e.sol#321-323)
+	State variables written after the call(s):
+	- claims (/sb/0xc621c5dc44eb12cacebd5959e07d8fec508f868e.sol#325-329)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Ownable.owner (/sb/0xc621c5dc44eb12cacebd5959e07d8fec508f868e.sol#150-157) should be declared external
+Ownable.renounceOwnership (/sb/0xc621c5dc44eb12cacebd5959e07d8fec508f868e.sol#175-178) should be declared external
+Ownable.transferOwnership (/sb/0xc621c5dc44eb12cacebd5959e07d8fec508f868e.sol#184-186) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xc621c5dc44eb12cacebd5959e07d8fec508f868e.sol:
+	- pragma solidity0.6.12 (/sb/0xc621c5dc44eb12cacebd5959e07d8fec508f868e.sol#34-35): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'Ownable._transferOwnership' (/sb/0xc621c5dc44eb12cacebd5959e07d8fec508f868e.sol#195-201) is not in mixedCase
+Parameter '_userCap' of DittoTokenSwap.startSwap (/sb/0xc621c5dc44eb12cacebd5959e07d8fec508f868e.sol#339) is not in mixedCase
+Parameter '_totalCap' of DittoTokenSwap.startSwap (/sb/0xc621c5dc44eb12cacebd5959e07d8fec508f868e.sol#339-341) is not in mixedCase
+Parameter '_bonusMultiplier' of DittoTokenSwap.startSwap (/sb/0xc621c5dc44eb12cacebd5959e07d8fec508f868e.sol#341-342) is not in mixedCase
+Parameter '_addr' of DittoTokenSwap.addInputToken (/sb/0xc621c5dc44eb12cacebd5959e07d8fec508f868e.sol#370) is not in mixedCase
+Parameter '_rate' of DittoTokenSwap.addInputToken (/sb/0xc621c5dc44eb12cacebd5959e07d8fec508f868e.sol#371) is not in mixedCase
+Parameter '_rate' of DittoTokenSwap.updateDittoRate (/sb/0xc621c5dc44eb12cacebd5959e07d8fec508f868e.sol#398) is not in mixedCase
+Parameter '_addr' of DittoTokenSwap.updateRateForInputToken (/sb/0xc621c5dc44eb12cacebd5959e07d8fec508f868e.sol#409) is not in mixedCase
+Parameter '_rate' of DittoTokenSwap.updateRateForInputToken (/sb/0xc621c5dc44eb12cacebd5959e07d8fec508f868e.sol#409-410) is not in mixedCase
+Parameter '_addr' of DittoTokenSwap.removeAddressFromInputsList (/sb/0xc621c5dc44eb12cacebd5959e07d8fec508f868e.sol#426) is not in mixedCase
+Parameter '_addr' of DittoTokenSwap.removeInputToken (/sb/0xc621c5dc44eb12cacebd5959e07d8fec508f868e.sol#440) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xc621c5dc44eb12cacebd5959e07d8fec508f868e.sol analyzed (4 contracts), 20 result(s) found

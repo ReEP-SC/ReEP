@@ -1,0 +1,131 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol:
+/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol:100:5: Warning: Invoking events without "emit" prefix is deprecated.
+    Sign();
+
+    ^----^
+/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol:126:5: Warning: Invoking events without "emit" prefix is deprecated.
+    CreateSwap(now);
+
+    ^-------------^
+/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol:140:32: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+    require(swap.secretHash == ripemd160(_secret));
+
+                               ^----------------^
+/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol:140:32: Warning: The provided argument of type bytes32 is not implicitly convertible to expected type bytes memory.
+    require(swap.secretHash == ripemd160(_secret));
+
+                               ^----------------^
+/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol:150:5: Warning: Invoking events without "emit" prefix is deprecated.
+    Withdraw();
+
+    ^--------^
+/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol:168:5: Warning: Invoking events without "emit" prefix is deprecated.
+    Close();
+
+    ^-----^
+/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol:186:5: Warning: Invoking events without "emit" prefix is deprecated.
+    Refund();
+
+    ^------^
+/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol:202:5: Warning: Invoking events without "emit" prefix is deprecated.
+    Abort();
+
+    ^-----^
+
+INFO:Detectors:[93m
+ERC20 (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#117-129) has incorrect ERC20 function interface(s):
+	-transfer (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#119)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[93m
+Reentrancy in EthTokenToSmthSwaps.abort (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#393-413):
+	External calls:
+	- Reputation(ratingContractAddress).change(_ownerAddress,- 1) (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#409-411)
+	State variables written after the call(s):
+	- participantSigns (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#413)
+	- swaps (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#413)
+Reentrancy in EthTokenToSmthSwaps.close (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#329-351):
+	External calls:
+	- Reputation(ratingContractAddress).change(msg.sender,1) (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#345-349)
+	State variables written after the call(s):
+	- swaps (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#349)
+Reentrancy in EthTokenToSmthSwaps.createSwap (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#224-259):
+	External calls:
+	- require(bool)(ERC20(_token).transferFrom(msg.sender,this,_value)) (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#235-243)
+	State variables written after the call(s):
+	- swaps (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#245-259)
+Reentrancy in EthTokenToSmthSwaps.refund (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#357-387):
+	External calls:
+	- ERC20(swap.token).transfer(msg.sender,swap.balance) (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#365)
+	- Reputation(ratingContractAddress).change(_participantAddress,- 1) (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#381-384)
+	State variables written after the call(s):
+	- swaps (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#385-387)
+Reentrancy in EthTokenToSmthSwaps.withdraw (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#279-309):
+	External calls:
+	- Reputation(ratingContractAddress).change(msg.sender,1) (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#293-295)
+	- ERC20(swap.token).transfer(msg.sender,swap.balance) (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#295-305)
+	State variables written after the call(s):
+	- swaps (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#305-307)
+	- swaps (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#307-309)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+Reentrancy in EthTokenToSmthSwaps.close (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#329-351):
+	External calls:
+	- Reputation(ratingContractAddress).change(msg.sender,1) (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#345-349)
+	State variables written after the call(s):
+	- participantSigns (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#349)
+Reentrancy in EthTokenToSmthSwaps.refund (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#357-387):
+	External calls:
+	- ERC20(swap.token).transfer(msg.sender,swap.balance) (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#365)
+	- Reputation(ratingContractAddress).change(_participantAddress,- 1) (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#381-384)
+	State variables written after the call(s):
+	- participantSigns (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#385-387)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+EthTokenToSmthSwaps.SafeTime should be constant (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#141-145)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Reputation.addToWhitelist (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#25-35) should be declared external
+Reputation.change (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#35-45) should be declared external
+Reputation.getMy (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#45-53) should be declared external
+Reputation.get (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#53-65) should be declared external
+ERC20.transfer (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#119) should be declared external
+ERC20.transferFrom (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#119-129) should be declared external
+EthTokenToSmthSwaps.setReputationAddress (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#175-189) should be declared external
+EthTokenToSmthSwaps.sign (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#193-207) should be declared external
+EthTokenToSmthSwaps.checkSign (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#209-221) should be declared external
+EthTokenToSmthSwaps.createSwap (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#224-259) should be declared external
+EthTokenToSmthSwaps.getBalance (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#259-273) should be declared external
+EthTokenToSmthSwaps.withdraw (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#279-309) should be declared external
+EthTokenToSmthSwaps.getSecret (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#315-325) should be declared external
+EthTokenToSmthSwaps.close (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#329-351) should be declared external
+EthTokenToSmthSwaps.refund (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#357-387) should be declared external
+EthTokenToSmthSwaps.abort (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#393-413) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol:
+	- pragma solidity^0.4.23 (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#1): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_contractAddress' of Reputation.addToWhitelist (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#25-27) is not in mixedCase
+Parameter '_userAddress' of Reputation.change (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#35) is not in mixedCase
+Parameter '_delta' of Reputation.change (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#35-37) is not in mixedCase
+Parameter '_userAddress' of Reputation.get (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#53) is not in mixedCase
+Parameter '_ratingContractAddress' of EthTokenToSmthSwaps.setReputationAddress (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#177) is not in mixedCase
+Parameter '_participantAddress' of EthTokenToSmthSwaps.sign (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#193-195) is not in mixedCase
+Parameter '_ownerAddress' of EthTokenToSmthSwaps.checkSign (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#209-215) is not in mixedCase
+Parameter '_secretHash' of EthTokenToSmthSwaps.createSwap (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#225-227) is not in mixedCase
+Parameter '_participantAddress' of EthTokenToSmthSwaps.createSwap (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#227) is not in mixedCase
+Parameter '_value' of EthTokenToSmthSwaps.createSwap (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#227) is not in mixedCase
+Parameter '_token' of EthTokenToSmthSwaps.createSwap (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#227) is not in mixedCase
+Parameter '_ownerAddress' of EthTokenToSmthSwaps.getBalance (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#265-269) is not in mixedCase
+Parameter '_secret' of EthTokenToSmthSwaps.withdraw (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#279) is not in mixedCase
+Parameter '_ownerAddress' of EthTokenToSmthSwaps.withdraw (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#279-281) is not in mixedCase
+Parameter '_participantAddress' of EthTokenToSmthSwaps.getSecret (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#319-321) is not in mixedCase
+Parameter '_participantAddress' of EthTokenToSmthSwaps.close (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#329-331) is not in mixedCase
+Parameter '_participantAddress' of EthTokenToSmthSwaps.refund (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#357-360) is not in mixedCase
+Parameter '_ownerAddress' of EthTokenToSmthSwaps.abort (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#393) is not in mixedCase
+Parameter '_ownerAddress' of EthTokenToSmthSwaps.clean (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol) is not in mixedCase
+Parameter '_participantAddress' of EthTokenToSmthSwaps.clean (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol) is not in mixedCase
+Variable 'EthTokenToSmthSwaps.SafeTime' (/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol#141-145) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x8d880dff55a0c5620cc617b0a34c83b87946783c.sol analyzed (4 contracts), 47 result(s) found

@@ -1,0 +1,121 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol:
+Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing "SPDX-License-Identifier: <SPDX-License>" to each source file. Use "SPDX-License-Identifier: UNLICENSED" for non-open-source code. Please see https://spdx.org for more information.
+--> /sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol
+
+Warning: Using ".value(...)" is deprecated. Use "{value: ...}" instead.
+   --> /sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol:121:25:
+    |
+121 |                         CETHInterface(cToken).repayBorrow.value(ctknContract.borrowBalanceCurrent(address(this)))();
+    |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning: Using ".value(...)" is deprecated. Use "{value: ...}" instead.
+   --> /sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol:194:13:
+    |
+194 |             CETHInterface(cErc20).mint.value(_amt)();
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+INFO:Detectors:[91m
+Helpers._transfer (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#91-99) sends eth to arbitrary user
+	Dangerous calls:
+	- msg.sender.transfer(_amt) (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#92-99)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[93m
+TokenInterface (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#47-56) has incorrect ERC20 function interface(s):
+	-approve (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#50)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[93m
+ProvideLiquidity.deposit (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#186-214) uses a dangerous strict equality:
+	- require(bool,string)(CTokenInterface(cErc20).mint(_amt) == 0,mint-failed)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Reentrancy in ProvideLiquidity.withdraw (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#220-251):
+	External calls:
+	- initknBal = tokenBal(token) (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#226-227)
+	- require(bool,string)(CTokenInterface(ctoken).redeem(_userLiq) == 0,redeem-failed) (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#227-229)
+	- finTknBal = tokenBal(token) (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#229-230)
+	State variables written after the call(s):
+	- liquidityBalance (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#230-231)
+Reentrancy in ProvideLiquidity.withdraw (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#220-251):
+	External calls:
+	- iniCtknBal = tokenBal(ctoken) (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#232-233)
+	- require(bool,string)(CTokenInterface(ctoken).redeemUnderlying(amt) == 0,redeemUnderlying-failed) (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#233-235)
+	- finCtknBal = tokenBal(ctoken) (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#235-238)
+	State variables written after the call(s):
+	- liquidityBalance (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#246-247)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+Controllers._enterMarket (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#258-280) does not use the value returned by external calls:
+	-ComptrollerInterface(comptrollerAddr).enterMarkets(cTknAddrs) (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#260-261)
+Controllers.exitMarket (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#289-306) does not use the value returned by external calls:
+	-ComptrollerInterface(comptrollerAddr).exitMarket(cTkn) (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#292-294)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in Controllers._enterMarket (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#258-280):
+	External calls:
+	- ComptrollerInterface(comptrollerAddr).enterMarkets(cTknAddrs) (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#260-261)
+	- tknAddrs[i] = CTokenInterface(cTknAddrs[i]).underlying() (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#265-267)
+	- TokenInterface(tknAddrs[i]).approve(cTknAddrs[i],uint256(- 1)) (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#268-272)
+	State variables written after the call(s):
+	- isTknAllowed (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#275-276)
+	- tknToCTkn (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#274-275)
+Reentrancy in ProvideLiquidity.deposit (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#186-214):
+	External calls:
+	- initalBal = tokenBal(cErc20) (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#196)
+	- CETHInterface(cErc20).mint.value(_amt)() (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#197)
+	- require(bool,string)(TokenInterface(token).transferFrom(msg.sender,address(this),_amt),allowance/balance?) (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#200-203)
+	- require(bool,string)(CTokenInterface(cErc20).mint(_amt) == 0,mint-failed) (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#203-205)
+	- finalBal = tokenBal(cErc20) (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#205-210)
+	- _amt = TokenInterface(token).balanceOf(msg.sender) (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#198-199)
+	External calls sending eth:
+	- CETHInterface(cErc20).mint.value(_amt)() (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#197)
+	State variables written after the call(s):
+	- liquidityBalance (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#211)
+Reentrancy in Controllers.exitMarket (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#289-306):
+	External calls:
+	- ComptrollerInterface(comptrollerAddr).exitMarket(cTkn) (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#292-294)
+	- tkn = CTokenInterface(cTkn).underlying() (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#301-302)
+	- TokenInterface(tkn).approve(cTkn,0) (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#302-305)
+	State variables written after the call(s):
+	- isTknAllowed (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Different versions of Solidity is used in /sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol:
+	- Version used: ['ABIEncoderV2', '^0.6.0']
+	- /sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#5-6 declares pragma solidity^0.6.0
+	- /sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#6-9 declares pragma experimentalABIEncoderV2
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#different-pragma-directives-are-used[0m
+INFO:Detectors:[92m
+AccessLiquidity.isOk (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#161-175) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol:
+	- pragma solidity^0.6.0 (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#5-6): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '' of CTokenInterface.borrowBalanceCurrent (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#14) is not in mixedCase
+Parameter '' of CTokenInterface.redeemUnderlying (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#15) is not in mixedCase
+Parameter '' of CTokenInterface.borrow (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#16) is not in mixedCase
+Parameter '' of CTokenInterface.borrowBalanceStored (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#18) is not in mixedCase
+Parameter '' of ListInterface.accountID (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#37-39) is not in mixedCase
+Parameter '' of IndexInterface.isClone (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#43-44) is not in mixedCase
+Parameter '_scope_0' of IndexInterface.isClone (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#46) is not in mixedCase
+Parameter '' of TokenInterface.allowance (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#47-48) is not in mixedCase
+Parameter '_scope_0' of TokenInterface.allowance (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#48) is not in mixedCase
+Parameter '' of TokenInterface.balanceOf (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#49) is not in mixedCase
+Parameter '' of TokenInterface.approve (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#50) is not in mixedCase
+Parameter '_scope_0' of TokenInterface.approve (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#50) is not in mixedCase
+Parameter '' of TokenInterface.transfer (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#51) is not in mixedCase
+Parameter '_scope_0' of TokenInterface.transfer (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#51) is not in mixedCase
+Parameter '' of TokenInterface.transferFrom (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#52) is not in mixedCase
+Parameter '_scope_0' of TokenInterface.transferFrom (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#52) is not in mixedCase
+Parameter '_scope_1' of TokenInterface.transferFrom (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#52) is not in mixedCase
+Function 'Helpers._transfer' (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#91-99) is not in mixedCase
+Parameter '_amt' of Helpers._transfer (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#91-92) is not in mixedCase
+Constant 'Helpers.instaIndex' (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#64-65) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'Helpers.comptrollerAddr' (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#65-67) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'Helpers.ethAddr' (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#67-68) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'Helpers.cEth' (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#68-71) is not in UPPER_CASE_WITH_UNDERSCORES
+Function 'Controllers._enterMarket' (/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol#258-280) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x88046ab50a87c60c572aaa94647dc42bdd18810d.sol analyzed (14 contracts), 37 result(s) found

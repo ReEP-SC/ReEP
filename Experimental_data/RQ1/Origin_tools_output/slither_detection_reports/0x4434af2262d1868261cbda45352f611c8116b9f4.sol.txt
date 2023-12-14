@@ -1,0 +1,126 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol:
+/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol:36:3: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+  function Ownable() public {
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol:66:3: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+  function Pausable() public {}
+  ^---------------------------^
+/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol:150:3: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+  function TokenSale(
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol:336:3: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+  function Controllable() public {
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol:89:5: Warning: Invoking events without "emit" prefix is deprecated.
+    Pause();
+    ^-----^
+/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol:98:5: Warning: Invoking events without "emit" prefix is deprecated.
+    Unpause();
+    ^-------^
+/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol:192:5: Warning: Invoking events without "emit" prefix is deprecated.
+    TokenPurchase(msg.sender, _beneficiary, weiAmount, tokens);
+    ^--------------------------------------------------------^
+/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol:313:5: Warning: Invoking events without "emit" prefix is deprecated.
+    Finalized();
+    ^---------^
+/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol:4:3: Warning: Function state mutability can be restricted to pure
+  function mul(uint256 a, uint256 b) internal constant returns (uint256) {
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol:10:3: Warning: Function state mutability can be restricted to pure
+  function div(uint256 a, uint256 b) internal constant returns (uint256) {
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol:17:3: Warning: Function state mutability can be restricted to pure
+  function sub(uint256 a, uint256 b) internal constant returns (uint256) {
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol:22:3: Warning: Function state mutability can be restricted to pure
+  function add(uint256 a, uint256 b) internal constant returns (uint256) {
+  ^ (Relevant source part starts here and spans across multiple lines).
+
+INFO:Detectors:[93m
+TokenSale.isContract (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#298-305) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+TokenSale.buyTokens (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#181-205) does not use the value returned by external calls:
+	-proofToken.mint(_beneficiary,tokens) (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#199-201)
+TokenSale.allocateProofTokens (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#308-318) does not use the value returned by external calls:
+	-proofToken.mint(PROOF_MULTISIG,TOKENS_ALLOCATED_TO_PROOF) (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#312-315)
+TokenSale.finalize (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#322-336) does not use the value returned by external calls:
+	-proofToken.finishMinting() (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#334)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in TokenSale.allocateProofTokens (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#308-318):
+	External calls:
+	- proofToken.mint(PROOF_MULTISIG,TOKENS_ALLOCATED_TO_PROOF) (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#312-315)
+	State variables written after the call(s):
+	- proofTokensAllocated (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#315-318)
+Reentrancy in TokenSale.finalize (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#322-336):
+	External calls:
+	- proofToken.finishMinting() (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#334)
+	- proofToken.enableTransfers(true) (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#334)
+	State variables written after the call(s):
+	- finalized (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#334-336)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+TokenSale.isContract uses assembly (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#298-305)
+	- /sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#301-305
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+TokenSale.allocatedTokens should be constant (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#121)
+TokenSale.firstCheckpointPrice should be constant (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#134-135)
+TokenSale.remainingTokens should be constant (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#119-121)
+TokenSale.secondCheckpointPrice should be constant (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#135-138)
+TokenSale.thirdCheckpointPrice should be constant (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#138-139)
+TokenSale.tokenCap should be constant (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#131-133)
+TokenSale.totalSupply should be constant (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#113-114)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#52-62) should be declared external
+Pausable.pause (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#89-96) should be declared external
+Pausable.unpause (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#98-107) should be declared external
+TokenSale.fallback (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#177) should be declared external
+TokenSale.totalSupply (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#251-255) should be declared external
+TokenSale.balanceOf (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#259-265) should be declared external
+TokenSale.changeController (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#268-275) should be declared external
+TokenSale.enableTransfers (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#277-282) should be declared external
+TokenSale.lockTransfers (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#283-286) should be declared external
+TokenSale.enableMasterTransfers (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#287-291) should be declared external
+TokenSale.lockMasterTransfers (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#291-297) should be declared external
+TokenSale.allocateProofTokens (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#308-318) should be declared external
+TokenSale.finalize (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#322-336) should be declared external
+TokenSale.forceStart (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#336-341) should be declared external
+Controllable.transferControl (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#364-366) should be declared external
+ProofTokenInterface.totalSupply (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#373-374) should be declared external
+ProofTokenInterface.totalSupplyAt (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#374-375) should be declared external
+ProofTokenInterface.balanceOf (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#375-376) should be declared external
+ProofTokenInterface.balanceOfAt (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#376) should be declared external
+ProofTokenInterface.transfer (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#376-377) should be declared external
+ProofTokenInterface.transferFrom (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#377-379) should be declared external
+ProofTokenInterface.approve (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#379) should be declared external
+ProofTokenInterface.approveAndCall (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#379-381) should be declared external
+ProofTokenInterface.allowance (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#381-383) should be declared external
+ProofTokenInterface.mint (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#383-384) should be declared external
+ProofTokenInterface.importPresaleBalances (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#384-386) should be declared external
+ProofTokenInterface.lockPresaleBalances (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol) should be declared external
+ProofTokenInterface.finishMinting (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol) should be declared external
+ProofTokenInterface.enableTransfers (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol) should be declared external
+ProofTokenInterface.enableMasterTransfers (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol) should be declared external
+ProofTokenInterface.createCloneToken (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol:
+	- pragma solidity^0.4.13 (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#1): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'Ownable.Ownable' (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#37-41) is not in mixedCase
+Function 'Pausable.Pausable' (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#69) is not in mixedCase
+Function 'TokenSale.TokenSale' (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#155-175) is not in mixedCase
+Parameter '_tokenAddress' of TokenSale.TokenSale (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#156) is not in mixedCase
+Parameter '_startTime' of TokenSale.TokenSale (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#157-158) is not in mixedCase
+Parameter '_endTime' of TokenSale.TokenSale (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#158-159) is not in mixedCase
+Parameter '_beneficiary' of TokenSale.buyTokens (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#182) is not in mixedCase
+Parameter '_owner' of TokenSale.balanceOf (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#260) is not in mixedCase
+Parameter '_newController' of TokenSale.changeController (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#270-273) is not in mixedCase
+Parameter '_addr' of TokenSale.isContract (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#299) is not in mixedCase
+Function 'Controllable.Controllable' (/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol#350-352) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x4434af2262d1868261cbda45352f611c8116b9f4.sol analyzed (6 contracts), 51 result(s) found

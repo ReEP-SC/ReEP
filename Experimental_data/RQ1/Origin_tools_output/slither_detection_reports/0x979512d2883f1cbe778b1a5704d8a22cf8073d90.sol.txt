@@ -1,0 +1,105 @@
+INFO:Detectors:[91m
+ZethrShell.WithdrawToBankroll (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#327-336) sends eth to arbitrary user
+	Dangerous calls:
+	- address(UsedBankrollAddresses[0]).transfer(address(this).balance) (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#329-333)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[91m
+Zlots.gamePaused (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#553-555) is never initialized. It is used in:
+Zlots.ZTHTKNADDR (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#577-579) is never initialized. It is used in:
+	- _zthToken (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#1353-1363)
+Zlots.ZTHBANKROLL (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#580-583) is never initialized. It is used in:
+	- constructor (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#591-611)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-state-variables[0m
+INFO:Detectors:[93m
+Reentrancy in Zlots._finishSpin (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#787-1117):
+	External calls:
+	- RequestBankrollPayment(zlotsJackpot,profit,tier) (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#844-849)
+	State variables written after the call(s):
+	- playerSpins (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#849-855)
+Reentrancy in Zlots._finishSpin (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#787-1117):
+	External calls:
+	- profit = ZlotsJackpotHoldingContract(zlotsJackpot).getJackpot() (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#869-871)
+	State variables written after the call(s):
+	- playerSpins (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#883-887)
+Reentrancy in Zlots._spinTokens (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#669-775):
+	External calls:
+	- _finishSpin(_tkn.sender) (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#739-741)
+	State variables written after the call(s):
+	- playerSpins (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#759-761)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+_tkn in Zlots.execute (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#647) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[92m
+Reentrancy in Zlots._spinTokens (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#669-775):
+	External calls:
+	- _finishSpin(_tkn.sender) (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#739-741)
+	State variables written after the call(s):
+	- totalSpins (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#767-770)
+	- totalZTHWagered (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#771)
+Reentrancy in Zlots.constructor (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#591-611):
+	External calls:
+	- setupBankrollInterface(BankrollAddress) (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#597)
+	State variables written after the call(s):
+	- bankroll (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#605)
+	- gameActive (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#607)
+	- maxProfit (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#601)
+	- maxProfitAsPercentOfHouse (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#601)
+	- minBet (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#609-611)
+	- owner (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#599)
+Reentrancy in ZethrBankrollBridge.setupBankrollInterface (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#247-273):
+	External calls:
+	- UsedBankrollAddresses = ZethrMainBankroll(ZethrMainBankrollAddress).gameGetTokenBankrollList() (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#261-265)
+	State variables written after the call(s):
+	- ValidBankrollAddress (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#265-273)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Zlots.ZTHBANKROLL should be constant (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#580-583)
+Zlots.ZTHTKNADDR should be constant (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#577-579)
+Zlots.gamePaused should be constant (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#553-555)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+ZethrTokenBankroll.gameRequestTokens (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#107-113) should be declared external
+ZethrTokenBankroll.gameTokenAmount (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#115-117) should be declared external
+ZethrMainBankroll.gameGetTokenBankrollList (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#125-133) should be declared external
+ZethrInterface.withdraw (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#137-139) should be declared external
+ZlotsJackpotHoldingContract.payOutWinner (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#209-211) should be declared external
+ZlotsJackpotHoldingContract.getJackpot (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#211-213) should be declared external
+ZethrBankrollBridge.getZethrTokenBankroll (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#299-309) should be declared external
+ZethrShell.WithdrawAndTransferToBankroll (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#341-347) should be declared external
+Zlots.fallback (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#621) should be declared external
+Zlots.execute (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#635-653) should be declared external
+Zlots.finishSpin (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#779-785) should be declared external
+Zlots.bankrollExternalUpdateTokens (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#1219-1229) should be declared external
+Zlots.ownerSetZlotsAddress (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#1279-1293) should be declared external
+Zlots.pauseGame (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#1301-1313) should be declared external
+Zlots.resumeGame (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#1317-1319) should be declared external
+Zlots.changeOwner (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#1323-1333) should be declared external
+Zlots.changeBankroll (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#1337-1349) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter 'ZethrMainBankrollAddress' of ZethrBankrollBridge.setupBankrollInterface (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#249) is not in mixedCase
+Function 'ZethrBankrollBridge.RequestBankrollPayment' (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#287-299) is not in mixedCase
+Variable 'ZethrBankrollBridge.Zethr' (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#225-229) is not in mixedCase
+Variable 'ZethrBankrollBridge.UsedBankrollAddresses' (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#237-241) is not in mixedCase
+Variable 'ZethrBankrollBridge.ValidBankrollAddress' (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#243) is not in mixedCase
+Function 'ZethrShell.WithdrawToBankroll' (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#327-336) is not in mixedCase
+Function 'ZethrShell.WithdrawAndTransferToBankroll' (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#341-347) is not in mixedCase
+Struct 'Zlots.playerSpin' (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#653-659) is not in CapWords
+Parameter 'BankrollAddress' of Zlots. (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#592-593) is not in mixedCase
+Parameter '_from' of Zlots.execute (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#637) is not in mixedCase
+Parameter '_value' of Zlots.execute (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#637) is not in mixedCase
+Parameter '' of Zlots.execute (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#637-639) is not in mixedCase
+Function 'Zlots._spinTokens' (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#669-775) is not in mixedCase
+Parameter '_tkn' of Zlots._spinTokens (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#669) is not in mixedCase
+Function 'Zlots._finishSpin' (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#787-1117) is not in mixedCase
+Parameter '_newOwner' of Zlots.changeOwner (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#1323) is not in mixedCase
+Parameter '_newBankroll' of Zlots.changeBankroll (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#1337) is not in mixedCase
+Function 'Zlots._zthToken' (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#1353-1363) is not in mixedCase
+Parameter '_tokenContract' of Zlots._zthToken (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#1353-1355) is not in mixedCase
+Constant 'Zlots.maxProfitDivisor' (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#531-533) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'Zlots.houseEdgeDivisor' (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#533-537) is not in UPPER_CASE_WITH_UNDERSCORES
+Variable 'Zlots.ZTHTKNADDR' (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#577-579) is not in mixedCase
+Variable 'Zlots.ZTHBANKROLL' (/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol#580-583) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x979512d2883f1cbe778b1a5704d8a22cf8073d90.sol analyzed (9 contracts), 52 result(s) found

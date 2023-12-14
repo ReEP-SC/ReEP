@@ -1,0 +1,138 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol:
+/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol:3:1: Warning: Experimental features are turned on. Do not use experimental features on live deployments.
+pragma experimental ABIEncoderV2;
+^-------------------------------^
+/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol:120:5: Warning: Functions in interfaces should be declared external.
+    function convert2(address[] _path, uint256 _amount,
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol:126:5: Warning: Functions in interfaces should be declared external.
+    function claimAndConvert2(
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol:198:49: Warning: This looks like an address but has an invalid checksum. If this is not used as an address, please prepend '00'. Correct checksummed address: '0x8316B082621CFedAB95bf4a44a1d4B64a6ffc336'. For more information please see https://solidity.readthedocs.io/en/develop/types.html#address-literals
+        OrFeedInterface orfeed= OrFeedInterface(0x8316b082621cfedab95bf4a44a1d4b64a6ffc336);
+                                                ^----------------------------------------^
+/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol:201:26: Warning: This looks like an address but has an invalid checksum. If this is not used as an address, please prepend '00'. Correct checksummed address: '0x8316B082621CFedAB95bf4a44a1d4B64a6ffc336'. For more information please see https://solidity.readthedocs.io/en/develop/types.html#address-literals
+        theToken.approve(0x8316b082621cfedab95bf4a44a1d4b64a6ffc336, 10000000000000000000000000000);
+                         ^----------------------------------------^
+/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol:220:27: Warning: This looks like an address but has an invalid checksum. If this is not used as an address, please prepend '00'. Correct checksummed address: '0x3dfd23A6c5E8BbcFc9581d2E864a68feb6a076d3'. For more information please see https://solidity.readthedocs.io/en/develop/types.html#address-literals
+        theToken.transfer(0x3dfd23a6c5e8bbcfc9581d2e864a68feb6a076d3, (_amount+ _fee));
+                          ^----------------------------------------^
+/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol:192:9: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+        bytes  _params) external payable {
+        ^------------^
+/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol:140:5: Warning: Function state mutability can be restricted to pure
+    function mul(uint256 a, uint256 b) internal view returns(uint256) {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol:146:5: Warning: Function state mutability can be restricted to pure
+    function div(uint256 a, uint256 b) internal view returns(uint256) {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol:153:5: Warning: Function state mutability can be restricted to pure
+    function sub(uint256 a, uint256 b) internal view returns(uint256) {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol:158:5: Warning: Function state mutability can be restricted to pure
+    function add(uint256 a, uint256 b) internal view returns(uint256) {
+    ^ (Relevant source part starts here and spans across multiple lines).
+
+INFO:Detectors:[93m
+Contract locking ether found in /sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol:
+	Contract flashItGen has payable functions:
+	 - executeOperation (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#196-225)
+	But does not have a function to withdraw the ether
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#contracts-that-lock-ether[0m
+INFO:Detectors:[93m
+flashItGen.executeOperation (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#196-225) does not use the value returned by external calls:
+	-theToken.approve(0x8316b082621cfedab95bf4a44a1d4b64a6ffc336,10000000000000000000000000000) (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#204-207)
+	-orfeed.arb(this,this,tokenOrder,_amount,exchangeOrder) (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#220-225)
+	-theToken.transfer(0x3dfd23a6c5e8bbcfc9581d2e864a68feb6a076d3,(_amount + _fee)) (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+IUniswapExchange.decimals should be constant (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#54)
+IUniswapExchange.name should be constant (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#53)
+IUniswapExchange.symbol should be constant (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#53-54)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Different versions of Solidity is used in /sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol:
+	- Version used: ['>=0.4.26', 'ABIEncoderV2']
+	- /sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#1 declares pragma solidity>=0.4.26
+	- /sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#3-5 declares pragma experimentalABIEncoderV2
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#different-pragma-directives-are-used[0m
+INFO:Detectors:[92m
+IERC20Token.name (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#94-95) should be declared external
+IERC20Token.symbol (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#95-96) should be declared external
+IERC20Token.decimals (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#96-97) should be declared external
+IERC20Token.totalSupply (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#97-98) should be declared external
+IERC20Token.balanceOf (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#98) should be declared external
+IERC20Token.allowance (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#98-101) should be declared external
+IERC20Token.transfer (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#101) should be declared external
+IERC20Token.transferFrom (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#102-105) should be declared external
+IERC20Token.approve (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#105-106) should be declared external
+IBancorNetwork.convert2 (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#123-130) should be declared external
+IBancorNetwork.claimAndConvert2 (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#130-135) should be declared external
+flashItGen.assignSequence (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#175-194) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol:
+	- pragma solidity>=0.4.26 (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#1): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter 'min_liquidity' of IUniswapExchange.addLiquidity (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#23) is not in mixedCase
+Parameter 'max_tokens' of IUniswapExchange.addLiquidity (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#23) is not in mixedCase
+Parameter 'min_eth' of IUniswapExchange.removeLiquidity (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#24) is not in mixedCase
+Parameter 'min_tokens' of IUniswapExchange.removeLiquidity (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#24) is not in mixedCase
+Parameter 'eth_sold' of IUniswapExchange.getEthToTokenInputPrice (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#26) is not in mixedCase
+Parameter 'tokens_bought' of IUniswapExchange.getEthToTokenOutputPrice (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#27) is not in mixedCase
+Parameter 'tokens_sold' of IUniswapExchange.getTokenToEthInputPrice (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#28) is not in mixedCase
+Parameter 'eth_bought' of IUniswapExchange.getTokenToEthOutputPrice (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#29) is not in mixedCase
+Parameter 'min_tokens' of IUniswapExchange.ethToTokenSwapInput (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#31) is not in mixedCase
+Parameter 'min_tokens' of IUniswapExchange.ethToTokenTransferInput (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#32) is not in mixedCase
+Parameter 'tokens_bought' of IUniswapExchange.ethToTokenSwapOutput (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#33) is not in mixedCase
+Parameter 'tokens_bought' of IUniswapExchange.ethToTokenTransferOutput (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#34) is not in mixedCase
+Parameter 'tokens_sold' of IUniswapExchange.tokenToEthSwapInput (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#36) is not in mixedCase
+Parameter 'min_eth' of IUniswapExchange.tokenToEthSwapInput (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#36) is not in mixedCase
+Parameter 'tokens_sold' of IUniswapExchange.tokenToEthTransferInput (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#37) is not in mixedCase
+Parameter 'min_eth' of IUniswapExchange.tokenToEthTransferInput (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#37) is not in mixedCase
+Parameter 'eth_bought' of IUniswapExchange.tokenToEthSwapOutput (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#38) is not in mixedCase
+Parameter 'max_tokens' of IUniswapExchange.tokenToEthSwapOutput (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#38) is not in mixedCase
+Parameter 'eth_bought' of IUniswapExchange.tokenToEthTransferOutput (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#39) is not in mixedCase
+Parameter 'max_tokens' of IUniswapExchange.tokenToEthTransferOutput (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#39) is not in mixedCase
+Parameter 'tokens_sold' of IUniswapExchange.tokenToTokenSwapInput (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#41) is not in mixedCase
+Parameter 'min_tokens_bought' of IUniswapExchange.tokenToTokenSwapInput (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#41) is not in mixedCase
+Parameter 'min_eth_bought' of IUniswapExchange.tokenToTokenSwapInput (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#41) is not in mixedCase
+Parameter 'token_addr' of IUniswapExchange.tokenToTokenSwapInput (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#41) is not in mixedCase
+Parameter 'tokens_sold' of IUniswapExchange.tokenToTokenTransferInput (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#42) is not in mixedCase
+Parameter 'min_tokens_bought' of IUniswapExchange.tokenToTokenTransferInput (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#42) is not in mixedCase
+Parameter 'min_eth_bought' of IUniswapExchange.tokenToTokenTransferInput (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#42) is not in mixedCase
+Parameter 'token_addr' of IUniswapExchange.tokenToTokenTransferInput (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#42) is not in mixedCase
+Parameter 'tokens_bought' of IUniswapExchange.tokenToTokenSwapOutput (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#43) is not in mixedCase
+Parameter 'max_tokens_sold' of IUniswapExchange.tokenToTokenSwapOutput (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#43) is not in mixedCase
+Parameter 'max_eth_sold' of IUniswapExchange.tokenToTokenSwapOutput (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#43) is not in mixedCase
+Parameter 'token_addr' of IUniswapExchange.tokenToTokenSwapOutput (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#43) is not in mixedCase
+Parameter 'tokens_bought' of IUniswapExchange.tokenToTokenTransferOutput (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#44) is not in mixedCase
+Parameter 'max_tokens_sold' of IUniswapExchange.tokenToTokenTransferOutput (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#44) is not in mixedCase
+Parameter 'max_eth_sold' of IUniswapExchange.tokenToTokenTransferOutput (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#44) is not in mixedCase
+Parameter 'token_addr' of IUniswapExchange.tokenToTokenTransferOutput (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#44-45) is not in mixedCase
+Parameter 'tokens_sold' of IUniswapExchange.tokenToExchangeSwapInput (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#46) is not in mixedCase
+Parameter 'min_tokens_bought' of IUniswapExchange.tokenToExchangeSwapInput (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#46) is not in mixedCase
+Parameter 'min_eth_bought' of IUniswapExchange.tokenToExchangeSwapInput (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#46) is not in mixedCase
+Parameter 'exchange_addr' of IUniswapExchange.tokenToExchangeSwapInput (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#46-47) is not in mixedCase
+Parameter 'tokens_sold' of IUniswapExchange.tokenToExchangeTransferInput (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#47) is not in mixedCase
+Parameter 'min_tokens_bought' of IUniswapExchange.tokenToExchangeTransferInput (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#47) is not in mixedCase
+Parameter 'min_eth_bought' of IUniswapExchange.tokenToExchangeTransferInput (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#47) is not in mixedCase
+Parameter 'exchange_addr' of IUniswapExchange.tokenToExchangeTransferInput (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#47-48) is not in mixedCase
+Parameter 'tokens_bought' of IUniswapExchange.tokenToExchangeSwapOutput (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#48) is not in mixedCase
+Parameter 'max_tokens_sold' of IUniswapExchange.tokenToExchangeSwapOutput (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#48) is not in mixedCase
+Parameter 'max_eth_sold' of IUniswapExchange.tokenToExchangeSwapOutput (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#48) is not in mixedCase
+Parameter 'exchange_addr' of IUniswapExchange.tokenToExchangeSwapOutput (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#48-49) is not in mixedCase
+Parameter 'tokens_bought' of IUniswapExchange.tokenToExchangeTransferOutput (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#49) is not in mixedCase
+Parameter 'max_tokens_sold' of IUniswapExchange.tokenToExchangeTransferOutput (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#49) is not in mixedCase
+Parameter 'max_eth_sold' of IUniswapExchange.tokenToExchangeTransferOutput (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#49) is not in mixedCase
+Parameter 'exchange_addr' of IUniswapExchange.tokenToExchangeTransferOutput (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#49-50) is not in mixedCase
+Parameter 'token_addr' of IUniswapExchange.setup (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#64) is not in mixedCase
+Contract 'flashItGen' (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#170-225) is not in CapWords
+Parameter '_reserve' of flashItGen.executeOperation (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#196-197) is not in mixedCase
+Parameter '_amount' of flashItGen.executeOperation (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#198) is not in mixedCase
+Parameter '_fee' of flashItGen.executeOperation (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#198) is not in mixedCase
+Variable 'flashItGen._tokenOrder' (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#172) is not in mixedCase
+Variable 'flashItGen._exchangeOrder' (/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol#172) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xbd055c46d0dcd3787a23b1114137f250ee5de0d1.sol analyzed (12 contracts), 76 result(s) found

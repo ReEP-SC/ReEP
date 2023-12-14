@@ -1,0 +1,111 @@
+INFO:Detectors:[93m
+OldIERC20 (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#337-338) has incorrect ERC20 function interface(s):
+	-transfer (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#337-338)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[93m
+Reentrancy in FarmProRata.deposit (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#444-461):
+	External calls:
+	- updateAccount(msg.sender) (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#448-452)
+	- require(bool,string)(Token(trustedDepositTokenAddress).transferFrom(msg.sender,address(this),amountToDeposit),Insufficient Token Allowance) (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#452-455)
+	State variables written after the call(s):
+	- depositedTokens (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#455-457)
+	- totalTokens (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#457-459)
+Reentrancy in FarmProRata.emergencyWithdraw (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#480-504):
+	External calls:
+	- require(bool,string)(Token(trustedDepositTokenAddress).transfer(msg.sender,amountToWithdraw),Could not transfer tokens.) (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#494-497)
+	State variables written after the call(s):
+	- depositedTokens (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#497-499)
+	- totalTokens (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#500-501)
+Reentrancy in FarmProRata.updateAccount (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#396-413):
+	External calls:
+	- require(bool,string)(Token(trustedRewardTokenAddress).transfer(account,pendingDivs),Could not transfer tokens.) (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#400-403)
+	State variables written after the call(s):
+	- lastDivPoints (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#411)
+Reentrancy in FarmProRata.withdraw (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#461-478):
+	External calls:
+	- updateAccount(msg.sender) (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#469-470)
+	- require(bool,string)(Token(trustedDepositTokenAddress).transfer(msg.sender,amountToWithdraw),Could not transfer tokens.) (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#470-471)
+	State variables written after the call(s):
+	- depositedTokens (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#473)
+	- totalTokens (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#475)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+EnumerableSet._remove (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#107-143) does not use the value returned by external calls:
+	-set._values.pop() (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#134-135)
+FarmProRata.deposit (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#444-461) does not use the value returned by external calls:
+	-holders.add(msg.sender) (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#459-461)
+FarmProRata.withdraw (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#461-478) does not use the value returned by external calls:
+	-holders.remove(msg.sender) (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#478)
+FarmProRata.emergencyWithdraw (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#480-504) does not use the value returned by external calls:
+	-holders.remove(msg.sender) (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#504)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in FarmProRata.addContractBalance (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#393-396):
+	External calls:
+	- require(bool,string)(Token(trustedRewardTokenAddress).transferFrom(msg.sender,address(this),amount),Cannot add balance!) (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#394-395)
+	State variables written after the call(s):
+	- contractBalance (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#395-396)
+Reentrancy in FarmProRata.deposit (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#444-461):
+	External calls:
+	- updateAccount(msg.sender) (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#448-452)
+	- require(bool,string)(Token(trustedDepositTokenAddress).transferFrom(msg.sender,address(this),amountToDeposit),Insufficient Token Allowance) (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#452-455)
+	State variables written after the call(s):
+	- depositTime (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#461)
+Reentrancy in FarmProRata.updateAccount (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#396-413):
+	External calls:
+	- require(bool,string)(Token(trustedRewardTokenAddress).transfer(account,pendingDivs),Could not transfer tokens.) (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#400-403)
+	State variables written after the call(s):
+	- lastClaimedTime (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#411)
+	- totalClaimedRewards (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#405-407)
+	- totalEarnedTokens (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#404-405)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+FarmProRata.adminCanClaimAfter should be constant (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#362)
+FarmProRata.disburseAmount should be constant (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#353)
+FarmProRata.disburseDuration should be constant (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#356-357)
+FarmProRata.disbursePercentX100 should be constant (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#366-368)
+FarmProRata.pointMultiplier should be constant (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#392)
+FarmProRata.totalTokensDisbursed should be constant (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#386)
+FarmProRata.trustedDepositTokenAddress should be constant (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#346-348)
+FarmProRata.trustedRewardTokenAddress should be constant (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#348-353)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#323-332) should be declared external
+FarmProRata.addContractBalance (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#393-396) should be declared external
+FarmProRata.getEstimatedPendingDivs (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#424-443) should be declared external
+FarmProRata.getNumberOfHolders (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#443-444) should be declared external
+FarmProRata.deposit (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#444-461) should be declared external
+FarmProRata.withdraw (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#461-478) should be declared external
+FarmProRata.emergencyWithdraw (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#480-504) should be declared external
+FarmProRata.claim (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#505-507) should be declared external
+FarmProRata.getDepositorsList (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#545-566) should be declared external
+FarmProRata.transferAnyERC20Token (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#567-575) should be declared external
+FarmProRata.transferAnyOldERC20Token (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#577-579) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol:
+	- pragma solidity0.6.11 (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#5-7): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'EnumerableSet._add' (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#89-103) is not in mixedCase
+Function 'EnumerableSet._remove' (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#107-143) is not in mixedCase
+Function 'EnumerableSet._contains' (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#148-150) is not in mixedCase
+Function 'EnumerableSet._length' (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#155-157) is not in mixedCase
+Function 'EnumerableSet._at' (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#166-178) is not in mixedCase
+Parameter '' of Token.transferFrom (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#334) is not in mixedCase
+Parameter '_scope_0' of Token.transferFrom (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#334) is not in mixedCase
+Parameter '_scope_1' of Token.transferFrom (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#334) is not in mixedCase
+Parameter '' of Token.transfer (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#335) is not in mixedCase
+Parameter '_scope_0' of Token.transfer (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#335-337) is not in mixedCase
+Parameter '' of OldIERC20.transfer (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#338) is not in mixedCase
+Parameter '_scope_0' of OldIERC20.transfer (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#338) is not in mixedCase
+Parameter '_holder' of FarmProRata.getPendingDivs (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#416) is not in mixedCase
+Parameter '_holder' of FarmProRata.getEstimatedPendingDivs (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#426) is not in mixedCase
+Parameter '_tokenAddr' of FarmProRata.transferAnyERC20Token (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#567-568) is not in mixedCase
+Parameter '_to' of FarmProRata.transferAnyERC20Token (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#569-570) is not in mixedCase
+Parameter '_amount' of FarmProRata.transferAnyERC20Token (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol#570) is not in mixedCase
+Parameter '_tokenAddr' of FarmProRata.transferAnyOldERC20Token (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol) is not in mixedCase
+Parameter '_to' of FarmProRata.transferAnyOldERC20Token (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol) is not in mixedCase
+Parameter '_amount' of FarmProRata.transferAnyOldERC20Token (/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xb1a6cd21eea237b2185bc33b4fb2bed0a4eaf68e.sol analyzed (6 contracts), 45 result(s) found

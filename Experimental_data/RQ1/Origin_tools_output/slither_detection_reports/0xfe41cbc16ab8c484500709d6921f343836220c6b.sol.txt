@@ -1,0 +1,191 @@
+INFO:Detectors:[93m
+GringottsBank.computeInterest (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#573-590) is declared view but contains assembly code
+GringottsBank.bytesToUint256 (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#614-622) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+GringottsBank._claimDeposit (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#499-523) uses a dangerous strict equality:
+	- require(bool,string)(deposits[_depositID].claimed == false,Already claimed)
+	- require(bool,string)(deposits[_depositID].depositor == _depositor,Depositor must match.)
+GringottsBank._claimDeposit (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#499-523) uses a dangerous strict equality:
+	- require(bool,string)(deposits[_depositID].claimed == false,Already claimed)
+	- require(bool,string)(deposits[_depositID].depositor == _depositor,Depositor must match.)
+GringottsBank.burnAndRedeem (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#401-439) uses a dangerous strict equality:
+	- require(bool,string)(deposits[_depositID].claimed == false,Already claimed)
+	- require(bool,string)(deposits[_depositID].depositor == msg.sender,Permission denied)
+GringottsBank._claimDeposit (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#499-523) uses a dangerous strict equality:
+	- require(bool,string)(deposits[_depositID].claimed == false,Already claimed)
+	- require(bool,string)(deposits[_depositID].depositor == _depositor,Depositor must match.)
+GringottsBank.burnAndRedeem (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#401-439) uses a dangerous strict equality:
+	- require(bool,string)(deposits[_depositID].claimed == false,Already claimed)
+	- require(bool,string)(deposits[_depositID].depositor == msg.sender,Permission denied)
+GringottsBank.transferDeposit (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#475-498) uses a dangerous strict equality:
+	- require(bool,string)(deposits[_depositID].depositor == msg.sender,Depositor must be the msg.sender)
+	- require(bool,string)(deposits[_depositID].claimed == false,Already claimed, can not transfer.)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Reentrancy in GringottsBank._deposit (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#530-563):
+	External calls:
+	- kryptonite = ERC20(registry.addressOf(SettingIds.CONTRACT_KTON_ERC20_TOKEN)) (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#534-536)
+	- _unitInterest = uint64(registry.uintOf(BankSettingIds.UINT_BANK_UNIT_INTEREST)) (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#546-549)
+	State variables written after the call(s):
+	- depositCount (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#556-557)
+Reentrancy in GringottsBank.burnAndRedeem (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#401-439):
+	External calls:
+	- ring = registry.addressOf(SettingIds.CONTRACT_RING_ERC20_TOKEN) (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#421-425)
+	- IBurnableERC20(ring).burn(address(this),deposits[_depositID].value) (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#425-429)
+	State variables written after the call(s):
+	- deposits (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#438)
+Reentrancy in GringottsBank.claimDepositWithPenalty (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#467-475):
+	External calls:
+	- kryptonite = ERC20(registry.addressOf(SettingIds.CONTRACT_KTON_ERC20_TOKEN)) (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#468)
+	- _penalty = computePenalty(_depositID) (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#469)
+	- require(bool)(ERC20(kryptonite).transferFrom(msg.sender,address(this),_penalty)) (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#469-470)
+	- _claimDeposit(msg.sender,_depositID,true,_penalty) (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#470-472)
+	State variables written after the call(s):
+	- deposits (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#470-472)
+Reentrancy in GringottsBank.tokenFallback (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#368-394):
+	External calls:
+	- ring = registry.addressOf(SettingIds.CONTRACT_RING_ERC20_TOKEN) (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#370-373)
+	- kryptonite = registry.addressOf(SettingIds.CONTRACT_KTON_ERC20_TOKEN) (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#373-375)
+	- _deposit(_from,_amount,months) (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#379-380)
+	- require(bool,string)(_amount >= computePenalty(_depositID),No enough amount of KTON penalty.) (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#385-387)
+	- _claimDeposit(_from,_depositID,true,_amount) (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#387-389)
+	State variables written after the call(s):
+	- deposits (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#387-389)
+	- userTotalDeposit (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#387-389)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+GringottsBank.claimTokens (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#629-639) does not use the value returned by external calls:
+	-token.transfer(owner,balance) (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#635-638)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in GringottsBank._claimDeposit (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#499-523):
+	External calls:
+	- ring = registry.addressOf(SettingIds.CONTRACT_RING_ERC20_TOKEN) (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#501-504)
+	State variables written after the call(s):
+	- deposits (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#517-518)
+	- userTotalDeposit (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#520)
+Reentrancy in GringottsBank._deposit (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#530-563):
+	External calls:
+	- kryptonite = ERC20(registry.addressOf(SettingIds.CONTRACT_KTON_ERC20_TOKEN)) (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#534-536)
+	- _unitInterest = uint64(registry.uintOf(BankSettingIds.UINT_BANK_UNIT_INTEREST)) (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#546-549)
+	State variables written after the call(s):
+	- deposits (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#549-556)
+	- userDeposits (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#557-558)
+	- userTotalDeposit (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#558)
+Reentrancy in GringottsBank.deposit (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#454-462):
+	External calls:
+	- ring = registry.addressOf(SettingIds.CONTRACT_RING_ERC20_TOKEN) (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#457-458)
+	- require(bool,string)(ERC20(ring).transferFrom(msg.sender,address(this),_amount),RING token tranfer failed.) (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#458-460)
+	- _deposit(_benificiary,_amount,_months) (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#460-462)
+	State variables written after the call(s):
+	- deposits (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#460-462)
+Reentrancy in GringottsBank.tokenFallback (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#368-394):
+	External calls:
+	- ring = registry.addressOf(SettingIds.CONTRACT_RING_ERC20_TOKEN) (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#370-373)
+	- kryptonite = registry.addressOf(SettingIds.CONTRACT_KTON_ERC20_TOKEN) (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#373-375)
+	- _deposit(_from,_amount,months) (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#379-380)
+	State variables written after the call(s):
+	- deposits (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#379-380)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+GringottsBank.burnAndRedeem uses assembly (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#401-439)
+	- /sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#402-405
+GringottsBank.computeInterest uses assembly (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#573-590)
+	- /sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#579-588
+GringottsBank.bytesToUint256 uses assembly (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#614-622)
+	- /sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#618-622
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+Different versions of Solidity is used in /sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol:
+	- Version used: ['^0.4.23', '^0.4.24']
+	- /sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#7-10 declares pragma solidity^0.4.24
+	- /sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#24-29 declares pragma solidity^0.4.24
+	- /sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#51-52 declares pragma solidity^0.4.24
+	- /sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#88-90 declares pragma solidity^0.4.23
+	- /sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#97-100 declares pragma solidity^0.4.23
+	- /sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#106-107 declares pragma solidity^0.4.24
+	- /sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#117 declares pragma solidity^0.4.24
+	- /sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#179-180 declares pragma solidity^0.4.24
+	- /sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#243 declares pragma solidity^0.4.24
+	- /sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#266 declares pragma solidity^0.4.24
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#different-pragma-directives-are-used[0m
+INFO:Detectors:[92m
+ERC20Basic.totalSupply (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#16-17) should be declared external
+ERC20Basic.balanceOf (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#17-18) should be declared external
+ERC20Basic.transfer (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#18-19) should be declared external
+ERC20.allowance (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#33-36) should be declared external
+ERC20.transferFrom (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#36-39) should be declared external
+ERC20.approve (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#39-41) should be declared external
+ISettingsRegistry.uintOf (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#54-56) should be declared external
+ISettingsRegistry.stringOf (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#56-58) should be declared external
+ISettingsRegistry.addressOf (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#58-60) should be declared external
+ISettingsRegistry.bytesOf (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#60-62) should be declared external
+ISettingsRegistry.boolOf (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#62-64) should be declared external
+ISettingsRegistry.intOf (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#64-66) should be declared external
+ISettingsRegistry.setUintProperty (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#66-68) should be declared external
+ISettingsRegistry.setStringProperty (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#68-70) should be declared external
+ISettingsRegistry.setAddressProperty (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#70-72) should be declared external
+ISettingsRegistry.setBytesProperty (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#73-74) should be declared external
+ISettingsRegistry.setBoolProperty (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#76-77) should be declared external
+ISettingsRegistry.setIntProperty (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#78) should be declared external
+ISettingsRegistry.getValueTypeOf (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#78-83) should be declared external
+IBurnableERC20.burn (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#91-93) should be declared external
+IMintableERC20.mint (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#100-102) should be declared external
+IAuthority.canCall (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#110-115) should be declared external
+DSAuth.setOwner (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#142-147) should be declared external
+DSAuth.setAuthority (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#147-156) should be declared external
+GringottsBank.initializeContract (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#350-356) should be declared external
+GringottsBank.getDeposit (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#356-361) should be declared external
+GringottsBank.tokenFallback (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#368-394) should be declared external
+GringottsBank.burnAndRedeem (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#401-439) should be declared external
+GringottsBank.deposit (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#441-445) should be declared external
+GringottsBank.claimDeposit (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#462-467) should be declared external
+GringottsBank.claimDepositWithPenalty (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#467-475) should be declared external
+GringottsBank.transferDeposit (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#475-498) should be declared external
+GringottsBank.getDepositIds (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#611-614) should be declared external
+GringottsBank.claimTokens (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#629-639) should be declared external
+GringottsBank.setRegistry (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#640-642) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol:
+	- pragma solidity^0.4.23 (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#88-90): it allows old versions
+	- pragma solidity^0.4.23 (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#97-100): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_registry' of GringottsBank.initializeContract (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#351) is not in mixedCase
+Parameter '_id' of GringottsBank.getDeposit (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#356) is not in mixedCase
+Parameter '_from' of GringottsBank.tokenFallback (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#368) is not in mixedCase
+Parameter '_amount' of GringottsBank.tokenFallback (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#368-370) is not in mixedCase
+Parameter '_data' of GringottsBank.tokenFallback (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#370) is not in mixedCase
+Parameter '_depositID' of GringottsBank.burnAndRedeem (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#401) is not in mixedCase
+Parameter '_data' of GringottsBank.burnAndRedeem (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#401) is not in mixedCase
+Parameter '_amount' of GringottsBank.deposit (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#442-443) is not in mixedCase
+Parameter '_months' of GringottsBank.deposit (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#443) is not in mixedCase
+Parameter '_benificiary' of GringottsBank.deposit (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#456) is not in mixedCase
+Parameter '_amount' of GringottsBank.deposit (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#456) is not in mixedCase
+Parameter '_months' of GringottsBank.deposit (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#456-457) is not in mixedCase
+Parameter '_depositID' of GringottsBank.claimDeposit (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#462-464) is not in mixedCase
+Parameter '_depositID' of GringottsBank.claimDepositWithPenalty (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#467) is not in mixedCase
+Parameter '_benificiary' of GringottsBank.transferDeposit (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#475-476) is not in mixedCase
+Parameter '_depositID' of GringottsBank.transferDeposit (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#476) is not in mixedCase
+Function 'GringottsBank._claimDeposit' (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#499-523) is not in mixedCase
+Parameter '_depositor' of GringottsBank._claimDeposit (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#499) is not in mixedCase
+Parameter '_depositID' of GringottsBank._claimDeposit (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#499) is not in mixedCase
+Parameter '_penaltyAmount' of GringottsBank._claimDeposit (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#500-501) is not in mixedCase
+Function 'GringottsBank._deposit' (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#530-563) is not in mixedCase
+Parameter '_depositor' of GringottsBank._deposit (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#530) is not in mixedCase
+Parameter '_value' of GringottsBank._deposit (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#530) is not in mixedCase
+Parameter '_month' of GringottsBank._deposit (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#530) is not in mixedCase
+Parameter '_value' of GringottsBank.computeInterest (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#573-574) is not in mixedCase
+Parameter '_month' of GringottsBank.computeInterest (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#574) is not in mixedCase
+Parameter '_unitInterest' of GringottsBank.computeInterest (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#574) is not in mixedCase
+Parameter '_depositID' of GringottsBank.isClaimRequirePenalty (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#591) is not in mixedCase
+Parameter '_depositID' of GringottsBank.computePenalty (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#597) is not in mixedCase
+Parameter '_user' of GringottsBank.getDepositIds (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#612) is not in mixedCase
+Parameter '_token' of GringottsBank.claimTokens (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#630) is not in mixedCase
+Parameter '_registry' of GringottsBank.setRegistry (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#640-641) is not in mixedCase
+Parameter '_depositID' of GringottsBank.removeUserDepositsByID (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#645) is not in mixedCase
+Parameter '_depositor' of GringottsBank.removeUserDepositsByID (/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol#645) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xfe41cbc16ab8c484500709d6921f343836220c6b.sol analyzed (11 contracts), 88 result(s) found

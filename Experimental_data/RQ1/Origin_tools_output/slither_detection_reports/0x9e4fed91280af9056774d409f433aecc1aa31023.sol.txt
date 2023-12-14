@@ -1,0 +1,136 @@
+INFO:Detectors:[91m
+AccessLiquidity.mintTknBack (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#235-252) sends eth to arbitrary user
+	Dangerous calls:
+	- cEthContract.mint.value(tknAmt)() (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#250-251)
+AccessLiquidity.payBorrowBack (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#272-288) sends eth to arbitrary user
+	Dangerous calls:
+	- cEthContract.repayBorrow.value(tknAmt)() (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#286-287)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[91m
+Reentrancy in ProvideLiquidity.withdrawToken (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#142-173):
+	External calls:
+	- exchangeRate = cTokenContract.exchangeRateCurrent() (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#147-148)
+	- initialTknBal = tknContract.balanceOf(address(this)) (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#155)
+	- require(bool,string)(cTokenContract.redeem(withdrawAmt) == 0,something went wrong) (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#156-157)
+	- finalTknBal = tknContract.balanceOf(address(this)) (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#157)
+	- require(bool,string)(ERC20Interface(tknAddr).transfer(msg.sender,tknAmt),not enough tkn to Transfer) (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#159-160)
+	- require(bool,string)(cTokenContract.redeem(withdrawAmt) == 0,something went wrong) (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#162-165)
+	External calls sending eth:
+	- msg.sender.transfer(tknAmt) (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#170)
+	State variables written after the call(s):
+	- deposits (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#172)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities[0m
+INFO:Detectors:[91m
+Helper.isCToken (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#99-100) is never initialized. It is used in:
+	- collectTokens (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#320-337)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-state-variables[0m
+INFO:Detectors:[93m
+ERC20Interface (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#15-25) has incorrect ERC20 function interface(s):
+	-approve (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#18-19)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[93m
+Reentrancy in ProvideLiquidity.withdrawCTkn (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#185-202):
+	External calls:
+	- require(bool,string)(CTokenInterface(ctknAddr).transfer(msg.sender,withdrawAmt),Dai Transfer failed) (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#190-199)
+	State variables written after the call(s):
+	- deposits (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#199-200)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+AdminStuff.enterMarket (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#338-349) does not use the value returned by external calls:
+	-troller.enterMarkets(cTknAddrArr) (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#346-349)
+AdminStuff.exitMarket (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#349-356) does not use the value returned by external calls:
+	-troller.exitMarket(cErc20) (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#356)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in ProvideLiquidity.depositCTkn (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#174-183):
+	External calls:
+	- require(bool,string)(cTokenContract.transferFrom(msg.sender,address(this),amt) == true,Nothing to deposit) (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#176-182)
+	State variables written after the call(s):
+	- deposits (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#182-183)
+	- totalDeposits (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#183)
+Reentrancy in ProvideLiquidity.depositToken (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#118-141):
+	External calls:
+	- require(bool,string)(ERC20Interface(tknAddr).transferFrom(msg.sender,address(this),amt),Nothing enough tkn to deposit) (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#120-121)
+	- assert(bool)(cTokenContract.mint(amt) == 0) (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#123)
+	- exchangeRate = cTokenContract.exchangeRateCurrent() (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#124)
+	State variables written after the call(s):
+	- deposits (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#128)
+	- totalDeposits (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#129)
+Reentrancy in ProvideLiquidity.depositToken (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#118-141):
+	External calls:
+	- cEthContract.mint.value(msg.value)() (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#131-132)
+	- exchangeRate_scope_0 = cEthContract.exchangeRateCurrent() (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#132)
+	External calls sending eth:
+	- cEthContract.mint.value(msg.value)() (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#131-132)
+	State variables written after the call(s):
+	- deposits (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#139-141)
+	- totalDeposits (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#141)
+Reentrancy in ProvideLiquidity.withdrawCTkn (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#185-202):
+	External calls:
+	- require(bool,string)(CTokenInterface(ctknAddr).transfer(msg.sender,withdrawAmt),Dai Transfer failed) (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#190-199)
+	State variables written after the call(s):
+	- totalDeposits (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#200-202)
+Reentrancy in ProvideLiquidity.withdrawToken (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#142-173):
+	External calls:
+	- exchangeRate = cTokenContract.exchangeRateCurrent() (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#147-148)
+	- initialTknBal = tknContract.balanceOf(address(this)) (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#155)
+	- require(bool,string)(cTokenContract.redeem(withdrawAmt) == 0,something went wrong) (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#156-157)
+	- finalTknBal = tknContract.balanceOf(address(this)) (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#157)
+	- require(bool,string)(ERC20Interface(tknAddr).transfer(msg.sender,tknAmt),not enough tkn to Transfer) (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#159-160)
+	- require(bool,string)(cTokenContract.redeem(withdrawAmt) == 0,something went wrong) (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#162-165)
+	External calls sending eth:
+	- msg.sender.transfer(tknAmt) (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#170)
+	State variables written after the call(s):
+	- totalDeposits (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#172-173)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Helper.adminOne should be constant (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#100-102)
+Helper.adminTwo should be constant (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#102-103)
+Helper.cDai should be constant (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#104-109)
+Helper.cEth should be constant (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#103-104)
+Helper.cUsdc should be constant (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#109-111)
+Helper.comptrollerAddr should be constant (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#97-99)
+Helper.daiAddr should be constant (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#93-94)
+Helper.ethAddr should be constant (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#92-93)
+Helper.registry should be constant (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#95-97)
+Helper.usdcAddr should be constant (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#94-95)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+ProvideLiquidity.depositToken (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#118-141) should be declared external
+ProvideLiquidity.withdrawToken (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#142-173) should be declared external
+ProvideLiquidity.depositCTkn (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#174-183) should be declared external
+ProvideLiquidity.withdrawCTkn (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#185-202) should be declared external
+AccessLiquidity.redeemTknAndTransfer (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#213-234) should be declared external
+AccessLiquidity.mintTknBack (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#235-252) should be declared external
+AccessLiquidity.borrowTknAndTransfer (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#252-272) should be declared external
+AccessLiquidity.payBorrowBack (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#272-288) should be declared external
+AdminStuff.collectCTokens (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#302-316) should be declared external
+AdminStuff.collectTokens (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#320-337) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol:
+	- pragma solidity^0.5.7 (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#5-7): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '' of RegistryInterface.proxies (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#8) is not in mixedCase
+Parameter '' of ERC20Interface.allowance (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#16) is not in mixedCase
+Parameter '_scope_0' of ERC20Interface.allowance (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#16) is not in mixedCase
+Parameter '' of ERC20Interface.balanceOf (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#17) is not in mixedCase
+Parameter '' of ERC20Interface.approve (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#18) is not in mixedCase
+Parameter '_scope_0' of ERC20Interface.approve (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#19) is not in mixedCase
+Parameter '' of ERC20Interface.transfer (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#19) is not in mixedCase
+Parameter '_scope_0' of ERC20Interface.transfer (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#19) is not in mixedCase
+Parameter '' of ERC20Interface.transferFrom (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#20) is not in mixedCase
+Parameter '_scope_0' of ERC20Interface.transferFrom (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#20) is not in mixedCase
+Parameter '_scope_1' of ERC20Interface.transferFrom (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#20) is not in mixedCase
+Parameter '' of ERC20Interface.withdraw (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#25) is not in mixedCase
+Parameter '' of CTokenInterface.transfer (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#31) is not in mixedCase
+Parameter '_scope_0' of CTokenInterface.transfer (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#31-32) is not in mixedCase
+Parameter '' of CTokenInterface.transferFrom (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#32) is not in mixedCase
+Parameter '_scope_0' of CTokenInterface.transferFrom (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#32) is not in mixedCase
+Parameter '_scope_1' of CTokenInterface.transferFrom (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#33) is not in mixedCase
+Parameter '' of CTokenInterface.balanceOf (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#33-34) is not in mixedCase
+Parameter '' of CETHInterface.transfer (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#42-44) is not in mixedCase
+Parameter '_scope_0' of CETHInterface.transfer (/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol#44) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x9e4fed91280af9056774d409f433aecc1aa31023.sol analyzed (12 contracts), 45 result(s) found

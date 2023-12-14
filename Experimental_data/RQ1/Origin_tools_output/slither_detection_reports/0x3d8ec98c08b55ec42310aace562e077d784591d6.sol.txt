@@ -1,0 +1,66 @@
+INFO:Detectors:[93m
+Meritocracy.withdraw (/sb/0x3d8ec98c08b55ec42310aace562e077d784591d6.sol#357-389) does not use the value returned by external calls:
+	-token.transfer(cReceiver.addr,r) (/sb/0x3d8ec98c08b55ec42310aace562e077d784591d6.sol#385)
+Meritocracy.removeContributor (/sb/0x3d8ec98c08b55ec42310aace562e077d784591d6.sol#573-599) does not use the value returned by external calls:
+	-registry.pop() (/sb/0x3d8ec98c08b55ec42310aace562e077d784591d6.sol#593)
+Meritocracy.changeToken (/sb/0x3d8ec98c08b55ec42310aace562e077d784591d6.sol#703-737) does not use the value returned by external calls:
+	-token.transfer(c.addr,r) (/sb/0x3d8ec98c08b55ec42310aace562e077d784591d6.sol#727-729)
+Meritocracy.escape (/sb/0x3d8ec98c08b55ec42310aace562e077d784591d6.sol#743-749) does not use the value returned by external calls:
+	-token.transfer(owner,token.balanceOf(address(this))) (/sb/0x3d8ec98c08b55ec42310aace562e077d784591d6.sol#747)
+Meritocracy.escape (/sb/0x3d8ec98c08b55ec42310aace562e077d784591d6.sol#759-773) does not use the value returned by external calls:
+	-t.transfer(owner,t.balanceOf(address(this))) (/sb/0x3d8ec98c08b55ec42310aace562e077d784591d6.sol#765-771)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Meritocracy.changeToken has external calls inside a loop:
+	- token.transfer(c.addr,r) (/sb/0x3d8ec98c08b55ec42310aace562e077d784591d6.sol#727-729)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in Meritocracy.allocate (/sb/0x3d8ec98c08b55ec42310aace562e077d784591d6.sol#301-345):
+	External calls:
+	- require(bool)(token.transferFrom(msg.sender,address(this),amount)) (/sb/0x3d8ec98c08b55ec42310aace562e077d784591d6.sol#331-339)
+	State variables written after the call(s):
+	- contributors (/sb/0x3d8ec98c08b55ec42310aace562e077d784591d6.sol#343)
+Reentrancy in Meritocracy.removeContributor (/sb/0x3d8ec98c08b55ec42310aace562e077d784591d6.sol#573-599):
+	External calls:
+	- registry.pop() (/sb/0x3d8ec98c08b55ec42310aace562e077d784591d6.sol#593)
+	State variables written after the call(s):
+	- contributors (/sb/0x3d8ec98c08b55ec42310aace562e077d784591d6.sol#595)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Meritocracy.forfeitAllocations (/sb/0x3d8ec98c08b55ec42310aace562e077d784591d6.sol#615-659) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool)(block.timestamp >= lastForfeit + 604800) (/sb/0x3d8ec98c08b55ec42310aace562e077d784591d6.sol#625-627)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+Meritocracy.getRegistry (/sb/0x3d8ec98c08b55ec42310aace562e077d784591d6.sol#345-351) should be declared external
+Meritocracy.getStatusLength (/sb/0x3d8ec98c08b55ec42310aace562e077d784591d6.sol#453-457) should be declared external
+Meritocracy.getStatus (/sb/0x3d8ec98c08b55ec42310aace562e077d784591d6.sol#457-477) should be declared external
+Meritocracy.forfeitAllocations (/sb/0x3d8ec98c08b55ec42310aace562e077d784591d6.sol#615-659) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x3d8ec98c08b55ec42310aace562e077d784591d6.sol:
+	- pragma solidity^0.5.0 (/sb/0x3d8ec98c08b55ec42310aace562e077d784591d6.sol#9-15): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_amount' of Meritocracy.allocate (/sb/0x3d8ec98c08b55ec42310aace562e077d784591d6.sol#301) is not in mixedCase
+Parameter '_contributor' of Meritocracy.award (/sb/0x3d8ec98c08b55ec42310aace562e077d784591d6.sol#391) is not in mixedCase
+Parameter '_amount' of Meritocracy.award (/sb/0x3d8ec98c08b55ec42310aace562e077d784591d6.sol#391) is not in mixedCase
+Parameter '_praise' of Meritocracy.award (/sb/0x3d8ec98c08b55ec42310aace562e077d784591d6.sol#391-393) is not in mixedCase
+Parameter '_contributor' of Meritocracy.getStatusLength (/sb/0x3d8ec98c08b55ec42310aace562e077d784591d6.sol#453-455) is not in mixedCase
+Parameter '_contributor' of Meritocracy.getStatus (/sb/0x3d8ec98c08b55ec42310aace562e077d784591d6.sol#459-463) is not in mixedCase
+Parameter '_index' of Meritocracy.getStatus (/sb/0x3d8ec98c08b55ec42310aace562e077d784591d6.sol#463) is not in mixedCase
+Parameter '_contributors' of Meritocracy.awardContributors (/sb/0x3d8ec98c08b55ec42310aace562e077d784591d6.sol#483) is not in mixedCase
+Parameter '_amountEach' of Meritocracy.awardContributors (/sb/0x3d8ec98c08b55ec42310aace562e077d784591d6.sol#483) is not in mixedCase
+Parameter '_praise' of Meritocracy.awardContributors (/sb/0x3d8ec98c08b55ec42310aace562e077d784591d6.sol#484-491) is not in mixedCase
+Parameter '_contributor' of Meritocracy.addContributor (/sb/0x3d8ec98c08b55ec42310aace562e077d784591d6.sol#519-521) is not in mixedCase
+Parameter '_newContributors' of Meritocracy.addContributors (/sb/0x3d8ec98c08b55ec42310aace562e077d784591d6.sol#545-547) is not in mixedCase
+Parameter '_maxContributors' of Meritocracy.setMaxContributors (/sb/0x3d8ec98c08b55ec42310aace562e077d784591d6.sol#603) is not in mixedCase
+Parameter '_admin' of Meritocracy.addAdmin (/sb/0x3d8ec98c08b55ec42310aace562e077d784591d6.sol#675) is not in mixedCase
+Parameter '_admin' of Meritocracy.removeAdmin (/sb/0x3d8ec98c08b55ec42310aace562e077d784591d6.sol#681-683) is not in mixedCase
+Parameter '_owner' of Meritocracy.changeOwner (/sb/0x3d8ec98c08b55ec42310aace562e077d784591d6.sol#691-693) is not in mixedCase
+Parameter '_token' of Meritocracy.changeToken (/sb/0x3d8ec98c08b55ec42310aace562e077d784591d6.sol#705-709) is not in mixedCase
+Parameter '_token' of Meritocracy.escape (/sb/0x3d8ec98c08b55ec42310aace562e077d784591d6.sol#759-763) is not in mixedCase
+Parameter '_token' of Meritocracy. (/sb/0x3d8ec98c08b55ec42310aace562e077d784591d6.sol) is not in mixedCase
+Parameter '_maxContributors' of Meritocracy. (/sb/0x3d8ec98c08b55ec42310aace562e077d784591d6.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x3d8ec98c08b55ec42310aace562e077d784591d6.sol analyzed (2 contracts), 34 result(s) found

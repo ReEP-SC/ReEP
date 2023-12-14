@@ -1,0 +1,110 @@
+INFO:Detectors:[91m
+CErc20Delegator.delegateTo (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#854-859) uses delegatecall to a input-controlled function id
+	(success,returnData) = callee.delegatecall(data) (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#855-856)
+CErc20Delegator.fallback (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol) uses delegatecall to a input-controlled function id
+	(success) = implementation.delegatecall(msg.data) (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#controlled-delegatecall[0m
+INFO:Detectors:[93m
+CErc20Delegator.delegateToViewImplementation (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#878-889) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+Reentrancy in CErc20Delegator._setImplementation (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#492-504):
+	External calls:
+	- delegateToImplementation(abi.encodeWithSignature(_resignImplementation())) (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#499-500)
+	State variables written after the call(s):
+	- implementation (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#501)
+Reentrancy in CErc20Delegator.constructor (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#456-482):
+	External calls:
+	- delegateTo(implementation_,abi.encodeWithSignature(initialize(address,address,address,uint256,string,string,uint8),underlying_,comptroller_,interestRateModel_,initialExchangeRateMantissa_,name_,symbol_,decimals_)) (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#465-479)
+	- _setImplementation(implementation_,false,becomeImplementationData) (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#480)
+	State variables written after the call(s):
+	- admin (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#482)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+CErc20Delegator.delegateTo uses assembly (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#854-859)
+	- /sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#856-858
+CErc20Delegator.delegateToViewImplementation uses assembly (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#878-889)
+	- /sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#886-889
+CErc20Delegator.fallback uses assembly (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol)
+	- /sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+CErc20Storage.underlying should be constant (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#375-376)
+CTokenStorage._notEntered should be constant (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#136)
+CTokenStorage.accrualBlockNumber should be constant (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#197)
+CTokenStorage.borrowIndex should be constant (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#202)
+CTokenStorage.decimals should be constant (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#149)
+CTokenStorage.initialExchangeRateMantissa should be constant (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#187)
+CTokenStorage.name should be constant (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#141)
+CTokenStorage.pendingAdmin should be constant (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#171-172)
+CTokenStorage.reserveFactorMantissa should be constant (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#192)
+CTokenStorage.symbol should be constant (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#146)
+CTokenStorage.totalBorrows should be constant (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#207-209)
+CTokenStorage.totalReserves should be constant (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#213-214)
+CTokenStorage.totalSupply should be constant (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#217)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+CTokenInterface.borrowBalanceStored (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#348-351) should be declared external
+CErc20Delegator.borrowBalanceStored (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#711-715) should be declared external
+CTokenInterface.exchangeRateCurrent (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#351-353) should be declared external
+CErc20Delegator.exchangeRateCurrent (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#720-724) should be declared external
+CTokenInterface.exchangeRateStored (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#353-354) should be declared external
+CErc20Delegator.exchangeRateStored (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#730-734) should be declared external
+CTokenInterface.accrueInterest (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#355) should be declared external
+CErc20Delegator.accrueInterest (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#745-748) should be declared external
+CErc20Delegator._setComptroller (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#781-788) should be declared external
+CTokenInterface._setComptroller (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#361-365) should be declared external
+CTokenInterface._setInterestRateModel (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#373-374) should be declared external
+CErc20Delegator._setInterestRateModel (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#836-845) should be declared external
+CDelegateInterface._becomeImplementation (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#430-432) should be declared external
+CDelegateInterface._resignImplementation (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#435) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol:
+	- pragma solidity^0.5.12 (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#7-9): it allows old versions
+	- pragma solidity^0.5.12 (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#89-91): it allows old versions
+	- pragma solidity^0.5.12 (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#128): it allows old versions
+	- pragma solidity^0.5.12 (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#436-437): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Low level call in CErc20Delegator.delegateTo (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#854-859):
+	-(success,returnData) = callee.delegatecall(data) /sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#855-856
+Low level call in CErc20Delegator.delegateToViewImplementation (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#878-889):
+	-(success,returnData) = address(this).staticcall(abi.encodeWithSignature(delegateToImplementation(bytes),data)) /sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#882-886
+Low level call in CErc20Delegator.fallback (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol):
+	-(success) = implementation.delegatecall(msg.data) /sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Variable 'CTokenStorage._notEntered' (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#136) is not in mixedCase
+Constant 'CTokenStorage.borrowRateMaxMantissa' (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#153-154) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'CTokenStorage.reserveFactorMaxMantissa' (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#159-162) is not in UPPER_CASE_WITH_UNDERSCORES
+Function 'CTokenInterface._setPendingAdmin' (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#357-358) is not in mixedCase
+Function 'CTokenInterface._acceptAdmin' (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#358-361) is not in mixedCase
+Function 'CTokenInterface._setComptroller' (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#361-365) is not in mixedCase
+Function 'CTokenInterface._setReserveFactor' (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#365-370) is not in mixedCase
+Function 'CTokenInterface._reduceReserves' (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#370-372) is not in mixedCase
+Function 'CTokenInterface._setInterestRateModel' (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#373-374) is not in mixedCase
+Constant 'CTokenInterface.isCToken' (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#249-252) is not in UPPER_CASE_WITH_UNDERSCORES
+Function 'CErc20Interface._addReserves' (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#397-400) is not in mixedCase
+Function 'CDelegatorInterface._setImplementation' (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#412-417) is not in mixedCase
+Function 'CDelegateInterface._becomeImplementation' (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#430-432) is not in mixedCase
+Function 'CDelegateInterface._resignImplementation' (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#435) is not in mixedCase
+Function 'CErc20Delegator._setPendingAdmin' (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#776-779) is not in mixedCase
+Function 'CErc20Delegator._acceptAdmin' (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#807-811) is not in mixedCase
+Function 'CErc20Delegator._setComptroller' (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#781-788) is not in mixedCase
+Function 'CErc20Delegator._setReserveFactor' (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#796-801) is not in mixedCase
+Function 'CErc20Delegator._reduceReserves' (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#822-828) is not in mixedCase
+Function 'CErc20Delegator._setInterestRateModel' (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#836-845) is not in mixedCase
+Function 'CErc20Delegator._addReserves' (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#816-819) is not in mixedCase
+Function 'CErc20Delegator._setImplementation' (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#492-504) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+CTokenStorage._notEntered (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#136) is never used in CErc20Delegator
+CTokenStorage.borrowRateMaxMantissa (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#153-154) is never used in CErc20Delegator
+CTokenStorage.reserveFactorMaxMantissa (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#159-162) is never used in CErc20Delegator
+CTokenStorage.initialExchangeRateMantissa (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#187) is never used in CErc20Delegator
+CTokenStorage.accountTokens (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#219-222) is never used in CErc20Delegator
+CTokenStorage.transferAllowances (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#223-224) is never used in CErc20Delegator
+CTokenStorage.accountBorrows (/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol#241-247) is never used in CErc20Delegator
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0xa446d7789f2c1daee6b9377add622a8dfe3c95ba.sol analyzed (10 contracts), 50 result(s) found

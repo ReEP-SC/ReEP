@@ -1,0 +1,40 @@
+INFO:Detectors:[93m
+Reentrancy in ClaimToken.claim (/sb/0x5b7d5b89d8f30ad8feb61a747693bf25c60be742.sol#382-393):
+	External calls:
+	- require(bool,string)(_token.balanceOf(address(this)) >= _balances[msg.sender],Insufficent contract balance to make claim, try again later.) (/sb/0x5b7d5b89d8f30ad8feb61a747693bf25c60be742.sol#388-389)
+	- _token.transfer(msg.sender,_balances[msg.sender]) (/sb/0x5b7d5b89d8f30ad8feb61a747693bf25c60be742.sol#390-393)
+	State variables written after the call(s):
+	- _balances (/sb/0x5b7d5b89d8f30ad8feb61a747693bf25c60be742.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+ClaimToken.claim (/sb/0x5b7d5b89d8f30ad8feb61a747693bf25c60be742.sol#382-393) does not use the value returned by external calls:
+	-_token.transfer(msg.sender,_balances[msg.sender]) (/sb/0x5b7d5b89d8f30ad8feb61a747693bf25c60be742.sol#390-393)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+ClaimToken.claim (/sb/0x5b7d5b89d8f30ad8feb61a747693bf25c60be742.sol#382-393) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(block.timestamp > _releaseTimestamp,Tokens not yet released) (/sb/0x5b7d5b89d8f30ad8feb61a747693bf25c60be742.sol#383-385)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+Ownable.owner (/sb/0x5b7d5b89d8f30ad8feb61a747693bf25c60be742.sol#64-68) should be declared external
+Ownable.renounceOwnership (/sb/0x5b7d5b89d8f30ad8feb61a747693bf25c60be742.sol#83-88) should be declared external
+Ownable.transferOwnership (/sb/0x5b7d5b89d8f30ad8feb61a747693bf25c60be742.sol#92-103) should be declared external
+ClaimToken.pendingClaim (/sb/0x5b7d5b89d8f30ad8feb61a747693bf25c60be742.sol#379-380) should be declared external
+ClaimToken.claim (/sb/0x5b7d5b89d8f30ad8feb61a747693bf25c60be742.sol#382-393) should be declared external
+ClaimToken.transfer (/sb/0x5b7d5b89d8f30ad8feb61a747693bf25c60be742.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x5b7d5b89d8f30ad8feb61a747693bf25c60be742.sol:
+	- pragma solidity^0.6.0 (/sb/0x5b7d5b89d8f30ad8feb61a747693bf25c60be742.sol#7-10): it allows old versions
+	- pragma solidity^0.6.0 (/sb/0x5b7d5b89d8f30ad8feb61a747693bf25c60be742.sol#35): it allows old versions
+	- pragma solidity^0.6.0 (/sb/0x5b7d5b89d8f30ad8feb61a747693bf25c60be742.sol#105-106): it allows old versions
+	- pragma solidity^0.6.0 (/sb/0x5b7d5b89d8f30ad8feb61a747693bf25c60be742.sol#184-185): it allows old versions
+	- pragma solidity^0.6.0 (/sb/0x5b7d5b89d8f30ad8feb61a747693bf25c60be742.sol#356-357): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'Context._msgSender' (/sb/0x5b7d5b89d8f30ad8feb61a747693bf25c60be742.sol#20-24) is not in mixedCase
+Function 'Context._msgData' (/sb/0x5b7d5b89d8f30ad8feb61a747693bf25c60be742.sol#24-30) is not in mixedCase
+Variable 'ClaimToken._releaseTimestamp' (/sb/0x5b7d5b89d8f30ad8feb61a747693bf25c60be742.sol#361-363) is not in mixedCase
+Variable 'ClaimToken._token' (/sb/0x5b7d5b89d8f30ad8feb61a747693bf25c60be742.sol#363) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x5b7d5b89d8f30ad8feb61a747693bf25c60be742.sol analyzed (5 contracts), 14 result(s) found

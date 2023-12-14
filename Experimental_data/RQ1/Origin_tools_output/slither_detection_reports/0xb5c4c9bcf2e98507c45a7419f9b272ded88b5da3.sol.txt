@@ -1,0 +1,98 @@
+INFO:Detectors:[91m
+Reentrancy in Exchange.buy (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#499-535):
+	External calls:
+	- token.allowance(_order.maker,address(this)) >= _order.amount (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#521-531)
+	- assert(bool)(token.transferFrom(_order.maker,msg.sender,_order.amount)) (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#525-528)
+	External calls sending eth:
+	- maker.transfer(_order.price) (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#531)
+	State variables written after the call(s):
+	- orders (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#531)
+Reentrancy in Exchange.buyPerUnit (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#437-471):
+	External calls:
+	- token.allowance(owner,address(this)) >= _amount (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#459-469)
+	- assert(bool)(token.transferFrom(owner,msg.sender,_amount)) (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#463-465)
+	External calls sending eth:
+	- owner.transfer(totalPrice) (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#465-467)
+	State variables written after the call(s):
+	- listOfAssets (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#467-469)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities[0m
+INFO:Detectors:[93m
+Reentrancy in Exchange.list (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#281-343):
+	External calls:
+	- require(bool)(totalListed[msg.sender][_tokenadd] + _amount <= token.allowance(msg.sender,address(this))) (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#291-295)
+	State variables written after the call(s):
+	- totalListed (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#341)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+Reentrancy in Exchange.buy (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#499-535):
+	External calls:
+	- token.allowance(_order.maker,address(this)) >= _order.amount (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#521-531)
+	- assert(bool)(token.transferFrom(_order.maker,msg.sender,_order.amount)) (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#525-528)
+	External calls sending eth:
+	- maker.transfer(_order.price) (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#531)
+	State variables written after the call(s):
+	- forSale (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#531)
+	- forSaleIndex (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#531)
+	- openBookIndex (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#531)
+	- openBooks (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#531)
+	- totalListed (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#531)
+	- userOrderIndex (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#531)
+	- userOrders (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#531)
+Reentrancy in Exchange.list (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#281-343):
+	External calls:
+	- require(bool)(totalListed[msg.sender][_tokenadd] + _amount <= token.allowance(msg.sender,address(this))) (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#291-295)
+	State variables written after the call(s):
+	- forSale (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#300-301)
+	- forSale (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#307)
+	- forSaleIndex (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#305)
+	- openBookIndex (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#325-329)
+	- openBooks (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#331-333)
+	- order_nonce (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#341-343)
+	- orders (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#309-315)
+	- userOrderIndex (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#333-337)
+	- userOrders (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#337-341)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Exchange.listDda (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#355-387) should be declared external
+Exchange.unlistDda (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#393-429) should be declared external
+Exchange.setOwner (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#579-581) should be declared external
+Exchange.blacklistParty (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#599-605) should be declared external
+Exchange.isBlacklist (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#621-631) should be declared external
+Exchange.getOrderCount (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#639-649) should be declared external
+Exchange.getBookCount (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#653-657) should be declared external
+Exchange.getOrders (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#677-683) should be declared external
+Exchange.getUserOrders (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#691-701) should be declared external
+Exchange.getopenDdaListAssets (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#703-709) should be declared external
+Exchange.getDdaListAssetInfo (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#721-731) should be declared external
+Exchange.getTotalListed (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#739-745) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Contract 'ERC20_Interface' (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#19-37) is not in CapWords
+Parameter '_tokenadd' of Exchange.list (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#281) is not in mixedCase
+Parameter '_amount' of Exchange.list (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#281) is not in mixedCase
+Parameter '_price' of Exchange.list (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#281-283) is not in mixedCase
+Parameter '_asset' of Exchange.listDda (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#355-356) is not in mixedCase
+Parameter '_amount' of Exchange.listDda (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#357) is not in mixedCase
+Parameter '_price' of Exchange.listDda (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#357) is not in mixedCase
+Parameter '_isLong' of Exchange.listDda (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#357-359) is not in mixedCase
+Parameter '_asset' of Exchange.unlistDda (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#393-395) is not in mixedCase
+Parameter '_asset' of Exchange.buyPerUnit (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#437-439) is not in mixedCase
+Parameter '_amount' of Exchange.buyPerUnit (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#439) is not in mixedCase
+Parameter '_orderId' of Exchange.unlist (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#485) is not in mixedCase
+Parameter '_orderId' of Exchange.buy (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#501) is not in mixedCase
+Parameter '_orderId' of Exchange.getOrder (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#561) is not in mixedCase
+Parameter '_owner' of Exchange.setOwner (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#579) is not in mixedCase
+Parameter '_address' of Exchange.blacklistParty (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#601) is not in mixedCase
+Parameter '_motion' of Exchange.blacklistParty (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#601) is not in mixedCase
+Parameter '_address' of Exchange.isBlacklist (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#621) is not in mixedCase
+Parameter '_token' of Exchange.getOrderCount (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#639-641) is not in mixedCase
+Parameter '_token' of Exchange.getOrders (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#679) is not in mixedCase
+Parameter '_user' of Exchange.getUserOrders (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#691) is not in mixedCase
+Parameter '_assetAddress' of Exchange.getDdaListAssetInfo (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#721) is not in mixedCase
+Parameter '_owner' of Exchange.getTotalListed (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#739-741) is not in mixedCase
+Parameter '_asset' of Exchange.getTotalListed (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#741) is not in mixedCase
+Parameter '_orderId' of Exchange.unLister (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#759) is not in mixedCase
+Parameter '_order' of Exchange.unLister (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#759-761) is not in mixedCase
+Variable 'Exchange.order_nonce' (/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol#163) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xb5c4c9bcf2e98507c45a7419f9b272ded88b5da3.sol analyzed (3 contracts), 44 result(s) found

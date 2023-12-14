@@ -1,0 +1,83 @@
+INFO:Detectors:[93m
+Reentrancy in beesfinancestaking.deposit (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol#396-414):
+	External calls:
+	- require(bool,string)(Token(tokenAddress).transferFrom(msg.sender,address(this),amountToStake),Insufficient Token Allowance) (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol#399-401)
+	- updateAccount(msg.sender) (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol#401-402)
+	- require(bool,string)(Token(tokenAddress).transfer(owner,fee),Could not transfer deposit fee.) (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol#408)
+	State variables written after the call(s):
+	- depositedTokens (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol#410)
+Reentrancy in beesfinancestaking.updateAccount (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol#362-376):
+	External calls:
+	- require(bool,string)(Token(tokenAddress).transfer(account,pendingDivs),Could not transfer tokens.) (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol#366-369)
+	State variables written after the call(s):
+	- lastClaimedTime (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol#375-376)
+Reentrancy in beesfinancestaking.withdraw (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol#414-438):
+	External calls:
+	- updateAccount(msg.sender) (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol#423-424)
+	- require(bool,string)(Token(tokenAddress).transfer(msg.sender,amountToWithdraw),Could not transfer tokens.) (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol#424-430)
+	State variables written after the call(s):
+	- depositedTokens (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol#430-431)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+EnumerableSet._remove (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol#107-143) does not use the value returned by external calls:
+	-set._values.pop() (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol#134-135)
+beesfinancestaking.deposit (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol#396-414) does not use the value returned by external calls:
+	-holders.add(msg.sender) (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol#412-414)
+beesfinancestaking.withdraw (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol#414-438) does not use the value returned by external calls:
+	-holders.remove(msg.sender) (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol#434-435)
+beesfinancestaking.transferAnyERC20Tokens (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol) does not use the value returned by external calls:
+	-Token(_tokenAddr).transfer(_to,_amount) (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in beesfinancestaking.deposit (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol#396-414):
+	External calls:
+	- require(bool,string)(Token(tokenAddress).transferFrom(msg.sender,address(this),amountToStake),Insufficient Token Allowance) (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol#399-401)
+	- updateAccount(msg.sender) (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol#401-402)
+	- require(bool,string)(Token(tokenAddress).transfer(owner,fee),Could not transfer deposit fee.) (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol#408)
+	State variables written after the call(s):
+	- stakingTime (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol#414)
+Reentrancy in beesfinancestaking.updateAccount (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol#362-376):
+	External calls:
+	- require(bool,string)(Token(tokenAddress).transfer(account,pendingDivs),Could not transfer tokens.) (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol#366-369)
+	State variables written after the call(s):
+	- totalClaimedRewards (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol#372-373)
+	- totalEarnedTokens (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol#369-370)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol#323-330) should be declared external
+beesfinancestaking.getNumberOfHolders (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol#393-396) should be declared external
+beesfinancestaking.deposit (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol#396-414) should be declared external
+beesfinancestaking.withdraw (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol#414-438) should be declared external
+beesfinancestaking.claimDivs (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol#438-439) should be declared external
+beesfinancestaking.getStakingAndDaoAmount (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol#439-445) should be declared external
+beesfinancestaking.transferAnyERC20Tokens (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol:
+	- pragma solidity0.6.12 (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol#5-7): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'EnumerableSet._add' (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol#89-103) is not in mixedCase
+Function 'EnumerableSet._remove' (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol#107-143) is not in mixedCase
+Function 'EnumerableSet._contains' (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol#148-150) is not in mixedCase
+Function 'EnumerableSet._length' (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol#155-157) is not in mixedCase
+Function 'EnumerableSet._at' (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol#166-178) is not in mixedCase
+Parameter '' of Token.transferFrom (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol#332) is not in mixedCase
+Parameter '_scope_0' of Token.transferFrom (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol#332) is not in mixedCase
+Parameter '_scope_1' of Token.transferFrom (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol#332) is not in mixedCase
+Parameter '' of Token.transfer (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol#333) is not in mixedCase
+Parameter '_scope_0' of Token.transfer (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol#333) is not in mixedCase
+Contract 'beesfinancestaking' (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol#334-445) is not in CapWords
+Parameter '_holder' of beesfinancestaking.getPendingDivs (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol#377) is not in mixedCase
+Parameter '_tokenAddr' of beesfinancestaking.transferAnyERC20Tokens (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol) is not in mixedCase
+Parameter '_to' of beesfinancestaking.transferAnyERC20Tokens (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol) is not in mixedCase
+Parameter '_amount' of beesfinancestaking.transferAnyERC20Tokens (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol) is not in mixedCase
+Constant 'beesfinancestaking.tokenAddress' (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol#342-345) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'beesfinancestaking.rewardRate' (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol#346-348) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'beesfinancestaking.rewardInterval' (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol#348-350) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'beesfinancestaking.stakingFeeRate' (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol#352-353) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'beesfinancestaking.unstakingFeeRate' (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol#354) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'beesfinancestaking.cliffTime' (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol#355-357) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'beesfinancestaking.stakingAndDaoTokens' (/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol#439) is not in UPPER_CASE_WITH_UNDERSCORES
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x96a670e362ee4536ce0033ce22f4ebe257daae05.sol analyzed (5 contracts), 39 result(s) found

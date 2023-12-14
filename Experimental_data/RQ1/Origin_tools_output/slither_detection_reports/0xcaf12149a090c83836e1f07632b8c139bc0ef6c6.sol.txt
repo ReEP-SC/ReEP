@@ -1,0 +1,81 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol:
+/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol:71:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function AppCoins() public {
+    ^ (Relevant source part starts here and spans across multiple lines).
+
+INFO:Detectors:[93m
+ERC20Interface (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol#13-33) has incorrect ERC20 function interface(s):
+	-transferFrom (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol#23-25)
+AppCoins (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol#33-255) has incorrect ERC20 function interface(s):
+	-transferFrom (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol#177-198)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[93m
+AppCoinsTimelock.allocateFunds (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol#313-333) does not use the value returned by external calls:
+	-appc.transferFrom(msg.sender,address(this),_amount) (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol#321-323)
+AppCoinsTimelock.release (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol#347-351) does not use the value returned by external calls:
+	-appc.transfer(_address,amount) (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in AppCoinsTimelock.allocateFunds (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol#313-333):
+	External calls:
+	- require(bool)(appc.allowance(msg.sender,address(this)) >= _amount) (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol#319-321)
+	- appc.transferFrom(msg.sender,address(this),_amount) (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol#321-323)
+	State variables written after the call(s):
+	- balances (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol#323-325)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+AppCoinsTimelock.release (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol#347-351) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool)(nowInMilliseconds >= releaseTime) (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+AppCoins.decimals should be constant (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol#45)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+AppCoins.name (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol#97-101) should be declared external
+ERC20Interface.name (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol#15-17) should be declared external
+ERC20Interface.symbol (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol#17-19) should be declared external
+AppCoins.symbol (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol#105-107) should be declared external
+ERC20Interface.balanceOf (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol#19-21) should be declared external
+AppCoins.balanceOf (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol#107-115) should be declared external
+AppCoins.transfer (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol#151-175) should be declared external
+ERC20Interface.transfer (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol#21-23) should be declared external
+AppCoins.transferFrom (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol#177-198) should be declared external
+ERC20Interface.transferFrom (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol#23-25) should be declared external
+AppCoins.approve (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol#199-203) should be declared external
+AppCoins.burn (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol#203-219) should be declared external
+AppCoins.burnFrom (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol#219-255) should be declared external
+AppCoinsTimelock.getReleaseTime (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol#305-309) should be declared external
+AppCoinsTimelock.getBalanceOf (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol#309-313) should be declared external
+AppCoinsTimelock.allocateFundsBulk (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol#335-347) should be declared external
+AppCoinsTimelock.release (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol#347-351) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_owner' of AppCoins.balanceOf (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol#113) is not in mixedCase
+Parameter '_to' of AppCoins.transfer (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol#151) is not in mixedCase
+Parameter '_amount' of AppCoins.transfer (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol#151-155) is not in mixedCase
+Parameter '_from' of AppCoins.transferFrom (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol#177) is not in mixedCase
+Parameter '_to' of AppCoins.transferFrom (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol#177-178) is not in mixedCase
+Parameter '_value' of AppCoins.transferFrom (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol#179) is not in mixedCase
+Function 'AppCoins.AppCoins' (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol#75-93) is not in mixedCase
+Function 'AppCoins._transfer' (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol#115-151) is not in mixedCase
+Parameter '_from' of AppCoins._transfer (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol#115) is not in mixedCase
+Parameter '_to' of AppCoins._transfer (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol#115-117) is not in mixedCase
+Parameter '_value' of AppCoins._transfer (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol#117) is not in mixedCase
+Parameter '_spender' of AppCoins.approve (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol#199) is not in mixedCase
+Parameter '_value' of AppCoins.approve (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol#199) is not in mixedCase
+Parameter '_value' of AppCoins.burn (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol#203) is not in mixedCase
+Parameter '_from' of AppCoins.burnFrom (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol#219) is not in mixedCase
+Parameter '_value' of AppCoins.burnFrom (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol#219) is not in mixedCase
+Variable 'AppCoins.token_name' (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol#41-43) is not in mixedCase
+Variable 'AppCoins.token_symbol' (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol#43-45) is not in mixedCase
+Parameter '_addrAppc' of AppCoinsTimelock. (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol#295) is not in mixedCase
+Parameter '_releaseTime' of AppCoinsTimelock. (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol#295) is not in mixedCase
+Parameter '_address' of AppCoinsTimelock.getBalanceOf (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol#309-311) is not in mixedCase
+Parameter '_address' of AppCoinsTimelock.allocateFunds (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol#315-319) is not in mixedCase
+Parameter '_amount' of AppCoinsTimelock.allocateFunds (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol#319) is not in mixedCase
+Parameter '_addresses' of AppCoinsTimelock.allocateFundsBulk (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol#335-337) is not in mixedCase
+Parameter '_amounts' of AppCoinsTimelock.allocateFundsBulk (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol#337) is not in mixedCase
+Parameter '_address' of AppCoinsTimelock.release (/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol#347-349) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xcaf12149a090c83836e1f07632b8c139bc0ef6c6.sol analyzed (3 contracts), 50 result(s) found

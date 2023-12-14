@@ -1,0 +1,96 @@
+INFO:Detectors:[93m
+Reentrancy in TokenVesting.release (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#617-629):
+	External calls:
+	- unreleased = releasableAmount(token) (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#617-619)
+	State variables written after the call(s):
+	- released (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#621-623)
+Reentrancy in TokenVesting.revoke (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#647-675):
+	External calls:
+	- balance = token.balanceOf(this) (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#659-661)
+	- unreleased = releasableAmount(token) (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#661-665)
+	State variables written after the call(s):
+	- revoked (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#665-667)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+InitialTokenDistribution.initialTransfer (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#799-809) does not use the value returned by external calls:
+	-token.transferFrom(msg.sender,to,amount) (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#809)
+InitialTokenDistribution.vest (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#809-829) does not use the value returned by external calls:
+	-token.transferFrom(msg.sender,vested[to],amount) (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#823-829)
+InitialTokenDistribution.lock (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#831-845) does not use the value returned by external calls:
+	-token.transferFrom(msg.sender,address(timelocked[to]),amount) (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#839-843)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in BlockFollowInitialTokenDistribution.constructor (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#911-933):
+	External calls:
+	- decimals = _token.decimals() (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#929)
+	State variables written after the call(s):
+	- reservedTokensFunctionality (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#929-933)
+	- reservedTokensTeam (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol)
+Reentrancy in BlockFollowInitialTokenDistribution.initialDistribution (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol):
+	External calls:
+	- initialTransfer(functionalityWallet,reservedTokensFunctionality) (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol)
+	- initialTransfer(teamWallet,reservedTokensTeam) (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol)
+	State variables written after the call(s):
+	- initiallyDistributed (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+TokenTimelock.constructor (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#177-205) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool)(_releaseTime > block.timestamp) (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#191-195)
+TokenTimelock.release (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#209-235) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool)(block.timestamp >= releaseTime) (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#215-219)
+TokenVesting.vestedAmount (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#695-725) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp >= start.add(duration) || revoked[token] (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#719-725)
+	- block.timestamp < cliff (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#713-725)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+Different versions of Solidity is used in /sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol:
+	- Version used: ['^0.4.23', '^0.4.24']
+	- /sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#1 declares pragma solidity^0.4.24
+	- /sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#481-485 declares pragma solidity^0.4.23
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#different-pragma-directives-are-used[0m
+INFO:Detectors:[92m
+ERC20Basic.totalSupply (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#21-23) should be declared external
+ERC20Basic.balanceOf (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#23-25) should be declared external
+ERC20Basic.transfer (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#25-27) should be declared external
+ERC20.allowance (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#47-53) should be declared external
+ERC20.transferFrom (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#53-59) should be declared external
+ERC20.approve (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#59-63) should be declared external
+TokenTimelock.release (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#209-235) should be declared external
+Ownable.renounceOwnership (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#417-423) should be declared external
+Ownable.transferOwnership (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#435-441) should be declared external
+TokenVesting.release (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#617-629) should be declared external
+TokenVesting.revoke (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#647-675) should be declared external
+InitialTokenDistribution.totalTokensDistributed (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#785-789) should be declared external
+BlockFollowInitialTokenDistribution.totalTokensDistributed (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol) should be declared external
+InitialTokenDistribution.processInitialDistribution (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#793-799) should be declared external
+InitialTokenDistribution.vest (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#809-829) should be declared external
+InitialTokenDistribution.lock (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#831-845) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol:
+	- pragma solidity^0.4.23 (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#481-485): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_token' of TokenTimelock. (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#181-185) is not in mixedCase
+Parameter '_beneficiary' of TokenTimelock. (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#185) is not in mixedCase
+Parameter '_releaseTime' of TokenTimelock. (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#185-187) is not in mixedCase
+Parameter '_newOwner' of Ownable.transferOwnership (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#437-439) is not in mixedCase
+Function 'Ownable._transferOwnership' (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#453-479) is not in mixedCase
+Parameter '_newOwner' of Ownable._transferOwnership (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#453-457) is not in mixedCase
+Parameter '_beneficiary' of TokenVesting. (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#573) is not in mixedCase
+Parameter '_start' of TokenVesting. (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#575) is not in mixedCase
+Parameter '_cliff' of TokenVesting. (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#575-577) is not in mixedCase
+Parameter '_duration' of TokenVesting. (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#577-583) is not in mixedCase
+Parameter '_revocable' of TokenVesting. (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#585) is not in mixedCase
+Parameter '_token' of InitialTokenDistribution. (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#771) is not in mixedCase
+Parameter '_name' of DetailedERC20. (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#881-885) is not in mixedCase
+Parameter '_symbol' of DetailedERC20. (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#885-887) is not in mixedCase
+Parameter '_decimals' of DetailedERC20. (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#887) is not in mixedCase
+Parameter '_token' of BlockFollowInitialTokenDistribution. (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#917) is not in mixedCase
+Parameter '_functionalityWallet' of BlockFollowInitialTokenDistribution. (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#917-919) is not in mixedCase
+Parameter '_teamWallet' of BlockFollowInitialTokenDistribution. (/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol#919) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xb5af99b7278a1c528e9f372f58b13b1799e31c50.sol analyzed (10 contracts), 46 result(s) found

@@ -1,0 +1,115 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol:
+/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol:7:5: Warning: No visibility specified. Defaulting to "public". 
+    constructor(){
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol:28:5: Warning: No visibility specified. Defaulting to "public". 
+    constructor(){
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol:109:10: Warning: No visibility specified. Defaulting to "public". 
+         function () payable stopOnPause{
+         ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol:142:10: Warning: No visibility specified. Defaulting to "public". 
+         function burnRestTokens() afterDeadline{
+         ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol:148:10: Warning: No visibility specified. Defaulting to "public". 
+         function isRunning() view returns (bool){
+         ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol:165:5: Warning: No visibility specified. Defaulting to "public". 
+    constructor(address _abioAddress, address _treasury, address _PICOAddr, uint _lenInMins,uint _minInvestment, uint _priceInWei){
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol:200:5: Warning: No visibility specified. Defaulting to "public". 
+    function safeWithdrawal() afterDeadline stopOnPause{
+    ^ (Relevant source part starts here and spans across multiple lines).
+
+INFO:Detectors:[93m
+ABIO_Token (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#47-52) has incorrect ERC20 function interface(s):
+	-transfer (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#48-51)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[93m
+Reentrancy in ABIO_BaseICO.burnRestTokens (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#145-153):
+	External calls:
+	- abioToken.burnMyBalance() (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#149)
+	State variables written after the call(s):
+	- restTokensBurned (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#152)
+Reentrancy in ABIO_ICO.constructor (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#166-187):
+	External calls:
+	- weiRaisedInPICO = PICO.weiRaised() (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#175)
+	- fundingGoal = PICO.fundingGoal() (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#177-178)
+	- goalReached() (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#180)
+	- fundingGoal = PICO.fundingGoal() (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#186-187)
+	State variables written after the call(s):
+	- fundingGoal (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#186-187)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+ABIO_ICO.goalReached (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#190-197) does not use the value returned by external calls:
+	-PICO.extGoalReached() (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#197)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in ABIO_ICO.constructor (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#166-187):
+	External calls:
+	- weiRaisedInPICO = PICO.weiRaised() (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#175)
+	- fundingGoal = PICO.fundingGoal() (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#177-178)
+	State variables written after the call(s):
+	- fundingGoal (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#177-178)
+Reentrancy in ABIO_ICO.constructor (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#166-187):
+	External calls:
+	- weiRaisedInPICO = PICO.weiRaised() (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#175)
+	- fundingGoal = PICO.fundingGoal() (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#177-178)
+	- goalReached() (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#180)
+	State variables written after the call(s):
+	- fundingGoalReached (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#180)
+	- length (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#184)
+	- minInvestment (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#180-184)
+	- startDate (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#184)
+	- weiPerABIO (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#184-185)
+Reentrancy in ABIO_BaseICO.fallback (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#111-124):
+	External calls:
+	- abioToken.transfer(msg.sender,ABIOAmount) (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#120-124)
+	State variables written after the call(s):
+	- abioSold (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#124)
+Reentrancy in ABIO_BaseICO.tokenFallback (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#131-140):
+	External calls:
+	- require(bool)(_from == abioToken.owner() || _from == owner) (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#134-135)
+	State variables written after the call(s):
+	- deadline (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#139)
+	- paused (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#138-139)
+	- volume (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#135)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+ABIO_ICO.abioSoldInPICO should be constant (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#165)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Ownable.changeOwner (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#14-20) should be declared external
+Haltable.pause (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#31-35) should be declared external
+Haltable.unpause (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#35-40) should be declared external
+ABIO_BaseICO.fallback (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#111-124) should be declared external
+ABIO_BaseICO.burnRestTokens (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#145-153) should be declared external
+ABIO_BaseICO.isRunning (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#154-159) should be declared external
+ABIO_ICO.safeWithdrawal (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#204-224) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Event 'Ownable.ownerTransfer' (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#4-5) is not in CapWords
+Event 'Ownable.ownerGone' (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#5-7) is not in CapWords
+Parameter '_newOwner' of Ownable.changeOwner (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#14) is not in mixedCase
+Contract 'ABIO_Token' (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#47-52) is not in CapWords
+Contract 'ABIO_preICO' (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#52-57) is not in CapWords
+Contract 'ABIO_BaseICO' (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#57-163) is not in CapWords
+Parameter '_newTreasury' of ABIO_BaseICO.changeTreasury (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#90) is not in mixedCase
+Parameter '_multiplier' of ABIO_BaseICO.adjustPrice (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#99-100) is not in mixedCase
+Parameter '_from' of ABIO_BaseICO.tokenFallback (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#131) is not in mixedCase
+Parameter '_value' of ABIO_BaseICO.tokenFallback (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#131) is not in mixedCase
+Parameter '' of ABIO_BaseICO.tokenFallback (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#131) is not in mixedCase
+Contract 'ABIO_ICO' (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#163-237) is not in CapWords
+Parameter '_abioAddress' of ABIO_ICO. (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#167) is not in mixedCase
+Parameter '_treasury' of ABIO_ICO. (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#167-169) is not in mixedCase
+Parameter '_PICOAddr' of ABIO_ICO. (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#169) is not in mixedCase
+Parameter '_lenInMins' of ABIO_ICO. (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#169-170) is not in mixedCase
+Parameter '_minInvestment' of ABIO_ICO. (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#170) is not in mixedCase
+Parameter '_priceInWei' of ABIO_ICO. (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#170) is not in mixedCase
+Parameter '_timeInMins' of ABIO_ICO.prolong (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#232-234) is not in mixedCase
+Variable 'ABIO_ICO.PICO' (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#165) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+ABIO_ICO.abioSoldInPICO (/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol#165) is never used in ABIO_ICO
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0x530a9cceee0c45f58229ae5c256e414e6df957ad.sol analyzed (6 contracts), 37 result(s) found

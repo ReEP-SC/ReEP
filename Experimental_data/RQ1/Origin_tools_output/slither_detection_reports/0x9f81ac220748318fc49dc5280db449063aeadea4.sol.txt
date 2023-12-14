@@ -1,0 +1,79 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x9f81ac220748318fc49dc5280db449063aeadea4.sol:
+/sb/0x9f81ac220748318fc49dc5280db449063aeadea4.sol:10:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function owned() public {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x9f81ac220748318fc49dc5280db449063aeadea4.sol:44:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function TokenERC20(uint256 initialSupply, string tokenName, string tokenSymbol) public {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x9f81ac220748318fc49dc5280db449063aeadea4.sol:126:2: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+	function EncryptedToken() TokenERC20(INITIAL_SUPPLY, 'Cable', 'CBA') payable public {}
+	^------------------------------------------------------------------------------------^
+/sb/0x9f81ac220748318fc49dc5280db449063aeadea4.sol:24:28: Warning: Functions in interfaces should be declared external.
+interface tokenRecipient { function receiveApproval(address _from, uint256 _value, address _token, bytes _extraData) public; }
+                           ^-----------------------------------------------------------------------------------------------^
+/sb/0x9f81ac220748318fc49dc5280db449063aeadea4.sol:103:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Burn(msg.sender, _value);
+        ^----------------------^
+/sb/0x9f81ac220748318fc49dc5280db449063aeadea4.sol:114:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Burn(_from, _value);
+        ^-----------------^
+
+INFO:Detectors:[91m
+EncryptedToken.frozenAccount (/sb/0x9f81ac220748318fc49dc5280db449063aeadea4.sol#126) is never initialized. It is used in:
+	- _transfer (/sb/0x9f81ac220748318fc49dc5280db449063aeadea4.sol#129-139)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-state-variables[0m
+INFO:Detectors:[93m
+TokenERC20 (/sb/0x9f81ac220748318fc49dc5280db449063aeadea4.sol#27-122) has incorrect ERC20 function interface(s):
+	-transfer (/sb/0x9f81ac220748318fc49dc5280db449063aeadea4.sol#72-75)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[93m
+Contract locking ether found in /sb/0x9f81ac220748318fc49dc5280db449063aeadea4.sol:
+	Contract EncryptedToken has payable functions:
+	 - EncryptedToken (/sb/0x9f81ac220748318fc49dc5280db449063aeadea4.sol#128-129)
+	But does not have a function to withdraw the ether
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#contracts-that-lock-ether[0m
+INFO:Detectors:[92m
+EncryptedToken.INITIAL_SUPPLY should be constant (/sb/0x9f81ac220748318fc49dc5280db449063aeadea4.sol#124-126)
+TokenERC20.decimals should be constant (/sb/0x9f81ac220748318fc49dc5280db449063aeadea4.sol#29-30)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+owned.transferOwnership (/sb/0x9f81ac220748318fc49dc5280db449063aeadea4.sol#19-24) should be declared external
+tokenRecipient.receiveApproval (/sb/0x9f81ac220748318fc49dc5280db449063aeadea4.sol#24-26) should be declared external
+TokenERC20.transfer (/sb/0x9f81ac220748318fc49dc5280db449063aeadea4.sol#72-75) should be declared external
+TokenERC20.transferFrom (/sb/0x9f81ac220748318fc49dc5280db449063aeadea4.sol#75-83) should be declared external
+TokenERC20.approveAndCall (/sb/0x9f81ac220748318fc49dc5280db449063aeadea4.sol#90-100) should be declared external
+TokenERC20.burn (/sb/0x9f81ac220748318fc49dc5280db449063aeadea4.sol#100-109) should be declared external
+TokenERC20.burnFrom (/sb/0x9f81ac220748318fc49dc5280db449063aeadea4.sol#109-122) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Contract 'owned' (/sb/0x9f81ac220748318fc49dc5280db449063aeadea4.sol#7-24) is not in CapWords
+Contract 'tokenRecipient' (/sb/0x9f81ac220748318fc49dc5280db449063aeadea4.sol#24-26) is not in CapWords
+Function 'TokenERC20.TokenERC20' (/sb/0x9f81ac220748318fc49dc5280db449063aeadea4.sol#44-52) is not in mixedCase
+Function 'TokenERC20._transfer' (/sb/0x9f81ac220748318fc49dc5280db449063aeadea4.sol#52-72) is not in mixedCase
+Parameter '_from' of TokenERC20._transfer (/sb/0x9f81ac220748318fc49dc5280db449063aeadea4.sol#52-54) is not in mixedCase
+Parameter '_to' of TokenERC20._transfer (/sb/0x9f81ac220748318fc49dc5280db449063aeadea4.sol#54) is not in mixedCase
+Parameter '_value' of TokenERC20._transfer (/sb/0x9f81ac220748318fc49dc5280db449063aeadea4.sol#54-55) is not in mixedCase
+Parameter '_to' of TokenERC20.transfer (/sb/0x9f81ac220748318fc49dc5280db449063aeadea4.sol#72) is not in mixedCase
+Parameter '_value' of TokenERC20.transfer (/sb/0x9f81ac220748318fc49dc5280db449063aeadea4.sol#73-75) is not in mixedCase
+Parameter '_from' of TokenERC20.transferFrom (/sb/0x9f81ac220748318fc49dc5280db449063aeadea4.sol#75-76) is not in mixedCase
+Parameter '_to' of TokenERC20.transferFrom (/sb/0x9f81ac220748318fc49dc5280db449063aeadea4.sol#76) is not in mixedCase
+Parameter '_value' of TokenERC20.transferFrom (/sb/0x9f81ac220748318fc49dc5280db449063aeadea4.sol#76) is not in mixedCase
+Parameter '_spender' of TokenERC20.approve (/sb/0x9f81ac220748318fc49dc5280db449063aeadea4.sol#84) is not in mixedCase
+Parameter '_value' of TokenERC20.approve (/sb/0x9f81ac220748318fc49dc5280db449063aeadea4.sol#84) is not in mixedCase
+Parameter '_spender' of TokenERC20.approveAndCall (/sb/0x9f81ac220748318fc49dc5280db449063aeadea4.sol#91-92) is not in mixedCase
+Parameter '_value' of TokenERC20.approveAndCall (/sb/0x9f81ac220748318fc49dc5280db449063aeadea4.sol#92) is not in mixedCase
+Parameter '_extraData' of TokenERC20.approveAndCall (/sb/0x9f81ac220748318fc49dc5280db449063aeadea4.sol#92) is not in mixedCase
+Parameter '_value' of TokenERC20.burn (/sb/0x9f81ac220748318fc49dc5280db449063aeadea4.sol#100) is not in mixedCase
+Parameter '_from' of TokenERC20.burnFrom (/sb/0x9f81ac220748318fc49dc5280db449063aeadea4.sol#109) is not in mixedCase
+Parameter '_value' of TokenERC20.burnFrom (/sb/0x9f81ac220748318fc49dc5280db449063aeadea4.sol#109) is not in mixedCase
+Function 'EncryptedToken._transfer' (/sb/0x9f81ac220748318fc49dc5280db449063aeadea4.sol#129-139) is not in mixedCase
+Parameter '_from' of EncryptedToken._transfer (/sb/0x9f81ac220748318fc49dc5280db449063aeadea4.sol#129) is not in mixedCase
+Parameter '_to' of EncryptedToken._transfer (/sb/0x9f81ac220748318fc49dc5280db449063aeadea4.sol#129) is not in mixedCase
+Parameter '_value' of EncryptedToken._transfer (/sb/0x9f81ac220748318fc49dc5280db449063aeadea4.sol#129) is not in mixedCase
+Function 'EncryptedToken.EncryptedToken' (/sb/0x9f81ac220748318fc49dc5280db449063aeadea4.sol#128-129) is not in mixedCase
+Variable 'EncryptedToken.INITIAL_SUPPLY' (/sb/0x9f81ac220748318fc49dc5280db449063aeadea4.sol#124-126) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+EncryptedToken.INITIAL_SUPPLY (/sb/0x9f81ac220748318fc49dc5280db449063aeadea4.sol#124-126) is never used in EncryptedToken
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0x9f81ac220748318fc49dc5280db449063aeadea4.sol analyzed (4 contracts), 38 result(s) found

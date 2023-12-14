@@ -1,0 +1,209 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol:
+/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol:7:1: Warning: Experimental features are turned on. Do not use experimental features on live deployments.
+pragma experimental ABIEncoderV2;
+^-------------------------------^
+
+INFO:Detectors:[93m
+Reentrancy in HexLotto.distributeToHex4 (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#460-463):
+	External calls:
+	- HEX4(hex4).distribute(hex4amount) (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#462-463)
+	State variables written after the call(s):
+	- hex4amount (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#463)
+Reentrancy in HexLotto.entry (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#488-523):
+	External calls:
+	- userBalance = ERC20(token).balanceOf(msg.sender) (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#493-494)
+	- require(bool,string)(ERC20(token).transferFrom(msg.sender,address(this),quantity),Transfer failed.) (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#500-505)
+	- require(bool,string)(HexMoney(hexMoneyContract).mintHXY(quantity,msg.sender),Mint HEX money failed) (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#505-509)
+	- distribute(quantity,tickets,ref) (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#514)
+	State variables written after the call(s):
+	- totalTickets (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#517-521)
+Reentrancy in HexLotto.finishHourly (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#576-600):
+	External calls:
+	- winningTicketNumber = RandomNumberGenerator(randomGenerationContract).generateRandomNumber(hourlyTickets - 1) (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#596-598)
+	- pickHourlyWinner(winningTicketNumber,hourlyPot,hourlyEntries) (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#598-599)
+	State variables written after the call(s):
+	- hourlyEntriesUsed (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#598-599)
+	- hourlyPotPaid (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#598-599)
+	- hourlyTicketsUsed (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#598-599)
+	- lastHourly (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#598-599)
+Reentrancy in HexLotto.finishMonthly (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#636-660):
+	External calls:
+	- winningTicketNumber = RandomNumberGenerator(randomGenerationContract).generateRandomNumber(monthlyTickets - 1) (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#656-658)
+	- pickMonthlyWinner(winningTicketNumber,monthlyPot,monthlyEntries) (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#658-660)
+	State variables written after the call(s):
+	- lastMonthly (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#658-660)
+	- monthlyEntriesUsed (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#658-660)
+	- monthlyPotPaid (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#658-660)
+	- monthlyTicketsUsed (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#658-660)
+Reentrancy in HexLotto.finishThreeYearly (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#755-783):
+	External calls:
+	- winningTicketNumber = RandomNumberGenerator(randomGenerationContract).generateRandomNumber(threeYearlyTickets - 1) (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#776-779)
+	- pickThreeYearlyWinner(winningTicketNumber,threeYearlyPot,threeYearlyEntries) (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#780-783)
+	State variables written after the call(s):
+	- lastThreeYearly (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#780-783)
+	- threeYearlyEntriesUsed (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#780-783)
+	- threeYearlyPotPaid (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#780-783)
+	- threeYearlyTicketsUsed (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#780-783)
+Reentrancy in HexLotto.finishYearly (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#695-724):
+	External calls:
+	- winningTicketNumber = RandomNumberGenerator(randomGenerationContract).generateRandomNumber(yearlyTickets - 1) (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#717-720)
+	- pickYearlyWinner(winningTicketNumber,yearlyPot,yearlyEntries) (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#720-723)
+	State variables written after the call(s):
+	- lastYearly (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#720-723)
+	- yearlyEntriesUsed (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#720-723)
+	- yearlyPotPaid (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#720-723)
+	- yearlyTicketsUsed (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#720-723)
+Reentrancy in HexLotto.withdraw (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#558-574):
+	External calls:
+	- amount = getAvailableBonusAmount(msg.sender) (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#565-566)
+	- require(bool,string)(Treasury(treasuryContract).transfer(msg.sender,amount),Withdrawal failed) (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#568-569)
+	State variables written after the call(s):
+	- bonusTicketsWithdrawn (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#569-571)
+	- playerStats (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#571)
+	- playerStats (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#573)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+ref in HexLotto.pickWinner (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#828-829) is a local variable never initialiazed
+winner in HexLotto.pickWinner (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#827-828) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[92m
+Reentrancy in HexLotto.distribute (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#466-485):
+	External calls:
+	- require(bool,string)(ERC20(token).transfer(treasuryContract,quantity.mul(5).div(100)),send to treasury failed) (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#469-474)
+	State variables written after the call(s):
+	- hex4amount (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#475-476)
+Reentrancy in HexLotto.distribute (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#466-485):
+	External calls:
+	- require(bool,string)(ERC20(token).transfer(treasuryContract,quantity.mul(5).div(100)),send to treasury failed) (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#469-474)
+	- require(bool,string)(ERC20(token).approve(hex4,hex4amount),approve hex failed) (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#477)
+	- require(bool,string)(ERC20(token).transfer(devSplitterContract,quantity.mul(10).div(100)),send to dev splitter failed) (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#479-484)
+	State variables written after the call(s):
+	- participantEntries (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#484-485)
+	- players (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#484-485)
+Reentrancy in HexLotto.entry (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#488-523):
+	External calls:
+	- userBalance = ERC20(token).balanceOf(msg.sender) (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#493-494)
+	- require(bool,string)(ERC20(token).transferFrom(msg.sender,address(this),quantity),Transfer failed.) (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#500-505)
+	- require(bool,string)(HexMoney(hexMoneyContract).mintHXY(quantity,msg.sender),Mint HEX money failed) (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#505-509)
+	- distribute(quantity,tickets,ref) (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#514)
+	State variables written after the call(s):
+	- playerStats (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#514-515)
+	- playerStats (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#515-517)
+	- totalAmount (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#521)
+Reentrancy in HexLotto.finishHourly (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#576-600):
+	External calls:
+	- winningTicketNumber = RandomNumberGenerator(randomGenerationContract).generateRandomNumber(hourlyTickets - 1) (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#596-598)
+	- pickHourlyWinner(winningTicketNumber,hourlyPot,hourlyEntries) (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#598-599)
+	State variables written after the call(s):
+	- lastWinnerId (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#598-599)
+Reentrancy in HexLotto.finishMonthly (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#636-660):
+	External calls:
+	- winningTicketNumber = RandomNumberGenerator(randomGenerationContract).generateRandomNumber(monthlyTickets - 1) (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#656-658)
+	- pickMonthlyWinner(winningTicketNumber,monthlyPot,monthlyEntries) (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#658-660)
+	State variables written after the call(s):
+	- lastWinnerId (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#658-660)
+Reentrancy in HexLotto.finishThreeYearly (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#755-783):
+	External calls:
+	- winningTicketNumber = RandomNumberGenerator(randomGenerationContract).generateRandomNumber(threeYearlyTickets - 1) (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#776-779)
+	- pickThreeYearlyWinner(winningTicketNumber,threeYearlyPot,threeYearlyEntries) (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#780-783)
+	State variables written after the call(s):
+	- lastWinnerId (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#780-783)
+Reentrancy in HexLotto.finishYearly (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#695-724):
+	External calls:
+	- winningTicketNumber = RandomNumberGenerator(randomGenerationContract).generateRandomNumber(yearlyTickets - 1) (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#717-720)
+	- pickYearlyWinner(winningTicketNumber,yearlyPot,yearlyEntries) (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#720-723)
+	State variables written after the call(s):
+	- lastWinnerId (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#720-723)
+Reentrancy in HexLotto.pickHourlyWinner (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#602-633):
+	External calls:
+	- require(bool,string)(ERC20(token).transfer(winnerRef,refWinnings),ref transfer failed) (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#627-628)
+	State variables written after the call(s):
+	- hourlyEntriesUsed (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#630-632)
+	- hourlyPotPaid (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#630)
+	- hourlyTicketsUsed (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#630)
+	- lastHourly (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#629)
+	- playerStats (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#629)
+Reentrancy in HexLotto.pickMonthlyWinner (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#664-694):
+	External calls:
+	- require(bool,string)(ERC20(token).transfer(winnerRef,refWinnings),ref transfer failed) (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#686-687)
+	State variables written after the call(s):
+	- lastMonthly (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#689)
+	- monthlyEntriesUsed (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#689-691)
+	- monthlyPotPaid (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#689)
+	- monthlyTicketsUsed (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#689)
+	- playerStats (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#688-689)
+Reentrancy in HexLotto.pickThreeYearlyWinner (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#784-823):
+	External calls:
+	- require(bool,string)(ERC20(token).transfer(winnerRef,refWinnings),ref transfer failed) (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#808-810)
+	State variables written after the call(s):
+	- lastThreeYearly (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#815)
+	- playerStats (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#810-815)
+	- threeYearlyEntriesUsed (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#817-819)
+	- threeYearlyPotPaid (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#815-816)
+	- threeYearlyTicketsUsed (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#816-817)
+Reentrancy in HexLotto.pickYearlyWinner (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#725-754):
+	External calls:
+	- require(bool,string)(ERC20(token).transfer(winnerRef,refWinnings),ref transfer failed) (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#747-748)
+	State variables written after the call(s):
+	- lastYearly (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#749)
+	- playerStats (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#749)
+	- yearlyEntriesUsed (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#751)
+	- yearlyPotPaid (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#749)
+	- yearlyTicketsUsed (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#750-751)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+HexLotto.devWallet should be constant (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#351)
+HexLotto.devWallet2 should be constant (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#352)
+HexLotto.devWallet3 should be constant (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#352-353)
+HexLotto.devWallet4 should be constant (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#353-354)
+HexLotto.devWallet5 should be constant (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#354)
+HexLotto.hour should be constant (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#367-368)
+HexLotto.hourlyQuantity should be constant (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#320-322)
+HexLotto.monthlyQuantity should be constant (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#322-323)
+HexLotto.threeYearlyQuantity should be constant (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#324-325)
+HexLotto.threeYears should be constant (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#375-376)
+HexLotto.yearlyQuantity should be constant (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#323-324)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Different versions of Solidity is used in /sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol:
+	- Version used: ['ABIEncoderV2', '^0.5.16']
+	- /sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#5-7 declares pragma solidity^0.5.16
+	- /sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#7-10 declares pragma experimentalABIEncoderV2
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#different-pragma-directives-are-used[0m
+INFO:Detectors:[92m
+Ownable.owner (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#204-208) should be declared external
+Ownable.renounceOwnership (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#228-232) should be declared external
+Ownable.transferOwnership (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#238-239) should be declared external
+HEX4.distribute (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#268-270) should be declared external
+RandomNumberGenerator.generateRandomNumber (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#278-282) should be declared external
+HexMoney.mintHXY (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#283-288) should be declared external
+HexLotto.setTreasury (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#413-417) should be declared external
+HexLotto.setRandomGenerator (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#418-425) should be declared external
+HexLotto.setHexMoney (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#425-433) should be declared external
+HexLotto.setTicketPrice (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#438-445) should be declared external
+HexLotto.setMinimumPot (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#449-455) should be declared external
+HexLotto.getParticipants (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#456-459) should be declared external
+HexLotto.getPlayers (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#459-460) should be declared external
+HexLotto.distributeToHex4 (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#460-463) should be declared external
+HexLotto.entry (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#488-523) should be declared external
+HexLotto.withdraw (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#558-574) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol:
+	- pragma solidity^0.5.16 (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#5-7): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'Context._msgSender' (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#175) is not in mixedCase
+Function 'Context._msgData' (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#175-186) is not in mixedCase
+Function 'Ownable._transferOwnership' (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#247-251) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+HexLotto.validQueryIds (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#304-307) is never used in HexLotto
+HexLotto.devWallet (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#351) is never used in HexLotto
+HexLotto.devWallet2 (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#352) is never used in HexLotto
+HexLotto.devWallet3 (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#352-353) is never used in HexLotto
+HexLotto.devWallet4 (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#353-354) is never used in HexLotto
+HexLotto.devWallet5 (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#354) is never used in HexLotto
+HexLotto.day (/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol#370-371) is never used in HexLotto
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0x06919a59440c1559d37df0a078e582ae4c39888e.sol analyzed (9 contracts), 43 result(s) found

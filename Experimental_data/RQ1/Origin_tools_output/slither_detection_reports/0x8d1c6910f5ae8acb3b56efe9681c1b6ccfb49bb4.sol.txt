@@ -1,0 +1,53 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x8d1c6910f5ae8acb3b56efe9681c1b6ccfb49bb4.sol:
+/sb/0x8d1c6910f5ae8acb3b56efe9681c1b6ccfb49bb4.sol:573:5: Warning: No visibility specified. Defaulting to "public". 
+    constructor(address moneyMarket, address liquidator) LiquidationChecker(moneyMarket, liquidator) {}
+    ^-------------------------------------------------------------------------------------------------^
+/sb/0x8d1c6910f5ae8acb3b56efe9681c1b6ccfb49bb4.sol:539:5: Warning: Function state mutability can be restricted to view
+    function oracleTouched() internal returns(bool) {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x8d1c6910f5ae8acb3b56efe9681c1b6ccfb49bb4.sol:640:5: Warning: Function state mutability can be restricted to pure
+    function getSupplyRate(address _asset, uint cash, uint borrows) public view returns (uint, uint) {
+    ^ (Relevant source part starts here and spans across multiple lines).
+
+INFO:Detectors:[93m
+LiquidationChecker.oracleTouched (/sb/0x8d1c6910f5ae8acb3b56efe9681c1b6ccfb49bb4.sol#556-564) uses a dangerous strict equality:
+	- sameBlock = oracle.mostRecentBlock() == block.number
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[92m
+NCStandardInterestRateModel.constructor.moneyMarket (local variable @ /sb/0x8d1c6910f5ae8acb3b56efe9681c1b6ccfb49bb4.sol#586) shadows:
+	- LiquidationChecker.moneyMarket (state variable @ /sb/0x8d1c6910f5ae8acb3b56efe9681c1b6ccfb49bb4.sol#529-530)
+NCStandardInterestRateModel.constructor.liquidator (local variable @ /sb/0x8d1c6910f5ae8acb3b56efe9681c1b6ccfb49bb4.sol#586) shadows:
+	- LiquidationChecker.liquidator (state variable @ /sb/0x8d1c6910f5ae8acb3b56efe9681c1b6ccfb49bb4.sol#530)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+EIP20Interface.totalSupply should be constant (/sb/0x8d1c6910f5ae8acb3b56efe9681c1b6ccfb49bb4.sol#18-20)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+EIP20Interface.balanceOf (/sb/0x8d1c6910f5ae8acb3b56efe9681c1b6ccfb49bb4.sol#22-24) should be declared external
+EIP20Interface.transfer (/sb/0x8d1c6910f5ae8acb3b56efe9681c1b6ccfb49bb4.sol#28-30) should be declared external
+EIP20Interface.transferFrom (/sb/0x8d1c6910f5ae8acb3b56efe9681c1b6ccfb49bb4.sol#35-37) should be declared external
+EIP20Interface.approve (/sb/0x8d1c6910f5ae8acb3b56efe9681c1b6ccfb49bb4.sol#41-43) should be declared external
+EIP20Interface.allowance (/sb/0x8d1c6910f5ae8acb3b56efe9681c1b6ccfb49bb4.sol#46-48) should be declared external
+PriceOracleInterface.assetPrices (/sb/0x8d1c6910f5ae8acb3b56efe9681c1b6ccfb49bb4.sol#61-65) should be declared external
+PriceOracleProxy.assetPrices (/sb/0x8d1c6910f5ae8acb3b56efe9681c1b6ccfb49bb4.sol#80-90) should be declared external
+InterestRateModel.getSupplyRate (/sb/0x8d1c6910f5ae8acb3b56efe9681c1b6ccfb49bb4.sol#262-263) should be declared external
+InterestRateModel.getBorrowRate (/sb/0x8d1c6910f5ae8acb3b56efe9681c1b6ccfb49bb4.sol#277-281) should be declared external
+MoneyMarket.markets (/sb/0x8d1c6910f5ae8acb3b56efe9681c1b6ccfb49bb4.sol#520-525) should be declared external
+MoneyMarket.oracle (/sb/0x8d1c6910f5ae8acb3b56efe9681c1b6ccfb49bb4.sol#525-526) should be declared external
+LiquidationChecker.setAllowLiquidation (/sb/0x8d1c6910f5ae8acb3b56efe9681c1b6ccfb49bb4.sol#564-572) should be declared external
+NCStandardInterestRateModel.getSupplyRate (/sb/0x8d1c6910f5ae8acb3b56efe9681c1b6ccfb49bb4.sol#650-684) should be declared external
+NCStandardInterestRateModel.getBorrowRate (/sb/0x8d1c6910f5ae8acb3b56efe9681c1b6ccfb49bb4.sol#697-702) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Constant 'Exponential.expScale' (/sb/0x8d1c6910f5ae8acb3b56efe9681c1b6ccfb49bb4.sol#359) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'Exponential.halfExpScale' (/sb/0x8d1c6910f5ae8acb3b56efe9681c1b6ccfb49bb4.sol#360-362) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'Exponential.mantissaOne' (/sb/0x8d1c6910f5ae8acb3b56efe9681c1b6ccfb49bb4.sol#362-363) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'Exponential.mantissaOneTenth' (/sb/0x8d1c6910f5ae8acb3b56efe9681c1b6ccfb49bb4.sol#363-364) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'NCStandardInterestRateModel.oneMinusSpreadBasisPoints' (/sb/0x8d1c6910f5ae8acb3b56efe9681c1b6ccfb49bb4.sol#578) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'NCStandardInterestRateModel.blocksPerYear' (/sb/0x8d1c6910f5ae8acb3b56efe9681c1b6ccfb49bb4.sol#579-580) is not in UPPER_CASE_WITH_UNDERSCORES
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+Exponential.mantissaOne (/sb/0x8d1c6910f5ae8acb3b56efe9681c1b6ccfb49bb4.sol#362-363) is never used in NCStandardInterestRateModel
+Exponential.mantissaOneTenth (/sb/0x8d1c6910f5ae8acb3b56efe9681c1b6ccfb49bb4.sol#363-364) is never used in NCStandardInterestRateModel
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0x8d1c6910f5ae8acb3b56efe9681c1b6ccfb49bb4.sol analyzed (10 contracts), 25 result(s) found

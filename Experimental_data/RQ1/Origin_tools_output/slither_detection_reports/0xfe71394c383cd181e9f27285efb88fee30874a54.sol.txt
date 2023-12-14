@@ -1,0 +1,221 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol:
+/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol:558:33: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function changeKeysRequired(uint256 purpose, uint256 number) external
+                                ^-------------^
+/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol:558:50: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function changeKeysRequired(uint256 purpose, uint256 number) external
+                                                 ^------------^
+/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol:566:30: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function getKeysRequired(uint256 purpose) external view returns(uint256 number)
+                             ^-------------^
+/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol:566:69: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function getKeysRequired(uint256 purpose) external view returns(uint256 number)
+                                                                    ^------------^
+/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol:927:47: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function isClaimValid(Identity _identity, bytes32 _claimId, uint256 claimTopic, bytes memory sig, bytes memory data)
+                                              ^--------------^
+
+INFO:Detectors:[91m
+Reentrancy in ERC734.approve (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#462-501):
+	External calls:
+	- (success,None) = executions[_id].to.call.value(executions[_id].value)(abi.encode(executions[_id].data,0)) (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#474-477)
+	State variables written after the call(s):
+	- executions (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#478-481)
+Reentrancy in ERC734.execute (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#502-521):
+	External calls:
+	- approve(executionNonce,true) (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#519)
+	State variables written after the call(s):
+	- executionNonce (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#519)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities[0m
+INFO:Detectors:[93m
+ClaimIssuer.getRecoveredAddress (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#990-1001) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+Reentrancy in TransferRestrictions.canTransfer (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol):
+	External calls:
+	- require(bool,string)(isFromUnresrictedCountry(_to),Country is Restricted) (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol)
+	State variables written after the call(s):
+	- counters (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol)
+	- counters (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol)
+	- counters (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol)
+	- counters (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol)
+	- counters (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol)
+Reentrancy in Identity.removeClaim (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#806-845):
+	External calls:
+	- claimsByTopic[claims[_claimId].topic].pop() (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#830-832)
+	State variables written after the call(s):
+	- claims (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#843-844)
+Reentrancy in ERC734.removeKey (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#521-574):
+	External calls:
+	- keys[_key].purposes.pop() (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#556)
+	- keysByPurpose[_purpose].pop() (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#566)
+	State variables written after the call(s):
+	- keys (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#572)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+ERC734.removeKey (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#521-574) does not use the value returned by external calls:
+	-keys[_key].purposes.pop() (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#556)
+	-keysByPurpose[_purpose].pop() (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#566)
+Identity.removeClaim (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#806-845) does not use the value returned by external calls:
+	-claimsByTopic[claims[_claimId].topic].pop() (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#830-832)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in ERC734.removeKey (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#521-574):
+	External calls:
+	- keys[_key].purposes.pop() (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#556)
+	State variables written after the call(s):
+	- keysByPurpose (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#561-566)
+Reentrancy in ClaimIssuer.revokeClaim (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#927-942):
+	External calls:
+	- (foundClaimTopic,scheme,issuer,sig,data,None) = Identity(_identity).getClaim(_claimId) (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#936-939)
+	State variables written after the call(s):
+	- identityAddresses (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#941-942)
+	- revokedClaims (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#940)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+ClaimIssuer.getRecoveredAddress uses assembly (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#990-1001)
+	- /sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#995-997
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+IClaimIssuer.issuedClaimCount should be constant (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#899-900)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Different versions of Solidity is used in /sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol:
+	- Version used: ['^0.5.0', '^0.5.10']
+	- /sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#7-9 declares pragma solidity^0.5.10
+	- /sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#15-18 declares pragma solidity^0.5.0
+	- /sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#57 declares pragma solidity^0.5.0
+	- /sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#139-140 declares pragma solidity^0.5.0
+	- /sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#181-183 declares pragma solidity^0.5.10
+	- /sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#326-328 declares pragma solidity^0.5.10
+	- /sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#613 declares pragma solidity^0.5.10
+	- /sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#709 declares pragma solidity^0.5.10
+	- /sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#893-895 declares pragma solidity^0.5.10
+	- /sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#924-927 declares pragma solidity^0.5.10
+	- /sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#1002 declares pragma solidity^0.5.10
+	- /sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#1038 declares pragma solidity^0.5.10
+	- /sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#1046-1048 declares pragma solidity^0.5.10
+	- /sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#1099-1102 declares pragma solidity^0.5.10
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#different-pragma-directives-are-used[0m
+INFO:Detectors:[92m
+Ownable.owner (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#85-87) should be declared external
+Ownable.renounceOwnership (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#109-114) should be declared external
+Ownable.transferOwnership (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#120-123) should be declared external
+AgentRole.addAgent (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#158-162) should be declared external
+AgentRole.removeAgent (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#162-166) should be declared external
+ERC734.addKey (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#427-462) should be declared external
+IERC734.addKey (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#254) should be declared external
+IERC734.execute (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#282-286) should be declared external
+ERC734.execute (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#502-521) should be declared external
+ERC734.getKey (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#375-384) should be declared external
+IERC734.getKey (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#287-292) should be declared external
+IERC734.getKeyPurposes (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#295-297) should be declared external
+ERC734.getKeyPurposes (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#391-393) should be declared external
+ERC734.getKeysByPurpose (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#404-406) should be declared external
+IERC734.getKeysByPurpose (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#300-302) should be declared external
+IERC734.removeKey (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#323-325) should be declared external
+ERC734.removeKey (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#521-574) should be declared external
+Identity.getClaim (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#855-880) should be declared external
+IERC735.getClaim (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#670-672) should be declared external
+IERC735.getClaimIdsByTopic (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#672-674) should be declared external
+Identity.getClaimIdsByTopic (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#885-889) should be declared external
+IERC735.addClaim (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#697-704) should be declared external
+Identity.addClaim (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#740-793) should be declared external
+Identity.removeClaim (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#806-845) should be declared external
+IERC735.removeClaim (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#708-709) should be declared external
+IClaimIssuer.revokeClaim (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#907-908) should be declared external
+ClaimIssuer.revokeClaim (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#927-942) should be declared external
+IClaimIssuer.isClaimValid (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#914-920) should be declared external
+ClaimIssuer.isClaimValid (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#948-990) should be declared external
+ICompliance.canTransfer (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#10-13) should be declared external
+TransferRestrictions.canTransfer (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol) should be declared external
+TransferRestrictions.restrictCountry (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#1129-1134) should be declared external
+TransferRestrictions.unrestrictCountry (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#1134-1136) should be declared external
+TransferRestrictions.restrictCountriesInBulk (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#1136-1144) should be declared external
+TransferRestrictions.unrestrictCountriesInBulk (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#1144-1150) should be declared external
+TransferRestrictions.getCount (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#1166-1175) should be declared external
+TransferRestrictions.addRestrictions (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#1180-1187) should be declared external
+TransferRestrictions.updateRestrictions (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#1187-1196) should be declared external
+TransferRestrictions.removeRestrictions (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#1196-1211) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol:
+	- pragma solidity^0.5.10 (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#7-9): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#15-18): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#57): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#139-140): it allows old versions
+	- pragma solidity^0.5.10 (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#181-183): it allows old versions
+	- pragma solidity^0.5.10 (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#326-328): it allows old versions
+	- pragma solidity^0.5.10 (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#613): it allows old versions
+	- pragma solidity^0.5.10 (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#709): it allows old versions
+	- pragma solidity^0.5.10 (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#893-895): it allows old versions
+	- pragma solidity^0.5.10 (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#924-927): it allows old versions
+	- pragma solidity^0.5.10 (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#1002): it allows old versions
+	- pragma solidity^0.5.10 (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#1038): it allows old versions
+	- pragma solidity^0.5.10 (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#1046-1048): it allows old versions
+	- pragma solidity^0.5.10 (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#1099-1102): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Low level call in ERC734.approve (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#462-501):
+	-(success,None) = executions[_id].to.call.value(executions[_id].value)(abi.encode(executions[_id].data,0)) /sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#474-477
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Function 'Ownable._transferOwnership' (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#124-137) is not in mixedCase
+Function 'AgentRole._addAgent' (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#166-172) is not in mixedCase
+Function 'AgentRole._removeAgent' (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#172-179) is not in mixedCase
+Parameter '_key' of ERC734.addKey (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#427-428) is not in mixedCase
+Parameter '_purpose' of ERC734.addKey (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#428) is not in mixedCase
+Parameter '_type' of ERC734.addKey (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#428) is not in mixedCase
+Parameter '_id' of ERC734.approve (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#463) is not in mixedCase
+Parameter '_approve' of ERC734.approve (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#463) is not in mixedCase
+Parameter '_to' of ERC734.execute (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#502) is not in mixedCase
+Parameter '_value' of ERC734.execute (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#502-503) is not in mixedCase
+Parameter '_data' of ERC734.execute (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#503-505) is not in mixedCase
+Parameter '_key' of ERC734.getKey (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#376) is not in mixedCase
+Parameter '_key' of ERC734.getKeyPurposes (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#391) is not in mixedCase
+Parameter '_purpose' of ERC734.getKeysByPurpose (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#404-405) is not in mixedCase
+Parameter '_key' of ERC734.keyHasPurpose (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#597) is not in mixedCase
+Parameter '_purpose' of ERC734.keyHasPurpose (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#597) is not in mixedCase
+Parameter '_key' of ERC734.removeKey (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#522) is not in mixedCase
+Parameter '_purpose' of ERC734.removeKey (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#522) is not in mixedCase
+Parameter '_claimId' of Identity.getClaim (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#858) is not in mixedCase
+Parameter '_topic' of Identity.getClaimIdsByTopic (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#886) is not in mixedCase
+Parameter '_topic' of Identity.addClaim (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#741) is not in mixedCase
+Parameter '_scheme' of Identity.addClaim (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#741-742) is not in mixedCase
+Parameter '_issuer' of Identity.addClaim (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#742) is not in mixedCase
+Parameter '_signature' of Identity.addClaim (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#743) is not in mixedCase
+Parameter '_data' of Identity.addClaim (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#743-745) is not in mixedCase
+Parameter '_uri' of Identity.addClaim (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#745-746) is not in mixedCase
+Parameter '_claimId' of Identity.removeClaim (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#807) is not in mixedCase
+Parameter '_claimId' of ClaimIssuer.revokeClaim (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#927) is not in mixedCase
+Parameter '_identity' of ClaimIssuer.revokeClaim (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#927-928) is not in mixedCase
+Parameter '_sig' of ClaimIssuer.isClaimRevoked (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#943) is not in mixedCase
+Parameter '_identity' of ClaimIssuer.isClaimValid (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#951) is not in mixedCase
+Parameter '_from' of TransferRestrictions.canTransfer (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol) is not in mixedCase
+Parameter '_to' of TransferRestrictions.canTransfer (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol) is not in mixedCase
+Parameter '_value' of TransferRestrictions.canTransfer (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol) is not in mixedCase
+Parameter '_identityRegistry' of TransferRestrictions. (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#1125-1126) is not in mixedCase
+Parameter '_country' of TransferRestrictions.restrictCountry (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#1129-1130) is not in mixedCase
+Parameter '_country' of TransferRestrictions.unrestrictCountry (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#1134) is not in mixedCase
+Parameter '_country' of TransferRestrictions.restrictCountriesInBulk (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#1137-1138) is not in mixedCase
+Parameter '_country' of TransferRestrictions.unrestrictCountriesInBulk (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#1144-1145) is not in mixedCase
+Parameter '_to' of TransferRestrictions.isFromUnresrictedCountry (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#1152) is not in mixedCase
+Parameter '_user' of TransferRestrictions.getStartTime (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#1158) is not in mixedCase
+Parameter '_index' of TransferRestrictions.getStartTime (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#1158) is not in mixedCase
+Parameter '_user' of TransferRestrictions.setStartTime (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#1164) is not in mixedCase
+Parameter '_index' of TransferRestrictions.setStartTime (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#1164) is not in mixedCase
+Parameter '_time' of TransferRestrictions.setStartTime (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#1164) is not in mixedCase
+Parameter '_user' of TransferRestrictions.getCount (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#1168) is not in mixedCase
+Parameter '_index' of TransferRestrictions.getCount (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#1168-1169) is not in mixedCase
+Parameter '_user' of TransferRestrictions.setCount (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#1178) is not in mixedCase
+Parameter '_count' of TransferRestrictions.setCount (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#1178) is not in mixedCase
+Parameter '_limit' of TransferRestrictions.addRestrictions (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#1181-1182) is not in mixedCase
+Parameter '_timespan' of TransferRestrictions.addRestrictions (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#1183-1184) is not in mixedCase
+Parameter '_limit' of TransferRestrictions.updateRestrictions (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#1188) is not in mixedCase
+Parameter '_timespan' of TransferRestrictions.updateRestrictions (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#1188-1189) is not in mixedCase
+Parameter '_index' of TransferRestrictions.updateRestrictions (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#1189-1190) is not in mixedCase
+Parameter '_index' of TransferRestrictions.removeRestrictions (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol#1197) is not in mixedCase
+Parameter '_user' of TransferRestrictions.resetStartTime (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol) is not in mixedCase
+Parameter '_index' of TransferRestrictions.resetStartTime (/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xfe71394c383cd181e9f27285efb88fee30874a54.sol analyzed (14 contracts), 111 result(s) found

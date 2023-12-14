@@ -1,0 +1,150 @@
+INFO:Detectors:[91m
+Operators.withdrawEth (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#696-706) sends eth to arbitrary user
+	Dangerous calls:
+	- msg.sender.transfer(address(this).balance) (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#704)
+CutiePluginBase._withdraw (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#824-831) sends eth to arbitrary user
+	Dangerous calls:
+	- address(coreContract).transfer(address(this).balance) (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#828-831)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[93m
+CutieCoreInterface (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#168-284) has incorrect ERC20 function interface(s):
+	-transferFrom (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#171-175)
+	-transfer (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#176-178)
+ERC721 (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#324-480) has incorrect ERC20 function interface(s):
+	-transferFrom (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#397-399)
+	-approve (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#406-408)
+	-transfer (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#478-480)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[93m
+Operators.withdrawERC20 (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#670-682) does not use the value returned by external calls:
+	-_tokenContract.transfer(msg.sender,balance) (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#680-682)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in CutiePluginBase.setup (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#764-772):
+	External calls:
+	- require(bool)(candidateContract.isCutieCore()) (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#767-768)
+	State variables written after the call(s):
+	- coreContract (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#768-769)
+	- pluginsContract (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#769)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+ERC20.decimals should be constant (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#296)
+ERC20.name should be constant (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#295)
+ERC20.symbol should be constant (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#293-295)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#47-59) should be declared external
+Pausable.pause (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#89-95) should be declared external
+Pausable.unpause (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#99-103) should be declared external
+PluginInterface.isPluginInterface (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#111-112) should be declared external
+CutiePluginBase.isPluginInterface (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#747-749) should be declared external
+CutiePluginBase.onRemove (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#831-832) should be declared external
+PluginInterface.onRemove (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#112-113) should be declared external
+CutiePluginBase.run (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#833-836) should be declared external
+PluginInterface.run (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#121-124) should be declared external
+CutieCoreInterface.isCutieCore (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#168-169) should be declared external
+CutieCoreInterface.getGenes (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#200-206) should be declared external
+CutieCoreInterface.getCooldownEndTime (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#207-215) should be declared external
+CutieCoreInterface.getCooldownIndex (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#215-223) should be declared external
+CutieCoreInterface.getGeneration (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#223-232) should be declared external
+CutieCoreInterface.getOptional (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#232-237) should be declared external
+CutieCoreInterface.changeGenes (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#237-242) should be declared external
+CutieCoreInterface.changeCooldownEndTime (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#242-247) should be declared external
+CutieCoreInterface.changeCooldownIndex (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#248-253) should be declared external
+CutieCoreInterface.changeOptional (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#253-257) should be declared external
+CutieCoreInterface.changeGeneration (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#258-261) should be declared external
+CutieCoreInterface.createSaleAuction (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#261-263) should be declared external
+CutieCoreInterface.breedWith (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#267) should be declared external
+CutieCoreInterface.getBreedingFee (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#267-268) should be declared external
+ERC20.totalSupply (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#302-303) should be declared external
+ERC20.balanceOf (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#303-304) should be declared external
+ERC20.allowance (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#304-305) should be declared external
+ERC20.transfer (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#305-306) should be declared external
+ERC20.approve (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#306-309) should be declared external
+ERC20.transferFrom (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#309-310) should be declared external
+ERC20.transferBulk (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#317-318) should be declared external
+ERC20.approveBulk (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#318-320) should be declared external
+PausableOperators.pause (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#733-735) should be declared external
+PausableOperators.unpause (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#740-745) should be declared external
+CutiePluginBase.setup (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#764-772) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol:
+	- pragma solidity^0.4.23 (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#5-7): it allows old versions
+	- pragma solidity^0.4.23 (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#7-9): it allows old versions
+	- pragma solidity^0.4.23 (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#9-12): it allows old versions
+	- pragma solidity^0.4.23 (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#12-16): it allows old versions
+	- pragma solidity^0.4.23 (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#103-104): it allows old versions
+	- pragma solidity^0.4.23 (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#139-140): it allows old versions
+	- pragma solidity^0.4.23 (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#140-141): it allows old versions
+	- pragma solidity^0.4.23 (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#286-287): it allows old versions
+	- pragma solidity^0.4.23 (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#287-288): it allows old versions
+	- pragma solidity^0.4.23 (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#288-290): it allows old versions
+	- pragma solidity^0.4.23 (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#321): it allows old versions
+	- pragma solidity^0.4.23 (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#480-481): it allows old versions
+	- pragma solidity^0.4.23 (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#481-483): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_addr' of Operators.isOwner (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#639) is not in mixedCase
+Parameter '_newOwner' of Operators.addOwner (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#642-645) is not in mixedCase
+Parameter '_oldOwner' of Operators.removeOwner (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#649) is not in mixedCase
+Parameter '_addr' of Operators.isOperator (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#655) is not in mixedCase
+Parameter '_newOperator' of Operators.addOperator (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#660) is not in mixedCase
+Parameter '_oldOperator' of Operators.removeOperator (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#667) is not in mixedCase
+Parameter '_tokenContract' of Operators.withdrawERC20 (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#677-678) is not in mixedCase
+Parameter '_tokenContract' of Operators.approveERC721 (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#684-687) is not in mixedCase
+Parameter '_tokenContract' of Operators.approveERC1155 (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#691) is not in mixedCase
+Parameter '' of CutiePluginBase.run (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#833) is not in mixedCase
+Parameter '_scope_0' of CutiePluginBase.run (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#833) is not in mixedCase
+Parameter '_scope_1' of CutiePluginBase.run (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#833) is not in mixedCase
+Parameter '' of CutiePluginBase.runSigned (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#836) is not in mixedCase
+Parameter '_scope_0' of CutiePluginBase.runSigned (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#836) is not in mixedCase
+Parameter '_scope_1' of CutiePluginBase.runSigned (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#836) is not in mixedCase
+Parameter '_coreAddress' of CutiePluginBase.setup (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#765) is not in mixedCase
+Parameter '_pluginsContract' of CutiePluginBase.setup (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#765) is not in mixedCase
+Function 'CutiePluginBase._isOwner' (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#775-778) is not in mixedCase
+Parameter '_claimant' of CutiePluginBase._isOwner (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#775-776) is not in mixedCase
+Parameter '_cutieId' of CutiePluginBase._isOwner (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#776) is not in mixedCase
+Function 'CutiePluginBase._escrow' (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#788-795) is not in mixedCase
+Parameter '_owner' of CutiePluginBase._escrow (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#788-791) is not in mixedCase
+Parameter '_cutieId' of CutiePluginBase._escrow (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#791) is not in mixedCase
+Function 'CutiePluginBase._transfer' (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#809-817) is not in mixedCase
+Parameter '_receiver' of CutiePluginBase._transfer (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#809) is not in mixedCase
+Parameter '_cutieId' of CutiePluginBase._transfer (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#809-811) is not in mixedCase
+Function 'CutiePluginBase._withdraw' (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#824-831) is not in mixedCase
+Parameter '_proxy' of CutieGenerator.setupGenerator (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#847) is not in mixedCase
+Parameter '_parent1' of CutieGenerator.setupGenerator (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#847) is not in mixedCase
+Parameter '_parent2' of CutieGenerator.setupGenerator (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#847) is not in mixedCase
+Parameter '_genome' of CutieGenerator.generateSingle (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#853-855) is not in mixedCase
+Parameter '_generation' of CutieGenerator.generateSingle (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#855) is not in mixedCase
+Parameter '_target' of CutieGenerator.generateSingle (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#855) is not in mixedCase
+Parameter '_genome' of CutieGenerator.generateSingleBreed (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#859-860) is not in mixedCase
+Parameter '_generation' of CutieGenerator.generateSingleBreed (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#860-862) is not in mixedCase
+Parameter '_target' of CutieGenerator.generateSingleBreed (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#862-863) is not in mixedCase
+Parameter '_genome' of CutieGenerator.generateSinglePromo (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#867) is not in mixedCase
+Parameter '_generation' of CutieGenerator.generateSinglePromo (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#868-869) is not in mixedCase
+Parameter '_target' of CutieGenerator.generateSinglePromo (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#869) is not in mixedCase
+Parameter '_genome' of CutieGenerator.generate (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#875-878) is not in mixedCase
+Parameter '_generation' of CutieGenerator.generate (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#878) is not in mixedCase
+Parameter '_target' of CutieGenerator.generate (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#878) is not in mixedCase
+Function 'CutieGenerator._generate' (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#884-898) is not in mixedCase
+Parameter '_genome' of CutieGenerator._generate (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#886) is not in mixedCase
+Parameter '_generation' of CutieGenerator._generate (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#886) is not in mixedCase
+Parameter '_target' of CutieGenerator._generate (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#886-887) is not in mixedCase
+Function 'CutieGenerator._generatePromo' (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#898-905) is not in mixedCase
+Parameter '_genome' of CutieGenerator._generatePromo (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#902) is not in mixedCase
+Parameter '_target' of CutieGenerator._generatePromo (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#902) is not in mixedCase
+Parameter '_newParent' of CutieGenerator.addParent (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#907) is not in mixedCase
+Parameter '_index' of CutieGenerator.removeParent (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#909) is not in mixedCase
+Parameter '_newParents' of CutieGenerator.addParents (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#914) is not in mixedCase
+Function 'CutieGenerator._getNextParent' (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#919-927) is not in mixedCase
+Function 'CutieGenerator._generateBreed' (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#927-934) is not in mixedCase
+Parameter '_genome' of CutieGenerator._generateBreed (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#927-928) is not in mixedCase
+Parameter '_generation' of CutieGenerator._generateBreed (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#928-930) is not in mixedCase
+Parameter '_target' of CutieGenerator._generateBreed (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol#930) is not in mixedCase
+Parameter '_cutieId' of CutieGenerator.recreate (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol) is not in mixedCase
+Parameter '_genome' of CutieGenerator.recreate (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol) is not in mixedCase
+Parameter '_generation' of CutieGenerator.recreate (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol) is not in mixedCase
+Parameter '_cutieId' of CutieGenerator.recoverCutie (/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xae9c3476ea17bce531cd9aedfd1aad651626bcf7.sol analyzed (13 contracts), 103 result(s) found

@@ -1,0 +1,87 @@
+INFO:Detectors:[93m
+Initializable.isConstructor (/sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol#243-275) is declared view but contains assembly code
+Adminable._admin (/sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol#377-393) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+Reentrancy in SwapRegistry.createExchange (/sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol#695-733):
+	External calls:
+	- nativeToken = vault.getTokenAddr(0) (/sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol#703-709)
+	- SwapExchange(exchange).setup(nativeToken,_token) (/sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol#725)
+	State variables written after the call(s):
+	- tokenToExchange (/sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol#725-727)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+SwapRegistry.claim (/sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol#519-657) does not use the value returned by external calls:
+	-token.mint(msg.sender,reward.sub(tax)) (/sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol#647-653)
+	-token.mint(bridge.admin(),tax) (/sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol#653-657)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+SwapRegistry.claim has external calls inside a loop:
+	- (height,None) = bridge.periods(right) (/sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol#587-589)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in SwapRegistry.createExchange (/sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol#695-733):
+	External calls:
+	- nativeToken = vault.getTokenAddr(0) (/sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol#703-709)
+	- SwapExchange(exchange).setup(nativeToken,_token) (/sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol#725)
+	State variables written after the call(s):
+	- exchangeToToken (/sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol#727-731)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Initializable.isConstructor uses assembly (/sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol#243-275)
+	- /sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol#273-275
+Adminable._admin uses assembly (/sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol#377-393)
+	- /sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol#387-393
+SwapRegistry.claim uses assembly (/sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol#519-657)
+	- /sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol#565-573
+	- /sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol#575-583
+	- /sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol#583-587
+SwapRegistry.createClone uses assembly (/sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol)
+	- /sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+Bridge.admin should be constant (/sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol#413-415)
+Bridge.operator should be constant (/sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol#409-411)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Vault.getTokenAddr (/sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol#419-421) should be declared external
+SwapExchange.setup (/sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol#421-425) should be declared external
+ERC20Mintable.mint (/sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol#451-455) should be declared external
+SwapRegistry.initialize (/sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol#497-519) should be declared external
+SwapRegistry.claim (/sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol#519-657) should be declared external
+SwapRegistry.getTaxRate (/sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol#659-661) should be declared external
+SwapRegistry.setTaxRate (/sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol#661-669) should be declared external
+SwapRegistry.getInflationRate (/sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol#671-673) should be declared external
+SwapRegistry.setInflationRate (/sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol#673-679) should be declared external
+SwapRegistry.createExchange (/sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol#695-733) should be declared external
+SwapRegistry.getExchangeCodeAddr (/sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol#733-737) should be declared external
+SwapRegistry.setExchangeCodeAddr (/sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol#737-747) should be declared external
+SwapRegistry.getExchange (/sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol) should be declared external
+SwapRegistry.getToken (/sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Variable 'Initializable.______gap' (/sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol#277) is not in mixedCase
+Function 'Adminable._admin' (/sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol#377-393) is not in mixedCase
+Parameter '_bridge' of SwapRegistry.initialize (/sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol#501) is not in mixedCase
+Parameter '_vault' of SwapRegistry.initialize (/sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol#501-503) is not in mixedCase
+Parameter '_poaReward' of SwapRegistry.initialize (/sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol#503-505) is not in mixedCase
+Parameter '_slotId' of SwapRegistry.claim (/sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol#521-523) is not in mixedCase
+Parameter '_consensusRoots' of SwapRegistry.claim (/sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol#523-525) is not in mixedCase
+Parameter '_cas' of SwapRegistry.claim (/sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol#525-527) is not in mixedCase
+Parameter '_validatorData' of SwapRegistry.claim (/sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol#527-529) is not in mixedCase
+Parameter '_rest' of SwapRegistry.claim (/sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol#531-533) is not in mixedCase
+Parameter '_taxRate' of SwapRegistry.setTaxRate (/sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol#663-667) is not in mixedCase
+Parameter '_inflationRate' of SwapRegistry.setInflationRate (/sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol#675) is not in mixedCase
+Parameter '_token' of SwapRegistry.createExchange (/sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol#697-701) is not in mixedCase
+Parameter '_exchangeCodeAddr' of SwapRegistry.setExchangeCodeAddr (/sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol#737) is not in mixedCase
+Parameter '_token' of SwapRegistry.getExchange (/sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol) is not in mixedCase
+Parameter '_exchange' of SwapRegistry.getToken (/sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol) is not in mixedCase
+Constant 'SwapRegistry.maxTax' (/sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol#467-469) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'SwapRegistry.inflationFactor' (/sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol#475-477) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'SwapRegistry.maxInflation' (/sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol#477-479) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'SwapRegistry.poaSupplyTarget' (/sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol#485-489) is not in UPPER_CASE_WITH_UNDERSCORES
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+Initializable.______gap (/sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol#277) is never used in SwapRegistry
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0xa1b82e4ec465748d06bd3751d409ca7d23f1d1fb.sol analyzed (8 contracts), 46 result(s) found

@@ -1,0 +1,33 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xb94c06b81d11bf68cbafe3694272bfc1d4edd9f1.sol:
+/sb/0xb94c06b81d11bf68cbafe3694272bfc1d4edd9f1.sol:7:3: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+  function TinyProxy(address toAddr, uint proxyGas) public {
+
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xb94c06b81d11bf68cbafe3694272bfc1d4edd9f1.sol:23:5: Warning: Invoking events without "emit" prefix is deprecated.
+    FundsReleased(receiver, balance);
+
+    ^------------------------------^
+
+INFO:Detectors:[91m
+TinyProxy.release (/sb/0xb94c06b81d11bf68cbafe3694272bfc1d4edd9f1.sol#31-53) sends eth to arbitrary user
+	Dangerous calls:
+	- require(bool)(receiver.call.gas(gasBudget).value(balance)()) (/sb/0xb94c06b81d11bf68cbafe3694272bfc1d4edd9f1.sol#37-41)
+	- require(bool)(receiver.send(balance)) (/sb/0xb94c06b81d11bf68cbafe3694272bfc1d4edd9f1.sol#41-45)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[92m
+TinyProxy.fallback (/sb/0xb94c06b81d11bf68cbafe3694272bfc1d4edd9f1.sol#23-27) should be declared external
+TinyProxy.release (/sb/0xb94c06b81d11bf68cbafe3694272bfc1d4edd9f1.sol#31-53) should be declared external
+TinyProxyFactory.make (/sb/0xb94c06b81d11bf68cbafe3694272bfc1d4edd9f1.sol#61-77) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xb94c06b81d11bf68cbafe3694272bfc1d4edd9f1.sol:
+	- pragma solidity^0.4.17 (/sb/0xb94c06b81d11bf68cbafe3694272bfc1d4edd9f1.sol#1): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Low level call in TinyProxy.release (/sb/0xb94c06b81d11bf68cbafe3694272bfc1d4edd9f1.sol#31-53):
+	-require(bool)(receiver.call.gas(gasBudget).value(balance)()) /sb/0xb94c06b81d11bf68cbafe3694272bfc1d4edd9f1.sol#37-41
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Function 'TinyProxy.TinyProxy' (/sb/0xb94c06b81d11bf68cbafe3694272bfc1d4edd9f1.sol#13-23) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xb94c06b81d11bf68cbafe3694272bfc1d4edd9f1.sol analyzed (2 contracts), 7 result(s) found

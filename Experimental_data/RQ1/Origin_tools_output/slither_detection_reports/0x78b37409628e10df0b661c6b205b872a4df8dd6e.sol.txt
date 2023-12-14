@@ -1,0 +1,109 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol:
+/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol:85:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Deposit(msg.sender, msg.value);
+        ^----------------------------^
+/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol:99:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Withdrawal(msg.sender, wad);
+        ^-------------------------^
+/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol:107:16: Warning: Using contract member "balance" inherited from the address type is deprecated. Convert the contract to "address" type to access the member, for example use "address(contract).balance" instead.
+        return this.balance;
+               ^----------^
+/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol:117:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Approval(msg.sender, guy, wad);
+        ^----------------------------^
+/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol:161:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Transfer(src, dst, wad);
+        ^---------------------^
+
+INFO:Detectors:[91m
+Account.transferByUser (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#1015-1125) sends eth to arbitrary user
+	Dangerous calls:
+	- _to.transfer(_value) (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#1099)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[93m
+ECRecovery.recover (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#732-794) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+Account.transferBySystem (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#983-1015) does not use the value returned by external calls:
+	-ERC20(_token).transfer(_to,_value) (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#1007)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in Account.init (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#943-967):
+	External calls:
+	- weth9 = config.weth9() (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#961-963)
+	State variables written after the call(s):
+	- isInitialized (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#965-967)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+ECRecovery.recover uses assembly (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#732-794)
+	- /sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#761-773
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+WETH9.decimals should be constant (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#57)
+WETH9.name should be constant (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#51-53)
+WETH9.symbol should be constant (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#53-57)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+WETH9.fallback (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#81-83) should be declared external
+WETH9.withdraw (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#95-113) should be declared external
+WETH9.totalSupply (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#113-115) should be declared external
+WETH9.approve (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#117-127) should be declared external
+WETH9.transfer (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#130-141) should be declared external
+DSAuthority.canCall (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#209-219) should be declared external
+DSAuth.setOwner (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#259-269) should be declared external
+DSAuth.setAuthority (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#269-281) should be declared external
+MasterCopy.changeMasterCopy (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#437-451) should be declared external
+Config.setWETH9 (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#521-541) should be declared external
+Config.setAccountHandler (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#543-573) should be declared external
+Config.toggleAdminsControl (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#577-595) should be declared external
+Config.isAdminValid (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#595-619) should be declared external
+Config.getAllAdmins (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#621-629) should be declared external
+Account.init (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#943-967) should be declared external
+Account.getAllUsers (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#969-977) should be declared external
+Account.balanceFor (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#977-983) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_masterCopy' of MasterCopy.changeMasterCopy (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#437-439) is not in mixedCase
+Parameter '_weth9' of Config.setWETH9 (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#524-526) is not in mixedCase
+Parameter '_accountHandler' of Config.setAccountHandler (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#547-549) is not in mixedCase
+Parameter '_isAccountHandler' of Config.setAccountHandler (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#549-551) is not in mixedCase
+Parameter '_admin' of Config.isAdminValid (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#595) is not in mixedCase
+Parameter '_admin' of Config.addAdmin (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#631) is not in mixedCase
+Parameter '_admin' of Config.removeAdmin (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#658-667) is not in mixedCase
+Parameter '_hash' of ECRecovery.recover (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#733-735) is not in mixedCase
+Parameter '_sig' of ECRecovery.recover (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#736-737) is not in mixedCase
+Parameter '_hash' of ECRecovery.toEthSignedMessageHash (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#799-801) is not in mixedCase
+Function 'Utils2._recoverSigner' (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#809-819) is not in mixedCase
+Parameter '_hash' of Utils2._recoverSigner (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#811) is not in mixedCase
+Parameter '_signature' of Utils2._recoverSigner (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#811) is not in mixedCase
+Parameter '_user' of Account.init (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#943) is not in mixedCase
+Parameter '_config' of Account.init (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#943) is not in mixedCase
+Parameter '_token' of Account.balanceFor (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#977-981) is not in mixedCase
+Parameter '_token' of Account.transferBySystem (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#991) is not in mixedCase
+Parameter '_to' of Account.transferBySystem (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#991) is not in mixedCase
+Parameter '_value' of Account.transferBySystem (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#993) is not in mixedCase
+Parameter '_token' of Account.transferByUser (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#1019-1021) is not in mixedCase
+Parameter '_to' of Account.transferByUser (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#1021) is not in mixedCase
+Parameter '_value' of Account.transferByUser (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#1023) is not in mixedCase
+Parameter '_salt' of Account.transferByUser (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#1023-1025) is not in mixedCase
+Parameter '_signature' of Account.transferByUser (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#1025-1027) is not in mixedCase
+Parameter '_user' of Account.addUser (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#1129-1133) is not in mixedCase
+Parameter '_salt' of Account.addUser (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#1133) is not in mixedCase
+Parameter '_signature' of Account.addUser (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#1133) is not in mixedCase
+Parameter '_user' of Account.removeUser (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#1184-1185) is not in mixedCase
+Parameter '_salt' of Account.removeUser (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#1185-1186) is not in mixedCase
+Parameter '_signature' of Account.removeUser (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#1187-1189) is not in mixedCase
+Function 'Account._getTransferActionHash' (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#1313-1345) is not in mixedCase
+Parameter '_token' of Account._getTransferActionHash (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#1319-1320) is not in mixedCase
+Parameter '_to' of Account._getTransferActionHash (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#1321-1323) is not in mixedCase
+Parameter '_value' of Account._getTransferActionHash (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#1323-1325) is not in mixedCase
+Parameter '_salt' of Account._getTransferActionHash (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#1327) is not in mixedCase
+Function 'Account._getUserActionHash' (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#1345-1371) is not in mixedCase
+Parameter '_user' of Account._getUserActionHash (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#1347) is not in mixedCase
+Parameter '_action' of Account._getUserActionHash (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#1347) is not in mixedCase
+Parameter '_salt' of Account._getUserActionHash (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol#1349) is not in mixedCase
+Parameter '_to' of Account.changeImpl (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol) is not in mixedCase
+Parameter '_salt' of Account.changeImpl (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol) is not in mixedCase
+Parameter '_signature' of Account.changeImpl (/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x78b37409628e10df0b661c6b205b872a4df8dd6e.sol analyzed (14 contracts), 65 result(s) found

@@ -1,0 +1,111 @@
+INFO:Detectors:[91m
+PayeeShare.etherPayout (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol#425-459) sends eth to arbitrary user
+	Dangerous calls:
+	- _owner.transfer(address(this).balance) (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol#453)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[91m
+Reentrancy in PayeeShare.addPayee (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol#359-417):
+	External calls:
+	- tokenContract.balanceOf(address(this)).sub(lockedToken) > 1 (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol#385-389)
+	- tokenPayout() (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol#387)
+	External calls sending eth:
+	- etherPayout() (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol#383-385)
+	State variables written after the call(s):
+	- payees (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol#409-411)
+	- processingPayout (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol#387)
+Reentrancy in PayeeShare.payoutLockedToken (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol#507-521):
+	External calls:
+	- require(bool)(tokenContract.balanceOf(address(this)) >= lockedToken) (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol#517-521)
+	- tokenContract.balanceOf(address(this)).sub(lockedToken) > 1 (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol)
+	- tokenPayout() (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol)
+	External calls sending eth:
+	- etherPayout() (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol)
+	State variables written after the call(s):
+	- processingPayout (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol)
+	- processingPayout (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol)
+Reentrancy in PayeeShare.payoutLockedToken (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol#507-521):
+	External calls:
+	- require(bool)(tokenContract.balanceOf(address(this)) >= lockedToken) (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol#517-521)
+	- tokenContract.balanceOf(address(this)).sub(lockedToken) > 1 (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol)
+	- tokenPayout() (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol)
+	- tokenContract.transfer(_owner,tokenContract.balanceOf(address(this))) (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol)
+	External calls sending eth:
+	- etherPayout() (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol)
+	State variables written after the call(s):
+	- processingPayout (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities[0m
+INFO:Detectors:[93m
+Reentrancy in PayeeShare.payoutLockedToken (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol#507-521):
+	External calls:
+	- require(bool)(tokenContract.balanceOf(address(this)) >= lockedToken) (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol#517-521)
+	State variables written after the call(s):
+	- lockedToken (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol)
+Reentrancy in PayeeShare.tokenPayout (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol#459-505):
+	External calls:
+	- require(bool)(tokenContract.balanceOf(address(this)) >= lockedToken.add((minTokenTransfer.mul(10 ** tokenContract.decimals())))) (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol#461-463)
+	State variables written after the call(s):
+	- processingPayout (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol#463-465)
+Reentrancy in PayeeShare.tokenPayout (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol#459-505):
+	External calls:
+	- require(bool)(tokenContract.balanceOf(address(this)) >= lockedToken.add((minTokenTransfer.mul(10 ** tokenContract.decimals())))) (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol#461-463)
+	- receivedValue = tokenContract.balanceOf(address(this)).sub(lockedToken) (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol#467-469)
+	- tokenContract.balanceOf(address(this)).sub(lockedToken) > 0 (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol#487-501)
+	- tokenContract.transfer(_owner,tokenContract.balanceOf(address(this)).sub(lockedToken)) (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol#489-495)
+	- TokenPayout(_owner,tokenContract.balanceOf(address(this)).sub(lockedToken),Owner) (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol#497-501)
+	State variables written after the call(s):
+	- processingPayout (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol#503-505)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+PayeeShare.tokenPayout (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol#459-505) does not use the value returned by external calls:
+	-tokenContract.transfer(myPayee.payee,receivedValue.mul(myPayee.payeePercentage).div(100)) (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol#473-477)
+	-tokenContract.transfer(_owner,tokenContract.balanceOf(address(this)).sub(lockedToken)) (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol#489-495)
+PayeeShare.payoutLockedToken (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol#507-521) does not use the value returned by external calls:
+	-tokenContract.transfer(_owner,tokenContract.balanceOf(address(this))) (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+PayeeShare.etherPayout has external calls inside a loop:
+	- myPayee.payee.transfer((receivedValue.mul(myPayee.payeePercentage).div(100))) (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol#439-446)
+PayeeShare.tokenPayout has external calls inside a loop:
+	- tokenContract.transfer(myPayee.payee,receivedValue.mul(myPayee.payeePercentage).div(100)) (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol#473-477)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in PayeeShare.addPayee (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol#359-417):
+	External calls:
+	- tokenContract.balanceOf(address(this)).sub(lockedToken) > 1 (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol#385-389)
+	- tokenPayout() (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol#387)
+	External calls sending eth:
+	- etherPayout() (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol#383-385)
+	State variables written after the call(s):
+	- payeePartsLeft (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol#403-409)
+	- payeePartsToSell (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol#399-401)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+PayeeShare.minTokenTransfer should be constant (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol#317-321)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Ownable.owner (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol#75-82) should be declared external
+Ownable.renounceOwnership (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol#125-135) should be declared external
+Ownable.transferOwnership (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol#149-155) should be declared external
+PayeeShare.getPayeeLenght (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol#351-355) should be declared external
+PayeeShare.getLockedToken (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol#355-359) should be declared external
+PayeeShare.addPayee (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol#359-417) should be declared external
+PayeeShare.setPartsToSell (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol#417-425) should be declared external
+PayeeShare.payoutLockedToken (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol#507-521) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol:
+	- pragma solidity>0.4.99<0.6.0 (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol#9-13): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'Ownable._transferOwnership' (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol#161-183) is not in mixedCase
+Variable 'Ownable._owner' (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol#35-37) is not in mixedCase
+Parameter '_tokenContract' of PayeeShare. (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol#336-341) is not in mixedCase
+Parameter '_lockedToken' of PayeeShare. (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol#341) is not in mixedCase
+Parameter '_lockedTokenTime' of PayeeShare. (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol#341) is not in mixedCase
+Parameter '_address' of PayeeShare.addPayee (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol#363) is not in mixedCase
+Parameter '_payeePercentage' of PayeeShare.addPayee (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol#363) is not in mixedCase
+Parameter '_parts' of PayeeShare.setPartsToSell (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol#419) is not in mixedCase
+Parameter '_price' of PayeeShare.setPartsToSell (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol#419) is not in mixedCase
+Constant 'PayeeShare.createdBy' (/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol#295-301) is not in UPPER_CASE_WITH_UNDERSCORES
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xa706f6be7284aafb91fbc13a8330d9db02a72451.sol analyzed (4 contracts), 32 result(s) found

@@ -1,0 +1,54 @@
+INFO:Detectors:[93m
+Contract locking ether found in /sb/0xc25d715f3613760f2989fd4f44bd90811eca0abc.sol:
+	Contract DSProxy has payable functions:
+	 - fallback (/sb/0xc25d715f3613760f2989fd4f44bd90811eca0abc.sol#120-121)
+	 - execute (/sb/0xc25d715f3613760f2989fd4f44bd90811eca0abc.sol#123-139)
+	 - execute (/sb/0xc25d715f3613760f2989fd4f44bd90811eca0abc.sol#139-162)
+	But does not have a function to withdraw the ether
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#contracts-that-lock-ether[0m
+INFO:Detectors:[93m
+Reentrancy in ProxyRegistry.build (/sb/0xc25d715f3613760f2989fd4f44bd90811eca0abc.sol#243-246):
+	External calls:
+	- require(bool)(proxies[owner] == DSProxy(0) || proxies[owner].owner() != owner) (/sb/0xc25d715f3613760f2989fd4f44bd90811eca0abc.sol)
+	- proxy = factory.build(owner) (/sb/0xc25d715f3613760f2989fd4f44bd90811eca0abc.sol)
+	State variables written after the call(s):
+	- proxies (/sb/0xc25d715f3613760f2989fd4f44bd90811eca0abc.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+Reentrancy in DSProxyFactory.build (/sb/0xc25d715f3613760f2989fd4f44bd90811eca0abc.sol#187-195):
+	External calls:
+	- proxy.setOwner(owner) (/sb/0xc25d715f3613760f2989fd4f44bd90811eca0abc.sol#194)
+	State variables written after the call(s):
+	- isProxy (/sb/0xc25d715f3613760f2989fd4f44bd90811eca0abc.sol#195)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+DSProxy.execute uses assembly (/sb/0xc25d715f3613760f2989fd4f44bd90811eca0abc.sol#139-162)
+	- /sb/0xc25d715f3613760f2989fd4f44bd90811eca0abc.sol#146-162
+DSProxyCache.write uses assembly (/sb/0xc25d715f3613760f2989fd4f44bd90811eca0abc.sol#213-227)
+	- /sb/0xc25d715f3613760f2989fd4f44bd90811eca0abc.sol#215-225
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+DSAuthority.canCall (/sb/0xc25d715f3613760f2989fd4f44bd90811eca0abc.sol#27-31) should be declared external
+DSAuth.setOwner (/sb/0xc25d715f3613760f2989fd4f44bd90811eca0abc.sol#46-53) should be declared external
+DSAuth.setAuthority (/sb/0xc25d715f3613760f2989fd4f44bd90811eca0abc.sol#54-62) should be declared external
+DSProxy.fallback (/sb/0xc25d715f3613760f2989fd4f44bd90811eca0abc.sol#120-121) should be declared external
+DSProxy.execute (/sb/0xc25d715f3613760f2989fd4f44bd90811eca0abc.sol#123-139) should be declared external
+DSProxyFactory.build (/sb/0xc25d715f3613760f2989fd4f44bd90811eca0abc.sol#184-186) should be declared external
+DSProxyCache.read (/sb/0xc25d715f3613760f2989fd4f44bd90811eca0abc.sol#210-213) should be declared external
+DSProxyCache.write (/sb/0xc25d715f3613760f2989fd4f44bd90811eca0abc.sol#213-227) should be declared external
+ProxyRegistry.build (/sb/0xc25d715f3613760f2989fd4f44bd90811eca0abc.sol#242) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xc25d715f3613760f2989fd4f44bd90811eca0abc.sol:
+	- pragma solidity^0.4.23 (/sb/0xc25d715f3613760f2989fd4f44bd90811eca0abc.sol#23-25): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_cacheAddr' of DSProxy. (/sb/0xc25d715f3613760f2989fd4f44bd90811eca0abc.sol#117-119) is not in mixedCase
+Parameter '_code' of DSProxy.execute (/sb/0xc25d715f3613760f2989fd4f44bd90811eca0abc.sol#125) is not in mixedCase
+Parameter '_data' of DSProxy.execute (/sb/0xc25d715f3613760f2989fd4f44bd90811eca0abc.sol#125) is not in mixedCase
+Parameter '_target' of DSProxy.execute (/sb/0xc25d715f3613760f2989fd4f44bd90811eca0abc.sol#141) is not in mixedCase
+Parameter '_cacheAddr' of DSProxy.setCache (/sb/0xc25d715f3613760f2989fd4f44bd90811eca0abc.sol#162-163) is not in mixedCase
+Parameter '_code' of DSProxyCache.read (/sb/0xc25d715f3613760f2989fd4f44bd90811eca0abc.sol#210-211) is not in mixedCase
+Parameter '_code' of DSProxyCache.write (/sb/0xc25d715f3613760f2989fd4f44bd90811eca0abc.sol#214) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xc25d715f3613760f2989fd4f44bd90811eca0abc.sol analyzed (8 contracts), 22 result(s) found

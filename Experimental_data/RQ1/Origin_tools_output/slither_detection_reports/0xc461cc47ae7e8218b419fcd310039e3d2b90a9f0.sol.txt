@@ -1,0 +1,152 @@
+INFO:Detectors:[91m
+deracle.owner (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#166) shadows:
+	- Ownable.owner (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#93)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variable-shadowing[0m
+INFO:Detectors:[91m
+deracle.keeper (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#167) is never initialized. It is used in:
+	- depositTokens (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#431-459)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-state-variables[0m
+INFO:Detectors:[93m
+Reentrancy in deracle.CheckInvestmentExpiry (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#610-621):
+	External calls:
+	- PayoutMaintainer() (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#617)
+	- contractBalance = ERC20Interface.balanceOf(address(this)) (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#619-620)
+	State variables written after the call(s):
+	- PayoutAmount (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#620-621)
+Reentrancy in deracle.Invest (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#213-309):
+	External calls:
+	- require(bool)(depositTokens(uplineId)) (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#224-226)
+	State variables written after the call(s):
+	- ExpiryInvestmentTimestamp (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#303-306)
+	- nextPosition (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#250-251)
+	- nextPosition (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#263)
+	- userlistbyid (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#247)
+	- userlistbyid (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#263)
+	- userlistbyid (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#265-266)
+	- userlistbyid (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#272-274)
+	- userlistbyid (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#275-277)
+	- userlistbyid (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#297)
+Reentrancy in deracle.PayoutMaintainer (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#536-554):
+	External calls:
+	- ERC20Interface.transfer(maintainer,MainterPayoutAmount) (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#552)
+	State variables written after the call(s):
+	- MainterPayoutAmount (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#553)
+Reentrancy in deracle.RemainingInvestorPayout (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#621-651):
+	External calls:
+	- ERC20Interface.transfer(userlistbyid[uint32(nextUnpaidUser)].OwnerAddress,PayoutAmount) (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#639-643)
+	State variables written after the call(s):
+	- nextUnpaidUser (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#644-647)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+deracle.depositTokens (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#431-459) does not use the value returned by external calls:
+	-ERC20Interface.transferFrom(from_,address(this),investamt) (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#444-447)
+	-ERC20Interface.transfer(userlistbyid[uplineId].OwnerAddress,referralamt) (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#449-451)
+deracle.Payout (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#526-536) does not use the value returned by external calls:
+	-ERC20Interface.transfer(userlistbyid[UserId].OwnerAddress,investamt * 3) (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#534-535)
+deracle.PayoutMaintainer (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#536-554) does not use the value returned by external calls:
+	-ERC20Interface.transfer(maintainer,MainterPayoutAmount) (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#552)
+deracle.RemainingInvestorPayout (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#621-651) does not use the value returned by external calls:
+	-ERC20Interface.transfer(userlistbyid[uint32(nextUnpaidUser)].OwnerAddress,PayoutAmount) (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#639-643)
+deracle.sosPayout (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol) does not use the value returned by external calls:
+	-ERC20Interface.transfer(msg.sender,GetContractBalance()) (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol)
+	-ERC20Interface.transfer(msg.sender,GetMaintainerAmount()) (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+deracle.RemainingInvestorPayout has external calls inside a loop:
+	- ERC20Interface.transfer(userlistbyid[uint32(nextUnpaidUser)].OwnerAddress,PayoutAmount) (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#639-643)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in deracle.CheckInvestmentExpiry (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#610-621):
+	External calls:
+	- PayoutMaintainer() (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#617)
+	State variables written after the call(s):
+	- IsExpired (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#619)
+Reentrancy in deracle.Invest (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#213-309):
+	External calls:
+	- require(bool)(depositTokens(uplineId)) (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#224-226)
+	State variables written after the call(s):
+	- currentLevel (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#294-296)
+	- userCounter (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#252)
+	- userids (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#301-303)
+	- userlistbypos (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#248-250)
+	- userlistbypos (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#298-299)
+Reentrancy in deracle.Payout (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#526-536):
+	External calls:
+	- ERC20Interface.transfer(userlistbyid[UserId].OwnerAddress,investamt * 3) (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#534-535)
+	State variables written after the call(s):
+	- UnpaidUserCount (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#535-536)
+Reentrancy in deracle.RemainingInvestorPayout (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#621-651):
+	External calls:
+	- ERC20Interface.transfer(userlistbyid[uint32(nextUnpaidUser)].OwnerAddress,PayoutAmount) (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#639-643)
+	State variables written after the call(s):
+	- UnpaidUserCount (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#643)
+Reentrancy in deracle.depositTokens (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#431-459):
+	External calls:
+	- investamt > ERC20Interface.allowance(from_,address(this)) (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#438-442)
+	- ERC20Interface.transferFrom(from_,address(this),investamt) (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#444-447)
+	- ERC20Interface.transfer(userlistbyid[uplineId].OwnerAddress,referralamt) (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#449-451)
+	State variables written after the call(s):
+	- MainterPayoutAmount (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#455-457)
+	- UnpaidUserCount (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#457-458)
+Reentrancy in deracle.sosPayout (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol):
+	External calls:
+	- ERC20Interface.transfer(msg.sender,GetContractBalance()) (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol)
+	- ERC20Interface.transfer(msg.sender,GetMaintainerAmount()) (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol)
+	State variables written after the call(s):
+	- IsExpired (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+deracle.idcounter should be constant (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#163-164)
+deracle.investamt should be constant (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#210)
+deracle.keeper should be constant (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#167)
+deracle.maintaineramt should be constant (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#211)
+deracle.referralamt should be constant (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#210-211)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#121-128) should be declared external
+Ownable.renounceOwnership (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#134-140) should be declared external
+deracle.Invest (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#213-309) should be declared external
+deracle.Payout3XReward (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#459-469) should be declared external
+deracle.getUserByAddress (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#554-559) should be declared external
+deracle.getUserIds (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#559-563) should be declared external
+deracle.CheckInvestmentExpiry (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#610-621) should be declared external
+deracle.RemainingInvestorPayout (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#621-651) should be declared external
+deracle.GetExpiryInvestmentTimestamp (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#666-671) should be declared external
+deracle.GetIsExpired (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#672-675) should be declared external
+deracle.GetUnpaidUserCount (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#675-678) should be declared external
+deracle.setMaintainer (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#679-684) should be declared external
+deracle.setToken (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#684-687) should be declared external
+deracle.testSetExpiryTrue (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol) should be declared external
+deracle.testSetExpiryFalse (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol) should be declared external
+deracle.sosPayout (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol:
+	- pragma solidity^0.4.23 (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#5-7): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Contract 'deracle' (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#140-687) is not in CapWords
+Function 'deracle.Invest' (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#213-309) is not in mixedCase
+Function 'deracle.block_call' (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#332-335) is not in mixedCase
+Function 'deracle.time_call' (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#336-341) is not in mixedCase
+Function 'deracle.Payout3XReward' (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#459-469) is not in mixedCase
+Parameter 'UserId' of deracle.Payout3XReward (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#460-461) is not in mixedCase
+Parameter 'UserId' of deracle.checkPayoutTree (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#470) is not in mixedCase
+Function 'deracle.Payout' (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#526-536) is not in mixedCase
+Parameter 'UserId' of deracle.Payout (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#526) is not in mixedCase
+Function 'deracle.PayoutMaintainer' (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#536-554) is not in mixedCase
+Function 'deracle.CheckInvestmentExpiry' (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#610-621) is not in mixedCase
+Function 'deracle.RemainingInvestorPayout' (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#621-651) is not in mixedCase
+Function 'deracle.GetContractBalance' (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#652-658) is not in mixedCase
+Function 'deracle.GetMaintainerAmount' (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#661-665) is not in mixedCase
+Function 'deracle.GetExpiryInvestmentTimestamp' (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#666-671) is not in mixedCase
+Function 'deracle.GetIsExpired' (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#672-675) is not in mixedCase
+Function 'deracle.GetUnpaidUserCount' (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#675-678) is not in mixedCase
+Variable 'deracle.ExpiryInvestmentTimestamp' (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#168-170) is not in mixedCase
+Variable 'deracle.IsExpired' (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#171) is not in mixedCase
+Variable 'deracle.PayoutAmount' (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#171-173) is not in mixedCase
+Variable 'deracle.MainterPayoutAmount' (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#174-175) is not in mixedCase
+Variable 'deracle.UnpaidUserCount' (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#175-176) is not in mixedCase
+Variable 'deracle.ERC20Interface' (/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol#181) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xc461cc47ae7e8218b419fcd310039e3d2b90a9f0.sol analyzed (3 contracts), 59 result(s) found

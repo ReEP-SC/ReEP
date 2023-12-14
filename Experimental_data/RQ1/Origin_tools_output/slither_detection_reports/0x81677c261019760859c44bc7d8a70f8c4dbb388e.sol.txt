@@ -1,0 +1,133 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol:
+/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol:650:1: Warning: Experimental features are turned on. Do not use experimental features on live deployments.
+pragma experimental ABIEncoderV2;
+^-------------------------------^
+/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol:467:5: Warning: Functions in interfaces should be declared external.
+    function recordSmSlash(address wk) public;
+    ^----------------------------------------^
+/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol:1142:9: Warning: Return value of low-level calls not used.
+        tokenScAddr.call(bytes4(keccak256("transfer(address,uint256)")), to, value);
+        ^-------------------------------------------------------------------------^
+/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol:1155:9: Warning: Return value of low-level calls not used.
+        tokenScAddr.call(bytes4(keccak256("transferFrom(address,address,uint256)")), from, to, value);
+        ^-------------------------------------------------------------------------------------------^
+
+INFO:Detectors:[91m
+RapidityLib.userFastMint (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#1613-1645) sends eth to arbitrary user
+	Dangerous calls:
+	- ISmgFeeProxy(storageData.smgFeeProxy).smgTransfer.value(lockFee)(params.smgID) (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#1629-1632)
+RapidityLib.userFastBurn (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#1672-1709) sends eth to arbitrary user
+	Dangerous calls:
+	- ISmgFeeProxy(storageData.smgFeeProxy).smgTransfer.value(lockFee)(params.smgID) (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#1696)
+RapidityLib.smgFastBurn (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#1716-1752) sends eth to arbitrary user
+	Dangerous calls:
+	- (params.userOrigAccount).transfer(params.value) (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#1747)
+CrossDelegate.smgWithdrawFee (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#2412-2424) sends eth to arbitrary user
+	Dangerous calls:
+	- receiver.transfer(fee) (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#2421-2422)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[93m
+CrossTypes.bytesToAddress (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#1156-1165) is declared view but contains assembly code
+CrossDelegate.bytesToBytes32 (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+CrossTypes.transfer (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#1165-1176) uses a dangerous strict equality:
+	- afterBalance == beforeBalance.add(value)
+CrossTypes.transfer (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#1165-1176) uses a dangerous strict equality:
+	- afterBalance == beforeBalance.add(value)
+CrossTypes.transferFrom (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#1176-1199) uses a dangerous strict equality:
+	- afterBalance == beforeBalance.add(value)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Reentrancy in CrossDelegate.smgWithdrawFee (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#2412-2424):
+	External calls:
+	- (None,None,None,None,None,curveID,None,PK,None,None,None) = storageData.smgAdminProxy.getStoremanGroupConfig(smgID) (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#2415-2416)
+	- verifySignature(curveID,sha256()(abi.encode(timeStamp,receiver)),PK,r,s) (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#2416-2417)
+	State variables written after the call(s):
+	- storageData (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#2420)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+CrossTypes.bytesToAddress uses assembly (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#1156-1165)
+	- /sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#1161-1165
+CrossDelegate.bytesToBytes32 uses assembly (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol)
+	- /sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+Different versions of Solidity is used in /sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol:
+	- Version used: ['0.4.26', 'ABIEncoderV2', '^0.4.24', '^0.4.26']
+	- /sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#39 declares pragma solidity^0.4.24
+	- /sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#120-121 declares pragma solidity^0.4.24
+	- /sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#147 declares pragma solidity0.4.26
+	- /sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#206 declares pragma solidity^0.4.24
+	- /sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#306-307 declares pragma solidity^0.4.24
+	- /sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#361 declares pragma solidity^0.4.26
+	- /sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#390-391 declares pragma solidity0.4.26
+	- /sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#462 declares pragma solidity^0.4.24
+	- /sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#512 declares pragma solidity0.4.26
+	- /sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#566 declares pragma solidity0.4.26
+	- /sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#575 declares pragma solidity^0.4.24
+	- /sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#676 declares pragma solidity^0.4.26
+	- /sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#676-677 declares pragma experimentalABIEncoderV2
+	- /sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#1040-1041 declares pragma solidity^0.4.26
+	- /sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#1113-1115 declares pragma solidity^0.4.26
+	- /sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#1231 declares pragma solidity^0.4.26
+	- /sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#1284-1285 declares pragma solidity^0.4.26
+	- /sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#1495 declares pragma solidity0.4.26
+	- /sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#1514 declares pragma solidity^0.4.26
+	- /sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#1786 declares pragma solidity^0.4.26
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#different-pragma-directives-are-used[0m
+INFO:Detectors:[92m
+Owned.transferOwner (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#61-67) should be declared external
+Owned.changeOwner (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#71-75) should be declared external
+Owned.acceptOwnership (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#75-81) should be declared external
+Owned.renounceOwnership (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#82-89) should be declared external
+Halt.setHalt (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#140-145) should be declared external
+IStoremanGroup.recordSmSlash (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#483-484) should be declared external
+HTLCTxLib.addUserTx (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#748-769) should be declared external
+HTLCDebtLib.srcDebtLock (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#1350-1362) should be declared external
+HTLCDebtLib.destDebtLock (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#1367-1379) should be declared external
+RapidityLib.userFastMint (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#1613-1645) should be declared external
+RapidityLib.smgFastMint (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#1651-1663) should be declared external
+RapidityLib.userFastBurn (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#1672-1709) should be declared external
+RapidityLib.smgFastBurn (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#1716-1752) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol:
+	- pragma solidity0.4.26 (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#147): it allows old versions
+	- pragma solidity^0.4.26 (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#361): it allows old versions
+	- pragma solidity0.4.26 (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#390-391): it allows old versions
+	- pragma solidity0.4.26 (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#512): it allows old versions
+	- pragma solidity0.4.26 (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#566): it allows old versions
+	- pragma solidity^0.4.26 (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#676): it allows old versions
+	- pragma solidity^0.4.26 (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#1040-1041): it allows old versions
+	- pragma solidity^0.4.26 (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#1113-1115): it allows old versions
+	- pragma solidity^0.4.26 (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#1231): it allows old versions
+	- pragma solidity^0.4.26 (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#1284-1285): it allows old versions
+	- pragma solidity0.4.26 (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#1495): it allows old versions
+	- pragma solidity^0.4.26 (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#1514): it allows old versions
+	- pragma solidity^0.4.26 (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#1786): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Low level call in CrossTypes.transfer (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#1165-1176):
+	-tokenScAddr.call(bytes4(keccak256()(transfer(address,uint256))),to,value) /sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#1173-1175
+Low level call in CrossTypes.transferFrom (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#1176-1199):
+	-tokenScAddr.call(bytes4(keccak256()(transferFrom(address,address,uint256))),from,to,value) /sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#1185-1195
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Parameter '_newOwner' of Owned.transferOwner (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#62) is not in mixedCase
+Parameter '_newOwner' of Owned.changeOwner (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#72-74) is not in mixedCase
+Parameter '' of IRC20Protocol.transfer (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#362) is not in mixedCase
+Parameter '_scope_0' of IRC20Protocol.transfer (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#362) is not in mixedCase
+Parameter '' of IRC20Protocol.transferFrom (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#363) is not in mixedCase
+Parameter '_scope_0' of IRC20Protocol.transferFrom (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#363) is not in mixedCase
+Parameter '_scope_1' of IRC20Protocol.transferFrom (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#363) is not in mixedCase
+Parameter 'PK' of CrossDelegate.verifySignature (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+BasicStorage.uintData (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#321-325) is never used in CrossDelegate
+BasicStorage.boolData (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#325) is never used in CrossDelegate
+BasicStorage.addressData (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#325-326) is never used in CrossDelegate
+BasicStorage.bytesData (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#326-327) is never used in CrossDelegate
+BasicStorage.stringData (/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol#327-329) is never used in CrossDelegate
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0x81677c261019760859c44bc7d8a70f8c4dbb388e.sol analyzed (19 contracts), 37 result(s) found

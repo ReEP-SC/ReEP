@@ -1,0 +1,88 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x8ba42c46aa1004a81ba9b99129a86d3ecb8968e5.sol:
+/sb/0x8ba42c46aa1004a81ba9b99129a86d3ecb8968e5.sol:154:5: Warning: Functions in interfaces should be declared external.
+    function addVersion(string _contractName, string version, address implementation) public;
+    ^---------------------------------------------------------------------------------------^
+/sb/0x8ba42c46aa1004a81ba9b99129a86d3ecb8968e5.sol:162:5: Warning: Functions in interfaces should be declared external.
+    function getVersion(string _contractName, string version) public view returns (address);
+    ^--------------------------------------------------------------------------------------^
+/sb/0x8ba42c46aa1004a81ba9b99129a86d3ecb8968e5.sol:290:40: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+        PROXY_STORAGE_CONTRACT.setUint(keccak256(_tokensReleaseDate), block.timestamp + (2 years));
+                                       ^---------------------------^
+/sb/0x8ba42c46aa1004a81ba9b99129a86d3ecb8968e5.sol:290:40: Warning: The provided argument of type string memory is not implicitly convertible to expected type bytes memory.
+        PROXY_STORAGE_CONTRACT.setUint(keccak256(_tokensReleaseDate), block.timestamp + (2 years));
+                                       ^---------------------------^
+/sb/0x8ba42c46aa1004a81ba9b99129a86d3ecb8968e5.sol:290:90: Warning: Using "years" as a unit denomination is deprecated.
+        PROXY_STORAGE_CONTRACT.setUint(keccak256(_tokensReleaseDate), block.timestamp + (2 years));
+                                                                                         ^-----^
+/sb/0x8ba42c46aa1004a81ba9b99129a86d3ecb8968e5.sol:312:47: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+        return PROXY_STORAGE_CONTRACT.getUint(keccak256(_tokensReleaseDate));
+                                              ^---------------------------^
+/sb/0x8ba42c46aa1004a81ba9b99129a86d3ecb8968e5.sol:312:47: Warning: The provided argument of type string memory is not implicitly convertible to expected type bytes memory.
+        return PROXY_STORAGE_CONTRACT.getUint(keccak256(_tokensReleaseDate));
+                                              ^---------------------------^
+/sb/0x8ba42c46aa1004a81ba9b99129a86d3ecb8968e5.sol:228:25: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function initialize(address sender) public payable {
+                        ^------------^
+
+INFO:Detectors:[91m
+UpgradeabilityStorage.registry (/sb/0x8ba42c46aa1004a81ba9b99129a86d3ecb8968e5.sol#209-211) is never initialized. It is used in:
+	- initialize (/sb/0x8ba42c46aa1004a81ba9b99129a86d3ecb8968e5.sol#228-233)
+UpgradeabilityStorage._implementation (/sb/0x8ba42c46aa1004a81ba9b99129a86d3ecb8968e5.sol#212-214) is never initialized. It is used in:
+	- implementation (/sb/0x8ba42c46aa1004a81ba9b99129a86d3ecb8968e5.sol#218-223)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-state-variables[0m
+INFO:Detectors:[93m
+Contract locking ether found in /sb/0x8ba42c46aa1004a81ba9b99129a86d3ecb8968e5.sol:
+	Contract TwoKeyTeamGrowthFund has payable functions:
+	 - initialize (/sb/0x8ba42c46aa1004a81ba9b99129a86d3ecb8968e5.sol#228-233)
+	But does not have a function to withdraw the ether
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#contracts-that-lock-ether[0m
+INFO:Detectors:[93m
+Reentrancy in TwoKeyTeamGrowthFund.setInitialParams (/sb/0x8ba42c46aa1004a81ba9b99129a86d3ecb8968e5.sol#279-294):
+	External calls:
+	- PROXY_STORAGE_CONTRACT.setUint(keccak256()(_tokensReleaseDate),block.timestamp + (441504000)) (/sb/0x8ba42c46aa1004a81ba9b99129a86d3ecb8968e5.sol#290-291)
+	State variables written after the call(s):
+	- initialized (/sb/0x8ba42c46aa1004a81ba9b99129a86d3ecb8968e5.sol#291-292)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+TokenPool.transferTokens (/sb/0x8ba42c46aa1004a81ba9b99129a86d3ecb8968e5.sol#261-272) does not use the value returned by external calls:
+	-IERC20(twoKeyEconomy).transfer(receiver,amount) (/sb/0x8ba42c46aa1004a81ba9b99129a86d3ecb8968e5.sol#268-269)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+UpgradeabilityStorage._implementation should be constant (/sb/0x8ba42c46aa1004a81ba9b99129a86d3ecb8968e5.sol#212-214)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+IERC20.approve (/sb/0x8ba42c46aa1004a81ba9b99129a86d3ecb8968e5.sol#34-43) should be declared external
+ITwoKeyMaintainersRegistry.checkIsAddressMaintainer (/sb/0x8ba42c46aa1004a81ba9b99129a86d3ecb8968e5.sol#117-118) should be declared external
+ITwoKeyMaintainersRegistry.checkIsAddressCoreDev (/sb/0x8ba42c46aa1004a81ba9b99129a86d3ecb8968e5.sol#118-120) should be declared external
+ITwoKeyMaintainersRegistry.addMaintainers (/sb/0x8ba42c46aa1004a81ba9b99129a86d3ecb8968e5.sol#120-121) should be declared external
+ITwoKeyMaintainersRegistry.addCoreDevs (/sb/0x8ba42c46aa1004a81ba9b99129a86d3ecb8968e5.sol#121-122) should be declared external
+ITwoKeyMaintainersRegistry.removeMaintainers (/sb/0x8ba42c46aa1004a81ba9b99129a86d3ecb8968e5.sol#122-123) should be declared external
+ITwoKeyMaintainersRegistry.removeCoreDevs (/sb/0x8ba42c46aa1004a81ba9b99129a86d3ecb8968e5.sol#123-126) should be declared external
+ITwoKeySingletoneRegistryFetchAddress.getContractProxyAddress (/sb/0x8ba42c46aa1004a81ba9b99129a86d3ecb8968e5.sol#127-128) should be declared external
+ITwoKeySingletoneRegistryFetchAddress.getNonUpgradableContractAddress (/sb/0x8ba42c46aa1004a81ba9b99129a86d3ecb8968e5.sol#128-129) should be declared external
+ITwoKeySingletoneRegistryFetchAddress.getLatestCampaignApprovedVersion (/sb/0x8ba42c46aa1004a81ba9b99129a86d3ecb8968e5.sol#129-132) should be declared external
+ITwoKeySingletonesRegistry.addVersion (/sb/0x8ba42c46aa1004a81ba9b99129a86d3ecb8968e5.sol#154-156) should be declared external
+ITwoKeySingletonesRegistry.getVersion (/sb/0x8ba42c46aa1004a81ba9b99129a86d3ecb8968e5.sol#162-165) should be declared external
+UpgradeabilityStorage.implementation (/sb/0x8ba42c46aa1004a81ba9b99129a86d3ecb8968e5.sol#218-223) should be declared external
+Upgradeable.initialize (/sb/0x8ba42c46aa1004a81ba9b99129a86d3ecb8968e5.sol#228-233) should be declared external
+TokenPool.getContractBalance (/sb/0x8ba42c46aa1004a81ba9b99129a86d3ecb8968e5.sol#249-258) should be declared external
+TwoKeyTeamGrowthFund.setInitialParams (/sb/0x8ba42c46aa1004a81ba9b99129a86d3ecb8968e5.sol#279-294) should be declared external
+TwoKeyTeamGrowthFund.transferTokensFromContract (/sb/0x8ba42c46aa1004a81ba9b99129a86d3ecb8968e5.sol#320-333) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x8ba42c46aa1004a81ba9b99129a86d3ecb8968e5.sol:
+	- pragma solidity^0.4.13 (/sb/0x8ba42c46aa1004a81ba9b99129a86d3ecb8968e5.sol#5-7): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Variable 'ITwoKeySingletonUtils.TWO_KEY_SINGLETON_REGISTRY' (/sb/0x8ba42c46aa1004a81ba9b99129a86d3ecb8968e5.sol#171-173) is not in mixedCase
+Variable 'UpgradeabilityStorage._implementation' (/sb/0x8ba42c46aa1004a81ba9b99129a86d3ecb8968e5.sol#212-214) is not in mixedCase
+Constant 'TokenPool._twoKeyAdmin' (/sb/0x8ba42c46aa1004a81ba9b99129a86d3ecb8968e5.sol#237-238) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'TokenPool._twoKeyEconomy' (/sb/0x8ba42c46aa1004a81ba9b99129a86d3ecb8968e5.sol#238-240) is not in UPPER_CASE_WITH_UNDERSCORES
+Parameter '_twoKeySingletonRegistry' of TwoKeyTeamGrowthFund.setInitialParams (/sb/0x8ba42c46aa1004a81ba9b99129a86d3ecb8968e5.sol#280-281) is not in mixedCase
+Parameter '_proxyStorageContract' of TwoKeyTeamGrowthFund.setInitialParams (/sb/0x8ba42c46aa1004a81ba9b99129a86d3ecb8968e5.sol#281-282) is not in mixedCase
+Parameter '_beneficiary' of TwoKeyTeamGrowthFund.transferTokensFromContract (/sb/0x8ba42c46aa1004a81ba9b99129a86d3ecb8968e5.sol#321-322) is not in mixedCase
+Parameter '_amount' of TwoKeyTeamGrowthFund.transferTokensFromContract (/sb/0x8ba42c46aa1004a81ba9b99129a86d3ecb8968e5.sol#322-323) is not in mixedCase
+Constant 'TwoKeyTeamGrowthFund._tokensReleaseDate' (/sb/0x8ba42c46aa1004a81ba9b99129a86d3ecb8968e5.sol#275-277) is not in UPPER_CASE_WITH_UNDERSCORES
+Variable 'TwoKeyTeamGrowthFund.PROXY_STORAGE_CONTRACT' (/sb/0x8ba42c46aa1004a81ba9b99129a86d3ecb8968e5.sol#277-279) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x8ba42c46aa1004a81ba9b99129a86d3ecb8968e5.sol analyzed (11 contracts), 34 result(s) found

@@ -1,0 +1,53 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x51105d34c48d53a7b2e848b85333d07a6a5c3035.sol:
+/sb/0x51105d34c48d53a7b2e848b85333d07a6a5c3035.sol:19:5: Warning: Functions in interfaces should be declared external.
+    function transfer(address _to, uint256 _value, bytes _data) public returns (bool ok);
+
+    ^-----------------------------------------------------------------------------------^
+/sb/0x51105d34c48d53a7b2e848b85333d07a6a5c3035.sol:226:3: Warning: Function state mutability can be restricted to view
+  function isContract(address _addr) private returns (bool is_contract) {
+
+  ^ (Relevant source part starts here and spans across multiple lines).
+
+INFO:Detectors:[93m
+Contract locking ether found in /sb/0x51105d34c48d53a7b2e848b85333d07a6a5c3035.sol:
+	Contract C3Coin has payable functions:
+	 - fallback (/sb/0x51105d34c48d53a7b2e848b85333d07a6a5c3035.sol)
+	But does not have a function to withdraw the ether
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#contracts-that-lock-ether[0m
+INFO:Detectors:[93m
+Reentrancy in C3Coin.transfer (/sb/0x51105d34c48d53a7b2e848b85333d07a6a5c3035.sol#421-455):
+	External calls:
+	- receiver.tokenFallback(msg.sender,_value,_data) (/sb/0x51105d34c48d53a7b2e848b85333d07a6a5c3035.sol#435-440)
+	State variables written after the call(s):
+	- balances (/sb/0x51105d34c48d53a7b2e848b85333d07a6a5c3035.sol#445-447)
+	- balances (/sb/0x51105d34c48d53a7b2e848b85333d07a6a5c3035.sol#447-451)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+C3Coin.isContract uses assembly (/sb/0x51105d34c48d53a7b2e848b85333d07a6a5c3035.sol#459-481)
+	- /sb/0x51105d34c48d53a7b2e848b85333d07a6a5c3035.sol#473-481
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+ERC223.transfer (/sb/0x51105d34c48d53a7b2e848b85333d07a6a5c3035.sol#37-39) should be declared external
+C3Coin.transfer (/sb/0x51105d34c48d53a7b2e848b85333d07a6a5c3035.sol#421-455) should be declared external
+ERC223ReceivingContract.tokenFallback (/sb/0x51105d34c48d53a7b2e848b85333d07a6a5c3035.sol#63-73) should be declared external
+Ownable.renounceOwnership (/sb/0x51105d34c48d53a7b2e848b85333d07a6a5c3035.sol#219-229) should be declared external
+Ownable.transferOwnership (/sb/0x51105d34c48d53a7b2e848b85333d07a6a5c3035.sol#243-245) should be declared external
+C3Coin.sell (/sb/0x51105d34c48d53a7b2e848b85333d07a6a5c3035.sol#505-531) should be declared external
+ERC223.sell (/sb/0x51105d34c48d53a7b2e848b85333d07a6a5c3035.sol#39-41) should be declared external
+C3Coin.setIcoContract (/sb/0x51105d34c48d53a7b2e848b85333d07a6a5c3035.sol#495-503) should be declared external
+C3Coin.fallback (/sb/0x51105d34c48d53a7b2e848b85333d07a6a5c3035.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_newOwner' of Ownable.transferOwnership (/sb/0x51105d34c48d53a7b2e848b85333d07a6a5c3035.sol#243) is not in mixedCase
+Function 'Ownable._transferOwnership' (/sb/0x51105d34c48d53a7b2e848b85333d07a6a5c3035.sol#253-272) is not in mixedCase
+Parameter '_newOwner' of Ownable._transferOwnership (/sb/0x51105d34c48d53a7b2e848b85333d07a6a5c3035.sol#255) is not in mixedCase
+Parameter '_owner' of C3Coin.balanceOf (/sb/0x51105d34c48d53a7b2e848b85333d07a6a5c3035.sol#403) is not in mixedCase
+Parameter '_to' of C3Coin.transfer (/sb/0x51105d34c48d53a7b2e848b85333d07a6a5c3035.sol#369) is not in mixedCase
+Parameter '_value' of C3Coin.transfer (/sb/0x51105d34c48d53a7b2e848b85333d07a6a5c3035.sol#369) is not in mixedCase
+Parameter '_to' of C3Coin.transfer (/sb/0x51105d34c48d53a7b2e848b85333d07a6a5c3035.sol#421-423) is not in mixedCase
+Parameter '_value' of C3Coin.transfer (/sb/0x51105d34c48d53a7b2e848b85333d07a6a5c3035.sol#423) is not in mixedCase
+Parameter '_data' of C3Coin.transfer (/sb/0x51105d34c48d53a7b2e848b85333d07a6a5c3035.sol#423) is not in mixedCase
+Parameter '_value' of C3Coin.sell (/sb/0x51105d34c48d53a7b2e848b85333d07a6a5c3035.sol#505-507) is not in mixedCase
+Parameter '_icoContract' of C3Coin.setIcoContract (/sb/0x51105d34c48d53a7b2e848b85333d07a6a5c3035.sol#498-499) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x51105d34c48d53a7b2e848b85333d07a6a5c3035.sol analyzed (5 contracts), 23 result(s) found

@@ -1,0 +1,79 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x70d91bafc49de2b132aae5766a5d13656f9efbbd.sol:
+/sb/0x70d91bafc49de2b132aae5766a5d13656f9efbbd.sol:18:3: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+  function Ownable() public {
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x70d91bafc49de2b132aae5766a5d13656f9efbbd.sol:108:3: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+  function QWoodDAO(Token sharesAddress, uint minimumSharesToPassAVote, uint minutesForDebate, uint256 minimumShare) payable public {
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x70d91bafc49de2b132aae5766a5d13656f9efbbd.sol:36:5: Warning: Invoking events without "emit" prefix is deprecated.
+    OwnershipTransferred(owner, newOwner);
+    ^-----------------------------------^
+/sb/0x70d91bafc49de2b132aae5766a5d13656f9efbbd.sol:49:5: Warning: Invoking events without "emit" prefix is deprecated.
+    receivedTokens(_from, _value, _token, _extraData);
+    ^-----------------------------------------------^
+/sb/0x70d91bafc49de2b132aae5766a5d13656f9efbbd.sol:53:5: Warning: Invoking events without "emit" prefix is deprecated.
+    receivedEther(msg.sender, msg.value);
+    ^----------------------------------^
+/sb/0x70d91bafc49de2b132aae5766a5d13656f9efbbd.sol:129:5: Warning: Invoking events without "emit" prefix is deprecated.
+    ChangeOfRules(minimumQuorum, debatingPeriodInMinutes, sharesTokenAddress, minShare);
+    ^---------------------------------------------------------------------------------^
+/sb/0x70d91bafc49de2b132aae5766a5d13656f9efbbd.sol:156:22: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+    p.proposalHash = keccak256(beneficiary, weiAmount, transactionBytecode);
+                     ^----------------------------------------------------^
+/sb/0x70d91bafc49de2b132aae5766a5d13656f9efbbd.sol:161:5: Warning: Invoking events without "emit" prefix is deprecated.
+    ProposalAdded(proposalID, beneficiary, weiAmount, jobDescription);
+    ^---------------------------------------------------------------^
+/sb/0x70d91bafc49de2b132aae5766a5d13656f9efbbd.sol:208:30: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+    return p.proposalHash == keccak256(beneficiary, weiAmount, transactionBytecode);
+                             ^----------------------------------------------------^
+/sb/0x70d91bafc49de2b132aae5766a5d13656f9efbbd.sol:233:5: Warning: Invoking events without "emit" prefix is deprecated.
+    Voted(proposalNumber,  supportsProposal, msg.sender);
+    ^--------------------------------------------------^
+/sb/0x70d91bafc49de2b132aae5766a5d13656f9efbbd.sol:250:26: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+    && p.proposalHash == keccak256(p.recipient, p.amount, transactionBytecode)); // and the supplied code matches the proposal...
+                         ^---------------------------------------------------^
+/sb/0x70d91bafc49de2b132aae5766a5d13656f9efbbd.sol:284:5: Warning: Invoking events without "emit" prefix is deprecated.
+    ProposalTallied(proposalNumber, yea - nay, quorum, p.proposalPassed);
+    ^------------------------------------------------------------------^
+
+INFO:Detectors:[91m
+Reentrancy in QWoodDAO.executeProposal (/sb/0x70d91bafc49de2b132aae5766a5d13656f9efbbd.sol#248-286):
+	External calls:
+	- require(bool)(p.recipient.call.value(p.amount)(transactionBytecode)) (/sb/0x70d91bafc49de2b132aae5766a5d13656f9efbbd.sol)
+	State variables written after the call(s):
+	- proposals (/sb/0x70d91bafc49de2b132aae5766a5d13656f9efbbd.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities[0m
+INFO:Detectors:[92m
+QWoodDAO.executeProposal has external calls inside a loop:
+	- voteWeight = sharesTokenAddress.balanceOf(v.voter) (/sb/0x70d91bafc49de2b132aae5766a5d13656f9efbbd.sol#269-272)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0x70d91bafc49de2b132aae5766a5d13656f9efbbd.sol#34-43) should be declared external
+tokenRecipient.receiveApproval (/sb/0x70d91bafc49de2b132aae5766a5d13656f9efbbd.sol#46-53) should be declared external
+tokenRecipient.fallback (/sb/0x70d91bafc49de2b132aae5766a5d13656f9efbbd.sol#53-58) should be declared external
+Token.transferFrom (/sb/0x70d91bafc49de2b132aae5766a5d13656f9efbbd.sol#59-65) should be declared external
+QWoodDAO.newProposalInEther (/sb/0x70d91bafc49de2b132aae5766a5d13656f9efbbd.sol#185-195) should be declared external
+QWoodDAO.checkProposalCode (/sb/0x70d91bafc49de2b132aae5766a5d13656f9efbbd.sol#207-217) should be declared external
+QWoodDAO.vote (/sb/0x70d91bafc49de2b132aae5766a5d13656f9efbbd.sol#228-243) should be declared external
+QWoodDAO.executeProposal (/sb/0x70d91bafc49de2b132aae5766a5d13656f9efbbd.sol#248-286) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x70d91bafc49de2b132aae5766a5d13656f9efbbd.sol:
+	- pragma solidity^0.4.16 (/sb/0x70d91bafc49de2b132aae5766a5d13656f9efbbd.sol#1): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Low level call in QWoodDAO.executeProposal (/sb/0x70d91bafc49de2b132aae5766a5d13656f9efbbd.sol#248-286):
+	-require(bool)(p.recipient.call.value(p.amount)(transactionBytecode)) /sb/0x70d91bafc49de2b132aae5766a5d13656f9efbbd.sol
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Function 'Ownable.Ownable' (/sb/0x70d91bafc49de2b132aae5766a5d13656f9efbbd.sol#18-23) is not in mixedCase
+Contract 'tokenRecipient' (/sb/0x70d91bafc49de2b132aae5766a5d13656f9efbbd.sol#43-58) is not in CapWords
+Event 'tokenRecipient.receivedEther' (/sb/0x70d91bafc49de2b132aae5766a5d13656f9efbbd.sol#43-44) is not in CapWords
+Event 'tokenRecipient.receivedTokens' (/sb/0x70d91bafc49de2b132aae5766a5d13656f9efbbd.sol#44-46) is not in CapWords
+Parameter '_from' of tokenRecipient.receiveApproval (/sb/0x70d91bafc49de2b132aae5766a5d13656f9efbbd.sol#46) is not in mixedCase
+Parameter '_value' of tokenRecipient.receiveApproval (/sb/0x70d91bafc49de2b132aae5766a5d13656f9efbbd.sol#46-47) is not in mixedCase
+Parameter '_token' of tokenRecipient.receiveApproval (/sb/0x70d91bafc49de2b132aae5766a5d13656f9efbbd.sol#47) is not in mixedCase
+Parameter '_extraData' of tokenRecipient.receiveApproval (/sb/0x70d91bafc49de2b132aae5766a5d13656f9efbbd.sol#47-48) is not in mixedCase
+Function 'QWoodDAO.QWoodDAO' (/sb/0x70d91bafc49de2b132aae5766a5d13656f9efbbd.sol#108-115) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x70d91bafc49de2b132aae5766a5d13656f9efbbd.sol analyzed (4 contracts), 21 result(s) found

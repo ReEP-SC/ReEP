@@ -1,0 +1,150 @@
+INFO:Detectors:[93m
+CutieCoreInterface (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#15-225) has incorrect ERC20 function interface(s):
+	-transferFrom (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#23-25)
+	-transfer (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#25-29)
+ERC20 (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#485-559) has incorrect ERC20 function interface(s):
+	-transfer (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#549)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[93m
+Reentrancy in Market.receiveApproval (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1243-1345):
+	External calls:
+	- priceInTokens = getPriceInToken(tokenContract,priceWei) (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1291-1293)
+	State variables written after the call(s):
+	- cutieIdToAuction (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1309)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+Reentrancy in Market.createAuction (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1081-1125):
+	External calls:
+	- require(bool)(_isOwner(msg.sender,_cutieId)) (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1085-1091)
+	- _escrow(msg.sender,_cutieId) (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1093)
+	State variables written after the call(s):
+	- cutieIdToAuction (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1119-1125)
+Reentrancy in SaleMarket.createAuction (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol):
+	External calls:
+	- _escrow(_seller,_cutieId) (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol)
+	State variables written after the call(s):
+	- cutieIdToAuction (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol)
+Reentrancy in Market.setup (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1135-1153):
+	External calls:
+	- require(bool)(candidateContract.isCutieCore()) (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1147)
+	State variables written after the call(s):
+	- coreContract (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1150-1153)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+ERC20.decimals should be constant (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#489)
+ERC20.name should be constant (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#489)
+ERC20.symbol should be constant (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#489)
+PriceOracleInterface.ETHPrice should be constant (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#571-573)
+SaleMarket.isSaleMarket should be constant (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+CutieCoreInterface.isCutieCore (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#19-23) should be declared external
+CutieCoreInterface.getGenes (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#71-85) should be declared external
+CutieCoreInterface.getCooldownEndTime (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#87-101) should be declared external
+CutieCoreInterface.getCooldownIndex (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#103-119) should be declared external
+CutieCoreInterface.getGeneration (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#119-135) should be declared external
+CutieCoreInterface.getOptional (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#141-151) should be declared external
+CutieCoreInterface.changeGenes (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#153-161) should be declared external
+CutieCoreInterface.changeCooldownEndTime (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#163-173) should be declared external
+CutieCoreInterface.changeCooldownIndex (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#173-185) should be declared external
+CutieCoreInterface.changeOptional (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#185-195) should be declared external
+CutieCoreInterface.changeGeneration (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#195-207) should be declared external
+CutieCoreInterface.createSaleAuction (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#207-221) should be declared external
+Ownable.transferOwnership (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#303-323) should be declared external
+Pausable.pause (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#391-399) should be declared external
+Pausable.unpause (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#403-407) should be declared external
+MarketInterface.createAuction (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#427-437) should be declared external
+Market.createAuction (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1081-1125) should be declared external
+SaleMarket.createAuction (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol) should be declared external
+MarketInterface.bid (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#437-449) should be declared external
+Market.bid (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1173-1177) should be declared external
+SaleMarket.bid (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol) should be declared external
+Market.cancelActiveAuctionWhenPaused (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1525-1543) should be declared external
+MarketInterface.cancelActiveAuctionWhenPaused (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#449) should be declared external
+MarketInterface.getAuctionInfo (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#451-481) should be declared external
+Market.getAuctionInfo (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1351-1387) should be declared external
+Market.setOperator (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#691-697) should be declared external
+Market.setup (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1135-1153) should be declared external
+Market.setFee (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1161-1165) should be declared external
+Market.isOnAuction (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1393-1407) should be declared external
+Market.getCurrentPrice (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1477-1491) should be declared external
+Market.cancelActiveAuction (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1497-1513) should be declared external
+Market.cancelCreatorAuction (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1559-1601) should be declared external
+Market.isPluginInterface (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1665-1677) should be declared external
+Market.onRemove (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1679) should be declared external
+Market.run (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1679-1687) should be declared external
+Market.withdraw (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1703-1725) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Variable 'PriceOracleInterface.ETHPrice' (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#571-573) is not in mixedCase
+Parameter '_cutieId' of Market.createAuction (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1081) is not in mixedCase
+Parameter '_startPrice' of Market.createAuction (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1081) is not in mixedCase
+Parameter '_endPrice' of Market.createAuction (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1081) is not in mixedCase
+Parameter '_duration' of Market.createAuction (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1081-1083) is not in mixedCase
+Parameter '_seller' of Market.createAuction (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1083) is not in mixedCase
+Parameter '_cutieId' of Market.bid (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1173) is not in mixedCase
+Parameter '_cutieId' of Market.cancelActiveAuctionWhenPaused (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1529-1531) is not in mixedCase
+Parameter '_cutieId' of Market.getAuctionInfo (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1351) is not in mixedCase
+Parameter '_sender' of Market.receiveApproval (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1243-1247) is not in mixedCase
+Parameter '_tokenContract' of Market.receiveApproval (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1247) is not in mixedCase
+Parameter '_extraData' of Market.receiveApproval (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1247-1249) is not in mixedCase
+Parameter '_newOperator' of Market.setOperator (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#691) is not in mixedCase
+Function 'Market._addAuction' (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#731-761) is not in mixedCase
+Parameter '_cutieId' of Market._addAuction (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#731) is not in mixedCase
+Parameter '_auction' of Market._addAuction (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#731) is not in mixedCase
+Function 'Market._isOwner' (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#765-773) is not in mixedCase
+Parameter '_claimant' of Market._isOwner (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#766-767) is not in mixedCase
+Parameter '_cutieId' of Market._isOwner (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#767) is not in mixedCase
+Function 'Market._transfer' (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#787-799) is not in mixedCase
+Parameter '_receiver' of Market._transfer (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#789) is not in mixedCase
+Parameter '_cutieId' of Market._transfer (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#789) is not in mixedCase
+Function 'Market._escrow' (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#815-827) is not in mixedCase
+Parameter '_owner' of Market._escrow (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#815-819) is not in mixedCase
+Parameter '_cutieId' of Market._escrow (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#819) is not in mixedCase
+Function 'Market._cancelActiveAuction' (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#827-841) is not in mixedCase
+Parameter '_cutieId' of Market._cancelActiveAuction (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#829) is not in mixedCase
+Parameter '_seller' of Market._cancelActiveAuction (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#829-833) is not in mixedCase
+Function 'Market._bid' (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#847-917) is not in mixedCase
+Parameter '_cutieId' of Market._bid (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#847-849) is not in mixedCase
+Parameter '_bidAmount' of Market._bid (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#850-853) is not in mixedCase
+Function 'Market._removeAuction' (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#923-925) is not in mixedCase
+Parameter '_cutieId' of Market._removeAuction (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#923) is not in mixedCase
+Function 'Market._isOnAuction' (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#929-939) is not in mixedCase
+Parameter '_auction' of Market._isOnAuction (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#931-933) is not in mixedCase
+Function 'Market._computeCurrentPrice' (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#955-995) is not in mixedCase
+Parameter '_startPrice' of Market._computeCurrentPrice (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#957) is not in mixedCase
+Parameter '_endPrice' of Market._computeCurrentPrice (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#957-959) is not in mixedCase
+Parameter '_duration' of Market._computeCurrentPrice (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#963) is not in mixedCase
+Parameter '_secondsPassed' of Market._computeCurrentPrice (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#963-965) is not in mixedCase
+Function 'Market._currentPrice' (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#997-1029) is not in mixedCase
+Parameter '_auction' of Market._currentPrice (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#999) is not in mixedCase
+Function 'Market._computeFee' (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1035-1037) is not in mixedCase
+Parameter '_price' of Market._computeFee (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1035) is not in mixedCase
+Parameter '_coreContractAddress' of Market.setup (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1135-1136) is not in mixedCase
+Parameter '_fee' of Market.setup (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1137) is not in mixedCase
+Parameter '_fee' of Market.setFee (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1161) is not in mixedCase
+Parameter '_tokenContract' of Market.getPriceInToken (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1181) is not in mixedCase
+Parameter '_extraData' of Market.getCutieId (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1213) is not in mixedCase
+Parameter '_cutieId' of Market.isOnAuction (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1395) is not in mixedCase
+Parameter '_cutieId' of Market.getCurrentPrice (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1477-1479) is not in mixedCase
+Parameter '_cutieId' of Market.cancelActiveAuction (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1497-1501) is not in mixedCase
+Parameter '_cutieId' of Market.cancelCreatorAuction (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1561-1563) is not in mixedCase
+Parameter '_tokenContract' of Market.withdrawTokenFromBalance (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1613-1615) is not in mixedCase
+Parameter '_withdrawToAddress' of Market.withdrawTokenFromBalance (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1615-1617) is not in mixedCase
+Parameter '_tokenContract' of Market.addToken (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1649-1651) is not in mixedCase
+Parameter '_priceOracle' of Market.addToken (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1651) is not in mixedCase
+Parameter '_tokenContract' of Market.removeToken (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1657-1659) is not in mixedCase
+Parameter '' of Market.run (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1681) is not in mixedCase
+Parameter '_scope_0' of Market.run (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1685) is not in mixedCase
+Parameter '_scope_1' of Market.run (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1685) is not in mixedCase
+Parameter '' of Market.runSigned (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1687-1691) is not in mixedCase
+Parameter '_scope_0' of Market.runSigned (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1691) is not in mixedCase
+Parameter '_scope_1' of Market.runSigned (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol#1693-1695) is not in mixedCase
+Parameter '_cutieId' of SaleMarket.createAuction (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol) is not in mixedCase
+Parameter '_startPrice' of SaleMarket.createAuction (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol) is not in mixedCase
+Parameter '_endPrice' of SaleMarket.createAuction (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol) is not in mixedCase
+Parameter '_duration' of SaleMarket.createAuction (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol) is not in mixedCase
+Parameter '_seller' of SaleMarket.createAuction (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol) is not in mixedCase
+Parameter '_cutieId' of SaleMarket.bid (/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xca891ae246e7177aad7b50dfb1b5e9993a63eafe.sol analyzed (9 contracts), 113 result(s) found

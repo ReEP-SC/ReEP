@@ -1,0 +1,38 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xc9d5667ddf59b65567ea04cc13090c0f048506b4.sol:
+/sb/0xc9d5667ddf59b65567ea04cc13090c0f048506b4.sol:181:9: Warning: Function state mutability can be restricted to view
+        function getDaiSplitTradeGas() public 
+        ^ (Relevant source part starts here and spans across multiple lines).
+
+INFO:Detectors:[92m
+CheckReserveSplit.getres1ReservesEthToToken has external calls inside a loop:
+	- rate = reserve.getConversionRate(ETH,token,querySizeEth * 10 ** 18,block.number) (/sb/0xc9d5667ddf59b65567ea04cc13090c0f048506b4.sol#82-86)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in CheckReserveSplit.copyReserves (/sb/0xc9d5667ddf59b65567ea04cc13090c0f048506b4.sol#50-62):
+	External calls:
+	- reserve = KyberReserveIf(getReserveTokenDest(address(token),index)) (/sb/0xc9d5667ddf59b65567ea04cc13090c0f048506b4.sol#55-56)
+	State variables written after the call(s):
+	- reservesPerTokenDest (/sb/0xc9d5667ddf59b65567ea04cc13090c0f048506b4.sol#57-60)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+CheckReserveSplit.setNumSplitRateCalls (/sb/0xc9d5667ddf59b65567ea04cc13090c0f048506b4.sol#45-49) should be declared external
+CheckReserveSplit.copyReserves (/sb/0xc9d5667ddf59b65567ea04cc13090c0f048506b4.sol#50-62) should be declared external
+CheckReserveSplit.getres1EthToDaiReserves100Eth (/sb/0xc9d5667ddf59b65567ea04cc13090c0f048506b4.sol#122-128) should be declared external
+CheckReserveSplit.getres1EthToUsdcReserves100Eth (/sb/0xc9d5667ddf59b65567ea04cc13090c0f048506b4.sol#128-134) should be declared external
+CheckReserveSplit.getDaiSplitTradeGas (/sb/0xc9d5667ddf59b65567ea04cc13090c0f048506b4.sol#183-189) should be declared external
+CheckReserveSplit.viewSplitTradeEthToUsdc (/sb/0xc9d5667ddf59b65567ea04cc13090c0f048506b4.sol#197-203) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xc9d5667ddf59b65567ea04cc13090c0f048506b4.sol:
+	- pragma solidity^0.5.11 (/sb/0xc9d5667ddf59b65567ea04cc13090c0f048506b4.sol#5-6): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Low level call in CheckReserveSplit.getReserveTokenDest (/sb/0xc9d5667ddf59b65567ea04cc13090c0f048506b4.sol#103-122):
+	-(success,returnData) = address(kyber).staticcall(abi.encodePacked(kyber.reservesPerTokenDest.selector,abi.encode(token,index))) /sb/0xc9d5667ddf59b65567ea04cc13090c0f048506b4.sol#108-116
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Constant 'CheckReserveSplit.kyber' (/sb/0xc9d5667ddf59b65567ea04cc13090c0f048506b4.sol#34-35) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'CheckReserveSplit.dai' (/sb/0xc9d5667ddf59b65567ea04cc13090c0f048506b4.sol#35-36) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'CheckReserveSplit.usdc' (/sb/0xc9d5667ddf59b65567ea04cc13090c0f048506b4.sol#36-38) is not in UPPER_CASE_WITH_UNDERSCORES
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xc9d5667ddf59b65567ea04cc13090c0f048506b4.sol analyzed (4 contracts), 13 result(s) found

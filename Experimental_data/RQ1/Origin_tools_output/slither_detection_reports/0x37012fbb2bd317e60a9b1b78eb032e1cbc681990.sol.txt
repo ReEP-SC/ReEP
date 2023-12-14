@@ -1,0 +1,191 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol:
+/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol:565:5: Warning: Function state mutability can be restricted to view
+    function getMaxBorrow(address _cBorrowAddress) public returns (uint) {
+    ^ (Relevant source part starts here and spans across multiple lines).
+
+INFO:Detectors:[91m
+ExchangeHelper.swap (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#804-899) sends eth to arbitrary user
+	Dangerous calls:
+	- (tRet,None) = ExchangeInterface(wrapper).swapEtherToToken.value(tokens[1])(tokens[1],orderAddresses[2],uint256(- 1)) (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#881-884)
+CompoundSaverProxy.boost (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#989-1040) sends eth to arbitrary user
+	Dangerous calls:
+	- CEtherInterface(_addrData[0]).mint.value(swapAmount)() (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#1033-1034)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[93m
+TokenInterface (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#746-760) has incorrect ERC20 function interface(s):
+	-approve (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#751)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[93m
+ExchangeHelper.swap (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#804-899) uses a dangerous strict equality:
+	- tokens[0] == 0
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Contract locking ether found in /sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol:
+	Contract DSProxy has payable functions:
+	 - fallback (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#170-172)
+	 - execute (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#174-190)
+	 - execute (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#190-214)
+	 - setCache (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#215-228)
+	But does not have a function to withdraw the ether
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#contracts-that-lock-ether[0m
+INFO:Detectors:[93m
+CompoundSaverHelper.paybackDebt (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#484-502) does not use the value returned by external calls:
+	-ERC20(_borrowToken).transfer(_user,(_amount - wholeDebt)) (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#492)
+CompoundSaverHelper.getFee (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#506-519) does not use the value returned by external calls:
+	-ERC20(_tokenAddr).transfer(WALLET_ID,feeAmount) (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#519)
+CompoundSaverHelper.enterMarket (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#521-529) does not use the value returned by external calls:
+	-ComptrollerInterface(COMPTROLLER).enterMarkets(markets) (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#527-528)
+CompoundSaverHelper.approveCToken (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#532-536) does not use the value returned by external calls:
+	-ERC20(_tokenAddr).approve(_cTokenAddr,uint256(- 1)) (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#535-536)
+ExchangeHelper.swap (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#804-899) does not use the value returned by external calls:
+	-ERC20(orderAddresses[1]).approve(address(ERC20_PROXY_0X),_data[0]) (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#821-822)
+	-ERC20(orderAddresses[1]).approve(address(ERC20_PROXY_0X),_data[0]) (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#860-862)
+	-ERC20(orderAddresses[1]).transfer(wrapper,tokens[1]) (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#884-887)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+DSProxy.execute uses assembly (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#190-214)
+	- /sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#199-214
+DSProxyCache.write uses assembly (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#233-252)
+	- /sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#234-249
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+DSGuard.canCall (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#30-32) should be declared external
+DSGuard.permit (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#32-34) should be declared external
+DSGuard.forbid (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#34-36) should be declared external
+DSGuard.permit (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#36-38) should be declared external
+DSGuard.forbid (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#38-43) should be declared external
+DSGuardFactory.newGuard (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#43-46) should be declared external
+DSAuthority.canCall (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#103-110) should be declared external
+DSAuth.setOwner (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#129-131) should be declared external
+DSAuth.setAuthority (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#131-139) should be declared external
+DSProxy.execute (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#174-190) should be declared external
+DSProxyCache.read (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#229-232) should be declared external
+DSProxyCache.write (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#233-252) should be declared external
+Discount.isCustomFeeSet (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#356-359) should be declared external
+Discount.getCustomServiceFee (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#359-363) should be declared external
+Discount.setServiceFee (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#363-375) should be declared external
+Discount.disableServiceFee (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#375-379) should be declared external
+CompoundLogger.LogRepay (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#613-620) should be declared external
+CompoundLogger.LogBoost (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#621-624) should be declared external
+SaverExchangeInterface.getBestPrice (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#733-744) should be declared external
+TokenInterface.allowance (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#746-748) should be declared external
+TokenInterface.balanceOf (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#748-751) should be declared external
+TokenInterface.approve (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#751) should be declared external
+TokenInterface.transfer (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#751-753) should be declared external
+TokenInterface.transferFrom (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#753-755) should be declared external
+TokenInterface.deposit (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#756-758) should be declared external
+TokenInterface.withdraw (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#758-760) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol:
+	- pragma solidity^0.5.0 (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#7-9): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#51-52): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#71): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#100): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#110-111): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#162-163): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#253): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#347): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#381): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#399-401): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#461): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#465): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#600-602): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#625): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#663): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#722): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#728-730): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#745-746): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#760-761): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#766): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#788-789): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#947): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#1041): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#1049): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Low level call in ExchangeHelper.takeOrder (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#904-939):
+	-(success,None) = _addresses[0].call.value(_value)(_data) /sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#911-912
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Parameter '_actionType' of FlashLoanLogger.logFlashLoan (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#57-58) is not in mixedCase
+Parameter '_id' of FlashLoanLogger.logFlashLoan (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#58-59) is not in mixedCase
+Parameter '_loanAmount' of FlashLoanLogger.logFlashLoan (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#59-60) is not in mixedCase
+Parameter '_sender' of FlashLoanLogger.logFlashLoan (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#60) is not in mixedCase
+Parameter '_cacheAddr' of DSProxy. (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#168-169) is not in mixedCase
+Parameter '_code' of DSProxy.execute (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#175) is not in mixedCase
+Parameter '_data' of DSProxy.execute (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#175-176) is not in mixedCase
+Parameter '_target' of DSProxy.execute (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#192) is not in mixedCase
+Parameter '_cacheAddr' of DSProxy.setCache (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#215-220) is not in mixedCase
+Parameter '_code' of DSProxyCache.read (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#230) is not in mixedCase
+Parameter '_code' of DSProxyCache.write (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#233) is not in mixedCase
+Parameter '_user' of Discount.isCustomFeeSet (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#357) is not in mixedCase
+Parameter '_user' of Discount.getCustomServiceFee (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#360-362) is not in mixedCase
+Parameter '_user' of Discount.setServiceFee (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#365) is not in mixedCase
+Parameter '_fee' of Discount.setServiceFee (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#365) is not in mixedCase
+Parameter '_user' of Discount.disableServiceFee (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#375-377) is not in mixedCase
+Parameter '_amount' of CompoundSaverHelper.paybackDebt (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#484) is not in mixedCase
+Parameter '_cBorrowToken' of CompoundSaverHelper.paybackDebt (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#484-485) is not in mixedCase
+Parameter '_borrowToken' of CompoundSaverHelper.paybackDebt (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#485-486) is not in mixedCase
+Parameter '_user' of CompoundSaverHelper.paybackDebt (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#486) is not in mixedCase
+Parameter '_amount' of CompoundSaverHelper.getFee (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#506) is not in mixedCase
+Parameter '_user' of CompoundSaverHelper.getFee (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#506) is not in mixedCase
+Parameter '_tokenAddr' of CompoundSaverHelper.getFee (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#506-509) is not in mixedCase
+Parameter '_cTokenAddrColl' of CompoundSaverHelper.enterMarket (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#521) is not in mixedCase
+Parameter '_cTokenAddrBorrow' of CompoundSaverHelper.enterMarket (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#522-525) is not in mixedCase
+Parameter '_tokenAddr' of CompoundSaverHelper.approveCToken (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#534) is not in mixedCase
+Parameter '_cTokenAddr' of CompoundSaverHelper.approveCToken (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#534) is not in mixedCase
+Parameter '_cTokenAddress' of CompoundSaverHelper.getUnderlyingAddr (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#541-542) is not in mixedCase
+Parameter '_cCollAddress' of CompoundSaverHelper.getMaxCollateral (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#555-556) is not in mixedCase
+Parameter '_cBorrowAddress' of CompoundSaverHelper.getMaxBorrow (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#581-582) is not in mixedCase
+Function 'CompoundLogger.LogRepay' (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#613-620) is not in mixedCase
+Parameter '_owner' of CompoundLogger.LogRepay (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#615-618) is not in mixedCase
+Parameter '_collateralAmount' of CompoundLogger.LogRepay (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#618) is not in mixedCase
+Parameter '_borrowAmount' of CompoundLogger.LogRepay (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#618-619) is not in mixedCase
+Parameter '_collAddr' of CompoundLogger.LogRepay (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#619) is not in mixedCase
+Parameter '_borrowAddr' of CompoundLogger.LogRepay (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#619) is not in mixedCase
+Function 'CompoundLogger.LogBoost' (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#621-624) is not in mixedCase
+Parameter '_owner' of CompoundLogger.LogBoost (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#621) is not in mixedCase
+Parameter '_borrowAmount' of CompoundLogger.LogBoost (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#621-622) is not in mixedCase
+Parameter '_collateralAmount' of CompoundLogger.LogBoost (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#622) is not in mixedCase
+Parameter '_collAddr' of CompoundLogger.LogBoost (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#622) is not in mixedCase
+Parameter '_borrowAddr' of CompoundLogger.LogBoost (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#622) is not in mixedCase
+Parameter '' of TokenInterface.allowance (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#746) is not in mixedCase
+Parameter '_scope_0' of TokenInterface.allowance (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#746) is not in mixedCase
+Parameter '' of TokenInterface.balanceOf (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#749) is not in mixedCase
+Parameter '' of TokenInterface.approve (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#751) is not in mixedCase
+Parameter '_scope_0' of TokenInterface.approve (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#751) is not in mixedCase
+Parameter '' of TokenInterface.transfer (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#751-752) is not in mixedCase
+Parameter '_scope_0' of TokenInterface.transfer (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#752) is not in mixedCase
+Parameter '' of TokenInterface.transferFrom (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#755) is not in mixedCase
+Parameter '_scope_0' of TokenInterface.transferFrom (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#755) is not in mixedCase
+Parameter '_scope_1' of TokenInterface.transferFrom (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#755) is not in mixedCase
+Parameter '' of TokenInterface.withdraw (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#759-760) is not in mixedCase
+Parameter '_data' of ExchangeHelper.swap (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#805-807) is not in mixedCase
+Parameter '_src' of ExchangeHelper.swap (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#807) is not in mixedCase
+Parameter '_dest' of ExchangeHelper.swap (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#807) is not in mixedCase
+Parameter '_exchangeAddress' of ExchangeHelper.swap (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#807) is not in mixedCase
+Parameter '_callData' of ExchangeHelper.swap (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#807) is not in mixedCase
+Parameter '_addresses' of ExchangeHelper.takeOrder (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#904) is not in mixedCase
+Parameter '_data' of ExchangeHelper.takeOrder (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#904-905) is not in mixedCase
+Parameter '_value' of ExchangeHelper.takeOrder (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#905) is not in mixedCase
+Parameter '_amount' of ExchangeHelper.takeOrder (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#906-908) is not in mixedCase
+Parameter '_src' of ExchangeHelper.wethToKyberEth (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#941-943) is not in mixedCase
+Parameter '_data' of CompoundSaverProxy.repay (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#954) is not in mixedCase
+Parameter '_addrData' of CompoundSaverProxy.repay (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#956-958) is not in mixedCase
+Parameter '_callData' of CompoundSaverProxy.repay (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#959-961) is not in mixedCase
+Parameter '_data' of CompoundSaverProxy.boost (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#990-992) is not in mixedCase
+Parameter '_addrData' of CompoundSaverProxy.boost (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#994-995) is not in mixedCase
+Parameter '_callData' of CompoundSaverProxy.boost (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#996-997) is not in mixedCase
+Parameter '_data' of CompoundFlashLoanTaker.repayWithLoan (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#1065) is not in mixedCase
+Parameter '_addrData' of CompoundFlashLoanTaker.repayWithLoan (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#1066) is not in mixedCase
+Parameter '_callData' of CompoundFlashLoanTaker.repayWithLoan (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#1068-1069) is not in mixedCase
+Parameter '_data' of CompoundFlashLoanTaker.boostWithLoan (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#1092-1093) is not in mixedCase
+Parameter '_addrData' of CompoundFlashLoanTaker.boostWithLoan (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#1095-1096) is not in mixedCase
+Parameter '_callData' of CompoundFlashLoanTaker.boostWithLoan (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#1097) is not in mixedCase
+Parameter '_contractAddr' of CompoundFlashLoanTaker.givePermission (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol) is not in mixedCase
+Parameter '_contractAddr' of CompoundFlashLoanTaker.removePermission (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol) is not in mixedCase
+Constant 'CompoundFlashLoanTaker.lendingPool' (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#1052) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'CompoundFlashLoanTaker.logger' (/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol#1060-1065) is not in UPPER_CASE_WITH_UNDERSCORES
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x37012fbb2bd317e60a9b1b78eb032e1cbc681990.sol analyzed (28 contracts), 119 result(s) found

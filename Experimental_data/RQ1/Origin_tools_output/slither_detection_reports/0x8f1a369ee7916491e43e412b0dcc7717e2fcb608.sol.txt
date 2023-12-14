@@ -1,0 +1,161 @@
+INFO:Detectors:[91m
+KyberNetwork.trade (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#2059-2199) sends eth to arbitrary user
+	Dangerous calls:
+	- tradeInput.trader.transfer(tradeInput.srcAmount - actualSrcAmount) (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#2099-2103)
+KyberNetwork.doReserveTrade (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#2281-2369) sends eth to arbitrary user
+	Dangerous calls:
+	- destAddress.transfer(amount) (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#2309-2313)
+	- require(bool)(reserve.trade.value(callValue)(src,amount,dest,this,conversionRate,validate)) (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#2329-2335)
+	- destAddress.transfer(expectedDestAmount) (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#2351-2357)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[93m
+tradeInput in KyberNetwork.tradeWithHint (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#1437) is a local variable never initialiazed
+data in VolumeImbalanceRecorder.decodeTokenImbalanceData (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#2785) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[93m
+KyberNetwork.listPairForReserve (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#1563-1609) does not use the value returned by external calls:
+	-token.approve(reserve,2 ** 255) (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#1595)
+	-token.approve(reserve,0) (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#1599-1603)
+KyberNetwork.trade (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#2059-2199) does not use the value returned by external calls:
+	-tradeInput.src.transfer(tradeInput.trader,(tradeInput.srcAmount - actualSrcAmount)) (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#2105-2107)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+KyberNetwork.searchBestRate has external calls inside a loop:
+	- rates[i] = (KyberReserveInterface(reserveArr[i])).getConversionRate(src,dest,srcAmount,block.number) (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#1887-1891)
+Wrapper.getBalances has external calls inside a loop:
+	- balance = tokens[i].balanceOf(reserve) (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#3629-3631)
+Wrapper.getTokenAllowances has external calls inside a loop:
+	- result[i] = tokens[i].allowance(owner,spender) (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol)
+Wrapper.getTokenRates has external calls inside a loop:
+	- buyBases[i] = ratesContract.getBasicRate(tokenList[i],true) (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol)
+Wrapper.getTokenRates has external calls inside a loop:
+	- sellBases[i] = ratesContract.getBasicRate(tokenList[i],false) (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol)
+Wrapper.getTokenIndicies has external calls inside a loop:
+	- (bulkIndex,index,buy,sell) = ratesContract.getCompactData(tokenList[i]) (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol)
+Wrapper.getExpectedRates has external calls inside a loop:
+	- (rates[i],slippage[i]) = network.getExpectedRate(srcs[i],dests[i],qty[i]) (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in KyberReserve.approveWithdrawAddress (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#743-771):
+	External calls:
+	- setDecimals(token) (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#755)
+	State variables written after the call(s):
+	- tokenWallet (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#761-765)
+Reentrancy in KyberNetwork.listPairForReserve (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#1563-1609):
+	External calls:
+	- token.approve(reserve,2 ** 255) (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#1595)
+	- token.approve(reserve,0) (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#1599-1603)
+	- setDecimals(token) (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#1609)
+	State variables written after the call(s):
+	- decimals (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#1609)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Deprecated standard detected @ /sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#1939-1940:
+	- Usage of "block.blockhash()" should be replaced with "blockhash()"
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#deprecated-standards[0m
+INFO:Detectors:[92m
+ERC20.totalSupply (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#21-23) should be declared external
+ERC20.balanceOf (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#23-25) should be declared external
+ERC20.transfer (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#25-27) should be declared external
+ERC20.transferFrom (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#27-29) should be declared external
+ERC20.approve (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#29-31) should be declared external
+ERC20.allowance (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#31-33) should be declared external
+ERC20.decimals (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#33-35) should be declared external
+PermissionGroups.transferAdmin (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#269-277) should be declared external
+PermissionGroups.transferAdminQuickly (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#289-303) should be declared external
+PermissionGroups.claimAdmin (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#317-327) should be declared external
+PermissionGroups.addAlerter (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#335-349) should be declared external
+PermissionGroups.removeAlerter (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#349-379) should be declared external
+PermissionGroups.addOperator (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#385-399) should be declared external
+PermissionGroups.removeOperator (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#401-441) should be declared external
+ConversionRates.recordImbalance (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#3199-3221) should be declared external
+ConversionRatesInterface.recordImbalance (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#525-539) should be declared external
+ConversionRatesInterface.getRate (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#539-549) should be declared external
+ConversionRates.getRate (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#3227-3341) should be declared external
+SanityRatesInterface.getSanityRate (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#555-561) should be declared external
+KyberReserve.trade (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#687-719) should be declared external
+KyberReserveInterface.trade (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#571-581) should be declared external
+KyberReserve.getConversionRate (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#931-991) should be declared external
+KyberReserveInterface.getConversionRate (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#581-585) should be declared external
+KyberReserve.fallback (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#661-665) should be declared external
+KyberReserve.enableTrade (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#721-727) should be declared external
+KyberReserve.disableTrade (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#729-739) should be declared external
+KyberReserve.approveWithdrawAddress (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#743-771) should be declared external
+KyberReserve.setTokenWallet (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#776-791) should be declared external
+KyberReserve.withdraw (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#801-823) should be declared external
+KyberReserve.setContracts (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#827-853) should be declared external
+KyberReserve.getSrcQty (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#913-931) should be declared external
+KyberNetworkInterface.maxGasPrice (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#1133) should be declared external
+KyberNetwork.maxGasPrice (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#1739-1747) should be declared external
+KyberNetwork.getUserCapInTokenWei (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#1760-1771) should be declared external
+KyberNetworkInterface.getUserCapInTokenWei (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#1139-1151) should be declared external
+KyberNetwork.enabled (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#1821-1825) should be declared external
+KyberNetworkInterface.enabled (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#1151) should be declared external
+KyberNetwork.info (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#1825-1829) should be declared external
+KyberNetworkInterface.info (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#1151-1153) should be declared external
+KyberNetwork.getExpectedRate (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#1749-1755) should be declared external
+KyberNetworkInterface.getExpectedRate (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#1153-1159) should be declared external
+KyberNetworkInterface.tradeWithHint (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#1159-1169) should be declared external
+KyberNetwork.tradeWithHint (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#1416-1463) should be declared external
+Utils2.getBalance (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#1181-1189) should be declared external
+ExpectedRateInterface.getExpectedRate (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#1267-1271) should be declared external
+FeeBurnerInterface.handleFees (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#1275-1285) should be declared external
+KyberNetwork.fallback (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#1391-1401) should be declared external
+KyberNetwork.addReserve (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#1479-1529) should be declared external
+KyberNetwork.listPairForReserve (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#1563-1609) should be declared external
+KyberNetwork.setWhiteList (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#1611-1621) should be declared external
+KyberNetwork.setExpectedRate (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#1621-1631) should be declared external
+KyberNetwork.setFeeBurner (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#1633-1639) should be declared external
+KyberNetwork.setParams (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#1641-1663) should be declared external
+KyberNetwork.setEnable (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#1663-1691) should be declared external
+KyberNetwork.setInfo (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#1693-1701) should be declared external
+KyberNetwork.setKyberProxy (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#1711-1717) should be declared external
+KyberNetwork.getNumReserves (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#1719-1721) should be declared external
+KyberNetwork.getReserves (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#1731-1739) should be declared external
+KyberNetwork.findBestRate (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#1801-1821) should be declared external
+VolumeImbalanceRecorder.setTokenControlInfo (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#2457-2475) should be declared external
+VolumeImbalanceRecorder.getTokenControlInfo (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#2475-2489) should be declared external
+ConversionRates.addToken (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#2969-3009) should be declared external
+ConversionRates.setBaseRate (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#3059-3091) should be declared external
+ConversionRates.setQtyStepFunction (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#3091-3131) should be declared external
+ConversionRates.setImbalanceStepFunction (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#3131-3165) should be declared external
+ConversionRates.setValidRateDurationInBlocks (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#3165-3169) should be declared external
+ConversionRates.enableTokenTrade (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#3169-3183) should be declared external
+ConversionRates.disableTokenTrade (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#3183-3191) should be declared external
+ConversionRates.setReserveAddress (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#3191-3199) should be declared external
+ConversionRates.getBasicRate (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#3347-3357) should be declared external
+ConversionRates.getCompactData (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#3357-3385) should be declared external
+ConversionRates.getTokenBasicData (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#3388-3401) should be declared external
+ConversionRates.getStepFunctionData (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#3403-3509) should be declared external
+ConversionRates.getListedTokens (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#3523-3529) should be declared external
+Wrapper.getBalances (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#3603-3637) should be declared external
+Wrapper.getTokenAllowances (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#3637-3651) should be declared external
+Wrapper.getByteFromBytes14 (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol) should be declared external
+Wrapper.getInt8FromByte (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol) should be declared external
+Wrapper.getTokenRates (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol) should be declared external
+Wrapper.getTokenIndicies (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol) should be declared external
+Wrapper.getExpectedRates (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol:
+	- pragma solidity0.4.18 (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#9-13): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'PermissionGroups.PermissionGroups' (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#207-217) is not in mixedCase
+Function 'KyberReserve.KyberReserve' (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#619-659) is not in mixedCase
+Parameter '_kyberNetwork' of KyberReserve.KyberReserve (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#620-621) is not in mixedCase
+Parameter '_ratesContract' of KyberReserve.KyberReserve (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#623-625) is not in mixedCase
+Parameter '_admin' of KyberReserve.KyberReserve (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#625-627) is not in mixedCase
+Parameter '_kyberNetwork' of KyberReserve.setContracts (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#827) is not in mixedCase
+Parameter '_conversionRates' of KyberReserve.setContracts (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#829-831) is not in mixedCase
+Parameter '_sanityRates' of KyberReserve.setContracts (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#831-833) is not in mixedCase
+Function 'KyberNetwork.KyberNetwork' (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#1363-1373) is not in mixedCase
+Parameter '_admin' of KyberNetwork.KyberNetwork (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#1363) is not in mixedCase
+Parameter '_maxGasPrice' of KyberNetwork.setParams (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#1645-1647) is not in mixedCase
+Parameter '_negligibleRateDiff' of KyberNetwork.setParams (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#1647-1653) is not in mixedCase
+Parameter '_enable' of KyberNetwork.setEnable (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#1665-1669) is not in mixedCase
+Function 'VolumeImbalanceRecorder.VolumeImbalanceRecorder' (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#2451-2457) is not in mixedCase
+Parameter '_admin' of VolumeImbalanceRecorder.VolumeImbalanceRecorder (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#2453) is not in mixedCase
+Function 'ConversionRates.ConversionRates' (/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol#2955-2965) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x8f1a369ee7916491e43e412b0dcc7717e2fcb608.sol analyzed (17 contracts), 114 result(s) found

@@ -1,0 +1,69 @@
+INFO:Detectors:[91m
+OwnableUpgradeable.__gap (/sb/0xc187551b9c692ff886f4b8da76ec5868019c8a42.sol#385-386) shadows:
+	- ContextUpgradeable.__gap (/sb/0xc187551b9c692ff886f4b8da76ec5868019c8a42.sol#328-329)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variable-shadowing[0m
+INFO:Detectors:[93m
+Initializable._isConstructor (/sb/0xc187551b9c692ff886f4b8da76ec5868019c8a42.sol#290-309) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+YieldFarmLP2.massHarvest (/sb/0xc187551b9c692ff886f4b8da76ec5868019c8a42.sol#444-467) does not use the value returned by external calls:
+	-_wah.transferFrom(_vault,msg.sender,totalDistributedValue) (/sb/0xc187551b9c692ff886f4b8da76ec5868019c8a42.sol#465-466)
+YieldFarmLP2.harvest (/sb/0xc187551b9c692ff886f4b8da76ec5868019c8a42.sol#486-502) does not use the value returned by external calls:
+	-_wah.transferFrom(_vault,msg.sender,userReward) (/sb/0xc187551b9c692ff886f4b8da76ec5868019c8a42.sol#501)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in YieldFarmLP2._harvest (/sb/0xc187551b9c692ff886f4b8da76ec5868019c8a42.sol#527-551):
+	External calls:
+	- _initEpoch(epochId) (/sb/0xc187551b9c692ff886f4b8da76ec5868019c8a42.sol#535)
+	State variables written after the call(s):
+	- lastEpochIdHarvested (/sb/0xc187551b9c692ff886f4b8da76ec5868019c8a42.sol#538-539)
+Reentrancy in YieldFarmLP2.initialize (/sb/0xc187551b9c692ff886f4b8da76ec5868019c8a42.sol#429-442):
+	External calls:
+	- epochDuration = _staking.epochDuration() (/sb/0xc187551b9c692ff886f4b8da76ec5868019c8a42.sol#436-437)
+	- epochStart = _staking.epoch1Start() (/sb/0xc187551b9c692ff886f4b8da76ec5868019c8a42.sol#438)
+	State variables written after the call(s):
+	- _totalAmountPerEpoch (/sb/0xc187551b9c692ff886f4b8da76ec5868019c8a42.sol#439-442)
+	- epochStart (/sb/0xc187551b9c692ff886f4b8da76ec5868019c8a42.sol#438)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+YieldFarmLP2._getEpochId (/sb/0xc187551b9c692ff886f4b8da76ec5868019c8a42.sol) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp < epochStart (/sb/0xc187551b9c692ff886f4b8da76ec5868019c8a42.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+Initializable._isConstructor uses assembly (/sb/0xc187551b9c692ff886f4b8da76ec5868019c8a42.sol#290-309)
+	- /sb/0xc187551b9c692ff886f4b8da76ec5868019c8a42.sol#309
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+OwnableUpgradeable.owner (/sb/0xc187551b9c692ff886f4b8da76ec5868019c8a42.sol#356-357) should be declared external
+OwnableUpgradeable.renounceOwnership (/sb/0xc187551b9c692ff886f4b8da76ec5868019c8a42.sol#371-374) should be declared external
+OwnableUpgradeable.transferOwnership (/sb/0xc187551b9c692ff886f4b8da76ec5868019c8a42.sol#382-385) should be declared external
+YieldFarmLP2.initialize (/sb/0xc187551b9c692ff886f4b8da76ec5868019c8a42.sol#429-442) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xc187551b9c692ff886f4b8da76ec5868019c8a42.sol:
+	- pragma solidity^0.6.0 (/sb/0xc187551b9c692ff886f4b8da76ec5868019c8a42.sol#6-8): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'Context._msgSender' (/sb/0xc187551b9c692ff886f4b8da76ec5868019c8a42.sol#238-240) is not in mixedCase
+Function 'Context._msgData' (/sb/0xc187551b9c692ff886f4b8da76ec5868019c8a42.sol#242-247) is not in mixedCase
+Function 'Initializable._isConstructor' (/sb/0xc187551b9c692ff886f4b8da76ec5868019c8a42.sol#290-309) is not in mixedCase
+Function 'ContextUpgradeable.__Context_init' (/sb/0xc187551b9c692ff886f4b8da76ec5868019c8a42.sol#313-314) is not in mixedCase
+Function 'ContextUpgradeable.__Context_init_unchained' (/sb/0xc187551b9c692ff886f4b8da76ec5868019c8a42.sol#314) is not in mixedCase
+Function 'ContextUpgradeable._msgSender' (/sb/0xc187551b9c692ff886f4b8da76ec5868019c8a42.sol#314-321) is not in mixedCase
+Function 'ContextUpgradeable._msgData' (/sb/0xc187551b9c692ff886f4b8da76ec5868019c8a42.sol#321-327) is not in mixedCase
+Variable 'ContextUpgradeable.__gap' (/sb/0xc187551b9c692ff886f4b8da76ec5868019c8a42.sol#328-329) is not in mixedCase
+Function 'OwnableUpgradeable.__Ownable_init' (/sb/0xc187551b9c692ff886f4b8da76ec5868019c8a42.sol#340-344) is not in mixedCase
+Function 'OwnableUpgradeable.__Ownable_init_unchained' (/sb/0xc187551b9c692ff886f4b8da76ec5868019c8a42.sol#344-351) is not in mixedCase
+Variable 'OwnableUpgradeable.__gap' (/sb/0xc187551b9c692ff886f4b8da76ec5868019c8a42.sol#385-386) is not in mixedCase
+Function 'YieldFarmLP2._initEpoch' (/sb/0xc187551b9c692ff886f4b8da76ec5868019c8a42.sol#521-527) is not in mixedCase
+Function 'YieldFarmLP2._harvest' (/sb/0xc187551b9c692ff886f4b8da76ec5868019c8a42.sol#527-551) is not in mixedCase
+Function 'YieldFarmLP2._getPoolSize' (/sb/0xc187551b9c692ff886f4b8da76ec5868019c8a42.sol#551-555) is not in mixedCase
+Function 'YieldFarmLP2._getUserBalancePerEpoch' (/sb/0xc187551b9c692ff886f4b8da76ec5868019c8a42.sol#555-562) is not in mixedCase
+Function 'YieldFarmLP2._getEpochId' (/sb/0xc187551b9c692ff886f4b8da76ec5868019c8a42.sol) is not in mixedCase
+Function 'YieldFarmLP2._stakingEpochId' (/sb/0xc187551b9c692ff886f4b8da76ec5868019c8a42.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+OwnableUpgradeable.__gap (/sb/0xc187551b9c692ff886f4b8da76ec5868019c8a42.sol#385-386) is never used in OwnableUpgradeable
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0xc187551b9c692ff886f4b8da76ec5868019c8a42.sol analyzed (8 contracts), 31 result(s) found

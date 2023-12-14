@@ -1,0 +1,188 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol:
+/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol:27:5: Warning: Variable is shadowed in inline assembly by an instruction of the same name
+    function add(uint x, int y) internal pure returns (uint z) {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol:42:5: Warning: Variable is shadowed in inline assembly by an instruction of the same name
+    function add(uint x, uint y) internal pure returns (uint z) {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol:37:5: Warning: Variable is shadowed in inline assembly by an instruction of the same name
+    function mul(uint x, int y) internal pure returns (int z) {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol:48:5: Warning: Variable is shadowed in inline assembly by an instruction of the same name
+    function mul(uint x, uint y) internal pure returns (uint z) {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol:32:5: Warning: Variable is shadowed in inline assembly by an instruction of the same name
+    function sub(uint x, int y) internal pure returns (uint z) {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol:45:5: Warning: Variable is shadowed in inline assembly by an instruction of the same name
+    function sub(uint x, uint y) internal pure returns (uint z) {
+    ^ (Relevant source part starts here and spans across multiple lines).
+
+INFO:Detectors:[91m
+LiquidationMachine.vat (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#486) shadows:
+	- DssCdpManager.vat (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#156-157)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variable-shadowing[0m
+INFO:Detectors:[93m
+Math.rpow (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#61-86) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+BCdpScoreConnector.quitScore (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#149-154) uses a dangerous strict equality:
+	- left[cdp] == 0
+BCdpScoreConnector.quitScore (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#149-154) uses a dangerous strict equality:
+	- left[cdp] == 0
+BCdpScoreConnector.updateScore (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#137-148) uses a dangerous strict equality:
+	- left[cdp] == 0
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Reentrancy in LiquidationMachine.bite (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#583-613):
+	External calls:
+	- (ink,art) = vat.urns(ilk,urn) (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#586-587)
+	- (rate,spotValue) = vat.ilks(ilk) (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#588-590)
+	- dink = calcDink(dart,rate,ilk) (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#599)
+	- updateScore(cdp,ilk,- toInt(dink),- toInt(dart),now) (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#602-604)
+	State variables written after the call(s):
+	- cushion (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#606-609)
+Reentrancy in BCdpManager.shift (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#671-689):
+	External calls:
+	- untop(cdpSrc) (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#678)
+	- untop(cdpDst) (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#678-679)
+	State variables written after the call(s):
+	- cushion (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#678-679)
+Reentrancy in JarConnector.spin (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#1007-1022):
+	External calls:
+	- score.spin() (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#1010)
+	- start[0] = score.start() (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#1010-1011)
+	State variables written after the call(s):
+	- round (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#1013)
+Reentrancy in JarConnector.spin (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#1007-1022):
+	External calls:
+	- score.spin() (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#1010)
+	- start[0] = score.start() (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#1010-1011)
+	- score.spin() (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#1013-1015)
+	- start[1] = score.start() (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#1015)
+	State variables written after the call(s):
+	- round (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#1017)
+Reentrancy in LiquidationMachine.untop (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#545-560):
+	External calls:
+	- (rate) = vat.ilks(ilk) (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#554-555)
+	State variables written after the call(s):
+	- cushion (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#555-558)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+GovernanceExecutor.doTransferAdmin.owner (local variable @ /sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol) shadows:
+	- DSAuth.owner (state variable @ /sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#426-429)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+JarConnector.getArtGlobalScore has external calls inside a loop:
+	- totalScore = add(totalScore,score.getArtGlobalScore(ilks[i],time,spinStart)) (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#1075-1077)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in LiquidationMachine.bite (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#583-613):
+	External calls:
+	- (ink,art) = vat.urns(ilk,urn) (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#586-587)
+	- (rate,spotValue) = vat.ilks(ilk) (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#588-590)
+	State variables written after the call(s):
+	- tic (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#598)
+Reentrancy in LiquidationMachine.quitBLiquidation (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#521-525):
+	External calls:
+	- untop(cdp) (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#522)
+	State variables written after the call(s):
+	- out (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#522-524)
+Reentrancy in BCdpScore.slashScore (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#927-962):
+	External calls:
+	- urn = manager.urns(maliciousCdp) (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#927-930)
+	- ilk = manager.ilks(maliciousCdp) (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#930)
+	- (realArt) = manager.vat().urns(ilk,urn) (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#930-931)
+	- left = BCdpScoreConnector(address(manager)).left(maliciousCdp) (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#939-941)
+	State variables written after the call(s):
+	- checkpoints (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#958-961)
+	- userScore (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#958-961)
+Reentrancy in JarConnector.spin (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#1007-1022):
+	External calls:
+	- score.spin() (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#1010)
+	- start[0] = score.start() (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#1010-1011)
+	State variables written after the call(s):
+	- start (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#1010-1011)
+Reentrancy in JarConnector.spin (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#1007-1022):
+	External calls:
+	- score.spin() (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#1010)
+	- start[0] = score.start() (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#1010-1011)
+	- score.spin() (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#1013-1015)
+	- start[1] = score.start() (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#1015)
+	State variables written after the call(s):
+	- start (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#1015)
+Reentrancy in LiquidationMachine.topup (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#525-540):
+	External calls:
+	- (rate) = vat.ilks(ilk) (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#529-531)
+	- vat.move(pool,address(this),dtab) (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#534-535)
+	- vat.frob(ilk,urn,urn,address(this),0,- toInt(dtopup)) (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#535-539)
+	State variables written after the call(s):
+	- cushion (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#539-540)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Math.rpow uses assembly (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#61-86)
+	- /sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#63-86
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+DssCdpManager.cdpAllow (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#227-235) should be declared external
+DssCdpManager.urnAllow (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#238-242) should be declared external
+DssCdpManager.open (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#244-269) should be declared external
+DssCdpManager.give (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#269-310) should be declared external
+DssCdpManager.flux (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#326-332) should be declared external
+DssCdpManager.flux (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#341-348) should be declared external
+DssCdpManager.move (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#350-355) should be declared external
+DSAuth.setOwner (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#434-437) should be declared external
+DSAuth.setAuthority (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#437-442) should be declared external
+VatLike.urns (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#459-460) should be declared external
+VatLike.flux (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#463-465) should be declared external
+VatLike.move (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#467-468) should be declared external
+VatLike.frob (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#468-471) should be declared external
+VatLike.fork (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#471-472) should be declared external
+VatLike.ilks (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#472-475) should be declared external
+CatLike.ilks (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#475-478) should be declared external
+EndLike.cat (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#478-480) should be declared external
+Ownable.owner (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#740-742) should be declared external
+Ownable.renounceOwnership (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#766-773) should be declared external
+Ownable.transferOwnership (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#778-781) should be declared external
+BCdpScore.getArtScore (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#962-968) should be declared external
+BCdpScore.getArtGlobalScore (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#969-976) should be declared external
+JarConnector.setManager (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#1001-1005) should be declared external
+JarConnector.spin (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#1007-1022) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol:
+	- pragma solidity^0.5.12 (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#25-27): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '' of VatLike.urns (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#460) is not in mixedCase
+Parameter '_scope_0' of VatLike.urns (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#460) is not in mixedCase
+Parameter '' of VatLike.hope (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#460-461) is not in mixedCase
+Parameter '' of VatLike.flux (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#464) is not in mixedCase
+Parameter '_scope_0' of VatLike.flux (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#464) is not in mixedCase
+Parameter '_scope_1' of VatLike.flux (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#464) is not in mixedCase
+Parameter '_scope_2' of VatLike.flux (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#464) is not in mixedCase
+Parameter '' of VatLike.move (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#467) is not in mixedCase
+Parameter '_scope_0' of VatLike.move (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#468) is not in mixedCase
+Parameter '_scope_1' of VatLike.move (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#468) is not in mixedCase
+Parameter '' of VatLike.frob (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#468) is not in mixedCase
+Parameter '_scope_0' of VatLike.frob (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#468) is not in mixedCase
+Parameter '_scope_1' of VatLike.frob (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#468-471) is not in mixedCase
+Parameter '_scope_2' of VatLike.frob (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#471) is not in mixedCase
+Parameter '_scope_3' of VatLike.frob (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#471) is not in mixedCase
+Parameter '_scope_4' of VatLike.frob (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#471) is not in mixedCase
+Parameter '' of VatLike.fork (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#471) is not in mixedCase
+Parameter '_scope_0' of VatLike.fork (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#471) is not in mixedCase
+Parameter '_scope_1' of VatLike.fork (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#471-472) is not in mixedCase
+Parameter '_scope_2' of VatLike.fork (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#472) is not in mixedCase
+Parameter '_scope_3' of VatLike.fork (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#472) is not in mixedCase
+Parameter '' of CatLike.ilks (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#477) is not in mixedCase
+Parameter '_score' of BCdpManager.setScoreContract (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#694) is not in mixedCase
+Parameter '_pool' of BCdpManager.setPoolContract (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#700) is not in mixedCase
+Function 'Context._msgSender' (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#710-715) is not in mixedCase
+Function 'Context._msgData' (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#716-724) is not in mixedCase
+Function 'Ownable._transferOwnership' (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#784-791) is not in mixedCase
+Parameter '_ilks' of JarConnector. (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#987-988) is not in mixedCase
+Parameter '_duration' of JarConnector. (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#988-992) is not in mixedCase
+Parameter '_manager' of JarConnector.setManager (/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol#1001) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xa02c72c583b6bc5cf7e3b72b7fce53d9c28fbb56.sol analyzed (21 contracts), 73 result(s) found

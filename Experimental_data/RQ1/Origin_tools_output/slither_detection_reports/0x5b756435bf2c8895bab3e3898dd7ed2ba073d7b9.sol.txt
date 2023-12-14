@@ -1,0 +1,71 @@
+INFO:Detectors:[92m
+Reentrancy in KyberBancorReserve.KyberBancorReserve (/sb/0x5b756435bf2c8895bab3e3898dd7ed2ba073d7b9.sol#703-743):
+	External calls:
+	- setDecimals(token) (/sb/0x5b756435bf2c8895bab3e3898dd7ed2ba073d7b9.sol#731)
+	- setDecimals(ETH_TOKEN_ADDRESS) (/sb/0x5b756435bf2c8895bab3e3898dd7ed2ba073d7b9.sol#731-735)
+	State variables written after the call(s):
+	- decimals (/sb/0x5b756435bf2c8895bab3e3898dd7ed2ba073d7b9.sol#731-735)
+Reentrancy in KyberBancorReserve.KyberBancorReserve (/sb/0x5b756435bf2c8895bab3e3898dd7ed2ba073d7b9.sol#703-743):
+	External calls:
+	- setDecimals(token) (/sb/0x5b756435bf2c8895bab3e3898dd7ed2ba073d7b9.sol#731)
+	- setDecimals(ETH_TOKEN_ADDRESS) (/sb/0x5b756435bf2c8895bab3e3898dd7ed2ba073d7b9.sol#731-735)
+	- (lastBuyRate,lastSellRate) = getBancorRatePlusPremiumForEthQty(baseEthQty) (/sb/0x5b756435bf2c8895bab3e3898dd7ed2ba073d7b9.sol#737-743)
+	State variables written after the call(s):
+	- lastBuyRate (/sb/0x5b756435bf2c8895bab3e3898dd7ed2ba073d7b9.sol#737-743)
+	- lastSellRate (/sb/0x5b756435bf2c8895bab3e3898dd7ed2ba073d7b9.sol#737-743)
+Reentrancy in KyberBancorReserve.doTrade (/sb/0x5b756435bf2c8895bab3e3898dd7ed2ba073d7b9.sol#1005-1031):
+	External calls:
+	- require(bool)(token.transferFrom(msg.sender,this,srcAmount)) (/sb/0x5b756435bf2c8895bab3e3898dd7ed2ba073d7b9.sol)
+	- userExpectedDestAmount = calcDstQty(srcAmount,getDecimals(srcToken),getDecimals(destToken),conversionRate) (/sb/0x5b756435bf2c8895bab3e3898dd7ed2ba073d7b9.sol)
+	- require(bool)(destToken.transfer(destAddress,userExpectedDestAmount)) (/sb/0x5b756435bf2c8895bab3e3898dd7ed2ba073d7b9.sol)
+	- (lastBuyRate,lastSellRate) = getBancorRatePlusPremiumForEthQty(baseEthQty) (/sb/0x5b756435bf2c8895bab3e3898dd7ed2ba073d7b9.sol)
+	External calls sending eth:
+	- destAddress.transfer(userExpectedDestAmount) (/sb/0x5b756435bf2c8895bab3e3898dd7ed2ba073d7b9.sol)
+	State variables written after the call(s):
+	- lastBuyRate (/sb/0x5b756435bf2c8895bab3e3898dd7ed2ba073d7b9.sol)
+	- lastSellRate (/sb/0x5b756435bf2c8895bab3e3898dd7ed2ba073d7b9.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+KyberBancorReserve.sanityRatesContract should be constant (/sb/0x5b756435bf2c8895bab3e3898dd7ed2ba073d7b9.sol#669-671)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+ERC20.totalSupply (/sb/0x5b756435bf2c8895bab3e3898dd7ed2ba073d7b9.sol#21-23) should be declared external
+ERC20.balanceOf (/sb/0x5b756435bf2c8895bab3e3898dd7ed2ba073d7b9.sol#23-25) should be declared external
+ERC20.transfer (/sb/0x5b756435bf2c8895bab3e3898dd7ed2ba073d7b9.sol#25-27) should be declared external
+ERC20.transferFrom (/sb/0x5b756435bf2c8895bab3e3898dd7ed2ba073d7b9.sol#27-29) should be declared external
+ERC20.approve (/sb/0x5b756435bf2c8895bab3e3898dd7ed2ba073d7b9.sol#29-31) should be declared external
+ERC20.allowance (/sb/0x5b756435bf2c8895bab3e3898dd7ed2ba073d7b9.sol#31-33) should be declared external
+ERC20.decimals (/sb/0x5b756435bf2c8895bab3e3898dd7ed2ba073d7b9.sol#33-35) should be declared external
+KyberBancorReserve.trade (/sb/0x5b756435bf2c8895bab3e3898dd7ed2ba073d7b9.sol#819-853) should be declared external
+KyberReserveInterface.trade (/sb/0x5b756435bf2c8895bab3e3898dd7ed2ba073d7b9.sol#55-75) should be declared external
+KyberBancorReserve.getConversionRate (/sb/0x5b756435bf2c8895bab3e3898dd7ed2ba073d7b9.sol#935-961) should be declared external
+KyberReserveInterface.getConversionRate (/sb/0x5b756435bf2c8895bab3e3898dd7ed2ba073d7b9.sol#75-85) should be declared external
+Utils2.getBalance (/sb/0x5b756435bf2c8895bab3e3898dd7ed2ba073d7b9.sol#233-251) should be declared external
+PermissionGroups.transferAdmin (/sb/0x5b756435bf2c8895bab3e3898dd7ed2ba073d7b9.sol#409-417) should be declared external
+PermissionGroups.transferAdminQuickly (/sb/0x5b756435bf2c8895bab3e3898dd7ed2ba073d7b9.sol#433-447) should be declared external
+PermissionGroups.claimAdmin (/sb/0x5b756435bf2c8895bab3e3898dd7ed2ba073d7b9.sol#455-469) should be declared external
+PermissionGroups.addAlerter (/sb/0x5b756435bf2c8895bab3e3898dd7ed2ba073d7b9.sol#475-491) should be declared external
+PermissionGroups.removeAlerter (/sb/0x5b756435bf2c8895bab3e3898dd7ed2ba073d7b9.sol#497-521) should be declared external
+PermissionGroups.addOperator (/sb/0x5b756435bf2c8895bab3e3898dd7ed2ba073d7b9.sol#527-549) should be declared external
+PermissionGroups.removeOperator (/sb/0x5b756435bf2c8895bab3e3898dd7ed2ba073d7b9.sol#549-581) should be declared external
+IBancorConverter.getReturn (/sb/0x5b756435bf2c8895bab3e3898dd7ed2ba073d7b9.sol#649-657) should be declared external
+KyberBancorReserve.fallback (/sb/0x5b756435bf2c8895bab3e3898dd7ed2ba073d7b9.sol#745-750) should be declared external
+KyberBancorReserve.setPremium (/sb/0x5b756435bf2c8895bab3e3898dd7ed2ba073d7b9.sol#755-801) should be declared external
+KyberBancorReserve.enableTrade (/sb/0x5b756435bf2c8895bab3e3898dd7ed2ba073d7b9.sol#857-863) should be declared external
+KyberBancorReserve.disableTrade (/sb/0x5b756435bf2c8895bab3e3898dd7ed2ba073d7b9.sol#863-877) should be declared external
+KyberBancorReserve.setKyberNetwork (/sb/0x5b756435bf2c8895bab3e3898dd7ed2ba073d7b9.sol#881-897) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x5b756435bf2c8895bab3e3898dd7ed2ba073d7b9.sol:
+	- pragma solidity0.4.18 (/sb/0x5b756435bf2c8895bab3e3898dd7ed2ba073d7b9.sol#9-13): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'PermissionGroups.PermissionGroups' (/sb/0x5b756435bf2c8895bab3e3898dd7ed2ba073d7b9.sol#353-361) is not in mixedCase
+Function 'KyberBancorReserve.KyberBancorReserve' (/sb/0x5b756435bf2c8895bab3e3898dd7ed2ba073d7b9.sol#703-743) is not in mixedCase
+Parameter '_bancor' of KyberBancorReserve.KyberBancorReserve (/sb/0x5b756435bf2c8895bab3e3898dd7ed2ba073d7b9.sol#709) is not in mixedCase
+Parameter '_kyberNetwork' of KyberBancorReserve.KyberBancorReserve (/sb/0x5b756435bf2c8895bab3e3898dd7ed2ba073d7b9.sol#709) is not in mixedCase
+Parameter '_token' of KyberBancorReserve.KyberBancorReserve (/sb/0x5b756435bf2c8895bab3e3898dd7ed2ba073d7b9.sol#709-711) is not in mixedCase
+Parameter '_admin' of KyberBancorReserve.KyberBancorReserve (/sb/0x5b756435bf2c8895bab3e3898dd7ed2ba073d7b9.sol#711) is not in mixedCase
+Parameter '_kyberNetwork' of KyberBancorReserve.setKyberNetwork (/sb/0x5b756435bf2c8895bab3e3898dd7ed2ba073d7b9.sol#885) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x5b756435bf2c8895bab3e3898dd7ed2ba073d7b9.sol analyzed (8 contracts), 37 result(s) found

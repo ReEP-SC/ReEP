@@ -1,0 +1,72 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xb671f2210b1f6621a2607ea63e6b2dc3e2464d1f.sol:
+/sb/0xb671f2210b1f6621a2607ea63e6b2dc3e2464d1f.sol:470:3: Warning: Functions in interfaces should be declared external.
+  function transfer(address to, uint value) public returns (bool);
+  ^--------------------------------------------------------------^
+/sb/0xb671f2210b1f6621a2607ea63e6b2dc3e2464d1f.sol:472:3: Warning: Functions in interfaces should be declared external.
+  function transferFrom(address from, address to, uint value) public returns (bool);
+  ^--------------------------------------------------------------------------------^
+/sb/0xb671f2210b1f6621a2607ea63e6b2dc3e2464d1f.sol:480:5: Warning: Functions in interfaces should be declared external.
+    function balanceOf(address account) public view returns (uint);
+    ^-------------------------------------------------------------^
+/sb/0xb671f2210b1f6621a2607ea63e6b2dc3e2464d1f.sol:481:5: Warning: Functions in interfaces should be declared external.
+    function appendVestingEntry(address account, uint quantity) public;
+    ^-----------------------------------------------------------------^
+/sb/0xb671f2210b1f6621a2607ea63e6b2dc3e2464d1f.sol:489:5: Warning: Functions in interfaces should be declared external.
+    function effectiveValue(bytes4 sourceCurrencyKey, uint sourceAmount, bytes4 destinationCurrencyKey) public view returns (uint);
+    ^-----------------------------------------------------------------------------------------------------------------------------^
+/sb/0xb671f2210b1f6621a2607ea63e6b2dc3e2464d1f.sol:491:5: Warning: Functions in interfaces should be declared external.
+    function rateForCurrency(bytes4 currencyKey) public view returns (uint);
+    ^----------------------------------------------------------------------^
+
+INFO:Detectors:[93m
+_result in RewardEscrow.checkAccountSchedule (/sb/0xb671f2210b1f6621a2607ea63e6b2dc3e2464d1f.sol#770) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[93m
+RewardEscrow.vest (/sb/0xb671f2210b1f6621a2607ea63e6b2dc3e2464d1f.sol#832-858) does not use the value returned by external calls:
+	-synthetix.transfer(msg.sender,total) (/sb/0xb671f2210b1f6621a2607ea63e6b2dc3e2464d1f.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in RewardEscrow.appendVestingEntry (/sb/0xb671f2210b1f6621a2607ea63e6b2dc3e2464d1f.sol#789-831):
+	External calls:
+	- require(bool,string)(totalEscrowedBalance <= synthetix.balanceOf(this),Must be enough balance in the contract to provide for the vesting entry) (/sb/0xb671f2210b1f6621a2607ea63e6b2dc3e2464d1f.sol#797-798)
+	State variables written after the call(s):
+	- totalEscrowedAccountBalance (/sb/0xb671f2210b1f6621a2607ea63e6b2dc3e2464d1f.sol#812-814)
+	- totalEscrowedAccountBalance (/sb/0xb671f2210b1f6621a2607ea63e6b2dc3e2464d1f.sol#822-826)
+	- vestingSchedules (/sb/0xb671f2210b1f6621a2607ea63e6b2dc3e2464d1f.sol#826-830)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+IFeePool.FEE_ADDRESS should be constant (/sb/0xb671f2210b1f6621a2607ea63e6b2dc3e2464d1f.sol#433)
+ISynthetixState.issuanceRatio should be constant (/sb/0xb671f2210b1f6621a2607ea63e6b2dc3e2464d1f.sol#461-462)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+IFeePool.transferFeeIncurred (/sb/0xb671f2210b1f6621a2607ea63e6b2dc3e2464d1f.sol#443-444) should be declared external
+ISynth.transfer (/sb/0xb671f2210b1f6621a2607ea63e6b2dc3e2464d1f.sol#485-488) should be declared external
+ISynth.transferFrom (/sb/0xb671f2210b1f6621a2607ea63e6b2dc3e2464d1f.sol#489-491) should be declared external
+ISynthetixEscrow.balanceOf (/sb/0xb671f2210b1f6621a2607ea63e6b2dc3e2464d1f.sol#493-495) should be declared external
+ISynthetixEscrow.appendVestingEntry (/sb/0xb671f2210b1f6621a2607ea63e6b2dc3e2464d1f.sol#495-500) should be declared external
+IExchangeRates.effectiveValue (/sb/0xb671f2210b1f6621a2607ea63e6b2dc3e2464d1f.sol#501-510) should be declared external
+IExchangeRates.rateForCurrency (/sb/0xb671f2210b1f6621a2607ea63e6b2dc3e2464d1f.sol#510-512) should be declared external
+ISynthetix.balanceOf (/sb/0xb671f2210b1f6621a2607ea63e6b2dc3e2464d1f.sol#526-527) should be declared external
+ISynthetix.transfer (/sb/0xb671f2210b1f6621a2607ea63e6b2dc3e2464d1f.sol#527-528) should be declared external
+ISynthetix.effectiveValue (/sb/0xb671f2210b1f6621a2607ea63e6b2dc3e2464d1f.sol#528-532) should be declared external
+ISynthetix.collateralisationRatio (/sb/0xb671f2210b1f6621a2607ea63e6b2dc3e2464d1f.sol#543-548) should be declared external
+ISynthetix.totalIssuedSynths (/sb/0xb671f2210b1f6621a2607ea63e6b2dc3e2464d1f.sol#548-552) should be declared external
+ISynthetix.getSynth (/sb/0xb671f2210b1f6621a2607ea63e6b2dc3e2464d1f.sol#552-553) should be declared external
+ISynthetix.debtBalanceOf (/sb/0xb671f2210b1f6621a2607ea63e6b2dc3e2464d1f.sol#553-554) should be declared external
+RewardEscrow.balanceOf (/sb/0xb671f2210b1f6621a2607ea63e6b2dc3e2464d1f.sol#665-671) should be declared external
+RewardEscrow.checkAccountSchedule (/sb/0xb671f2210b1f6621a2607ea63e6b2dc3e2464d1f.sol#768-778) should be declared external
+RewardEscrow.appendVestingEntry (/sb/0xb671f2210b1f6621a2607ea63e6b2dc3e2464d1f.sol#789-831) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Function 'SafeDecimalMath._multiplyDecimalRound' (/sb/0xb671f2210b1f6621a2607ea63e6b2dc3e2464d1f.sol#189-203) is not in mixedCase
+Function 'SafeDecimalMath._divideDecimalRound' (/sb/0xb671f2210b1f6621a2607ea63e6b2dc3e2464d1f.sol#274-284) is not in mixedCase
+Constant 'SafeDecimalMath.highPrecisionDecimals' (/sb/0xb671f2210b1f6621a2607ea63e6b2dc3e2464d1f.sol#126-128) is not in UPPER_CASE_WITH_UNDERSCORES
+Parameter '_owner' of Owned. (/sb/0xb671f2210b1f6621a2607ea63e6b2dc3e2464d1f.sol#397-398) is not in mixedCase
+Parameter '_owner' of Owned.nominateNewOwner (/sb/0xb671f2210b1f6621a2607ea63e6b2dc3e2464d1f.sol#410-411) is not in mixedCase
+Variable 'IFeePool.FEE_ADDRESS' (/sb/0xb671f2210b1f6621a2607ea63e6b2dc3e2464d1f.sol#433) is not in mixedCase
+Parameter '_synthetix' of RewardEscrow. (/sb/0xb671f2210b1f6621a2607ea63e6b2dc3e2464d1f.sol#621-622) is not in mixedCase
+Parameter '_feePool' of RewardEscrow. (/sb/0xb671f2210b1f6621a2607ea63e6b2dc3e2464d1f.sol#622-623) is not in mixedCase
+Parameter '_synthetix' of RewardEscrow.setSynthetix (/sb/0xb671f2210b1f6621a2607ea63e6b2dc3e2464d1f.sol#636-637) is not in mixedCase
+Parameter '_feePool' of RewardEscrow.setFeePool (/sb/0xb671f2210b1f6621a2607ea63e6b2dc3e2464d1f.sol#653) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xb671f2210b1f6621a2607ea63e6b2dc3e2464d1f.sol analyzed (10 contracts), 31 result(s) found

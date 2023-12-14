@@ -1,0 +1,59 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x9fca8394b1ffe9900decfd3af7098747b9e756ca.sol:
+/sb/0x9fca8394b1ffe9900decfd3af7098747b9e756ca.sol:165:5: Warning: Function state mutability can be restricted to pure
+    function transfer(address, uint) public {}
+    ^----------------------------------------^
+
+INFO:Detectors:[93m
+EthertoteToken (/sb/0x9fca8394b1ffe9900decfd3af7098747b9e756ca.sol#163-181) has incorrect ERC20 function interface(s):
+	-transfer (/sb/0x9fca8394b1ffe9900decfd3af7098747b9e756ca.sol#181)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[93m
+Reentrancy in Reward.claimTokens (/sb/0x9fca8394b1ffe9900decfd3af7098747b9e756ca.sol#435-463):
+	External calls:
+	- require(bool)(now > showTokenSaleClosingTime()) (/sb/0x9fca8394b1ffe9900decfd3af7098747b9e756ca.sol#435-442)
+	- require(bool)(now < (showTokenSaleClosingTime().add(5184000))) (/sb/0x9fca8394b1ffe9900decfd3af7098747b9e756ca.sol#447)
+	- token.transfer(msg.sender,claimants[i].claimantAmount) (/sb/0x9fca8394b1ffe9900decfd3af7098747b9e756ca.sol#457-459)
+	State variables written after the call(s):
+	- claimants (/sb/0x9fca8394b1ffe9900decfd3af7098747b9e756ca.sol#460-461)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+Reward.claimTokens has external calls inside a loop:
+	- token.transfer(msg.sender,claimants[i].claimantAmount) (/sb/0x9fca8394b1ffe9900decfd3af7098747b9e756ca.sol#457-459)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reward.claimTokenWindowOpen should be constant (/sb/0x9fca8394b1ffe9900decfd3af7098747b9e756ca.sol#243-247)
+Reward.contractCreationBlockTime should be constant (/sb/0x9fca8394b1ffe9900decfd3af7098747b9e756ca.sol#229-237)
+Reward.tokenContractAddress should be constant (/sb/0x9fca8394b1ffe9900decfd3af7098747b9e756ca.sol#211-217)
+Reward.tokenSaleAddress should be constant (/sb/0x9fca8394b1ffe9900decfd3af7098747b9e756ca.sol#217-223)
+Reward.tokenSaleClosingTime should be constant (/sb/0x9fca8394b1ffe9900decfd3af7098747b9e756ca.sol#239-241)
+Reward.windowOpenTime should be constant (/sb/0x9fca8394b1ffe9900decfd3af7098747b9e756ca.sol#247-249)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+EthertoteToken.thisContractAddress (/sb/0x9fca8394b1ffe9900decfd3af7098747b9e756ca.sol#165-173) should be declared external
+EthertoteToken.balanceOf (/sb/0x9fca8394b1ffe9900decfd3af7098747b9e756ca.sol#173-181) should be declared external
+EthertoteToken.transfer (/sb/0x9fca8394b1ffe9900decfd3af7098747b9e756ca.sol#181) should be declared external
+TokenSale.closingTime (/sb/0x9fca8394b1ffe9900decfd3af7098747b9e756ca.sol#191-195) should be declared external
+Reward.addClaimant (/sb/0x9fca8394b1ffe9900decfd3af7098747b9e756ca.sol#352-375) should be declared external
+Reward.adjustEntitlement (/sb/0x9fca8394b1ffe9900decfd3af7098747b9e756ca.sol#375-391) should be declared external
+Reward.recoverTokens (/sb/0x9fca8394b1ffe9900decfd3af7098747b9e756ca.sol#395-405) should be declared external
+Reward.ClaimEth (/sb/0x9fca8394b1ffe9900decfd3af7098747b9e756ca.sol#419-425) should be declared external
+Reward.claimTokens (/sb/0x9fca8394b1ffe9900decfd3af7098747b9e756ca.sol#435-463) should be declared external
+Reward.checkClaimEntitlement (/sb/0x9fca8394b1ffe9900decfd3af7098747b9e756ca.sol#483-507) should be declared external
+Reward.checkClaimEntitlementofWallet (/sb/0x9fca8394b1ffe9900decfd3af7098747b9e756ca.sol#509-543) should be declared external
+Reward.numberOfClaimants (/sb/0x9fca8394b1ffe9900decfd3af7098747b9e756ca.sol#543-553) should be declared external
+Reward.thisContractBalance (/sb/0x9fca8394b1ffe9900decfd3af7098747b9e756ca.sol) should be declared external
+Reward.thisContractTokenBalance (/sb/0x9fca8394b1ffe9900decfd3af7098747b9e756ca.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '' of EthertoteToken.balanceOf (/sb/0x9fca8394b1ffe9900decfd3af7098747b9e756ca.sol#173) is not in mixedCase
+Parameter '' of EthertoteToken.transfer (/sb/0x9fca8394b1ffe9900decfd3af7098747b9e756ca.sol#181) is not in mixedCase
+Parameter '_scope_0' of EthertoteToken.transfer (/sb/0x9fca8394b1ffe9900decfd3af7098747b9e756ca.sol#181) is not in mixedCase
+Parameter '_address' of Reward.addClaimant (/sb/0x9fca8394b1ffe9900decfd3af7098747b9e756ca.sol#357) is not in mixedCase
+Parameter '_amount' of Reward.addClaimant (/sb/0x9fca8394b1ffe9900decfd3af7098747b9e756ca.sol#357) is not in mixedCase
+Parameter '' of Reward.addClaimant (/sb/0x9fca8394b1ffe9900decfd3af7098747b9e756ca.sol#357) is not in mixedCase
+Parameter '_address' of Reward.adjustEntitlement (/sb/0x9fca8394b1ffe9900decfd3af7098747b9e756ca.sol#377) is not in mixedCase
+Parameter '_amount' of Reward.adjustEntitlement (/sb/0x9fca8394b1ffe9900decfd3af7098747b9e756ca.sol#377) is not in mixedCase
+Function 'Reward.ClaimEth' (/sb/0x9fca8394b1ffe9900decfd3af7098747b9e756ca.sol#419-425) is not in mixedCase
+Parameter '_address' of Reward.checkClaimEntitlementofWallet (/sb/0x9fca8394b1ffe9900decfd3af7098747b9e756ca.sol#511-513) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x9fca8394b1ffe9900decfd3af7098747b9e756ca.sol analyzed (4 contracts), 28 result(s) found

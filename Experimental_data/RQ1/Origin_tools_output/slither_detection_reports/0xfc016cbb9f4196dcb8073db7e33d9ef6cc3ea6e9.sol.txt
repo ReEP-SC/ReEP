@@ -1,0 +1,95 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol:
+/sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol:180:13: Warning: Invoking events without "emit" prefix is deprecated.
+            Transfer(from, to, value);
+            ^-----------------------^
+/sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol:213:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Approval(owner, spender, value);
+        ^-----------------------------^
+/sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol:314:13: Warning: Return value of low-level calls not used.
+            mk_contract_address(this, i).call();
+            ^---------------------------------^
+/sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol:427:29: Warning: Using contract member "balance" inherited from the address type is deprecated. Convert the contract to "address" type to access the member, for example use "address(contract).balance" instead.
+        msg.sender.transfer(this.balance);
+                            ^----------^
+
+INFO:Detectors:[91m
+GasSiphonWallet.withdraw (/sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol) sends eth to arbitrary user
+	Dangerous calls:
+	- msg.sender.transfer(this.balance) (/sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[93m
+Rlp.mk_contract_address (/sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol#98-160) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+Reentrancy in GasToken2.free (/sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol#338-342):
+	External calls:
+	- destroyChildren(value) (/sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol#341)
+	State variables written after the call(s):
+	- s_balances (/sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol#341-342)
+Reentrancy in GasToken2.freeFrom (/sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol#367-384):
+	External calls:
+	- destroyChildren(value) (/sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol#382)
+	State variables written after the call(s):
+	- s_allowances (/sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol#383-384)
+	- s_balances (/sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol#383)
+Reentrancy in GasToken2.freeFromUpTo (/sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol#392-424):
+	External calls:
+	- destroyChildren(value) (/sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol#415-416)
+	State variables written after the call(s):
+	- s_allowances (/sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol#420-422)
+	- s_balances (/sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol#417-420)
+Reentrancy in GasToken2.freeUpTo (/sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol#355-359):
+	External calls:
+	- destroyChildren(value) (/sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol#358)
+	State variables written after the call(s):
+	- s_balances (/sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol#358-359)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+GasSiphonWallet.withdraw (/sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol) does not use the value returned by external calls:
+	-gasToken.transfer(msg.sender,bal) (/sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+GasToken2.destroyChildren has external calls inside a loop:
+	- mk_contract_address(this,i).call() (/sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol#323)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Rlp.mk_contract_address uses assembly (/sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol#98-160)
+	- /sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol#146-159
+GasToken2.makeChild uses assembly (/sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol#259-293)
+	- /sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol#260-293
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+Ownable.owner (/sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol#29-34) should be declared external
+Ownable.renounceOwnership (/sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol#55-60) should be declared external
+Ownable.transferOwnership (/sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol#63-68) should be declared external
+GasToken2.balanceOf (/sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol#176-178) should be declared external
+GasToken2.transfer (/sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol#193-195) should be declared external
+GasToken2.transferFrom (/sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol#196-207) should be declared external
+GasToken2.approve (/sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol#211-220) should be declared external
+GasToken2.allowance (/sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol#226-230) should be declared external
+GasToken2.totalSupply (/sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol#256-258) should be declared external
+GasToken2.mint (/sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol#301-303) should be declared external
+GasToken2.free (/sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol#338-342) should be declared external
+GasToken2.freeUpTo (/sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol#355-359) should be declared external
+GasToken2.freeFrom (/sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol#367-384) should be declared external
+GasToken2.freeFromUpTo (/sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol#392-424) should be declared external
+GasSiphonWallet.fallback (/sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol#430-433) should be declared external
+GasSiphonWallet.setMintRate (/sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Low level call in GasToken2.destroyChildren (/sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol#319-324):
+	-mk_contract_address(this,i).call() /sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol#323
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Function 'Ownable._transferOwnership' (/sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol#72-82) is not in mixedCase
+Function 'Rlp.count_bytes' (/sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol#87-97) is not in mixedCase
+Function 'Rlp.mk_contract_address' (/sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol#98-160) is not in mixedCase
+Variable 'GasToken2.s_balances' (/sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol#167) is not in mixedCase
+Variable 'GasToken2.s_allowances' (/sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol#169-170) is not in mixedCase
+Variable 'GasToken2.s_head' (/sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol#250) is not in mixedCase
+Variable 'GasToken2.s_tail' (/sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol#250) is not in mixedCase
+Parameter '_gasToken' of GasSiphonWallet. (/sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol#427-428) is not in mixedCase
+Parameter '_numTokens' of GasSiphonWallet.mint (/sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol) is not in mixedCase
+Parameter '_mintRate' of GasSiphonWallet.setMintRate (/sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xfc016cbb9f4196dcb8073db7e33d9ef6cc3ea6e9.sol analyzed (4 contracts), 37 result(s) found

@@ -1,0 +1,116 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol:
+/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol:257:5: Warning: Functions in interfaces should be declared external.
+    function addVersion(string _contractName, string version, address implementation) public;
+    ^---------------------------------------------------------------------------------------^
+/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol:265:5: Warning: Functions in interfaces should be declared external.
+    function getVersion(string _contractName, string version) public view returns (address);
+    ^--------------------------------------------------------------------------------------^
+/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol:408:40: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+        PROXY_STORAGE_CONTRACT.setUint(keccak256(_tokensReleaseDate), block.timestamp + 10 * (1 years));
+                                       ^---------------------------^
+/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol:408:40: Warning: The provided argument of type string memory is not implicitly convertible to expected type bytes memory.
+        PROXY_STORAGE_CONTRACT.setUint(keccak256(_tokensReleaseDate), block.timestamp + 10 * (1 years));
+                                       ^---------------------------^
+/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol:408:95: Warning: Using "years" as a unit denomination is deprecated.
+        PROXY_STORAGE_CONTRACT.setUint(keccak256(_tokensReleaseDate), block.timestamp + 10 * (1 years));
+                                                                                              ^-----^
+/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol:424:65: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+        uint tokensReleaseDate = PROXY_STORAGE_CONTRACT.getUint(keccak256(_tokensReleaseDate));
+                                                                ^---------------------------^
+/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol:424:65: Warning: The provided argument of type string memory is not implicitly convertible to expected type bytes memory.
+        uint tokensReleaseDate = PROXY_STORAGE_CONTRACT.getUint(keccak256(_tokensReleaseDate));
+                                                                ^---------------------------^
+/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol:438:39: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+        bytes32 keyHashTotalRewards = keccak256(_tokensReceivedFromModeratorRewards);
+                                      ^--------------------------------------------^
+/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol:438:39: Warning: The provided argument of type string memory is not implicitly convertible to expected type bytes memory.
+        bytes32 keyHashTotalRewards = keccak256(_tokensReceivedFromModeratorRewards);
+                                      ^--------------------------------------------^
+/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol:331:25: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function initialize(address sender) public payable {
+                        ^------------^
+
+INFO:Detectors:[91m
+UpgradeabilityStorage.registry (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#312-314) is never initialized. It is used in:
+	- initialize (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#331-336)
+UpgradeabilityStorage._implementation (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#315-317) is never initialized. It is used in:
+	- implementation (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#321-326)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-state-variables[0m
+INFO:Detectors:[93m
+Contract locking ether found in /sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol:
+	Contract TwoKeyDeepFreezeTokenPool has payable functions:
+	 - initialize (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#331-336)
+	But does not have a function to withdraw the ether
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#contracts-that-lock-ether[0m
+INFO:Detectors:[93m
+Reentrancy in TwoKeyDeepFreezeTokenPool.setInitialParams (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#394-413):
+	External calls:
+	- PROXY_STORAGE_CONTRACT.setUint(keccak256()(_tokensReleaseDate),block.timestamp + 10 * (220752000)) (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#408-410)
+	State variables written after the call(s):
+	- initialized (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#410-411)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+TokenPool.transferTokens (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#364-375) does not use the value returned by external calls:
+	-IERC20(twoKeyEconomy).transfer(receiver,amount) (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#371-372)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+TwoKeyDeepFreezeTokenPool.transferTokensToCommunityPool (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#418-431) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool)(block.timestamp > tokensReleaseDate) (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#427-428)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+UpgradeabilityStorage._implementation should be constant (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#315-317)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+IERC20.approve (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#34-43) should be declared external
+ITwoKeyCampaignValidator.isCampaignValidated (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#117-118) should be declared external
+ITwoKeyCampaignValidator.validateAcquisitionCampaign (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#118-119) should be declared external
+ITwoKeyCampaignValidator.validateDonationCampaign (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#119-120) should be declared external
+ITwoKeyCampaignValidator.validateCPCCampaign (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#120-123) should be declared external
+ITwoKeyEventSource.ethereumOf (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#125-126) should be declared external
+ITwoKeyEventSource.plasmaOf (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#126-127) should be declared external
+ITwoKeyEventSource.isAddressMaintainer (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#127-128) should be declared external
+ITwoKeyEventSource.getTwoKeyDefaultIntegratorFeeFromAdmin (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#128-129) should be declared external
+ITwoKeyEventSource.getTwoKeyDefaultNetworkTaxPercent (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#143-148) should be declared external
+ITwoKeyEventSource.emitReceivedTokensToDeepFreezeTokenPool (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#179-185) should be declared external
+ITwoKeyEventSource.emitReceivedTokensAsModerator (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#185-191) should be declared external
+ITwoKeyEventSource.emitDAIReleasedAsIncome (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#191-197) should be declared external
+ITwoKeyEventSource.emitEndedBudgetCampaign (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#197-205) should be declared external
+ITwoKeyEventSource.emitUserWithdrawnNetworkEarnings (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#205-211) should be declared external
+ITwoKeyEventSource.emitRebalancedRewards (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#211-219) should be declared external
+ITwoKeyMaintainersRegistry.checkIsAddressMaintainer (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#220-221) should be declared external
+ITwoKeyMaintainersRegistry.checkIsAddressCoreDev (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#221-223) should be declared external
+ITwoKeyMaintainersRegistry.addMaintainers (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#223-224) should be declared external
+ITwoKeyMaintainersRegistry.addCoreDevs (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#224-225) should be declared external
+ITwoKeyMaintainersRegistry.removeMaintainers (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#225-226) should be declared external
+ITwoKeyMaintainersRegistry.removeCoreDevs (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#226-229) should be declared external
+ITwoKeySingletoneRegistryFetchAddress.getContractProxyAddress (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#230-231) should be declared external
+ITwoKeySingletoneRegistryFetchAddress.getNonUpgradableContractAddress (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#231-232) should be declared external
+ITwoKeySingletoneRegistryFetchAddress.getLatestCampaignApprovedVersion (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#232-235) should be declared external
+ITwoKeySingletonesRegistry.addVersion (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#257-259) should be declared external
+ITwoKeySingletonesRegistry.getVersion (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#265-268) should be declared external
+UpgradeabilityStorage.implementation (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#321-326) should be declared external
+Upgradeable.initialize (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#331-336) should be declared external
+TwoKeyDeepFreezeTokenPool.setInitialParams (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#394-413) should be declared external
+TwoKeyDeepFreezeTokenPool.transferTokensToCommunityPool (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#418-431) should be declared external
+TwoKeyDeepFreezeTokenPool.updateReceivedTokensForSuccessfulConversions (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#431-446) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol:
+	- pragma solidity^0.4.13 (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#5-7): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Variable 'ITwoKeySingletonUtils.TWO_KEY_SINGLETON_REGISTRY' (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#274-276) is not in mixedCase
+Variable 'UpgradeabilityStorage._implementation' (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#315-317) is not in mixedCase
+Constant 'TokenPool._twoKeyAdmin' (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#340-341) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'TokenPool._twoKeyEconomy' (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#341-343) is not in UPPER_CASE_WITH_UNDERSCORES
+Parameter '_twoKeySingletonesRegistry' of TwoKeyDeepFreezeTokenPool.setInitialParams (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#395-396) is not in mixedCase
+Parameter '_twoKeyParticipationMiningPool' of TwoKeyDeepFreezeTokenPool.setInitialParams (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#396-397) is not in mixedCase
+Parameter '_proxyStorage' of TwoKeyDeepFreezeTokenPool.setInitialParams (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#397-398) is not in mixedCase
+Variable 'TwoKeyDeepFreezeTokenPool.PROXY_STORAGE_CONTRACT' (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#378-380) is not in mixedCase
+Constant 'TwoKeyDeepFreezeTokenPool._tokensReleaseDate' (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#380-381) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'TwoKeyDeepFreezeTokenPool._tokensReceivedFromModeratorRewards' (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#381-383) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'TwoKeyDeepFreezeTokenPool._twoKeyCampaignValidator' (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#383-384) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'TwoKeyDeepFreezeTokenPool._twoKeyEventSource' (/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol#384-386) is not in UPPER_CASE_WITH_UNDERSCORES
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xc4a300ffb8b0496d0335a3487fa6910a14913846.sol analyzed (13 contracts), 52 result(s) found

@@ -1,0 +1,110 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol:
+/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol:501:17: Warning: Function declared as view, but this expression (potentially) modifies the state and thus requires non-payable (the default) or payable.
+        require(token.call(bytes4(keccak256("name()"))));
+                ^-------------------------------------^
+/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol:515:17: Warning: Function declared as view, but this expression (potentially) modifies the state and thus requires non-payable (the default) or payable.
+        require(token.call(bytes4(keccak256("symbol()"))));
+                ^---------------------------------------^
+
+INFO:Detectors:[91m
+MultiChanger.sendEthValue (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#653-657) sends eth to arbitrary user
+	Dangerous calls:
+	- require(bool)(target.call.value(value)()) (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#655-657)
+MultiChanger.sendEthProportion (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#657-673) sends eth to arbitrary user
+	Dangerous calls:
+	- require(bool)(target.call.value(value)()) (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#671)
+MultiChanger.depositEtherTokenAmount (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#673-685) sends eth to arbitrary user
+	Dangerous calls:
+	- etherToken.deposit.value(amount)() (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#685)
+MultiChanger.depositEtherTokenProportion (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#685-695) sends eth to arbitrary user
+	Dangerous calls:
+	- etherToken.deposit.value(amount)() (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#693-695)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[93m
+CheckedERC20.isContract (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#337-351) is declared view but contains assembly code
+CheckedERC20.handleReturnBool (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#351-387) is declared view but contains assembly code
+CheckedERC20.handleReturnBytes32 (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#387-427) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+CheckedERC20.checkedTransfer (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#477-497) uses a dangerous strict equality:
+	- require(bool,string)(token.balanceOf(this) == balance.sub(value),checkedTransfer: Final balance didn't match)
+CheckedERC20.checkedTransfer (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#477-497) uses a dangerous strict equality:
+	- require(bool,string)(token.balanceOf(this) == balance.sub(value),checkedTransfer: Final balance didn't match)
+CheckedERC20.checkedTransferFrom (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#497-515) uses a dangerous strict equality:
+	- require(bool,string)(token.balanceOf(to) == toBalance.add(value),checkedTransfer: Final balance didn't match)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+MultiChanger.transferFromTokenAmount uses tx.origin for authorization:
+	- require(bool)(fromToken.asmTransferFrom(tx.origin,this,amount)) (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#739)
+MultiChanger.transferFromTokenProportion uses tx.origin for authorization:
+	- require(bool)(fromToken.asmTransferFrom(tx.origin,this,amount)) (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#745-747)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-usage-of-txorigin[0m
+INFO:Detectors:[93m
+MultiChanger.multitokenChangeAmount (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol) does not use the value returned by external calls:
+	-fromToken.asmApprove(mtkn,uint256(- 1)) (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol)
+	-mtkn.change(fromToken,toToken,amount,minReturn) (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+CheckedERC20.isContract uses assembly (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#337-351)
+	- /sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#345-351
+CheckedERC20.handleReturnBool uses assembly (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#351-387)
+	- /sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#359-387
+CheckedERC20.handleReturnBytes32 uses assembly (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#387-427)
+	- /sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#399-427
+ExternalCall.externalCall uses assembly (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#549-607)
+	- /sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#553-607
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+ERC20Basic.totalSupply (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#29-31) should be declared external
+ERC20Basic.balanceOf (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#31-33) should be declared external
+ERC20Basic.transfer (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#33-35) should be declared external
+ERC20.allowance (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#57-61) should be declared external
+ERC20.transferFrom (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#61-67) should be declared external
+ERC20.approve (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#67-73) should be declared external
+IBasicMultiToken.tokensCount (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#97-99) should be declared external
+IBasicMultiToken.tokens (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#99-103) should be declared external
+IBasicMultiToken.bundlingEnabled (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#103) should be declared external
+IBasicMultiToken.bundleFirstTokens (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#105-109) should be declared external
+IBasicMultiToken.bundle (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#109-111) should be declared external
+IBasicMultiToken.unbundle (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#111-115) should be declared external
+IBasicMultiToken.unbundleSome (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#117-123) should be declared external
+IBasicMultiToken.disableBundling (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#123-125) should be declared external
+IBasicMultiToken.enableBundling (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#126-129) should be declared external
+IMultiToken.weights (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#171) should be declared external
+IMultiToken.changesEnabled (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#171-173) should be declared external
+IMultiToken.getReturn (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#173-179) should be declared external
+IMultiToken.change (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#179-189) should be declared external
+IMultiToken.disableChanges (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#189-191) should be declared external
+IEtherToken.deposit (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#619-621) should be declared external
+IEtherToken.withdraw (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#621-623) should be declared external
+MultiChanger.change (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#631-647) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Low level call in CheckedERC20.asmTransfer (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#427-441):
+	-require(bool)(token.call(bytes4(keccak256()(transfer(address,uint256))),to,value)) /sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#433-441
+Low level call in CheckedERC20.asmTransferFrom (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#441-461):
+	-require(bool)(token.call(bytes4(keccak256()(transferFrom(address,address,uint256))),from,to,value)) /sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#447-459
+Low level call in CheckedERC20.asmApprove (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#461-475):
+	-require(bool)(token.call(bytes4(keccak256()(approve(address,uint256))),spender,value)) /sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#467-475
+Low level call in CheckedERC20.asmName (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#515-533):
+	-require(bool)(token.call(bytes4(keccak256()(name())))) /sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#531
+Low level call in CheckedERC20.asmSymbol (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#533-539):
+	-require(bool)(token.call(bytes4(keccak256()(symbol())))) /sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#537
+Low level call in MultiChanger.sendEthValue (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#653-657):
+	-require(bool)(target.call.value(value)()) /sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#655-657
+Low level call in MultiChanger.sendEthProportion (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#657-673):
+	-require(bool)(target.call.value(value)()) /sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#671
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Constant 'IBasicMultiToken.InterfaceId_IBasicMultiToken' (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#129-131) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'IMultiToken.InterfaceId_IMultiToken' (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#191-193) is not in UPPER_CASE_WITH_UNDERSCORES
+Parameter '_a' of SafeMath.mul (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#235) is not in mixedCase
+Parameter '_b' of SafeMath.mul (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#235) is not in mixedCase
+Parameter '_a' of SafeMath.div (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#269) is not in mixedCase
+Parameter '_b' of SafeMath.div (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#271-275) is not in mixedCase
+Parameter '_a' of SafeMath.sub (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#301-303) is not in mixedCase
+Parameter '_b' of SafeMath.sub (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#303-305) is not in mixedCase
+Parameter '_a' of SafeMath.add (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#321-323) is not in mixedCase
+Parameter '_b' of SafeMath.add (/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol#323) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x9ef74f01c70c80f008b51ae434e56ee79b6f4016.sol analyzed (9 contracts), 56 result(s) found

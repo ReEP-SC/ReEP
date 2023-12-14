@@ -1,0 +1,94 @@
+INFO:Detectors:[93m
+Reentrancy in DaiSavingsEscrow.release (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#494-512):
+	External calls:
+	- chai.exit(vault,escr.wrap) (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#506)
+	- receivedDai = dai.balanceOf(vault) (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#507)
+	- dai.transfer(escr.provider,escr.payment) (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#508-510)
+	- dai.transfer(manager,interest) (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#510)
+	State variables written after the call(s):
+	- escrow (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#510-511)
+Reentrancy in DaiSavingsEscrow.resolve (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#469-494):
+	External calls:
+	- chai.exit(vault,escr.wrap) (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#486-487)
+	- receivedDai = dai.balanceOf(vault) (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#488)
+	- dai.transfer(escr.client,clientAward) (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#489-490)
+	- dai.transfer(escr.provider,providerAward) (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#490-491)
+	- dai.transfer(msg.sender,lexFee) (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#492)
+	- dai.transfer(manager,interest) (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#492-493)
+	State variables written after the call(s):
+	- escrow (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#493)
+Reentrancy in DaiSavingsEscrow.withdraw (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#512-534):
+	External calls:
+	- chai.exit(vault,escr.wrap) (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#526)
+	- receivedDai = dai.balanceOf(vault) (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#527-528)
+	- dai.transfer(escr.provider,escr.payment) (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#532)
+	- dai.transfer(manager,interest) (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#532-533)
+	State variables written after the call(s):
+	- escrow (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#533-534)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+DaiSavingsEscrow.constructor (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#433-436) does not use the value returned by external calls:
+	-dai.approve(chaiAddress,uint256(- 1)) (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#435)
+DaiSavingsEscrow.register (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#437-462) does not use the value returned by external calls:
+	-dai.transferFrom(msg.sender,vault,payment) (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#446-448)
+DaiSavingsEscrow.resolve (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#469-494) does not use the value returned by external calls:
+	-dai.transfer(escr.client,clientAward) (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#489-490)
+	-dai.transfer(escr.provider,providerAward) (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#490-491)
+	-dai.transfer(msg.sender,lexFee) (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#492)
+	-dai.transfer(manager,interest) (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#492-493)
+DaiSavingsEscrow.release (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#494-512) does not use the value returned by external calls:
+	-dai.transfer(escr.provider,escr.payment) (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#508-510)
+	-dai.transfer(manager,interest) (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#510)
+DaiSavingsEscrow.withdraw (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#512-534) does not use the value returned by external calls:
+	-dai.transfer(escr.provider,escr.payment) (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#532)
+	-dai.transfer(manager,interest) (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#532-533)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in DaiSavingsEscrow.constructor (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#433-436):
+	External calls:
+	- dai.approve(chaiAddress,uint256(- 1)) (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#435)
+	State variables written after the call(s):
+	- manager (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#435-436)
+Reentrancy in DaiSavingsEscrow.register (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#437-462):
+	External calls:
+	- dai.transferFrom(msg.sender,vault,payment) (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#446-448)
+	- balance = chai.balanceOf(vault) (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#450)
+	- chai.join(vault,payment) (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#450-453)
+	- escrow[index] = Escrow(msg.sender,provider,payment,chai.balanceOf(vault).sub(balance),termination,index,details,false,false) (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#454-459)
+	State variables written after the call(s):
+	- escrow (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#454-459)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+DaiSavingsEscrow.chaiAddress should be constant (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#397-400)
+DaiSavingsEscrow.daiAddress should be constant (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#393-395)
+DaiSavingsEscrow.emoji should be constant (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#412)
+DaiSavingsEscrow.version should be constant (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#408-410)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+LexDAORole.addLexDAO (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#109-113) should be declared external
+LexDAORole.renounceLexDAO (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#113-115) should be declared external
+IChai.transferFrom (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#361-363) should be declared external
+IChai.exit (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#383-384) should be declared external
+DaiSavingsEscrow.register (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#437-462) should be declared external
+DaiSavingsEscrow.dispute (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#464-469) should be declared external
+DaiSavingsEscrow.resolve (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#469-494) should be declared external
+DaiSavingsEscrow.release (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#494-512) should be declared external
+DaiSavingsEscrow.withdraw (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#512-534) should be declared external
+DaiSavingsEscrow.proposeManager (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol) should be declared external
+DaiSavingsEscrow.transferManager (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol:
+	- pragma solidity0.5.14 (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#19-21): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'Context._msgSender' (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#39-43) is not in mixedCase
+Function 'Context._msgData' (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#43-51) is not in mixedCase
+Function 'LexDAORole._addLexDAO' (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#115-120) is not in mixedCase
+Function 'LexDAORole._removeLexDAO' (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#120-128) is not in mixedCase
+Parameter '_proposedManager' of DaiSavingsEscrow.proposeManager (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+DaiSavingsEscrow.daiAddress (/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol#393-395) is never used in DaiSavingsEscrow
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0xb6b82757620aae18d5b853682a6923390a1ad74c.sol analyzed (7 contracts), 29 result(s) found

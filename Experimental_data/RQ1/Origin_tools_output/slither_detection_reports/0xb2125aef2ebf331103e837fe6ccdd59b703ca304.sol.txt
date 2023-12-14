@@ -1,0 +1,99 @@
+INFO:Detectors:[91m
+SundayLottery.sendToAdministration (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol) sends eth to arbitrary user
+	Dangerous calls:
+	- administrationWallet.send(amount) (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[91m
+Reentrancy in SundayLottery.makeTwists (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#685-699):
+	External calls:
+	- play(currentRound) (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#693)
+	External calls sending eth:
+	- play(currentRound) (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#693)
+	- sendToAdministration() (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#693)
+	State variables written after the call(s):
+	- currentRound (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#697)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities[0m
+INFO:Detectors:[93m
+Address.toAddress (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#67-77) is declared view but contains assembly code
+Address.isNotContract (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#79-97) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[92m
+SundayLottery.buyTicket has external calls inside a loop:
+	- m_tickets.newTicket(currentRound,_addressPlayer,priceOfToken) (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#661-663)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in SundayLottery.buyTicket (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#605-685):
+	External calls:
+	- m_tickets.newTicket(currentRound,_addressPlayer,priceOfToken) (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#661-663)
+	External calls sending eth:
+	- refundEth(msg.sender,investment.sub(requireEth)) (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#643-647)
+	State variables written after the call(s):
+	- totalTicketBuyed (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#673-675)
+Reentrancy in SundayLottery.constructor (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#571-591):
+	External calls:
+	- m_tickets.clearRound(currentRound) (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#587-589)
+	- setStepLottery(_step) (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#589)
+	State variables written after the call(s):
+	- amountPrize (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#589)
+	- canBuyTickets (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#589)
+	- priceOfToken (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#589)
+Reentrancy in SundayLottery.makeTwists (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#685-699):
+	External calls:
+	- play(currentRound) (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#693)
+	External calls sending eth:
+	- play(currentRound) (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#693)
+	- sendToAdministration() (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#693)
+	State variables written after the call(s):
+	- canBuyTickets (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#695)
+Reentrancy in SundayLottery.setStepLottery (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#729-739):
+	External calls:
+	- require(bool)(getCountTickets(currentRound) == 0) (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#731-733)
+	State variables written after the call(s):
+	- amountPrize (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#738-739)
+	- canBuyTickets (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#738-739)
+	- priceOfToken (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#738-739)
+	- stepLottery (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#737)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Address.toAddress uses assembly (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#67-77)
+	- /sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#73-77
+Address.isNotContract uses assembly (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#79-97)
+	- /sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#88-97
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+Accessibility.changeOwner (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#241-259) should be declared external
+TicketsStorage.checkWinner (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#307-309) should be declared external
+TicketsStorage.getBalancePlayer (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#309-316) should be declared external
+TicketsStorage.ticketInfo (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#321-331) should be declared external
+TicketsStorage.newTicket (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#331-359) should be declared external
+TicketsStorage.clearRound (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#359-363) should be declared external
+TicketsStorage.getCountTickets (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#363-371) should be declared external
+TicketsStorage.addBalanceWinner (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#371-385) should be declared external
+TicketsStorage.getBalanceWinner (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#385-393) should be declared external
+TicketsStorage.findHappyNumber (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#393-427) should be declared external
+SundayLottery.getTicketInfo (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#765-775) should be declared external
+SundayLottery.checkWinner (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#813-821) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol:
+	- pragma solidity>0.4.99<0.6.0 (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#9-13): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_a' of SafeMath.mul (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#117-121) is not in mixedCase
+Parameter '_b' of SafeMath.mul (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#121) is not in mixedCase
+Parameter '_a' of SafeMath.div (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#141-143) is not in mixedCase
+Parameter '_b' of SafeMath.div (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#143) is not in mixedCase
+Parameter '_a' of SafeMath.sub (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#177) is not in mixedCase
+Parameter '_b' of SafeMath.sub (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#177) is not in mixedCase
+Parameter '_a' of SafeMath.add (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#201) is not in mixedCase
+Parameter '_b' of SafeMath.add (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#201) is not in mixedCase
+Parameter '_newOwner' of Accessibility.changeOwner (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#243) is not in mixedCase
+Parameter '_administrationWallet' of SundayLottery. (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#571-575) is not in mixedCase
+Parameter '_step' of SundayLottery. (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#575-579) is not in mixedCase
+Parameter '_addressPlayer' of SundayLottery.buyTicket (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#606-607) is not in mixedCase
+Parameter '_player' of SundayLottery.refundEth (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#785-789) is not in mixedCase
+Parameter '_value' of SundayLottery.refundEth (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#789) is not in mixedCase
+Parameter '_newWallet' of SundayLottery.setAdministrationWallet (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol) is not in mixedCase
+Variable 'SundayLottery.m_tickets' (/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol#481-485) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xb2125aef2ebf331103e837fe6ccdd59b703ca304.sol analyzed (6 contracts), 40 result(s) found

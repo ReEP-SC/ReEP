@@ -1,0 +1,120 @@
+INFO:Detectors:[91m
+OnChainShop.fallback (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#937-989) sends eth to arbitrary user
+	Dangerous calls:
+	- beneficiary.transfer(curPriceWei) (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#965-967)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[93m
+IERC721 (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#139-187) has incorrect ERC20 function interface(s):
+	-approve (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#157)
+	-transferFrom (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#169)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[93m
+Reentrancy in OnChainShop.fallback (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#937-989):
+	External calls:
+	- curPriceWei = priceWei() (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#941-945)
+	- remaining = cryptostamp.balanceOf(address(this)) (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#953-955)
+	- priceEurCent = pricingStrategy.adjustPrice(priceEurCent,remaining) (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#955-957)
+	State variables written after the call(s):
+	- priceEurCent (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#955-957)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+OnChainShop.rescueToken (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol) does not use the value returned by external calls:
+	-_foreignToken.transfer(_to,_foreignToken.balanceOf(address(this))) (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in OnChainShop.fallback (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#937-989):
+	External calls:
+	- curPriceWei = priceWei() (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#941-945)
+	- remaining = cryptostamp.balanceOf(address(this)) (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#953-955)
+	- priceEurCent = pricingStrategy.adjustPrice(priceEurCent,remaining) (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#955-957)
+	- tokenId = cryptostamp.tokenOfOwnerByIndex(address(this),0) (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#967-969)
+	- cryptostamp.safeTransferFrom(address(this),msg.sender,tokenId) (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#969-971)
+	External calls sending eth:
+	- beneficiary.transfer(curPriceWei) (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#965-967)
+	State variables written after the call(s):
+	- deliveryStatus (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#977)
+Reentrancy in OnChainShop.shipToMe (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#999-1025):
+	External calls:
+	- require(bool,string)(cryptostamp.ownerOf(_tokenId) == msg.sender,You can only request shipping for your own tokens.) (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#1009-1011)
+	State variables written after the call(s):
+	- deliveryStatus (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#1023-1025)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+OracleRequest.EUR_WEI should be constant (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#513)
+OracleRequest.lastUpdate should be constant (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#513-514)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+IERC721Receiver.onERC721Received (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#73-81) should be declared external
+OnChainShop.onERC721Received (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol) should be declared external
+IERC721.balanceOf (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#147-153) should be declared external
+IERC721.ownerOf (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#153-155) should be declared external
+IERC721.approve (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#157) should be declared external
+IERC721.getApproved (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#157-159) should be declared external
+IERC721.setApprovalForAll (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#159-163) should be declared external
+IERC721.isApprovedForAll (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#163-165) should be declared external
+IERC721.transferFrom (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#169) should be declared external
+IERC721.safeTransferFrom (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#169-175) should be declared external
+IERC721.safeTransferFrom (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#175-187) should be declared external
+IERC721Enumerable.totalSupply (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#201-207) should be declared external
+IERC721Enumerable.tokenOfOwnerByIndex (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#207-212) should be declared external
+IERC721Enumerable.tokenByIndex (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#219) should be declared external
+OracleRequest.ETH_EUR (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#525-541) should be declared external
+OracleRequest.ETH_EURCENT (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#545-547) should be declared external
+Last100PricingStrategy.adjustPrice (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#607-629) should be declared external
+PricingStrategy.adjustPrice (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#555-561) should be declared external
+OnChainShop.setCryptostamp (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#803-819) should be declared external
+OnChainShop.setPrice (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#819-837) should be declared external
+OnChainShop.setBeneficiary (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#837-857) should be declared external
+OnChainShop.setOracle (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#861-881) should be declared external
+OnChainShop.setPricingStrategy (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#881-899) should be declared external
+OnChainShop.openShop (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#901-911) should be declared external
+OnChainShop.closeShop (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#911-913) should be declared external
+OnChainShop.shipToMe (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#999-1025) should be declared external
+OnChainShop.confirmShipping (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#1027-1033) should be declared external
+OnChainShop.rejectShipping (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#1041-1051) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol:
+	- pragma solidity^0.5.0 (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#33-35): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#93): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#131): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#189-193): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#225-227): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#259): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#289): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#345): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#507-509): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#551): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#577-579): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#641): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'OracleRequest.ETH_EUR' (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#525-541) is not in mixedCase
+Function 'OracleRequest.ETH_EURCENT' (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#545-547) is not in mixedCase
+Variable 'OracleRequest.EUR_WEI' (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#513) is not in mixedCase
+Parameter '_oldPrice' of Last100PricingStrategy.adjustPrice (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#607-611) is not in mixedCase
+Parameter '_remainingPieces' of Last100PricingStrategy.adjustPrice (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#611) is not in mixedCase
+Parameter '' of OnChainShop.onERC721Received (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol) is not in mixedCase
+Parameter '_from' of OnChainShop.onERC721Received (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol) is not in mixedCase
+Parameter '_scope_0' of OnChainShop.onERC721Received (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol) is not in mixedCase
+Parameter '_scope_1' of OnChainShop.onERC721Received (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol) is not in mixedCase
+Parameter '_oracle' of OnChainShop. (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#679-681) is not in mixedCase
+Parameter '_priceEurCent' of OnChainShop. (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#681-683) is not in mixedCase
+Parameter '_beneficiary' of OnChainShop. (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#683) is not in mixedCase
+Parameter '_shippingControl' of OnChainShop. (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#683) is not in mixedCase
+Parameter '_tokenAssignmentControl' of OnChainShop. (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#683-685) is not in mixedCase
+Parameter '_newCryptostamp' of OnChainShop.setCryptostamp (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#803) is not in mixedCase
+Parameter '_newPriceEurCent' of OnChainShop.setPrice (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#819) is not in mixedCase
+Parameter '_newBeneficiary' of OnChainShop.setBeneficiary (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#843-847) is not in mixedCase
+Parameter '_newOracle' of OnChainShop.setOracle (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#861) is not in mixedCase
+Parameter '_newPricingStrategy' of OnChainShop.setPricingStrategy (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#881-883) is not in mixedCase
+Parameter '_deliveryInfo' of OnChainShop.shipToMe (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#999-1003) is not in mixedCase
+Parameter '_tokenId' of OnChainShop.shipToMe (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#1003) is not in mixedCase
+Parameter '_tokenId' of OnChainShop.confirmShipping (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#1027-1029) is not in mixedCase
+Parameter '_tokenId' of OnChainShop.rejectShipping (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#1041) is not in mixedCase
+Parameter '_reason' of OnChainShop.rejectShipping (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#1041-1043) is not in mixedCase
+Parameter '_foreignToken' of OnChainShop.rescueToken (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol) is not in mixedCase
+Parameter '_to' of OnChainShop.rescueToken (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol) is not in mixedCase
+Variable 'OnChainShop._isOpen' (/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol#657-659) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xc5ba58b8362a25b1ddb59e2106910b6c324a5668.sol analyzed (12 contracts), 63 result(s) found

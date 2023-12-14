@@ -1,0 +1,169 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol:
+/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol:107:3: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+  function Ownable() public {
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol:797:2: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+	function ChainPay() public {
+ ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol:131:5: Warning: Invoking events without "emit" prefix is deprecated.
+    OwnershipTransferred(owner, newOwner);
+    ^-----------------------------------^
+/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol:173:5: Warning: Invoking events without "emit" prefix is deprecated.
+    OwnershipTransferred(owner, pendingOwner);
+    ^---------------------------------------^
+/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol:241:5: Warning: Invoking events without "emit" prefix is deprecated.
+    Transfer(msg.sender, _to, _value);
+    ^-------------------------------^
+/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol:307:5: Warning: Invoking events without "emit" prefix is deprecated.
+    Transfer(_from, _to, _value);
+    ^--------------------------^
+/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol:321:5: Warning: Invoking events without "emit" prefix is deprecated.
+    Approval(msg.sender, _spender, _value);
+    ^------------------------------------^
+/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol:341:5: Warning: Invoking events without "emit" prefix is deprecated.
+    Approval(msg.sender, _spender, allowed[msg.sender][_spender]);
+    ^-----------------------------------------------------------^
+/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol:365:5: Warning: Invoking events without "emit" prefix is deprecated.
+    Approval(msg.sender, _spender, allowed[msg.sender][_spender]);
+    ^-----------------------------------------------------------^
+/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol:565:3: Warning: Invoking events without "emit" prefix is deprecated.
+		Burn(burner, _value);
+		^------------------^
+/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol:713:3: Warning: Invoking events without "emit" prefix is deprecated.
+		Migrate(msg.sender, value);
+		^------------------------^
+/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol:751:4: Warning: Invoking events without "emit" prefix is deprecated.
+			Migrate(holder, value);
+			^--------------------^
+
+INFO:Detectors:[93m
+Contract locking ether found in /sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol:
+	Contract ChainPay has payable functions:
+	 - fallback (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol)
+	But does not have a function to withdraw the ether
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#contracts-that-lock-ether[0m
+INFO:Detectors:[93m
+empty in ERC223Token.transfer (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#489) is a local variable never initialiazed
+empty in ERC223Token.transferFrom (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#539) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[93m
+MigratoryToken.migrate (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#741-769) does not use the value returned by external calls:
+	-MigrationAgent(migrationAgent).migrateFrom(msg.sender,value) (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#755-763)
+MigratoryToken.migrateHolders (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#769-825) does not use the value returned by external calls:
+	-MigrationAgent(migrationAgent).migrateFrom(holder,value) (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#807-811)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in HoldersToken.transfer (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#637-651):
+	External calls:
+	- ok = super.transfer(_to,_value) (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#647-649)
+	State variables written after the call(s):
+	- holders (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#649)
+	- isHolder (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#649)
+Reentrancy in HoldersToken.transfer (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#651-675):
+	External calls:
+	- ok = super.transfer(_to,_value,_data) (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#669)
+	State variables written after the call(s):
+	- holders (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#669)
+	- isHolder (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#669)
+Reentrancy in HoldersToken.transferFrom (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#675-695):
+	External calls:
+	- ok = super.transferFrom(_from,_to,_value) (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#690-691)
+	State variables written after the call(s):
+	- holders (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#691-693)
+	- isHolder (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#691-693)
+Reentrancy in HoldersToken.transferFrom (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#699-709):
+	External calls:
+	- ok = super.transferFrom(_from,_to,_value,_data) (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#707-709)
+	State variables written after the call(s):
+	- holders (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#709)
+	- isHolder (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#709)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+ERC223Token.checkAndInvokeReceiver uses assembly (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#449-471)
+	- /sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#455-459
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+ERC223Receiver.tokenFallback (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#25-33) should be declared external
+Ownable.transferOwnership (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#131-153) should be declared external
+Claimable.transferOwnership (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#173-179) should be declared external
+Claimable.claimOwnership (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#185-193) should be declared external
+ERC20Basic.totalSupply (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#193-195) should be declared external
+BasicToken.totalSupply (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#233-237) should be declared external
+BasicToken.balanceOf (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#269-271) should be declared external
+ERC20Basic.balanceOf (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#195-203) should be declared external
+ERC20.allowance (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#273-281) should be declared external
+StandardToken.allowance (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#341-351) should be declared external
+ERC20.approve (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#285-291) should be declared external
+StandardToken.approve (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#331-341) should be declared external
+StandardToken.increaseApproval (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#351-365) should be declared external
+StandardToken.decreaseApproval (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#365-403) should be declared external
+ERC223Token.setERC223Activated (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#419-431) should be declared external
+ERC223Token.setWhiteListContract (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#434-439) should be declared external
+ERC223Token.setUserWhiteListContract (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#439-449) should be declared external
+BurnableToken.burnTokenBurn (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#591-611) should be declared external
+MigrationAgent.migrateFrom (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#715-721) should be declared external
+MigratoryToken.setMigrationAgent (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#737-741) should be declared external
+MigratoryToken.migrate (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#741-769) should be declared external
+MigratoryToken.migrateHolders (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#769-825) should be declared external
+ChainPay.setMigrationGate (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#893-903) should be declared external
+ChainPay.transferMulti (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#909) should be declared external
+ChainPay.fallback (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol:
+	- pragma solidity^0.4.18 (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#15-21): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'Ownable.Ownable' (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#119-127) is not in mixedCase
+Parameter '_owner' of BasicToken.balanceOf (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#269) is not in mixedCase
+Parameter '_to' of BasicToken.transfer (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#239) is not in mixedCase
+Parameter '_value' of BasicToken.transfer (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#239-241) is not in mixedCase
+Parameter '_owner' of StandardToken.allowance (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#341) is not in mixedCase
+Parameter '_spender' of StandardToken.allowance (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#341-343) is not in mixedCase
+Parameter '_from' of StandardToken.transferFrom (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#303-305) is not in mixedCase
+Parameter '_to' of StandardToken.transferFrom (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#305) is not in mixedCase
+Parameter '_value' of StandardToken.transferFrom (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#305) is not in mixedCase
+Parameter '_spender' of StandardToken.approve (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#337) is not in mixedCase
+Parameter '_value' of StandardToken.approve (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#337) is not in mixedCase
+Parameter '_spender' of StandardToken.increaseApproval (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#352-353) is not in mixedCase
+Parameter '_addedValue' of StandardToken.increaseApproval (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#353) is not in mixedCase
+Parameter '_spender' of StandardToken.decreaseApproval (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#365-367) is not in mixedCase
+Parameter '_subtractedValue' of StandardToken.decreaseApproval (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#367-376) is not in mixedCase
+Parameter '_to' of ERC223Token.transfer (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#473) is not in mixedCase
+Parameter '_value' of ERC223Token.transfer (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#473-475) is not in mixedCase
+Parameter '_from' of ERC223Token.transferFrom (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#513-515) is not in mixedCase
+Parameter '_to' of ERC223Token.transferFrom (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#515) is not in mixedCase
+Parameter '_value' of ERC223Token.transferFrom (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#515) is not in mixedCase
+Parameter '_activate' of ERC223Token.setERC223Activated (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#421) is not in mixedCase
+Parameter '_addr' of ERC223Token.setWhiteListContract (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#437) is not in mixedCase
+Parameter '_addr' of ERC223Token.setUserWhiteListContract (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#447) is not in mixedCase
+Parameter '_to' of ERC223Token.checkAndInvokeReceiver (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#453) is not in mixedCase
+Parameter '_value' of ERC223Token.checkAndInvokeReceiver (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#453) is not in mixedCase
+Parameter '_data' of ERC223Token.checkAndInvokeReceiver (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#453-455) is not in mixedCase
+Parameter '_to' of ERC223Token.transfer (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#493-495) is not in mixedCase
+Parameter '_value' of ERC223Token.transfer (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#495) is not in mixedCase
+Parameter '_data' of ERC223Token.transfer (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#495-496) is not in mixedCase
+Parameter '_from' of ERC223Token.transferFrom (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#550-553) is not in mixedCase
+Parameter '_to' of ERC223Token.transferFrom (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#553) is not in mixedCase
+Parameter '_value' of ERC223Token.transferFrom (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#553) is not in mixedCase
+Parameter '_data' of ERC223Token.transferFrom (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#553) is not in mixedCase
+Parameter '_value' of BurnableToken.burnTokenBurn (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#593-595) is not in mixedCase
+Parameter '_to' of HoldersToken.transfer (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#638-639) is not in mixedCase
+Parameter '_value' of HoldersToken.transfer (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#639-641) is not in mixedCase
+Parameter '_from' of HoldersToken.transferFrom (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#677) is not in mixedCase
+Parameter '_to' of HoldersToken.transferFrom (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#677) is not in mixedCase
+Parameter '_value' of HoldersToken.transferFrom (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#679-681) is not in mixedCase
+Parameter '_to' of HoldersToken.transfer (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#651) is not in mixedCase
+Parameter '_value' of HoldersToken.transfer (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#651) is not in mixedCase
+Parameter '_data' of HoldersToken.transfer (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#653) is not in mixedCase
+Parameter '_from' of HoldersToken.transferFrom (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#699) is not in mixedCase
+Parameter '_to' of HoldersToken.transferFrom (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#699-701) is not in mixedCase
+Parameter '_value' of HoldersToken.transferFrom (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#701) is not in mixedCase
+Parameter '_data' of HoldersToken.transferFrom (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#701-703) is not in mixedCase
+Parameter '_addr' of HoldersToken.addHolder (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#623-625) is not in mixedCase
+Function 'ChainPay.ChainPay' (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#857-889) is not in mixedCase
+Parameter '_addr' of ChainPay.setMigrationGate (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#897-903) is not in mixedCase
+Parameter '_tos' of ChainPay.transferMulti (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#909) is not in mixedCase
+Parameter '_values' of ChainPay.transferMulti (/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol#909) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x8b163843e70c8deec03d5ebb1256e0148f14e35b.sol analyzed (14 contracts), 87 result(s) found

@@ -1,0 +1,161 @@
+INFO:Detectors:[91m
+NamiGame.withdrawToken (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol) sends eth to arbitrary user
+	Dangerous calls:
+	- _account.transfer(_amount) (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[93m
+NamiCrowdSale (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#949-1973) has incorrect ERC20 function interface(s):
+	-transfer (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1217-1231)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[93m
+NamiCrowdSale._transfer (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1123-1185) uses a dangerous strict equality:
+	- assert(bool)(balanceOf[_from] + balanceOf[_to] == previousBalances)
+NamiCrowdSale._transfer (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1123-1185) uses a dangerous strict equality:
+	- assert(bool)(balanceOf[_from] + balanceOf[_to] == previousBalances)
+NamiCrowdSale.burnTokens (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1571-1619) uses a dangerous strict equality:
+	- totalSupply == 0
+NamiCrowdSale._transfer (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1123-1185) uses a dangerous strict equality:
+	- assert(bool)(balanceOf[_from] + balanceOf[_to] == previousBalances)
+NamiCrowdSale.burnTokens (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1571-1619) uses a dangerous strict equality:
+	- totalSupply == 0
+NamiCrowdSale.setPresalePhase (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1625-1681) uses a dangerous strict equality:
+	- canSwitchPhase = (currentPhase == Phase.Created && _nextPhase == Phase.Running) || (currentPhase == Phase.Running && _nextPhase == Phase.Paused) || ((currentPhase == Phase.Running || currentPhase == Phase.Paused) && _nextPhase == Phase.Migrating && crowdsaleManager != 0x0) || (currentPhase == Phase.Paused && _nextPhase == Phase.Running) || (currentPhase == Phase.Migrating && _nextPhase == Phase.Migrated && totalSupply == 0)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+NamiCrowdSale.transferToExchange (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1819-1858) does not use the value returned by external calls:
+	-receiver.tokenFallbackExchange(msg.sender,_value,_price) (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1851-1853)
+NamiCrowdSale.transferToBuyer (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1897-1961) does not use the value returned by external calls:
+	-receiver.tokenFallbackBuyer(msg.sender,_value,_buyer) (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1945-1951)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in NamiCrowdSale._migrateToken (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1729-1759):
+	External calls:
+	- newToken = presale.balanceOf(_from) (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1737-1743)
+	- presale.burnTokens(_from) (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1749)
+	State variables written after the call(s):
+	- balanceOf (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1751-1753)
+	- totalSupply (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1755-1757)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+NamiCrowdSale.transferToExchange uses assembly (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1819-1858)
+	- /sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1825-1837
+NamiCrowdSale.transferToBuyer uses assembly (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1897-1961)
+	- /sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1911-1921
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+NamiCrowdSale.decimals should be constant (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#981-985)
+NamiCrowdSale.name should be constant (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#979)
+NamiCrowdSale.symbol should be constant (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#979-981)
+NamiGame.name should be constant (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+NamiMultiSigWallet.fallback (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#283-287) should be declared external
+NamiMultiSigWallet.addOwner (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#339-357) should be declared external
+NamiMultiSigWallet.removeOwner (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#367-397) should be declared external
+NamiMultiSigWallet.replaceOwner (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#411-443) should be declared external
+NamiMultiSigWallet.submitTransaction (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#477-491) should be declared external
+NamiMultiSigWallet.revokeConfirmation (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#527-539) should be declared external
+NamiMultiSigWallet.getConfirmationCount (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#687-705) should be declared external
+NamiMultiSigWallet.getTransactionCount (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#727-747) should be declared external
+NamiMultiSigWallet.getOwners (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#749-759) should be declared external
+NamiMultiSigWallet.getConfirmations (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#771-799) should be declared external
+NamiMultiSigWallet.getTransactionIds (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#825-865) should be declared external
+PresaleToken.burnTokens (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#871) should be declared external
+ERC223ReceivingContract.tokenFallback (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#893-909) should be declared external
+ERC223ReceivingContract.tokenFallbackBuyer (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#909-917) should be declared external
+ERC223ReceivingContract.tokenFallbackExchange (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#917-921) should be declared external
+NamiCrowdSale.transferForTeam (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1191-1205) should be declared external
+NamiCrowdSale.transfer (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1217-1231) should be declared external
+NamiCrowdSale.transferFrom (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1243-1261) should be declared external
+NamiCrowdSale.approveAndCall (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1345-1363) should be declared external
+NamiCrowdSale.changeTransferable (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1365-1369) should be declared external
+NamiCrowdSale.changeEscrow (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1371-1379) should be declared external
+NamiCrowdSale.changeBinary (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1381-1389) should be declared external
+NamiCrowdSale.changeBinaryAddress (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1391-1403) should be declared external
+NamiCrowdSale.fallback (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1523-1527) should be declared external
+NamiCrowdSale.burnTokens (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1571-1619) should be declared external
+NamiCrowdSale.setPresalePhase (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1625-1681) should be declared external
+NamiCrowdSale.withdrawEther (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1681-1703) should be declared external
+NamiCrowdSale.safeWithdraw (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1703-1715) should be declared external
+NamiCrowdSale.setCrowdsaleManager (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1717-1727) should be declared external
+NamiCrowdSale.migrateToken (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1761-1771) should be declared external
+NamiCrowdSale.migrateForInvestor (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1773-1777) should be declared external
+NamiCrowdSale.transferToExchange (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1819-1858) should be declared external
+NamiCrowdSale.transferToBuyer (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1897-1961) should be declared external
+NamiGame.changeEscrow (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#2085-2099) should be declared external
+NamiGame.changePause (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#2101-2105) should be declared external
+NamiGame.changeMinWithdraw (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#2105-2117) should be declared external
+NamiGame.changeMaxWithdraw (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#2117-2133) should be declared external
+NamiGame.withdrawEther (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#2141-2155) should be declared external
+NamiGame.withdrawNac (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol) should be declared external
+NamiGame.setController (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol) should be declared external
+NamiGame.removeController (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol) should be declared external
+NamiGame.fallback (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol) should be declared external
+NamiGame.withdrawToken (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Low level call in NamiMultiSigWallet.executeTransaction (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#545-595):
+	-transactions[transactionId].destination.call.value(transactions[transactionId].value)(transactions[transactionId].data) /sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#563-593
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Parameter '_owners' of NamiMultiSigWallet. (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#303) is not in mixedCase
+Parameter '_required' of NamiMultiSigWallet. (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#303-305) is not in mixedCase
+Parameter '_required' of NamiMultiSigWallet.changeRequirement (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#451) is not in mixedCase
+Contract 'tokenRecipient' (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#931-947) is not in CapWords
+Parameter '_escrow' of NamiCrowdSale. (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#959) is not in mixedCase
+Parameter '_namiMultiSigWallet' of NamiCrowdSale. (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#959-961) is not in mixedCase
+Parameter '_namiPresale' of NamiCrowdSale. (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#961) is not in mixedCase
+Function 'NamiCrowdSale._transfer' (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1123-1185) is not in mixedCase
+Parameter '_from' of NamiCrowdSale._transfer (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1123) is not in mixedCase
+Parameter '_to' of NamiCrowdSale._transfer (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1123-1125) is not in mixedCase
+Parameter '_value' of NamiCrowdSale._transfer (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1126-1129) is not in mixedCase
+Parameter '_to' of NamiCrowdSale.transferForTeam (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1199) is not in mixedCase
+Parameter '_value' of NamiCrowdSale.transferForTeam (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1199) is not in mixedCase
+Parameter '_to' of NamiCrowdSale.transfer (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1221) is not in mixedCase
+Parameter '_value' of NamiCrowdSale.transfer (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1221) is not in mixedCase
+Parameter '_from' of NamiCrowdSale.transferFrom (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1243-1245) is not in mixedCase
+Parameter '_to' of NamiCrowdSale.transferFrom (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1247) is not in mixedCase
+Parameter '_value' of NamiCrowdSale.transferFrom (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1247) is not in mixedCase
+Parameter '_spender' of NamiCrowdSale.approve (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1289-1293) is not in mixedCase
+Parameter '_value' of NamiCrowdSale.approve (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1293) is not in mixedCase
+Parameter '_spender' of NamiCrowdSale.approveAndCall (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1347) is not in mixedCase
+Parameter '_value' of NamiCrowdSale.approveAndCall (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1347-1349) is not in mixedCase
+Parameter '_extraData' of NamiCrowdSale.approveAndCall (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1349) is not in mixedCase
+Parameter '_escrow' of NamiCrowdSale.changeEscrow (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1372-1373) is not in mixedCase
+Parameter '_binary' of NamiCrowdSale.changeBinary (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1383-1385) is not in mixedCase
+Parameter '_binaryAddress' of NamiCrowdSale.changeBinaryAddress (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1391-1393) is not in mixedCase
+Parameter '_buyer' of NamiCrowdSale.buy (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1537) is not in mixedCase
+Parameter '_owner' of NamiCrowdSale.burnTokens (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1573) is not in mixedCase
+Parameter '_nextPhase' of NamiCrowdSale.setPresalePhase (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1629) is not in mixedCase
+Parameter '_amount' of NamiCrowdSale.withdrawEther (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1687) is not in mixedCase
+Parameter '_withdraw' of NamiCrowdSale.safeWithdraw (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1703-1705) is not in mixedCase
+Parameter '_amount' of NamiCrowdSale.safeWithdraw (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1705) is not in mixedCase
+Parameter '_mgr' of NamiCrowdSale.setCrowdsaleManager (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1717) is not in mixedCase
+Function 'NamiCrowdSale._migrateToken' (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1729-1759) is not in mixedCase
+Parameter '_from' of NamiCrowdSale._migrateToken (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1729-1731) is not in mixedCase
+Parameter '_to' of NamiCrowdSale._migrateToken (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1731-1733) is not in mixedCase
+Parameter '_from' of NamiCrowdSale.migrateToken (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1761-1763) is not in mixedCase
+Parameter '_to' of NamiCrowdSale.migrateToken (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1763-1767) is not in mixedCase
+Parameter '_to' of NamiCrowdSale.transferToExchange (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1819-1820) is not in mixedCase
+Parameter '_value' of NamiCrowdSale.transferToExchange (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1821-1823) is not in mixedCase
+Parameter '_price' of NamiCrowdSale.transferToExchange (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1823-1825) is not in mixedCase
+Parameter '_to' of NamiCrowdSale.transferToBuyer (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1897-1901) is not in mixedCase
+Parameter '_value' of NamiCrowdSale.transferToBuyer (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1901) is not in mixedCase
+Parameter '_buyer' of NamiCrowdSale.transferToBuyer (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1901-1903) is not in mixedCase
+Variable 'NamiCrowdSale.TRANSFERABLE' (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#985-987) is not in mixedCase
+Parameter '_escrow' of NamiGame. (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1979) is not in mixedCase
+Parameter '_namiMultiSigWallet' of NamiGame. (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1979-1981) is not in mixedCase
+Parameter '_namiAddress' of NamiGame. (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#1981-1987) is not in mixedCase
+Parameter '_escrow' of NamiGame.changeEscrow (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#2087) is not in mixedCase
+Parameter '_minWithdraw' of NamiGame.changeMinWithdraw (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#2105-2107) is not in mixedCase
+Parameter '_maxNac' of NamiGame.changeMaxWithdraw (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#2118-2123) is not in mixedCase
+Parameter '_amount' of NamiGame.withdrawEther (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#2141-2143) is not in mixedCase
+Parameter '_to' of NamiGame.withdrawEther (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#2143) is not in mixedCase
+Parameter '_amount' of NamiGame.withdrawNac (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol) is not in mixedCase
+Parameter '_controller' of NamiGame.setController (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol) is not in mixedCase
+Parameter '_controller' of NamiGame.removeController (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol) is not in mixedCase
+Parameter '_account' of NamiGame.withdrawToken (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol) is not in mixedCase
+Parameter '_amount' of NamiGame.withdrawToken (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol) is not in mixedCase
+Variable 'NamiGame.NamiAddr' (/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol#2027-2029) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x954730298304a0b4b4c885244695aed5e0a8a27a.sol analyzed (7 contracts), 114 result(s) found

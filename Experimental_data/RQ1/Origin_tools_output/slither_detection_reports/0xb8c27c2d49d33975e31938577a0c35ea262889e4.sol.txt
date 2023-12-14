@@ -1,0 +1,96 @@
+INFO:Detectors:[91m
+ScorchablePayments.transferTokens (/sb/0xb8c27c2d49d33975e31938577a0c35ea262889e4.sol#515-527) sends eth to arbitrary user
+	Dangerous calls:
+	- dest.transfer(amount) (/sb/0xb8c27c2d49d33975e31938577a0c35ea262889e4.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[91m
+Reentrancy in ScorchablePayments.cancelPayment (/sb/0xb8c27c2d49d33975e31938577a0c35ea262889e4.sol#279-311):
+	External calls:
+	- transferTokens(address(this),msg.sender,payments[paymentId].amount,payments[paymentId].isEthPayment) (/sb/0xb8c27c2d49d33975e31938577a0c35ea262889e4.sol#295-309)
+	State variables written after the call(s):
+	- payments (/sb/0xb8c27c2d49d33975e31938577a0c35ea262889e4.sol#309)
+Reentrancy in ScorchablePayments.claimTimedOutPayment (/sb/0xb8c27c2d49d33975e31938577a0c35ea262889e4.sol#411-427):
+	External calls:
+	- transferTokens(address(this),payments[paymentId].payee,payments[paymentId].amount,payments[paymentId].isEthPayment) (/sb/0xb8c27c2d49d33975e31938577a0c35ea262889e4.sol#419-424)
+	State variables written after the call(s):
+	- payments (/sb/0xb8c27c2d49d33975e31938577a0c35ea262889e4.sol#425)
+Reentrancy in ScorchablePayments.payBond (/sb/0xb8c27c2d49d33975e31938577a0c35ea262889e4.sol#311-329):
+	External calls:
+	- transferTokens(msg.sender,address(this),payments[paymentId].payeeBondAmount,payments[paymentId].isEthPayment) (/sb/0xb8c27c2d49d33975e31938577a0c35ea262889e4.sol#317-325)
+	State variables written after the call(s):
+	- payments (/sb/0xb8c27c2d49d33975e31938577a0c35ea262889e4.sol#327)
+	- payments (/sb/0xb8c27c2d49d33975e31938577a0c35ea262889e4.sol#329)
+Reentrancy in ScorchablePayments.releasePayment (/sb/0xb8c27c2d49d33975e31938577a0c35ea262889e4.sol#363-381):
+	External calls:
+	- transferTokens(address(this),payments[paymentId].payee,amount,payments[paymentId].isEthPayment) (/sb/0xb8c27c2d49d33975e31938577a0c35ea262889e4.sol#375-377)
+	State variables written after the call(s):
+	- payments (/sb/0xb8c27c2d49d33975e31938577a0c35ea262889e4.sol#379-381)
+Reentrancy in ScorchablePayments.returnTokensToSender (/sb/0xb8c27c2d49d33975e31938577a0c35ea262889e4.sol#331-355):
+	External calls:
+	- transferTokens(address(this),payments[paymentId].payer,amount,payments[paymentId].isEthPayment) (/sb/0xb8c27c2d49d33975e31938577a0c35ea262889e4.sol#345-347)
+	State variables written after the call(s):
+	- payments (/sb/0xb8c27c2d49d33975e31938577a0c35ea262889e4.sol#349)
+	- payments (/sb/0xb8c27c2d49d33975e31938577a0c35ea262889e4.sol#351-355)
+Reentrancy in ScorchablePayments.scorchPayment (/sb/0xb8c27c2d49d33975e31938577a0c35ea262889e4.sol#381-407):
+	External calls:
+	- transferTokens(address(this),scorchAddress,amountToScorch,payments[paymentId].isEthPayment) (/sb/0xb8c27c2d49d33975e31938577a0c35ea262889e4.sol#393-399)
+	State variables written after the call(s):
+	- payments (/sb/0xb8c27c2d49d33975e31938577a0c35ea262889e4.sol#403-405)
+Reentrancy in ScorchablePayments.topUp (/sb/0xb8c27c2d49d33975e31938577a0c35ea262889e4.sol#357-363):
+	External calls:
+	- transferTokens(msg.sender,address(this),amount,payments[paymentId].isEthPayment) (/sb/0xb8c27c2d49d33975e31938577a0c35ea262889e4.sol#359-361)
+	State variables written after the call(s):
+	- payments (/sb/0xb8c27c2d49d33975e31938577a0c35ea262889e4.sol#361-363)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities[0m
+INFO:Detectors:[92m
+Reentrancy in ScorchablePayments.cancelPayment (/sb/0xb8c27c2d49d33975e31938577a0c35ea262889e4.sol#279-311):
+	External calls:
+	- transferTokens(address(this),msg.sender,payments[paymentId].amount,payments[paymentId].isEthPayment) (/sb/0xb8c27c2d49d33975e31938577a0c35ea262889e4.sol#295-309)
+	State variables written after the call(s):
+	- paymentIds (/sb/0xb8c27c2d49d33975e31938577a0c35ea262889e4.sol#309)
+Reentrancy in ScorchablePayments.claimTimedOutPayment (/sb/0xb8c27c2d49d33975e31938577a0c35ea262889e4.sol#411-427):
+	External calls:
+	- transferTokens(address(this),payments[paymentId].payee,payments[paymentId].amount,payments[paymentId].isEthPayment) (/sb/0xb8c27c2d49d33975e31938577a0c35ea262889e4.sol#419-424)
+	State variables written after the call(s):
+	- paymentIds (/sb/0xb8c27c2d49d33975e31938577a0c35ea262889e4.sol#425)
+Reentrancy in ScorchablePayments.createPayment (/sb/0xb8c27c2d49d33975e31938577a0c35ea262889e4.sol#237-278):
+	External calls:
+	- transferTokens(msg.sender,address(this),amountToPay,isEthPayment) (/sb/0xb8c27c2d49d33975e31938577a0c35ea262889e4.sol#247-251)
+	State variables written after the call(s):
+	- currentId (/sb/0xb8c27c2d49d33975e31938577a0c35ea262889e4.sol#277)
+	- paymentIds (/sb/0xb8c27c2d49d33975e31938577a0c35ea262889e4.sol#255-275)
+	- payments (/sb/0xb8c27c2d49d33975e31938577a0c35ea262889e4.sol#255-275)
+Reentrancy in ScorchablePayments.releasePayment (/sb/0xb8c27c2d49d33975e31938577a0c35ea262889e4.sol#363-381):
+	External calls:
+	- transferTokens(address(this),payments[paymentId].payee,amount,payments[paymentId].isEthPayment) (/sb/0xb8c27c2d49d33975e31938577a0c35ea262889e4.sol#375-377)
+	State variables written after the call(s):
+	- paymentIds (/sb/0xb8c27c2d49d33975e31938577a0c35ea262889e4.sol#379-381)
+Reentrancy in ScorchablePayments.returnTokensToSender (/sb/0xb8c27c2d49d33975e31938577a0c35ea262889e4.sol#331-355):
+	External calls:
+	- transferTokens(address(this),payments[paymentId].payer,amount,payments[paymentId].isEthPayment) (/sb/0xb8c27c2d49d33975e31938577a0c35ea262889e4.sol#345-347)
+	State variables written after the call(s):
+	- paymentIds (/sb/0xb8c27c2d49d33975e31938577a0c35ea262889e4.sol#349)
+Reentrancy in ScorchablePayments.scorchPayment (/sb/0xb8c27c2d49d33975e31938577a0c35ea262889e4.sol#381-407):
+	External calls:
+	- transferTokens(address(this),scorchAddress,amountToScorch,payments[paymentId].isEthPayment) (/sb/0xb8c27c2d49d33975e31938577a0c35ea262889e4.sol#393-399)
+	State variables written after the call(s):
+	- paymentIds (/sb/0xb8c27c2d49d33975e31938577a0c35ea262889e4.sol#403-405)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+DaiTransferrer.daiAddress should be constant (/sb/0xb8c27c2d49d33975e31938577a0c35ea262889e4.sol#29-31)
+ScorchablePayments.scorchAddress should be constant (/sb/0xb8c27c2d49d33975e31938577a0c35ea262889e4.sol#207-209)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+DaiInterface.transferFrom (/sb/0xb8c27c2d49d33975e31938577a0c35ea262889e4.sol#17-25) should be declared external
+ScorchablePayments.extendInactionTimeout (/sb/0xb8c27c2d49d33975e31938577a0c35ea262889e4.sol#501-515) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_src' of DaiTransferrer.transferDai (/sb/0xb8c27c2d49d33975e31938577a0c35ea262889e4.sol#35) is not in mixedCase
+Parameter '_dst' of DaiTransferrer.transferDai (/sb/0xb8c27c2d49d33975e31938577a0c35ea262889e4.sol#35-37) is not in mixedCase
+Parameter '_dai' of DaiTransferrer.transferDai (/sb/0xb8c27c2d49d33975e31938577a0c35ea262889e4.sol#37) is not in mixedCase
+Function 'ScorchablePayments._deletePayment' (/sb/0xb8c27c2d49d33975e31938577a0c35ea262889e4.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+DaiTransferrer.daiAddress (/sb/0xb8c27c2d49d33975e31938577a0c35ea262889e4.sol#29-31) is never used in ScorchablePayments
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0xb8c27c2d49d33975e31938577a0c35ea262889e4.sol analyzed (5 contracts), 22 result(s) found

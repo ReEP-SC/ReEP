@@ -1,0 +1,109 @@
+INFO:Detectors:[91m
+Reentrancy in Hodl.RetireHodl (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#353-405):
+	External calls:
+	- PayToken(s.user,s.tokenAddress,s.amount) (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#373)
+	- PayToken(s.user,s.tokenAddress,realAmount) (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#398-401)
+	External calls sending eth:
+	- PayEth(s.user,s.amount) (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#367-369)
+	- PayEth(s.user,realAmount) (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#393)
+	State variables written after the call(s):
+	- _safes (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#405)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities[0m
+INFO:Detectors:[93m
+Hodl.PayToken (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#419-431) does not use the value returned by external calls:
+	-token.transfer(user,amount) (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#427-429)
+Hodl.WithdrawReserve (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#531-557) does not use the value returned by external calls:
+	-token.transfer(msg.sender,amount) (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#553-555)
+Hodl.WithdrawAllReserves (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#561-609) does not use the value returned by external calls:
+	-token.transfer(msg.sender,x) (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#607)
+Hodl.WithdrawSpecialToken (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#637-655) does not use the value returned by external calls:
+	-token.transfer(msg.sender,amount) (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#655)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Hodl.WithdrawAllReserves has external calls inside a loop:
+	- token.transfer(msg.sender,x) (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#607)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in Hodl.ClaimHodlToken (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#293-335):
+	External calls:
+	- require(bool)(token.transferFrom(msg.sender,address(this),amount)) (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#303-311)
+	State variables written after the call(s):
+	- _currentIndex (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#333)
+	- _safes (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#315-321)
+	- _totalSaved (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#323-331)
+	- _userSafes (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#313-315)
+Reentrancy in Hodl.RetireHodl (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#353-405):
+	External calls:
+	- PayToken(s.user,s.tokenAddress,realAmount) (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#398-401)
+	External calls sending eth:
+	- PayEth(s.user,realAmount) (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#393)
+	State variables written after the call(s):
+	- _listedReserves (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#403)
+	- _systemReserves (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#403)
+Reentrancy in Hodl.RetireHodl (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#353-405):
+	External calls:
+	- PayToken(s.user,s.tokenAddress,s.amount) (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#373)
+	- PayToken(s.user,s.tokenAddress,realAmount) (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#398-401)
+	External calls sending eth:
+	- PayEth(s.user,s.amount) (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#367-369)
+	- PayEth(s.user,realAmount) (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#393)
+	State variables written after the call(s):
+	- _totalSaved (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#405)
+	- _userSafes (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#405)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+EIP20Interface.decimals should be constant (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#19-23)
+EIP20Interface.totalSupply should be constant (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#17-19)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+EIP20Interface.balanceOf (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#23-25) should be declared external
+EIP20Interface.transfer (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#25-27) should be declared external
+EIP20Interface.transferFrom (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#27-29) should be declared external
+EIP20Interface.approve (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#29-31) should be declared external
+EIP20Interface.allowance (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#31-35) should be declared external
+OwnableContract.viewSuperOwner (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#73-81) should be declared external
+OwnableContract.changeOwner (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#81-95) should be declared external
+BlockableContract.doBlockContract (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#125-135) should be declared external
+BlockableContract.unBlockContract (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#135-145) should be declared external
+Hodl.fallback (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#217-225) should be declared external
+Hodl.GetUserSafesLength (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#227-233) should be declared external
+Hodl.GetReserveAmount (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#237-243) should be declared external
+Hodl.Getsafe (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#245-265) should be declared external
+Hodl.HodlEth (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#265-291) should be declared external
+Hodl.ClaimHodlToken (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#293-335) should be declared external
+Hodl.UserRetireHodl (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#337-351) should be declared external
+Hodl.OwnerRetireHodl (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#509-519) should be declared external
+Hodl.ChangeComission (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#521-529) should be declared external
+Hodl.WithdrawReserve (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#531-557) should be declared external
+Hodl.WithdrawAllReserves (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#561-609) should be declared external
+Hodl.WithdrawSpecialEth (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#611-631) should be declared external
+Hodl.WithdrawSpecialToken (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#637-655) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol:
+	- pragma solidity^0.4.23 (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#9-13): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'Hodl.GetUserSafesLength' (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#227-233) is not in mixedCase
+Function 'Hodl.GetReserveAmount' (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#237-243) is not in mixedCase
+Function 'Hodl.Getsafe' (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#245-265) is not in mixedCase
+Parameter '_id' of Hodl.Getsafe (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#247-251) is not in mixedCase
+Function 'Hodl.HodlEth' (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#265-291) is not in mixedCase
+Function 'Hodl.ClaimHodlToken' (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#293-335) is not in mixedCase
+Function 'Hodl.UserRetireHodl' (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#337-351) is not in mixedCase
+Function 'Hodl.RetireHodl' (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#353-405) is not in mixedCase
+Function 'Hodl.PayEth' (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#407-417) is not in mixedCase
+Function 'Hodl.PayToken' (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#419-431) is not in mixedCase
+Function 'Hodl.StoreComission' (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#439-463) is not in mixedCase
+Function 'Hodl.DeleteSafe' (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#467-505) is not in mixedCase
+Function 'Hodl.OwnerRetireHodl' (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#509-519) is not in mixedCase
+Function 'Hodl.ChangeComission' (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#521-529) is not in mixedCase
+Function 'Hodl.WithdrawReserve' (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#531-557) is not in mixedCase
+Function 'Hodl.WithdrawAllReserves' (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#561-609) is not in mixedCase
+Function 'Hodl.WithdrawSpecialEth' (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#611-631) is not in mixedCase
+Function 'Hodl.WithdrawSpecialToken' (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#637-655) is not in mixedCase
+Variable 'Hodl._userSafes' (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#169-173) is not in mixedCase
+Variable 'Hodl._totalSaved' (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#181-183) is not in mixedCase
+Variable 'Hodl._listedReserves' (/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol#203) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xb150a5c1e3f5acca0afa9ebb6f0ef612ccba0842.sol analyzed (4 contracts), 54 result(s) found

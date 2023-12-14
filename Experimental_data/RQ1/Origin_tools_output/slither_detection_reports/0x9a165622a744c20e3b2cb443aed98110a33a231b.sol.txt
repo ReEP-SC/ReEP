@@ -1,0 +1,90 @@
+INFO:Detectors:[93m
+Address.isContract (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#266-280) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+Reentrancy in StrategyProxy.claim (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#533-542):
+	External calls:
+	- feeDistribution.claim_many((p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p)) (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#539-540)
+	- lastTimeCursor = feeDistribution.time_cursor_of(address(proxy)) (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#540)
+	State variables written after the call(s):
+	- lastTimeCursor (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#540)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+StrategyProxy.vote (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#490-492) does not use the value returned by external calls:
+	-proxy.execute(gauge,0,abi.encodeWithSignature(vote_for_gauge_weights(address,uint256),_gauge,_amount)) (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#491-492)
+StrategyProxy.withdraw (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#492-507) does not use the value returned by external calls:
+	-proxy.execute(_gauge,0,abi.encodeWithSignature(withdraw(uint256),_amount)) (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#500-501)
+	-proxy.execute(_token,0,abi.encodeWithSignature(transfer(address,uint256),msg.sender,_balance)) (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#505-506)
+StrategyProxy.deposit (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#512-526) does not use the value returned by external calls:
+	-proxy.execute(_token,0,abi.encodeWithSignature(approve(address,uint256),_gauge,0)) (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#519-520)
+	-proxy.execute(_token,0,abi.encodeWithSignature(approve(address,uint256),_gauge,_balance)) (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#521-522)
+StrategyProxy.harvest (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#526-533) does not use the value returned by external calls:
+	-proxy.execute(mintr,0,abi.encodeWithSignature(mint(address),_gauge)) (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#529-530)
+	-proxy.execute(crv,0,abi.encodeWithSignature(transfer(address,uint256),msg.sender,_balance)) (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#531-533)
+StrategyProxy.claim (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#533-542) does not use the value returned by external calls:
+	-feeDistribution.claim_many((p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p)) (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#539-540)
+	-proxy.execute(CRV3,0,abi.encodeWithSignature(transfer(address,uint256),recipient,amount)) (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol)
+StrategyProxy.claimRewards (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol) does not use the value returned by external calls:
+	-proxy.execute(_token,0,abi.encodeWithSignature(transfer(address,uint256),msg.sender,IERC20(_token).balanceOf(address(proxy)))) (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Address.isContract uses assembly (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#266-280)
+	- /sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#277-279
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+StrategyProxy.vote (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#490-492) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol:
+	- pragma solidity^0.5.17 (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#9-13): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Low level call in Address.sendValue (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#307-317):
+	-(success) = recipient.call.value(amount)() /sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#314-315
+Low level call in SafeERC20.callOptionalReturn (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#364-401):
+	-(success,returndata) = address(token).call(data) /sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#380-385
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Parameter '' of IProxy.increaseAmount (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#408-409) is not in mixedCase
+Parameter '' of Mintr.mint (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#412) is not in mixedCase
+Function 'IFeeDistribution.claim_many' (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#414-416) is not in mixedCase
+Parameter '' of IFeeDistribution.claim_many (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#414-415) is not in mixedCase
+Function 'IFeeDistribution.last_token_time' (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#416-418) is not in mixedCase
+Function 'IFeeDistribution.time_cursor' (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#418-420) is not in mixedCase
+Function 'IFeeDistribution.time_cursor_of' (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#420-425) is not in mixedCase
+Parameter '' of IFeeDistribution.time_cursor_of (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#424) is not in mixedCase
+Parameter '' of IGauge.deposit (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#427) is not in mixedCase
+Parameter '' of IGauge.balanceOf (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#429) is not in mixedCase
+Parameter '' of IGauge.withdraw (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#430) is not in mixedCase
+Function 'IGauge.claim_rewards' (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#430) is not in mixedCase
+Parameter '' of IGauge.claim_rewards (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#430) is not in mixedCase
+Function 'IGauge.rewarded_token' (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#430-431) is not in mixedCase
+Function 'IGauge.reward_tokens' (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#431-432) is not in mixedCase
+Parameter '' of IGauge.reward_tokens (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#431-432) is not in mixedCase
+Parameter '_governance' of StrategyProxy.setGovernance (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#460-461) is not in mixedCase
+Parameter '_gauge' of StrategyProxy.approveStrategy (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#465-468) is not in mixedCase
+Parameter '_strategy' of StrategyProxy.approveStrategy (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#468) is not in mixedCase
+Parameter '_gauge' of StrategyProxy.revokeStrategy (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#473-474) is not in mixedCase
+Parameter '_voter' of StrategyProxy.approveVoter (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#478) is not in mixedCase
+Parameter '_voter' of StrategyProxy.revokeVoter (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#480) is not in mixedCase
+Parameter '_gauge' of StrategyProxy.vote (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#490) is not in mixedCase
+Parameter '_amount' of StrategyProxy.vote (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#490) is not in mixedCase
+Parameter '_gauge' of StrategyProxy.withdraw (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#492-493) is not in mixedCase
+Parameter '_token' of StrategyProxy.withdraw (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#493-494) is not in mixedCase
+Parameter '_amount' of StrategyProxy.withdraw (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#496) is not in mixedCase
+Parameter '_gauge' of StrategyProxy.balanceOf (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#507) is not in mixedCase
+Parameter '_gauge' of StrategyProxy.withdrawAll (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#509-511) is not in mixedCase
+Parameter '_token' of StrategyProxy.withdrawAll (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#511) is not in mixedCase
+Parameter '_gauge' of StrategyProxy.deposit (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#513) is not in mixedCase
+Parameter '_token' of StrategyProxy.deposit (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#513) is not in mixedCase
+Parameter '_gauge' of StrategyProxy.harvest (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#526-527) is not in mixedCase
+Parameter '_gauge' of StrategyProxy.claimRewards (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol) is not in mixedCase
+Parameter '_token' of StrategyProxy.claimRewards (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol) is not in mixedCase
+Constant 'StrategyProxy.proxy' (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#433-434) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'StrategyProxy.mintr' (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#434-435) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'StrategyProxy.crv' (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#435-438) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'StrategyProxy.gauge' (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#438-440) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'StrategyProxy.yveCRV' (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#440-445) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'StrategyProxy.feeDistribution' (/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol#449-453) is not in UPPER_CASE_WITH_UNDERSCORES
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x9a165622a744c20e3b2cb443aed98110a33a231b.sol analyzed (9 contracts), 54 result(s) found

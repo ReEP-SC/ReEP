@@ -1,0 +1,45 @@
+INFO:Detectors:[93m
+FloatifyAccount.deposit (/sb/0x95f56663c15d04dc1fdf0af579341c4366a89718.sol#387-393) uses a dangerous strict equality:
+	- require(bool,string)(cdaiContract.mint(_daiBalance) == 0,Call to mint function failed)
+FloatifyAccount.deposit (/sb/0x95f56663c15d04dc1fdf0af579341c4366a89718.sol#387-393) uses a dangerous strict equality:
+	- require(bool,string)(cdaiContract.mint(_daiBalance) == 0,Call to mint function failed)
+FloatifyAccount.redeemAndWithdrawMax (/sb/0x95f56663c15d04dc1fdf0af579341c4366a89718.sol#422-439) uses a dangerous strict equality:
+	- require(bool,string)(cdaiContract.redeem(_cdaiBalance) == 0,Redemption of all cDAI for DAI failed)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[92m
+Reentrancy in FloatifyAccount.deposit (/sb/0x95f56663c15d04dc1fdf0af579341c4366a89718.sol#387-393):
+	External calls:
+	- _daiBalance = daiContract.balanceOf(address(this)) (/sb/0x95f56663c15d04dc1fdf0af579341c4366a89718.sol#388-390)
+	State variables written after the call(s):
+	- totalDeposited (/sb/0x95f56663c15d04dc1fdf0af579341c4366a89718.sol#390-391)
+Reentrancy in FloatifyAccount.redeemAndWithdrawMax (/sb/0x95f56663c15d04dc1fdf0af579341c4366a89718.sol#422-439):
+	External calls:
+	- _cdaiBalance = cdaiContract.balanceOf(address(this)) (/sb/0x95f56663c15d04dc1fdf0af579341c4366a89718.sol#425)
+	- require(bool,string)(cdaiContract.redeem(_cdaiBalance) == 0,Redemption of all cDAI for DAI failed) (/sb/0x95f56663c15d04dc1fdf0af579341c4366a89718.sol#433-434)
+	- _daiBalance = daiContract.balanceOf(address(this)) (/sb/0x95f56663c15d04dc1fdf0af579341c4366a89718.sol#434-435)
+	State variables written after the call(s):
+	- totalWithdrawn (/sb/0x95f56663c15d04dc1fdf0af579341c4366a89718.sol#436)
+Reentrancy in FloatifyAccount.redeemAndWithdrawPartial (/sb/0x95f56663c15d04dc1fdf0af579341c4366a89718.sol#443-452):
+	External calls:
+	- require(bool,string)(cdaiContract.redeemUnderlying(_daiAmount) == 0,Redemption of some cDAI for DAI failed) (/sb/0x95f56663c15d04dc1fdf0af579341c4366a89718.sol#447-448)
+	- _daiBalance = daiContract.balanceOf(address(this)) (/sb/0x95f56663c15d04dc1fdf0af579341c4366a89718.sol)
+	State variables written after the call(s):
+	- totalWithdrawn (/sb/0x95f56663c15d04dc1fdf0af579341c4366a89718.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Ownable.owner (/sb/0x95f56663c15d04dc1fdf0af579341c4366a89718.sol#156-159) should be declared external
+Ownable.renounceOwnership (/sb/0x95f56663c15d04dc1fdf0af579341c4366a89718.sol#183-186) should be declared external
+Ownable.transferOwnership (/sb/0x95f56663c15d04dc1fdf0af579341c4366a89718.sol#191-194) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x95f56663c15d04dc1fdf0af579341c4366a89718.sol:
+	- pragma solidity0.5.8 (/sb/0x95f56663c15d04dc1fdf0af579341c4366a89718.sol#9): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'Ownable._transferOwnership' (/sb/0x95f56663c15d04dc1fdf0af579341c4366a89718.sol#195-206) is not in mixedCase
+Parameter '_withdrawalAddress' of FloatifyAccount.withdraw (/sb/0x95f56663c15d04dc1fdf0af579341c4366a89718.sol#413-414) is not in mixedCase
+Parameter '_withdrawalAddress' of FloatifyAccount.redeemAndWithdrawMax (/sb/0x95f56663c15d04dc1fdf0af579341c4366a89718.sol#423) is not in mixedCase
+Parameter '_withdrawalAddress' of FloatifyAccount.redeemAndWithdrawPartial (/sb/0x95f56663c15d04dc1fdf0af579341c4366a89718.sol#443) is not in mixedCase
+Parameter '_daiAmount' of FloatifyAccount.redeemAndWithdrawPartial (/sb/0x95f56663c15d04dc1fdf0af579341c4366a89718.sol#443-444) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x95f56663c15d04dc1fdf0af579341c4366a89718.sol analyzed (4 contracts), 14 result(s) found

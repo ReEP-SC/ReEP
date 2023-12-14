@@ -1,0 +1,60 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xa7aca9c1f08025e50c21738ad85fd99b7fa7fed9.sol:
+Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing "SPDX-License-Identifier: <SPDX-License>" to each source file. Use "SPDX-License-Identifier: UNLICENSED" for non-open-source code. Please see https://spdx.org for more information.
+--> /sb/0xa7aca9c1f08025e50c21738ad85fd99b7fa7fed9.sol
+
+
+INFO:Detectors:[93m
+Sale.startSale (/sb/0xa7aca9c1f08025e50c21738ad85fd99b7fa7fed9.sol#148-150) uses a dangerous strict equality:
+	- require(bool)(msg.sender == owner && startDate == 0)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Sale.fallback (/sb/0xa7aca9c1f08025e50c21738ad85fd99b7fa7fed9.sol#94-108) does not use the value returned by external calls:
+	-Token.transfer(msg.sender,amount) (/sb/0xa7aca9c1f08025e50c21738ad85fd99b7fa7fed9.sol#107-108)
+Sale.contribute (/sb/0xa7aca9c1f08025e50c21738ad85fd99b7fa7fed9.sol#110-125) does not use the value returned by external calls:
+	-Token.transfer(msg.sender,amount) (/sb/0xa7aca9c1f08025e50c21738ad85fd99b7fa7fed9.sol#124-125)
+Sale.burn (/sb/0xa7aca9c1f08025e50c21738ad85fd99b7fa7fed9.sol#139-144) does not use the value returned by external calls:
+	-Token.transfer(address(0),Token.balanceOf(address(this))) (/sb/0xa7aca9c1f08025e50c21738ad85fd99b7fa7fed9.sol#143-144)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in Sale.contribute (/sb/0xa7aca9c1f08025e50c21738ad85fd99b7fa7fed9.sol#110-125):
+	External calls:
+	- require(bool)(Token.balanceOf(address(this)) > 0) (/sb/0xa7aca9c1f08025e50c21738ad85fd99b7fa7fed9.sol#114-115)
+	State variables written after the call(s):
+	- amount (/sb/0xa7aca9c1f08025e50c21738ad85fd99b7fa7fed9.sol#116-117)
+Reentrancy in Sale.contribute (/sb/0xa7aca9c1f08025e50c21738ad85fd99b7fa7fed9.sol#110-125):
+	External calls:
+	- require(bool)(Token.balanceOf(address(this)) > 0) (/sb/0xa7aca9c1f08025e50c21738ad85fd99b7fa7fed9.sol#114-115)
+	- require(bool)(amount <= Token.balanceOf(address(this))) (/sb/0xa7aca9c1f08025e50c21738ad85fd99b7fa7fed9.sol#117-119)
+	State variables written after the call(s):
+	- collectedETH (/sb/0xa7aca9c1f08025e50c21738ad85fd99b7fa7fed9.sol#123)
+	- totalSold (/sb/0xa7aca9c1f08025e50c21738ad85fd99b7fa7fed9.sol#120)
+Reentrancy in Sale.fallback (/sb/0xa7aca9c1f08025e50c21738ad85fd99b7fa7fed9.sol#94-108):
+	External calls:
+	- require(bool)(Token.balanceOf(address(this)) > 0) (/sb/0xa7aca9c1f08025e50c21738ad85fd99b7fa7fed9.sol#97-99)
+	State variables written after the call(s):
+	- amount (/sb/0xa7aca9c1f08025e50c21738ad85fd99b7fa7fed9.sol#100-101)
+Reentrancy in Sale.fallback (/sb/0xa7aca9c1f08025e50c21738ad85fd99b7fa7fed9.sol#94-108):
+	External calls:
+	- require(bool)(Token.balanceOf(address(this)) > 0) (/sb/0xa7aca9c1f08025e50c21738ad85fd99b7fa7fed9.sol#97-99)
+	- require(bool)(amount <= Token.balanceOf(address(this))) (/sb/0xa7aca9c1f08025e50c21738ad85fd99b7fa7fed9.sol#101-102)
+	State variables written after the call(s):
+	- collectedETH (/sb/0xa7aca9c1f08025e50c21738ad85fd99b7fa7fed9.sol#104-107)
+	- totalSold (/sb/0xa7aca9c1f08025e50c21738ad85fd99b7fa7fed9.sol#103-104)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Sale.withdrawETH (/sb/0xa7aca9c1f08025e50c21738ad85fd99b7fa7fed9.sol#127-135) should be declared external
+Sale.endPresale (/sb/0xa7aca9c1f08025e50c21738ad85fd99b7fa7fed9.sol#135-137) should be declared external
+Sale.burn (/sb/0xa7aca9c1f08025e50c21738ad85fd99b7fa7fed9.sol#139-144) should be declared external
+Sale.startSale (/sb/0xa7aca9c1f08025e50c21738ad85fd99b7fa7fed9.sol#148-150) should be declared external
+Sale.availableTokens (/sb/0xa7aca9c1f08025e50c21738ad85fd99b7fa7fed9.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xa7aca9c1f08025e50c21738ad85fd99b7fa7fed9.sol:
+	- pragma solidity0.6.8 (/sb/0xa7aca9c1f08025e50c21738ad85fd99b7fa7fed9.sol#5-7): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_token' of Sale. (/sb/0xa7aca9c1f08025e50c21738ad85fd99b7fa7fed9.sol#86) is not in mixedCase
+Parameter '_rate' of Sale. (/sb/0xa7aca9c1f08025e50c21738ad85fd99b7fa7fed9.sol#86-87) is not in mixedCase
+Variable 'Sale.Token' (/sb/0xa7aca9c1f08025e50c21738ad85fd99b7fa7fed9.sol#78-79) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xa7aca9c1f08025e50c21738ad85fd99b7fa7fed9.sol analyzed (3 contracts), 17 result(s) found

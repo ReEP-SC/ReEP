@@ -1,0 +1,35 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xca6f79983bad5450a6257e20b6e0b766c3d0c654.sol:
+/sb/0xca6f79983bad5450a6257e20b6e0b766c3d0c654.sol:136:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function DSSpell(address whom_, uint256 mana_, bytes data_) public {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xca6f79983bad5450a6257e20b6e0b766c3d0c654.sol:101:9: Warning: Invoking events without "emit" prefix is deprecated.
+        LogNote(msg.sig, msg.sender, foo, bar, msg.value, msg.data);
+        ^---------------------------------------------------------^
+
+INFO:Detectors:[91m
+Reentrancy in DSSpell.cast (/sb/0xca6f79983bad5450a6257e20b6e0b766c3d0c654.sol#150-151):
+	External calls:
+	- exec(whom,data,mana) (/sb/0xca6f79983bad5450a6257e20b6e0b766c3d0c654.sol#150-151)
+	State variables written after the call(s):
+	- done (/sb/0xca6f79983bad5450a6257e20b6e0b766c3d0c654.sol#151)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities[0m
+INFO:Detectors:[93m
+c in DSExec.exec (/sb/0xca6f79983bad5450a6257e20b6e0b766c3d0c654.sol#50) is a local variable never initialiazed
+c in DSExec.tryExec (/sb/0xca6f79983bad5450a6257e20b6e0b766c3d0c654.sol#64) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[92m
+DSSpell.cast (/sb/0xca6f79983bad5450a6257e20b6e0b766c3d0c654.sol#150-151) should be declared external
+DSSpellBook.make (/sb/0xca6f79983bad5450a6257e20b6e0b766c3d0c654.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xca6f79983bad5450a6257e20b6e0b766c3d0c654.sol:
+	- pragma solidity^0.4.18 (/sb/0xca6f79983bad5450a6257e20b6e0b766c3d0c654.sol#2-3): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Low level call in DSExec.tryExec (/sb/0xca6f79983bad5450a6257e20b6e0b766c3d0c654.sol#25-31):
+	-target.call.value(value)(calldata) /sb/0xca6f79983bad5450a6257e20b6e0b766c3d0c654.sol#29-31
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Function 'DSSpell.DSSpell' (/sb/0xca6f79983bad5450a6257e20b6e0b766c3d0c654.sol#140-143) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xca6f79983bad5450a6257e20b6e0b766c3d0c654.sol analyzed (4 contracts), 8 result(s) found

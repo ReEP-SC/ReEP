@@ -1,0 +1,70 @@
+INFO:Detectors:[91m
+SetBuyer.buy (/sb/0x968a92f07df9ec1799e7e25de5b50663e611d38d.sol#571-637) sends eth to arbitrary user
+	Dangerous calls:
+	- msg.sender.transfer(address(this).balance) (/sb/0x968a92f07df9ec1799e7e25de5b50663e611d38d.sol#617-625)
+SetBuyer.sendEthValue (/sb/0x968a92f07df9ec1799e7e25de5b50663e611d38d.sol#649-663) sends eth to arbitrary user
+	Dangerous calls:
+	- require(bool)(target.call.value(value)(data)) (/sb/0x968a92f07df9ec1799e7e25de5b50663e611d38d.sol#657-663)
+SetBuyer.sendEthProportion (/sb/0x968a92f07df9ec1799e7e25de5b50663e611d38d.sol#663-673) sends eth to arbitrary user
+	Dangerous calls:
+	- require(bool)(target.call.value(value)(data)) (/sb/0x968a92f07df9ec1799e7e25de5b50663e611d38d.sol#669-673)
+SetBuyer.kyberSendEthProportion (/sb/0x968a92f07df9ec1799e7e25de5b50663e611d38d.sol#771-793) sends eth to arbitrary user
+	Dangerous calls:
+	- kyber.trade.value(value)(fromToken,value,toToken,this,1 << 255,0,0) (/sb/0x968a92f07df9ec1799e7e25de5b50663e611d38d.sol#785-793)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[93m
+ISetToken (/sb/0x968a92f07df9ec1799e7e25de5b50663e611d38d.sol#351-541) has incorrect ERC20 function interface(s):
+	-transfer (/sb/0x968a92f07df9ec1799e7e25de5b50663e611d38d.sol#531-539)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[93m
+SetBuyer.transferTokenProportionToOrigin uses tx.origin for authorization:
+	- require(bool)(token.transfer(tx.origin,amount)) (/sb/0x968a92f07df9ec1799e7e25de5b50663e611d38d.sol#763-765)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-usage-of-txorigin[0m
+INFO:Detectors:[93m
+SetBuyer.approveTokenAmount (/sb/0x968a92f07df9ec1799e7e25de5b50663e611d38d.sol#675-695) does not use the value returned by external calls:
+	-fromToken.approve(target,0) (/sb/0x968a92f07df9ec1799e7e25de5b50663e611d38d.sol#683)
+	-fromToken.approve(target,amount) (/sb/0x968a92f07df9ec1799e7e25de5b50663e611d38d.sol#685-687)
+SetBuyer.approveTokenProportion (/sb/0x968a92f07df9ec1799e7e25de5b50663e611d38d.sol#695-713) does not use the value returned by external calls:
+	-fromToken.approve(target,0) (/sb/0x968a92f07df9ec1799e7e25de5b50663e611d38d.sol#703)
+	-fromToken.approve(target,amount) (/sb/0x968a92f07df9ec1799e7e25de5b50663e611d38d.sol#703-705)
+SetBuyer.kyberSendEthProportion (/sb/0x968a92f07df9ec1799e7e25de5b50663e611d38d.sol#771-793) does not use the value returned by external calls:
+	-kyber.trade.value(value)(fromToken,value,toToken,this,1 << 255,0,0) (/sb/0x968a92f07df9ec1799e7e25de5b50663e611d38d.sol#785-793)
+SetBuyer.kyberApproveTokenAmount (/sb/0x968a92f07df9ec1799e7e25de5b50663e611d38d.sol) does not use the value returned by external calls:
+	-fromToken.approve(kyber,uint256(- 1)) (/sb/0x968a92f07df9ec1799e7e25de5b50663e611d38d.sol)
+	-kyber.trade(fromToken,amount,toToken,this,1 << 255,0,0) (/sb/0x968a92f07df9ec1799e7e25de5b50663e611d38d.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+SetBuyer.buy has external calls inside a loop:
+	- token.balanceOf(this) > 0 (/sb/0x968a92f07df9ec1799e7e25de5b50663e611d38d.sol#627-635)
+SetBuyer.buy has external calls inside a loop:
+	- require(bool,string)(token.transfer(msg.sender,token.balanceOf(this)),transfer failed) (/sb/0x968a92f07df9ec1799e7e25de5b50663e611d38d.sol#631-635)
+SetBuyer.buy has external calls inside a loop:
+	- token.allowance(this,set) == 0 (/sb/0x968a92f07df9ec1799e7e25de5b50663e611d38d.sol#601-605)
+SetBuyer.buy has external calls inside a loop:
+	- require(bool,string)(token.approve(set,uint256(- 1)),Approve failed) (/sb/0x968a92f07df9ec1799e7e25de5b50663e611d38d.sol#603)
+SetBuyer.buy has external calls inside a loop:
+	- amount = token.balanceOf(this).div(units[i]) (/sb/0x968a92f07df9ec1799e7e25de5b50663e611d38d.sol#608-613)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+ExternalCall.externalCall uses assembly (/sb/0x968a92f07df9ec1799e7e25de5b50663e611d38d.sol#233-281)
+	- /sb/0x968a92f07df9ec1799e7e25de5b50663e611d38d.sol#235-281
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+IKyberNetworkProxy.trade (/sb/0x968a92f07df9ec1799e7e25de5b50663e611d38d.sol#545-567) should be declared external
+SetBuyer.buy (/sb/0x968a92f07df9ec1799e7e25de5b50663e611d38d.sol#571-637) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Low level call in SetBuyer.sendEthValue (/sb/0x968a92f07df9ec1799e7e25de5b50663e611d38d.sol#649-663):
+	-require(bool)(target.call.value(value)(data)) /sb/0x968a92f07df9ec1799e7e25de5b50663e611d38d.sol#657-663
+Low level call in SetBuyer.sendEthProportion (/sb/0x968a92f07df9ec1799e7e25de5b50663e611d38d.sol#663-673):
+	-require(bool)(target.call.value(value)(data)) /sb/0x968a92f07df9ec1799e7e25de5b50663e611d38d.sol#669-673
+Low level call in SetBuyer.approveTokenAmount (/sb/0x968a92f07df9ec1799e7e25de5b50663e611d38d.sol#675-695):
+	-require(bool)(target.call(data)) /sb/0x968a92f07df9ec1799e7e25de5b50663e611d38d.sol#687-694
+Low level call in SetBuyer.approveTokenProportion (/sb/0x968a92f07df9ec1799e7e25de5b50663e611d38d.sol#695-713):
+	-require(bool)(target.call(data)) /sb/0x968a92f07df9ec1799e7e25de5b50663e611d38d.sol#705-711
+Low level call in SetBuyer.transferTokenAmount (/sb/0x968a92f07df9ec1799e7e25de5b50663e611d38d.sol#713-721):
+	-require(bool)(target.call(data)) /sb/0x968a92f07df9ec1799e7e25de5b50663e611d38d.sol#719
+Low level call in SetBuyer.transferTokenProportion (/sb/0x968a92f07df9ec1799e7e25de5b50663e611d38d.sol#725-754):
+	-require(bool)(target.call(data)) /sb/0x968a92f07df9ec1799e7e25de5b50663e611d38d.sol#745-747
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Slither:/sb/0x968a92f07df9ec1799e7e25de5b50663e611d38d.sol analyzed (6 contracts), 24 result(s) found

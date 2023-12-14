@@ -1,0 +1,246 @@
+INFO:Detectors:[91m
+ERC721._ownedTokensCount (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#601-602) is never initialized. It is used in:
+	- balanceOf (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#634-642)
+NFTRewardB._powerBalances (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1378-1379) is never initialized. It is used in:
+	- withdrawAnft (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1632-1679)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-state-variables[0m
+INFO:Detectors:[93m
+Address.isContract (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#439-457) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+IERC721 (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#336-385) has incorrect ERC20 function interface(s):
+	-transferFrom (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#371-374)
+	-approve (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#374-378)
+ERC721 (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#587-950) has incorrect ERC20 function interface(s):
+	-transferFrom (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#715-720)
+	-approve (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#663-674)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[93m
+Reentrancy in NFTRewardB.checkHalve (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1398-1408):
+	External calls:
+	- _artd.mint(address(this),_initReward) (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1403-1404)
+	State variables written after the call(s):
+	- _periodFinish (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1406-1407)
+Reentrancy in NFTRewardB.exit (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1694-1699):
+	External calls:
+	- withdrawall() (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1695-1697)
+	- getReward() (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1699)
+	State variables written after the call(s):
+	- _idRewardPerWeightPaid (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1699)
+	- _idrewards (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1699)
+	- _initReward (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1699)
+	- _lastUpdateTime (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1699)
+	- _periodFinish (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1699)
+	- _rewardPerWeightStored (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1699)
+	- _rewardRate (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1699)
+	- _userRewardPerWeightPaid (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1699)
+	- _userrewards (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1699)
+Reentrancy in NFTRewardB.stakeAnft (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1572-1619):
+	External calls:
+	- owner = NFTownerOf(anftId) (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1591-1593)
+	- stakeweight = getNftWeight(anftId) (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1596-1597)
+	State variables written after the call(s):
+	- _totalWeight (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1597-1599)
+Reentrancy in NFTRewardB.updateIdReward (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1426-1437):
+	External calls:
+	- _idrewards[anftId] = earnedId(anftId) (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1430-1432)
+	State variables written after the call(s):
+	- _idRewardPerWeightPaid (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1432-1435)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+NFTRewardB.stakeAnft (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1572-1619) does not use the value returned by external calls:
+	-IPlayerLink(_playerLink).bindRefer(msg.sender,affCode) (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1612-1614)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in NFTRewardB.checkHalve (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1398-1408):
+	External calls:
+	- _artd.mint(address(this),_initReward) (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1403-1404)
+	State variables written after the call(s):
+	- _rewardRate (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1405-1406)
+Reentrancy in NFTRewardB.getReward (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1700-1757):
+	External calls:
+	- fee = IPlayerLink(_playerLink).settleReward(msg.sender,reward) (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1712-1714)
+	State variables written after the call(s):
+	- _idRewardPerWeightPaid (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1753-1754)
+	- _idrewards (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1753)
+Reentrancy in NFTRewardB.reserveMintAmount (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol):
+	External calls:
+	- _artd.mint(address(this),reward) (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol)
+	State variables written after the call(s):
+	- _lastUpdateTime (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol)
+	- _periodFinish (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol)
+	- _rewardRate (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol)
+	- _rewardRate (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol)
+Reentrancy in NFTRewardB.stakeAnft (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1572-1619):
+	External calls:
+	- owner = NFTownerOf(anftId) (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1591-1593)
+	- stakeweight = getNftWeight(anftId) (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1596-1597)
+	State variables written after the call(s):
+	- _weightBalances (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1601-1604)
+Reentrancy in NFTRewardB.stakeAnft (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1572-1619):
+	External calls:
+	- owner = NFTownerOf(anftId) (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1591-1593)
+	- stakeweight = getNftWeight(anftId) (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1596-1597)
+	- _anftToken.safeTransferFrom(msg.sender,address(this),anftId) (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1605-1609)
+	- ! IPlayerLink(_playerLink).hasRefer(msg.sender) (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1609-1614)
+	- IPlayerLink(_playerLink).bindRefer(msg.sender,affCode) (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1612-1614)
+	State variables written after the call(s):
+	- _lastStakedTime (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1616-1618)
+	- users (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1614-1616)
+	- usersRecords (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1614-1616)
+Reentrancy in NFTRewardB.startNFTReward (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1767-1783):
+	External calls:
+	- _artd.mint(address(this),_initReward) (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1777-1778)
+	State variables written after the call(s):
+	- _lastUpdateTime (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1778-1779)
+	- _periodFinish (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1781)
+Reentrancy in NFTRewardB.withdrawAnft (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1632-1679):
+	External calls:
+	- weight = getNftWeight(anftId) (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1663)
+	State variables written after the call(s):
+	- _totalWeight (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1665)
+	- _totalWeight (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1667)
+	- _weightBalances (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1670-1671)
+	- _weightBalances (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1671-1674)
+Reentrancy in NFTRewardB.withdrawAnft (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1632-1679):
+	External calls:
+	- weight = getNftWeight(anftId) (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1663)
+	- _anftToken.safeTransferFrom(address(this),msg.sender,anftId) (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1674-1675)
+	State variables written after the call(s):
+	- users (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1675-1676)
+	- usersRecords (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1675-1676)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+NFTRewardB.reserveMintAmount (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp >= _periodFinish (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol)
+NFTRewardB.IsReward (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol) uses timestamp for comparisons
+	Dangerous comparisons:
+	- (block.timestamp > _lastUpdateTime) (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+Address.isContract uses assembly (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#439-457)
+	- /sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#452-456
+ERC721._checkOnERC721Received uses assembly (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#908-942)
+	- /sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#932-934
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+NFTRewardB._baseRate should be constant (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1353)
+NFTRewardB._fixRateBase should be constant (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1365-1369)
+NFTRewardB._playerLink should be constant (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1334-1337)
+NFTRewardB._rewardPool should be constant (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1340-1343)
+NFTRewardB._teamWallet should be constant (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1337-1338)
+NFTRewardB._totalPower should be constant (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1377-1378)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Ownable.owner (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#266-270) should be declared external
+Ownable.renounceOwnership (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#292-297) should be declared external
+Ownable.transferOwnership (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#300-301) should be declared external
+ERC721.safeTransferFrom (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#733-736) should be declared external
+IERC721.safeTransferFrom (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#366-367) should be declared external
+IERC721.transferFrom (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#371-374) should be declared external
+ERC721.transferFrom (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#715-720) should be declared external
+ERC721.approve (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#663-674) should be declared external
+IERC721.approve (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#374-378) should be declared external
+IERC721.setApprovalForAll (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#379-381) should be declared external
+ERC721.setApprovalForAll (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#691-697) should be declared external
+ERC721Enumerable.tokenOfOwnerByIndex (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#988-995) should be declared external
+IERC721Enumerable.tokenOfOwnerByIndex (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#396-397) should be declared external
+ERC721Enumerable.tokenByIndex (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1010-1016) should be declared external
+IERC721Enumerable.tokenByIndex (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#398) should be declared external
+IERC721Receiver.onERC721Received (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#423-425) should be declared external
+Governance.setGovernance (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1319-1324) should be declared external
+NFTRewardB.getStaker (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1458-1463) should be declared external
+NFTRewardB.UserRecord (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1463-1466) should be declared external
+NFTRewardB.stakeInfo (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1466-1478) should be declared external
+NFTRewardB.stakeCount (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1478-1480) should be declared external
+NFTRewardB.stakeAnft (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1572-1619) should be declared external
+NFTRewardB.onERC721Received (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1620-1632) should be declared external
+NFTRewardB.getPlayerIds (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1689-1694) should be declared external
+NFTRewardB.setTeamRewardRate (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol) should be declared external
+NFTRewardB.setPoolRewardRate (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol) should be declared external
+NFTRewardB.setWithDrawPunishTime (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol) should be declared external
+NFTRewardB.IsReward (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol) should be declared external
+NFTRewardB.rewardStarttime (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol:
+	- pragma solidity^0.5.16 (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#5-7): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Low level call in Address.sendValue (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#487-492):
+	-(success) = recipient.call.value(amount)() /sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#491
+Low level call in ERC721._checkOnERC721Received (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#908-942):
+	-(success,returndata) = to.call(abi.encodeWithSelector(IERC721Receiver(to).onERC721Received.selector,_msgSender(),from,tokenId,_data)) /sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#918-928
+Low level call in SafeERC20.callOptionalReturn (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1278-1308):
+	-(success,returndata) = address(token).call(data) /sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1301-1302
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Function 'Context._msgSender' (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#225-226) is not in mixedCase
+Function 'Context._msgData' (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#228-236) is not in mixedCase
+Function 'Ownable._transferOwnership' (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#308-315) is not in mixedCase
+Function 'ERC165._registerInterface' (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#580-584) is not in mixedCase
+Parameter '_data' of ERC721.safeTransferFrom (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#749) is not in mixedCase
+Function 'ERC721._safeTransferFrom' (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#770-775) is not in mixedCase
+Parameter '_data' of ERC721._safeTransferFrom (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#772) is not in mixedCase
+Function 'ERC721._exists' (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#778-783) is not in mixedCase
+Function 'ERC721._isApprovedOrOwner' (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#788-798) is not in mixedCase
+Function 'ERC721._safeMint' (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#807-808) is not in mixedCase
+Function 'ERC721._safeMint' (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#824-832) is not in mixedCase
+Parameter '_data' of ERC721._safeMint (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#828) is not in mixedCase
+Function 'ERC721._mint' (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#839-851) is not in mixedCase
+Function 'ERC721._burn' (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#858-863) is not in mixedCase
+Function 'ERC721._burn' (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#870-876) is not in mixedCase
+Function 'ERC721._transferFrom' (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#881-892) is not in mixedCase
+Function 'ERC721._checkOnERC721Received' (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#908-942) is not in mixedCase
+Parameter '_data' of ERC721._checkOnERC721Received (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#911) is not in mixedCase
+Function 'ERC721._clearApproval' (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#947-950) is not in mixedCase
+Function 'ERC721Enumerable._mint' (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1041-1048) is not in mixedCase
+Function 'ERC721Enumerable._burn' (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1052-1061) is not in mixedCase
+Function 'ERC721Enumerable._transferFrom' (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1028-1033) is not in mixedCase
+Function 'ERC721Enumerable._tokensOfOwner' (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1067-1068) is not in mixedCase
+Function 'ERC721Enumerable._addTokenToOwnerEnumeration' (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1072-1074) is not in mixedCase
+Function 'ERC721Enumerable._addTokenToAllTokensEnumeration' (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1078-1081) is not in mixedCase
+Function 'ERC721Enumerable._removeTokenFromOwnerEnumeration' (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1093-1113) is not in mixedCase
+Function 'ERC721Enumerable._removeTokenFromAllTokensEnumeration' (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1124-1154) is not in mixedCase
+Variable 'Governance._governance' (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1310) is not in mixedCase
+Parameter '_nftid' of NFTRewardB.addUserId (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1437) is not in mixedCase
+Parameter '_nftid' of NFTRewardB.quitUser (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1447) is not in mixedCase
+Parameter '_nftid' of NFTRewardB.getStaker (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1459-1461) is not in mixedCase
+Function 'NFTRewardB.UserRecord' (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1463-1466) is not in mixedCase
+Function 'NFTRewardB.NFTownerOf' (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol) is not in mixedCase
+Function 'NFTRewardB.IsReward' (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol) is not in mixedCase
+Variable 'NFTRewardB._artd' (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1328-1331) is not in mixedCase
+Variable 'NFTRewardB._anftToken' (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1331-1333) is not in mixedCase
+Variable 'NFTRewardB._anftFactory' (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1333-1334) is not in mixedCase
+Variable 'NFTRewardB._playerLink' (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1334-1337) is not in mixedCase
+Variable 'NFTRewardB._teamWallet' (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1337-1338) is not in mixedCase
+Variable 'NFTRewardB._rewardPool' (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1340-1343) is not in mixedCase
+Variable 'NFTRewardB._initReward' (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1345-1347) is not in mixedCase
+Variable 'NFTRewardB._startTime' (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1348-1349) is not in mixedCase
+Variable 'NFTRewardB._periodFinish' (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1349-1350) is not in mixedCase
+Variable 'NFTRewardB._rewardRate' (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1350) is not in mixedCase
+Variable 'NFTRewardB._lastUpdateTime' (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1350-1351) is not in mixedCase
+Variable 'NFTRewardB._rewardPerWeightStored' (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1351-1352) is not in mixedCase
+Variable 'NFTRewardB._teamRewardRate' (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1352) is not in mixedCase
+Variable 'NFTRewardB._poolRewardRate' (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1352-1353) is not in mixedCase
+Variable 'NFTRewardB._baseRate' (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1353) is not in mixedCase
+Variable 'NFTRewardB._punishTime' (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1353-1354) is not in mixedCase
+Variable 'NFTRewardB._userRewardPerWeightPaid' (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1354-1357) is not in mixedCase
+Variable 'NFTRewardB._userrewards' (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1357-1358) is not in mixedCase
+Variable 'NFTRewardB._idRewardPerWeightPaid' (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1358-1360) is not in mixedCase
+Variable 'NFTRewardB._idrewards' (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1360-1362) is not in mixedCase
+Variable 'NFTRewardB._lastStakedTime' (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1362-1363) is not in mixedCase
+Variable 'NFTRewardB._hasStart' (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1363) is not in mixedCase
+Variable 'NFTRewardB._hasRewardStart' (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1364) is not in mixedCase
+Variable 'NFTRewardB._fixRateBase' (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1365-1369) is not in mixedCase
+Variable 'NFTRewardB._totalWeight' (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1369-1370) is not in mixedCase
+Variable 'NFTRewardB._weightBalances' (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1370-1372) is not in mixedCase
+Variable 'NFTRewardB._artdBalances' (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1374-1375) is not in mixedCase
+Variable 'NFTRewardB._playerAnft' (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1375-1376) is not in mixedCase
+Variable 'NFTRewardB._anftMapIndex' (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1376-1377) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+NFTRewardB._totalPower (/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol#1377-1378) is never used in NFTRewardB
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0xb794fa29f9ce65fb6050f7cd7462b815d2736a29.sol analyzed (20 contracts), 120 result(s) found

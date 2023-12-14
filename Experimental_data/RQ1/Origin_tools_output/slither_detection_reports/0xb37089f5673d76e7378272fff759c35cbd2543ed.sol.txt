@@ -1,0 +1,61 @@
+INFO:Detectors:[91m
+Reentrancy in EnglishAuction.end (/sb/0xb37089f5673d76e7378272fff759c35cbd2543ed.sol#116-134):
+	External calls:
+	- IERC1155(token).safeTransferFrom(address(this),winning,id,1,new bytes(0x0)) (/sb/0xb37089f5673d76e7378272fff759c35cbd2543ed.sol#122-124)
+	External calls sending eth:
+	- haus.transfer(hausFee) (/sb/0xb37089f5673d76e7378272fff759c35cbd2543ed.sol#129-132)
+	- seller.transfer(address(this).balance) (/sb/0xb37089f5673d76e7378272fff759c35cbd2543ed.sol#132-133)
+	State variables written after the call(s):
+	- ended (/sb/0xb37089f5673d76e7378272fff759c35cbd2543ed.sol#133-134)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities[0m
+INFO:Detectors:[93m
+EnglishAuction.pull (/sb/0xb37089f5673d76e7378272fff759c35cbd2543ed.sol#135-144) uses a dangerous strict equality:
+	- require(bool,string)(lastBidTime == 0,There were bids)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Reentrancy in EnglishAuction.pull (/sb/0xb37089f5673d76e7378272fff759c35cbd2543ed.sol#135-144):
+	External calls:
+	- IERC1155(token).safeTransferFrom(address(this),seller,id,1,new bytes(0x0)) (/sb/0xb37089f5673d76e7378272fff759c35cbd2543ed.sol#143-144)
+	State variables written after the call(s):
+	- ended (/sb/0xb37089f5673d76e7378272fff759c35cbd2543ed.sol#144)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+EnglishAuction.bid (/sb/0xb37089f5673d76e7378272fff759c35cbd2543ed.sol#97-116) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(block.timestamp >= startBidTime,Auction not started) (/sb/0xb37089f5673d76e7378272fff759c35cbd2543ed.sol#98-99)
+	- require(bool,string)(block.timestamp < lastBidTime.add(bidLength),Auction ended) (/sb/0xb37089f5673d76e7378272fff759c35cbd2543ed.sol#104-108)
+	- require(bool,string)(block.timestamp < startBidTime.add(auctionLength),Auction ended) (/sb/0xb37089f5673d76e7378272fff759c35cbd2543ed.sol#99-101)
+	- lastBidTime != 0 (/sb/0xb37089f5673d76e7378272fff759c35cbd2543ed.sol#103-111)
+EnglishAuction.end (/sb/0xb37089f5673d76e7378272fff759c35cbd2543ed.sol#116-134) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(lastBidTime != 0,no bids) (/sb/0xb37089f5673d76e7378272fff759c35cbd2543ed.sol#117)
+	- require(bool,string)(block.timestamp >= lastBidTime.add(bidLength) || block.timestamp >= startBidTime.add(auctionLength),Auction live) (/sb/0xb37089f5673d76e7378272fff759c35cbd2543ed.sol#117-120)
+EnglishAuction.pull (/sb/0xb37089f5673d76e7378272fff759c35cbd2543ed.sol#135-144) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(block.timestamp >= startBidTime.add(auctionLength),Auction live) (/sb/0xb37089f5673d76e7378272fff759c35cbd2543ed.sol#138-140)
+	- require(bool,string)(lastBidTime == 0,There were bids) (/sb/0xb37089f5673d76e7378272fff759c35cbd2543ed.sol#137-138)
+EnglishAuction.live (/sb/0xb37089f5673d76e7378272fff759c35cbd2543ed.sol#144-151) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp < lastBidTime.add(bidLength) && block.timestamp < startBidTime.add(auctionLength) (/sb/0xb37089f5673d76e7378272fff759c35cbd2543ed.sol#147-151)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+EnglishAuction.auctionLength should be constant (/sb/0xb37089f5673d76e7378272fff759c35cbd2543ed.sol#79-80)
+EnglishAuction.bidLength should be constant (/sb/0xb37089f5673d76e7378272fff759c35cbd2543ed.sol#76-78)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+EnglishAuction.bid (/sb/0xb37089f5673d76e7378272fff759c35cbd2543ed.sol#97-116) should be declared external
+EnglishAuction.end (/sb/0xb37089f5673d76e7378272fff759c35cbd2543ed.sol#116-134) should be declared external
+EnglishAuction.pull (/sb/0xb37089f5673d76e7378272fff759c35cbd2543ed.sol#135-144) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xb37089f5673d76e7378272fff759c35cbd2543ed.sol:
+	- pragma solidity^0.6.7 (/sb/0xb37089f5673d76e7378272fff759c35cbd2543ed.sol#10-12): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '' of EnglishAuction.onERC1155Received (/sb/0xb37089f5673d76e7378272fff759c35cbd2543ed.sol#151) is not in mixedCase
+Parameter '_scope_0' of EnglishAuction.onERC1155Received (/sb/0xb37089f5673d76e7378272fff759c35cbd2543ed.sol#151) is not in mixedCase
+Parameter '_scope_1' of EnglishAuction.onERC1155Received (/sb/0xb37089f5673d76e7378272fff759c35cbd2543ed.sol#151) is not in mixedCase
+Parameter '_scope_2' of EnglishAuction.onERC1155Received (/sb/0xb37089f5673d76e7378272fff759c35cbd2543ed.sol#151-152) is not in mixedCase
+Parameter '_scope_3' of EnglishAuction.onERC1155Received (/sb/0xb37089f5673d76e7378272fff759c35cbd2543ed.sol#154) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xb37089f5673d76e7378272fff759c35cbd2543ed.sol analyzed (3 contracts), 17 result(s) found

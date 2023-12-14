@@ -1,0 +1,186 @@
+INFO:Detectors:[91m
+ViolaCrowdsale._forwardFunds (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#521-523) sends eth to arbitrary user
+	Dangerous calls:
+	- wallet.transfer(this.balance) (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#522-523)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[93m
+ViolaCrowdsale.completeCrowdsale (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#502-509) uses a dangerous strict equality:
+	- assert(bool)(this.balance == 0)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Reentrancy in ViolaCrowdsale.allocateToken (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#738-771):
+	External calls:
+	- require(bool)(getTokensLeft() >= tokensToAllocate) (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#756)
+	State variables written after the call(s):
+	- totalTokensAllocated (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#758-759)
+Reentrancy in ViolaCrowdsale.allocateTopupToken (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol):
+	External calls:
+	- require(bool)(getTokensLeft() >= tokensToAllocate) (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol)
+	State variables written after the call(s):
+	- totalTokensAllocated (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol)
+Reentrancy in ViolaCrowdsale.completeCrowdsale (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#502-509):
+	External calls:
+	- require(bool)(violaToken.allowance(owner,this) == 0) (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#504-507)
+	State variables written after the call(s):
+	- status (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#507)
+Reentrancy in ViolaCrowdsale.externalPurchaseTokens (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#902-917):
+	External calls:
+	- require(bool)(getTokensLeft() >= totalTokensToAllocate) (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#906-908)
+	State variables written after the call(s):
+	- totalTokensAllocated (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#908-910)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+ViolaCrowdsale.burnExtraTokens (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#509-518) does not use the value returned by external calls:
+	-violaToken.burnFrom(owner,extraTokensToBurn) (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#512-516)
+ViolaCrowdsale.claimTokens (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#821-834) does not use the value returned by external calls:
+	-violaToken.transferFrom(owner,tokenReceiver,tokensToClaim) (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#830-833)
+ViolaCrowdsale.claimBonusTokens (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#836-853) does not use the value returned by external calls:
+	-violaToken.transferFrom(owner,tokenReceiver,tokensToClaim) (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#849-850)
+ViolaCrowdsale.emergencyERC20Drain (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol) does not use the value returned by external calls:
+	-token.transfer(owner,amount) (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in ViolaCrowdsale.allocateToken (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#738-771):
+	External calls:
+	- require(bool)(getTokensLeft() >= tokensToAllocate) (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#756)
+	State variables written after the call(s):
+	- bonusTokensAllocated (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#762-765)
+	- tokensAllocated (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#760)
+Reentrancy in ViolaCrowdsale.allocateToken (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#738-771):
+	External calls:
+	- require(bool)(getTokensLeft() >= tokensToAllocate) (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#756)
+	- tokensHasSoldOut() (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#767-771)
+	- endCrowdsale() (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#770)
+	State variables written after the call(s):
+	- bonusVestingPeriod (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#770)
+Reentrancy in ViolaCrowdsale.allocateTopupToken (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol):
+	External calls:
+	- require(bool)(getTokensLeft() >= tokensToAllocate) (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol)
+	State variables written after the call(s):
+	- bonusTokensAllocated (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol)
+	- tokensAllocated (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol)
+Reentrancy in ViolaCrowdsale.endCrowdsale (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#480-491):
+	External calls:
+	- ! tokensHasSoldOut() (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#482-485)
+	State variables written after the call(s):
+	- bonusVestingPeriod (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#487)
+	- status (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#488)
+Reentrancy in ViolaCrowdsale.externalPurchaseTokens (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#902-917):
+	External calls:
+	- require(bool)(getTokensLeft() >= totalTokensToAllocate) (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#906-908)
+	State variables written after the call(s):
+	- externalBonusTokensAllocated (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#913-916)
+	- externalTokensAllocated (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#911-913)
+	- totalReservedTokenAllocated (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#910-911)
+Reentrancy in ViolaCrowdsale.setLeftoverTokensBuffer (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#539-545):
+	External calls:
+	- require(bool)(getTokensLeft() >= _tokenBuffer) (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#542-545)
+	State variables written after the call(s):
+	- leftoverTokensBuffer (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#545)
+Reentrancy in ViolaCrowdsale.startCrowdsale (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#464-476):
+	External calls:
+	- require(bool)(getTokensLeft() > 0) (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#470-473)
+	State variables written after the call(s):
+	- status (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#474)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+ERC20Basic.totalSupply should be constant (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#273-274)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+VLTToken.totalSupply (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#106-107) should be declared external
+ERC20Interface.totalSupply (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#51-52) should be declared external
+ERC20Interface.balanceOf (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#52-53) should be declared external
+VLTToken.balanceOf (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#112-117) should be declared external
+ERC20Interface.transfer (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#53-54) should be declared external
+VLTToken.transfer (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#121-139) should be declared external
+VLTToken.allowance (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#189-192) should be declared external
+ERC20Interface.allowance (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#54-55) should be declared external
+ERC20Interface.transferFrom (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#55-56) should be declared external
+VLTToken.transferFrom (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#161-180) should be declared external
+VLTToken.approve (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#148-155) should be declared external
+ERC20Interface.approve (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#56-58) should be declared external
+VLTToken.increaseApproval (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#200-208) should be declared external
+VLTToken.decreaseApproval (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#217-231) should be declared external
+VLTToken.burn (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#232-247) should be declared external
+VLTToken.burnFrom (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#249-261) should be declared external
+VLTToken.transferAnyERC20Token (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#268-270) should be declared external
+ERC20Basic.balanceOf (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#274-275) should be declared external
+ERC20Basic.transfer (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#275) should be declared external
+ERC20.allowance (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#277-281) should be declared external
+ERC20.transferFrom (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#281-284) should be declared external
+ERC20.approve (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#284-288) should be declared external
+Ownable.transferOwnership (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#322-329) should be declared external
+ViolaCrowdsale.getTotalTokensByAddress (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#680-685) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol:
+	- pragma solidity0.4.20 (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#1): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_owner' of VLTToken.balanceOf (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#115) is not in mixedCase
+Parameter '_to' of VLTToken.transfer (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#122) is not in mixedCase
+Parameter '_value' of VLTToken.transfer (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#122) is not in mixedCase
+Parameter '_owner' of VLTToken.allowance (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#189) is not in mixedCase
+Parameter '_spender' of VLTToken.allowance (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#189-191) is not in mixedCase
+Parameter '_from' of VLTToken.transferFrom (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#161) is not in mixedCase
+Parameter '_to' of VLTToken.transferFrom (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#161) is not in mixedCase
+Parameter '_value' of VLTToken.transferFrom (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#161) is not in mixedCase
+Parameter '_spender' of VLTToken.approve (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#148-149) is not in mixedCase
+Parameter '_value' of VLTToken.approve (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#149-150) is not in mixedCase
+Function 'VLTToken.VLTToken' (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#91-101) is not in mixedCase
+Parameter '_spender' of VLTToken.increaseApproval (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#200) is not in mixedCase
+Parameter '_addedValue' of VLTToken.increaseApproval (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#200-201) is not in mixedCase
+Parameter '_spender' of VLTToken.decreaseApproval (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#218-219) is not in mixedCase
+Parameter '_subtractedValue' of VLTToken.decreaseApproval (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#219) is not in mixedCase
+Parameter '_value' of VLTToken.burn (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#232) is not in mixedCase
+Parameter '_from' of VLTToken.burnFrom (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#250) is not in mixedCase
+Parameter '_value' of VLTToken.burnFrom (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#250) is not in mixedCase
+Variable 'VLTToken._totalSupply' (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#77-78) is not in mixedCase
+Function 'Ownable.Ownable' (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#306-307) is not in mixedCase
+Parameter '_startTime' of ViolaCrowdsale.initialiseCrowdsale (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#431-433) is not in mixedCase
+Parameter '_rate' of ViolaCrowdsale.initialiseCrowdsale (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#433) is not in mixedCase
+Parameter '_tokenAddress' of ViolaCrowdsale.initialiseCrowdsale (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#433-435) is not in mixedCase
+Parameter '_wallet' of ViolaCrowdsale.initialiseCrowdsale (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#435-439) is not in mixedCase
+Function 'ViolaCrowdsale._forwardFunds' (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#521-523) is not in mixedCase
+Parameter '_amountToTransfer' of ViolaCrowdsale.partialForwardFunds (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#524) is not in mixedCase
+Parameter '_tokenBuffer' of ViolaCrowdsale.setLeftoverTokensBuffer (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#539-540) is not in mixedCase
+Parameter '_rate' of ViolaCrowdsale.setRate (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#547) is not in mixedCase
+Parameter '_rate' of ViolaCrowdsale.setBonusTokenRateLevelOne (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#551) is not in mixedCase
+Parameter '_rate' of ViolaCrowdsale.setBonusTokenRateLevelTwo (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#557) is not in mixedCase
+Parameter '_rate' of ViolaCrowdsale.setBonusTokenRateLevelThree (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#563) is not in mixedCase
+Parameter '_rate' of ViolaCrowdsale.setBonusTokenRateLevelFour (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#570-571) is not in mixedCase
+Parameter '_minWeiToPurchase' of ViolaCrowdsale.setMinWeiToPurchase (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#574) is not in mixedCase
+Parameter '_investor' of ViolaCrowdsale.setWhitelistAddress (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#591) is not in mixedCase
+Parameter '_cap' of ViolaCrowdsale.setWhitelistAddress (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#591-592) is not in mixedCase
+Parameter '_investor' of ViolaCrowdsale.removeWhitelistAddress (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#600) is not in mixedCase
+Parameter '_kycAddress' of ViolaCrowdsale.approveKYC (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#609-611) is not in mixedCase
+Parameter '_kycAddress' of ViolaCrowdsale.revokeKYC (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#625-627) is not in mixedCase
+Parameter '_investor' of ViolaCrowdsale.getTotalTokensByAddress (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#683) is not in mixedCase
+Parameter '_investor' of ViolaCrowdsale.getTotalNormalTokensByAddress (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#690-691) is not in mixedCase
+Parameter '_investor' of ViolaCrowdsale.getTotalBonusTokensByAddress (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#700) is not in mixedCase
+Function 'ViolaCrowdsale._clearTotalNormalTokensByAddress' (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#703-713) is not in mixedCase
+Parameter '_investor' of ViolaCrowdsale._clearTotalNormalTokensByAddress (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#707) is not in mixedCase
+Function 'ViolaCrowdsale._clearTotalBonusTokensByAddress' (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#713-716) is not in mixedCase
+Parameter '_investor' of ViolaCrowdsale._clearTotalBonusTokensByAddress (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#714) is not in mixedCase
+Function 'ViolaCrowdsale._refund' (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#775-787) is not in mixedCase
+Parameter '_investor' of ViolaCrowdsale._refund (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#775) is not in mixedCase
+Parameter '_investor' of ViolaCrowdsale.refundPartial (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#790) is not in mixedCase
+Parameter '_refundAmt' of ViolaCrowdsale.refundPartial (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#790-792) is not in mixedCase
+Parameter '_tokenAmt' of ViolaCrowdsale.refundPartial (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#792) is not in mixedCase
+Parameter '_bonusTokenAmt' of ViolaCrowdsale.refundPartial (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#792-795) is not in mixedCase
+Parameter '_tokenReceiver' of ViolaCrowdsale.distributeBonusTokens (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#855-856) is not in mixedCase
+Parameter '_tokenReceiver' of ViolaCrowdsale.distributeICOTokens (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#871) is not in mixedCase
+Parameter '_investor' of ViolaCrowdsale.externalPurchaseTokens (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#902) is not in mixedCase
+Parameter '_amount' of ViolaCrowdsale.externalPurchaseTokens (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#902-903) is not in mixedCase
+Parameter '_bonusAmount' of ViolaCrowdsale.externalPurchaseTokens (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#903) is not in mixedCase
+Parameter '_investor' of ViolaCrowdsale.refundAllExternalPurchase (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#918) is not in mixedCase
+Parameter '_investor' of ViolaCrowdsale.refundExternalPurchase (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#932) is not in mixedCase
+Parameter '_amountToRefund' of ViolaCrowdsale.refundExternalPurchase (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#933) is not in mixedCase
+Parameter '_bonusAmountToRefund' of ViolaCrowdsale.refundExternalPurchase (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#933-934) is not in mixedCase
+Function 'ViolaCrowdsale._clearAddressFromCrowdsale' (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#953-958) is not in mixedCase
+Parameter '_investor' of ViolaCrowdsale._clearAddressFromCrowdsale (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol#954-955) is not in mixedCase
+Parameter '_investor' of ViolaCrowdsale.allocateTopupToken (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol) is not in mixedCase
+Parameter '_amount' of ViolaCrowdsale.allocateTopupToken (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol) is not in mixedCase
+Parameter '_bonusAmount' of ViolaCrowdsale.allocateTopupToken (/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x851669f77544ca3e02305c74238160051cb0f51f.sol analyzed (7 contracts), 108 result(s) found

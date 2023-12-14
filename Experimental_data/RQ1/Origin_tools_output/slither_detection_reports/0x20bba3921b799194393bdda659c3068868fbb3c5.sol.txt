@@ -1,0 +1,110 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol:
+Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+   --> /sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol:439:28:
+    |
+439 |     function receiveTokens(address _from, uint256 _value, bytes memory _extraData) public {
+    |                            ^^^^^^^^^^^^^
+
+Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+   --> /sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol:439:59:
+    |
+439 |     function receiveTokens(address _from, uint256 _value, bytes memory _extraData) public {
+    |                                                           ^^^^^^^^^^^^^^^^^^^^^^^
+
+
+INFO:Detectors:[91m
+Reentrancy in Staking.stake (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol#399-420):
+	External calls:
+	- updateAccount(msg.sender) (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol#405-406)
+	- require(bool,string)(Token(stakingTokenAddress).transferFrom(msg.sender,address(this),amountToStake),Insufficient Token Allowance) (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol#406-411)
+	External calls sending eth:
+	- _owner.transfer(fee) (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol#402)
+	State variables written after the call(s):
+	- depositedTokens (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol#411-413)
+Reentrancy in Staking.unstake (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol#420-441):
+	External calls:
+	- updateAccount(msg.sender) (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol#426-429)
+	- require(bool,string)(Token(stakingTokenAddress).transfer(msg.sender,amountToWithdraw),Could not transfer tokens.) (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol#430-434)
+	External calls sending eth:
+	- _owner.transfer(fee) (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol#423-424)
+	State variables written after the call(s):
+	- depositedTokens (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol#435-436)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities[0m
+INFO:Detectors:[93m
+Reentrancy in Staking.updateAccount (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol#364-379):
+	External calls:
+	- require(bool,string)(Token(rewardTokenAddress).transfer(account,pendingDivs),Could not transfer tokens.) (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol#367-371)
+	State variables written after the call(s):
+	- lastDivPoints (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol#378-379)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+EnumerableSet._remove (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol#107-143) does not use the value returned by external calls:
+	-set._values.pop() (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol#134-135)
+Staking.stake (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol#399-420) does not use the value returned by external calls:
+	-holders.add(msg.sender) (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol#416-418)
+Staking.unstake (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol#420-441) does not use the value returned by external calls:
+	-holders.remove(msg.sender) (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol#440)
+Staking.transferAnyERC20Tokens (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol) does not use the value returned by external calls:
+	-Token(_tokenAddr).transfer(_to,_amount) (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in Staking.stake (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol#399-420):
+	External calls:
+	- updateAccount(msg.sender) (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol#405-406)
+	- require(bool,string)(Token(stakingTokenAddress).transferFrom(msg.sender,address(this),amountToStake),Insufficient Token Allowance) (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol#406-411)
+	External calls sending eth:
+	- _owner.transfer(fee) (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol#402)
+	State variables written after the call(s):
+	- stakingTime (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol#418-420)
+	- totalTokens (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol#414-416)
+Reentrancy in Staking.unstake (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol#420-441):
+	External calls:
+	- updateAccount(msg.sender) (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol#426-429)
+	- require(bool,string)(Token(stakingTokenAddress).transfer(msg.sender,amountToWithdraw),Could not transfer tokens.) (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol#430-434)
+	External calls sending eth:
+	- _owner.transfer(fee) (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol#423-424)
+	State variables written after the call(s):
+	- totalTokens (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol#436-439)
+Reentrancy in Staking.updateAccount (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol#364-379):
+	External calls:
+	- require(bool,string)(Token(rewardTokenAddress).transfer(account,pendingDivs),Could not transfer tokens.) (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol#367-371)
+	State variables written after the call(s):
+	- lastClaimedTime (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol#377)
+	- totalClaimedRewards (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol#373-375)
+	- totalEarnedTokens (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol#371-372)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Staking.fee should be constant (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol#363)
+Staking.pointMultiplier should be constant (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol#363-364)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol#323-330) should be declared external
+Staking.getNumberOfStakers (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol#395-399) should be declared external
+Staking.stake (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol#399-420) should be declared external
+Staking.unstake (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol#420-441) should be declared external
+Staking.claim (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol#441-445) should be declared external
+Staking.receiveTokens (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol#447-450) should be declared external
+Staking.transferAnyERC20Tokens (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol:
+	- pragma solidity0.6.12 (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol#5-7): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'EnumerableSet._add' (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol#89-103) is not in mixedCase
+Function 'EnumerableSet._remove' (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol#107-143) is not in mixedCase
+Function 'EnumerableSet._contains' (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol#148-150) is not in mixedCase
+Function 'EnumerableSet._length' (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol#155-157) is not in mixedCase
+Function 'EnumerableSet._at' (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol#166-178) is not in mixedCase
+Parameter '' of Token.transferFrom (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol#332) is not in mixedCase
+Parameter '_scope_0' of Token.transferFrom (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol#332-333) is not in mixedCase
+Parameter '_scope_1' of Token.transferFrom (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol#333) is not in mixedCase
+Parameter '' of Token.transfer (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol#334) is not in mixedCase
+Parameter '_scope_0' of Token.transfer (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol#334) is not in mixedCase
+Parameter '_holder' of Staking.getPendingDivs (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol#379-380) is not in mixedCase
+Parameter '_value' of Staking.receiveTokens (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol#447) is not in mixedCase
+Parameter '_tokenAddr' of Staking.transferAnyERC20Tokens (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol) is not in mixedCase
+Parameter '_to' of Staking.transferAnyERC20Tokens (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol) is not in mixedCase
+Parameter '_amount' of Staking.transferAnyERC20Tokens (/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x20bba3921b799194393bdda659c3068868fbb3c5.sol analyzed (5 contracts), 34 result(s) found

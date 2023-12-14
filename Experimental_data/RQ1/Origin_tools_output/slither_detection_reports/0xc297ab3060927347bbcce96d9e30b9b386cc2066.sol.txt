@@ -1,0 +1,95 @@
+INFO:Detectors:[93m
+Reentrancy in WSFDaiVault.deposit (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#573-583):
+	External calls:
+	- require(bool,string)(Token(trustedDepositTokenAddress).transferFrom(msg.sender,address(this),amountToDeposit),Insufficient Token Allowance) (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#575-576)
+	- updateAccount(msg.sender) (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#576)
+	State variables written after the call(s):
+	- depositedTokens (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#576-580)
+Reentrancy in WSFDaiVault.emergencyWithdraw (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#606-632):
+	External calls:
+	- require(bool,string)(Token(trustedDepositTokenAddress).transfer(owner,fee),Could not transfer fee!) (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#621-624)
+	- require(bool,string)(Token(trustedDepositTokenAddress).transfer(msg.sender,amountAfterFee),Could not transfer tokens.) (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#624-627)
+	State variables written after the call(s):
+	- depositedTokens (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#627-630)
+Reentrancy in WSFDaiVault.updateAccount (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#520-543):
+	External calls:
+	- require(bool,string)(Token(trustedRewardTokenAddress).transfer(account,pendingDivs.mul(getTokenPerDaiUniswap()).div(1e18)),Could not transfer tokens.) (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#528-532)
+	State variables written after the call(s):
+	- lastClaimedTime (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#540-543)
+Reentrancy in WSFDaiVault.withdraw (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#583-603):
+	External calls:
+	- updateAccount(msg.sender) (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#588-589)
+	- require(bool,string)(Token(trustedDepositTokenAddress).transfer(owner,fee),Could not transfer fee!) (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#594-596)
+	- require(bool,string)(Token(trustedDepositTokenAddress).transfer(msg.sender,amountAfterFee),Could not transfer tokens.) (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#596-597)
+	State variables written after the call(s):
+	- depositedTokens (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#597-598)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+EnumerableSet._remove (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#107-143) does not use the value returned by external calls:
+	-set._values.pop() (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#134-135)
+WSFDaiVault.deposit (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#573-583) does not use the value returned by external calls:
+	-holders.add(msg.sender) (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#581)
+WSFDaiVault.withdraw (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#583-603) does not use the value returned by external calls:
+	-holders.remove(msg.sender) (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#601)
+WSFDaiVault.emergencyWithdraw (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#606-632) does not use the value returned by external calls:
+	-holders.remove(msg.sender) (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#631-632)
+WSFDaiVault.transferAnyERC20Tokens (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol) does not use the value returned by external calls:
+	-Token(_tokenAddr).transfer(_to,_amount) (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in WSFDaiVault.deposit (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#573-583):
+	External calls:
+	- require(bool,string)(Token(trustedDepositTokenAddress).transferFrom(msg.sender,address(this),amountToDeposit),Insufficient Token Allowance) (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#575-576)
+	- updateAccount(msg.sender) (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#576)
+	State variables written after the call(s):
+	- depositTime (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#581-583)
+Reentrancy in WSFDaiVault.updateAccount (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#520-543):
+	External calls:
+	- require(bool,string)(Token(trustedRewardTokenAddress).transfer(account,pendingDivs.mul(getTokenPerDaiUniswap()).div(1e18)),Could not transfer tokens.) (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#528-532)
+	State variables written after the call(s):
+	- totalClaimedRewards (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#537-538)
+	- totalEarnedTokens (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#533-535)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+WSFDaiVault.adminCanClaimAfter should be constant (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#500)
+WSFDaiVault.cliffTime should be constant (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#492-493)
+WSFDaiVault.rewardRatePercentX100 should be constant (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#488-489)
+WSFDaiVault.vaultDuration should be constant (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#495-496)
+WSFDaiVault.withdrawFeePercentX100 should be constant (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#493-494)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#322-329) should be declared external
+WSFDaiVault.getNumberOfHolders (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#567-571) should be declared external
+WSFDaiVault.deposit (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#573-583) should be declared external
+WSFDaiVault.withdraw (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#583-603) should be declared external
+WSFDaiVault.emergencyWithdraw (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#606-632) should be declared external
+WSFDaiVault.claim (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#632-633) should be declared external
+WSFDaiVault.getDepositorsList (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#634-654) should be declared external
+WSFDaiVault.transferAnyERC20Tokens (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol:
+	- pragma solidity0.6.11 (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#5-7): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'EnumerableSet._add' (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#89-103) is not in mixedCase
+Function 'EnumerableSet._remove' (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#107-143) is not in mixedCase
+Function 'EnumerableSet._contains' (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#148-150) is not in mixedCase
+Function 'EnumerableSet._length' (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#155-157) is not in mixedCase
+Function 'EnumerableSet._at' (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#166-178) is not in mixedCase
+Parameter '' of Token.transferFrom (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#331) is not in mixedCase
+Parameter '_scope_0' of Token.transferFrom (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#331-332) is not in mixedCase
+Parameter '_scope_1' of Token.transferFrom (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#332) is not in mixedCase
+Parameter '' of Token.transfer (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#334) is not in mixedCase
+Parameter '_scope_0' of Token.transfer (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#334) is not in mixedCase
+Function 'IUniswapV2Router01.WETH' (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#338-340) is not in mixedCase
+Parameter '_holder' of WSFDaiVault.getPendingDivs (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#545) is not in mixedCase
+Parameter '_tokenAddr' of WSFDaiVault.transferAnyERC20Tokens (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol) is not in mixedCase
+Parameter '_to' of WSFDaiVault.transferAnyERC20Tokens (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol) is not in mixedCase
+Parameter '_amount' of WSFDaiVault.transferAnyERC20Tokens (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol) is not in mixedCase
+Constant 'WSFDaiVault.uniswapV2router' (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#474-476) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'WSFDaiVault.trustedDepositTokenAddress' (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#480-484) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'WSFDaiVault.trustedRewardTokenAddress' (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#484-487) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'WSFDaiVault.rewardInterval' (/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol#490-491) is not in UPPER_CASE_WITH_UNDERSCORES
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xc297ab3060927347bbcce96d9e30b9b386cc2066.sol analyzed (7 contracts), 40 result(s) found

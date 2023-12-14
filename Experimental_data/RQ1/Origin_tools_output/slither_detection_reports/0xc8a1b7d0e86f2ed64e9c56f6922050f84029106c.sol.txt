@@ -1,0 +1,56 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xc8a1b7d0e86f2ed64e9c56f6922050f84029106c.sol:
+/sb/0xc8a1b7d0e86f2ed64e9c56f6922050f84029106c.sol:15:3: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+  function Ownable() public {
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xc8a1b7d0e86f2ed64e9c56f6922050f84029106c.sol:34:48: Warning: This declaration shadows an existing declaration.
+  function decimals() public constant returns (uint8 decimals);
+                                               ^------------^
+/sb/0xc8a1b7d0e86f2ed64e9c56f6922050f84029106c.sol:34:3: The shadowed declaration is here:
+  function decimals() public constant returns (uint8 decimals);
+  ^-----------------------------------------------------------^
+
+/sb/0xc8a1b7d0e86f2ed64e9c56f6922050f84029106c.sol:31:3: Warning: Functions in interfaces should be declared external.
+  function totalSupply() public constant returns (uint256 );
+  ^--------------------------------------------------------^
+/sb/0xc8a1b7d0e86f2ed64e9c56f6922050f84029106c.sol:32:3: Warning: Functions in interfaces should be declared external.
+  function balanceOf(address _owner) public constant returns (uint256 );
+  ^--------------------------------------------------------------------^
+/sb/0xc8a1b7d0e86f2ed64e9c56f6922050f84029106c.sol:33:3: Warning: Functions in interfaces should be declared external.
+  function transfer(address _to, uint256 _value) public returns (bool );
+  ^--------------------------------------------------------------------^
+/sb/0xc8a1b7d0e86f2ed64e9c56f6922050f84029106c.sol:34:3: Warning: Functions in interfaces should be declared external.
+  function decimals() public constant returns (uint8 decimals);
+  ^-----------------------------------------------------------^
+
+INFO:Detectors:[93m
+Airdropper.batchTransfer (/sb/0xc8a1b7d0e86f2ed64e9c56f6922050f84029106c.sol#44-63) does not use the value returned by external calls:
+	-token.transfer(_recipients[j],_values[j]) (/sb/0xc8a1b7d0e86f2ed64e9c56f6922050f84029106c.sol#59-63)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+IERC20.decimals.decimals (local variable @ /sb/0xc8a1b7d0e86f2ed64e9c56f6922050f84029106c.sol#35) shadows:
+	- IERC20.decimals (function @ /sb/0xc8a1b7d0e86f2ed64e9c56f6922050f84029106c.sol#34-35)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+Airdropper.batchTransfer has external calls inside a loop:
+	- token.transfer(_recipients[j],_values[j]) (/sb/0xc8a1b7d0e86f2ed64e9c56f6922050f84029106c.sol#59-63)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+IERC20.totalSupply (/sb/0xc8a1b7d0e86f2ed64e9c56f6922050f84029106c.sol#31-32) should be declared external
+IERC20.balanceOf (/sb/0xc8a1b7d0e86f2ed64e9c56f6922050f84029106c.sol#32-33) should be declared external
+IERC20.transfer (/sb/0xc8a1b7d0e86f2ed64e9c56f6922050f84029106c.sol#33-34) should be declared external
+IERC20.decimals (/sb/0xc8a1b7d0e86f2ed64e9c56f6922050f84029106c.sol#34-35) should be declared external
+Airdropper.batchTransfer (/sb/0xc8a1b7d0e86f2ed64e9c56f6922050f84029106c.sol#44-63) should be declared external
+Airdropper.withdrawalToken (/sb/0xc8a1b7d0e86f2ed64e9c56f6922050f84029106c.sol#63-68) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xc8a1b7d0e86f2ed64e9c56f6922050f84029106c.sol:
+	- pragma solidity^0.4.18 (/sb/0xc8a1b7d0e86f2ed64e9c56f6922050f84029106c.sol#1): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'Ownable.Ownable' (/sb/0xc8a1b7d0e86f2ed64e9c56f6922050f84029106c.sol#15-20) is not in mixedCase
+Parameter '_recipients' of Airdropper.batchTransfer (/sb/0xc8a1b7d0e86f2ed64e9c56f6922050f84029106c.sol#44) is not in mixedCase
+Parameter '_values' of Airdropper.batchTransfer (/sb/0xc8a1b7d0e86f2ed64e9c56f6922050f84029106c.sol#44) is not in mixedCase
+Parameter '_tokenAddress' of Airdropper.batchTransfer (/sb/0xc8a1b7d0e86f2ed64e9c56f6922050f84029106c.sol#44-45) is not in mixedCase
+Parameter '_tokenAddress' of Airdropper.withdrawalToken (/sb/0xc8a1b7d0e86f2ed64e9c56f6922050f84029106c.sol#64) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xc8a1b7d0e86f2ed64e9c56f6922050f84029106c.sol analyzed (3 contracts), 15 result(s) found

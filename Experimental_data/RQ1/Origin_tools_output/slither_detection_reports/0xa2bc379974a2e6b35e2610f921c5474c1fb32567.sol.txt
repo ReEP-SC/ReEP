@@ -1,0 +1,84 @@
+INFO:Detectors:[93m
+Address.isContract (/sb/0xa2bc379974a2e6b35e2610f921c5474c1fb32567.sol#229-242) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+StakeFdcRewardDnsPool.stake (/sb/0xa2bc379974a2e6b35e2610f921c5474c1fb32567.sol#363-388) uses a dangerous strict equality:
+	- stakeStartOf[msg.sender] == 0
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Reentrancy in StakeFdcRewardDnsPool.exit (/sb/0xa2bc379974a2e6b35e2610f921c5474c1fb32567.sol#439-441):
+	External calls:
+	- withdraw(balanceOf[msg.sender]) (/sb/0xa2bc379974a2e6b35e2610f921c5474c1fb32567.sol#440-441)
+	- getReward() (/sb/0xa2bc379974a2e6b35e2610f921c5474c1fb32567.sol#441)
+	State variables written after the call(s):
+	- rewards (/sb/0xa2bc379974a2e6b35e2610f921c5474c1fb32567.sol#441)
+Reentrancy in StakeFdcRewardDnsPool.withdraw (/sb/0xa2bc379974a2e6b35e2610f921c5474c1fb32567.sol#412-439):
+	External calls:
+	- beforeT = stakeToken.balanceOf(address(this)) (/sb/0xa2bc379974a2e6b35e2610f921c5474c1fb32567.sol#423-426)
+	State variables written after the call(s):
+	- balanceOf (/sb/0xa2bc379974a2e6b35e2610f921c5474c1fb32567.sol#428-432)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+Reentrancy in StakeFdcRewardDnsPool.stake (/sb/0xa2bc379974a2e6b35e2610f921c5474c1fb32567.sol#363-388):
+	External calls:
+	- require(bool,string)(stakeToken.balanceOf(msg.sender) >= amount,insufficient balance to stake) (/sb/0xa2bc379974a2e6b35e2610f921c5474c1fb32567.sol#367-368)
+	- beforeT = stakeToken.balanceOf(address(this)) (/sb/0xa2bc379974a2e6b35e2610f921c5474c1fb32567.sol#368-370)
+	State variables written after the call(s):
+	- balanceOf (/sb/0xa2bc379974a2e6b35e2610f921c5474c1fb32567.sol#374-375)
+	- totalSupply (/sb/0xa2bc379974a2e6b35e2610f921c5474c1fb32567.sol#373-374)
+Reentrancy in StakeFdcRewardDnsPool.stake (/sb/0xa2bc379974a2e6b35e2610f921c5474c1fb32567.sol#363-388):
+	External calls:
+	- require(bool,string)(stakeToken.balanceOf(msg.sender) >= amount,insufficient balance to stake) (/sb/0xa2bc379974a2e6b35e2610f921c5474c1fb32567.sol#367-368)
+	- beforeT = stakeToken.balanceOf(address(this)) (/sb/0xa2bc379974a2e6b35e2610f921c5474c1fb32567.sol#368-370)
+	- afterT = stakeToken.balanceOf(address(this)) (/sb/0xa2bc379974a2e6b35e2610f921c5474c1fb32567.sol#375-376)
+	State variables written after the call(s):
+	- rewardRate (/sb/0xa2bc379974a2e6b35e2610f921c5474c1fb32567.sol#386)
+	- stakeAmount (/sb/0xa2bc379974a2e6b35e2610f921c5474c1fb32567.sol#381-382)
+	- stakeCount (/sb/0xa2bc379974a2e6b35e2610f921c5474c1fb32567.sol#383-386)
+	- stakeStartOf (/sb/0xa2bc379974a2e6b35e2610f921c5474c1fb32567.sol#378)
+	- stakeTime (/sb/0xa2bc379974a2e6b35e2610f921c5474c1fb32567.sol#382-383)
+Reentrancy in StakeFdcRewardDnsPool.withdraw (/sb/0xa2bc379974a2e6b35e2610f921c5474c1fb32567.sol#412-439):
+	External calls:
+	- beforeT = stakeToken.balanceOf(address(this)) (/sb/0xa2bc379974a2e6b35e2610f921c5474c1fb32567.sol#423-426)
+	State variables written after the call(s):
+	- totalSupply (/sb/0xa2bc379974a2e6b35e2610f921c5474c1fb32567.sol#427-428)
+Reentrancy in StakeFdcRewardDnsPool.withdraw (/sb/0xa2bc379974a2e6b35e2610f921c5474c1fb32567.sol#412-439):
+	External calls:
+	- beforeT = stakeToken.balanceOf(address(this)) (/sb/0xa2bc379974a2e6b35e2610f921c5474c1fb32567.sol#423-426)
+	- afterT = stakeToken.balanceOf(address(this)) (/sb/0xa2bc379974a2e6b35e2610f921c5474c1fb32567.sol#435-436)
+	State variables written after the call(s):
+	- rewardRate (/sb/0xa2bc379974a2e6b35e2610f921c5474c1fb32567.sol#436-438)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+StakeFdcRewardDnsPool.lastTimeRewardApplicable (/sb/0xa2bc379974a2e6b35e2610f921c5474c1fb32567.sol#349-351) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp < rewardFinishTime (/sb/0xa2bc379974a2e6b35e2610f921c5474c1fb32567.sol#351)
+StakeFdcRewardDnsPool.stake (/sb/0xa2bc379974a2e6b35e2610f921c5474c1fb32567.sol#363-388) uses timestamp for comparisons
+	Dangerous comparisons:
+	- stakeStartOf[msg.sender] == 0 (/sb/0xa2bc379974a2e6b35e2610f921c5474c1fb32567.sol#377-381)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+Address.isContract uses assembly (/sb/0xa2bc379974a2e6b35e2610f921c5474c1fb32567.sol#229-242)
+	- /sb/0xa2bc379974a2e6b35e2610f921c5474c1fb32567.sol#241-242
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+IMinableERC20.mint (/sb/0xa2bc379974a2e6b35e2610f921c5474c1fb32567.sol#302-303) should be declared external
+StakeFdcRewardDnsPool.start (/sb/0xa2bc379974a2e6b35e2610f921c5474c1fb32567.sol#334-349) should be declared external
+StakeFdcRewardDnsPool.stake (/sb/0xa2bc379974a2e6b35e2610f921c5474c1fb32567.sol#363-388) should be declared external
+StakeFdcRewardDnsPool.getBack (/sb/0xa2bc379974a2e6b35e2610f921c5474c1fb32567.sol#458-466) should be declared external
+StakeFdcRewardDnsPool.canHarvest (/sb/0xa2bc379974a2e6b35e2610f921c5474c1fb32567.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xa2bc379974a2e6b35e2610f921c5474c1fb32567.sol:
+	- pragma solidity^0.5.8 (/sb/0xa2bc379974a2e6b35e2610f921c5474c1fb32567.sol#9-11): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Low level call in SafeERC20.callOptionalReturn (/sb/0xa2bc379974a2e6b35e2610f921c5474c1fb32567.sol#270-299):
+	-(success,returndata) = address(token).call(data) /sb/0xa2bc379974a2e6b35e2610f921c5474c1fb32567.sol#284
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Parameter 'stake_token' of StakeFdcRewardDnsPool.start (/sb/0xa2bc379974a2e6b35e2610f921c5474c1fb32567.sol#336-337) is not in mixedCase
+Parameter 'reward_token' of StakeFdcRewardDnsPool.start (/sb/0xa2bc379974a2e6b35e2610f921c5474c1fb32567.sol#337) is not in mixedCase
+Function 'StakeFdcRewardDnsPool._unstake' (/sb/0xa2bc379974a2e6b35e2610f921c5474c1fb32567.sol#394-412) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xa2bc379974a2e6b35e2610f921c5474c1fb32567.sol analyzed (6 contracts), 21 result(s) found

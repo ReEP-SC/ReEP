@@ -1,0 +1,89 @@
+INFO:Detectors:[93m
+Reentrancy in GoldmintPool.migrateToNewControllerContract (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#745-785):
+	External calls:
+	- core.setNewControllerAddress(newControllerAddr) (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#757-763)
+	- stakeFreezer.setNewControllerAddress(newControllerAddr) (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#764-767)
+	- mntpTokenAmount = getMntpBalance() (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#767)
+	- goldTokenAmount = getGoldBalance() (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#769-775)
+	- mntpToken.transfer(newControllerAddr,mntpTokenAmount) (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#775-777)
+	- goldToken.transfer(newControllerAddr,goldTokenAmount) (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#781-783)
+	State variables written after the call(s):
+	- isActualContractVer (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#783-785)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+frozenAmount in GoldmintPool.unholdStake (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#579) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[93m
+GoldmintPool.holdStake (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#547-573) does not use the value returned by external calls:
+	-mntpToken.transferFrom(msg.sender,address(this),mntpAmount) (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#559-565)
+GoldmintPool.unholdStake (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#573-599) does not use the value returned by external calls:
+	-mntpToken.transfer(msg.sender,amount) (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#593-597)
+GoldmintPool.distribShareProfit (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#601-623) does not use the value returned by external calls:
+	-mntpToken.transferFrom(tokenBankAddress,address(this),mntpReward) (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#607-611)
+	-goldToken.transferFrom(tokenBankAddress,address(this),goldReward) (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#611-617)
+GoldmintPool.withdrawUserReward (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#623-671) does not use the value returned by external calls:
+	-mntpToken.transfer(msg.sender,mntpReward) (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#657-659)
+	-goldToken.transfer(msg.sender,goldReward) (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#659-663)
+GoldmintPool.migrateToNewControllerContract (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#745-785) does not use the value returned by external calls:
+	-mntpToken.transfer(newControllerAddr,mntpTokenAmount) (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#775-777)
+	-goldToken.transfer(newControllerAddr,goldTokenAmount) (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#781-783)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in GoldmintPool.constructor (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#499-525):
+	External calls:
+	- mntpToken = core.mntpToken() (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#515-517)
+	- goldToken = core.goldToken() (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#517-523)
+	State variables written after the call(s):
+	- goldToken (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#517-523)
+	- tokenBankAddress (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#523)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+IStdToken.balanceOf (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#15-17) should be declared external
+IStdToken.transfer (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#17-19) should be declared external
+IStdToken.transferFrom (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#19-25) should be declared external
+PoolCommon.addAdministator (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#75-81) should be declared external
+PoolCommon.removeAdministator (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#83-91) should be declared external
+PoolCommon.isAdministrator (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#91-99) should be declared external
+PoolCommon.addManager (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#101-107) should be declared external
+PoolCommon.removeManager (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#109-117) should be declared external
+PoolCommon.isManager (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#123-129) should be declared external
+PoolCore.setNewControllerAddress (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#209-213) should be declared external
+PoolCore.addHeldTokens (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#213-229) should be declared external
+PoolCore.freeHeldTokens (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#230-243) should be declared external
+PoolCore.addRewardPerShare (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#245-261) should be declared external
+PoolCore.getMntpTokenUserReward (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#271-287) should be declared external
+PoolCore.getGoldTokenUserReward (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#287-309) should be declared external
+StakeFreezer.setNewControllerAddress (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#377-383) should be declared external
+StakeFreezer.freezeUserStake (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#385-395) should be declared external
+StakeFreezer.unfreezeUserStake (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#399-423) should be declared external
+StakeFreezer.getUserFrozenStake (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#423-431) should be declared external
+GoldmintPool.setTokenBankAddress (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#525-531) should be declared external
+GoldmintPool.setStakeFreezerAddress (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#531-537) should be declared external
+GoldmintPool.switchActive (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#537-547) should be declared external
+GoldmintPool.holdStake (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#547-573) should be declared external
+GoldmintPool.distribShareProfit (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#601-623) should be declared external
+GoldmintPool.withdrawRewardAndUnholdStake (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#671-681) should be declared external
+GoldmintPool.addRewadToStake (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#681-701) should be declared external
+GoldmintPool.freezeStake (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#705-717) should be declared external
+GoldmintPool.unfreezeUserStake (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#719-739) should be declared external
+GoldmintPool.migrateToNewControllerContract (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#745-785) should be declared external
+GoldmintPool.getMntpTokenUserReward (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#785-801) should be declared external
+GoldmintPool.getGoldTokenUserReward (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#801-821) should be declared external
+GoldmintPool.getUserMntpRewardPayouts (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#825-839) should be declared external
+GoldmintPool.getUserGoldRewardPayouts (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#845-851) should be declared external
+GoldmintPool.getUserStake (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#853-863) should be declared external
+GoldmintPool.getUserFrozenStake (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#867-875) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Event 'StakeFreezer.onFreeze' (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#359-365) is not in CapWords
+Event 'StakeFreezer.onUnfreeze' (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#367-373) is not in CapWords
+Event 'GoldmintPool.onDistribShareProfit' (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#445-451) is not in CapWords
+Event 'GoldmintPool.onUserRewardWithdrawn' (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#451-459) is not in CapWords
+Event 'GoldmintPool.onHoldStake' (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#459-463) is not in CapWords
+Event 'GoldmintPool.onUnholdStake' (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#465-473) is not in CapWords
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+PoolCore._mntpRewardPerShare (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#153-157) is never used in PoolCore
+PoolCore._goldRewardPerShare (/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol#161-163) is never used in PoolCore
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0x9568c8c783f7166a9b88d0047ad28efc43921242.sol analyzed (6 contracts), 50 result(s) found

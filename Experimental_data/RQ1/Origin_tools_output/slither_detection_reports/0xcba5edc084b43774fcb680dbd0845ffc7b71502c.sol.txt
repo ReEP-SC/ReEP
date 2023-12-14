@@ -1,0 +1,63 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xcba5edc084b43774fcb680dbd0845ffc7b71502c.sol:
+/sb/0xcba5edc084b43774fcb680dbd0845ffc7b71502c.sol:31:5: Warning: No visibility specified. Defaulting to "public". 
+    function balanceOf(address _owner) constant returns(uint) {}
+    ^----------------------------------------------------------^
+/sb/0xcba5edc084b43774fcb680dbd0845ffc7b71502c.sol:31:24: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function balanceOf(address _owner) constant returns(uint) {}
+                       ^------------^
+/sb/0xcba5edc084b43774fcb680dbd0845ffc7b71502c.sol:33:5: Warning: No visibility specified. Defaulting to "public". 
+    function transfer(address _to, uint _value) returns(bool) {}
+    ^----------------------------------------------------------^
+/sb/0xcba5edc084b43774fcb680dbd0845ffc7b71502c.sol:33:23: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function transfer(address _to, uint _value) returns(bool) {}
+                      ^---------^
+/sb/0xcba5edc084b43774fcb680dbd0845ffc7b71502c.sol:33:36: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function transfer(address _to, uint _value) returns(bool) {}
+                                   ^---------^
+/sb/0xcba5edc084b43774fcb680dbd0845ffc7b71502c.sol:31:5: Warning: Function state mutability can be restricted to pure
+    function balanceOf(address _owner) constant returns(uint) {}
+    ^----------------------------------------------------------^
+/sb/0xcba5edc084b43774fcb680dbd0845ffc7b71502c.sol:33:5: Warning: Function state mutability can be restricted to pure
+    function transfer(address _to, uint _value) returns(bool) {}
+    ^----------------------------------------------------------^
+
+INFO:Detectors:[93m
+Contract locking ether found in /sb/0xcba5edc084b43774fcb680dbd0845ffc7b71502c.sol:
+	Contract SwapContractCryptyktoPDATA has payable functions:
+	 - fallback (/sb/0xcba5edc084b43774fcb680dbd0845ffc7b71502c.sol#145-153)
+	But does not have a function to withdraw the ether
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#contracts-that-lock-ether[0m
+INFO:Detectors:[93m
+Reentrancy in SwapContractCryptyktoPDATA.sendCurrentPayment (/sb/0xcba5edc084b43774fcb680dbd0845ffc7b71502c.sol#191-225):
+	External calls:
+	- company_token.transfer(PartnerAccount,unsealedAmount) (/sb/0xcba5edc084b43774fcb680dbd0845ffc7b71502c.sol#205-207)
+	State variables written after the call(s):
+	- alreadyTransfered (/sb/0xcba5edc084b43774fcb680dbd0845ffc7b71502c.sol#209)
+	- currentBalance (/sb/0xcba5edc084b43774fcb680dbd0845ffc7b71502c.sol#209-211)
+Reentrancy in SwapContractCryptyktoPDATA.sendCurrentPayment (/sb/0xcba5edc084b43774fcb680dbd0845ffc7b71502c.sol#191-225):
+	External calls:
+	- company_token.transfer(PartnerAccount,currentBalance) (/sb/0xcba5edc084b43774fcb680dbd0845ffc7b71502c.sol#215-219)
+	State variables written after the call(s):
+	- alreadyTransfered (/sb/0xcba5edc084b43774fcb680dbd0845ffc7b71502c.sol#225)
+	- currentBalance (/sb/0xcba5edc084b43774fcb680dbd0845ffc7b71502c.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+SwapContractCryptyktoPDATA.sendCurrentPayment (/sb/0xcba5edc084b43774fcb680dbd0845ffc7b71502c.sol#191-225) does not use the value returned by external calls:
+	-company_token.transfer(PartnerAccount,unsealedAmount) (/sb/0xcba5edc084b43774fcb680dbd0845ffc7b71502c.sol#205-207)
+	-company_token.transfer(PartnerAccount,currentBalance) (/sb/0xcba5edc084b43774fcb680dbd0845ffc7b71502c.sol#215-219)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+CryptykToken.balanceOf (/sb/0xcba5edc084b43774fcb680dbd0845ffc7b71502c.sol#31-33) should be declared external
+CryptykToken.transfer (/sb/0xcba5edc084b43774fcb680dbd0845ffc7b71502c.sol#33-39) should be declared external
+SwapContractCryptyktoPDATA.fallback (/sb/0xcba5edc084b43774fcb680dbd0845ffc7b71502c.sol#145-153) should be declared external
+SwapContractCryptyktoPDATA.getBalance (/sb/0xcba5edc084b43774fcb680dbd0845ffc7b71502c.sol#165-179) should be declared external
+SwapContractCryptyktoPDATA.setOwner (/sb/0xcba5edc084b43774fcb680dbd0845ffc7b71502c.sol#179-191) should be declared external
+SwapContractCryptyktoPDATA.sendCurrentPayment (/sb/0xcba5edc084b43774fcb680dbd0845ffc7b71502c.sol#191-225) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_company_token' of SwapContractCryptyktoPDATA. (/sb/0xcba5edc084b43774fcb680dbd0845ffc7b71502c.sol#101) is not in mixedCase
+Parameter '_owner' of SwapContractCryptyktoPDATA.setOwner (/sb/0xcba5edc084b43774fcb680dbd0845ffc7b71502c.sol#181-185) is not in mixedCase
+Variable 'SwapContractCryptyktoPDATA.company_token' (/sb/0xcba5edc084b43774fcb680dbd0845ffc7b71502c.sol#49-51) is not in mixedCase
+Variable 'SwapContractCryptyktoPDATA.PartnerAccount' (/sb/0xcba5edc084b43774fcb680dbd0845ffc7b71502c.sol#51-53) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xcba5edc084b43774fcb680dbd0845ffc7b71502c.sol analyzed (9 contracts), 14 result(s) found

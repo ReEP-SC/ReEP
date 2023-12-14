@@ -1,0 +1,204 @@
+INFO:Detectors:[91m
+Reputation.balances (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#249-257) is never initialized. It is used in:
+	- balanceOfAt (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#310-329)
+	- mint (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#361-385)
+	- burn (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#397-425)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-state-variables[0m
+INFO:Detectors:[93m
+Address.isContract (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1333-1355) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[92m
+Reputation.balanceOf._owner (local variable @ /sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#295) shadows:
+	- Ownable._owner (state variable @ /sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#33)
+Reputation.balanceOfAt._owner (local variable @ /sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#313) shadows:
+	- Ownable._owner (state variable @ /sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#33)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+Reentrancy in ExternalLocking4Reputation.claim (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol):
+	External calls:
+	- (result,returnValue) = externalLockingContract.call(abi.encodeWithSignature(getBalanceFuncSignature,beneficiary)) (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol)
+	State variables written after the call(s):
+	- lockers (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol)
+	- lockingsCounter (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol)
+	- scores (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol)
+	- totalLocked (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol)
+	- totalLockedLeft (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol)
+	- totalScore (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Locking4Reputation.redeem (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#2365-2397) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(block.timestamp > redeemEnableTime,now > redeemEnableTime) (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#2369-2371)
+Locking4Reputation._release (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#2403-2433) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(block.timestamp > locker.releaseTime,check the lock period pass) (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#2425-2427)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+Address.isContract uses assembly (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1333-1355)
+	- /sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1353-1355
+ExternalLocking4Reputation.claim uses assembly (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol)
+	- /sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+Reputation.decimals should be constant (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#197-199)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Different versions of Solidity is used in /sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol:
+	- Version used: ['^0.5.0', '^0.5.4']
+	- /sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#13-19 declares pragma solidity^0.5.0
+	- /sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#175-177 declares pragma solidity^0.5.4
+	- /sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#547-551 declares pragma solidity^0.5.0
+	- /sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#599-605 declares pragma solidity^0.5.0
+	- /sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#743-747 declares pragma solidity^0.5.0
+	- /sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1169 declares pragma solidity^0.5.0
+	- /sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1229 declares pragma solidity^0.5.4
+	- /sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1297-1301 declares pragma solidity^0.5.0
+	- /sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1383 declares pragma solidity^0.5.4
+	- /sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1527 declares pragma solidity^0.5.4
+	- /sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1823 declares pragma solidity^0.5.4
+	- /sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1855 declares pragma solidity^0.5.4
+	- /sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#2291-2293 declares pragma solidity^0.5.4
+	- /sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#2631-2633 declares pragma solidity^0.5.4
+	- /sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol declares pragma solidity^0.5.4
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#different-pragma-directives-are-used[0m
+INFO:Detectors:[92m
+Ownable.owner (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#63-71) should be declared external
+Ownable.renounceOwnership (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#115-125) should be declared external
+Ownable.transferOwnership (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#139-141) should be declared external
+Reputation.mint (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#361-385) should be declared external
+Reputation.burn (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#397-425) should be declared external
+ERC20.transfer (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#845-853) should be declared external
+IERC20.transfer (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#555-559) should be declared external
+IERC20.approve (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#559-565) should be declared external
+ERC20.approve (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#879-893) should be declared external
+ERC20.transferFrom (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#911-929) should be declared external
+IERC20.transferFrom (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#565-577) should be declared external
+IERC20.balanceOf (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#583-585) should be declared external
+ERC20.balanceOf (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#817-824) should be declared external
+ERC20.allowance (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#835-837) should be declared external
+IERC20.allowance (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#587-591) should be declared external
+ERC20.increaseAllowance (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#947-967) should be declared external
+ERC20.decreaseAllowance (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#995-1011) should be declared external
+ERC20Burnable.burn (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1189-1195) should be declared external
+ERC20Burnable.burnFrom (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1213-1217) should be declared external
+DAOToken.mint (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1271-1287) should be declared external
+Avatar.genericCall (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1623-1647) should be declared external
+Avatar.sendEther (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1659-1667) should be declared external
+Avatar.externalTokenTransfer (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1679-1693) should be declared external
+Avatar.externalTokenTransferFrom (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1727-1743) should be declared external
+Avatar.externalTokenApproval (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1773-1789) should be declared external
+Avatar.metaData (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1805-1813) should be declared external
+GlobalConstraintInterface.pre (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1831-1835) should be declared external
+GlobalConstraintInterface.post (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1835-1843) should be declared external
+GlobalConstraintInterface.when (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1849-1851) should be declared external
+Locking4Reputation.redeem (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#2365-2397) should be declared external
+ExternalLocking4Reputation.claim (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol) should be declared external
+ExternalLocking4Reputation.register (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol:
+	- pragma solidity^0.5.0 (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#13-19): it allows old versions
+	- pragma solidity^0.5.4 (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#175-177): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#547-551): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#599-605): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#743-747): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1169): it allows old versions
+	- pragma solidity^0.5.4 (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1229): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1297-1301): it allows old versions
+	- pragma solidity^0.5.4 (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1383): it allows old versions
+	- pragma solidity^0.5.4 (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1527): it allows old versions
+	- pragma solidity^0.5.4 (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1823): it allows old versions
+	- pragma solidity^0.5.4 (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1855): it allows old versions
+	- pragma solidity^0.5.4 (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#2291-2293): it allows old versions
+	- pragma solidity^0.5.4 (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#2631-2633): it allows old versions
+	- pragma solidity^0.5.4 (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Low level call in SafeERC20.safeTransfer (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1403-1427):
+	-(success,returnValue) = _erc20Addr.call(abi.encodeWithSelector(TRANSFER_SELECTOR,_to,_value)) /sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1411-1419
+Low level call in SafeERC20.safeTransferFrom (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1427-1479):
+	-(success,returnValue) = _erc20Addr.call(abi.encodeWithSelector(TRANSFERFROM_SELECTOR,_from,_to,_value)) /sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1457-1471
+Low level call in SafeERC20.safeApprove (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1479-1519):
+	-(success,returnValue) = _erc20Addr.call(abi.encodeWithSelector(APPROVE_SELECTOR,_spender,_value)) /sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1493-1501
+Low level call in Avatar.genericCall (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1623-1647):
+	-(success,returnValue) = _contract.call.value(_value)(_data) /sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1637-1643
+Low level call in ExternalLocking4Reputation.claim (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol):
+	-(result,returnValue) = externalLockingContract.call(abi.encodeWithSignature(getBalanceFuncSignature,beneficiary)) /sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Function 'Ownable._transferOwnership' (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#149-175) is not in mixedCase
+Parameter '_owner' of Reputation.balanceOf (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#295) is not in mixedCase
+Parameter '_owner' of Reputation.balanceOfAt (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#313) is not in mixedCase
+Parameter '_blockNumber' of Reputation.balanceOfAt (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#313) is not in mixedCase
+Parameter '_blockNumber' of Reputation.totalSupplyAt (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#337-339) is not in mixedCase
+Parameter '_user' of Reputation.mint (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#363) is not in mixedCase
+Parameter '_amount' of Reputation.mint (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#363) is not in mixedCase
+Parameter '_user' of Reputation.burn (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#397) is not in mixedCase
+Parameter '_amount' of Reputation.burn (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#397-399) is not in mixedCase
+Parameter '_block' of Reputation.getValueAt (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#451) is not in mixedCase
+Parameter '_value' of Reputation.updateValueAtNow (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#501) is not in mixedCase
+Function 'ERC20._transfer' (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1025-1039) is not in mixedCase
+Function 'ERC20._mint' (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1057-1067) is not in mixedCase
+Function 'ERC20._burn' (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1084-1107) is not in mixedCase
+Function 'ERC20._burnFrom' (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1134-1161) is not in mixedCase
+Parameter '_name' of DAOToken. (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1263) is not in mixedCase
+Parameter '_symbol' of DAOToken. (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1263) is not in mixedCase
+Parameter '_cap' of DAOToken. (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1263) is not in mixedCase
+Parameter '_to' of DAOToken.mint (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1273) is not in mixedCase
+Parameter '_amount' of DAOToken.mint (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1273-1275) is not in mixedCase
+Parameter '_erc20Addr' of SafeERC20.safeTransfer (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1403-1406) is not in mixedCase
+Parameter '_to' of SafeERC20.safeTransfer (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1407) is not in mixedCase
+Parameter '_value' of SafeERC20.safeTransfer (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1407) is not in mixedCase
+Parameter '_erc20Addr' of SafeERC20.safeTransferFrom (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1427) is not in mixedCase
+Parameter '_from' of SafeERC20.safeTransferFrom (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1427-1430) is not in mixedCase
+Parameter '_to' of SafeERC20.safeTransferFrom (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1431-1435) is not in mixedCase
+Parameter '_value' of SafeERC20.safeTransferFrom (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1435) is not in mixedCase
+Parameter '_erc20Addr' of SafeERC20.safeApprove (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1479-1481) is not in mixedCase
+Parameter '_spender' of SafeERC20.safeApprove (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1481) is not in mixedCase
+Parameter '_value' of SafeERC20.safeApprove (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1481) is not in mixedCase
+Parameter '_orgName' of Avatar. (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1575-1577) is not in mixedCase
+Parameter '_nativeToken' of Avatar. (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1577-1583) is not in mixedCase
+Parameter '_nativeReputation' of Avatar. (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1583-1585) is not in mixedCase
+Parameter '_contract' of Avatar.genericCall (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1623) is not in mixedCase
+Parameter '_data' of Avatar.genericCall (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1623-1625) is not in mixedCase
+Parameter '_value' of Avatar.genericCall (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1625) is not in mixedCase
+Parameter '_amountInWei' of Avatar.sendEther (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1659-1661) is not in mixedCase
+Parameter '_to' of Avatar.sendEther (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1661) is not in mixedCase
+Parameter '_externalToken' of Avatar.externalTokenTransfer (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1679) is not in mixedCase
+Parameter '_to' of Avatar.externalTokenTransfer (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1679-1681) is not in mixedCase
+Parameter '_value' of Avatar.externalTokenTransfer (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1681-1683) is not in mixedCase
+Parameter '_externalToken' of Avatar.externalTokenTransferFrom (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1731) is not in mixedCase
+Parameter '_from' of Avatar.externalTokenTransferFrom (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1731) is not in mixedCase
+Parameter '_to' of Avatar.externalTokenTransferFrom (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1731-1733) is not in mixedCase
+Parameter '_value' of Avatar.externalTokenTransferFrom (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1733) is not in mixedCase
+Parameter '_externalToken' of Avatar.externalTokenApproval (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1777-1779) is not in mixedCase
+Parameter '_spender' of Avatar.externalTokenApproval (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1779) is not in mixedCase
+Parameter '_value' of Avatar.externalTokenApproval (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1779) is not in mixedCase
+Parameter '_metaData' of Avatar.metaData (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#1805-1809) is not in mixedCase
+Parameter '_beneficiary' of Locking4Reputation.redeem (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#2365-2367) is not in mixedCase
+Function 'Locking4Reputation._release' (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#2403-2433) is not in mixedCase
+Parameter '_beneficiary' of Locking4Reputation._release (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#2403) is not in mixedCase
+Parameter '_lockingId' of Locking4Reputation._release (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#2403-2405) is not in mixedCase
+Function 'Locking4Reputation._lock' (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#2449-2547) is not in mixedCase
+Parameter '_amount' of Locking4Reputation._lock (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#2449-2451) is not in mixedCase
+Parameter '_period' of Locking4Reputation._lock (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#2451-2453) is not in mixedCase
+Parameter '_locker' of Locking4Reputation._lock (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#2453) is not in mixedCase
+Parameter '_numerator' of Locking4Reputation._lock (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#2455-2459) is not in mixedCase
+Parameter '_denominator' of Locking4Reputation._lock (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#2459) is not in mixedCase
+Function 'Locking4Reputation._initialize' (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#2575-2629) is not in mixedCase
+Parameter '_avatar' of Locking4Reputation._initialize (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#2577-2580) is not in mixedCase
+Parameter '_reputationReward' of Locking4Reputation._initialize (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#2581) is not in mixedCase
+Parameter '_lockingStartTime' of Locking4Reputation._initialize (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#2581) is not in mixedCase
+Parameter '_lockingEndTime' of Locking4Reputation._initialize (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#2581) is not in mixedCase
+Parameter '_redeemEnableTime' of Locking4Reputation._initialize (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#2583) is not in mixedCase
+Parameter '_maxLockingPeriod' of Locking4Reputation._initialize (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol#2583-2585) is not in mixedCase
+Parameter '_avatar' of ExternalLocking4Reputation.initialize (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol) is not in mixedCase
+Parameter '_reputationReward' of ExternalLocking4Reputation.initialize (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol) is not in mixedCase
+Parameter '_claimingStartTime' of ExternalLocking4Reputation.initialize (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol) is not in mixedCase
+Parameter '_claimingEndTime' of ExternalLocking4Reputation.initialize (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol) is not in mixedCase
+Parameter '_redeemEnableTime' of ExternalLocking4Reputation.initialize (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol) is not in mixedCase
+Parameter '_externalLockingContract' of ExternalLocking4Reputation.initialize (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol) is not in mixedCase
+Parameter '_getBalanceFuncSignature' of ExternalLocking4Reputation.initialize (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol) is not in mixedCase
+Parameter '_beneficiary' of ExternalLocking4Reputation.claim (/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x8dedde6ca2ccf16fae7fd8d310016b55e24d0115.sol analyzed (15 contracts), 123 result(s) found

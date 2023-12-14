@@ -1,0 +1,92 @@
+INFO:Detectors:[93m
+Reentrancy in MerkleTreeWithHistory.constructor (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#39-58):
+	External calls:
+	- currentZero = hashLeftRight(currentZero,currentZero) (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#49-51)
+	State variables written after the call(s):
+	- filledSubtrees (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#54)
+	- zeros (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#51-54)
+Reentrancy in Tornado.deposit (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#235-246):
+	External calls:
+	- insertedIndex = _insert(_commitment) (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#242-244)
+	State variables written after the call(s):
+	- commitments (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#245)
+Reentrancy in Tornado.withdraw (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#253-267):
+	External calls:
+	- require(bool,string)(verifier.verifyProof(_proof,(uint256(_root),uint256(_nullifierHash),uint256(_recipient),uint256(_relayer),_fee,_refund)),Invalid withdraw proof) (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#259-264)
+	State variables written after the call(s):
+	- nullifierHashes (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#264)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+MerkleTreeWithHistory.hasherAddress should be constant (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#28)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Different versions of Solidity is used in /sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol:
+	- Version used: ['^0.5.0', '^0.5.8']
+	- /sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#16-18 declares pragma solidity^0.5.8
+	- /sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#135 declares pragma solidity^0.5.0
+	- /sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#190-191 declares pragma solidity^0.5.8
+	- /sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#321-322 declares pragma solidity^0.5.8
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#different-pragma-directives-are-used[0m
+INFO:Detectors:[92m
+MerkleTreeWithHistory.getLastRoot (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#128-133) should be declared external
+IVerifier.verifyProof (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#192-193) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol:
+	- pragma solidity^0.5.8 (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#16-18): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#135): it allows old versions
+	- pragma solidity^0.5.8 (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#190-191): it allows old versions
+	- pragma solidity^0.5.8 (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#321-322): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Low level call in TornadoCash_erc20._processWithdraw (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#334-350):
+	-(success) = _recipient.call.value(_refund)() /sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#347
+Low level call in TornadoCash_erc20._safeErc20TransferFrom (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#350-364):
+	-(success,data) = token.call(abi.encodeWithSelector(0x23b872dd,_from,_to,_amount)) /sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#352-354
+Low level call in TornadoCash_erc20._safeErc20Transfer (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#364-369):
+	-(success,data) = token.call(abi.encodeWithSelector(0xa9059cbb,_to,_amount)) /sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#365-368
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Function 'Hasher.MiMCSponge' (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#20-23) is not in mixedCase
+Parameter 'in_xL' of Hasher.MiMCSponge (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#20) is not in mixedCase
+Parameter 'in_xR' of Hasher.MiMCSponge (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#20) is not in mixedCase
+Parameter '_treeLevels' of MerkleTreeWithHistory. (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#40) is not in mixedCase
+Parameter '_left' of MerkleTreeWithHistory.hashLeftRight (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#60-61) is not in mixedCase
+Parameter '_right' of MerkleTreeWithHistory.hashLeftRight (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#61) is not in mixedCase
+Function 'MerkleTreeWithHistory._insert' (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#72-103) is not in mixedCase
+Parameter '_leaf' of MerkleTreeWithHistory._insert (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#72) is not in mixedCase
+Parameter '_root' of MerkleTreeWithHistory.isKnownRoot (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#107) is not in mixedCase
+Parameter '_verifier' of Tornado. (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#221-222) is not in mixedCase
+Parameter '_denomination' of Tornado. (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#222-223) is not in mixedCase
+Parameter '_operator' of Tornado. (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#224-226) is not in mixedCase
+Parameter '_commitment' of Tornado.deposit (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#236-238) is not in mixedCase
+Function 'Tornado._processDeposit' (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#247-248) is not in mixedCase
+Parameter '_proof' of Tornado.withdraw (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#254) is not in mixedCase
+Parameter '_root' of Tornado.withdraw (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#254) is not in mixedCase
+Parameter '_nullifierHash' of Tornado.withdraw (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#254) is not in mixedCase
+Parameter '_recipient' of Tornado.withdraw (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#254-255) is not in mixedCase
+Parameter '_relayer' of Tornado.withdraw (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#255) is not in mixedCase
+Parameter '_fee' of Tornado.withdraw (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#255) is not in mixedCase
+Parameter '_refund' of Tornado.withdraw (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#255) is not in mixedCase
+Function 'Tornado._processWithdraw' (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#268-272) is not in mixedCase
+Parameter '_nullifierHash' of Tornado.isSpent (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#273) is not in mixedCase
+Parameter '_nullifierHashes' of Tornado.isSpentArray (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#279-282) is not in mixedCase
+Parameter '_newVerifier' of Tornado.updateVerifier (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#297) is not in mixedCase
+Parameter '_newOperator' of Tornado.changeOperator (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#300) is not in mixedCase
+Contract 'TornadoCash_erc20' (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#324-369) is not in CapWords
+Function 'TornadoCash_erc20._processDeposit' (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#330-334) is not in mixedCase
+Function 'TornadoCash_erc20._processWithdraw' (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#334-350) is not in mixedCase
+Parameter '_recipient' of TornadoCash_erc20._processWithdraw (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#337-338) is not in mixedCase
+Parameter '_relayer' of TornadoCash_erc20._processWithdraw (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#338) is not in mixedCase
+Parameter '_fee' of TornadoCash_erc20._processWithdraw (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#338-339) is not in mixedCase
+Parameter '_refund' of TornadoCash_erc20._processWithdraw (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#339) is not in mixedCase
+Parameter '_token' of TornadoCash_erc20. (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#329) is not in mixedCase
+Function 'TornadoCash_erc20._safeErc20TransferFrom' (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#350-364) is not in mixedCase
+Parameter '_from' of TornadoCash_erc20._safeErc20TransferFrom (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#351-352) is not in mixedCase
+Parameter '_to' of TornadoCash_erc20._safeErc20TransferFrom (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#352) is not in mixedCase
+Parameter '_amount' of TornadoCash_erc20._safeErc20TransferFrom (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#352) is not in mixedCase
+Function 'TornadoCash_erc20._safeErc20Transfer' (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#364-369) is not in mixedCase
+Parameter '_to' of TornadoCash_erc20._safeErc20Transfer (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#364) is not in mixedCase
+Parameter '_amount' of TornadoCash_erc20._safeErc20Transfer (/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol#364) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x8d28f129b68040abf99b35e40cdcf74076d5fe6e.sol analyzed (6 contracts), 52 result(s) found

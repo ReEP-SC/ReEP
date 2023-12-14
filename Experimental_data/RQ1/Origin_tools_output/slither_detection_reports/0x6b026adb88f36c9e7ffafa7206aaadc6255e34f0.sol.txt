@@ -1,0 +1,106 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol:
+/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol:767:5: Warning: Function state mutability can be restricted to pure
+    function getRandom() public view returns(bytes32){}
+    ^-------------------------------------------------^
+/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol:769:5: Warning: Function state mutability can be restricted to pure
+    function destruct() public{}
+    ^--------------------------^
+
+INFO:Detectors:[93m
+Poker.freeLottery (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#507-585) uses a dangerous strict equality:
+	- winNo == 7
+Poker.freeLottery (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#507-585) uses a dangerous strict equality:
+	- winNo == 7
+Poker.play (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#321-505) uses a dangerous strict equality:
+	- _jpNo == 77 && jpBalance > jpMinPrize
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[92m
+Reentrancy in Poker.constructor (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#279-319):
+	External calls:
+	- _rndSeed = rnd.getRandom() (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#313)
+	- rnd.destruct() (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#313)
+	State variables written after the call(s):
+	- rndSeed (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#313-319)
+Reentrancy in Poker.updateRndSeed (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#603-631):
+	External calls:
+	- _rndSeed = rnd.getRandom() (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#615-617)
+	- rnd.destruct() (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#617-619)
+	State variables written after the call(s):
+	- rndSeed (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#619-631)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Poker.play (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#321-505) uses timestamp for comparisons
+	Dangerous comparisons:
+	- _gType == 3 && _bet.contain((_winNo - 1) / 4 + 1) (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#409-431)
+	- _gType == 2 && _bet.contain(_winNo % 4 + 1) (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#391-409)
+	- (_winNo >= 29 && _bet.contain(2)) || (_winNo <= 24 && _bet.contain(1)) (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#355-379)
+	- _winNo >= 25 && _winNo <= 28 && _bet.contain(0) (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#371-379)
+	- _gType == 4 && _bet.contain(_winNo) (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#433-448)
+	- _jpNo == 77 && jpBalance > jpMinPrize (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#471-487)
+Poker.freeLottery (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#507-585) uses timestamp for comparisons
+	Dangerous comparisons:
+	- winNo == 7 (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#545-567)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+Poker.hour should be constant (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#267-269)
+Poker.jpChance should be constant (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#257-259)
+Poker.jpMinBetAmount should be constant (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#251-255)
+Poker.jpMinPrize should be constant (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#255-257)
+Poker.jpPercent should be constant (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#259)
+Poker.lotteryPercent should be constant (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#209-213)
+Poker.maxBetVal should be constant (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#217)
+Poker.minBetVal should be constant (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#213-215)
+Poker.minPrize should be constant (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#207-209)
+Poker.minute should be constant (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#265-267)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#63-77) should be declared external
+Poker.play (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#321-505) should be declared external
+Poker.freeLottery (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#507-585) should be declared external
+Poker.freeLottoInfo (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#585-599) should be declared external
+Poker.updateRndSeed (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#603-631) should be declared external
+Poker.updateOdds (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#631-648) should be declared external
+Poker.updateStatus (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#649-665) should be declared external
+Poker.getOdds (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#667-677) should be declared external
+Poker.updateLottoParams (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#679-711) should be declared external
+Poker.getLottoData (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#711-723) should be declared external
+Poker.setAddr (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#724-745) should be declared external
+Poker.getAddr (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#745-772) should be declared external
+Poker.withdraw (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#779-787) should be declared external
+Poker.distribute (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#789-811) should be declared external
+Poker.fallback (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#813-822) should be declared external
+RandomOnce.getRandom (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol) should be declared external
+RandomOnce.destruct (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Contract 'pokerEvents' (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#115-175) is not in CapWords
+Parameter '_rndAddr' of Poker. (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#281-283) is not in mixedCase
+Parameter '_gType' of Poker.play (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#321-323) is not in mixedCase
+Parameter '_bet' of Poker.play (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#323-325) is not in mixedCase
+Parameter '_gid' of Poker.freeLottery (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#511) is not in mixedCase
+Parameter '_rndAddr' of Poker.updateRndSeed (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#605-609) is not in mixedCase
+Parameter '_game' of Poker.updateOdds (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#633) is not in mixedCase
+Parameter '_val' of Poker.updateOdds (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#633-635) is not in mixedCase
+Parameter '_p' of Poker.updateStatus (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#649) is not in mixedCase
+Parameter '_status' of Poker.updateStatus (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#649) is not in mixedCase
+Parameter '_gid' of Poker.updateLottoParams (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#685) is not in mixedCase
+Parameter '_key' of Poker.updateLottoParams (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#685) is not in mixedCase
+Parameter '_val' of Poker.updateLottoParams (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#685) is not in mixedCase
+Parameter '_gid' of Poker.getLottoData (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#711) is not in mixedCase
+Parameter '_acc' of Poker.setAddr (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#725) is not in mixedCase
+Parameter '_addr' of Poker.setAddr (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#725-727) is not in mixedCase
+Parameter '_acc' of Poker.getAddr (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#745-747) is not in mixedCase
+Parameter '_to' of Poker.withdraw (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#781) is not in mixedCase
+Parameter '_p' of Poker.distribute (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#789-791) is not in mixedCase
+Contract 'inArrayExt' (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol) is not in CapWords
+Parameter '_arr' of inArrayExt.contain (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol) is not in mixedCase
+Parameter '_val' of inArrayExt.contain (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol) is not in mixedCase
+Contract 'intArrayExt' (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol) is not in CapWords
+Parameter '_arr' of intArrayExt.contain (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol) is not in mixedCase
+Parameter '_val' of intArrayExt.contain (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+Poker.minPrize (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#207-209) is never used in Poker
+Poker.lotteryPercent (/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol#209-213) is never used in Poker
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0x6b026adb88f36c9e7ffafa7206aaadc6255e34f0.sol analyzed (6 contracts), 50 result(s) found

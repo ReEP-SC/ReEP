@@ -1,0 +1,36 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xbb27a42a806aeb9898755b9be189887dc1220588.sol:
+Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing "SPDX-License-Identifier: <SPDX-License>" to each source file. Use "SPDX-License-Identifier: UNLICENSED" for non-open-source code. Please see https://spdx.org for more information.
+--> /sb/0xbb27a42a806aeb9898755b9be189887dc1220588.sol
+
+
+INFO:Detectors:[93m
+ThirmLP.initApproval (/sb/0xbb27a42a806aeb9898755b9be189887dc1220588.sol#320-324) does not use the value returned by external calls:
+	-ERC20(THIRM).approve(UNISWAP_V2,uint256(~ 0)) (/sb/0xbb27a42a806aeb9898755b9be189887dc1220588.sol#323)
+	-ERC20(USDC).approve(UNISWAP_V2,uint256(~ 0)) (/sb/0xbb27a42a806aeb9898755b9be189887dc1220588.sol#323-324)
+ThirmLP.kill (/sb/0xbb27a42a806aeb9898755b9be189887dc1220588.sol#324-331) does not use the value returned by external calls:
+	-ERC20(inputcontract).transfer(OWNER,inputcontractbal) (/sb/0xbb27a42a806aeb9898755b9be189887dc1220588.sol#328-331)
+ThirmLP.start (/sb/0xbb27a42a806aeb9898755b9be189887dc1220588.sol#346-378) does not use the value returned by external calls:
+	-uniswap.swapExactTokensForTokens(halfBal,amountOutMin[1],path,address(this),block.timestamp + 100) (/sb/0xbb27a42a806aeb9898755b9be189887dc1220588.sol#367-375)
+	-uniswap.addLiquidity(THIRM,USDC,thirmBalance,usdcBalance,0,0,address(this),block.timestamp + 100) (/sb/0xbb27a42a806aeb9898755b9be189887dc1220588.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+ThirmLP.start (/sb/0xbb27a42a806aeb9898755b9be189887dc1220588.sol#346-378) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(lastTimeExecuted.add(TIME_OFFSET) < block.timestamp,Cannot execute the start function.) (/sb/0xbb27a42a806aeb9898755b9be189887dc1220588.sol#346-350)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+ThirmLP.initApproval (/sb/0xbb27a42a806aeb9898755b9be189887dc1220588.sol#320-324) should be declared external
+ThirmLP.kill (/sb/0xbb27a42a806aeb9898755b9be189887dc1220588.sol#324-331) should be declared external
+ThirmLP.thirmAllowance (/sb/0xbb27a42a806aeb9898755b9be189887dc1220588.sol#331-337) should be declared external
+ThirmLP.usdcAllowance (/sb/0xbb27a42a806aeb9898755b9be189887dc1220588.sol#337-342) should be declared external
+ThirmLP.timeForNextExecution (/sb/0xbb27a42a806aeb9898755b9be189887dc1220588.sol#342-345) should be declared external
+ThirmLP.start (/sb/0xbb27a42a806aeb9898755b9be189887dc1220588.sol#346-378) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xbb27a42a806aeb9898755b9be189887dc1220588.sol:
+	- pragma solidity^0.6.0 (/sb/0xbb27a42a806aeb9898755b9be189887dc1220588.sol#5-7): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'IUniswapV2Router02.WETH' (/sb/0xbb27a42a806aeb9898755b9be189887dc1220588.sol#97-99) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xbb27a42a806aeb9898755b9be189887dc1220588.sol analyzed (4 contracts), 12 result(s) found

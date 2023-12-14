@@ -1,0 +1,138 @@
+INFO:Detectors:[93m
+Address.isContract (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#149-159) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+YALPHARewardsUSDCPool.notifyRewardAmount (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#436-444) uses a dangerous strict equality:
+	- require(bool,string)(periodFinish == 0,Only can call once to start staking)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Reentrancy in YALPHARewardsUSDCPool.checkNextEpoch (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#406-433):
+	External calls:
+	- rewardMultiplier = nextRewardMultiplier() (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#409-410)
+	- yalpha.mint(address(this),currentEpochReward) (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#420-424)
+	State variables written after the call(s):
+	- periodFinish (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#430-432)
+	- totalAccumulatedReward (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#424-428)
+Reentrancy in YALPHARewardsUSDCPool.exit (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#380-381):
+	External calls:
+	- withdraw(balanceOf(msg.sender)) (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#381)
+	- getReward() (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#381)
+	State variables written after the call(s):
+	- currentEpoch (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#381)
+	- currentEpochReward (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#381)
+	- lastUpdateTime (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#381)
+	- periodFinish (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#381)
+	- rewardPerTokenStored (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#381)
+	- rewardRate (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#381)
+	- rewards (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#381)
+	- totalAccumulatedReward (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#381)
+	- userRewardPerTokenPaid (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#381)
+Reentrancy in YALPHARewardsUSDCPool.getReward (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#385-402):
+	External calls:
+	- reward = earned(msg.sender) (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#389-392)
+	State variables written after the call(s):
+	- rewards (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#394)
+Reentrancy in YALPHARewardsUSDCPool.notifyRewardAmount (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#436-444):
+	External calls:
+	- yalpha.mint(address(this),currentEpochReward) (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol)
+	State variables written after the call(s):
+	- periodFinish (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol)
+	- totalAccumulatedReward (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol)
+Reentrancy in YALPHARewardsUSDCPool.updateReward (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#308-321):
+	External calls:
+	- rewards[account] = earned(account) (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#316-317)
+	State variables written after the call(s):
+	- userRewardPerTokenPaid (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#317-319)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+YALPHARewardsUSDCPool.setRewardStake (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#350-356) does not use the value returned by external calls:
+	-yalpha.approve(rewardStake,0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff) (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#355-356)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in YALPHARewardsUSDCPool.checkNextEpoch (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#406-433):
+	External calls:
+	- rewardMultiplier = nextRewardMultiplier() (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#409-410)
+	State variables written after the call(s):
+	- currentEpochReward (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#411)
+	- currentEpochReward (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#416-417)
+Reentrancy in YALPHARewardsUSDCPool.checkNextEpoch (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#406-433):
+	External calls:
+	- rewardMultiplier = nextRewardMultiplier() (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#409-410)
+	- yalpha.mint(address(this),currentEpochReward) (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#420-424)
+	State variables written after the call(s):
+	- currentEpoch (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#428)
+	- lastUpdateTime (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#429-430)
+	- rewardRate (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#428-429)
+Reentrancy in YALPHARewardsUSDCPool.getReward (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#385-402):
+	External calls:
+	- reward = earned(msg.sender) (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#389-392)
+	State variables written after the call(s):
+	- accumulatedStakingPower (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#392-394)
+Reentrancy in YALPHARewardsUSDCPool.notifyRewardAmount (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#436-444):
+	External calls:
+	- yalpha.mint(address(this),currentEpochReward) (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol)
+	State variables written after the call(s):
+	- currentEpoch (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol)
+	- lastUpdateTime (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+YALPHARewardsUSDCPool.notifyRewardAmount (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#436-444) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(periodFinish == 0,Only can call once to start staking) (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#438-439)
+YALPHARewardsUSDCPool.nextRewardMultiplier (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#402-406) uses timestamp for comparisons
+	Dangerous comparisons:
+	- votingValue > 0 (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#405-406)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+Address.isContract uses assembly (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#149-159)
+	- /sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#155
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+YALPHARewardsUSDCPool.starttime should be constant (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#288-289)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Different versions of Solidity is used in /sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol:
+	- Version used: ['^0.5.0', '^0.5.5']
+	- /sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#1 declares pragma solidity^0.5.5
+	- /sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#70-71 declares pragma solidity^0.5.0
+	- /sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#83-84 declares pragma solidity^0.5.0
+	- /sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#122 declares pragma solidity^0.5.0
+	- /sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#148-149 declares pragma solidity^0.5.5
+	- /sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#175-176 declares pragma solidity^0.5.0
+	- /sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#223-224 declares pragma solidity^0.5.0
+	- /sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#237-239 declares pragma solidity^0.5.0
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#different-pragma-directives-are-used[0m
+INFO:Detectors:[92m
+Ownable.owner (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#92-93) should be declared external
+Ownable.renounceOwnership (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#101-106) should be declared external
+Ownable.transferOwnership (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#107-110) should be declared external
+YALPHARewardsUSDCPool.stakingPower (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#346-350) should be declared external
+YALPHARewardsUSDCPool.stake (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#356-360) should be declared external
+YALPHARewardsUSDCPool.stakeReward (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#360-374) should be declared external
+YALPHARewardsUSDCPool.getPeriodFinish (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#381-384) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol:
+	- pragma solidity^0.5.5 (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#1): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#70-71): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#83-84): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#122): it allows old versions
+	- pragma solidity^0.5.5 (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#148-149): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#175-176): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#223-224): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#237-239): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Low level call in Address.sendValue (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#162-175):
+	-(success) = recipient.call.value(amount)() /sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#169-172
+Low level call in SafeERC20.callOptionalReturn (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#205-223):
+	-(success,returndata) = address(token).call(data) /sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#209-210
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Function 'Context._msgSender' (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#72-75) is not in mixedCase
+Function 'Context._msgData' (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#76-83) is not in mixedCase
+Function 'Ownable._transferOwnership' (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#110-122) is not in mixedCase
+Parameter '_rewardVote' of IRewardDistributionRecipient.setRewardVote (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#235-237) is not in mixedCase
+Parameter '_rewardStake' of YALPHARewardsUSDCPool.setRewardStake (/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol#351) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x7090ba9b263a0d373ff943587ec3ffd1d60597b8.sol analyzed (12 contracts), 32 result(s) found

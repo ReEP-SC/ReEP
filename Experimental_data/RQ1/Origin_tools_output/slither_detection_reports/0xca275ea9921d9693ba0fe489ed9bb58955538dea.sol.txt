@@ -1,0 +1,142 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol:
+/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol:255:5: Warning: Functions in interfaces should be declared external.
+    function addVersion(string _contractName, string version, address implementation) public;
+    ^---------------------------------------------------------------------------------------^
+/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol:263:5: Warning: Functions in interfaces should be declared external.
+    function getVersion(string _contractName, string version) public view returns (address);
+    ^--------------------------------------------------------------------------------------^
+/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol:618:27: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+        bytes32 hashKey = keccak256(_currencyName2rate, _currency);
+                          ^--------------------------------------^
+/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol:639:17: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+                keccak256(_pairToOracleAddress, hexedPairs[i]),
+                ^--------------------------------------------^
+/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol:669:67: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+        address oracleAddress = PROXY_STORAGE_CONTRACT.getAddress(keccak256(_pairToOracleAddress, baseTarget));
+                                                                  ^-----------------------------------------^
+/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol:828:50: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+        return PROXY_STORAGE_CONTRACT.getAddress(keccak256(_pairToOracleAddress, hexedPair));
+                                                 ^----------------------------------------^
+/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol:529:25: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function initialize(address sender) public payable {
+                        ^------------^
+/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol:695:9: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+        string fiatCurrency,
+        ^-----------------^
+/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol:792:13: Warning: Unused local variable.
+            uint80 roundID,
+            ^------------^
+/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol:794:13: Warning: Unused local variable.
+            uint startedAt,
+            ^------------^
+/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol:795:13: Warning: Unused local variable.
+            uint timeStamp,
+            ^------------^
+/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol:796:13: Warning: Unused local variable.
+            uint80 answeredInRound
+            ^--------------------^
+/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol:657:35: Warning: Function declared as view, but this expression (potentially) modifies the state and thus requires non-payable (the default) or payable.
+        bytes32 hexedBaseTarget = stringToBytes32(base_target);
+                                  ^--------------------------^
+/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol:721:56: Warning: Function declared as view, but this expression (potentially) modifies the state and thus requires non-payable (the default) or payable.
+            uint eth_usd = getBaseToTargetRateInternal(stringToBytes32("USD"));
+                                                       ^--------------------^
+/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol:773:62: Warning: Function declared as view, but this expression (potentially) modifies the state and thus requires non-payable (the default) or payable.
+            uint stableEthRate = getBaseToTargetRateInternal(stringToBytes32(tokenSymbolToCurrency));
+                                                             ^------------------------------------^
+/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol:776:56: Warning: Function declared as view, but this expression (potentially) modifies the state and thus requires non-payable (the default) or payable.
+            uint eth_usd = getBaseToTargetRateInternal(stringToBytes32("USD"));
+                                                       ^--------------------^
+/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol:827:29: Warning: Function declared as view, but this expression (potentially) modifies the state and thus requires non-payable (the default) or payable.
+        bytes32 hexedPair = stringToBytes32(pair);
+                            ^-------------------^
+/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol:839:5: Warning: Function state mutability can be restricted to pure
+    function stringToBytes32(
+    ^ (Relevant source part starts here and spans across multiple lines).
+
+INFO:Detectors:[91m
+UpgradeabilityStorage.registry (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#510-512) is never initialized. It is used in:
+	- initialize (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#529-534)
+UpgradeabilityStorage._implementation (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#513-515) is never initialized. It is used in:
+	- implementation (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#519-524)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-state-variables[0m
+INFO:Detectors:[93m
+Contract locking ether found in /sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol:
+	Contract TwoKeyExchangeRateContract has payable functions:
+	 - initialize (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#529-534)
+	But does not have a function to withdraw the ether
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#contracts-that-lock-ether[0m
+INFO:Detectors:[92m
+TwoKeyExchangeRateContract.setMultipleFiatCurrencyDetails has external calls inside a loop:
+	- ITwoKeyEventSourceEvents(twoKeyEventSource).priceUpdated(_currencies[i],_baseToTargetRates[i],block.timestamp,msg.sender) (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#603-604)
+TwoKeyExchangeRateContract.storeChainLinkOracleAddresses has external calls inside a loop:
+	- PROXY_STORAGE_CONTRACT.setAddress(keccak256()(_pairToOracleAddress,hexedPairs[i]),priceFeeds[i]) (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#638-642)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+TwoKeyExchangeRateContract.stringToBytes32 uses assembly (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#839-855)
+	- /sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#849-855
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+UpgradeabilityStorage._implementation should be constant (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#513-515)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+IERC20.approve (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#66-75) should be declared external
+ITwoKeyEventSourceEvents.ethereumOf (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#150-151) should be declared external
+ITwoKeyEventSourceEvents.plasmaOf (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#151-153) should be declared external
+ITwoKeyEventSourceEvents.emitHandleChangedEvent (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#208-215) should be declared external
+ITwoKeyMaintainersRegistry.checkIsAddressMaintainer (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#218-219) should be declared external
+ITwoKeyMaintainersRegistry.checkIsAddressCoreDev (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#219-221) should be declared external
+ITwoKeyMaintainersRegistry.addMaintainers (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#221-222) should be declared external
+ITwoKeyMaintainersRegistry.addCoreDevs (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#222-223) should be declared external
+ITwoKeyMaintainersRegistry.removeMaintainers (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#223-224) should be declared external
+ITwoKeyMaintainersRegistry.removeCoreDevs (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#224-227) should be declared external
+ITwoKeySingletoneRegistryFetchAddress.getContractProxyAddress (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#228-229) should be declared external
+ITwoKeySingletoneRegistryFetchAddress.getNonUpgradableContractAddress (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#229-230) should be declared external
+ITwoKeySingletoneRegistryFetchAddress.getLatestCampaignApprovedVersion (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#230-233) should be declared external
+ITwoKeySingletonesRegistry.addVersion (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#255-257) should be declared external
+ITwoKeySingletonesRegistry.getVersion (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#263-266) should be declared external
+UpgradeabilityStorage.implementation (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#519-524) should be declared external
+Upgradeable.initialize (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#529-534) should be declared external
+TwoKeyExchangeRateContract.setFiatCurrencyDetails (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#574-586) should be declared external
+TwoKeyExchangeRateContract.setMultipleFiatCurrencyDetails (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#591-607) should be declared external
+TwoKeyExchangeRateContract.storeChainLinkOracleAddresses (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#628-646) should be declared external
+TwoKeyExchangeRateContract.exchangeCurrencies (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#680-693) should be declared external
+TwoKeyExchangeRateContract.getFiatToStableQuotes (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#693-731) should be declared external
+TwoKeyExchangeRateContract.get2KeyDaiRate (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#734-756) should be declared external
+TwoKeyExchangeRateContract.getStableCoinToUSDQuota (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#756-784) should be declared external
+TwoKeyExchangeRateContract.getChainLinkOracleAddress (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#820-833) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol:
+	- pragma solidity^0.4.13 (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#5-7): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_username_walletName' of ITwoKeyEventSourceEvents.userRegistered (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#197-198) is not in mixedCase
+Function 'IUniswapV2Router01.WETH' (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#269-271) is not in mixedCase
+Parameter '_a' of SafeMath.mul (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#429) is not in mixedCase
+Parameter '_b' of SafeMath.mul (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#429) is not in mixedCase
+Parameter '_a' of SafeMath.div (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#445) is not in mixedCase
+Parameter '_b' of SafeMath.div (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#445) is not in mixedCase
+Parameter '_a' of SafeMath.sub (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#455) is not in mixedCase
+Parameter '_b' of SafeMath.sub (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#455) is not in mixedCase
+Parameter '_a' of SafeMath.add (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#463) is not in mixedCase
+Parameter '_b' of SafeMath.add (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#463) is not in mixedCase
+Variable 'ITwoKeySingletonUtils.TWO_KEY_SINGLETON_REGISTRY' (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#472-474) is not in mixedCase
+Variable 'UpgradeabilityStorage._implementation' (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#513-515) is not in mixedCase
+Parameter '_twoKeySingletonesRegistry' of TwoKeyExchangeRateContract.setInitialParams (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#554-555) is not in mixedCase
+Parameter '_proxyStorage' of TwoKeyExchangeRateContract.setInitialParams (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#555-556) is not in mixedCase
+Parameter '_currency' of TwoKeyExchangeRateContract.setFiatCurrencyDetails (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#575-576) is not in mixedCase
+Parameter '_baseToTargetRate' of TwoKeyExchangeRateContract.setFiatCurrencyDetails (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#576-577) is not in mixedCase
+Parameter '_currencies' of TwoKeyExchangeRateContract.setMultipleFiatCurrencyDetails (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#592-593) is not in mixedCase
+Parameter '_baseToTargetRates' of TwoKeyExchangeRateContract.setMultipleFiatCurrencyDetails (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#593-594) is not in mixedCase
+Parameter '_currency' of TwoKeyExchangeRateContract.storeFiatCurrencyDetails (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#613-614) is not in mixedCase
+Parameter '_baseToTargetRate' of TwoKeyExchangeRateContract.storeFiatCurrencyDetails (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#614-615) is not in mixedCase
+Parameter 'base_target' of TwoKeyExchangeRateContract.getBaseToTargetRate (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#651-652) is not in mixedCase
+Parameter 'base_target' of TwoKeyExchangeRateContract.exchangeCurrencies (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#681-682) is not in mixedCase
+Parameter 'base_amount' of TwoKeyExchangeRateContract.exchangeCurrencies (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#682-683) is not in mixedCase
+Constant 'TwoKeyExchangeRateContract._currencyName2rate' (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#539-540) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'TwoKeyExchangeRateContract._pairToOracleAddress' (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#540-541) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'TwoKeyExchangeRateContract._twoKeyEventSource' (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#541-543) is not in UPPER_CASE_WITH_UNDERSCORES
+Variable 'TwoKeyExchangeRateContract.PROXY_STORAGE_CONTRACT' (/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol#546-548) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xca275ea9921d9693ba0fe489ed9bb58955538dea.sol analyzed (15 contracts), 60 result(s) found

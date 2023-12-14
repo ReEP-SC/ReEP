@@ -1,0 +1,81 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol:
+/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol:165:3: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+  function Ownable() public {
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol:215:3: Warning: Functions in interfaces should be declared external.
+  function accountIdForAddress(address _address) public view returns (uint256);
+  ^---------------------------------------------------------------------------^
+/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol:217:3: Warning: Functions in interfaces should be declared external.
+  function addressBelongsToAccount(address _address) public view returns (bool);
+  ^----------------------------------------------------------------------------^
+/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol:851:5: Warning: Unused local variable.
+    address _oldRegistryAdmin = registryAdmin;
+    ^-----------------------^
+
+INFO:Detectors:[92m
+AccountRegistryBatchAdmin.batchCreateAccount has external calls inside a loop:
+	- registry.addressBelongsToAccount(_newUsers[i]) (/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol)
+AccountRegistryBatchAdmin.batchCreateAccount has external calls inside a loop:
+	- logic.createAccount(_newUsers[i]) (/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in AccountRegistryLogic.acceptInvite (/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol#573-591):
+	External calls:
+	- inviteAddress = signingLogic.recoverSigner(keccak256()(abi.encodePacked(msg.sender)),_sig) (/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol#577-587)
+	State variables written after the call(s):
+	- pendingInvites (/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol#589)
+Reentrancy in AccountRegistryLogic.createInvite (/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol#539-547):
+	External calls:
+	- inviteAddress = signingLogic.recoverSigner(keccak256()(abi.encodePacked(msg.sender)),_sig) (/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol#541-543)
+	State variables written after the call(s):
+	- pendingInvites (/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol#545-547)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol#213-217) should be declared external
+AccountRegistryInterface.accountIdForAddress (/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol#219-225) should be declared external
+AccountRegistryInterface.addressBelongsToAccount (/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol#226-229) should be declared external
+AccountRegistryLogic.setSigningLogic (/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol#470-481) should be declared external
+AccountRegistryLogic.setRegistryAdmin (/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol#493-505) should be declared external
+AccountRegistryLogic.setAccountRegistry (/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol#519-527) should be declared external
+AccountRegistryLogic.createInvite (/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol#539-547) should be declared external
+AccountRegistryLogic.acceptInvite (/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol#573-591) should be declared external
+AccountRegistryLogic.createAccount (/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol#595-597) should be declared external
+AccountRegistryLogic.addAddressToAccountFor (/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol#663-681) should be declared external
+AccountRegistryLogic.addAddressToAccount (/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol#701-721) should be declared external
+AccountRegistryLogic.removeAddressFromAccountFor (/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol#829-845) should be declared external
+AccountRegistryBatchAdmin.setRegistryAdmin (/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol) should be declared external
+AccountRegistryBatchAdmin.batchCreateAccount (/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Function 'Ownable.Ownable' (/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol#179-191) is not in mixedCase
+Parameter '_signingLogic' of AccountRegistryLogic. (/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol#343-345) is not in mixedCase
+Parameter '_registry' of AccountRegistryLogic. (/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol#345) is not in mixedCase
+Parameter '_newSigningLogic' of AccountRegistryLogic.setSigningLogic (/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol#471-473) is not in mixedCase
+Parameter '_newRegistryAdmin' of AccountRegistryLogic.setRegistryAdmin (/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol#495-497) is not in mixedCase
+Parameter '_newRegistry' of AccountRegistryLogic.setAccountRegistry (/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol#519-521) is not in mixedCase
+Parameter '_sig' of AccountRegistryLogic.createInvite (/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol#541) is not in mixedCase
+Parameter '_sig' of AccountRegistryLogic.acceptInvite (/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol#577) is not in mixedCase
+Parameter '_newUser' of AccountRegistryLogic.createAccount (/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol#597) is not in mixedCase
+Parameter '_newUser' of AccountRegistryLogic.createAccountForUser (/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol#627-629) is not in mixedCase
+Parameter '_newAddress' of AccountRegistryLogic.addAddressToAccountFor (/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol#665) is not in mixedCase
+Parameter '_newAddressSig' of AccountRegistryLogic.addAddressToAccountFor (/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol#665) is not in mixedCase
+Parameter '_senderSig' of AccountRegistryLogic.addAddressToAccountFor (/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol#665-669) is not in mixedCase
+Parameter '_sender' of AccountRegistryLogic.addAddressToAccountFor (/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol#669) is not in mixedCase
+Parameter '_nonce' of AccountRegistryLogic.addAddressToAccountFor (/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol#671) is not in mixedCase
+Parameter '_newAddress' of AccountRegistryLogic.addAddressToAccount (/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol#701-703) is not in mixedCase
+Parameter '_newAddressSig' of AccountRegistryLogic.addAddressToAccount (/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol#705) is not in mixedCase
+Parameter '_senderSig' of AccountRegistryLogic.addAddressToAccount (/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol#705-707) is not in mixedCase
+Parameter '_nonce' of AccountRegistryLogic.addAddressToAccount (/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol#707-709) is not in mixedCase
+Parameter '_newAddress' of AccountRegistryLogic.addAddressToAccountForUser (/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol#737) is not in mixedCase
+Parameter '_newAddressSig' of AccountRegistryLogic.addAddressToAccountForUser (/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol#737-741) is not in mixedCase
+Parameter '_senderSig' of AccountRegistryLogic.addAddressToAccountForUser (/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol#741) is not in mixedCase
+Parameter '_sender' of AccountRegistryLogic.addAddressToAccountForUser (/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol#741-743) is not in mixedCase
+Parameter '_nonce' of AccountRegistryLogic.addAddressToAccountForUser (/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol#743) is not in mixedCase
+Parameter '_addressToRemove' of AccountRegistryLogic.removeAddressFromAccountFor (/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol#831-833) is not in mixedCase
+Event 'AccountRegistryBatchAdmin.addressSkipped' (/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol#865-869) is not in CapWords
+Parameter '_registry' of AccountRegistryBatchAdmin. (/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol#861) is not in mixedCase
+Parameter '_logic' of AccountRegistryBatchAdmin. (/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol#861-863) is not in mixedCase
+Parameter '_newRegistryAdmin' of AccountRegistryBatchAdmin.setRegistryAdmin (/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol) is not in mixedCase
+Parameter '_newUsers' of AccountRegistryBatchAdmin.batchCreateAccount (/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xaa1ab04fa43a5adbbb97e8030166663797cc200c.sol analyzed (5 contracts), 48 result(s) found

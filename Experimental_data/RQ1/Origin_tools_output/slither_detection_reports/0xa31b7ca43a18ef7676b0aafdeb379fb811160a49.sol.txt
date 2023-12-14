@@ -1,0 +1,55 @@
+INFO:Detectors:[93m
+Reentrancy in TokenVesting.release (/sb/0xa31b7ca43a18ef7676b0aafdeb379fb811160a49.sol#411-424):
+	External calls:
+	- unreleased = _releasableAmount(token) (/sb/0xa31b7ca43a18ef7676b0aafdeb379fb811160a49.sol#415-416)
+	State variables written after the call(s):
+	- _released (/sb/0xa31b7ca43a18ef7676b0aafdeb379fb811160a49.sol#418-419)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+TokenVesting.release (/sb/0xa31b7ca43a18ef7676b0aafdeb379fb811160a49.sol#411-424) does not use the value returned by external calls:
+	-token.transfer(_beneficiary,unreleased) (/sb/0xa31b7ca43a18ef7676b0aafdeb379fb811160a49.sol#419-422)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+TokenVesting.constructor.beneficiary (local variable @ /sb/0xa31b7ca43a18ef7676b0aafdeb379fb811160a49.sol#350) shadows:
+	- TokenVesting.beneficiary (function @ /sb/0xa31b7ca43a18ef7676b0aafdeb379fb811160a49.sol#378-383)
+TokenVesting.constructor.start (local variable @ /sb/0xa31b7ca43a18ef7676b0aafdeb379fb811160a49.sol#350) shadows:
+	- TokenVesting.start (function @ /sb/0xa31b7ca43a18ef7676b0aafdeb379fb811160a49.sol#386-390)
+TokenVesting.constructor.duration (local variable @ /sb/0xa31b7ca43a18ef7676b0aafdeb379fb811160a49.sol#350) shadows:
+	- TokenVesting.duration (function @ /sb/0xa31b7ca43a18ef7676b0aafdeb379fb811160a49.sol#392-397)
+TokenVesting.constructor.initialRelease (local variable @ /sb/0xa31b7ca43a18ef7676b0aafdeb379fb811160a49.sol#350-352) shadows:
+	- TokenVesting.initialRelease (function @ /sb/0xa31b7ca43a18ef7676b0aafdeb379fb811160a49.sol#398-401)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+TokenVesting.constructor (/sb/0xa31b7ca43a18ef7676b0aafdeb379fb811160a49.sol#350-369) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(start.add(duration) > block.timestamp,TokenVesting: final time is before current time) (/sb/0xa31b7ca43a18ef7676b0aafdeb379fb811160a49.sol#359-362)
+TokenVesting._vestedAmount (/sb/0xa31b7ca43a18ef7676b0aafdeb379fb811160a49.sol#434-437) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp >= _start.add(_duration) (/sb/0xa31b7ca43a18ef7676b0aafdeb379fb811160a49.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+Different versions of Solidity is used in /sb/0xa31b7ca43a18ef7676b0aafdeb379fb811160a49.sol:
+	- Version used: ['0.6.12', '>=0.6.0<0.8.0']
+	- /sb/0xa31b7ca43a18ef7676b0aafdeb379fb811160a49.sol#9-12 declares pragma solidity>=0.6.0<0.8.0
+	- /sb/0xa31b7ca43a18ef7676b0aafdeb379fb811160a49.sol#92-93 declares pragma solidity>=0.6.0<0.8.0
+	- /sb/0xa31b7ca43a18ef7676b0aafdeb379fb811160a49.sol#316 declares pragma solidity0.6.12
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#different-pragma-directives-are-used[0m
+INFO:Detectors:[92m
+TokenVesting.beneficiary (/sb/0xa31b7ca43a18ef7676b0aafdeb379fb811160a49.sol#378-383) should be declared external
+TokenVesting.start (/sb/0xa31b7ca43a18ef7676b0aafdeb379fb811160a49.sol#386-390) should be declared external
+TokenVesting.duration (/sb/0xa31b7ca43a18ef7676b0aafdeb379fb811160a49.sol#392-397) should be declared external
+TokenVesting.initialRelease (/sb/0xa31b7ca43a18ef7676b0aafdeb379fb811160a49.sol#398-401) should be declared external
+TokenVesting.released (/sb/0xa31b7ca43a18ef7676b0aafdeb379fb811160a49.sol#403-407) should be declared external
+TokenVesting.release (/sb/0xa31b7ca43a18ef7676b0aafdeb379fb811160a49.sol#411-424) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xa31b7ca43a18ef7676b0aafdeb379fb811160a49.sol:
+	- pragma solidity>=0.6.0<0.8.0 (/sb/0xa31b7ca43a18ef7676b0aafdeb379fb811160a49.sol#9-12): is has a complex pragma
+	- pragma solidity>=0.6.0<0.8.0 (/sb/0xa31b7ca43a18ef7676b0aafdeb379fb811160a49.sol#92-93): is has a complex pragma
+	- pragma solidity0.6.12 (/sb/0xa31b7ca43a18ef7676b0aafdeb379fb811160a49.sol#316): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'TokenVesting._releasableAmount' (/sb/0xa31b7ca43a18ef7676b0aafdeb379fb811160a49.sol#427-431) is not in mixedCase
+Function 'TokenVesting._vestedAmount' (/sb/0xa31b7ca43a18ef7676b0aafdeb379fb811160a49.sol#434-437) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xa31b7ca43a18ef7676b0aafdeb379fb811160a49.sol analyzed (3 contracts), 18 result(s) found

@@ -1,0 +1,99 @@
+INFO:Detectors:[91m
+Zethell._settleAndRestart (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#180-197) sends eth to arbitrary user
+	Dangerous calls:
+	- ZTHBANKROLL.transfer(address(this).balance) (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#188-190)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[91m
+Reentrancy in Zethell._settleAndRestart (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#180-197):
+	External calls:
+	- ZTHTKN.transfer(currentWinner,payment) (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#185-187)
+	External calls sending eth:
+	- ZTHBANKROLL.transfer(address(this).balance) (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#188-190)
+	State variables written after the call(s):
+	- tokensInPlay (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#194-197)
+Reentrancy in Zethell._stakeTokens (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#146-172):
+	External calls:
+	- _settleAndRestart() (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#153-154)
+	State variables written after the call(s):
+	- contractBalance (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#164-165)
+	- currentWinner (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#163-164)
+	- gameEnds (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#162-163)
+	- tokensInPlay (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#171)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities[0m
+INFO:Detectors:[93m
+_tkn in Zethell.tokenFallback (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#132-133) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[93m
+Zethell.constructor (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#91-125) does not use the value returned by external calls:
+	-ZTHTKN.approve(ZTHBANKROLL,2 ** 256 - 1) (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#104-105)
+Zethell._settleAndRestart (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#180-197) does not use the value returned by external calls:
+	-ZTHTKN.transfer(currentWinner,payment) (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#185-187)
+Zethell.retrieveHouseTake (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#214-224) does not use the value returned by external calls:
+	-ZTHTKN.transfer(bankroll,toTake) (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#220-221)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in Zethell._settleAndRestart (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#180-197):
+	External calls:
+	- ZTHTKN.transfer(currentWinner,payment) (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#185-187)
+	External calls sending eth:
+	- ZTHBANKROLL.transfer(address(this).balance) (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#188-190)
+	State variables written after the call(s):
+	- gameActive (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#197)
+Reentrancy in Zethell._stakeTokens (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#146-172):
+	External calls:
+	- _settleAndRestart() (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#153-154)
+	State variables written after the call(s):
+	- gameStarted (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#161-162)
+	- houseTake (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#168-171)
+Reentrancy in Zethell.constructor (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#91-125):
+	External calls:
+	- ZTHTKN.approve(ZTHBANKROLL,2 ** 256 - 1) (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#104-105)
+	State variables written after the call(s):
+	- gameActive (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#123-125)
+	- gameEnds (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#123)
+	- gameStarted (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#122)
+	- tokenToTimer (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#113-114)
+	- tokenToTimer (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#115-116)
+	- tokenToTimer (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#116-117)
+	- tokenToTimer (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#117-118)
+	- validTokenBet (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#108)
+	- validTokenBet (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#110)
+	- validTokenBet (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#110)
+	- validTokenBet (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#110-111)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+ZTHReceivingContract.tokenFallback (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#12-15) should be declared external
+Zethell.tokenFallback (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#128-136) should be declared external
+ZTHInterface.transfer (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#16-17) should be declared external
+ZTHInterface.approve (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#17-20) should be declared external
+Zethell.fallback (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#125-126) should be declared external
+Zethell.balanceOf (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#198-199) should be declared external
+Zethell.addTokenTime (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#203-205) should be declared external
+Zethell.removeTokenTime (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#209-212) should be declared external
+Zethell.retrieveHouseTake (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#214-224) should be declared external
+Zethell.pauseGame (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#226-229) should be declared external
+Zethell.resumeGame (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#231-234) should be declared external
+Zethell.changeOwner (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#235-239) should be declared external
+Zethell.changeBankroll (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#240-248) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_from' of Zethell.tokenFallback (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#129-130) is not in mixedCase
+Parameter '_value' of Zethell.tokenFallback (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#130) is not in mixedCase
+Parameter '' of Zethell.tokenFallback (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#130) is not in mixedCase
+Parameter 'ZethrAddress' of Zethell. (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#91) is not in mixedCase
+Parameter 'BankrollAddress' of Zethell. (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#91-92) is not in mixedCase
+Function 'Zethell._stakeTokens' (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#146-172) is not in mixedCase
+Parameter '_tkn' of Zethell._stakeTokens (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#147-148) is not in mixedCase
+Function 'Zethell._settleAndRestart' (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#180-197) is not in mixedCase
+Parameter '_tokenAmount' of Zethell.addTokenTime (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#203) is not in mixedCase
+Parameter '_timeBought' of Zethell.addTokenTime (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#203) is not in mixedCase
+Parameter '_tokenAmount' of Zethell.removeTokenTime (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#209) is not in mixedCase
+Parameter '_newOwner' of Zethell.changeOwner (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#235-236) is not in mixedCase
+Parameter '_newBankroll' of Zethell.changeBankroll (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#241) is not in mixedCase
+Function 'Zethell._zthToken' (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#249-256) is not in mixedCase
+Parameter '_tokenContract' of Zethell._zthToken (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#251-254) is not in mixedCase
+Variable 'Zethell.ZTHTKNADDR' (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#48-49) is not in mixedCase
+Variable 'Zethell.ZTHBANKROLL' (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#49-51) is not in mixedCase
+Variable 'Zethell.ZTHTKN' (/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol#51-52) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x52d9f3dda15c4faa3e8393b468c3d9e6086bb1ef.sol analyzed (4 contracts), 41 result(s) found

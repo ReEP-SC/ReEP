@@ -1,0 +1,132 @@
+INFO:Detectors:[93m
+Contract locking ether found in /sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol:
+	Contract BankrollNetworkStack has payable functions:
+	 - fallback (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#235-236)
+	But does not have a function to withdraw the ether
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#contracts-that-lock-ether[0m
+INFO:Detectors:[93m
+Reentrancy in BankrollNetworkStack.distribute (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#507-536):
+	External calls:
+	- onBalance(totalTokenBalance(),now) (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#509-510)
+	State variables written after the call(s):
+	- lastBalance_ (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#510)
+Reentrancy in BankrollNetworkStack.transfer (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#338-402):
+	External calls:
+	- withdraw() (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#349)
+	State variables written after the call(s):
+	- payoutsTo_ (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#357-361)
+	- payoutsTo_ (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#362-363)
+	- stats (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#371-372)
+	- stats (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#372-373)
+	- stats (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#373-375)
+	- stats (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#375-378)
+	- tokenBalanceLedger_ (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#350-355)
+	- tokenBalanceLedger_ (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#355-357)
+	- totalTxs (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#378-379)
+Reentrancy in BankrollNetworkStack.withdraw (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#270-299):
+	External calls:
+	- token.transfer(_customerAddress,_dividends) (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#280-283)
+	- distribute() (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#298-299)
+	State variables written after the call(s):
+	- profitPerShare_ (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#298-299)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+BankrollNetworkStack.withdraw (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#270-299) does not use the value returned by external calls:
+	-token.transfer(_customerAddress,_dividends) (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#280-283)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in BankrollNetworkStack.buyFor (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#206-232):
+	External calls:
+	- require(bool)(token.transferFrom(_customerAddress,address(this),buy_amount)) (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#209-211)
+	State variables written after the call(s):
+	- dividendBalance_ (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#212-213)
+	- payoutsTo_ (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#212-213)
+	- players (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#212-213)
+	- stats (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#212-213)
+	- tokenBalanceLedger_ (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#212-213)
+	- tokenSupply_ (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#212-213)
+	- totalDeposits (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#211)
+	- totalTxs (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#212-213)
+Reentrancy in BankrollNetworkStack.distribute (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#507-536):
+	External calls:
+	- onBalance(totalTokenBalance(),now) (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#509-510)
+	State variables written after the call(s):
+	- dividendBalance_ (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#527-529)
+	- lastPayout (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#533-534)
+	- profitPerShare_ (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#530-531)
+Reentrancy in BankrollNetworkStack.donatePool (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#194-199):
+	External calls:
+	- require(bool)(token.transferFrom(msg.sender,address(this),amount)) (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#197)
+	State variables written after the call(s):
+	- dividendBalance_ (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#197-198)
+Reentrancy in BankrollNetworkStack.transfer (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#338-402):
+	External calls:
+	- withdraw() (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#349)
+	State variables written after the call(s):
+	- players (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#369)
+Reentrancy in BankrollNetworkStack.withdraw (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#270-299):
+	External calls:
+	- token.transfer(_customerAddress,_dividends) (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#280-283)
+	State variables written after the call(s):
+	- stats (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#283-290)
+	- stats (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#291)
+	- totalClaims (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#292-293)
+	- totalTxs (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#291-292)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+BankrollNetworkStack.balanceInterval should be constant (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#174-175)
+BankrollNetworkStack.distributionInterval should be constant (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#175-176)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Token.transferFrom (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#15-17) should be declared external
+Token.transfer (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#17-19) should be declared external
+Token.balanceOf (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#19-24) should be declared external
+BankrollNetworkStack.donatePool (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#194-199) should be declared external
+BankrollNetworkStack.buy (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#203-204) should be declared external
+BankrollNetworkStack.fallback (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#235-236) should be declared external
+BankrollNetworkStack.reinvest (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#239-270) should be declared external
+BankrollNetworkStack.sell (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#299-336) should be declared external
+BankrollNetworkStack.totalSupply (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#415-417) should be declared external
+BankrollNetworkStack.tokenBalance (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#436-438) should be declared external
+BankrollNetworkStack.sellPrice (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#449-457) should be declared external
+BankrollNetworkStack.buyPrice (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#458-465) should be declared external
+BankrollNetworkStack.calculateTokensReceived (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#466-475) should be declared external
+BankrollNetworkStack.calculateethReceived (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#476-480) should be declared external
+BankrollNetworkStack.statsOf (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#483-497) should be declared external
+BankrollNetworkStack.dailyEstimate (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#497-505) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Event 'BankrollNetworkStack.onLeaderBoard' (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#57-65) is not in CapWords
+Event 'BankrollNetworkStack.onTokenPurchase' (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#65-73) is not in CapWords
+Event 'BankrollNetworkStack.onTokenSell' (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#73-80) is not in CapWords
+Event 'BankrollNetworkStack.onReinvestment' (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#80-87) is not in CapWords
+Event 'BankrollNetworkStack.onWithdraw' (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#87-95) is not in CapWords
+Event 'BankrollNetworkStack.onTransfer' (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#95-104) is not in CapWords
+Event 'BankrollNetworkStack.onBalance' (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#105-108) is not in CapWords
+Event 'BankrollNetworkStack.onDonation' (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#110-114) is not in CapWords
+Parameter '_tokenAddress' of BankrollNetworkStack. (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#188) is not in mixedCase
+Parameter 'buy_amount' of BankrollNetworkStack.buy (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#203-204) is not in mixedCase
+Parameter '_customerAddress' of BankrollNetworkStack.buyFor (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#207) is not in mixedCase
+Parameter 'buy_amount' of BankrollNetworkStack.buyFor (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#207) is not in mixedCase
+Parameter '_amountOfTokens' of BankrollNetworkStack.sell (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#299-300) is not in mixedCase
+Parameter '_toAddress' of BankrollNetworkStack.transfer (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#339) is not in mixedCase
+Parameter '_amountOfTokens' of BankrollNetworkStack.transfer (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#339-340) is not in mixedCase
+Parameter '_customerAddress' of BankrollNetworkStack.balanceOf (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#431) is not in mixedCase
+Parameter '_customerAddress' of BankrollNetworkStack.tokenBalance (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#436) is not in mixedCase
+Parameter '_customerAddress' of BankrollNetworkStack.dividendsOf (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#440) is not in mixedCase
+Parameter '_ethToSpend' of BankrollNetworkStack.calculateTokensReceived (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#466) is not in mixedCase
+Parameter '_tokensToSell' of BankrollNetworkStack.calculateethReceived (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#477) is not in mixedCase
+Parameter '_customerAddress' of BankrollNetworkStack.statsOf (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#483-484) is not in mixedCase
+Parameter '_customerAddress' of BankrollNetworkStack.dailyEstimate (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#498) is not in mixedCase
+Parameter '_customerAddress' of BankrollNetworkStack.purchaseTokens (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#543-544) is not in mixedCase
+Parameter '_incomingeth' of BankrollNetworkStack.purchaseTokens (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#544) is not in mixedCase
+Constant 'BankrollNetworkStack.entryFee_' (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#140) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'BankrollNetworkStack.exitFee_' (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#140-142) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'BankrollNetworkStack.dripFee' (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#144) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'BankrollNetworkStack.payoutRate_' (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#147-148) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'BankrollNetworkStack.magnitude' (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#148-150) is not in UPPER_CASE_WITH_UNDERSCORES
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+BankrollNetworkStack.dripFee (/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol#144) is never used in BankrollNetworkStack
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0x84a4eccb81a1fd0867c7682e2c85ffef4538a2f4.sol analyzed (3 contracts), 57 result(s) found

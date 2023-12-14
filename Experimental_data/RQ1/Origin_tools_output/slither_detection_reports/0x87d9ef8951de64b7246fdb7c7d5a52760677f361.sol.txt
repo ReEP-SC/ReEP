@@ -1,0 +1,77 @@
+INFO:Detectors:[93m
+Contract locking ether found in /sb/0x87d9ef8951de64b7246fdb7c7d5a52760677f361.sol:
+	Contract TokenFaucet has payable functions:
+	 - fallback (/sb/0x87d9ef8951de64b7246fdb7c7d5a52760677f361.sol#1063-1073)
+	But does not have a function to withdraw the ether
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#contracts-that-lock-ether[0m
+INFO:Detectors:[93m
+Reentrancy in TokenFaucet._distributeTokens (/sb/0x87d9ef8951de64b7246fdb7c7d5a52760677f361.sol#1345-1363):
+	External calls:
+	- _token.transfer(account,_dailyRate) (/sb/0x87d9ef8951de64b7246fdb7c7d5a52760677f361.sol)
+	State variables written after the call(s):
+	- _referralList (/sb/0x87d9ef8951de64b7246fdb7c7d5a52760677f361.sol)
+	- _totalDistributedTokens (/sb/0x87d9ef8951de64b7246fdb7c7d5a52760677f361.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+TokenRecover.recoverERC20 (/sb/0x87d9ef8951de64b7246fdb7c7d5a52760677f361.sol#885-901) does not use the value returned by external calls:
+	-IERC20(tokenAddress).transfer(owner(),tokenAmount) (/sb/0x87d9ef8951de64b7246fdb7c7d5a52760677f361.sol#897-901)
+TokenFaucet._distributeTokens (/sb/0x87d9ef8951de64b7246fdb7c7d5a52760677f361.sol#1345-1363) does not use the value returned by external calls:
+	-_token.transfer(account,_dailyRate) (/sb/0x87d9ef8951de64b7246fdb7c7d5a52760677f361.sol)
+	-_token.transfer(firstReferral,referralEarnedTokens) (/sb/0x87d9ef8951de64b7246fdb7c7d5a52760677f361.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+TokenFaucet.constructor.token (local variable @ /sb/0x87d9ef8951de64b7246fdb7c7d5a52760677f361.sol#1031) shadows:
+	- TokenFaucet.token (function @ /sb/0x87d9ef8951de64b7246fdb7c7d5a52760677f361.sol#1111-1119)
+TokenFaucet.constructor.dailyRate (local variable @ /sb/0x87d9ef8951de64b7246fdb7c7d5a52760677f361.sol#1035) shadows:
+	- TokenFaucet.dailyRate (function @ /sb/0x87d9ef8951de64b7246fdb7c7d5a52760677f361.sol#1125-1127)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+TokenFaucet._distributeTokens (/sb/0x87d9ef8951de64b7246fdb7c7d5a52760677f361.sol#1345-1363) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool)(nextClaimTime(account) <= block.timestamp) (/sb/0x87d9ef8951de64b7246fdb7c7d5a52760677f361.sol#1349-1351)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+TokenFaucet._pauseTime should be constant (/sb/0x87d9ef8951de64b7246fdb7c7d5a52760677f361.sol#945-947)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+ERC20.totalSupply (/sb/0x87d9ef8951de64b7246fdb7c7d5a52760677f361.sol#271-275) should be declared external
+IERC20.totalSupply (/sb/0x87d9ef8951de64b7246fdb7c7d5a52760677f361.sol#27-31) should be declared external
+IERC20.balanceOf (/sb/0x87d9ef8951de64b7246fdb7c7d5a52760677f361.sol#31-35) should be declared external
+ERC20.balanceOf (/sb/0x87d9ef8951de64b7246fdb7c7d5a52760677f361.sol#289-291) should be declared external
+ERC20.allowance (/sb/0x87d9ef8951de64b7246fdb7c7d5a52760677f361.sol#323-339) should be declared external
+IERC20.allowance (/sb/0x87d9ef8951de64b7246fdb7c7d5a52760677f361.sol#35-41) should be declared external
+IERC20.transfer (/sb/0x87d9ef8951de64b7246fdb7c7d5a52760677f361.sol#41-45) should be declared external
+ERC20.transfer (/sb/0x87d9ef8951de64b7246fdb7c7d5a52760677f361.sol#341-345) should be declared external
+ERC20.approve (/sb/0x87d9ef8951de64b7246fdb7c7d5a52760677f361.sol#375-393) should be declared external
+IERC20.approve (/sb/0x87d9ef8951de64b7246fdb7c7d5a52760677f361.sol#45-51) should be declared external
+ERC20.transferFrom (/sb/0x87d9ef8951de64b7246fdb7c7d5a52760677f361.sol#415-427) should be declared external
+IERC20.transferFrom (/sb/0x87d9ef8951de64b7246fdb7c7d5a52760677f361.sol#51-61) should be declared external
+ERC20.increaseAllowance (/sb/0x87d9ef8951de64b7246fdb7c7d5a52760677f361.sol#464-475) should be declared external
+ERC20.decreaseAllowance (/sb/0x87d9ef8951de64b7246fdb7c7d5a52760677f361.sol#515-541) should be declared external
+Ownable.renounceOwnership (/sb/0x87d9ef8951de64b7246fdb7c7d5a52760677f361.sol#785-795) should be declared external
+Ownable.transferOwnership (/sb/0x87d9ef8951de64b7246fdb7c7d5a52760677f361.sol#805-809) should be declared external
+TokenRecover.recoverERC20 (/sb/0x87d9ef8951de64b7246fdb7c7d5a52760677f361.sol#885-901) should be declared external
+TokenFaucet.getTokensWithReferral (/sb/0x87d9ef8951de64b7246fdb7c7d5a52760677f361.sol#1093-1109) should be declared external
+TokenFaucet.token (/sb/0x87d9ef8951de64b7246fdb7c7d5a52760677f361.sol#1111-1119) should be declared external
+TokenFaucet.dailyRate (/sb/0x87d9ef8951de64b7246fdb7c7d5a52760677f361.sol#1125-1127) should be declared external
+TokenFaucet.totalDistributedTokens (/sb/0x87d9ef8951de64b7246fdb7c7d5a52760677f361.sol#1143-1156) should be declared external
+TokenFaucet.receivedTokens (/sb/0x87d9ef8951de64b7246fdb7c7d5a52760677f361.sol#1165-1173) should be declared external
+TokenFaucet.lastUpdate (/sb/0x87d9ef8951de64b7246fdb7c7d5a52760677f361.sol#1181-1189) should be declared external
+TokenFaucet.getReferral (/sb/0x87d9ef8951de64b7246fdb7c7d5a52760677f361.sol#1219-1229) should be declared external
+TokenFaucet.earnedByReferral (/sb/0x87d9ef8951de64b7246fdb7c7d5a52760677f361.sol#1237-1247) should be declared external
+TokenFaucet.getReferredAddresses (/sb/0x87d9ef8951de64b7246fdb7c7d5a52760677f361.sol#1253-1257) should be declared external
+TokenFaucet.getReferredAddressesLength (/sb/0x87d9ef8951de64b7246fdb7c7d5a52760677f361.sol#1273-1279) should be declared external
+TokenFaucet.remainingTokens (/sb/0x87d9ef8951de64b7246fdb7c7d5a52760677f361.sol#1281-1287) should be declared external
+TokenFaucet.getRecipientAddress (/sb/0x87d9ef8951de64b7246fdb7c7d5a52760677f361.sol#1291-1299) should be declared external
+TokenFaucet.getRecipientsLength (/sb/0x87d9ef8951de64b7246fdb7c7d5a52760677f361.sol#1303-1311) should be declared external
+TokenFaucet.setRates (/sb/0x87d9ef8951de64b7246fdb7c7d5a52760677f361.sol#1319-1335) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Function 'ERC20._transfer' (/sb/0x87d9ef8951de64b7246fdb7c7d5a52760677f361.sol#547-561) is not in mixedCase
+Function 'ERC20._mint' (/sb/0x87d9ef8951de64b7246fdb7c7d5a52760677f361.sol#583-599) is not in mixedCase
+Function 'ERC20._burn' (/sb/0x87d9ef8951de64b7246fdb7c7d5a52760677f361.sol#607-619) is not in mixedCase
+Function 'ERC20._burnFrom' (/sb/0x87d9ef8951de64b7246fdb7c7d5a52760677f361.sol#643-675) is not in mixedCase
+Function 'Ownable._transferOwnership' (/sb/0x87d9ef8951de64b7246fdb7c7d5a52760677f361.sol#822-843) is not in mixedCase
+Function 'TokenFaucet._distributeTokens' (/sb/0x87d9ef8951de64b7246fdb7c7d5a52760677f361.sol#1345-1363) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x87d9ef8951de64b7246fdb7c7d5a52760677f361.sol analyzed (6 contracts), 45 result(s) found

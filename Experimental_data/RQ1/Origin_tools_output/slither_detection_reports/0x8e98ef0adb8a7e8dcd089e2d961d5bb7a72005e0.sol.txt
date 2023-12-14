@@ -1,0 +1,66 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x8e98ef0adb8a7e8dcd089e2d961d5bb7a72005e0.sol:
+Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing "SPDX-License-Identifier: <SPDX-License>" to each source file. Use "SPDX-License-Identifier: UNLICENSED" for non-open-source code. Please see https://spdx.org for more information.
+--> /sb/0x8e98ef0adb8a7e8dcd089e2d961d5bb7a72005e0.sol
+
+
+INFO:Detectors:[93m
+Reentrancy in AxiaVault.distributeAXIA (/sb/0x8e98ef0adb8a7e8dcd089e2d961d5bb7a72005e0.sol#44-53):
+	External calls:
+	- TokenBalance = ERC20Interface(AXIA).balanceOf(address(this)) (/sb/0x8e98ef0adb8a7e8dcd089e2d961d5bb7a72005e0.sol#45-46)
+	- ERC20Interface(AXIA).transfer(recipient,amount) (/sb/0x8e98ef0adb8a7e8dcd089e2d961d5bb7a72005e0.sol#49-51)
+	State variables written after the call(s):
+	- lastTradingFeeDistributionAxia (/sb/0x8e98ef0adb8a7e8dcd089e2d961d5bb7a72005e0.sol#52-53)
+Reentrancy in AxiaVault.distributeDEFI (/sb/0x8e98ef0adb8a7e8dcd089e2d961d5bb7a72005e0.sol#72-80):
+	External calls:
+	- TokenBalance = ERC20Interface(DefiLiquidity).balanceOf(address(this)) (/sb/0x8e98ef0adb8a7e8dcd089e2d961d5bb7a72005e0.sol#72-73)
+	- ERC20Interface(DefiLiquidity).transfer(recipient,amount) (/sb/0x8e98ef0adb8a7e8dcd089e2d961d5bb7a72005e0.sol#77-80)
+	State variables written after the call(s):
+	- lastTradingFeeDistributionDefi (/sb/0x8e98ef0adb8a7e8dcd089e2d961d5bb7a72005e0.sol#80)
+Reentrancy in AxiaVault.distributeORACLE (/sb/0x8e98ef0adb8a7e8dcd089e2d961d5bb7a72005e0.sol#62-71):
+	External calls:
+	- TokenBalance = ERC20Interface(OracleLiquidty).balanceOf(address(this)) (/sb/0x8e98ef0adb8a7e8dcd089e2d961d5bb7a72005e0.sol#63-64)
+	- ERC20Interface(OracleLiquidty).transfer(recipient,amount) (/sb/0x8e98ef0adb8a7e8dcd089e2d961d5bb7a72005e0.sol#68-71)
+	State variables written after the call(s):
+	- lastTradingFeeDistributionOracle (/sb/0x8e98ef0adb8a7e8dcd089e2d961d5bb7a72005e0.sol#71)
+Reentrancy in AxiaVault.distributeSWAP (/sb/0x8e98ef0adb8a7e8dcd089e2d961d5bb7a72005e0.sol#53-62):
+	External calls:
+	- TokenBalance = ERC20Interface(SwapLiquidity).balanceOf(address(this)) (/sb/0x8e98ef0adb8a7e8dcd089e2d961d5bb7a72005e0.sol#54-55)
+	- ERC20Interface(SwapLiquidity).transfer(recipient,amount) (/sb/0x8e98ef0adb8a7e8dcd089e2d961d5bb7a72005e0.sol#58-61)
+	State variables written after the call(s):
+	- lastTradingFeeDistributionSwap (/sb/0x8e98ef0adb8a7e8dcd089e2d961d5bb7a72005e0.sol#62)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+AxiaVault.distributeAXIA (/sb/0x8e98ef0adb8a7e8dcd089e2d961d5bb7a72005e0.sol#44-53) does not use the value returned by external calls:
+	-ERC20Interface(AXIA).transfer(recipient,amount) (/sb/0x8e98ef0adb8a7e8dcd089e2d961d5bb7a72005e0.sol#49-51)
+AxiaVault.distributeSWAP (/sb/0x8e98ef0adb8a7e8dcd089e2d961d5bb7a72005e0.sol#53-62) does not use the value returned by external calls:
+	-ERC20Interface(SwapLiquidity).transfer(recipient,amount) (/sb/0x8e98ef0adb8a7e8dcd089e2d961d5bb7a72005e0.sol#58-61)
+AxiaVault.distributeORACLE (/sb/0x8e98ef0adb8a7e8dcd089e2d961d5bb7a72005e0.sol#62-71) does not use the value returned by external calls:
+	-ERC20Interface(OracleLiquidty).transfer(recipient,amount) (/sb/0x8e98ef0adb8a7e8dcd089e2d961d5bb7a72005e0.sol#68-71)
+AxiaVault.distributeDEFI (/sb/0x8e98ef0adb8a7e8dcd089e2d961d5bb7a72005e0.sol#72-80) does not use the value returned by external calls:
+	-ERC20Interface(DefiLiquidity).transfer(recipient,amount) (/sb/0x8e98ef0adb8a7e8dcd089e2d961d5bb7a72005e0.sol#77-80)
+AxiaVault.processMigration (/sb/0x8e98ef0adb8a7e8dcd089e2d961d5bb7a72005e0.sol#101-120) does not use the value returned by external calls:
+	-ERC20Interface(AXIA).transfer(migrationRecipient,TokenBalance) (/sb/0x8e98ef0adb8a7e8dcd089e2d961d5bb7a72005e0.sol#111-112)
+	-ERC20Interface(SwapLiquidity).transfer(migrationRecipient,TokenBalanceSwap) (/sb/0x8e98ef0adb8a7e8dcd089e2d961d5bb7a72005e0.sol#112-113)
+	-ERC20Interface(OracleLiquidty).transfer(migrationRecipient,TokenBalanceOracle) (/sb/0x8e98ef0adb8a7e8dcd089e2d961d5bb7a72005e0.sol#113-117)
+	-ERC20Interface(DefiLiquidity).transfer(migrationRecipient,TokenBalanceDefi) (/sb/0x8e98ef0adb8a7e8dcd089e2d961d5bb7a72005e0.sol#118-120)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+AxiaVault.synch (/sb/0x8e98ef0adb8a7e8dcd089e2d961d5bb7a72005e0.sol#81-87) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x8e98ef0adb8a7e8dcd089e2d961d5bb7a72005e0.sol:
+	- pragma solidity^0.6.0 (/sb/0x8e98ef0adb8a7e8dcd089e2d961d5bb7a72005e0.sol#5-7): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_digits' of AxiaVault.synch (/sb/0x8e98ef0adb8a7e8dcd089e2d961d5bb7a72005e0.sol#81) is not in mixedCase
+Parameter '_digitsb' of AxiaVault.synch (/sb/0x8e98ef0adb8a7e8dcd089e2d961d5bb7a72005e0.sol#81) is not in mixedCase
+Parameter '_AXIAaddress' of AxiaVault.startToken (/sb/0x8e98ef0adb8a7e8dcd089e2d961d5bb7a72005e0.sol#121) is not in mixedCase
+Parameter '_SwapLiquidity' of AxiaVault.startToken (/sb/0x8e98ef0adb8a7e8dcd089e2d961d5bb7a72005e0.sol#121-122) is not in mixedCase
+Parameter '_OracleLiquidity' of AxiaVault.startToken (/sb/0x8e98ef0adb8a7e8dcd089e2d961d5bb7a72005e0.sol#122-123) is not in mixedCase
+Parameter '_DefiLiquidity' of AxiaVault.startToken (/sb/0x8e98ef0adb8a7e8dcd089e2d961d5bb7a72005e0.sol#123) is not in mixedCase
+Variable 'AxiaVault.AXIA' (/sb/0x8e98ef0adb8a7e8dcd089e2d961d5bb7a72005e0.sol#25) is not in mixedCase
+Variable 'AxiaVault.SwapLiquidity' (/sb/0x8e98ef0adb8a7e8dcd089e2d961d5bb7a72005e0.sol#25-26) is not in mixedCase
+Variable 'AxiaVault.OracleLiquidty' (/sb/0x8e98ef0adb8a7e8dcd089e2d961d5bb7a72005e0.sol#26-27) is not in mixedCase
+Variable 'AxiaVault.DefiLiquidity' (/sb/0x8e98ef0adb8a7e8dcd089e2d961d5bb7a72005e0.sol#27-29) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x8e98ef0adb8a7e8dcd089e2d961d5bb7a72005e0.sol analyzed (2 contracts), 21 result(s) found

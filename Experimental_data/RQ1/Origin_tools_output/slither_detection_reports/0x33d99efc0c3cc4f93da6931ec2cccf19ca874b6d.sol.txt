@@ -1,0 +1,175 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol:
+/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol:178:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function Owned() public {
+
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol:296:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function _0xLitecoinToken() public onlyOwner{
+
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol:204:9: Warning: Invoking events without "emit" prefix is deprecated.
+        OwnershipTransferred(owner, newOwner);
+
+        ^-----------------------------------^
+/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol:296:40: Warning: Modifier-style base constructor call without arguments.
+    function _0xLitecoinToken() public onlyOwner{
+
+                                       ^-------^
+/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol:322:25: Warning: This looks like an address but has an invalid checksum. If this is not used as an address, please prepend '00'. Correct checksummed address: '0xB6eD7644C69416d67B522e20bC294A9a9B405B31'. For more information please see https://solidity.readthedocs.io/en/develop/types.html#address-literals
+        parentAddress = 0xb6ed7644c69416d67b522e20bc294a9a9b405b31;
+
+                        ^----------------------------------------^
+/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol:339:31: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+            bytes32 digest =  keccak256(challengeNumber, msg.sender, nonce );
+
+                              ^--------------------------------------------^
+/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol:372:15: Warning: Invoking events without "emit" prefix is deprecated.
+              Mint(msg.sender, reward_amount, epochCount, challengeNumber );
+
+              ^-----------------------------------------------------------^
+/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol:461:15: Warning: Invoking events without "emit" prefix is deprecated.
+              Mint(msg.sender, reward_amount, epochCount, 0 ); // use 0 to indicate a merge mine
+
+              ^---------------------------------------------^
+/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol:588:26: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+        bytes32 digest = keccak256(challenge_number,msg.sender,nonce);
+
+                         ^------------------------------------------^
+/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol:597:28: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+          bytes32 digest = keccak256(challenge_number,msg.sender,nonce);
+
+                           ^------------------------------------------^
+/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol:651:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Transfer(msg.sender, to, tokens);
+
+        ^------------------------------^
+/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol:679:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Approval(msg.sender, spender, tokens);
+
+        ^-----------------------------------^
+/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol:713:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Transfer(from, to, tokens);
+
+        ^------------------------^
+/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol:751:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Approval(msg.sender, spender, tokens);
+
+        ^-----------------------------------^
+/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol:403:46: Warning: "block.blockhash()" has been deprecated in favor of "blockhash()"
+            bytes32 future_challengeNumber = block.blockhash(block.number - 1);
+
+                                             ^-------------^
+/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol:496:25: Warning: "block.blockhash()" has been deprecated in favor of "blockhash()"
+      challengeNumber = block.blockhash(block.number - 1);
+
+                        ^-------------^
+/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol:586:43: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function getMintDigest(uint256 nonce, bytes32 challenge_digest, bytes32 challenge_number) public view returns (bytes32 digesttest) {
+
+                                          ^----------------------^
+
+INFO:Detectors:[93m
+_0xLitecoinToken.merge (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#777-955) uses a dangerous strict equality:
+	- challengeNumber == future_challengeNumber
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Contract locking ether found in /sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol:
+	Contract _0xLitecoinToken has payable functions:
+	 - fallback (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol)
+	But does not have a function to withdraw the ether
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#contracts-that-lock-ether[0m
+INFO:Detectors:[93m
+Reentrancy in _0xLitecoinToken.merge (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#777-955):
+	External calls:
+	- parentChallengeNumber = ERC918Interface(parentAddress).challengeNumber() (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#881-885)
+	State variables written after the call(s):
+	- challengeNumber (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#949)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+Reentrancy in _0xLitecoinToken.merge (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#777-955):
+	External calls:
+	- parentChallengeNumber = ERC918Interface(parentAddress).challengeNumber() (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#881-885)
+	State variables written after the call(s):
+	- balances (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#917-921)
+	- epochCount (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#949)
+	- lastRewardAmount (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#943-947)
+	- lastRewardEthBlockNumber (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#947-949)
+	- lastRewardTo (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#943)
+	- latestDifficultyPeriodStarted (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#949)
+	- maxSupplyForEra (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#949)
+	- miningTarget (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#949)
+	- rewardEra (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#949)
+	- solutionForChallenge (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#901-905)
+	- tokensMinted (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#921-924)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+ERC918Interface.challengeNumber should be constant (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#291)
+ERC918Interface.lastRewardAmount should be constant (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#287)
+ERC918Interface.lastRewardEthBlockNumber should be constant (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#287-291)
+ERC918Interface.lastRewardTo should be constant (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#273-287)
+_0xLitecoinToken._BLOCKS_PER_READJUSTMENT should be constant (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#515)
+_0xLitecoinToken._MAXIMUM_TARGET should be constant (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#543-545)
+_0xLitecoinToken._MINIMUM_TARGET should be constant (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#517-523)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Deprecated standard detected @ /sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#817-819:
+	- Usage of "block.blockhash()" should be replaced with "blockhash()"
+Deprecated standard detected @ /sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#1031-1035:
+	- Usage of "block.blockhash()" should be replaced with "blockhash()"
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#deprecated-standards[0m
+INFO:Detectors:[92m
+ERC20Interface.totalSupply (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#209-213) should be declared external
+_0xLitecoinToken.totalSupply (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#1273-1281) should be declared external
+ERC20Interface.balanceOf (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#213) should be declared external
+_0xLitecoinToken.balanceOf (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#1293-1309) should be declared external
+_0xLitecoinToken.allowance (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#1501-1521) should be declared external
+ERC20Interface.allowance (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#217-221) should be declared external
+ERC20Interface.transfer (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#221-225) should be declared external
+_0xLitecoinToken.transfer (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#1337-1353) should be declared external
+ERC20Interface.approve (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#225-231) should be declared external
+_0xLitecoinToken.approve (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#1401-1413) should be declared external
+ERC20Interface.transferFrom (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#231-235) should be declared external
+_0xLitecoinToken.transferFrom (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#1457-1485) should be declared external
+ERC918Interface.totalSupply (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#253) should be declared external
+ERC918Interface.getMiningDifficulty (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#254-256) should be declared external
+ERC918Interface.getMiningTarget (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#257) should be declared external
+ERC918Interface.getMiningReward (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#257-261) should be declared external
+ERC918Interface.balanceOf (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#261-265) should be declared external
+ERC918Interface.mint (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#265-267) should be declared external
+ApproveAndCallFallBack.receiveApproval (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#323-331) should be declared external
+Owned.transferOwnership (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#403-415) should be declared external
+Owned.acceptOwnership (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#419-443) should be declared external
+_0xLitecoinToken.mint (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#681-777) should be declared external
+_0xLitecoinToken.merge (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#777-955) should be declared external
+_0xLitecoinToken.getChallengeNumber (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#1151-1153) should be declared external
+_0xLitecoinToken.getMiningDifficulty (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#1161-1171) should be declared external
+_0xLitecoinToken.getMiningTarget (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#1171-1175) should be declared external
+_0xLitecoinToken.getMintDigest (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#1201-1225) should be declared external
+_0xLitecoinToken.checkMintSolution (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#1225-1253) should be declared external
+_0xLitecoinToken.approveAndCall (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#1557-1573) should be declared external
+_0xLitecoinToken.fallback (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol) should be declared external
+_0xLitecoinToken.transferAnyERC20Token (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol:
+	- pragma solidity^0.4.18 (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#1): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter 'challenge_digest' of ERC918Interface.mint (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#265) is not in mixedCase
+Function 'Owned.Owned' (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#387-391) is not in mixedCase
+Parameter '_newOwner' of Owned.transferOwnership (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#407) is not in mixedCase
+Contract '_0xLitecoinToken' (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#471-1573) is not in CapWords
+Function '_0xLitecoinToken._0xLitecoinToken' (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#625-677) is not in mixedCase
+Parameter 'challenge_digest' of _0xLitecoinToken.mint (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#681) is not in mixedCase
+Function '_0xLitecoinToken._startNewMiningEpoch' (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#961-1035) is not in mixedCase
+Function '_0xLitecoinToken._reAdjustDifficulty' (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#1045-1149) is not in mixedCase
+Parameter 'challenge_digest' of _0xLitecoinToken.getMintDigest (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#1204-1213) is not in mixedCase
+Parameter 'challenge_number' of _0xLitecoinToken.getMintDigest (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#1213) is not in mixedCase
+Parameter 'challenge_digest' of _0xLitecoinToken.checkMintSolution (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#1229-1233) is not in mixedCase
+Parameter 'challenge_number' of _0xLitecoinToken.checkMintSolution (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#1233-1241) is not in mixedCase
+Variable '_0xLitecoinToken._totalSupply' (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#499) is not in mixedCase
+Variable '_0xLitecoinToken._BLOCKS_PER_READJUSTMENT' (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#515) is not in mixedCase
+Variable '_0xLitecoinToken._MINIMUM_TARGET' (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#517-523) is not in mixedCase
+Variable '_0xLitecoinToken._MAXIMUM_TARGET' (/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol#543-545) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x33d99efc0c3cc4f93da6931ec2cccf19ca874b6d.sol analyzed (7 contracts), 55 result(s) found

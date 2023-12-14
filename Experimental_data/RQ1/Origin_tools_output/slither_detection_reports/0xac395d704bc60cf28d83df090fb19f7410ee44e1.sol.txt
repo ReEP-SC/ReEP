@@ -1,0 +1,117 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol:
+/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol:83:21: Warning: This looks like an address but has an invalid checksum. If this is not used as an address, please prepend '00'. Correct checksummed address: '0x66668757B73DEecC5d7241EA8DaF39b509DE3AE9'. For more information please see https://solidity.readthedocs.io/en/develop/types.html#address-literals
+    address omfAddr=0x66668757b73deecc5d7241ea8daf39b509de3ae9;
+                    ^----------------------------------------^
+/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol:112:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Approval(msg.sender, _spender, _value);
+        ^------------------------------------^
+/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol:130:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Transfer(msg.sender, _to, _value);
+        ^-------------------------------^
+/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol:145:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Transfer(_from, _to, _value);
+        ^--------------------------^
+/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol:106:6: Warning: No visibility specified. Defaulting to "public". 
+     function balanceOf(address _owner) constant returns (uint256 balance) {
+     ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol:110:5: Warning: No visibility specified. Defaulting to "public". 
+    function approve(address _spender, uint _value) {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol:116:5: Warning: No visibility specified. Defaulting to "public". 
+    function allowance(address _owner, address _spender) constant returns (uint256 remaining) {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol:159:6: Warning: No visibility specified. Defaulting to "public". 
+     function getEffectiveCount() constant  returns (uint) {
+     ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol:174:5: Warning: No visibility specified. Defaulting to "public". 
+    function getEach() constant  returns (uint) {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol:175:10: Warning: Unused local variable.
+         ERC20 token =ERC20(omfAddr);
+         ^---------^
+
+INFO:Detectors:[93m
+ERC20Basic (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#42-58) has incorrect ERC20 function interface(s):
+	-transfer (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#54)
+ERC20 (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#58-67) has incorrect ERC20 function interface(s):
+	-transferFrom (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#59-60)
+	-approve (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#61)
+OMXS2Token (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#70-198) has incorrect ERC20 function interface(s):
+	-transfer (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#123-135)
+	-transferFrom (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#136-152)
+	-approve (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#112-117)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[93m
+OMXS2Token.decimals (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#76) shadows:
+	- ERC20Basic.decimals (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#43-44)
+OMXS2Token.name (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#73-74) shadows:
+	- ERC20Basic.name (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#44-45)
+OMXS2Token.symbol (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#74) shadows:
+	- ERC20Basic.symbol (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#45)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variable-shadowing-from-abstract-contracts[0m
+INFO:Detectors:[93m
+amount in OMXS2Token.settle (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#186-187) is a local variable never initialiazed
+effective in OMXS2Token.getEffectiveCount (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#164) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[92m
+OMXS2Token.getEffectiveCount has external calls inside a loop:
+	- oSize = token.balanceOf(users[i]).div(exchangeRate * 10 ** omfDecimals) (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#167-171)
+OMXS2Token.settle has external calls inside a loop:
+	- oSize = token.balanceOf(users[i]).div(exchangeRate * 10 ** omfDecimals) (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#190-192)
+OMXS2Token.settle has external calls inside a loop:
+	- token.transfer(users[i],amount) (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+ERC20Basic.decimals should be constant (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#43-44)
+ERC20Basic.name should be constant (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#44-45)
+ERC20Basic.symbol should be constant (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#45)
+OMXS2Token._initialSupply should be constant (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#77)
+OMXS2Token.decimals should be constant (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#76)
+OMXS2Token.exchangeRate should be constant (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#83)
+OMXS2Token.minEffective should be constant (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#83-84)
+OMXS2Token.name should be constant (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#73-74)
+OMXS2Token.omfAddr should be constant (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#84-89)
+OMXS2Token.omfDecimals should be constant (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#89-90)
+OMXS2Token.symbol should be constant (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#74)
+OMXS2Token.weekOutput should be constant (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#90-91)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+OMXS2Token.totalSupply (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#106-107) should be declared external
+ERC20Basic.totalSupply (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#51-52) should be declared external
+OMXS2Token.balanceOf (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#108-112) should be declared external
+ERC20Basic.balanceOf (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#52-53) should be declared external
+ERC20Basic.transfer (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#54) should be declared external
+OMXS2Token.transfer (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#123-135) should be declared external
+OMXS2Token.allowance (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#117-122) should be declared external
+ERC20.allowance (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#58-59) should be declared external
+ERC20.transferFrom (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#59-60) should be declared external
+OMXS2Token.transferFrom (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#136-152) should be declared external
+ERC20.approve (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#61) should be declared external
+OMXS2Token.approve (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#112-117) should be declared external
+OMXS2Token.withdrawToken (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#152-162) should be declared external
+OMXS2Token.settle (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#185-198) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol:
+	- pragma solidity^0.4.26 (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#5-6): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Variable 'ERC20Basic._totalSupply' (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#51) is not in mixedCase
+Parameter '_owner' of OMXS2Token.balanceOf (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#110) is not in mixedCase
+Parameter '_to' of OMXS2Token.transfer (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#123) is not in mixedCase
+Parameter '_value' of OMXS2Token.transfer (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#123-124) is not in mixedCase
+Parameter '_owner' of OMXS2Token.allowance (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#118-120) is not in mixedCase
+Parameter '_spender' of OMXS2Token.allowance (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#120-121) is not in mixedCase
+Parameter '_from' of OMXS2Token.transferFrom (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#136) is not in mixedCase
+Parameter '_to' of OMXS2Token.transferFrom (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#136-137) is not in mixedCase
+Parameter '_value' of OMXS2Token.transferFrom (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#137) is not in mixedCase
+Parameter '_spender' of OMXS2Token.approve (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#112) is not in mixedCase
+Parameter '_value' of OMXS2Token.approve (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#112-114) is not in mixedCase
+Parameter '_tokenAddress' of OMXS2Token.withdrawToken (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#153) is not in mixedCase
+Parameter '_addr' of OMXS2Token.withdrawToken (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#153-154) is not in mixedCase
+Parameter '_tokenAmount' of OMXS2Token.withdrawToken (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#154-155) is not in mixedCase
+Parameter '_startIndex' of OMXS2Token.settle (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#185) is not in mixedCase
+Parameter '_count' of OMXS2Token.settle (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#185) is not in mixedCase
+Variable 'OMXS2Token._initialSupply' (/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol#77) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xac395d704bc60cf28d83df090fb19f7410ee44e1.sol analyzed (4 contracts), 44 result(s) found

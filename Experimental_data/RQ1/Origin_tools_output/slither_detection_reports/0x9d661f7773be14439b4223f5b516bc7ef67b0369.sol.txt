@@ -1,0 +1,45 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x9d661f7773be14439b4223f5b516bc7ef67b0369.sol:
+/sb/0x9d661f7773be14439b4223f5b516bc7ef67b0369.sol:11:1: Warning: Experimental features are turned on. Do not use experimental features on live deployments.
+pragma experimental ABIEncoderV2;
+^-------------------------------^
+/sb/0x9d661f7773be14439b4223f5b516bc7ef67b0369.sol:337:9: Warning: Failure condition of 'send' ignored. Consider using 'transfer' instead.
+        msg.sender.send(address(this).balance);
+        ^------------------------------------^
+
+INFO:Detectors:[91m
+PayableHumanityApplicant.applyWithEtherFor (/sb/0x9d661f7773be14439b4223f5b516bc7ef67b0369.sol#331-371) sends eth to arbitrary user
+	Dangerous calls:
+	- msg.sender.send(address(this).balance) (/sb/0x9d661f7773be14439b4223f5b516bc7ef67b0369.sol#365)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[93m
+HumanityApplicant.constructor (/sb/0x9d661f7773be14439b4223f5b516bc7ef67b0369.sol#257-269) does not use the value returned by external calls:
+	-humanity.approve(address(governance),uint256(- 1)) (/sb/0x9d661f7773be14439b4223f5b516bc7ef67b0369.sol#269)
+PayableHumanityApplicant.applyWithEtherFor (/sb/0x9d661f7773be14439b4223f5b516bc7ef67b0369.sol#331-371) does not use the value returned by external calls:
+	-exchange.ethToTokenSwapOutput.value(msg.value)(fee,block.timestamp) (/sb/0x9d661f7773be14439b4223f5b516bc7ef67b0369.sol#355-357)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Different versions of Solidity is used in /sb/0x9d661f7773be14439b4223f5b516bc7ef67b0369.sol:
+	- Version used: ['0.5.7', 'ABIEncoderV2']
+	- /sb/0x9d661f7773be14439b4223f5b516bc7ef67b0369.sol#9-11 declares pragma solidity0.5.7
+	- /sb/0x9d661f7773be14439b4223f5b516bc7ef67b0369.sol#11-18 declares pragma experimentalABIEncoderV2
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#different-pragma-directives-are-used[0m
+INFO:Detectors:[92m
+IRegistry.add (/sb/0x9d661f7773be14439b4223f5b516bc7ef67b0369.sol#73-75) should be declared external
+IUniswapExchange.ethToTokenSwapOutput (/sb/0x9d661f7773be14439b4223f5b516bc7ef67b0369.sol#75-85) should be declared external
+IGovernance.proposeWithFeeRecipient (/sb/0x9d661f7773be14439b4223f5b516bc7ef67b0369.sol#85-97) should be declared external
+IGovernance.proposalFee (/sb/0x9d661f7773be14439b4223f5b516bc7ef67b0369.sol#99) should be declared external
+TwitterHumanityApplicant.applyWithTwitter (/sb/0x9d661f7773be14439b4223f5b516bc7ef67b0369.sol#405-407) should be declared external
+TwitterHumanityApplicant.applyWithTwitterUsingEther (/sb/0x9d661f7773be14439b4223f5b516bc7ef67b0369.sol#419-425) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x9d661f7773be14439b4223f5b516bc7ef67b0369.sol:
+	- pragma solidity0.5.7 (/sb/0x9d661f7773be14439b4223f5b516bc7ef67b0369.sol#9-11): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter 'tokens_bought' of IUniswapExchange.ethToTokenSwapOutput (/sb/0x9d661f7773be14439b4223f5b516bc7ef67b0369.sol#75-83) is not in mixedCase
+Parameter '_governance' of HumanityApplicant. (/sb/0x9d661f7773be14439b4223f5b516bc7ef67b0369.sol#261) is not in mixedCase
+Parameter '_registry' of HumanityApplicant. (/sb/0x9d661f7773be14439b4223f5b516bc7ef67b0369.sol#261) is not in mixedCase
+Parameter '_humanity' of HumanityApplicant. (/sb/0x9d661f7773be14439b4223f5b516bc7ef67b0369.sol#261-263) is not in mixedCase
+Parameter '_exchange' of PayableHumanityApplicant. (/sb/0x9d661f7773be14439b4223f5b516bc7ef67b0369.sol#321-323) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x9d661f7773be14439b4223f5b516bc7ef67b0369.sol analyzed (8 contracts), 16 result(s) found

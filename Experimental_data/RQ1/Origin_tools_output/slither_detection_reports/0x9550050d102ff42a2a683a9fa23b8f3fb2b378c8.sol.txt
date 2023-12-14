@@ -1,0 +1,221 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol:
+/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol:263:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Deposit(msg.sender, msg.value);
+        ^----------------------------^
+/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol:277:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Withdrawal(msg.sender, wad);
+        ^-------------------------^
+/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol:285:16: Warning: Using contract member "balance" inherited from the address type is deprecated. Convert the contract to "address" type to access the member, for example use "address(contract).balance" instead.
+        return this.balance;
+               ^----------^
+/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol:295:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Approval(msg.sender, guy, wad);
+        ^----------------------------^
+/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol:339:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Transfer(src, dst, wad);
+        ^---------------------^
+/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol:747:23: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+        return bytes4(keccak256(s));
+                      ^----------^
+/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol:747:23: Warning: The provided argument of type string memory is not implicitly convertible to expected type bytes memory.
+        return bytes4(keccak256(s));
+                      ^----------^
+
+INFO:Detectors:[91m
+Account.transferByUser (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1275-1387) sends eth to arbitrary user
+	Dangerous calls:
+	- _to.transfer(_value) (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1373-1375)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[93m
+ECRecovery.recover (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#689-758) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+Account.transferBySystem (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1249-1275) does not use the value returned by external calls:
+	-ERC20(_token).transfer(_to,_value) (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1271-1274)
+UniswapConnector.tradeWithInputFixed (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1933-2005) does not use the value returned by external calls:
+	-ERC20(_srcToken).approve(uniswapExchangeAddr,0) (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1983)
+	-ERC20(_srcToken).approve(uniswapExchangeAddr,_srcTokenValue) (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1983-1985)
+UniswapConnector._performTradeWithInputFixed (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#2253-2293) does not use the value returned by external calls:
+	-exchange.tokenToTokenSwapInput(inputValue,div(mul(outputValue,sub(WAD,TOKEN_ALLOWED_SLIPPAGE)),WAD),1,add(now,DEADLINE_DURATION),_destToken) (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#2275-2289)
+UniswapConnector._performTradeWithOutputFixed (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#2293-2347) does not use the value returned by external calls:
+	-exchange.tokenToTokenSwapOutput(outputValue,div(mul(inputValue,add(WAD,TOKEN_ALLOWED_SLIPPAGE)),WAD),div(mul(inputValueB,add(WAD,20 * (10 ** 16))),WAD),add(now,DEADLINE_DURATION),_destToken) (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#2337-2347)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in Account.init (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1213-1231):
+	External calls:
+	- weth9 = config.weth9() (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1229-1231)
+	State variables written after the call(s):
+	- isInitialized (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1231)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+ECRecovery.recover uses assembly (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#689-758)
+	- /sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#715-729
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+WETH9.decimals should be constant (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#239-241)
+WETH9.name should be constant (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#237)
+WETH9.symbol should be constant (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#237-239)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+DSAuthority.canCall (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#127-129) should be declared external
+DSAuth.setOwner (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#171-182) should be declared external
+DSAuth.setAuthority (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#187-197) should be declared external
+WETH9.fallback (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#271-273) should be declared external
+WETH9.withdraw (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#285-299) should be declared external
+WETH9.totalSupply (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#303-305) should be declared external
+WETH9.approve (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#305-323) should be declared external
+WETH9.transfer (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#323-327) should be declared external
+MasterCopy.changeMasterCopy (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#829-857) should be declared external
+Config.setWETH9 (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#925-953) should be declared external
+Config.setAccountHandler (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#953-979) should be declared external
+Config.toggleAdminsControl (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#979-997) should be declared external
+Config.isAdminValid (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#997-1009) should be declared external
+Config.getAllAdmins (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1009-1017) should be declared external
+Account.init (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1213-1231) should be declared external
+Account.getAllUsers (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1231-1239) should be declared external
+Account.balanceFor (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1241-1249) should be declared external
+Escrow.transfer (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1775-1799) should be declared external
+Escrow.transferFromAccount (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1799-1829) should be declared external
+UniswapConnector.tradeWithInputFixed (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1933-2005) should be declared external
+ExchangeConnector.tradeWithInputFixed (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1847-1873) should be declared external
+ExchangeConnector.tradeWithOutputFixed (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1873-1881) should be declared external
+UniswapConnector.tradeWithOutputFixed (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#2005-2145) should be declared external
+ExchangeConnector.isTradeFeasible (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1883-1889) should be declared external
+UniswapConnector.isTradeFeasible (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#2201-2229) should be declared external
+UniswapConnector.setUniswapFactory (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1905-1911) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter 'eth_sold' of UniswapExchange.getEthToTokenInputPrice (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#375-379) is not in mixedCase
+Parameter 'tokens_bought' of UniswapExchange.getEthToTokenOutputPrice (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#381) is not in mixedCase
+Parameter 'tokens_sold' of UniswapExchange.getTokenToEthInputPrice (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#383) is not in mixedCase
+Parameter 'eth_bought' of UniswapExchange.getTokenToEthOutputPrice (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#385) is not in mixedCase
+Parameter 'min_tokens' of UniswapExchange.ethToTokenSwapInput (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#387) is not in mixedCase
+Parameter 'min_tokens' of UniswapExchange.ethToTokenTransferInput (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#391) is not in mixedCase
+Parameter 'tokens_bought' of UniswapExchange.ethToTokenSwapOutput (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#393-395) is not in mixedCase
+Parameter 'tokens_bought' of UniswapExchange.ethToTokenTransferOutput (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#395) is not in mixedCase
+Parameter 'tokens_sold' of UniswapExchange.tokenToEthSwapInput (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#399) is not in mixedCase
+Parameter 'min_eth' of UniswapExchange.tokenToEthSwapInput (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#399) is not in mixedCase
+Parameter 'tokens_sold' of UniswapExchange.tokenToEthTransferInput (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#399-403) is not in mixedCase
+Parameter 'min_tokens' of UniswapExchange.tokenToEthTransferInput (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#403) is not in mixedCase
+Parameter 'eth_bought' of UniswapExchange.tokenToEthSwapOutput (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#405) is not in mixedCase
+Parameter 'max_tokens' of UniswapExchange.tokenToEthSwapOutput (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#405) is not in mixedCase
+Parameter 'eth_bought' of UniswapExchange.tokenToEthTransferOutput (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#407) is not in mixedCase
+Parameter 'max_tokens' of UniswapExchange.tokenToEthTransferOutput (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#407) is not in mixedCase
+Parameter 'tokens_sold' of UniswapExchange.tokenToTokenSwapInput (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#409) is not in mixedCase
+Parameter 'min_tokens_bought' of UniswapExchange.tokenToTokenSwapInput (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#409) is not in mixedCase
+Parameter 'min_eth_bought' of UniswapExchange.tokenToTokenSwapInput (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#409) is not in mixedCase
+Parameter 'token_addr' of UniswapExchange.tokenToTokenSwapInput (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#409) is not in mixedCase
+Parameter 'tokens_sold' of UniswapExchange.tokenToTokenTransferInput (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#411) is not in mixedCase
+Parameter 'min_tokens_bought' of UniswapExchange.tokenToTokenTransferInput (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#411) is not in mixedCase
+Parameter 'min_eth_bought' of UniswapExchange.tokenToTokenTransferInput (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#411) is not in mixedCase
+Parameter 'token_addr' of UniswapExchange.tokenToTokenTransferInput (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#411) is not in mixedCase
+Parameter 'tokens_bought' of UniswapExchange.tokenToTokenSwapOutput (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#425) is not in mixedCase
+Parameter 'max_tokens_sold' of UniswapExchange.tokenToTokenSwapOutput (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#425-427) is not in mixedCase
+Parameter 'max_eth_sold' of UniswapExchange.tokenToTokenSwapOutput (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#427) is not in mixedCase
+Parameter 'token_addr' of UniswapExchange.tokenToTokenSwapOutput (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#429) is not in mixedCase
+Parameter 'tokens_bought' of UniswapExchange.tokenToTokenTransferOutput (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#431-435) is not in mixedCase
+Parameter 'max_tokens_sold' of UniswapExchange.tokenToTokenTransferOutput (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#435) is not in mixedCase
+Parameter 'max_eth_sold' of UniswapExchange.tokenToTokenTransferOutput (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#435) is not in mixedCase
+Parameter 'token_addr' of UniswapExchange.tokenToTokenTransferOutput (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#437) is not in mixedCase
+Parameter '_hash' of ECRecovery.recover (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#689) is not in mixedCase
+Parameter '_sig' of ECRecovery.recover (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#689-690) is not in mixedCase
+Parameter '_hash' of ECRecovery.toEthSignedMessageHash (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#761) is not in mixedCase
+Function 'Utils2._recoverSigner' (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#769-781) is not in mixedCase
+Parameter '_hash' of Utils2._recoverSigner (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#769-771) is not in mixedCase
+Parameter '_signature' of Utils2._recoverSigner (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#771) is not in mixedCase
+Function 'DSThing.S' (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#783-797) is not in mixedCase
+Parameter '_masterCopy' of MasterCopy.changeMasterCopy (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#831) is not in mixedCase
+Parameter '_weth9' of Config.setWETH9 (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#931-932) is not in mixedCase
+Parameter '_accountHandler' of Config.setAccountHandler (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#959-961) is not in mixedCase
+Parameter '_isAccountHandler' of Config.setAccountHandler (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#963) is not in mixedCase
+Parameter '_admin' of Config.isAdminValid (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#997) is not in mixedCase
+Parameter '_admin' of Config.addAdmin (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1023) is not in mixedCase
+Parameter '_admin' of Config.removeAdmin (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1053) is not in mixedCase
+Parameter '_user' of Account.init (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1215) is not in mixedCase
+Parameter '_config' of Account.init (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1215-1217) is not in mixedCase
+Parameter '_token' of Account.balanceFor (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1241) is not in mixedCase
+Parameter '_token' of Account.transferBySystem (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1253) is not in mixedCase
+Parameter '_to' of Account.transferBySystem (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1255) is not in mixedCase
+Parameter '_value' of Account.transferBySystem (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1255) is not in mixedCase
+Parameter '_token' of Account.transferByUser (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1281) is not in mixedCase
+Parameter '_to' of Account.transferByUser (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1281-1283) is not in mixedCase
+Parameter '_value' of Account.transferByUser (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1287) is not in mixedCase
+Parameter '_salt' of Account.transferByUser (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1291) is not in mixedCase
+Parameter '_signature' of Account.transferByUser (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1292-1293) is not in mixedCase
+Parameter '_user' of Account.addUser (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1394-1395) is not in mixedCase
+Parameter '_salt' of Account.addUser (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1395) is not in mixedCase
+Parameter '_signature' of Account.addUser (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1395) is not in mixedCase
+Parameter '_user' of Account.removeUser (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1457-1459) is not in mixedCase
+Parameter '_salt' of Account.removeUser (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1459-1462) is not in mixedCase
+Parameter '_signature' of Account.removeUser (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1463-1465) is not in mixedCase
+Function 'Account._getTransferActionHash' (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1577-1609) is not in mixedCase
+Parameter '_token' of Account._getTransferActionHash (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1581) is not in mixedCase
+Parameter '_to' of Account._getTransferActionHash (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1581) is not in mixedCase
+Parameter '_value' of Account._getTransferActionHash (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1583) is not in mixedCase
+Parameter '_salt' of Account._getTransferActionHash (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1587-1589) is not in mixedCase
+Function 'Account._getUserActionHash' (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1609-1646) is not in mixedCase
+Parameter '_user' of Account._getUserActionHash (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1613-1616) is not in mixedCase
+Parameter '_action' of Account._getUserActionHash (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1625) is not in mixedCase
+Parameter '_salt' of Account._getUserActionHash (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1625-1629) is not in mixedCase
+Parameter '_to' of Account.changeImpl (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1677-1679) is not in mixedCase
+Parameter '_salt' of Account.changeImpl (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1681-1683) is not in mixedCase
+Parameter '_signature' of Account.changeImpl (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1685) is not in mixedCase
+Parameter '_token' of Escrow.transfer (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1775) is not in mixedCase
+Parameter '_to' of Escrow.transfer (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1777) is not in mixedCase
+Parameter '_value' of Escrow.transfer (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1779-1781) is not in mixedCase
+Parameter '_account' of Escrow.transferFromAccount (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1803) is not in mixedCase
+Parameter '_token' of Escrow.transferFromAccount (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1803) is not in mixedCase
+Parameter '_to' of Escrow.transferFromAccount (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1805) is not in mixedCase
+Parameter '_value' of Escrow.transferFromAccount (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1805-1807) is not in mixedCase
+Parameter '_escrow' of UniswapConnector.tradeWithInputFixed (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1937-1939) is not in mixedCase
+Parameter '_srcToken' of UniswapConnector.tradeWithInputFixed (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1939-1941) is not in mixedCase
+Parameter '_destToken' of UniswapConnector.tradeWithInputFixed (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1941-1943) is not in mixedCase
+Parameter '_srcTokenValue' of UniswapConnector.tradeWithInputFixed (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1943-1945) is not in mixedCase
+Parameter '_escrow' of UniswapConnector.tradeWithOutputFixed (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#2005-2007) is not in mixedCase
+Parameter '_srcToken' of UniswapConnector.tradeWithOutputFixed (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#2011) is not in mixedCase
+Parameter '_destToken' of UniswapConnector.tradeWithOutputFixed (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#2011) is not in mixedCase
+Parameter '_srcTokenValue' of UniswapConnector.tradeWithOutputFixed (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#2011) is not in mixedCase
+Parameter '_maxDestTokenValue' of UniswapConnector.tradeWithOutputFixed (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#2011) is not in mixedCase
+Parameter '_srcToken' of UniswapConnector.getExpectedRate (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#2147) is not in mixedCase
+Parameter '_destToken' of UniswapConnector.getExpectedRate (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#2147-2149) is not in mixedCase
+Parameter '_srcTokenValue' of UniswapConnector.getExpectedRate (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#2149) is not in mixedCase
+Parameter '_srcToken' of UniswapConnector.isTradeFeasible (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#2203) is not in mixedCase
+Parameter '_destToken' of UniswapConnector.isTradeFeasible (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#2203) is not in mixedCase
+Parameter '_srcTokenValue' of UniswapConnector.isTradeFeasible (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#2203) is not in mixedCase
+Parameter '_uniswapFactory' of UniswapConnector. (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1901-1905) is not in mixedCase
+Parameter '_uniswapFactory' of UniswapConnector.setUniswapFactory (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#1909) is not in mixedCase
+Function 'UniswapConnector._isExchangeAvailable' (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#2231-2253) is not in mixedCase
+Parameter '_token' of UniswapConnector._isExchangeAvailable (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#2235-2237) is not in mixedCase
+Function 'UniswapConnector._performTradeWithInputFixed' (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#2253-2293) is not in mixedCase
+Parameter '_srcToken' of UniswapConnector._performTradeWithInputFixed (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#2257) is not in mixedCase
+Parameter '_destToken' of UniswapConnector._performTradeWithInputFixed (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#2257) is not in mixedCase
+Parameter '_srcTokenValue' of UniswapConnector._performTradeWithInputFixed (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#2257-2261) is not in mixedCase
+Function 'UniswapConnector._performTradeWithOutputFixed' (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#2293-2347) is not in mixedCase
+Parameter '_srcToken' of UniswapConnector._performTradeWithOutputFixed (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#2297) is not in mixedCase
+Parameter '_destToken' of UniswapConnector._performTradeWithOutputFixed (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#2301-2303) is not in mixedCase
+Parameter '_maxDestTokenValue' of UniswapConnector._performTradeWithOutputFixed (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#2305-2307) is not in mixedCase
+Function 'UniswapConnector._calcValuesForTokenToTokenOutput' (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#2347-2421) is not in mixedCase
+Parameter '_srcToken' of UniswapConnector._calcValuesForTokenToTokenOutput (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#2353) is not in mixedCase
+Parameter '_destToken' of UniswapConnector._calcValuesForTokenToTokenOutput (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#2353) is not in mixedCase
+Parameter '_maxDestTokenValue' of UniswapConnector._calcValuesForTokenToTokenOutput (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#2359) is not in mixedCase
+Function 'UniswapConnector._calcValuesForTokenToTokenInput' (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#2421-2465) is not in mixedCase
+Parameter '_srcToken' of UniswapConnector._calcValuesForTokenToTokenInput (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#2427-2431) is not in mixedCase
+Parameter '_destToken' of UniswapConnector._calcValuesForTokenToTokenInput (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#2431) is not in mixedCase
+Parameter '_srcTokenValue' of UniswapConnector._calcValuesForTokenToTokenInput (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol#2431) is not in mixedCase
+Function 'UniswapConnector._fetchReserveValues' (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol) is not in mixedCase
+Parameter '_srcToken' of UniswapConnector._fetchReserveValues (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol) is not in mixedCase
+Parameter '_destToken' of UniswapConnector._fetchReserveValues (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol) is not in mixedCase
+Function 'UniswapConnector._calculateEtherTokenOutput' (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol) is not in mixedCase
+Parameter '_inputAmount' of UniswapConnector._calculateEtherTokenOutput (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol) is not in mixedCase
+Parameter '_inputReserve' of UniswapConnector._calculateEtherTokenOutput (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol) is not in mixedCase
+Parameter '_outputReserve' of UniswapConnector._calculateEtherTokenOutput (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol) is not in mixedCase
+Function 'UniswapConnector._calculateEtherTokenInput' (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol) is not in mixedCase
+Parameter '_outputAmount' of UniswapConnector._calculateEtherTokenInput (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol) is not in mixedCase
+Parameter '_inputReserve' of UniswapConnector._calculateEtherTokenInput (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol) is not in mixedCase
+Parameter '_outputReserve' of UniswapConnector._calculateEtherTokenInput (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol) is not in mixedCase
+Function 'UniswapConnector._transfer' (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol) is not in mixedCase
+Parameter '_token' of UniswapConnector._transfer (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol) is not in mixedCase
+Parameter '_to' of UniswapConnector._transfer (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol) is not in mixedCase
+Parameter '_value' of UniswapConnector._transfer (/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x9550050d102ff42a2a683a9fa23b8f3fb2b378c8.sol analyzed (23 contracts), 167 result(s) found

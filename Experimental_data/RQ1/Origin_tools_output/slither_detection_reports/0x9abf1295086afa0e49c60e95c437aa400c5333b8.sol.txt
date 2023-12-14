@@ -1,0 +1,257 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol:
+/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol:171:9: Warning: Invoking events without "emit" prefix is deprecated.
+        NewSymbol(currency);
+        ^-----------------^
+
+INFO:Detectors:[93m
+Oracle.encodeCurrency (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#197-213) is declared view but contains assembly code
+Oracle.decodeCurrency (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#217-253) is declared view but contains assembly code
+ERC721Base._isContract (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1545-1553) is declared view but contains assembly code
+BytesUtils.readBytes32 (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1657-1665) is declared view but contains assembly code
+MortgageManager.getData (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+ERC721Base (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#641-1609) has incorrect ERC20 function interface(s):
+	-approve (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1145-1165)
+	-transferFrom (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1419-1427)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[93m
+Reentrancy in MortgageManager.claim (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2461-2557):
+	External calls:
+	- mortgage.engine.getStatus(loanId) == Engine.Status.paid || mortgage.engine.getStatus(loanId) == Engine.Status.destroyed (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2483-2547)
+	State variables written after the call(s):
+	- mortgages (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2499-2503)
+Reentrancy in MortgageManager.claim (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2461-2557):
+	External calls:
+	- isDefaulted(mortgage.engine,loanId) (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2509-2547)
+	- require(bool,string)(msg.sender == mortgage.engine.ownerOf(loanId),Sender not lender) (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2519-2523)
+	State variables written after the call(s):
+	- mortgages (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2527-2529)
+Reentrancy in MortgageManager.requestMortgageId (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2061-2191):
+	External calls:
+	- require(bool,string)(engine.getCurrency(loanId) == MANA_CURRENCY,Loan currency is not MANA) (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2085-2091)
+	- borrower = engine.getBorrower(loanId) (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2095-2097)
+	- require(bool,string)(engine.getStatus(loanId) == Engine.Status.initial,Loan status is not inital) (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2101-2109)
+	- require(bool,string)(msg.sender == borrower || (msg.sender == engine.getCreator(loanId) && creators[msg.sender]),Creator should be borrower or authorized) (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2109-2117)
+	- require(bool,string)(engine.isApproved(loanId),Loan is not approved) (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2117)
+	- require(bool,string)(rcn.allowance(borrower,this) >= REQUIRED_ALLOWANCE,Manager cannot handle borrower's funds) (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2119-2123)
+	- (None,None,landCost,None) = landMarket.auctionByAssetId(landId) (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2141-2147)
+	- loanAmount = engine.getAmount(loanId) (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2147)
+	- require(bool,string)(mana.transferFrom(msg.sender,this,deposit),Error pulling mana) (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2157-2159)
+	State variables written after the call(s):
+	- loanToLiability (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2177-2179)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+ERC721Base.constructor.name (local variable @ /sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#701-705) shadows:
+	- ERC721Base.name (function @ /sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#747-753)
+ERC721Base.constructor.symbol (local variable @ /sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#705) shadows:
+	- ERC721Base.symbol (function @ /sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#755-759)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+Reentrancy in MortgageManager.claim (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2461-2557):
+	External calls:
+	- mortgage.engine.getStatus(loanId) == Engine.Status.paid || mortgage.engine.getStatus(loanId) == Engine.Status.destroyed (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2483-2547)
+	- land.safeTransferFrom(this,msg.sender,mortgage.landId) (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2503-2505)
+	- isDefaulted(mortgage.engine,loanId) (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2509-2547)
+	- require(bool,string)(msg.sender == mortgage.engine.ownerOf(loanId),Sender not lender) (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2519-2523)
+	- land.safeTransferFrom(this,msg.sender,mortgage.landId) (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2531-2535)
+	State variables written after the call(s):
+	- mortgageByLandId (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2553-2557)
+Reentrancy in MortgageManager.requestCosign (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2239-2391):
+	External calls:
+	- loanAmount = convertRate(engine.getOracle(index),engine.getCurrency(index),oracleData,engine.getAmount(index)) (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2291-2295)
+	- require(bool,string)(rcn.transferFrom(mortgage.owner,this,loanAmount),Error pulling RCN from borrower) (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2295-2301)
+	- boughtMana = convertSafe(mortgage.tokenConverter,rcn,mana,loanAmount) (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2309-2315)
+	- (None,None,currentLandCost,None) = mortgage.landMarket.auctionByAssetId(mortgage.landId) (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2323-2325)
+	- require(bool,string)(mana.approve(mortgage.landMarket,currentLandCost),Error approving mana transfer) (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2329-2337)
+	State variables written after the call(s):
+	- flagReceiveLand (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2337)
+Reentrancy in MortgageManager.requestCosign (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2239-2391):
+	External calls:
+	- loanAmount = convertRate(engine.getOracle(index),engine.getCurrency(index),oracleData,engine.getAmount(index)) (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2291-2295)
+	- require(bool,string)(rcn.transferFrom(mortgage.owner,this,loanAmount),Error pulling RCN from borrower) (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2295-2301)
+	- boughtMana = convertSafe(mortgage.tokenConverter,rcn,mana,loanAmount) (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2309-2315)
+	- (None,None,currentLandCost,None) = mortgage.landMarket.auctionByAssetId(mortgage.landId) (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2323-2325)
+	- require(bool,string)(mana.approve(mortgage.landMarket,currentLandCost),Error approving mana transfer) (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2329-2337)
+	- mortgage.landMarket.executeOrder(mortgage.landId,currentLandCost) (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2337-2345)
+	- require(bool,string)(mana.approve(mortgage.landMarket,0),Error removing approve mana transfer) (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2345-2351)
+	- require(bool,string)(land.ownerOf(mortgage.landId) == address(this),Error buying parcel) (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2355-2357)
+	- land.setUpdateOperator(mortgage.landId,mortgage.owner) (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2359-2363)
+	- require(bool,string)(mana.transfer(mortgage.owner,rest),Error returning MANA) (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2375)
+	- require(bool,string)(mortgage.engine.cosign(index,0),Error performing cosign) (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2381-2383)
+	State variables written after the call(s):
+	- mortgageByLandId (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2385-2387)
+Reentrancy in MortgageManager.requestMortgageId (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2061-2191):
+	External calls:
+	- require(bool,string)(engine.getCurrency(loanId) == MANA_CURRENCY,Loan currency is not MANA) (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2085-2091)
+	- borrower = engine.getBorrower(loanId) (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2095-2097)
+	- require(bool,string)(engine.getStatus(loanId) == Engine.Status.initial,Loan status is not inital) (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2101-2109)
+	- require(bool,string)(msg.sender == borrower || (msg.sender == engine.getCreator(loanId) && creators[msg.sender]),Creator should be borrower or authorized) (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2109-2117)
+	- require(bool,string)(engine.isApproved(loanId),Loan is not approved) (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2117)
+	- require(bool,string)(rcn.allowance(borrower,this) >= REQUIRED_ALLOWANCE,Manager cannot handle borrower's funds) (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2119-2123)
+	- (None,None,landCost,None) = landMarket.auctionByAssetId(landId) (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2141-2147)
+	- loanAmount = engine.getAmount(loanId) (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2147)
+	- require(bool,string)(mana.transferFrom(msg.sender,this,deposit),Error pulling mana) (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2157-2159)
+	State variables written after the call(s):
+	- mortgages (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2163-2177)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+MortgageManager.isDefaulted (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2565-2579) uses timestamp for comparisons
+	Dangerous comparisons:
+	- engine.getStatus(index) == Engine.Status.lent && engine.getDueTime(index).add(604800) <= block.timestamp (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2575-2579)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+Oracle.encodeCurrency uses assembly (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#197-213)
+	- /sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#209-213
+Oracle.decodeCurrency uses assembly (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#217-253)
+	- /sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#227-253
+ERC721Base._isContract uses assembly (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1545-1553)
+	- /sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1553
+ERC721Base._noThrowCall uses assembly (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1555-1609)
+	- /sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1571-1609
+BytesUtils.readBytes32 uses assembly (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1657-1665)
+	- /sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1661-1665
+MortgageManager.getData uses assembly (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol)
+	- /sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+Engine.VERSION should be constant (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#263)
+Engine.VERSION_NAME should be constant (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#263-265)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Token.transfer (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#19-21) should be declared external
+Token.transferFrom (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#21-23) should be declared external
+Token.allowance (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#23-25) should be declared external
+Token.approve (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#25-27) should be declared external
+Token.increaseApproval (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#27-29) should be declared external
+Token.balanceOf (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#29-35) should be declared external
+Oracle.url (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#139-143) should be declared external
+Oracle.getRate (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#155-163) should be declared external
+Oracle.addCurrency (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#173-191) should be declared external
+Oracle.decodeCurrency (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#217-253) should be declared external
+Engine.getTotalLoans (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#271) should be declared external
+Engine.getOracle (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#271-273) should be declared external
+Engine.getBorrower (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#273-275) should be declared external
+Engine.getCosigner (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#277) should be declared external
+Engine.ownerOf (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#279-281) should be declared external
+Engine.getCreator (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#281) should be declared external
+Engine.getAmount (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#281-283) should be declared external
+Engine.getPaid (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#283-285) should be declared external
+Engine.getDueTime (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#285-287) should be declared external
+Engine.getApprobation (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#287-291) should be declared external
+Engine.getStatus (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#291-293) should be declared external
+Engine.isApproved (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#293-295) should be declared external
+Engine.getPendingAmount (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#295-297) should be declared external
+Engine.getCurrency (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#297-299) should be declared external
+Engine.approveLoan (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#301) should be declared external
+Engine.transfer (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#301-313) should be declared external
+Engine.takeOwnership (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#313-317) should be declared external
+Engine.withdrawal (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#317) should be declared external
+Engine.identifierToIndex (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#317-319) should be declared external
+MortgageManager.url (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1921-1927) should be declared external
+Cosigner.url (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#369) should be declared external
+Cosigner.cost (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#373-377) should be declared external
+MortgageManager.cost (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1993-1999) should be declared external
+Cosigner.requestCosign (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#397-405) should be declared external
+MortgageManager.requestCosign (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2239-2391) should be declared external
+LandMarket.executeOrder (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1713-1717) should be declared external
+Land.updateLandData (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1723-1725) should be declared external
+Land.decodeTokenId (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1725-1729) should be declared external
+Land.safeTransferFrom (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1729-1731) should be declared external
+Land.ownerOf (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1731-1733) should be declared external
+MortgageManager.getData (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_to' of Ownable.setOwner (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#81) is not in mixedCase
+Parameter '' of Engine.ownerOf (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#279) is not in mixedCase
+Variable 'Engine.VERSION' (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#263) is not in mixedCase
+Variable 'Engine.VERSION_NAME' (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#263-265) is not in mixedCase
+Function 'ERC165._registerInterface' (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#625-635) is not in mixedCase
+Constant 'ERC165._InterfaceId_ERC165' (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#555-561) is not in UPPER_CASE_WITH_UNDERSCORES
+Parameter '_tokenId' of ERC721Base.tokenURI (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#781-785) is not in mixedCase
+Function 'ERC721Base._setURIProvider' (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#803-811) is not in mixedCase
+Parameter '_provider' of ERC721Base._setURIProvider (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#803-805) is not in mixedCase
+Parameter '_owner' of ERC721Base.assetsOf (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#837-841) is not in mixedCase
+Parameter '_index' of ERC721Base.tokenByIndex (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#863) is not in mixedCase
+Parameter '_owner' of ERC721Base.tokenOfOwnerByIndex (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#907-911) is not in mixedCase
+Parameter '_index' of ERC721Base.tokenOfOwnerByIndex (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#911-913) is not in mixedCase
+Parameter '_assetId' of ERC721Base.ownerOf (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#947) is not in mixedCase
+Function 'ERC721Base._ownerOf' (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#949-955) is not in mixedCase
+Parameter '_assetId' of ERC721Base._ownerOf (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#951) is not in mixedCase
+Parameter '_owner' of ERC721Base.balanceOf (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#973-975) is not in mixedCase
+Function 'ERC721Base._balanceOf' (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#983-987) is not in mixedCase
+Parameter '_owner' of ERC721Base._balanceOf (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#983) is not in mixedCase
+Parameter '_operator' of ERC721Base.isApprovedForAll (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1009-1011) is not in mixedCase
+Parameter '_assetHolder' of ERC721Base.isApprovedForAll (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1011) is not in mixedCase
+Function 'ERC721Base._isApprovedForAll' (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1017-1023) is not in mixedCase
+Parameter '_operator' of ERC721Base._isApprovedForAll (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1017) is not in mixedCase
+Parameter '_assetHolder' of ERC721Base._isApprovedForAll (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1017-1019) is not in mixedCase
+Parameter '_assetId' of ERC721Base.getApprovedAddress (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1035) is not in mixedCase
+Function 'ERC721Base._getApprovedAddress' (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1051-1055) is not in mixedCase
+Parameter '_assetId' of ERC721Base._getApprovedAddress (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1051) is not in mixedCase
+Parameter '_operator' of ERC721Base.isAuthorized (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1065) is not in mixedCase
+Parameter '_assetId' of ERC721Base.isAuthorized (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1065) is not in mixedCase
+Function 'ERC721Base._isAuthorized' (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1075-1089) is not in mixedCase
+Parameter '_operator' of ERC721Base._isAuthorized (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1077) is not in mixedCase
+Parameter '_assetId' of ERC721Base._isAuthorized (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1077) is not in mixedCase
+Parameter '_operator' of ERC721Base.setApprovalForAll (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1117-1118) is not in mixedCase
+Parameter '_authorized' of ERC721Base.setApprovalForAll (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1119) is not in mixedCase
+Parameter '_operator' of ERC721Base.approve (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1145) is not in mixedCase
+Parameter '_assetId' of ERC721Base.approve (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1145-1147) is not in mixedCase
+Function 'ERC721Base._addAssetTo' (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1171-1193) is not in mixedCase
+Parameter '_to' of ERC721Base._addAssetTo (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1171) is not in mixedCase
+Parameter '_assetId' of ERC721Base._addAssetTo (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1171-1173) is not in mixedCase
+Function 'ERC721Base._transferAsset' (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1197-1269) is not in mixedCase
+Parameter '_from' of ERC721Base._transferAsset (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1199) is not in mixedCase
+Parameter '_to' of ERC721Base._transferAsset (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1201-1205) is not in mixedCase
+Parameter '_assetId' of ERC721Base._transferAsset (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1205) is not in mixedCase
+Function 'ERC721Base._clearApproval' (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1271-1279) is not in mixedCase
+Parameter '_holder' of ERC721Base._clearApproval (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1271) is not in mixedCase
+Parameter '_assetId' of ERC721Base._clearApproval (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1271) is not in mixedCase
+Function 'ERC721Base._generate' (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1283-1295) is not in mixedCase
+Parameter '_assetId' of ERC721Base._generate (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1283) is not in mixedCase
+Parameter '_beneficiary' of ERC721Base._generate (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1283-1285) is not in mixedCase
+Parameter '_from' of ERC721Base.safeTransferFrom (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1337) is not in mixedCase
+Parameter '_to' of ERC721Base.safeTransferFrom (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1337) is not in mixedCase
+Parameter '_assetId' of ERC721Base.safeTransferFrom (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1338-1339) is not in mixedCase
+Parameter '_from' of ERC721Base.safeTransferFrom (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1385-1387) is not in mixedCase
+Parameter '_to' of ERC721Base.safeTransferFrom (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1387) is not in mixedCase
+Parameter '_assetId' of ERC721Base.safeTransferFrom (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1387-1389) is not in mixedCase
+Parameter '_userData' of ERC721Base.safeTransferFrom (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1389) is not in mixedCase
+Parameter '_from' of ERC721Base.transferFrom (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1421) is not in mixedCase
+Parameter '_to' of ERC721Base.transferFrom (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1421) is not in mixedCase
+Parameter '_assetId' of ERC721Base.transferFrom (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1421-1422) is not in mixedCase
+Function 'ERC721Base._doTransferFrom' (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1431-1543) is not in mixedCase
+Parameter '_to' of ERC721Base._doTransferFrom (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1435) is not in mixedCase
+Parameter '_assetId' of ERC721Base._doTransferFrom (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1437-1439) is not in mixedCase
+Parameter '_userData' of ERC721Base._doTransferFrom (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1439-1443) is not in mixedCase
+Parameter '_doCheck' of ERC721Base._doTransferFrom (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1443-1445) is not in mixedCase
+Function 'ERC721Base._isContract' (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1545-1553) is not in mixedCase
+Function 'ERC721Base._noThrowCall' (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1555-1609) is not in mixedCase
+Parameter '' of MortgageManager.cost (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1993) is not in mixedCase
+Parameter '_scope_0' of MortgageManager.cost (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1993) is not in mixedCase
+Parameter '_scope_1' of MortgageManager.cost (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1993-1997) is not in mixedCase
+Parameter '_scope_2' of MortgageManager.cost (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1997) is not in mixedCase
+Parameter '' of MortgageManager.claim (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2461-2463) is not in mixedCase
+Function 'MortgageManager._doTransferFrom' (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol) is not in mixedCase
+Parameter '_from' of MortgageManager._doTransferFrom (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol) is not in mixedCase
+Parameter '_to' of MortgageManager._doTransferFrom (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol) is not in mixedCase
+Parameter '_assetId' of MortgageManager._doTransferFrom (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol) is not in mixedCase
+Parameter '_userData' of MortgageManager._doTransferFrom (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol) is not in mixedCase
+Parameter '_doCheck' of MortgageManager._doTransferFrom (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol) is not in mixedCase
+Parameter '_rcn' of MortgageManager. (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1865) is not in mixedCase
+Parameter '_mana' of MortgageManager. (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1865) is not in mixedCase
+Parameter '_land' of MortgageManager. (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1865-1867) is not in mixedCase
+Parameter '_provider' of MortgageManager.setURIProvider (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#1941) is not in mixedCase
+Parameter '_tokenId' of MortgageManager.onERC721Received (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2587) is not in mixedCase
+Parameter '' of MortgageManager.onERC721Received (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2587) is not in mixedCase
+Parameter '_scope_0' of MortgageManager.onERC721Received (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2587) is not in mixedCase
+Parameter '' of MortgageManager.onERC721Received (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2621) is not in mixedCase
+Parameter '_tokenId' of MortgageManager.onERC721Received (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2621-2625) is not in mixedCase
+Parameter '_scope_0' of MortgageManager.onERC721Received (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol#2625) is not in mixedCase
+Parameter '' of MortgageManager.onERC721Received (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol) is not in mixedCase
+Parameter '_scope_0' of MortgageManager.onERC721Received (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol) is not in mixedCase
+Parameter '_tokenId' of MortgageManager.onERC721Received (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol) is not in mixedCase
+Parameter '_scope_1' of MortgageManager.onERC721Received (/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x9abf1295086afa0e49c60e95c437aa400c5333b8.sol analyzed (16 contracts), 155 result(s) found

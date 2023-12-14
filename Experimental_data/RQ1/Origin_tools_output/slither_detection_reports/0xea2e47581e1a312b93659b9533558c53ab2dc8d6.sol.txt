@@ -1,0 +1,75 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xea2e47581e1a312b93659b9533558c53ab2dc8d6.sol:
+/sb/0xea2e47581e1a312b93659b9533558c53ab2dc8d6.sol:135:27: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+        bytes32 digest =  keccak256(challenge, msg.sender, nonce); 
+                          ^-------------------------------------^
+/sb/0xea2e47581e1a312b93659b9533558c53ab2dc8d6.sol:313:27: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+        bytes32 digest =  keccak256(challenge, msg.sender, nonce); 
+                          ^-------------------------------------^
+
+INFO:Detectors:[93m
+Reentrancy in LupeMining.mine (/sb/0xea2e47581e1a312b93659b9533558c53ab2dc8d6.sol#131-207):
+	External calls:
+	- require(bool)(tokenContract.balanceOf(address(this)) > blockReward) (/sb/0xea2e47581e1a312b93659b9533558c53ab2dc8d6.sol#135-139)
+	- tokenContract.transfer(msg.sender,blockReward * 10 ** tokenContract.decimals()) (/sb/0xea2e47581e1a312b93659b9533558c53ab2dc8d6.sol#199-203)
+	State variables written after the call(s):
+	- blockReward (/sb/0xea2e47581e1a312b93659b9533558c53ab2dc8d6.sol#205)
+	- challenge (/sb/0xea2e47581e1a312b93659b9533558c53ab2dc8d6.sol#205)
+	- target (/sb/0xea2e47581e1a312b93659b9533558c53ab2dc8d6.sol#205)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+LupeMining.mine (/sb/0xea2e47581e1a312b93659b9533558c53ab2dc8d6.sol#131-207) does not use the value returned by external calls:
+	-tokenContract.transfer(msg.sender,blockReward * 10 ** tokenContract.decimals()) (/sb/0xea2e47581e1a312b93659b9533558c53ab2dc8d6.sol#199-203)
+LupeMining.stopMining (/sb/0xea2e47581e1a312b93659b9533558c53ab2dc8d6.sol#389-407) does not use the value returned by external calls:
+	-tokenContract.transfer(msg.sender,tokenContract.balanceOf(address(this))) (/sb/0xea2e47581e1a312b93659b9533558c53ab2dc8d6.sol#397-399)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in LupeMining.mine (/sb/0xea2e47581e1a312b93659b9533558c53ab2dc8d6.sol#131-207):
+	External calls:
+	- require(bool)(tokenContract.balanceOf(address(this)) > blockReward) (/sb/0xea2e47581e1a312b93659b9533558c53ab2dc8d6.sol#135-139)
+	State variables written after the call(s):
+	- lastRewardAmount (/sb/0xea2e47581e1a312b93659b9533558c53ab2dc8d6.sol#185)
+	- lastRewardETHBlock (/sb/0xea2e47581e1a312b93659b9533558c53ab2dc8d6.sol#185-187)
+	- lastRewardedMiner (/sb/0xea2e47581e1a312b93659b9533558c53ab2dc8d6.sol#181-185)
+	- minedTokensAmount (/sb/0xea2e47581e1a312b93659b9533558c53ab2dc8d6.sol#177-181)
+	- solutionForChallenge (/sb/0xea2e47581e1a312b93659b9533558c53ab2dc8d6.sol#169-173)
+Reentrancy in LupeMining.mine (/sb/0xea2e47581e1a312b93659b9533558c53ab2dc8d6.sol#131-207):
+	External calls:
+	- require(bool)(tokenContract.balanceOf(address(this)) > blockReward) (/sb/0xea2e47581e1a312b93659b9533558c53ab2dc8d6.sol#135-139)
+	- tokenContract.transfer(msg.sender,blockReward * 10 ** tokenContract.decimals()) (/sb/0xea2e47581e1a312b93659b9533558c53ab2dc8d6.sol#199-203)
+	State variables written after the call(s):
+	- ETHBlockDiffAdjusted (/sb/0xea2e47581e1a312b93659b9533558c53ab2dc8d6.sol#205)
+	- blockNumber (/sb/0xea2e47581e1a312b93659b9533558c53ab2dc8d6.sol#205)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+LupeMining.ETHER_BLOCK_TIME should be constant (/sb/0xea2e47581e1a312b93659b9533558c53ab2dc8d6.sol#55-57)
+LupeMining.LUPX_BLOCKS_PER_EPOCH_TARGET should be constant (/sb/0xea2e47581e1a312b93659b9533558c53ab2dc8d6.sol#51-53)
+LupeMining.LUPX_BLOCK_TIME should be constant (/sb/0xea2e47581e1a312b93659b9533558c53ab2dc8d6.sol#53-55)
+LupeMining.MAX_TARGET should be constant (/sb/0xea2e47581e1a312b93659b9533558c53ab2dc8d6.sol#69-71)
+LupeMining.MIN_TARGET should be constant (/sb/0xea2e47581e1a312b93659b9533558c53ab2dc8d6.sol#65-69)
+LupeMining.halvingBlockAmount should be constant (/sb/0xea2e47581e1a312b93659b9533558c53ab2dc8d6.sol#59)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+LupeMining.lockContract (/sb/0xea2e47581e1a312b93659b9533558c53ab2dc8d6.sol#122-129) should be declared external
+LupeMining.mine (/sb/0xea2e47581e1a312b93659b9533558c53ab2dc8d6.sol#131-207) should be declared external
+LupeMining.getChallenge (/sb/0xea2e47581e1a312b93659b9533558c53ab2dc8d6.sol#305-311) should be declared external
+LupeMining.getMiningDifficulty (/sb/0xea2e47581e1a312b93659b9533558c53ab2dc8d6.sol#311-317) should be declared external
+LupeMining.getMiningTarget (/sb/0xea2e47581e1a312b93659b9533558c53ab2dc8d6.sol#317-325) should be declared external
+LupeMining.testHASH (/sb/0xea2e47581e1a312b93659b9533558c53ab2dc8d6.sol#325-365) should be declared external
+LupeMining.transferOwnership (/sb/0xea2e47581e1a312b93659b9533558c53ab2dc8d6.sol#369-379) should be declared external
+LupeMining.destroyOwnership (/sb/0xea2e47581e1a312b93659b9533558c53ab2dc8d6.sol#379-387) should be declared external
+LupeMining.stopMining (/sb/0xea2e47581e1a312b93659b9533558c53ab2dc8d6.sol#389-407) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Event 'LupeMining.newBlock' (/sb/0xea2e47581e1a312b93659b9533558c53ab2dc8d6.sol#103-105) is not in CapWords
+Parameter '_tokenContract' of LupeMining. (/sb/0xea2e47581e1a312b93659b9533558c53ab2dc8d6.sol#107-111) is not in mixedCase
+Parameter 'challenge_digest' of LupeMining.mine (/sb/0xea2e47581e1a312b93659b9533558c53ab2dc8d6.sol#131) is not in mixedCase
+Parameter 'challenge_digest' of LupeMining.testHASH (/sb/0xea2e47581e1a312b93659b9533558c53ab2dc8d6.sol#329-333) is not in mixedCase
+Variable 'LupeMining.LUPX_BLOCKS_PER_EPOCH_TARGET' (/sb/0xea2e47581e1a312b93659b9533558c53ab2dc8d6.sol#51-53) is not in mixedCase
+Variable 'LupeMining.LUPX_BLOCK_TIME' (/sb/0xea2e47581e1a312b93659b9533558c53ab2dc8d6.sol#53-55) is not in mixedCase
+Variable 'LupeMining.ETHER_BLOCK_TIME' (/sb/0xea2e47581e1a312b93659b9533558c53ab2dc8d6.sol#55-57) is not in mixedCase
+Variable 'LupeMining.ETHER_BLOCKS_PER_EPOCH_TARGET' (/sb/0xea2e47581e1a312b93659b9533558c53ab2dc8d6.sol#59-65) is not in mixedCase
+Variable 'LupeMining.MIN_TARGET' (/sb/0xea2e47581e1a312b93659b9533558c53ab2dc8d6.sol#65-69) is not in mixedCase
+Variable 'LupeMining.MAX_TARGET' (/sb/0xea2e47581e1a312b93659b9533558c53ab2dc8d6.sol#69-71) is not in mixedCase
+Variable 'LupeMining.ETHBlockDiffAdjusted' (/sb/0xea2e47581e1a312b93659b9533558c53ab2dc8d6.sol#87-91) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xea2e47581e1a312b93659b9533558c53ab2dc8d6.sol analyzed (4 contracts), 26 result(s) found

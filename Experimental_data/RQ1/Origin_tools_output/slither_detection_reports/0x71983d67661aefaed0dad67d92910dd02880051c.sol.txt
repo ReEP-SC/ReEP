@@ -1,0 +1,52 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x71983d67661aefaed0dad67d92910dd02880051c.sol:
+/sb/0x71983d67661aefaed0dad67d92910dd02880051c.sol:77:5: Warning: Functions in interfaces should be declared external.
+    function balanceOf(uint128 id) public view returns (uint256);
+    ^-----------------------------------------------------------^
+/sb/0x71983d67661aefaed0dad67d92910dd02880051c.sol:79:5: Warning: Functions in interfaces should be declared external.
+    function allocate(uint128 id, uint256 value) public;
+    ^--------------------------------------------------^
+/sb/0x71983d67661aefaed0dad67d92910dd02880051c.sol:81:5: Warning: Functions in interfaces should be declared external.
+    function withdraw(uint128 id, address to, uint256 value) public;
+    ^--------------------------------------------------------------^
+/sb/0x71983d67661aefaed0dad67d92910dd02880051c.sol:83:5: Warning: Functions in interfaces should be declared external.
+    function complete() public;
+    ^-------------------------^
+
+INFO:Detectors:[93m
+Reentrancy in TokenPool.allocate (/sb/0x71983d67661aefaed0dad67d92910dd02880051c.sol#419-431):
+	External calls:
+	- assert(bool)(unallocated() >= value) (/sb/0x71983d67661aefaed0dad67d92910dd02880051c.sol#425)
+	State variables written after the call(s):
+	- allocated (/sb/0x71983d67661aefaed0dad67d92910dd02880051c.sol#427)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+TokenPool.withdraw (/sb/0x71983d67661aefaed0dad67d92910dd02880051c.sol#443-471) does not use the value returned by external calls:
+	-token.transfer(to,value) (/sb/0x71983d67661aefaed0dad67d92910dd02880051c.sol#467)
+TokenPool.complete (/sb/0x71983d67661aefaed0dad67d92910dd02880051c.sol#479-489) does not use the value returned by external calls:
+	-token.transfer(msg.sender,unallocated()) (/sb/0x71983d67661aefaed0dad67d92910dd02880051c.sol#487-489)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in TokenPool.allocate (/sb/0x71983d67661aefaed0dad67d92910dd02880051c.sol#419-431):
+	External calls:
+	- assert(bool)(unallocated() >= value) (/sb/0x71983d67661aefaed0dad67d92910dd02880051c.sol#425)
+	State variables written after the call(s):
+	- balances (/sb/0x71983d67661aefaed0dad67d92910dd02880051c.sol#427-429)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+TokenPool.balanceOf (/sb/0x71983d67661aefaed0dad67d92910dd02880051c.sol#403-409) should be declared external
+ITokenPool.balanceOf (/sb/0x71983d67661aefaed0dad67d92910dd02880051c.sol#79-81) should be declared external
+ITokenPool.allocate (/sb/0x71983d67661aefaed0dad67d92910dd02880051c.sol#81-83) should be declared external
+TokenPool.allocate (/sb/0x71983d67661aefaed0dad67d92910dd02880051c.sol#419-431) should be declared external
+TokenPool.withdraw (/sb/0x71983d67661aefaed0dad67d92910dd02880051c.sol#443-471) should be declared external
+ITokenPool.withdraw (/sb/0x71983d67661aefaed0dad67d92910dd02880051c.sol#83-91) should be declared external
+ITokenPool.complete (/sb/0x71983d67661aefaed0dad67d92910dd02880051c.sol#94-95) should be declared external
+TokenPool.complete (/sb/0x71983d67661aefaed0dad67d92910dd02880051c.sol#479-489) should be declared external
+Ownable.owner (/sb/0x71983d67661aefaed0dad67d92910dd02880051c.sol#139-145) should be declared external
+Ownable.renounceOwnership (/sb/0x71983d67661aefaed0dad67d92910dd02880051c.sol#191-197) should be declared external
+Ownable.transferOwnership (/sb/0x71983d67661aefaed0dad67d92910dd02880051c.sol#209-215) should be declared external
+TokenPool.fallback (/sb/0x71983d67661aefaed0dad67d92910dd02880051c.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Function 'Ownable._transferOwnership' (/sb/0x71983d67661aefaed0dad67d92910dd02880051c.sol#233-239) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x71983d67661aefaed0dad67d92910dd02880051c.sol analyzed (5 contracts), 17 result(s) found

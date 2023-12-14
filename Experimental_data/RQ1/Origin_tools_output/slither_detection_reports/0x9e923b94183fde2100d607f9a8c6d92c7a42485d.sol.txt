@@ -1,0 +1,95 @@
+INFO:Detectors:[93m
+Reentrancy in LAVIDAandUSDT.deposit (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#571-581):
+	External calls:
+	- require(bool,string)(Token(trustedDepositTokenAddress).transferFrom(msg.sender,address(this),amountToDeposit),Insufficient Token Allowance) (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#573-574)
+	- updateAccount(msg.sender) (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#574)
+	State variables written after the call(s):
+	- depositedTokens (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#574-578)
+Reentrancy in LAVIDAandUSDT.emergencyWithdraw (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#604-630):
+	External calls:
+	- require(bool,string)(Token(trustedDepositTokenAddress).transfer(owner,fee),Could not transfer fee!) (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#619-622)
+	- require(bool,string)(Token(trustedDepositTokenAddress).transfer(msg.sender,amountAfterFee),Could not transfer tokens.) (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#622-625)
+	State variables written after the call(s):
+	- depositedTokens (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#625-628)
+Reentrancy in LAVIDAandUSDT.updateAccount (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#521-541):
+	External calls:
+	- require(bool,string)(Token(trustedRewardTokenAddress).transfer(account,pendingDivs.mul(getTokenPerEther()).div(1e18)),Could not transfer tokens.) (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#526-530)
+	State variables written after the call(s):
+	- lastClaimedTime (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#539-541)
+Reentrancy in LAVIDAandUSDT.withdraw (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#581-601):
+	External calls:
+	- updateAccount(msg.sender) (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#586-587)
+	- require(bool,string)(Token(trustedDepositTokenAddress).transfer(owner,fee),Could not transfer fee!) (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#592-594)
+	- require(bool,string)(Token(trustedDepositTokenAddress).transfer(msg.sender,amountAfterFee),Could not transfer tokens.) (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#594-595)
+	State variables written after the call(s):
+	- depositedTokens (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#595-596)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+EnumerableSet._remove (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#108-144) does not use the value returned by external calls:
+	-set._values.pop() (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#135-136)
+LAVIDAandUSDT.deposit (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#571-581) does not use the value returned by external calls:
+	-holders.add(msg.sender) (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#579)
+LAVIDAandUSDT.withdraw (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#581-601) does not use the value returned by external calls:
+	-holders.remove(msg.sender) (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#599)
+LAVIDAandUSDT.emergencyWithdraw (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#604-630) does not use the value returned by external calls:
+	-holders.remove(msg.sender) (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#629-630)
+LAVIDAandUSDT.transferAnyERC20Tokens (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol) does not use the value returned by external calls:
+	-Token(_tokenAddr).transfer(_to,_amount) (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in LAVIDAandUSDT.deposit (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#571-581):
+	External calls:
+	- require(bool,string)(Token(trustedDepositTokenAddress).transferFrom(msg.sender,address(this),amountToDeposit),Insufficient Token Allowance) (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#573-574)
+	- updateAccount(msg.sender) (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#574)
+	State variables written after the call(s):
+	- depositTime (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#579-581)
+Reentrancy in LAVIDAandUSDT.updateAccount (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#521-541):
+	External calls:
+	- require(bool,string)(Token(trustedRewardTokenAddress).transfer(account,pendingDivs.mul(getTokenPerEther()).div(1e18)),Could not transfer tokens.) (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#526-530)
+	State variables written after the call(s):
+	- totalClaimedRewards (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#535-536)
+	- totalEarnedTokens (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#531-534)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+LAVIDAandUSDT.adminCanClaimAfter should be constant (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#501)
+LAVIDAandUSDT.cliffTime should be constant (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#493-494)
+LAVIDAandUSDT.rewardRatePercentX100 should be constant (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#489-490)
+LAVIDAandUSDT.vaultDuration should be constant (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#496-497)
+LAVIDAandUSDT.withdrawFeePercentX100 should be constant (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#494-495)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#323-330) should be declared external
+LAVIDAandUSDT.getNumberOfHolders (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#565-568) should be declared external
+LAVIDAandUSDT.deposit (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#571-581) should be declared external
+LAVIDAandUSDT.withdraw (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#581-601) should be declared external
+LAVIDAandUSDT.emergencyWithdraw (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#604-630) should be declared external
+LAVIDAandUSDT.claim (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#630-631) should be declared external
+LAVIDAandUSDT.getDepositorsList (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#632-652) should be declared external
+LAVIDAandUSDT.transferAnyERC20Tokens (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol:
+	- pragma solidity0.6.11 (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#5-7): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'EnumerableSet._add' (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#90-104) is not in mixedCase
+Function 'EnumerableSet._remove' (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#108-144) is not in mixedCase
+Function 'EnumerableSet._contains' (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#149-151) is not in mixedCase
+Function 'EnumerableSet._length' (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#156-158) is not in mixedCase
+Function 'EnumerableSet._at' (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#167-179) is not in mixedCase
+Parameter '' of Token.transferFrom (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#332) is not in mixedCase
+Parameter '_scope_0' of Token.transferFrom (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#333) is not in mixedCase
+Parameter '_scope_1' of Token.transferFrom (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#333) is not in mixedCase
+Parameter '' of Token.transfer (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#335) is not in mixedCase
+Parameter '_scope_0' of Token.transfer (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#335) is not in mixedCase
+Function 'IUniswapV2Router01.WETH' (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#339-341) is not in mixedCase
+Parameter '_holder' of LAVIDAandUSDT.getPendingDivs (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#543) is not in mixedCase
+Parameter '_tokenAddr' of LAVIDAandUSDT.transferAnyERC20Tokens (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol) is not in mixedCase
+Parameter '_to' of LAVIDAandUSDT.transferAnyERC20Tokens (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol) is not in mixedCase
+Parameter '_amount' of LAVIDAandUSDT.transferAnyERC20Tokens (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol) is not in mixedCase
+Constant 'LAVIDAandUSDT.uniswapV2router' (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#474-476) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'LAVIDAandUSDT.trustedDepositTokenAddress' (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#479-484) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'LAVIDAandUSDT.trustedRewardTokenAddress' (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#485-488) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'LAVIDAandUSDT.rewardInterval' (/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol#491-492) is not in UPPER_CASE_WITH_UNDERSCORES
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x9e923b94183fde2100d607f9a8c6d92c7a42485d.sol analyzed (7 contracts), 40 result(s) found

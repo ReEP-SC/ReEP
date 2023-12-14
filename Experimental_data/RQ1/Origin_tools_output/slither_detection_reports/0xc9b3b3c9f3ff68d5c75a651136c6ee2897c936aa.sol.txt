@@ -1,0 +1,59 @@
+INFO:Detectors:[93m
+DTF.transfer (/sb/0xc9b3b3c9f3ff68d5c75a651136c6ee2897c936aa.sol#162-179) does not use the value returned by external calls:
+	-knc.transfer(msg.sender,tokens) (/sb/0xc9b3b3c9f3ff68d5c75a651136c6ee2897c936aa.sol#172-173)
+	-omg.transfer(msg.sender,tokens) (/sb/0xc9b3b3c9f3ff68d5c75a651136c6ee2897c936aa.sol#173-177)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in DTF.fallback (/sb/0xc9b3b3c9f3ff68d5c75a651136c6ee2897c936aa.sol#222-243):
+	External calls:
+	- (kncExpectedPrice) = kyber.getExpectedRate(ieth,knc,msg.value) (/sb/0xc9b3b3c9f3ff68d5c75a651136c6ee2897c936aa.sol#224)
+	- (omgExpectedPrice) = kyber.getExpectedRate(ieth,omg,msg.value) (/sb/0xc9b3b3c9f3ff68d5c75a651136c6ee2897c936aa.sol#225-226)
+	- kncCount = kyber.trade.value(kncCost)(ieth,kncCost,knc,address(this),2 ** 256 - 1,1,0) (/sb/0xc9b3b3c9f3ff68d5c75a651136c6ee2897c936aa.sol#228-232)
+	- omgCount = kyber.trade.value(omgCost)(ieth,omgCost,omg,address(this),2 ** 256 - 1,1,0) (/sb/0xc9b3b3c9f3ff68d5c75a651136c6ee2897c936aa.sol#232-235)
+	External calls sending eth:
+	- kncCount = kyber.trade.value(kncCost)(ieth,kncCost,knc,address(this),2 ** 256 - 1,1,0) (/sb/0xc9b3b3c9f3ff68d5c75a651136c6ee2897c936aa.sol#228-232)
+	- omgCount = kyber.trade.value(omgCost)(ieth,omgCost,omg,address(this),2 ** 256 - 1,1,0) (/sb/0xc9b3b3c9f3ff68d5c75a651136c6ee2897c936aa.sol#232-235)
+	State variables written after the call(s):
+	- _totalSupply (/sb/0xc9b3b3c9f3ff68d5c75a651136c6ee2897c936aa.sol#242)
+	- balances (/sb/0xc9b3b3c9f3ff68d5c75a651136c6ee2897c936aa.sol#240-241)
+Reentrancy in DTF.transfer (/sb/0xc9b3b3c9f3ff68d5c75a651136c6ee2897c936aa.sol#162-179):
+	External calls:
+	- knc.transfer(msg.sender,tokens) (/sb/0xc9b3b3c9f3ff68d5c75a651136c6ee2897c936aa.sol#172-173)
+	- omg.transfer(msg.sender,tokens) (/sb/0xc9b3b3c9f3ff68d5c75a651136c6ee2897c936aa.sol#173-177)
+	State variables written after the call(s):
+	- _totalSupply (/sb/0xc9b3b3c9f3ff68d5c75a651136c6ee2897c936aa.sol#177-178)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+ERC20.totalSupply (/sb/0xc9b3b3c9f3ff68d5c75a651136c6ee2897c936aa.sol#36-37) should be declared external
+DTF.totalSupply (/sb/0xc9b3b3c9f3ff68d5c75a651136c6ee2897c936aa.sol#147-149) should be declared external
+ERC20.balanceOf (/sb/0xc9b3b3c9f3ff68d5c75a651136c6ee2897c936aa.sol#37-38) should be declared external
+DTF.balanceOf (/sb/0xc9b3b3c9f3ff68d5c75a651136c6ee2897c936aa.sol#155-156) should be declared external
+ERC20.allowance (/sb/0xc9b3b3c9f3ff68d5c75a651136c6ee2897c936aa.sol#38-39) should be declared external
+DTF.allowance (/sb/0xc9b3b3c9f3ff68d5c75a651136c6ee2897c936aa.sol#220-222) should be declared external
+ERC20.transfer (/sb/0xc9b3b3c9f3ff68d5c75a651136c6ee2897c936aa.sol#39-40) should be declared external
+DTF.transfer (/sb/0xc9b3b3c9f3ff68d5c75a651136c6ee2897c936aa.sol#162-179) should be declared external
+DTF.approve (/sb/0xc9b3b3c9f3ff68d5c75a651136c6ee2897c936aa.sol#188-195) should be declared external
+ERC20.approve (/sb/0xc9b3b3c9f3ff68d5c75a651136c6ee2897c936aa.sol#40-41) should be declared external
+DTF.transferFrom (/sb/0xc9b3b3c9f3ff68d5c75a651136c6ee2897c936aa.sol#203-213) should be declared external
+ERC20.transferFrom (/sb/0xc9b3b3c9f3ff68d5c75a651136c6ee2897c936aa.sol#41-43) should be declared external
+Kyber.getExpectedRate (/sb/0xc9b3b3c9f3ff68d5c75a651136c6ee2897c936aa.sol#51-56) should be declared external
+Kyber.trade (/sb/0xc9b3b3c9f3ff68d5c75a651136c6ee2897c936aa.sol#56-66) should be declared external
+Owned.transferOwnership (/sb/0xc9b3b3c9f3ff68d5c75a651136c6ee2897c936aa.sol#85-89) should be declared external
+Owned.acceptOwnership (/sb/0xc9b3b3c9f3ff68d5c75a651136c6ee2897c936aa.sol#89-97) should be declared external
+DTF.fallback (/sb/0xc9b3b3c9f3ff68d5c75a651136c6ee2897c936aa.sol#222-243) should be declared external
+DTF.getExpectedRate (/sb/0xc9b3b3c9f3ff68d5c75a651136c6ee2897c936aa.sol#243-253) should be declared external
+DTF.transferAnyERC20Token (/sb/0xc9b3b3c9f3ff68d5c75a651136c6ee2897c936aa.sol#257-265) should be declared external
+DTF.withdrawETH (/sb/0xc9b3b3c9f3ff68d5c75a651136c6ee2897c936aa.sol) should be declared external
+DTF.depositETH (/sb/0xc9b3b3c9f3ff68d5c75a651136c6ee2897c936aa.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xc9b3b3c9f3ff68d5c75a651136c6ee2897c936aa.sol:
+	- pragma solidity^0.4.18 (/sb/0xc9b3b3c9f3ff68d5c75a651136c6ee2897c936aa.sol#1): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_newOwner' of Owned.transferOwnership (/sb/0xc9b3b3c9f3ff68d5c75a651136c6ee2897c936aa.sol#87) is not in mixedCase
+Variable 'DTF._totalSupply' (/sb/0xc9b3b3c9f3ff68d5c75a651136c6ee2897c936aa.sol#109-110) is not in mixedCase
+Variable 'DTF.KNCBalance' (/sb/0xc9b3b3c9f3ff68d5c75a651136c6ee2897c936aa.sol#111-112) is not in mixedCase
+Variable 'DTF.OMGBalance' (/sb/0xc9b3b3c9f3ff68d5c75a651136c6ee2897c936aa.sol#112-114) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xc9b3b3c9f3ff68d5c75a651136c6ee2897c936aa.sol analyzed (5 contracts), 29 result(s) found

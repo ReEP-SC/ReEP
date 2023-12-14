@@ -1,0 +1,130 @@
+INFO:Detectors:[93m
+Reentrancy in TokenVesting.release (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1845-1861):
+	External calls:
+	- unreleased = releasableAmount(token) (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1847-1851)
+	State variables written after the call(s):
+	- released (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1853-1859)
+Reentrancy in TokenVesting.revoke (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1867-1885):
+	External calls:
+	- balance = token.balanceOf(this) (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1871)
+	- unreleased = releasableAmount(token) (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1871-1873)
+	State variables written after the call(s):
+	- revoked (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1877-1879)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+DividendToken.claimDividend (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1149-1175) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool)(dividendEndTime.sub(claimTimeout) > block.timestamp) (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1161-1165)
+	- require(bool)(dividendEndTime > 0) (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1159-1160)
+DividendToken.updateDividend (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1223-1239) uses timestamp for comparisons
+	Dangerous comparisons:
+	- lastUpdate[_hodler] < lastDividendIncreaseDate (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1233-1239)
+DividendToken.getClaimableDividend (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1245-1263) uses timestamp for comparisons
+	Dangerous comparisons:
+	- lastUpdate[_hodler] < lastDividendIncreaseDate (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1251-1263)
+DividendToken.requestUnclaimed (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1351-1373) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool)(block.timestamp >= dividendEndTime.sub(claimTimeout)) (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1365-1371)
+DividendToken.fallback (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1391-1441) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool)(dividendEndTime < block.timestamp) (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1397-1403)
+TokenVesting.vestedAmount (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1915-1935) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp >= start.add(duration) || revoked[token] (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1927-1935)
+	- block.timestamp < cliff (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1925-1935)
+RoundedTokenVesting.vestedAmount (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#2011-2033) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp < cliff (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#2013-2033)
+	- block.timestamp >= start.add(duration) || revoked[token] (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#2015-2033)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+DividendToken.claimTimeout should be constant (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1075-1077)
+DividendToken.dividendCycleTime should be constant (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1081-1083)
+TendToken.granularity should be constant (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1473-1480)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Ownable.renounceOwnership (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#147-149) should be declared external
+Ownable.transferOwnership (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#163-169) should be declared external
+ERC20Basic.totalSupply (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#309-311) should be declared external
+BasicToken.totalSupply (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#395-401) should be declared external
+ERC20.allowance (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#335-349) should be declared external
+StandardToken.allowance (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#589-603) should be declared external
+MintableToken.finishMinting (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#847-861) should be declared external
+Pausable.pause (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#939-951) should be declared external
+Pausable.unpause (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#961-973) should be declared external
+DividendToken.claimDividend (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1149-1175) should be declared external
+DividendToken.getClaimableDividend (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1245-1263) should be declared external
+DividendToken.setTreasurer (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1325-1333) should be declared external
+DividendToken.requestUnclaimed (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1351-1373) should be declared external
+DividendToken.fallback (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1391-1441) should be declared external
+TendToken.batchMint (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1633-1665) should be declared external
+TokenVesting.release (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1845-1861) should be declared external
+TokenVesting.revoke (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1867-1885) should be declared external
+TendTokenVested.mintDevelopmentTeamTokens (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol) should be declared external
+TendTokenVested.getVestingWalletLength (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_newOwner' of Ownable.transferOwnership (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#165) is not in mixedCase
+Function 'Ownable._transferOwnership' (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#175-197) is not in mixedCase
+Parameter '_newOwner' of Ownable._transferOwnership (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#185-187) is not in mixedCase
+Parameter '_owner' of BasicToken.balanceOf (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#451) is not in mixedCase
+Parameter '_to' of BasicToken.transfer (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#415) is not in mixedCase
+Parameter '_value' of BasicToken.transfer (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#415) is not in mixedCase
+Parameter '_owner' of StandardToken.allowance (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#589) is not in mixedCase
+Parameter '_spender' of StandardToken.allowance (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#589) is not in mixedCase
+Parameter '_from' of StandardToken.transferFrom (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#509) is not in mixedCase
+Parameter '_to' of StandardToken.transferFrom (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#509) is not in mixedCase
+Parameter '_value' of StandardToken.transferFrom (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#509) is not in mixedCase
+Parameter '_spender' of StandardToken.approve (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#553-554) is not in mixedCase
+Parameter '_value' of StandardToken.approve (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#555) is not in mixedCase
+Parameter '_spender' of StandardToken.increaseApproval (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#633) is not in mixedCase
+Parameter '_addedValue' of StandardToken.increaseApproval (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#633) is not in mixedCase
+Parameter '_spender' of StandardToken.decreaseApproval (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#685) is not in mixedCase
+Parameter '_subtractedValue' of StandardToken.decreaseApproval (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#685) is not in mixedCase
+Parameter '_to' of MintableToken.mint (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#799-801) is not in mixedCase
+Parameter '_amount' of MintableToken.mint (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#801-805) is not in mixedCase
+Parameter '_to' of PausableToken.transfer (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#995) is not in mixedCase
+Parameter '_value' of PausableToken.transfer (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#995) is not in mixedCase
+Parameter '_from' of PausableToken.transferFrom (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1009) is not in mixedCase
+Parameter '_to' of PausableToken.transferFrom (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1009) is not in mixedCase
+Parameter '_value' of PausableToken.transferFrom (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1009-1011) is not in mixedCase
+Parameter '_spender' of PausableToken.approve (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1017-1021) is not in mixedCase
+Parameter '_value' of PausableToken.approve (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1021) is not in mixedCase
+Parameter '_spender' of PausableToken.increaseApproval (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1031-1034) is not in mixedCase
+Parameter '_addedValue' of PausableToken.increaseApproval (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1035) is not in mixedCase
+Parameter '_spender' of PausableToken.decreaseApproval (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1043) is not in mixedCase
+Parameter '_subtractedValue' of PausableToken.decreaseApproval (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1043-1047) is not in mixedCase
+Parameter '_to' of DividendToken.transfer (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1273) is not in mixedCase
+Parameter '_value' of DividendToken.transfer (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1273-1275) is not in mixedCase
+Parameter '_from' of DividendToken.transferFrom (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1297) is not in mixedCase
+Parameter '_to' of DividendToken.transferFrom (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1297) is not in mixedCase
+Parameter '_value' of DividendToken.transferFrom (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1297-1299) is not in mixedCase
+Parameter '_from' of DividendToken.transferDividend (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1193) is not in mixedCase
+Parameter '_to' of DividendToken.transferDividend (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1193) is not in mixedCase
+Parameter '_value' of DividendToken.transferDividend (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1193) is not in mixedCase
+Parameter '_hodler' of DividendToken.updateDividend (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1223-1225) is not in mixedCase
+Parameter '_hodler' of DividendToken.getClaimableDividend (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1247) is not in mixedCase
+Parameter '_treasurer' of DividendToken.setTreasurer (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1327) is not in mixedCase
+Parameter '_active' of DividendToken.setTreasurer (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1327) is not in mixedCase
+Parameter '_hodler' of DividendToken.calcDividend (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1451-1457) is not in mixedCase
+Parameter '_totalSupply' of DividendToken.calcDividend (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1457) is not in mixedCase
+Parameter '_to' of TendToken.transfer (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1521) is not in mixedCase
+Parameter '_value' of TendToken.transfer (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1521-1523) is not in mixedCase
+Parameter '_from' of TendToken.transferFrom (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1563) is not in mixedCase
+Parameter '_to' of TendToken.transferFrom (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1563) is not in mixedCase
+Parameter '_value' of TendToken.transferFrom (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1563) is not in mixedCase
+Parameter '_to' of TendToken.mint (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1595) is not in mixedCase
+Parameter '_amount' of TendToken.mint (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1595-1601) is not in mixedCase
+Parameter '_amount' of TendToken.requireMultiple (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1507) is not in mixedCase
+Parameter '_to' of TendToken.batchMint (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1637) is not in mixedCase
+Parameter '_amount' of TendToken.batchMint (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1637-1639) is not in mixedCase
+Parameter '_beneficiary' of TokenVesting. (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1811-1813) is not in mixedCase
+Parameter '_start' of TokenVesting. (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1813) is not in mixedCase
+Parameter '_cliff' of TokenVesting. (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1813-1815) is not in mixedCase
+Parameter '_duration' of TokenVesting. (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1817) is not in mixedCase
+Parameter '_revocable' of TokenVesting. (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#1817) is not in mixedCase
+Parameter '_granularity' of RoundedTokenVesting. (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol#2001) is not in mixedCase
+Parameter '_to' of TendTokenVested.mintDevelopmentTeamTokens (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol) is not in mixedCase
+Parameter '_tokens' of TendTokenVested.mintDevelopmentTeamTokens (/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xaab606817809841e8b1168be8779eeaf6744ef64.sol analyzed (15 contracts), 91 result(s) found

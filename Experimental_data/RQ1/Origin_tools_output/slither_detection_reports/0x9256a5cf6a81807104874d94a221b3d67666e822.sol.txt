@@ -1,0 +1,116 @@
+INFO:Detectors:[93m
+Reentrancy in PoolA._deposit (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#494-517):
+	External calls:
+	- require(bool,string)(Token(tokenAddress).transferFrom(msg.sender,address(this),amountToStake),Insufficient Token Allowance) (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#500-502)
+	- updateAccount(msg.sender) (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#504-506)
+	- require(bool,string)(Token(tokenAddress).transfer(admin,fee),Could not transfer deposit fee.) (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#508-510)
+	State variables written after the call(s):
+	- depositedTokens (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#510-512)
+Reentrancy in PoolA.claim (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#552):
+	External calls:
+	- updateAccount(msg.sender) (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#552)
+	- claimRef() (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#552)
+	State variables written after the call(s):
+	- rewardBonuses (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#552)
+Reentrancy in PoolA.updateAccount (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#434-454):
+	External calls:
+	- require(bool,string)(Token(tokenAddress).transfer(account,unclaimedDivs),Could not transfer tokens.) (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#439-444)
+	State variables written after the call(s):
+	- lastClaimedTime (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#453)
+Reentrancy in PoolA.updateRef (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#455-464):
+	External calls:
+	- require(bool,string)(Token(tokenAddress).transfer(account,unclaimedRef),Could not transfer tokens.) (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#458-462)
+	State variables written after the call(s):
+	- rewardBonuses (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#462-464)
+Reentrancy in PoolA.withdraw (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#517-552):
+	External calls:
+	- updateAccount(msg.sender) (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#522)
+	- require(bool,string)(Token(tokenAddress).transfer(admin,fee),Could not transfer withdraw fee.) (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#529-535)
+	- require(bool,string)(Token(tokenAddress).transfer(msg.sender,amountAfterFee),Could not transfer tokens.) (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#536-541)
+	State variables written after the call(s):
+	- depositedTokens (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#541-544)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+EnumerableSet._remove (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#107-143) does not use the value returned by external calls:
+	-set._values.pop() (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#134-135)
+PoolA.transferAnyERC20Tokens (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#427-433) does not use the value returned by external calls:
+	-Token(_tokenAddr).transfer(_to,_amount) (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#433)
+PoolA._deposit (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#494-517) does not use the value returned by external calls:
+	-holders.add(msg.sender) (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#514-515)
+PoolA.withdraw (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#517-552) does not use the value returned by external calls:
+	-holders.remove(msg.sender) (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#550)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in PoolA._deposit (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#494-517):
+	External calls:
+	- require(bool,string)(Token(tokenAddress).transferFrom(msg.sender,address(this),amountToStake),Insufficient Token Allowance) (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#500-502)
+	- updateAccount(msg.sender) (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#504-506)
+	- require(bool,string)(Token(tokenAddress).transfer(admin,fee),Could not transfer deposit fee.) (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#508-510)
+	State variables written after the call(s):
+	- stakingTime (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#515)
+Reentrancy in PoolA.updateAccount (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#434-454):
+	External calls:
+	- require(bool,string)(Token(tokenAddress).transfer(account,unclaimedDivs),Could not transfer tokens.) (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#439-444)
+	State variables written after the call(s):
+	- rewardBonuses (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#448-452)
+	- totalClaimedRewards (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#447)
+	- totalEarnedTokens (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#444-447)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#323-330) should be declared external
+PoolA.setTokenAddresses (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#378-387) should be declared external
+PoolA.stakingFeeRateSet (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#387-396) should be declared external
+PoolA.refSet (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#398-400) should be declared external
+PoolA.rewardRateSet (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#400-404) should be declared external
+PoolA.StakingReturnsAmountSet (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#404-411) should be declared external
+PoolA.possibleUnstakeTimeSet (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#412-416) should be declared external
+PoolA.rewardIntervalSet (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#416-418) should be declared external
+PoolA.allowStaking (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#419-427) should be declared external
+PoolA.transferAnyERC20Tokens (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#427-433) should be declared external
+PoolA.getNumberOfHolders (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#488-489) should be declared external
+PoolA.deposit (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#489-492) should be declared external
+PoolA.withdraw (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#517-552) should be declared external
+PoolA.claim (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#552) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol:
+	- pragma solidity0.6.12 (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#5-7): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'EnumerableSet._add' (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#89-103) is not in mixedCase
+Function 'EnumerableSet._remove' (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#107-143) is not in mixedCase
+Function 'EnumerableSet._contains' (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#148-150) is not in mixedCase
+Function 'EnumerableSet._length' (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#155-157) is not in mixedCase
+Function 'EnumerableSet._at' (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#166-178) is not in mixedCase
+Parameter '' of Token.transferFrom (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#331) is not in mixedCase
+Parameter '_scope_0' of Token.transferFrom (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#331) is not in mixedCase
+Parameter '_scope_1' of Token.transferFrom (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#331) is not in mixedCase
+Parameter '' of Token.transfer (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#332) is not in mixedCase
+Parameter '_scope_0' of Token.transfer (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#332) is not in mixedCase
+Parameter '_tokenAddr' of PoolA.setTokenAddresses (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#378-380) is not in mixedCase
+Parameter '_stakingFeeRate' of PoolA.stakingFeeRateSet (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#388-389) is not in mixedCase
+Parameter '_unstakingFeeRate' of PoolA.stakingFeeRateSet (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#389-392) is not in mixedCase
+Parameter '_value' of PoolA.refSet (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#398) is not in mixedCase
+Parameter '_rewardRate' of PoolA.rewardRateSet (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#400-402) is not in mixedCase
+Function 'PoolA.StakingReturnsAmountSet' (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#404-411) is not in mixedCase
+Parameter '_poolreward' of PoolA.StakingReturnsAmountSet (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#406) is not in mixedCase
+Parameter '_possibleUnstakeTime' of PoolA.possibleUnstakeTimeSet (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#412) is not in mixedCase
+Parameter '_rewardInterval' of PoolA.rewardIntervalSet (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#416) is not in mixedCase
+Parameter '_status' of PoolA.allowStaking (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#420-421) is not in mixedCase
+Parameter '_tokenAddr' of PoolA.transferAnyERC20Tokens (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#429) is not in mixedCase
+Parameter '_to' of PoolA.transferAnyERC20Tokens (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#429) is not in mixedCase
+Parameter '_amount' of PoolA.transferAnyERC20Tokens (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#429-430) is not in mixedCase
+Parameter '_holder' of PoolA.getUnclaimedDivs (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#465) is not in mixedCase
+Parameter '_upline' of PoolA.deposit (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#490) is not in mixedCase
+Function 'PoolA._deposit' (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#494-517) is not in mixedCase
+Function 'PoolA._setUpline' (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#570-579) is not in mixedCase
+Parameter '_addr' of PoolA._setUpline (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#570) is not in mixedCase
+Parameter '_upline' of PoolA._setUpline (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#570-571) is not in mixedCase
+Function 'PoolA._refPayout' (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol) is not in mixedCase
+Parameter '_addr' of PoolA._refPayout (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol) is not in mixedCase
+Parameter '_amount' of PoolA._refPayout (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol) is not in mixedCase
+Variable 'PoolA.PossibleUnstakeTime' (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#360-361) is not in mixedCase
+Variable 'PoolA.FundedTokens' (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#362) is not in mixedCase
+Variable 'PoolA.ref_bonus' (/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol#376) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x9256a5cf6a81807104874d94a221b3d67666e822.sol analyzed (5 contracts), 61 result(s) found

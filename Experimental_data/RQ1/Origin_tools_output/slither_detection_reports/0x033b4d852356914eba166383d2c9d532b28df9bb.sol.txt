@@ -1,0 +1,58 @@
+INFO:Detectors:[91m
+ERC20Seller.buy (/sb/0x033b4d852356914eba166383d2c9d532b28df9bb.sol#365-398) sends eth to arbitrary user
+	Dangerous calls:
+	- seller.transfer(address(this).balance) (/sb/0x033b4d852356914eba166383d2c9d532b28df9bb.sol#395-396)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[93m
+Reentrancy in ERC20Seller.addOrder (/sb/0x033b4d852356914eba166383d2c9d532b28df9bb.sol#313-322):
+	External calls:
+	- require(bool)(token.transferFrom(msg.sender,address(this),_amount)) (/sb/0x033b4d852356914eba166383d2c9d532b28df9bb.sol#319-321)
+	State variables written after the call(s):
+	- orders (/sb/0x033b4d852356914eba166383d2c9d532b28df9bb.sol#321-322)
+Reentrancy in ERC20Seller.decreaseAmount (/sb/0x033b4d852356914eba166383d2c9d532b28df9bb.sol#335-344):
+	External calls:
+	- require(bool)(token.transfer(seller,amountToDecrease)) (/sb/0x033b4d852356914eba166383d2c9d532b28df9bb.sol#342-343)
+	State variables written after the call(s):
+	- orders (/sb/0x033b4d852356914eba166383d2c9d532b28df9bb.sol#343-344)
+Reentrancy in ERC20Seller.removeOrder (/sb/0x033b4d852356914eba166383d2c9d532b28df9bb.sol#348-358):
+	External calls:
+	- require(bool)(token.transfer(seller,orders[_orderID].amount)) (/sb/0x033b4d852356914eba166383d2c9d532b28df9bb.sol#356-357)
+	State variables written after the call(s):
+	- orders (/sb/0x033b4d852356914eba166383d2c9d532b28df9bb.sol#357-358)
+	- orders (/sb/0x033b4d852356914eba166383d2c9d532b28df9bb.sol#358)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+tokensBought in ERC20Seller.buy (/sb/0x033b4d852356914eba166383d2c9d532b28df9bb.sol#367) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[92m
+Reentrancy in ERC20Seller.increaseAmount (/sb/0x033b4d852356914eba166383d2c9d532b28df9bb.sol#327-331):
+	External calls:
+	- require(bool)(token.transferFrom(msg.sender,address(this),_amount)) (/sb/0x033b4d852356914eba166383d2c9d532b28df9bb.sol#329)
+	State variables written after the call(s):
+	- orders (/sb/0x033b4d852356914eba166383d2c9d532b28df9bb.sol#329-331)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+ERC20Seller.MAX_ORDERS should be constant (/sb/0x033b4d852356914eba166383d2c9d532b28df9bb.sol#281)
+ERC20Seller.MAX_VALUE should be constant (/sb/0x033b4d852356914eba166383d2c9d532b28df9bb.sol#288-290)
+ERC20Seller.NO_ORDER_FOUND should be constant (/sb/0x033b4d852356914eba166383d2c9d532b28df9bb.sol#287)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x033b4d852356914eba166383d2c9d532b28df9bb.sol:
+	- pragma solidity^0.5.8 (/sb/0x033b4d852356914eba166383d2c9d532b28df9bb.sol#14-17): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_token' of ERC20Seller. (/sb/0x033b4d852356914eba166383d2c9d532b28df9bb.sol#308) is not in mixedCase
+Parameter '_divisor' of ERC20Seller. (/sb/0x033b4d852356914eba166383d2c9d532b28df9bb.sol#308-309) is not in mixedCase
+Parameter '_price' of ERC20Seller.addOrder (/sb/0x033b4d852356914eba166383d2c9d532b28df9bb.sol#314) is not in mixedCase
+Parameter '_amount' of ERC20Seller.addOrder (/sb/0x033b4d852356914eba166383d2c9d532b28df9bb.sol#314) is not in mixedCase
+Parameter '_orderID' of ERC20Seller.increaseAmount (/sb/0x033b4d852356914eba166383d2c9d532b28df9bb.sol#328) is not in mixedCase
+Parameter '_amount' of ERC20Seller.increaseAmount (/sb/0x033b4d852356914eba166383d2c9d532b28df9bb.sol#328) is not in mixedCase
+Parameter '_orderID' of ERC20Seller.decreaseAmount (/sb/0x033b4d852356914eba166383d2c9d532b28df9bb.sol#335) is not in mixedCase
+Parameter '_amount' of ERC20Seller.decreaseAmount (/sb/0x033b4d852356914eba166383d2c9d532b28df9bb.sol#335) is not in mixedCase
+Parameter '_orderID' of ERC20Seller.removeOrder (/sb/0x033b4d852356914eba166383d2c9d532b28df9bb.sol#348-350) is not in mixedCase
+Parameter '_maxPrice' of ERC20Seller.buy (/sb/0x033b4d852356914eba166383d2c9d532b28df9bb.sol#365-366) is not in mixedCase
+Variable 'ERC20Seller.MAX_ORDERS' (/sb/0x033b4d852356914eba166383d2c9d532b28df9bb.sol#281) is not in mixedCase
+Variable 'ERC20Seller.NO_ORDER_FOUND' (/sb/0x033b4d852356914eba166383d2c9d532b28df9bb.sol#287) is not in mixedCase
+Variable 'ERC20Seller.MAX_VALUE' (/sb/0x033b4d852356914eba166383d2c9d532b28df9bb.sol#288-290) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x033b4d852356914eba166383d2c9d532b28df9bb.sol analyzed (3 contracts), 21 result(s) found

@@ -1,0 +1,44 @@
+INFO:Detectors:[91m
+KyberWrapper.swapTokenToEther (/sb/0x71354d33b3d024cde6b1f60bbdad91f987ab585c.sol#110-131) sends eth to arbitrary user
+	Dangerous calls:
+	- msg.sender.transfer(destAmount) (/sb/0x71354d33b3d024cde6b1f60bbdad91f987ab585c.sol#130)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[93m
+KyberWrapper.swapEtherToToken (/sb/0x71354d33b3d024cde6b1f60bbdad91f987ab585c.sol#93-110) does not use the value returned by external calls:
+	-token.transfer(msg.sender,destAmount) (/sb/0x71354d33b3d024cde6b1f60bbdad91f987ab585c.sol#109)
+KyberWrapper.swapTokenToEther (/sb/0x71354d33b3d024cde6b1f60bbdad91f987ab585c.sol#110-131) does not use the value returned by external calls:
+	-token.approve(address(_kyberNetworkProxy),_amount) (/sb/0x71354d33b3d024cde6b1f60bbdad91f987ab585c.sol#123-125)
+KyberWrapper.swapTokenToToken (/sb/0x71354d33b3d024cde6b1f60bbdad91f987ab585c.sol#132-151) does not use the value returned by external calls:
+	-srcToken.approve(address(_kyberNetworkProxy),srcQty) (/sb/0x71354d33b3d024cde6b1f60bbdad91f987ab585c.sol#143-145)
+	-destToken.transfer(msg.sender,destAmount) (/sb/0x71354d33b3d024cde6b1f60bbdad91f987ab585c.sol#150-151)
+KyberWrapper.withdrawUSDC (/sb/0x71354d33b3d024cde6b1f60bbdad91f987ab585c.sol#78-87) does not use the value returned by external calls:
+	-usdcToken.transfer(msg.sender,currentTokenBalance) (/sb/0x71354d33b3d024cde6b1f60bbdad91f987ab585c.sol#85)
+KyberWrapper.withdrawETHAndTokens (/sb/0x71354d33b3d024cde6b1f60bbdad91f987ab585c.sol#87-93) does not use the value returned by external calls:
+	-daiToken.transfer(msg.sender,currentTokenBalance) (/sb/0x71354d33b3d024cde6b1f60bbdad91f987ab585c.sol#93)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+KyberNetworkProxyInterface.getExpectedRate (/sb/0x71354d33b3d024cde6b1f60bbdad91f987ab585c.sol#26-29) should be declared external
+KyberNetworkProxyInterface.tradeWithHint (/sb/0x71354d33b3d024cde6b1f60bbdad91f987ab585c.sol#29-32) should be declared external
+KyberNetworkProxyInterface.trade (/sb/0x71354d33b3d024cde6b1f60bbdad91f987ab585c.sol#32-35) should be declared external
+KyberNetworkProxyInterface.swapTokenToToken (/sb/0x71354d33b3d024cde6b1f60bbdad91f987ab585c.sol#37-41) should be declared external
+KyberWrapper.getExpectedRate (/sb/0x71354d33b3d024cde6b1f60bbdad91f987ab585c.sol#151-156) should be declared external
+ExchangeInterface.getExpectedRate (/sb/0x71354d33b3d024cde6b1f60bbdad91f987ab585c.sol#45-49) should be declared external
+KyberWrapper.withdrawUSDC (/sb/0x71354d33b3d024cde6b1f60bbdad91f987ab585c.sol#78-87) should be declared external
+KyberWrapper.withdrawETHAndTokens (/sb/0x71354d33b3d024cde6b1f60bbdad91f987ab585c.sol#87-93) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x71354d33b3d024cde6b1f60bbdad91f987ab585c.sol:
+	- pragma solidity^0.5.0 (/sb/0x71354d33b3d024cde6b1f60bbdad91f987ab585c.sol#5-8): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_ethAmount' of KyberWrapper.swapEtherToToken (/sb/0x71354d33b3d024cde6b1f60bbdad91f987ab585c.sol#94-95) is not in mixedCase
+Parameter '_tokenAddress' of KyberWrapper.swapEtherToToken (/sb/0x71354d33b3d024cde6b1f60bbdad91f987ab585c.sol#95) is not in mixedCase
+Parameter '_tokenAddress' of KyberWrapper.swapTokenToEther (/sb/0x71354d33b3d024cde6b1f60bbdad91f987ab585c.sol#111) is not in mixedCase
+Parameter '_amount' of KyberWrapper.swapTokenToEther (/sb/0x71354d33b3d024cde6b1f60bbdad91f987ab585c.sol#111-112) is not in mixedCase
+Parameter '_srcAddr' of KyberWrapper.swapTokenToToken (/sb/0x71354d33b3d024cde6b1f60bbdad91f987ab585c.sol#132-133) is not in mixedCase
+Parameter '_destAddr' of KyberWrapper.swapTokenToToken (/sb/0x71354d33b3d024cde6b1f60bbdad91f987ab585c.sol#133) is not in mixedCase
+Parameter '_src' of KyberWrapper.getExpectedRate (/sb/0x71354d33b3d024cde6b1f60bbdad91f987ab585c.sol#151) is not in mixedCase
+Parameter '_dest' of KyberWrapper.getExpectedRate (/sb/0x71354d33b3d024cde6b1f60bbdad91f987ab585c.sol#151) is not in mixedCase
+Parameter '_srcQty' of KyberWrapper.getExpectedRate (/sb/0x71354d33b3d024cde6b1f60bbdad91f987ab585c.sol#151-152) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x71354d33b3d024cde6b1f60bbdad91f987ab585c.sol analyzed (4 contracts), 24 result(s) found

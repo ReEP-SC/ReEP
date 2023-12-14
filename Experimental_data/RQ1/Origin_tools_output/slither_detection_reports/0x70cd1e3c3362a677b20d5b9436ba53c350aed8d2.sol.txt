@@ -1,0 +1,875 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol:
+/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol:723:7: Warning: Unreachable code.
+      _networkID; // silence the warning and remain backwards compatible
+      ^--------^
+/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol:754:7: Warning: Unreachable code.
+      _myid; _result; _proof; // Silence compiler warnings
+      ^--------------------^
+/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol:752:5: Warning: Function state mutability can be restricted to pure
+    function __callback(bytes32 _myid, string memory _result, bytes memory _proof) public {
+    ^ (Relevant source part starts here and spans across multiple lines).
+
+INFO:Detectors:[91m
+BadBitCasino.sendEthToGame (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1708-1714) sends eth to arbitrary user
+	Dangerous calls:
+	- msg.sender.transfer(_amount) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1713-1714)
+BadBitCasino.emergencyShutdown (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1714-1730) sends eth to arbitrary user
+	Dangerous calls:
+	- _addresses[i].transfer(userBalances[_addresses[i]]) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1721-1722)
+	- msg.sender.transfer(address(this).balance) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1724-1725)
+BadBitDistributor.transferFundsToDepositPool (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol) sends eth to arbitrary user
+	Dangerous calls:
+	- receiver.transfer(initialDepositBalance) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[91m
+Reentrancy in BadBitCasino.placeBetForDoubleOrNothing (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1526-1560):
+	External calls:
+	- require(bool)(settings.BETS_ALLOWED()) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1526-1528)
+	- _finalizeLastBets(msg.sender) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1528)
+	- _gasPrice < settings.MIN_GAS_PRICE() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1534-1540)
+	- _gasPrice = settings.MIN_GAS_PRICE() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1535-1536)
+	- _gasPrice > settings.MAX_GAS_PRICE() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1537-1540)
+	- _gasPrice = settings.MAX_GAS_PRICE() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1537-1540)
+	- oraclize_setCustomGasPrice(_gasPrice) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1540-1541)
+	- gasLimit = settings.ORACLIZE_GAS_LIMIT() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1542)
+	- settings.USE_BLOCKHASH_RANDOM_SEED() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1542-1546)
+	- queryId = oraclize_query(0,URL,,gasLimit) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1542-1546)
+	- queryId = oraclize_newRandomDSQuery(0,8,gasLimit) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1542-1546)
+	- settings.USE_BLOCKHASH_RANDOM_SEED() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1546-1549)
+	- totalFundsSpentOnOraclize += oraclize_getPrice(url,gasLimit) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1546-1549)
+	- totalFundsSpentOnOraclize += oraclize_getPrice(random,gasLimit) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1546-1549)
+	External calls sending eth:
+	- queryId = oraclize_query(0,URL,,gasLimit) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1542-1546)
+	- queryId = oraclize_newRandomDSQuery(0,8,gasLimit) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1542-1546)
+	State variables written after the call(s):
+	- totalPlayerBalances (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1553-1555)
+	- userBalances (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1553-1555)
+Reentrancy in BadBitCasino.placeBetForDoubleOrNothing (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1526-1560):
+	External calls:
+	- require(bool)(settings.BETS_ALLOWED()) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1526-1528)
+	- _finalizeLastBets(msg.sender) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1528)
+	- _gasPrice < settings.MIN_GAS_PRICE() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1534-1540)
+	- _gasPrice = settings.MIN_GAS_PRICE() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1535-1536)
+	- _gasPrice > settings.MAX_GAS_PRICE() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1537-1540)
+	- _gasPrice = settings.MAX_GAS_PRICE() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1537-1540)
+	- oraclize_setCustomGasPrice(_gasPrice) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1540-1541)
+	- gasLimit = settings.ORACLIZE_GAS_LIMIT() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1542)
+	- settings.USE_BLOCKHASH_RANDOM_SEED() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1542-1546)
+	- queryId = oraclize_query(0,URL,,gasLimit) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1542-1546)
+	- queryId = oraclize_newRandomDSQuery(0,8,gasLimit) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1542-1546)
+	- settings.USE_BLOCKHASH_RANDOM_SEED() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1546-1549)
+	- totalFundsSpentOnOraclize += oraclize_getPrice(url,gasLimit) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1546-1549)
+	External calls sending eth:
+	- queryId = oraclize_query(0,URL,,gasLimit) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1542-1546)
+	- queryId = oraclize_newRandomDSQuery(0,8,gasLimit) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1542-1546)
+	State variables written after the call(s):
+	- OAR (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1546-1549)
+	- oraclize (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1546-1549)
+Reentrancy in BadBitCasino.placeBetForDoubleOrNothing (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1526-1560):
+	External calls:
+	- require(bool)(settings.BETS_ALLOWED()) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1526-1528)
+	- _finalizeLastBets(msg.sender) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1528)
+	- _gasPrice < settings.MIN_GAS_PRICE() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1534-1540)
+	- _gasPrice = settings.MIN_GAS_PRICE() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1535-1536)
+	- _gasPrice > settings.MAX_GAS_PRICE() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1537-1540)
+	- _gasPrice = settings.MAX_GAS_PRICE() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1537-1540)
+	- oraclize_setCustomGasPrice(_gasPrice) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1540-1541)
+	- gasLimit = settings.ORACLIZE_GAS_LIMIT() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1542)
+	- settings.USE_BLOCKHASH_RANDOM_SEED() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1542-1546)
+	- queryId = oraclize_query(0,URL,,gasLimit) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1542-1546)
+	- queryId = oraclize_newRandomDSQuery(0,8,gasLimit) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1542-1546)
+	- totalFundsSpentOnOraclize += oraclize_getPrice(random,gasLimit) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1546-1549)
+	External calls sending eth:
+	- queryId = oraclize_query(0,URL,,gasLimit) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1542-1546)
+	- queryId = oraclize_newRandomDSQuery(0,8,gasLimit) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1542-1546)
+	State variables written after the call(s):
+	- OAR (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1546-1549)
+	- oraclize (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1546-1549)
+Reentrancy in BadBitDistributor.transferFundsToDepositPool (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol):
+	External calls:
+	- require(bool)(casino.totalFundsTransferredToDepositPool() == 0) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol)
+	- initialDepositBalance = casino.totalFundsSentByOwner() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol)
+	- (currentRevenue,isCurrentRevenuePositive) = getOngoingRevenue() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol)
+	- require(bool)(isCurrentRevenuePositive && currentRevenue > initialDepositBalance * settings.REVENUE_TO_INITIAL_DEPOSIT_RATIO()) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol)
+	- casino.setTotalFundsTransferredToDepositPool(initialDepositBalance) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol)
+	External calls sending eth:
+	- receiver.transfer(initialDepositBalance) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol)
+	State variables written after the call(s):
+	- depositPoolTransferCycle (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities[0m
+INFO:Detectors:[91m
+BadBitCasino.users (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1390-1391) shadows:
+	- BadBitWallet.users (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1141)
+BadBitCasino.totalFundsSentByOwner (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1366) shadows:
+	- BadBitWallet.totalFundsSentByOwner (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1157-1158)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variable-shadowing[0m
+INFO:Detectors:[93m
+Buffer.init (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#507-522) is declared view but contains assembly code
+Buffer.append (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#537-571) is declared view but contains assembly code
+Buffer.append (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#575-592) is declared view but contains assembly code
+Buffer.appendInt (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#595-617) is declared view but contains assembly code
+usingOraclize.getCodeSize (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#814-818) is declared view but contains assembly code
+usingOraclize.copyBytes (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#998-1015) is declared view but contains assembly code
+usingOraclize.safeMemoryCleaner (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1109-1115) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+Reentrancy in BadBitCasino.__callback (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1560-1618):
+	External calls:
+	- msg.sender != oraclize_cbAddress() && ! settings.isOperatorAddress(msg.sender) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1563)
+	- require(bool)(settings.USE_BLOCKHASH_RANDOM_SEED() || bytes(result)[0] != 0) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1568)
+	- settings.isOperatorAddress(msg.sender) || settings.USE_BLOCKHASH_RANDOM_SEED() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1570-1578)
+	- commissionEarned += getCommission(donBets[myid].amount) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1580-1583)
+	- winnings = getPossibleWinnings(donBets[myid].amount) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1584-1587)
+	- updatePlayerLevelIfNeeded(donBets[myid].sender) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1590-1591)
+	State variables written after the call(s):
+	- donBets (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1594)
+Reentrancy in BadBitCasino.__callback (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1560-1618):
+	External calls:
+	- msg.sender != oraclize_cbAddress() && ! settings.isOperatorAddress(msg.sender) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1563)
+	- require(bool)(settings.USE_BLOCKHASH_RANDOM_SEED() || bytes(result)[0] != 0) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1568)
+	- settings.isOperatorAddress(msg.sender) || settings.USE_BLOCKHASH_RANDOM_SEED() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1570-1578)
+	- commissionEarned += getCommission(donBets[myid].amount) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1580-1583)
+	- winnings = getPossibleWinnings(donBets[myid].amount) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1584-1587)
+	- updatePlayerLevelIfNeeded(donBets[myid].sender) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1590-1591)
+	- distributor.winTokens(donBets[myid].sender) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1611)
+	- tokensWon = distributor.getStandardLot() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1612)
+	State variables written after the call(s):
+	- donBets (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1617-1618)
+Reentrancy in BadBitCasino._finalizeLastBets (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1464-1513):
+	External calls:
+	- count > 0 && needToUpdateBetsForUser(_user) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1466-1513)
+	- (None,finalized,None,isBonus) = GameInterface(betObject.game).getBetInfo(_user,betObject.betId) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1470-1473)
+	- (None,isFirstFinalized,None,None) = GameInterface(bets[_user][starting].game).getBetInfo(_user,bets[_user][starting].betId) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1506-1508)
+	State variables written after the call(s):
+	- firstUnfinalizedBet (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1510)
+Reentrancy in BadBitDistributor.endCycle (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2066-2111):
+	External calls:
+	- fundsLostByPlayersUntilCycle[currentCycle] = getFundsLostByPlayers() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2075-2077)
+	- totalPlayerProfitsUntilCycle[currentCycle] = casino.totalPlayerProfits() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2079-2080)
+	- fundsSpentOnOraclizeUntilCycle[currentCycle] = getFundsSpentOnOraclize() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2080-2084)
+	- distributedTokensInCycle[currentCycle] = getDistributedTokens() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2085-2086)
+	- (revenueForCycle[currentCycle],isCycleRevenuePositive[currentCycle]) = getOngoingRevenue() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2090-2092)
+	- totalSupply = token.totalSupply() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2093)
+	- casino.addAmountByDistributor(profitHolder,amount) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol)
+	State variables written after the call(s):
+	- currentCycle (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol)
+	- fundsSpentOnDistributionGasCosts (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol)
+Reentrancy in usingOraclize.oraclizeAPI (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#716-726):
+	External calls:
+	- address(oraclize) != OAR.getAddress() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#722-726)
+	- oraclize = OraclizeI(OAR.getAddress()) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#723-726)
+	State variables written after the call(s):
+	- oraclize (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#723-726)
+Reentrancy in BadBitCasino.placeBet (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1446-1464):
+	External calls:
+	- require(bool)(settings.BETS_ALLOWED()) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1447-1448)
+	- _finalizeLastBets(_user) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1449-1450)
+	State variables written after the call(s):
+	- bets (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1453-1454)
+	- totalPlayerBalances (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1452-1453)
+	- userBalances (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1452-1453)
+	- userBonusBalances (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1450)
+Reentrancy in BadBitCasino.placeBet (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1446-1464):
+	External calls:
+	- require(bool)(settings.BETS_ALLOWED()) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1447-1448)
+	- _finalizeLastBets(_user) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1449-1450)
+	- firstUnfinalizedBet[_user] != bets[_user].length - 1 && ! needToUpdateBetsForUser(_user) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1460-1464)
+	State variables written after the call(s):
+	- firstUnfinalizedBet (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1463-1464)
+Reentrancy in BadBitDistributor.sendRevenueToUser (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1975-1989):
+	External calls:
+	- amount = getUsersRevenue(_user,_to) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1978)
+	State variables written after the call(s):
+	- startingCycleForUser (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1984)
+Reentrancy in BadBitDistributor.skipFirstDistributionCycle (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1819-1836):
+	External calls:
+	- fundsLostByPlayersUntilCycle[currentCycle] = getFundsLostByPlayers() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1822)
+	- totalPlayerProfitsUntilCycle[currentCycle] = casino.totalPlayerProfits() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1822-1824)
+	- fundsSpentOnOraclizeUntilCycle[currentCycle] = getFundsSpentOnOraclize() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1824-1825)
+	- distributedTokensInCycle[currentCycle] = getDistributedTokens() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1832-1836)
+	State variables written after the call(s):
+	- currentCycle (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1836)
+Reentrancy in BadBitDistributor.stake (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2044-2051):
+	External calls:
+	- sendRevenueToUser(msg.sender,currentCycle) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2044)
+	- token.transferFrom(msg.sender,address(this),_amount) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2047-2048)
+	State variables written after the call(s):
+	- stakedTokens (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2048)
+	- startingCycleForUser (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2048-2050)
+Reentrancy in BadBitDistributor.unstake (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2051-2055):
+	External calls:
+	- sendRevenueToUser(msg.sender,currentCycle) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2054)
+	State variables written after the call(s):
+	- stakedTokens (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2054)
+Reentrancy in BadBitDistributor.unstake (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2051-2055):
+	External calls:
+	- sendRevenueToUser(msg.sender,currentCycle) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2054)
+	- token.transfer(msg.sender,_amount) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2055)
+	State variables written after the call(s):
+	- startingCycleForUser (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2055)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+BadBitWallet._subtract uses tx.origin for authorization:
+	- require(bool)(tx.origin == _user) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1198-1199)
+BadBitWallet._subtractBonus uses tx.origin for authorization:
+	- require(bool)(tx.origin == _user) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1273)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-usage-of-txorigin[0m
+INFO:Detectors:[93m
+buf in usingOraclize.ba2cbor (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#828-829) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[93m
+CBOR.encodeType (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#626-648) does not use the value returned by external calls:
+	-_buf.appendInt(_value,1) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#636)
+	-_buf.appendInt(_value,2) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#640)
+	-_buf.appendInt(_value,4) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#642-643)
+	-_buf.appendInt(_value,8) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#648)
+CBOR.encodeBytes (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#666-675) does not use the value returned by external calls:
+	-_buf.append(_value) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#672-675)
+CBOR.encodeString (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#675-684) does not use the value returned by external calls:
+	-_buf.append(bytes(_value)) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#683-684)
+BadBitDistributor.sendTokens (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1906-1910) does not use the value returned by external calls:
+	-token.transferFrom(tokenHolder,_user,_amount) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1907)
+BadBitDistributor.stake (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2044-2051) does not use the value returned by external calls:
+	-token.transferFrom(msg.sender,address(this),_amount) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2047-2048)
+BadBitDistributor.unstake (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2051-2055) does not use the value returned by external calls:
+	-token.transfer(msg.sender,_amount) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2055)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+BadBitCasino._finalizeLastBets has external calls inside a loop:
+	- (None,finalized,None,isBonus) = GameInterface(betObject.game).getBetInfo(_user,betObject.betId) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1470-1473)
+BadBitCasino._finalizeLastBets has external calls inside a loop:
+	- GameInterface(betObject.game).canFinalizeBet(_user,betObject.betId) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1479-1510)
+BadBitCasino._finalizeLastBets has external calls inside a loop:
+	- (profit,totalWon) = GameInterface(betObject.game).finalizeBet(_user,betObject.betId) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1481-1483)
+BadBitCasino._finalizeLastBets has external calls inside a loop:
+	- totalWon > settings.BIG_WIN_THRESHOLD() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1495-1499)
+BadBitCasino._finalizeLastBets has external calls inside a loop:
+	- (None,isFirstFinalized,None,None) = GameInterface(bets[_user][starting].game).getBetInfo(_user,bets[_user][starting].betId) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1506-1508)
+BadBitCasino.getCurrentBalance has external calls inside a loop:
+	- (amount,finalized) = GameInterface(betObject.game).getBetInfo(_user,betObject.betId) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1632-1633)
+BadBitCasino.getCurrentBalance has external calls inside a loop:
+	- winnings = GameInterface(betObject.game).getUserProfitForFinishedBet(_user,betObject.betId) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1634-1636)
+BadBitCasino.updatePlayerLevelIfNeeded has external calls inside a loop:
+	- _addBonus(_user,settings.bonusBalanceRewardForLevel(currentPlayerLevel)) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1700-1702)
+BadBitCasino.emergencyShutdown has external calls inside a loop:
+	- GameInterface(games[i_scope_0]).emergencyWithdraw(msg.sender) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1728-1729)
+BadBitCasino.emergencyShutdown has external calls inside a loop:
+	- _addresses[i].transfer(userBalances[_addresses[i]]) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1721-1722)
+BadBitDistributor.shouldWinTokens has external calls inside a loop:
+	- (minB,maxB,gbs,gwp) = GameInterface(_contract).getParamsForTokenCaluclation(_chances[i]) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1900)
+BadBitDistributor.getFundsLostByPlayers has external calls inside a loop:
+	- fundsLostByPlayers += GameInterface(games[i]).totalFundsLostByPlayers() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1923)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in BadBitCasino.__callback (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1560-1618):
+	External calls:
+	- msg.sender != oraclize_cbAddress() && ! settings.isOperatorAddress(msg.sender) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1563)
+	- require(bool)(settings.USE_BLOCKHASH_RANDOM_SEED() || bytes(result)[0] != 0) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1568)
+	- settings.isOperatorAddress(msg.sender) || settings.USE_BLOCKHASH_RANDOM_SEED() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1570-1578)
+	- commissionEarned += getCommission(donBets[myid].amount) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1580-1583)
+	- winnings = getPossibleWinnings(donBets[myid].amount) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1584-1587)
+	State variables written after the call(s):
+	- totalWinningsForPlayer (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1589-1590)
+Reentrancy in BadBitCasino.__callback (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1560-1618):
+	External calls:
+	- msg.sender != oraclize_cbAddress() && ! settings.isOperatorAddress(msg.sender) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1563)
+	- require(bool)(settings.USE_BLOCKHASH_RANDOM_SEED() || bytes(result)[0] != 0) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1568)
+	- settings.isOperatorAddress(msg.sender) || settings.USE_BLOCKHASH_RANDOM_SEED() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1570-1578)
+	- commissionEarned += getCommission(donBets[myid].amount) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1580-1583)
+	- winnings = getPossibleWinnings(donBets[myid].amount) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1584-1587)
+	- updatePlayerLevelIfNeeded(donBets[myid].sender) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1590-1591)
+	State variables written after the call(s):
+	- lastWonAmountPerGame (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1591-1594)
+	- totalPlayerBalances (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1591)
+	- userBalances (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1591)
+Reentrancy in BadBitCasino.__callback (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1560-1618):
+	External calls:
+	- msg.sender != oraclize_cbAddress() && ! settings.isOperatorAddress(msg.sender) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1563)
+	- require(bool)(settings.USE_BLOCKHASH_RANDOM_SEED() || bytes(result)[0] != 0) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1568)
+	- settings.isOperatorAddress(msg.sender) || settings.USE_BLOCKHASH_RANDOM_SEED() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1570-1578)
+	State variables written after the call(s):
+	- totalFundsLostByPlayers (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1594-1596)
+Reentrancy in BadBitCasino._finalizeLastBets (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1464-1513):
+	External calls:
+	- count > 0 && needToUpdateBetsForUser(_user) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1466-1513)
+	- (None,finalized,None,isBonus) = GameInterface(betObject.game).getBetInfo(_user,betObject.betId) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1470-1473)
+	- GameInterface(betObject.game).canFinalizeBet(_user,betObject.betId) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1479-1510)
+	- (profit,totalWon) = GameInterface(betObject.game).finalizeBet(_user,betObject.betId) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1481-1483)
+	State variables written after the call(s):
+	- totalPlayerBalances (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1484)
+	- totalPlayerProfits (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1485-1489)
+	- totalPlayerProfits (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1485-1489)
+	- totalWinningsForPlayer (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1489-1490)
+	- userBalances (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1484)
+Reentrancy in BadBitCasino._finalizeLastBets (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1464-1513):
+	External calls:
+	- count > 0 && needToUpdateBetsForUser(_user) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1466-1513)
+	- (None,finalized,None,isBonus) = GameInterface(betObject.game).getBetInfo(_user,betObject.betId) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1470-1473)
+	- GameInterface(betObject.game).canFinalizeBet(_user,betObject.betId) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1479-1510)
+	- (profit,totalWon) = GameInterface(betObject.game).finalizeBet(_user,betObject.betId) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1481-1483)
+	- updatePlayerLevelIfNeeded(_user) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1490-1492)
+	State variables written after the call(s):
+	- lastWonAmountPerGame (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1494-1495)
+Reentrancy in BadBitDistributor.changeStageIfNeeded (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1845-1850):
+	External calls:
+	- totalSupply = token.totalSupply() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1846)
+	- tokensDistributed = getDistributedTokens() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1846-1848)
+	State variables written after the call(s):
+	- currentStage (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1849-1850)
+Reentrancy in BadBitDistributor.endCycle (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2066-2111):
+	External calls:
+	- fundsLostByPlayersUntilCycle[currentCycle] = getFundsLostByPlayers() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2075-2077)
+	- totalPlayerProfitsUntilCycle[currentCycle] = casino.totalPlayerProfits() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2079-2080)
+	State variables written after the call(s):
+	- totalPlayerProfitsUntilCycle (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2079-2080)
+Reentrancy in BadBitDistributor.endCycle (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2066-2111):
+	External calls:
+	- fundsLostByPlayersUntilCycle[currentCycle] = getFundsLostByPlayers() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2075-2077)
+	- totalPlayerProfitsUntilCycle[currentCycle] = casino.totalPlayerProfits() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2079-2080)
+	- fundsSpentOnOraclizeUntilCycle[currentCycle] = getFundsSpentOnOraclize() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2080-2084)
+	State variables written after the call(s):
+	- fundsSpentOnDistributionUntilCycle (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2084-2085)
+	- fundsSpentOnOraclizeUntilCycle (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2080-2084)
+Reentrancy in BadBitDistributor.endCycle (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2066-2111):
+	External calls:
+	- fundsLostByPlayersUntilCycle[currentCycle] = getFundsLostByPlayers() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2075-2077)
+	- totalPlayerProfitsUntilCycle[currentCycle] = casino.totalPlayerProfits() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2079-2080)
+	- fundsSpentOnOraclizeUntilCycle[currentCycle] = getFundsSpentOnOraclize() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2080-2084)
+	- distributedTokensInCycle[currentCycle] = getDistributedTokens() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2085-2086)
+	State variables written after the call(s):
+	- distributedTokensInCycle (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2085-2086)
+	- stageInCycle (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2086-2088)
+	- totalStakedInCycle (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2088-2090)
+Reentrancy in usingOraclize.oraclize_newRandomDSQuery (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#832-880):
+	External calls:
+	- sessionKeyHash_bytes32 = oraclize_randomDS_getSessionPubKeyHash() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#843-844)
+	- queryId = oraclize_query(random,args,_customGasLimit) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#853)
+	External calls sending eth:
+	- queryId = oraclize_query(random,args,_customGasLimit) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#853)
+	State variables written after the call(s):
+	- oraclize_network_name (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#853)
+	- oraclize_randomDS_args (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#875-880)
+Reentrancy in BadBitCasino.placeBet (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1446-1464):
+	External calls:
+	- require(bool)(settings.BETS_ALLOWED()) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1447-1448)
+	State variables written after the call(s):
+	- users (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1449)
+Reentrancy in BadBitCasino.placeBet (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1446-1464):
+	External calls:
+	- require(bool)(settings.BETS_ALLOWED()) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1447-1448)
+	- _finalizeLastBets(_user) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1449-1450)
+	State variables written after the call(s):
+	- lastWonAmountPerGame (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1449-1450)
+Reentrancy in BadBitCasino.placeBetForDoubleOrNothing (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1526-1560):
+	External calls:
+	- require(bool)(settings.BETS_ALLOWED()) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1526-1528)
+	- _finalizeLastBets(msg.sender) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1528)
+	State variables written after the call(s):
+	- lastWonAmountPerGame (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1528)
+Reentrancy in BadBitCasino.placeBetForDoubleOrNothing (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1526-1560):
+	External calls:
+	- require(bool)(settings.BETS_ALLOWED()) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1526-1528)
+	- _finalizeLastBets(msg.sender) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1528)
+	- _gasPrice < settings.MIN_GAS_PRICE() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1534-1540)
+	- _gasPrice = settings.MIN_GAS_PRICE() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1535-1536)
+	- _gasPrice > settings.MAX_GAS_PRICE() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1537-1540)
+	- _gasPrice = settings.MAX_GAS_PRICE() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1537-1540)
+	- oraclize_setCustomGasPrice(_gasPrice) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1540-1541)
+	State variables written after the call(s):
+	- oraclize_network_name (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1540-1541)
+Reentrancy in BadBitCasino.placeBetForDoubleOrNothing (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1526-1560):
+	External calls:
+	- require(bool)(settings.BETS_ALLOWED()) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1526-1528)
+	- _finalizeLastBets(msg.sender) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1528)
+	- _gasPrice < settings.MIN_GAS_PRICE() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1534-1540)
+	- _gasPrice = settings.MIN_GAS_PRICE() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1535-1536)
+	- _gasPrice > settings.MAX_GAS_PRICE() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1537-1540)
+	- _gasPrice = settings.MAX_GAS_PRICE() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1537-1540)
+	- oraclize_setCustomGasPrice(_gasPrice) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1540-1541)
+	- gasLimit = settings.ORACLIZE_GAS_LIMIT() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1542)
+	- settings.USE_BLOCKHASH_RANDOM_SEED() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1542-1546)
+	- queryId = oraclize_query(0,URL,,gasLimit) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1542-1546)
+	- queryId = oraclize_newRandomDSQuery(0,8,gasLimit) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1542-1546)
+	- settings.USE_BLOCKHASH_RANDOM_SEED() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1546-1549)
+	- totalFundsSpentOnOraclize += oraclize_getPrice(url,gasLimit) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1546-1549)
+	- totalFundsSpentOnOraclize += oraclize_getPrice(random,gasLimit) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1546-1549)
+	External calls sending eth:
+	- queryId = oraclize_query(0,URL,,gasLimit) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1542-1546)
+	- queryId = oraclize_newRandomDSQuery(0,8,gasLimit) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1542-1546)
+	State variables written after the call(s):
+	- donBets (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1549-1553)
+Reentrancy in BadBitCasino.placeBetForDoubleOrNothing (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1526-1560):
+	External calls:
+	- require(bool)(settings.BETS_ALLOWED()) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1526-1528)
+	- _finalizeLastBets(msg.sender) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1528)
+	- _gasPrice < settings.MIN_GAS_PRICE() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1534-1540)
+	- _gasPrice = settings.MIN_GAS_PRICE() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1535-1536)
+	- _gasPrice > settings.MAX_GAS_PRICE() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1537-1540)
+	- _gasPrice = settings.MAX_GAS_PRICE() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1537-1540)
+	- oraclize_setCustomGasPrice(_gasPrice) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1540-1541)
+	- gasLimit = settings.ORACLIZE_GAS_LIMIT() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1542)
+	- settings.USE_BLOCKHASH_RANDOM_SEED() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1542-1546)
+	- queryId = oraclize_query(0,URL,,gasLimit) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1542-1546)
+	External calls sending eth:
+	- queryId = oraclize_query(0,URL,,gasLimit) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1542-1546)
+	State variables written after the call(s):
+	- oraclize_network_name (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1542-1546)
+Reentrancy in BadBitCasino.placeBetForDoubleOrNothing (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1526-1560):
+	External calls:
+	- require(bool)(settings.BETS_ALLOWED()) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1526-1528)
+	- _finalizeLastBets(msg.sender) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1528)
+	- _gasPrice < settings.MIN_GAS_PRICE() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1534-1540)
+	- _gasPrice = settings.MIN_GAS_PRICE() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1535-1536)
+	- _gasPrice > settings.MAX_GAS_PRICE() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1537-1540)
+	- _gasPrice = settings.MAX_GAS_PRICE() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1537-1540)
+	- oraclize_setCustomGasPrice(_gasPrice) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1540-1541)
+	- gasLimit = settings.ORACLIZE_GAS_LIMIT() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1542)
+	- queryId = oraclize_newRandomDSQuery(0,8,gasLimit) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1542-1546)
+	External calls sending eth:
+	- queryId = oraclize_newRandomDSQuery(0,8,gasLimit) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1542-1546)
+	State variables written after the call(s):
+	- oraclize_network_name (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1542-1546)
+	- oraclize_randomDS_args (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1542-1546)
+Reentrancy in BadBitCasino.placeBetForDoubleOrNothing (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1526-1560):
+	External calls:
+	- require(bool)(settings.BETS_ALLOWED()) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1526-1528)
+	- _finalizeLastBets(msg.sender) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1528)
+	- _gasPrice < settings.MIN_GAS_PRICE() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1534-1540)
+	- _gasPrice = settings.MIN_GAS_PRICE() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1535-1536)
+	- _gasPrice > settings.MAX_GAS_PRICE() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1537-1540)
+	- _gasPrice = settings.MAX_GAS_PRICE() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1537-1540)
+	- oraclize_setCustomGasPrice(_gasPrice) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1540-1541)
+	- gasLimit = settings.ORACLIZE_GAS_LIMIT() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1542)
+	- settings.USE_BLOCKHASH_RANDOM_SEED() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1542-1546)
+	- queryId = oraclize_query(0,URL,,gasLimit) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1542-1546)
+	- queryId = oraclize_newRandomDSQuery(0,8,gasLimit) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1542-1546)
+	- settings.USE_BLOCKHASH_RANDOM_SEED() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1546-1549)
+	- totalFundsSpentOnOraclize += oraclize_getPrice(url,gasLimit) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1546-1549)
+	External calls sending eth:
+	- queryId = oraclize_query(0,URL,,gasLimit) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1542-1546)
+	- queryId = oraclize_newRandomDSQuery(0,8,gasLimit) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1542-1546)
+	State variables written after the call(s):
+	- oraclize_network_name (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1546-1549)
+Reentrancy in BadBitCasino.placeBetForDoubleOrNothing (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1526-1560):
+	External calls:
+	- require(bool)(settings.BETS_ALLOWED()) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1526-1528)
+	- _finalizeLastBets(msg.sender) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1528)
+	- _gasPrice < settings.MIN_GAS_PRICE() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1534-1540)
+	- _gasPrice = settings.MIN_GAS_PRICE() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1535-1536)
+	- _gasPrice > settings.MAX_GAS_PRICE() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1537-1540)
+	- _gasPrice = settings.MAX_GAS_PRICE() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1537-1540)
+	- oraclize_setCustomGasPrice(_gasPrice) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1540-1541)
+	- gasLimit = settings.ORACLIZE_GAS_LIMIT() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1542)
+	- settings.USE_BLOCKHASH_RANDOM_SEED() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1542-1546)
+	- queryId = oraclize_query(0,URL,,gasLimit) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1542-1546)
+	- queryId = oraclize_newRandomDSQuery(0,8,gasLimit) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1542-1546)
+	- totalFundsSpentOnOraclize += oraclize_getPrice(random,gasLimit) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1546-1549)
+	External calls sending eth:
+	- queryId = oraclize_query(0,URL,,gasLimit) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1542-1546)
+	- queryId = oraclize_newRandomDSQuery(0,8,gasLimit) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1542-1546)
+	State variables written after the call(s):
+	- oraclize_network_name (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1546-1549)
+Reentrancy in BadBitDistributor.skipFirstDistributionCycle (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1819-1836):
+	External calls:
+	- fundsLostByPlayersUntilCycle[currentCycle] = getFundsLostByPlayers() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1822)
+	- totalPlayerProfitsUntilCycle[currentCycle] = casino.totalPlayerProfits() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1822-1824)
+	State variables written after the call(s):
+	- totalPlayerProfitsUntilCycle (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1822-1824)
+Reentrancy in BadBitDistributor.skipFirstDistributionCycle (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1819-1836):
+	External calls:
+	- fundsLostByPlayersUntilCycle[currentCycle] = getFundsLostByPlayers() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1822)
+	- totalPlayerProfitsUntilCycle[currentCycle] = casino.totalPlayerProfits() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1822-1824)
+	- fundsSpentOnOraclizeUntilCycle[currentCycle] = getFundsSpentOnOraclize() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1824-1825)
+	State variables written after the call(s):
+	- fundsSpentOnDistributionUntilCycle (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1828-1832)
+	- fundsSpentOnOraclizeUntilCycle (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1824-1825)
+Reentrancy in BadBitDistributor.skipFirstDistributionCycle (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1819-1836):
+	External calls:
+	- fundsLostByPlayersUntilCycle[currentCycle] = getFundsLostByPlayers() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1822)
+	- totalPlayerProfitsUntilCycle[currentCycle] = casino.totalPlayerProfits() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1822-1824)
+	- fundsSpentOnOraclizeUntilCycle[currentCycle] = getFundsSpentOnOraclize() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1824-1825)
+	- distributedTokensInCycle[currentCycle] = getDistributedTokens() (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1832-1836)
+	State variables written after the call(s):
+	- distributedTokensInCycle (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1832-1836)
+	- stageInCycle (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1836)
+	- totalStakedInCycle (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1836)
+Reentrancy in BadBitDistributor.stake (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2044-2051):
+	External calls:
+	- sendRevenueToUser(msg.sender,currentCycle) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2044)
+	State variables written after the call(s):
+	- stakedTokensPeriodEnd (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2046-2047)
+Reentrancy in BadBitDistributor.stake (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2044-2051):
+	External calls:
+	- sendRevenueToUser(msg.sender,currentCycle) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2044)
+	- token.transferFrom(msg.sender,address(this),_amount) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2047-2048)
+	State variables written after the call(s):
+	- totalStaked (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2050)
+Reentrancy in BadBitDistributor.unstake (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2051-2055):
+	External calls:
+	- sendRevenueToUser(msg.sender,currentCycle) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2054)
+	- token.transfer(msg.sender,_amount) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2055)
+	State variables written after the call(s):
+	- totalStaked (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2055)
+Reentrancy in BadBitWallet.withdraw (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1291-1323):
+	External calls:
+	- BadBitCasino(address(this))._finalizeLastBets(_user) (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1301-1305)
+	State variables written after the call(s):
+	- totalPlayerBalances (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1311-1314)
+	- userBalances (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1309-1311)
+	- userWithdrawals (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1314-1321)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Buffer.init uses assembly (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#507-522)
+	- /sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#519-522
+Buffer.append uses assembly (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#537-571)
+	- /sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#543-558
+	- /sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#560-561
+	- /sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#565-570
+Buffer.append uses assembly (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#575-592)
+	- /sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#581-591
+Buffer.appendInt uses assembly (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#595-617)
+	- /sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#607-616
+usingOraclize.getCodeSize uses assembly (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#814-818)
+	- /sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#818
+usingOraclize.oraclize_newRandomDSQuery uses assembly (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#832-880)
+	- /sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#844-850
+	- /sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#851
+	- /sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#854-875
+usingOraclize.verifySig uses assembly (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#884-901)
+	- /sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#893-895
+usingOraclize.copyBytes uses assembly (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#998-1015)
+	- /sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1009-1013
+usingOraclize.safer_ecrecover uses assembly (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1021-1046)
+	- /sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1036-1045
+usingOraclize.ecrecovery uses assembly (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1048-1108)
+	- /sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1061-1083
+usingOraclize.safeMemoryCleaner uses assembly (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1109-1115)
+	- /sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1111-1115
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+GameInterface.commissionEarned should be constant (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#397)
+GameInterface.totalFundsLostByPlayers should be constant (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#398)
+OraclizeI.cbAddress should be constant (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#446)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+BadBitSettings.addGame (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#245-249) should be declared external
+BadBitSettings.removeGame (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#255-276) should be declared external
+BadBitSettings.addOperator (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#282-287) should be declared external
+BadBitSettings.removeOperator (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#292-312) should be declared external
+BadBitSettings.setMaxGasPriceInGwei (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#313-320) should be declared external
+BadBitSettings.setMinGasPriceInGwei (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#320-329) should be declared external
+BadBitSettings.setBetsAllowed (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#329-332) should be declared external
+BadBitSettings.setBigWin (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#332-338) should be declared external
+BadBitSettings.setMaxChanceForBonus (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#338-345) should be declared external
+BadBitSettings.setMaxDonInRow (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#347-352) should be declared external
+BadBitSettings.setHouseEdge (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#354-366) should be declared external
+BadBitSettings.setOraclizeGasLimit (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#366-370) should be declared external
+BadBitSettings.setMaxWp (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#370-373) should be declared external
+BadBitSettings.setMinWp (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#373-377) should be declared external
+BadBitSettings.setUseBlockhashRandomSeed (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#377-381) should be declared external
+BadBitSettings.setRevenueToInitialDepositRatio (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#382-391) should be declared external
+BadBitSettings.getOperators (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#391-394) should be declared external
+BadBitSettings.getGames (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#394-395) should be declared external
+BadBitSettings.getNumberOfGames (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#395-396) should be declared external
+GameInterface.finalizeBet (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#398-399) should be declared external
+GameInterface.canFinalizeBet (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#399-400) should be declared external
+GameInterface.getUserProfitForFinishedBet (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#400) should be declared external
+GameInterface.getTotalBets (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#401-402) should be declared external
+GameInterface.getPossibleWinnings (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#405-409) should be declared external
+GameInterface.getBetInfo (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#411-412) should be declared external
+GameInterface.getParamsForTokenCaluclation (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#412-414) should be declared external
+GameInterface.emergencyWithdraw (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#414-415) should be declared external
+OraclizeI.getPrice (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#447) should be declared external
+OraclizeI.getPrice (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#448-449) should be declared external
+OraclizeI.queryN (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#449-450) should be declared external
+OraclizeI.query2 (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#450-451) should be declared external
+OraclizeAddrResolverI.getAddress (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#470) should be declared external
+BadBitCasino.__callback (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1560-1618) should be declared external
+usingOraclize.__callback (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#763-766) should be declared external
+IBadBitDistributor.sendTokens (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1117-1119) should be declared external
+IBadBitDistributor.getStandardLot (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1119-1122) should be declared external
+IBadBitDistributor.shouldWinTokens (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1122-1127) should be declared external
+IBadBitDistributor.winTokens (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1127-1128) should be declared external
+BadBitWallet.setDistributor (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1175-1181) should be declared external
+BadBitWallet.topUp (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1184-1188) should be declared external
+BadBitWallet.add (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1209-1212) should be declared external
+BadBitWallet.addBonus (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1236-1240) should be declared external
+BadBitWallet.subtractBonus (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1258-1262) should be declared external
+BadBitWallet.withdraw (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1291-1323) should be declared external
+BadBitWallet.getNumberOfUserWithdrawals (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1324-1328) should be declared external
+BadBitWallet.addAmountByDistributor (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1328-1333) should be declared external
+BadBitCasino.fillAmountRequiredForLevel (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1403-1446) should be declared external
+BadBitCasino.placeBet (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1446-1464) should be declared external
+BadBitCasino.finalizeLastBetsForAddresses (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1520-1526) should be declared external
+BadBitCasino.placeBetForDoubleOrNothing (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1526-1560) should be declared external
+BadBitCasino.getCurrentBalance (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1622-1642) should be declared external
+BadBitCasino.getExtraTokenWinChanceForPlayer (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1670-1677) should be declared external
+BadBitCasino.sendEthToGame (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1708-1714) should be declared external
+BadBitCasino.emergencyShutdown (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1714-1730) should be declared external
+BadBitCasino.setTotalFundsTransferredToDepositPool (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1730-1733) should be declared external
+BadBitCasino.getTotalBets (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1736-1740) should be declared external
+BadBitCasino.getUsers (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1740-1745) should be declared external
+BadBitDistributor.skipFirstDistributionCycle (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1819-1836) should be declared external
+BadBitDistributor.winTokens (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1883-1887) should be declared external
+BadBitDistributor.shouldWinTokens (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1887-1906) should be declared external
+BadBitDistributor.getUsersOngoingRevenue (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2025-2042) should be declared external
+BadBitDistributor.stake (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2044-2051) should be declared external
+BadBitDistributor.unstake (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2051-2055) should be declared external
+BadBitDistributor.setMinimumStakingPeriod (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2057-2058) should be declared external
+BadBitDistributor.setDistributionPeriod (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2058-2065) should be declared external
+BadBitDistributor.setCurrentStage (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2065-2066) should be declared external
+BadBitDistributor.endCycle (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2066-2111) should be declared external
+BadBitDistributor.distributeRevenueToUsers (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol) should be declared external
+BadBitDistributor.transferFundsToDepositPool (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol) should be declared external
+BadBitDistributor.setProfitHolder (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol) should be declared external
+BadBitDistributor.setLotSize (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol) should be declared external
+BadBitDistributor.setMaxPercentage (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol:
+	- pragma solidity^0.5.0 (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#5-7): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_address' of BadBitSettings.addGame (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#245-246) is not in mixedCase
+Parameter '_address' of BadBitSettings.removeGame (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#255) is not in mixedCase
+Parameter '_address' of BadBitSettings.addOperator (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#282) is not in mixedCase
+Parameter '_address' of BadBitSettings.removeOperator (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#292) is not in mixedCase
+Parameter '_maxGasPrice' of BadBitSettings.setMaxGasPriceInGwei (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#314-315) is not in mixedCase
+Parameter '_minGasPrice' of BadBitSettings.setMinGasPriceInGwei (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#323) is not in mixedCase
+Parameter '_betsAllowed' of BadBitSettings.setBetsAllowed (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#329) is not in mixedCase
+Parameter '_bigWin' of BadBitSettings.setBigWin (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#333-335) is not in mixedCase
+Parameter '_chance' of BadBitSettings.setMaxChanceForBonus (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#341) is not in mixedCase
+Parameter '_count' of BadBitSettings.setMaxDonInRow (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#347) is not in mixedCase
+Parameter '_edge' of BadBitSettings.setHouseEdge (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#354) is not in mixedCase
+Parameter '_gas' of BadBitSettings.setOraclizeGasLimit (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#366) is not in mixedCase
+Parameter '_wp' of BadBitSettings.setMaxWp (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#370) is not in mixedCase
+Parameter '_wp' of BadBitSettings.setMinWp (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#373) is not in mixedCase
+Parameter '_use' of BadBitSettings.setUseBlockhashRandomSeed (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#380) is not in mixedCase
+Parameter '_ratio' of BadBitSettings.setRevenueToInitialDepositRatio (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#384) is not in mixedCase
+Variable 'BadBitSettings.ORACLIZE_GAS_LIMIT' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#152-153) is not in mixedCase
+Variable 'BadBitSettings.MAX_GAS_PRICE' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#154) is not in mixedCase
+Variable 'BadBitSettings.MIN_GAS_PRICE' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#155-156) is not in mixedCase
+Variable 'BadBitSettings.BIG_WIN_THRESHOLD' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#156-157) is not in mixedCase
+Variable 'BadBitSettings.MAX_CHANCE_FOR_BONUS_BETTING' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#158-159) is not in mixedCase
+Variable 'BadBitSettings.MAX_DON_IN_ROW' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#159-160) is not in mixedCase
+Variable 'BadBitSettings.HOUSE_EDGE' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#160-161) is not in mixedCase
+Variable 'BadBitSettings.MAX_WP' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#161) is not in mixedCase
+Variable 'BadBitSettings.MIN_WP' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#161-164) is not in mixedCase
+Variable 'BadBitSettings.REVENUE_TO_INITIAL_DEPOSIT_RATIO' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#164-166) is not in mixedCase
+Variable 'BadBitSettings.BETS_ALLOWED' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#166) is not in mixedCase
+Variable 'BadBitSettings.USE_BLOCKHASH_RANDOM_SEED' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#167-168) is not in mixedCase
+Contract 'solcChecker' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#444-445) is not in CapWords
+Function 'OraclizeI.randomDS_getSessionPubKeyHash' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#448) is not in mixedCase
+Function 'OraclizeI.query_withGasLimit' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#451-459) is not in mixedCase
+Function 'OraclizeI.queryN_withGasLimit' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#459-467) is not in mixedCase
+Function 'OraclizeI.query2_withGasLimit' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#467-469) is not in mixedCase
+Struct 'Buffer.buffer' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#503-507) is not in CapWords
+Parameter '_buf' of Buffer.init (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#507-508) is not in mixedCase
+Parameter '_capacity' of Buffer.init (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#508) is not in mixedCase
+Parameter '_buf' of Buffer.resize (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#523) is not in mixedCase
+Parameter '_capacity' of Buffer.resize (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#523-524) is not in mixedCase
+Parameter '_a' of Buffer.max (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#527) is not in mixedCase
+Parameter '_b' of Buffer.max (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#527-528) is not in mixedCase
+Parameter '_buf' of Buffer.append (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#537) is not in mixedCase
+Parameter '_data' of Buffer.append (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#537) is not in mixedCase
+Parameter '_buf' of Buffer.append (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#577-579) is not in mixedCase
+Parameter '_buf' of Buffer.appendInt (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#595) is not in mixedCase
+Parameter '_len' of Buffer.appendInt (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#596) is not in mixedCase
+Parameter '_buf' of CBOR.encodeType (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#627) is not in mixedCase
+Parameter '_major' of CBOR.encodeType (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#627-628) is not in mixedCase
+Parameter '_value' of CBOR.encodeType (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#628) is not in mixedCase
+Parameter '_buf' of CBOR.encodeIndefiniteLengthType (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#649) is not in mixedCase
+Parameter '_major' of CBOR.encodeIndefiniteLengthType (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#649-650) is not in mixedCase
+Parameter '_buf' of CBOR.encodeUInt (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#653) is not in mixedCase
+Parameter '_value' of CBOR.encodeUInt (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#654) is not in mixedCase
+Parameter '_buf' of CBOR.encodeInt (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#658) is not in mixedCase
+Parameter '_value' of CBOR.encodeInt (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#658) is not in mixedCase
+Parameter '_buf' of CBOR.encodeBytes (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#666) is not in mixedCase
+Parameter '_value' of CBOR.encodeBytes (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#666-667) is not in mixedCase
+Parameter '_buf' of CBOR.encodeString (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#677-679) is not in mixedCase
+Parameter '_value' of CBOR.encodeString (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#679-680) is not in mixedCase
+Parameter '_buf' of CBOR.startArray (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#685-686) is not in mixedCase
+Parameter '_buf' of CBOR.startMap (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#689) is not in mixedCase
+Parameter '_buf' of CBOR.endSequence (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#693-694) is not in mixedCase
+Contract 'usingOraclize' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#697-1115) is not in CapWords
+Function 'usingOraclize.oraclize_setNetwork' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#737-741) is not in mixedCase
+Function 'usingOraclize.oraclize_setNetworkName' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#741-744) is not in mixedCase
+Parameter '_network_name' of usingOraclize.oraclize_setNetworkName (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#741-742) is not in mixedCase
+Function 'usingOraclize.oraclize_getNetworkName' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#745-749) is not in mixedCase
+Function 'usingOraclize.oraclize_setNetwork' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#749-763) is not in mixedCase
+Function 'usingOraclize.__callback' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#763-766) is not in mixedCase
+Parameter '_myid' of usingOraclize.__callback (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#764) is not in mixedCase
+Parameter '_result' of usingOraclize.__callback (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#764) is not in mixedCase
+Function 'usingOraclize.__callback' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#766-769) is not in mixedCase
+Function 'usingOraclize.oraclize_getPrice' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#769-774) is not in mixedCase
+Parameter '_datasource' of usingOraclize.oraclize_getPrice (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#770) is not in mixedCase
+Parameter '_gasLimit' of usingOraclize.oraclize_getPrice (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#770) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#774-784) is not in mixedCase
+Parameter '_timestamp' of usingOraclize.oraclize_query (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#774-775) is not in mixedCase
+Parameter '_datasource' of usingOraclize.oraclize_query (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#775) is not in mixedCase
+Parameter '_arg' of usingOraclize.oraclize_query (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#775) is not in mixedCase
+Parameter '_gasLimit' of usingOraclize.oraclize_query (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#775) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#784-799) is not in mixedCase
+Parameter '_datasource' of usingOraclize.oraclize_query (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#785) is not in mixedCase
+Parameter '_argN' of usingOraclize.oraclize_query (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#785-787) is not in mixedCase
+Parameter '_gasLimit' of usingOraclize.oraclize_query (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#788) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#799-809) is not in mixedCase
+Parameter '_datasource' of usingOraclize.oraclize_query (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#800-802) is not in mixedCase
+Parameter '_args' of usingOraclize.oraclize_query (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#802) is not in mixedCase
+Parameter '_gasLimit' of usingOraclize.oraclize_query (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#802) is not in mixedCase
+Function 'usingOraclize.oraclize_cbAddress' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#809-814) is not in mixedCase
+Function 'usingOraclize.oraclize_setCustomGasPrice' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#818-821) is not in mixedCase
+Parameter '_gasPrice' of usingOraclize.oraclize_setCustomGasPrice (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#819) is not in mixedCase
+Function 'usingOraclize.oraclize_randomDS_getSessionPubKeyHash' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#821-825) is not in mixedCase
+Parameter '_arr' of usingOraclize.ba2cbor (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#825) is not in mixedCase
+Function 'usingOraclize.oraclize_newRandomDSQuery' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#832-880) is not in mixedCase
+Parameter '_delay' of usingOraclize.oraclize_newRandomDSQuery (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#833) is not in mixedCase
+Parameter '_nbytes' of usingOraclize.oraclize_newRandomDSQuery (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#833) is not in mixedCase
+Parameter '_customGasLimit' of usingOraclize.oraclize_newRandomDSQuery (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#833) is not in mixedCase
+Function 'usingOraclize.oraclize_randomDS_setCommitment' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#880-884) is not in mixedCase
+Parameter '_queryId' of usingOraclize.oraclize_randomDS_setCommitment (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#881) is not in mixedCase
+Parameter '_commitment' of usingOraclize.oraclize_randomDS_setCommitment (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#881) is not in mixedCase
+Parameter '_tosignh' of usingOraclize.verifySig (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#884) is not in mixedCase
+Parameter '_dersig' of usingOraclize.verifySig (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#884-885) is not in mixedCase
+Parameter '_pubkey' of usingOraclize.verifySig (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#885) is not in mixedCase
+Function 'usingOraclize.oraclize_randomDS_proofVerify__sessionKeyValidity' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#901-933) is not in mixedCase
+Parameter '_proof' of usingOraclize.oraclize_randomDS_proofVerify__sessionKeyValidity (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#902-903) is not in mixedCase
+Parameter '_sig2offset' of usingOraclize.oraclize_randomDS_proofVerify__sessionKeyValidity (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#903-904) is not in mixedCase
+Function 'usingOraclize.oraclize_randomDS_proofVerify__returnCode' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#933-944) is not in mixedCase
+Parameter '_queryId' of usingOraclize.oraclize_randomDS_proofVerify__returnCode (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#936-939) is not in mixedCase
+Parameter '_result' of usingOraclize.oraclize_randomDS_proofVerify__returnCode (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#939) is not in mixedCase
+Parameter '_proof' of usingOraclize.oraclize_randomDS_proofVerify__returnCode (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#939) is not in mixedCase
+Parameter '_content' of usingOraclize.matchBytes32Prefix (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#944) is not in mixedCase
+Parameter '_prefix' of usingOraclize.matchBytes32Prefix (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#944) is not in mixedCase
+Parameter '_nRandomBytes' of usingOraclize.matchBytes32Prefix (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#944-945) is not in mixedCase
+Function 'usingOraclize.oraclize_randomDS_proofVerify__main' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#949-996) is not in mixedCase
+Parameter '_proof' of usingOraclize.oraclize_randomDS_proofVerify__main (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#950) is not in mixedCase
+Parameter '_queryId' of usingOraclize.oraclize_randomDS_proofVerify__main (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#950) is not in mixedCase
+Parameter '_result' of usingOraclize.oraclize_randomDS_proofVerify__main (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#950) is not in mixedCase
+Parameter '_contextName' of usingOraclize.oraclize_randomDS_proofVerify__main (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#950) is not in mixedCase
+Parameter '_fromOffset' of usingOraclize.copyBytes (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#998) is not in mixedCase
+Parameter '_length' of usingOraclize.copyBytes (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#998-1000) is not in mixedCase
+Parameter '_to' of usingOraclize.copyBytes (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1000) is not in mixedCase
+Parameter '_toOffset' of usingOraclize.copyBytes (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1000) is not in mixedCase
+Function 'usingOraclize.safer_ecrecover' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1021-1046) is not in mixedCase
+Parameter '_hash' of usingOraclize.ecrecovery (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1050-1051) is not in mixedCase
+Parameter '_sig' of usingOraclize.ecrecovery (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1051-1052) is not in mixedCase
+Variable 'usingOraclize.OAR' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#700) is not in mixedCase
+Constant 'usingOraclize.day' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#700-701) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'usingOraclize.week' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#701) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'usingOraclize.month' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#703-704) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'usingOraclize.proofType_NONE' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#704) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'usingOraclize.proofType_Ledger' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#704-705) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'usingOraclize.proofType_Native' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#705-707) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'usingOraclize.proofStorage_IPFS' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#707-708) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'usingOraclize.proofType_Android' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#708) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'usingOraclize.proofType_TLSNotary' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#709-713) is not in UPPER_CASE_WITH_UNDERSCORES
+Variable 'usingOraclize.oraclize_network_name' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#713) is not in mixedCase
+Constant 'usingOraclize.networkID_auto' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#713) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'usingOraclize.networkID_morden' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#713-714) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'usingOraclize.networkID_mainnet' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#714) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'usingOraclize.networkID_testnet' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#714-715) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'usingOraclize.networkID_consensys' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#715) is not in UPPER_CASE_WITH_UNDERSCORES
+Variable 'usingOraclize.oraclize_randomDS_args' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#715-716) is not in mixedCase
+Variable 'usingOraclize.oraclize_randomDS_sessionKeysHashVerified' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#716) is not in mixedCase
+Modifier 'usingOraclize.oraclize_randomDS_proofVerify' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#726-737) is not in mixedCase
+Parameter '_settings' of BadBitWallet. (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1173) is not in mixedCase
+Parameter '_distributorAddress' of BadBitWallet.setDistributor (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1175) is not in mixedCase
+Function 'BadBitWallet._subtract' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1196-1206) is not in mixedCase
+Parameter '_user' of BadBitWallet._subtract (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1196-1197) is not in mixedCase
+Parameter '_amount' of BadBitWallet._subtract (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1197) is not in mixedCase
+Parameter '_user' of BadBitWallet.add (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1209-1210) is not in mixedCase
+Parameter '_amount' of BadBitWallet.add (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1210-1211) is not in mixedCase
+Function 'BadBitWallet._add' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1220-1230) is not in mixedCase
+Parameter '_user' of BadBitWallet._add (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1221) is not in mixedCase
+Parameter '_amount' of BadBitWallet._add (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1221) is not in mixedCase
+Parameter '_user' of BadBitWallet.addBonus (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1236) is not in mixedCase
+Parameter '_amount' of BadBitWallet.addBonus (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1236) is not in mixedCase
+Function 'BadBitWallet._addBonus' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1248-1254) is not in mixedCase
+Parameter '_user' of BadBitWallet._addBonus (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1249) is not in mixedCase
+Parameter '_amount' of BadBitWallet._addBonus (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1249) is not in mixedCase
+Parameter '_user' of BadBitWallet.subtractBonus (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1259) is not in mixedCase
+Parameter '_amount' of BadBitWallet.subtractBonus (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1259) is not in mixedCase
+Function 'BadBitWallet._subtractBonus' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1270-1282) is not in mixedCase
+Parameter '_user' of BadBitWallet._subtractBonus (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1270) is not in mixedCase
+Parameter '_amount' of BadBitWallet._subtractBonus (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1271-1273) is not in mixedCase
+Parameter '_user' of BadBitWallet.withdraw (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1292-1293) is not in mixedCase
+Parameter '_amount' of BadBitWallet.withdraw (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1293-1294) is not in mixedCase
+Parameter '_user' of BadBitWallet.getNumberOfUserWithdrawals (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1325-1328) is not in mixedCase
+Parameter '_user' of BadBitWallet.addAmountByDistributor (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1330) is not in mixedCase
+Parameter '_amount' of BadBitWallet.addAmountByDistributor (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1330) is not in mixedCase
+Function 'BadBitCasino.__callback' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1560-1618) is not in mixedCase
+Parameter '_user' of BadBitCasino.placeBet (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1446) is not in mixedCase
+Parameter '_betId' of BadBitCasino.placeBet (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1446) is not in mixedCase
+Parameter '_amount' of BadBitCasino.placeBet (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1446) is not in mixedCase
+Function 'BadBitCasino._finalizeLastBets' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1464-1513) is not in mixedCase
+Parameter '_user' of BadBitCasino._finalizeLastBets (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1465) is not in mixedCase
+Parameter '_addresses' of BadBitCasino.finalizeLastBetsForAddresses (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1522) is not in mixedCase
+Parameter '_game' of BadBitCasino.placeBetForDoubleOrNothing (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1526) is not in mixedCase
+Parameter '_amount' of BadBitCasino.placeBetForDoubleOrNothing (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1526) is not in mixedCase
+Parameter '_user' of BadBitCasino.getCurrentBalance (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1622) is not in mixedCase
+Parameter '_amount' of BadBitCasino.getCommission (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1646) is not in mixedCase
+Parameter '_amount' of BadBitCasino.getPossibleWinnings (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1661) is not in mixedCase
+Parameter '_user' of BadBitCasino.getExtraTokenWinChanceForPlayer (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1671) is not in mixedCase
+Parameter '_user' of BadBitCasino.needToUpdateBetsForUser (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1677) is not in mixedCase
+Parameter '_user' of BadBitCasino.updatePlayerLevelIfNeeded (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1686-1688) is not in mixedCase
+Parameter '_amount' of BadBitCasino.sendEthToGame (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1710-1711) is not in mixedCase
+Parameter '_addresses' of BadBitCasino.emergencyShutdown (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1716-1717) is not in mixedCase
+Parameter '_value' of BadBitCasino.setTotalFundsTransferredToDepositPool (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1731) is not in mixedCase
+Parameter '_user' of BadBitCasino.getTotalBets (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1737) is not in mixedCase
+Parameter '_token' of BadBitDistributor. (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1794) is not in mixedCase
+Parameter '_tokenHolder' of BadBitDistributor. (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1794) is not in mixedCase
+Parameter '_settings' of BadBitDistributor. (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1794-1796) is not in mixedCase
+Parameter '_casino' of BadBitDistributor. (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1796) is not in mixedCase
+Parameter '_profitHolder' of BadBitDistributor. (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1796) is not in mixedCase
+Parameter '_minB' of BadBitDistributor.getBetBasedWinChance (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1850) is not in mixedCase
+Parameter '_maxB' of BadBitDistributor.getBetBasedWinChance (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1850) is not in mixedCase
+Parameter '_gbs' of BadBitDistributor.getBetBasedWinChance (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1852-1853) is not in mixedCase
+Parameter '_gwp' of BadBitDistributor.getBetBasedWinChance (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1853-1854) is not in mixedCase
+Parameter '_betSize' of BadBitDistributor.getBetBasedWinChance (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1854-1855) is not in mixedCase
+Parameter '_maxNumberOfBets' of BadBitDistributor.getBetBasedWinChance (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1857-1858) is not in mixedCase
+Parameter '_chance' of BadBitDistributor.getBetBasedWinChance (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1858-1859) is not in mixedCase
+Parameter '_user' of BadBitDistributor.winTokens (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1883) is not in mixedCase
+Parameter '_contract' of BadBitDistributor.shouldWinTokens (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1888) is not in mixedCase
+Parameter '_hash' of BadBitDistributor.shouldWinTokens (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1888) is not in mixedCase
+Parameter '_user' of BadBitDistributor.shouldWinTokens (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1889-1891) is not in mixedCase
+Parameter '_betSizes' of BadBitDistributor.shouldWinTokens (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1891) is not in mixedCase
+Parameter '_chances' of BadBitDistributor.shouldWinTokens (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1891) is not in mixedCase
+Parameter '_maxNumOfBets' of BadBitDistributor.shouldWinTokens (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1891-1892) is not in mixedCase
+Parameter '_user' of BadBitDistributor.sendTokens (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1906) is not in mixedCase
+Parameter '_amount' of BadBitDistributor.sendTokens (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1906) is not in mixedCase
+Parameter '_user' of BadBitDistributor.sendRevenueToUser (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1975-1976) is not in mixedCase
+Parameter '_to' of BadBitDistributor.sendRevenueToUser (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1976) is not in mixedCase
+Parameter '_user' of BadBitDistributor.getUsersRevenue (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1991) is not in mixedCase
+Parameter '_to' of BadBitDistributor.getUsersRevenue (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1991) is not in mixedCase
+Parameter '_user' of BadBitDistributor.getUsersOngoingRevenue (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2028) is not in mixedCase
+Parameter '_amount' of BadBitDistributor.stake (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2044) is not in mixedCase
+Parameter '_amount' of BadBitDistributor.unstake (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2051) is not in mixedCase
+Parameter '_period' of BadBitDistributor.setMinimumStakingPeriod (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2057) is not in mixedCase
+Parameter '_period' of BadBitDistributor.setDistributionPeriod (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#2058-2059) is not in mixedCase
+Parameter '_users' of BadBitDistributor.distributeRevenueToUsers (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol) is not in mixedCase
+Parameter '_cycle' of BadBitDistributor.distributeRevenueToUsers (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol) is not in mixedCase
+Parameter '_holder' of BadBitDistributor.setProfitHolder (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol) is not in mixedCase
+Parameter '_stage' of BadBitDistributor.setLotSize (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol) is not in mixedCase
+Parameter '_amount' of BadBitDistributor.setLotSize (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol) is not in mixedCase
+Parameter '_stage' of BadBitDistributor.setMaxPercentage (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol) is not in mixedCase
+Parameter '_amount' of BadBitDistributor.setMaxPercentage (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol) is not in mixedCase
+Variable 'BadBitDistributor.MINIMUM_STAKING_PERIOD' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1755) is not in mixedCase
+Variable 'BadBitDistributor.LENGTH_OF_DISTRIBUTION_PERIOD' (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#1755-1756) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+usingOraclize.day (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#700-701) is never used in BadBitCasino
+usingOraclize.week (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#701) is never used in BadBitCasino
+usingOraclize.month (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#703-704) is never used in BadBitCasino
+usingOraclize.proofType_NONE (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#704) is never used in BadBitCasino
+usingOraclize.proofType_Ledger (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#704-705) is never used in BadBitCasino
+usingOraclize.proofType_Native (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#705-707) is never used in BadBitCasino
+usingOraclize.proofStorage_IPFS (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#707-708) is never used in BadBitCasino
+usingOraclize.proofType_Android (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#708) is never used in BadBitCasino
+usingOraclize.proofType_TLSNotary (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#709-713) is never used in BadBitCasino
+usingOraclize.networkID_morden (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#713-714) is never used in BadBitCasino
+usingOraclize.networkID_mainnet (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#714) is never used in BadBitCasino
+usingOraclize.networkID_testnet (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#714-715) is never used in BadBitCasino
+usingOraclize.networkID_consensys (/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol#715) is never used in BadBitCasino
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0x70cd1e3c3362a677b20d5b9436ba53c350aed8d2.sol analyzed (14 contracts), 387 result(s) found

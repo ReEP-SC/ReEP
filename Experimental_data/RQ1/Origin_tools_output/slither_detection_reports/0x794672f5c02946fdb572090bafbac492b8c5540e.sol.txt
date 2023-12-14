@@ -1,0 +1,150 @@
+INFO:Detectors:[91m
+MultiBuyer.buyOnApprove (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#513-625) sends eth to arbitrary user
+	Dangerous calls:
+	- require(bool,string)(_exchanges[i].call.value(_values[i])(data),buy: exchange arbitrary call failed) (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#563-565)
+	- msg.sender.transfer(address(this).balance) (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#619)
+MultiBuyer.buyOnTransfer (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#625-731) sends eth to arbitrary user
+	Dangerous calls:
+	- require(bool,string)(_exchanges[i].call.value(_values[i])(data),buy: exchange arbitrary call failed) (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#679-681)
+	- msg.sender.transfer(address(this).balance) (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#723)
+MultiBuyer.buyFirstTokensOnApprove (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#731-829) sends eth to arbitrary user
+	Dangerous calls:
+	- require(bool,string)(_exchanges[i].call.value(_values[i])(data),buy: exchange arbitrary call failed) (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#781-785)
+	- msg.sender.transfer(address(this).balance) (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#823)
+MultiBuyer.buyFirstTokensOnTransfer (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#829-885) sends eth to arbitrary user
+	Dangerous calls:
+	- require(bool,string)(_exchanges[i].call.value(_values[i])(data),buy: exchange arbitrary call failed) (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol)
+	- msg.sender.transfer(address(this).balance) (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[93m
+MultiBuyer.buyOnApprove (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#513-625) does not use the value returned by external calls:
+	-_throughToken.approve(_exchanges[i],0) (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#553-555)
+	-_throughToken.approve(_exchanges[i],_throughToken.balanceOf(this)) (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#557-559)
+	-_throughToken.approve(_exchanges[i],0) (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#569-575)
+	-token.approve(_mtkn,0) (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#585)
+	-token.approve(_mtkn,token.balanceOf(this)) (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#585-587)
+	-_throughToken.transfer(msg.sender,_throughToken.balanceOf(this)) (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#621-625)
+MultiBuyer.buyOnTransfer (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#625-731) does not use the value returned by external calls:
+	-_throughToken.transfer(_exchanges[i],_values[i]) (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#667)
+	-token.approve(_mtkn,0) (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#691-693)
+	-token.approve(_mtkn,token.balanceOf(this)) (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#699-701)
+	-_throughToken.transfer(msg.sender,_throughToken.balanceOf(this)) (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#729)
+MultiBuyer.buyFirstTokensOnApprove (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#731-829) does not use the value returned by external calls:
+	-_throughToken.approve(_exchanges[i],0) (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#777)
+	-_throughToken.approve(_exchanges[i],_throughToken.balanceOf(this)) (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#777-781)
+	-_throughToken.approve(_exchanges[i],0) (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#787-795)
+	-token.approve(_mtkn,0) (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#817)
+	-token.approve(_mtkn,amounts[i]) (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#817)
+	-_throughToken.transfer(msg.sender,_throughToken.balanceOf(this)) (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#827-829)
+MultiBuyer.buyFirstTokensOnTransfer (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#829-885) does not use the value returned by external calls:
+	-_throughToken.transfer(_exchanges[i],_values[i]) (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#876-877)
+	-token.approve(_mtkn,0) (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol)
+	-token.approve(_mtkn,amounts[i]) (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol)
+	-_throughToken.transfer(msg.sender,_throughToken.balanceOf(this)) (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+MultiBuyer.buyOnApprove has external calls inside a loop:
+	- token = _mtkn.tokens(i - 1) (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#583-585)
+MultiBuyer.buyOnApprove has external calls inside a loop:
+	- token.approve(_mtkn,0) (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#585)
+MultiBuyer.buyOnApprove has external calls inside a loop:
+	- token.approve(_mtkn,token.balanceOf(this)) (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#585-587)
+MultiBuyer.buyOnApprove has external calls inside a loop:
+	- amount = j.mul(token.balanceOf(this)).div(token.balanceOf(_mtkn)) (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#587-597)
+MultiBuyer.buyOnTransfer has external calls inside a loop:
+	- token = _mtkn.tokens(i - 1) (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#691)
+MultiBuyer.buyOnTransfer has external calls inside a loop:
+	- token.approve(_mtkn,0) (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#691-693)
+MultiBuyer.buyOnTransfer has external calls inside a loop:
+	- token.approve(_mtkn,token.balanceOf(this)) (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#699-701)
+MultiBuyer.buyOnTransfer has external calls inside a loop:
+	- amount = j.mul(token.balanceOf(this)).div(token.balanceOf(_mtkn)) (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#702-707)
+MultiBuyer.buyFirstTokensOnApprove has external calls inside a loop:
+	- token = _mtkn.tokens(i) (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#807-809)
+MultiBuyer.buyFirstTokensOnApprove has external calls inside a loop:
+	- amounts[i] = token.balanceOf(this) (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#811-817)
+MultiBuyer.buyFirstTokensOnApprove has external calls inside a loop:
+	- token.approve(_mtkn,0) (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#817)
+MultiBuyer.buyFirstTokensOnApprove has external calls inside a loop:
+	- token.approve(_mtkn,amounts[i]) (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#817)
+MultiBuyer.buyFirstTokensOnTransfer has external calls inside a loop:
+	- token = _mtkn.tokens(i) (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol)
+MultiBuyer.buyFirstTokensOnTransfer has external calls inside a loop:
+	- amounts[i] = token.balanceOf(this) (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol)
+MultiBuyer.buyFirstTokensOnTransfer has external calls inside a loop:
+	- token.approve(_mtkn,0) (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol)
+MultiBuyer.buyFirstTokensOnTransfer has external calls inside a loop:
+	- token.approve(_mtkn,amounts[i]) (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+ERC20Basic.totalSupply (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#29-31) should be declared external
+ERC20Basic.balanceOf (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#31-33) should be declared external
+ERC20Basic.transfer (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#33-35) should be declared external
+ERC20.allowance (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#57-61) should be declared external
+ERC20.transferFrom (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#61-67) should be declared external
+ERC20.approve (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#67-73) should be declared external
+IBasicMultiToken.tokensCount (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#97-99) should be declared external
+IBasicMultiToken.tokens (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#99-101) should be declared external
+IBasicMultiToken.allTokens (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#101-103) should be declared external
+IBasicMultiToken.allDecimals (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#103-105) should be declared external
+IBasicMultiToken.allBalances (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#105-109) should be declared external
+IBasicMultiToken.allTokensDecimalsBalances (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#109) should be declared external
+IBasicMultiToken.bundleFirstTokens (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#111-115) should be declared external
+IBasicMultiToken.bundle (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#115-117) should be declared external
+IBasicMultiToken.unbundle (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#117-123) should be declared external
+IBasicMultiToken.unbundleSome (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#123-129) should be declared external
+IMultiToken.getReturn (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#137) should be declared external
+IMultiToken.change (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#141-143) should be declared external
+IMultiToken.allWeights (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#143) should be declared external
+IMultiToken.allTokensDecimalsBalancesWeights (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#144-157) should be declared external
+Ownable.renounceOwnership (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#407-415) should be declared external
+Ownable.transferOwnership (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#425-439) should be declared external
+MultiBuyer.buyOnApprove (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#513-625) should be declared external
+MultiBuyer.buyOnTransfer (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#625-731) should be declared external
+MultiBuyer.buyFirstTokensOnApprove (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#731-829) should be declared external
+MultiBuyer.buyFirstTokensOnTransfer (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#829-885) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Low level call in MultiBuyer.buyOnApprove (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#513-625):
+	-require(bool,string)(_exchanges[i].call.value(_values[i])(data),buy: exchange arbitrary call failed) /sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#563-565
+Low level call in MultiBuyer.buyOnTransfer (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#625-731):
+	-require(bool,string)(_exchanges[i].call(data),buy: exchange arbitrary call failed) /sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#669-673
+	-require(bool,string)(_exchanges[i].call.value(_values[i])(data),buy: exchange arbitrary call failed) /sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#679-681
+Low level call in MultiBuyer.buyFirstTokensOnApprove (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#731-829):
+	-require(bool,string)(_exchanges[i].call.value(_values[i])(data),buy: exchange arbitrary call failed) /sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#781-785
+Low level call in MultiBuyer.buyFirstTokensOnTransfer (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#829-885):
+	-require(bool,string)(_exchanges[i].call(data),buy: exchange arbitrary call failed) /sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#877-879
+	-require(bool,string)(_exchanges[i].call.value(_values[i])(data),buy: exchange arbitrary call failed) /sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Parameter '_newOwner' of Ownable.transferOwnership (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#433) is not in mixedCase
+Function 'Ownable._transferOwnership' (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#443-452) is not in mixedCase
+Parameter '_newOwner' of Ownable._transferOwnership (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#443) is not in mixedCase
+Parameter '_mtkn' of MultiBuyer.buyOnApprove (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#513) is not in mixedCase
+Parameter '_minimumReturn' of MultiBuyer.buyOnApprove (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#517) is not in mixedCase
+Parameter '_throughToken' of MultiBuyer.buyOnApprove (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#517-518) is not in mixedCase
+Parameter '_exchanges' of MultiBuyer.buyOnApprove (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#519) is not in mixedCase
+Parameter '_datas' of MultiBuyer.buyOnApprove (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#519) is not in mixedCase
+Parameter '_datasIndexes' of MultiBuyer.buyOnApprove (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#519-521) is not in mixedCase
+Parameter '_values' of MultiBuyer.buyOnApprove (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#521) is not in mixedCase
+Parameter '_mtkn' of MultiBuyer.buyOnTransfer (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#627) is not in mixedCase
+Parameter '_minimumReturn' of MultiBuyer.buyOnTransfer (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#627) is not in mixedCase
+Parameter '_throughToken' of MultiBuyer.buyOnTransfer (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#629) is not in mixedCase
+Parameter '_exchanges' of MultiBuyer.buyOnTransfer (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#629) is not in mixedCase
+Parameter '_datas' of MultiBuyer.buyOnTransfer (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#629-631) is not in mixedCase
+Parameter '_datasIndexes' of MultiBuyer.buyOnTransfer (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#631) is not in mixedCase
+Parameter '_values' of MultiBuyer.buyOnTransfer (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#637) is not in mixedCase
+Parameter '_mtkn' of MultiBuyer.buyFirstTokensOnApprove (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#731-733) is not in mixedCase
+Parameter '_throughToken' of MultiBuyer.buyFirstTokensOnApprove (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#733) is not in mixedCase
+Parameter '_exchanges' of MultiBuyer.buyFirstTokensOnApprove (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#735-739) is not in mixedCase
+Parameter '_datas' of MultiBuyer.buyFirstTokensOnApprove (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#739) is not in mixedCase
+Parameter '_datasIndexes' of MultiBuyer.buyFirstTokensOnApprove (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#739-741) is not in mixedCase
+Parameter '_values' of MultiBuyer.buyFirstTokensOnApprove (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#741-743) is not in mixedCase
+Parameter '_mtkn' of MultiBuyer.buyFirstTokensOnTransfer (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#835) is not in mixedCase
+Parameter '_throughToken' of MultiBuyer.buyFirstTokensOnTransfer (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#835-837) is not in mixedCase
+Parameter '_exchanges' of MultiBuyer.buyFirstTokensOnTransfer (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#837) is not in mixedCase
+Parameter '_datas' of MultiBuyer.buyFirstTokensOnTransfer (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#837-839) is not in mixedCase
+Parameter '_datasIndexes' of MultiBuyer.buyFirstTokensOnTransfer (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#839) is not in mixedCase
+Parameter '_values' of MultiBuyer.buyFirstTokensOnTransfer (/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol#839-841) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x794672f5c02946fdb572090bafbac492b8c5540e.sol analyzed (9 contracts), 83 result(s) found

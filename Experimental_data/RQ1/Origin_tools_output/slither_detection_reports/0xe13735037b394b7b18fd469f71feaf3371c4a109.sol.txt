@@ -1,0 +1,94 @@
+INFO:Detectors:[91m
+Reentrancy in TecoBuyBack.payOrders (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#459-479):
+	External calls:
+	- payOrder(orderId_1) (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#473)
+	- payOrder(orderId_2) (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#475)
+	State variables written after the call(s):
+	- orders (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#475)
+	- tokensBought (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#475)
+Reentrancy in TecoBuyBack.payOrders (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#459-479):
+	External calls:
+	- payOrder(orderId_1) (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#473)
+	- payOrder(orderId_2) (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#475)
+	- payOrder(orderId_3) (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#475-477)
+	State variables written after the call(s):
+	- orders (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#475-477)
+	- tokensBought (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#475-477)
+Reentrancy in TecoBuyBack.payOrders (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#459-479):
+	External calls:
+	- payOrder(orderId_1) (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#473)
+	- payOrder(orderId_2) (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#475)
+	- payOrder(orderId_3) (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#475-477)
+	- payOrder(orderId_4) (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#477)
+	State variables written after the call(s):
+	- orders (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#477)
+	- tokensBought (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#477)
+Reentrancy in TecoBuyBack.payOrders (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#459-479):
+	External calls:
+	- payOrder(orderId_1) (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#473)
+	- payOrder(orderId_2) (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#475)
+	- payOrder(orderId_3) (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#475-477)
+	- payOrder(orderId_4) (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#477)
+	- payOrder(orderId_5) (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#479)
+	State variables written after the call(s):
+	- orders (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#479)
+	- tokensBought (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#479)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities[0m
+INFO:Detectors:[93m
+TecoBuyBack.payOrder (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#479-519) does not use the value returned by external calls:
+	-tecoToken.transferFrom(orders[orderId].investor,owner,orders[orderId].amount) (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#501-511)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in TecoBuyBack.createOrder (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#407-437):
+	External calls:
+	- require(bool)(availableBonuses(msg.sender) >= _amount) (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#421-425)
+	- require(bool)(tecoToken.allowance(msg.sender,address(this)) >= _amount) (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#427-431)
+	State variables written after the call(s):
+	- numOrders (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#433-437)
+	- orders (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#433-437)
+Reentrancy in TecoBuyBack.payOrder (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#479-519):
+	External calls:
+	- tecoToken.transferFrom(orders[orderId].investor,owner,orders[orderId].amount) (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#501-511)
+	External calls sending eth:
+	- orders[orderId].investor.transfer(orderSum(orderId)) (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#495-501)
+	State variables written after the call(s):
+	- tokensBought (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#511-517)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+TecoIco.bonusOf (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#15-21) should be declared external
+TecoToken.balanceOf (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#23-27) should be declared external
+TecoToken.allowance (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#27-31) should be declared external
+TecoToken.transferFrom (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#31-35) should be declared external
+TecoToken.approve (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#35-45) should be declared external
+Ownable.renounceOwnership (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#233-239) should be declared external
+Ownable.transferOwnership (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#251-257) should be declared external
+TecoBuyBack.withdrawAllFunds (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#363-365) should be declared external
+TecoBuyBack.withdrawFunds (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#369-385) should be declared external
+TecoBuyBack.setRate (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#397-405) should be declared external
+TecoBuyBack.createOrder (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#407-437) should be declared external
+TecoBuyBack.payOrders (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#459-479) should be declared external
+TecoBuyBack.deleteOrder (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#521-549) should be declared external
+TecoBuyBack.getOrderInvestor (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#551-563) should be declared external
+TecoBuyBack.getOrderAmount (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol) should be declared external
+TecoBuyBack.getOrderStatus (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol) should be declared external
+TecoBuyBack.getTokensBought (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol:
+	- pragma solidity^0.4.23 (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#9-13): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_newOwner' of Ownable.transferOwnership (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#255) is not in mixedCase
+Function 'Ownable._transferOwnership' (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#273-293) is not in mixedCase
+Parameter '_newOwner' of Ownable._transferOwnership (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#277-279) is not in mixedCase
+Parameter '_tecoIco' of TecoBuyBack. (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#340-341) is not in mixedCase
+Parameter '_tecoToken' of TecoBuyBack. (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#341) is not in mixedCase
+Parameter '_rate' of TecoBuyBack.setRate (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#397-399) is not in mixedCase
+Parameter '_amount' of TecoBuyBack.createOrder (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#411) is not in mixedCase
+Parameter 'orderId_1' of TecoBuyBack.payOrders (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#461-463) is not in mixedCase
+Parameter 'orderId_2' of TecoBuyBack.payOrders (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#464-467) is not in mixedCase
+Parameter 'orderId_3' of TecoBuyBack.payOrders (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#467) is not in mixedCase
+Parameter 'orderId_4' of TecoBuyBack.payOrders (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#467) is not in mixedCase
+Parameter 'orderId_5' of TecoBuyBack.payOrders (/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol#467-469) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xe13735037b394b7b18fd469f71feaf3371c4a109.sol analyzed (5 contracts), 37 result(s) found

@@ -1,0 +1,140 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol:
+/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol:123:3: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+  function Ownable() {
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol:297:3: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+  function TerraformReserve(address _token) {
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol:453:3: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+  function TokenVesting(
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol:163:5: Warning: Invoking events without "emit" prefix is deprecated.
+    OwnershipTransferred(owner, newOwner);
+    ^-----------------------------------^
+/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol:333:5: Warning: Invoking events without "emit" prefix is deprecated.
+    LockedBalance(_from, mana);
+    ^------------------------^
+/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol:349:5: Warning: Invoking events without "emit" prefix is deprecated.
+    AcceptingDepositsChanged(acceptingDeposits);
+    ^-----------------------------------------^
+/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol:369:5: Warning: Invoking events without "emit" prefix is deprecated.
+    LandClaimContractSet(target);
+    ^--------------------------^
+/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol:579:5: Warning: Invoking events without "emit" prefix is deprecated.
+    Released(released);
+    ^----------------^
+/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol:615:5: Warning: Invoking events without "emit" prefix is deprecated.
+    Revoked();
+    ^-------^
+/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol:123:3: Warning: No visibility specified. Defaulting to "public". 
+  function Ownable() {
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol:297:3: Warning: No visibility specified. Defaulting to "public". 
+  function TerraformReserve(address _token) {
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol:453:3: Warning: No visibility specified. Defaulting to "public". 
+  function TokenVesting(
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol:675:3: Warning: No visibility specified. Defaulting to "public". 
+  function releaseForeignToken(ERC20 _token, uint256 amount) onlyOwner {
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol:15:3: Warning: Function state mutability can be restricted to pure
+  function max64(uint64 a, uint64 b) internal constant returns (uint64) {
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol:23:3: Warning: Function state mutability can be restricted to pure
+  function min64(uint64 a, uint64 b) internal constant returns (uint64) {
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol:31:3: Warning: Function state mutability can be restricted to pure
+  function max256(uint256 a, uint256 b) internal constant returns (uint256) {
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol:39:3: Warning: Function state mutability can be restricted to pure
+  function min256(uint256 a, uint256 b) internal constant returns (uint256) {
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol:51:3: Warning: Function state mutability can be restricted to pure
+  function mul(uint256 a, uint256 b) internal constant returns (uint256) {
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol:63:3: Warning: Function state mutability can be restricted to pure
+  function div(uint256 a, uint256 b) internal constant returns (uint256) {
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol:77:3: Warning: Function state mutability can be restricted to pure
+  function sub(uint256 a, uint256 b) internal constant returns (uint256) {
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol:87:3: Warning: Function state mutability can be restricted to pure
+  function add(uint256 a, uint256 b) internal constant returns (uint256) {
+  ^ (Relevant source part starts here and spans across multiple lines).
+
+INFO:Detectors:[93m
+Contract locking ether found in /sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol:
+	Contract TerraformReserve has payable functions:
+	 - fallback (/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol#419-425)
+	But does not have a function to withdraw the ether
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#contracts-that-lock-ether[0m
+INFO:Detectors:[93m
+Reentrancy in TokenVesting._releaseTo (/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol#607-629):
+	External calls:
+	- unreleased = releasableAmount() (/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol#615-625)
+	State variables written after the call(s):
+	- released (/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol#625)
+Reentrancy in TokenVesting.revoke (/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol#643-661):
+	External calls:
+	- _releaseTo(beneficiary) (/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol#647)
+	- token.safeTransfer(owner,token.balanceOf(this)) (/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol#654-655)
+	State variables written after the call(s):
+	- revoked (/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol#657)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+TerraformReserve.setTargetContract (/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol#395-411) does not use the value returned by external calls:
+	-manaToken.approve(landClaim,totalLocked) (/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol#405-407)
+TokenVesting.releaseForeignToken (/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol) does not use the value returned by external calls:
+	-_token.transfer(owner,amount) (/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in TerraformReserve.lockMana (/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol#341-359):
+	External calls:
+	- require(bool)(manaToken.transferFrom(_from,this,mana)) (/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol#347-349)
+	State variables written after the call(s):
+	- lockedBalance (/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol#349-355)
+	- totalLocked (/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol#357)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+ERC20Basic.totalSupply should be constant (/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol#183)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol#165-181) should be declared external
+ERC20Basic.balanceOf (/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol#183-189) should be declared external
+ERC20Basic.transfer (/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol#189-191) should be declared external
+ERC20.allowance (/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol#195-197) should be declared external
+ERC20.transferFrom (/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol#197-205) should be declared external
+ERC20.approve (/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol#205-207) should be declared external
+ReturnVestingRegistry.record (/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol#259-271) should be declared external
+TerraformReserve.lockMana (/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol#341-359) should be declared external
+TerraformReserve.changeContractState (/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol#363-377) should be declared external
+TerraformReserve.setTargetContract (/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol#395-411) should be declared external
+TerraformReserve.fallback (/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol#419-425) should be declared external
+TokenVesting.changeBeneficiary (/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol#553-565) should be declared external
+TokenVesting.release (/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol#571-581) should be declared external
+TokenVesting.releaseTo (/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol#591-601) should be declared external
+TokenVesting.revoke (/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol#643-661) should be declared external
+TokenVesting.releaseForeignToken (/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol:
+	- pragma solidity^0.4.13 (/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol#9-13): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'Ownable.Ownable' (/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol#135-141) is not in mixedCase
+Function 'TerraformReserve.TerraformReserve' (/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol#315-325) is not in mixedCase
+Parameter '_token' of TerraformReserve.TerraformReserve (/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol#319) is not in mixedCase
+Parameter '_from' of TerraformReserve.lockMana (/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol#341) is not in mixedCase
+Parameter '_acceptingDeposits' of TerraformReserve.changeContractState (/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol#363-365) is not in mixedCase
+Function 'TokenVesting.TokenVesting' (/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol#493-527) is not in mixedCase
+Parameter '_beneficiary' of TokenVesting.TokenVesting (/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol#493) is not in mixedCase
+Parameter '_start' of TokenVesting.TokenVesting (/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol#493-495) is not in mixedCase
+Parameter '_cliff' of TokenVesting.TokenVesting (/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol#497) is not in mixedCase
+Parameter '_duration' of TokenVesting.TokenVesting (/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol#497-499) is not in mixedCase
+Parameter '_revocable' of TokenVesting.TokenVesting (/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol#499) is not in mixedCase
+Parameter '_token' of TokenVesting.TokenVesting (/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol#501-507) is not in mixedCase
+Function 'TokenVesting._releaseTo' (/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol#607-629) is not in mixedCase
+Parameter '_token' of TokenVesting.releaseForeignToken (/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xb1d460a797ae79579214d5fae2dfc54192b70b97.sol analyzed (9 contracts), 38 result(s) found

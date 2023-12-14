@@ -1,0 +1,98 @@
+INFO:Detectors:[93m
+Reentrancy in TokenVesting.release (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#214-224):
+	External calls:
+	- unreleased = releasableAmount(token) (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#216-220)
+	State variables written after the call(s):
+	- released (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#220-221)
+Reentrancy in TokenVesting.revoke (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#231-245):
+	External calls:
+	- balance = token.balanceOf(this) (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#240-241)
+	- unreleased = releasableAmount(token) (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#241-242)
+	State variables written after the call(s):
+	- revoked (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#243-244)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+GenesisManager.start (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#402-406) does not use the value returned by external calls:
+	-token.mint(this,initialSupply) (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#403-404)
+GenesisManager.addVestingGrant (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#470-494) does not use the value returned by external calls:
+	-token.transfer(holder,_amount) (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#493-494)
+GenesisManager.addCommunityGrant (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#499-520) does not use the value returned by external calls:
+	-token.transfer(holder,_amount) (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#518-520)
+GenesisManager.end (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol) does not use the value returned by external calls:
+	-token.transfer(tokenDistribution,crowdSupply) (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol)
+	-token.transfer(bankMultisig,companySupply) (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in GenesisManager.end (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol):
+	External calls:
+	- token.transfer(tokenDistribution,crowdSupply) (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol)
+	- token.transfer(bankMultisig,companySupply) (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol)
+	- token.transferOwnership(minter) (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol)
+	State variables written after the call(s):
+	- stage (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol)
+Reentrancy in GenesisManager.start (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#402-406):
+	External calls:
+	- token.mint(this,initialSupply) (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#403-404)
+	State variables written after the call(s):
+	- stage (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#405-406)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+ERC20Basic.totalSupply should be constant (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#9-10)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+ERC20Basic.balanceOf (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#10-11) should be declared external
+ERC20Basic.transfer (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#11-12) should be declared external
+ERC20.allowance (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#20-21) should be declared external
+ERC20.transferFrom (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#21-22) should be declared external
+ERC20.approve (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#22-23) should be declared external
+Ownable.transferOwnership (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#115-124) should be declared external
+TokenTimelock.release (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#154-161) should be declared external
+TokenVesting.release (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#214-224) should be declared external
+TokenVesting.revoke (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#231-245) should be declared external
+ILivepeerToken.mint (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#277-278) should be declared external
+ILivepeerToken.burn (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#279) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol:
+	- pragma solidity0.4.18 (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#1): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'Ownable.Ownable' (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#101-103) is not in mixedCase
+Function 'TokenTimelock.TokenTimelock' (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#140-149) is not in mixedCase
+Parameter '_token' of TokenTimelock.TokenTimelock (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#141) is not in mixedCase
+Parameter '_beneficiary' of TokenTimelock.TokenTimelock (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#141-142) is not in mixedCase
+Parameter '_releaseTime' of TokenTimelock.TokenTimelock (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#142) is not in mixedCase
+Function 'TokenVesting.TokenVesting' (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#194-208) is not in mixedCase
+Parameter '_beneficiary' of TokenVesting.TokenVesting (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#196-197) is not in mixedCase
+Parameter '_start' of TokenVesting.TokenVesting (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#197) is not in mixedCase
+Parameter '_cliff' of TokenVesting.TokenVesting (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#197-198) is not in mixedCase
+Parameter '_duration' of TokenVesting.TokenVesting (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#198-199) is not in mixedCase
+Parameter '_revocable' of TokenVesting.TokenVesting (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#199) is not in mixedCase
+Function 'GenesisManager.GenesisManager' (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#351-362) is not in mixedCase
+Parameter '_token' of GenesisManager.GenesisManager (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#352) is not in mixedCase
+Parameter '_tokenDistribution' of GenesisManager.GenesisManager (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#352-354) is not in mixedCase
+Parameter '_bankMultisig' of GenesisManager.GenesisManager (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#354-355) is not in mixedCase
+Parameter '_minter' of GenesisManager.GenesisManager (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#357-358) is not in mixedCase
+Parameter '_grantsStartTimestamp' of GenesisManager.GenesisManager (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#358) is not in mixedCase
+Parameter '_initialSupply' of GenesisManager.setAllocations (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#378) is not in mixedCase
+Parameter '_crowdSupply' of GenesisManager.setAllocations (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#378-380) is not in mixedCase
+Parameter '_companySupply' of GenesisManager.setAllocations (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#380-381) is not in mixedCase
+Parameter '_teamSupply' of GenesisManager.setAllocations (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#381-382) is not in mixedCase
+Parameter '_investorsSupply' of GenesisManager.setAllocations (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#382) is not in mixedCase
+Parameter '_communitySupply' of GenesisManager.setAllocations (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#383-384) is not in mixedCase
+Parameter '_receiver' of GenesisManager.addTeamGrant (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#417-419) is not in mixedCase
+Parameter '_amount' of GenesisManager.addTeamGrant (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#419) is not in mixedCase
+Parameter '_timeToCliff' of GenesisManager.addTeamGrant (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#421) is not in mixedCase
+Parameter '_vestingDuration' of GenesisManager.addTeamGrant (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#421) is not in mixedCase
+Parameter '_receiver' of GenesisManager.addInvestorGrant (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#445) is not in mixedCase
+Parameter '_amount' of GenesisManager.addInvestorGrant (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#445) is not in mixedCase
+Parameter '_timeToCliff' of GenesisManager.addInvestorGrant (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#447) is not in mixedCase
+Parameter '_vestingDuration' of GenesisManager.addInvestorGrant (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#447) is not in mixedCase
+Parameter '_receiver' of GenesisManager.addVestingGrant (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#470) is not in mixedCase
+Parameter '_amount' of GenesisManager.addVestingGrant (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#470) is not in mixedCase
+Parameter '_timeToCliff' of GenesisManager.addVestingGrant (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#470) is not in mixedCase
+Parameter '_vestingDuration' of GenesisManager.addVestingGrant (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#471) is not in mixedCase
+Parameter '_receiver' of GenesisManager.addCommunityGrant (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#499-500) is not in mixedCase
+Parameter '_amount' of GenesisManager.addCommunityGrant (/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol#500) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xd78b6bd09cd28a83cfb21afa0da95c685a6bb0b1.sol analyzed (9 contracts), 58 result(s) found

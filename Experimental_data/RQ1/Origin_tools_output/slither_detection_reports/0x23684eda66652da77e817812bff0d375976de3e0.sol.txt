@@ -1,0 +1,213 @@
+INFO:Detectors:[91m
+Reentrancy in Book.redeemSubcontract (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#593-619):
+	External calls:
+	- balanceSend(tMargin,k.taker) (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#600-601)
+	External calls sending eth:
+	- BURN_ADDRESS.transfer(defPay) (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#599-600)
+	- balanceSend(tMargin,k.taker) (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#600-601)
+	State variables written after the call(s):
+	- subcontracts (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#608)
+	- subcontracts (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#615-616)
+Reentrancy in Book.redeemSubcontract (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#593-619):
+	External calls:
+	- balanceSend(tMargin,k.taker) (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#600-601)
+	- shortTakerContracts.pop() (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#610)
+	- longTakerContracts.pop() (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#617)
+	External calls sending eth:
+	- BURN_ADDRESS.transfer(defPay) (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#599-600)
+	- balanceSend(tMargin,k.taker) (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#600-601)
+	State variables written after the call(s):
+	- subcontracts (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#618-619)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities[0m
+INFO:Detectors:[93m
+Oracle.getStartDay (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#199-206) uses a dangerous strict equality:
+	- assets[_assetID].currentDay == 7
+Oracle.getStartDay (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#199-206) uses a dangerous strict equality:
+	- assets[_assetID].currentDay == 7
+Oracle.isSettleDay (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#232-235) uses a dangerous strict equality:
+	- (assets[_assetID].currentDay == 7)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+order in Book.take (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#754) is a local variable never initialiazed
+asset in Oracle.addAsset (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#83) is a local variable never initialiazed
+lpprof in Book.settleSubcontract (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#705) is a local variable never initialiazed
+blank in Book.redeemSubcontract (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#618) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[93m
+Book.redeemSubcontract (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#593-619) does not use the value returned by external calls:
+	-shortTakerContracts.pop() (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#610)
+	-longTakerContracts.pop() (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#617)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in AssetSwap.burn (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1217-1230):
+	External calls:
+	- fee = b.bookBurn(subkID,msg.sender,msg.value) (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1220-1222)
+	External calls sending eth:
+	- BURN_ADDRESS.transfer(fee) (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1224-1225)
+	State variables written after the call(s):
+	- _withdrawBalances (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1225-1227)
+Reentrancy in Book.redeemSubcontract (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#593-619):
+	External calls:
+	- balanceSend(tMargin,k.taker) (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#600-601)
+	External calls sending eth:
+	- BURN_ADDRESS.transfer(defPay) (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#599-600)
+	- balanceSend(tMargin,k.taker) (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#600-601)
+	State variables written after the call(s):
+	- longTakerContracts (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#616-617)
+	- shortTakerContracts (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#608-610)
+Reentrancy in AssetSwap.setRates (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1302-1317):
+	External calls:
+	- require(bool)(! oracle.isSettleDay(ASSET_ID)) (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1310-1312)
+	State variables written after the call(s):
+	- _LongRate (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1312-1313)
+	- _ShortRate (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1314-1316)
+Reentrancy in AssetSwap.weeklyReturns (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1385-1411):
+	External calls:
+	- require(bool)(oracle.isSettleDay(ASSET_ID)) (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1389)
+	- assetPrice = oracle.getPrices(ASSET_ID) (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1390-1391)
+	- ethPrice = oracle.getPrices(0) (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1391)
+	State variables written after the call(s):
+	- _lastWeeklyReturnsTime (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1410)
+	- takerLongReturns (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1398-1399)
+	- takerLongReturns (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1401-1404)
+	- takerShortReturns (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1400-1401)
+	- takerShortReturns (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1404-1409)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Oracle.addAdmin (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#62-68) should be declared external
+Oracle.editPrice (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#101-108) should be declared external
+Oracle.addReader (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#116-120) should be declared external
+Oracle.getPrices (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#129-134) should be declared external
+Oracle.getStalePrices (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#146-152) should be declared external
+Oracle.getCurrentPrice (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#160-166) should be declared external
+Oracle.getLastUpdateTime (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#174-179) should be declared external
+Oracle.getLastSettleTime (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#190-195) should be declared external
+Oracle.getStartDay (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#199-206) should be declared external
+Oracle.isFinalDay (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#219-221) should be declared external
+Oracle.isSettleDay (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#232-235) should be declared external
+Oracle.removeAdmin (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#244-246) should be declared external
+Oracle.setIntraWeekPrice (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#256-280) should be declared external
+Oracle.setSettlePrice (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#290-317) should be declared external
+Book.adjustMinRM (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#399-404) should be declared external
+Book.adminCancel (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#411-417) should be declared external
+Book.adminStop (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#420-425) should be declared external
+Book.bookBurn (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#440-457) should be declared external
+Book.bookCancel (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#460-487) should be declared external
+Book.fundLPMargin (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#489-493) should be declared external
+Book.fundTakerMargin (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#496-498) should be declared external
+Book.getSubkData (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#519-536) should be declared external
+Book.getSubkDetail (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#537-551) should be declared external
+Book.inactiveOracle (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#554-561) should be declared external
+Book.inactiveLP (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#568-583) should be declared external
+Book.redeemSubcontract (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#593-619) should be declared external
+Book.settleLong (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#621-639) should be declared external
+Book.settleShort (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#641-671) should be declared external
+Book.MarginCheck (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#671-694) should be declared external
+Book.take (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#748-789) should be declared external
+Book.withdrawalLP (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#793-804) should be declared external
+Book.withdrawalTaker (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#816-854) should be declared external
+AssetSwap.addAdmin (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#952-957) should be declared external
+AssetSwap.adjDST (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#964-968) should be declared external
+AssetSwap.adjRMMin (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#974-975) should be declared external
+AssetSwap.adjisFreeMargin (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#985-986) should be declared external
+AssetSwap.adjustMinRM (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#993-1002) should be declared external
+AssetSwap.adminCancel (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1008-1017) should be declared external
+AssetSwap.adminKill (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1024-1027) should be declared external
+AssetSwap.balanceTransfer (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1030-1036) should be declared external
+AssetSwap.changeFeeAddress (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1039-1041) should be declared external
+AssetSwap.createBook (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1043-1057) should be declared external
+AssetSwap.getBookData (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1078-1103) should be declared external
+AssetSwap.getSubcontractData (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1110-1126) should be declared external
+AssetSwap.getSubcontractStatus (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1157-1174) should be declared external
+AssetSwap.getBookBalance (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1174-1184) should be declared external
+AssetSwap.lpFund (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1206-1210) should be declared external
+AssetSwap.burn (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1217-1230) should be declared external
+AssetSwap.cancel (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1232-1242) should be declared external
+AssetSwap.inactiveOracle (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1246-1253) should be declared external
+AssetSwap.inactiveLP (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1259-1267) should be declared external
+AssetSwap.redeem (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1271-1279) should be declared external
+AssetSwap.removeAdmin (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1281-1285) should be declared external
+AssetSwap.setSizeDiscCut (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1285-1293) should be declared external
+AssetSwap.setRates (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1302-1317) should be declared external
+AssetSwap.settle (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1323-1339) should be declared external
+AssetSwap.takerFund (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1342-1346) should be declared external
+AssetSwap.take (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1349-1376) should be declared external
+AssetSwap.weeklyReturns (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1385-1411) should be declared external
+AssetSwap.withdrawalLP (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1414-1427) should be declared external
+AssetSwap.withdrawalTaker (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1444-1454) should be declared external
+AssetSwap.withdrawBalance (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x23684eda66652da77e817812bff0d375976de3e0.sol:
+	- pragma solidity^0.5.11 (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#7-9): it allows old versions
+	- pragma solidity^0.5.11 (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#318): it allows old versions
+	- pragma solidity^0.5.11 (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#872): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_name' of Oracle.addAsset (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#76-78) is not in mixedCase
+Parameter '_startPrice' of Oracle.addAsset (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#78) is not in mixedCase
+Parameter '_assetID' of Oracle.editPrice (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#101) is not in mixedCase
+Parameter '_newPrice' of Oracle.editPrice (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#101-102) is not in mixedCase
+Parameter '_assetID' of Oracle.getPrices (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#129) is not in mixedCase
+Parameter '_assetID' of Oracle.getStalePrices (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#147) is not in mixedCase
+Parameter '_assetID' of Oracle.getCurrentPrice (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#161) is not in mixedCase
+Parameter '_assetID' of Oracle.getLastUpdateTime (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#176) is not in mixedCase
+Parameter '_assetID' of Oracle.getLastSettleTime (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#190) is not in mixedCase
+Parameter '_assetID' of Oracle.getStartDay (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#199-200) is not in mixedCase
+Parameter '_assetID' of Oracle.isFinalDay (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#219) is not in mixedCase
+Parameter '_assetID' of Oracle.isSettleDay (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#232-233) is not in mixedCase
+Parameter '_assetID' of Oracle.setIntraWeekPrice (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#256-257) is not in mixedCase
+Parameter '_price' of Oracle.setIntraWeekPrice (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#257) is not in mixedCase
+Parameter '_assetID' of Oracle.setSettlePrice (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#290-291) is not in mixedCase
+Parameter '_price' of Oracle.setSettlePrice (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#291) is not in mixedCase
+Parameter '_min' of Book.adjustMinRM (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#399-401) is not in mixedCase
+Parameter '_lastOracleSettleTime' of Book.inactiveLP (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#569-571) is not in mixedCase
+Function 'Book.MarginCheck' (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#671-694) is not in mixedCase
+Parameter '_a' of Book.subzero (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#858) is not in mixedCase
+Parameter '_b' of Book.subzero (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#858) is not in mixedCase
+Parameter '_a' of Book.add (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#862-863) is not in mixedCase
+Parameter '_b' of Book.add (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#863) is not in mixedCase
+Variable 'Book.LPMargin' (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#341) is not in mixedCase
+Variable 'Book.LPLongMargin' (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#341) is not in mixedCase
+Variable 'Book.LPShortMargin' (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#342) is not in mixedCase
+Variable 'Book.LPRequiredMargin' (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#342-343) is not in mixedCase
+Event 'AssetSwap.subkTracker' (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#931-935) is not in CapWords
+Parameter '_isDaylightSav' of AssetSwap.adjDST (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#965) is not in mixedCase
+Parameter '_RMMin' of AssetSwap.adjRMMin (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#974) is not in mixedCase
+Parameter '_freeMargin' of AssetSwap.adjisFreeMargin (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#985-986) is not in mixedCase
+Parameter '_min' of AssetSwap.adjustMinRM (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#996) is not in mixedCase
+Parameter '_lp' of AssetSwap.adminCancel (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1010) is not in mixedCase
+Parameter '_lp' of AssetSwap.adminKill (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1025-1026) is not in mixedCase
+Parameter '_min' of AssetSwap.createBook (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1043) is not in mixedCase
+Parameter '_lp' of AssetSwap.getBookData (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1078) is not in mixedCase
+Parameter '_lp' of AssetSwap.getSubcontractData (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1110) is not in mixedCase
+Parameter '_lp' of AssetSwap.getSubcontractStatus (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1159) is not in mixedCase
+Parameter '_lp' of AssetSwap.getBookBalance (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1175) is not in mixedCase
+Parameter '_lp' of AssetSwap.lpFund (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1206-1207) is not in mixedCase
+Parameter '_lp' of AssetSwap.burn (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1218-1219) is not in mixedCase
+Parameter '_lp' of AssetSwap.cancel (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1233) is not in mixedCase
+Parameter '_lp' of AssetSwap.inactiveOracle (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1247) is not in mixedCase
+Parameter '_lp' of AssetSwap.inactiveLP (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1260-1261) is not in mixedCase
+Parameter '_lp' of AssetSwap.redeem (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1273) is not in mixedCase
+Parameter '_lp' of AssetSwap.settle (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1325) is not in mixedCase
+Parameter '_settleLong' of AssetSwap.settle (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1325) is not in mixedCase
+Parameter '_topLoop' of AssetSwap.settle (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1325) is not in mixedCase
+Parameter '_lp' of AssetSwap.takerFund (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1342-1343) is not in mixedCase
+Parameter '_lp' of AssetSwap.take (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1349) is not in mixedCase
+Parameter '_lp' of AssetSwap.withdrawalTaker (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#1445-1446) is not in mixedCase
+Parameter '_a' of AssetSwap.subzero (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol) is not in mixedCase
+Parameter '_b' of AssetSwap.subzero (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol) is not in mixedCase
+Parameter '_a' of AssetSwap.add (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol) is not in mixedCase
+Parameter '_b' of AssetSwap.add (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol) is not in mixedCase
+Variable 'AssetSwap._isDST' (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#882) is not in mixedCase
+Variable 'AssetSwap._isFreeMargin' (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#882-883) is not in mixedCase
+Variable 'AssetSwap._LongRate' (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#883) is not in mixedCase
+Variable 'AssetSwap._ShortRate' (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#884-885) is not in mixedCase
+Variable 'AssetSwap.GLOBAL_SIZE_DISC' (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#885-886) is not in mixedCase
+Variable 'AssetSwap.GLOBAL_RM_MIN' (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#887) is not in mixedCase
+Constant 'AssetSwap._leverageRatio' (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#904-905) is not in UPPER_CASE_WITH_UNDERSCORES
+Variable 'AssetSwap._lastWeeklyReturnsTime' (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#907-909) is not in mixedCase
+Variable 'AssetSwap._books' (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#914-916) is not in mixedCase
+Variable 'AssetSwap._withdrawBalances' (/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol#918-920) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x23684eda66652da77e817812bff0d375976de3e0.sol analyzed (3 contracts), 141 result(s) found

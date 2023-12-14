@@ -1,0 +1,90 @@
+INFO:Detectors:[93m
+Reentrancy in Crowdsale.fallback (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#350-372):
+	External calls:
+	- require(bool,string)(amount <= token.balanceOf(address(this)),Infucient token balance in ICO) (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#356-361)
+	- token.transfer(msg.sender,amount) (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#367-368)
+	- require(bool,string)(token.balanceOf(msg.sender) + amount <= (maxTokensToOnceHandWl),The purchase limit of tokens has been exceeded) (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#353-356)
+	- require(bool,string)(token.balanceOf(msg.sender) + amount <= (maxTokensToOnceHandNoWl),The purchase limit of tokens has been exceeded) (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#353-356)
+	State variables written after the call(s):
+	- amountNotWL (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#371-372)
+	- amountWL (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#368)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+Crowdsale.constructor (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#343-350) does not use the value returned by external calls:
+	-token.transfer(owner,token.totalSupply() - (amountWL + amountNotWL)) (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#350)
+Crowdsale.fallback (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#350-372) does not use the value returned by external calls:
+	-token.transfer(msg.sender,amount) (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#367-368)
+Crowdsale.getLeftTokens (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#390-394) does not use the value returned by external calls:
+	-token.transfer(owner,token.balanceOf(address(this))) (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#392-394)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+ERC20.allowance.owner (local variable @ /sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#168) shadows:
+	- Ownable.owner (function @ /sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#72-76)
+ERC20._approve.owner (local variable @ /sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#208-210) shadows:
+	- Ownable.owner (function @ /sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#72-76)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+Crowdsale.countBy1EthIfNotWL should be constant (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#333-334)
+Crowdsale.countBy1EthIfWL should be constant (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#330-331)
+Crowdsale.sat should be constant (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#325)
+Crowdsale.startIco should be constant (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#327-328)
+ERC20.periodRebalance should be constant (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#135-136)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Ownable.owner (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#72-76) should be declared external
+Ownable.renounceOwnership (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#85-90) should be declared external
+Ownable.transferOwnership (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#90-94) should be declared external
+ERC20.totalSupply (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#155-159) should be declared external
+ERC20.transfer (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#164-168) should be declared external
+ERC20.allowance (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#168-173) should be declared external
+ERC20.approve (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#173-175) should be declared external
+ERC20.transferFrom (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#175-180) should be declared external
+ERC20.increaseAllowance (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#181-185) should be declared external
+ERC20.decreaseAllowance (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#185-191) should be declared external
+ERC20.toggleWhiteList (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#267-270) should be declared external
+ERC20.toggleTaxFeeList (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#270-274) should be declared external
+ERC20.toggleBlackList (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#274-277) should be declared external
+ERC20.toggleIsWhiteListOnly (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#277-280) should be declared external
+ERC20.changePercentOfTax (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#280-284) should be declared external
+ERC20.changePercentOfTaxSell (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#284-286) should be declared external
+ERC20.changePercentOfTaxBuy (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#286-288) should be declared external
+ERC20.changeRewardsWallet (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#292-302) should be declared external
+ERC20.blockSell (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#304-306) should be declared external
+ERC20.sendBlockedTokensToRw (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#314-321) should be declared external
+Crowdsale.pushWhiteList (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#377-386) should be declared external
+Crowdsale.manualGetETH (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#386-390) should be declared external
+Crowdsale.getLeftTokens (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#390-394) should be declared external
+Crowdsale.sendAmountWlToNoWL (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#395-400) should be declared external
+Crowdsale.getStartICO (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#406-409) should be declared external
+Crowdsale.getOwner (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#409-410) should be declared external
+Crowdsale.getStopIco (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#410-413) should be declared external
+Crowdsale.tokenAddress (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#413-416) should be declared external
+Crowdsale.IcoDeposit (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#416-419) should be declared external
+Crowdsale.myBalancex10 (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#420-421) should be declared external
+Crowdsale.myBalancex1000 (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol) should be declared external
+Crowdsale.leftAmountForWL (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol) should be declared external
+Crowdsale.leftAmountForNotWL (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol:
+	- pragma solidity^0.5.1 (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#5-7): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'Ownable._transferOwnership' (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#94-103) is not in mixedCase
+Function 'ERC20._transfer' (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#191-202) is not in mixedCase
+Function 'ERC20._mint' (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#202-208) is not in mixedCase
+Function 'ERC20._approve' (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#208-216) is not in mixedCase
+Function 'ERC20._taxTransfer' (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#216-241) is not in mixedCase
+Parameter '_sender' of ERC20._taxTransfer (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#216) is not in mixedCase
+Parameter '_recipient' of ERC20._taxTransfer (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#216) is not in mixedCase
+Parameter '_amount' of ERC20._taxTransfer (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#216-218) is not in mixedCase
+Parameter '_liqAddress' of ERC20.blockSell (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#304) is not in mixedCase
+Parameter '_liqAddress' of ERC20.changeLiqAddress (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#306) is not in mixedCase
+Constant 'ERC20.total' (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#131-133) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'ERC20.baseBalance' (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#143) is not in UPPER_CASE_WITH_UNDERSCORES
+Function 'Crowdsale.IcoDeposit' (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#416-419) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+Crowdsale.me (/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol#324-325) is never used in Crowdsale
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0x0e3f6a2af30a2c86465dc182be58c02d75d84abd.sol analyzed (4 contracts), 55 result(s) found

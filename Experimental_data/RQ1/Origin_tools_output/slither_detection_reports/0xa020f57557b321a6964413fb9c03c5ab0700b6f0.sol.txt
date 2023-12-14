@@ -1,0 +1,98 @@
+INFO:Detectors:[93m
+Contract locking ether found in /sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol:
+	Contract WKA_Token has payable functions:
+	 - constructor (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#903-919)
+	But does not have a function to withdraw the ether
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#contracts-that-lock-ether[0m
+INFO:Detectors:[93m
+Reentrancy in TokenVesting.release (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#625-649):
+	External calls:
+	- unreleased = releasableAmount(token) (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#630-631)
+	State variables written after the call(s):
+	- released (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#635-637)
+Reentrancy in TokenVesting.revoke (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#663-685):
+	External calls:
+	- balance = token.balanceOf(this) (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#673-675)
+	- unreleased = releasableAmount(token) (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#675-679)
+	State variables written after the call(s):
+	- revoked (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#681)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+TokenVault.fillUpAllowance (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#793-801) does not use the value returned by external calls:
+	-token.approve(token,amount) (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#799-801)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+TokenVesting.vestedAmount (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#717-765) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp < cliff (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#739-765)
+	- block.timestamp >= start.add(duration) || revoked[token] (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#743-765)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+WKA_Token.date15Dec2018 should be constant (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#889-891)
+WKA_Token.lock90Days should be constant (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#891-892)
+WKA_Token.unlock100Days should be constant (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#895-896)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+ERC20Basic.totalSupply (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#121-123) should be declared external
+BasicToken.totalSupply (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#171-175) should be declared external
+ERC20Basic.balanceOf (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#123-125) should be declared external
+BasicToken.balanceOf (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#223-229) should be declared external
+ERC20Basic.transfer (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#125-135) should be declared external
+BasicToken.transfer (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#185-205) should be declared external
+ERC20.allowance (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#233-235) should be declared external
+StandardToken.allowance (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#357-363) should be declared external
+ERC20.transferFrom (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#235-247) should be declared external
+StandardToken.transferFrom (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#285-307) should be declared external
+StandardToken.approve (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#335-339) should be declared external
+ERC20.approve (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#247-249) should be declared external
+StandardToken.increaseApproval (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#375-389) should be declared external
+StandardToken.decreaseApproval (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#389-415) should be declared external
+TokenVesting.release (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#625-649) should be declared external
+TokenVesting.revoke (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#663-685) should be declared external
+TokenVault.fillUpAllowance (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#793-801) should be declared external
+BurnableToken.burn (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#823-849) should be declared external
+WKA_Token.lockedBalanceOf (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol) should be declared external
+WKA_Token.releaseableBalanceOf (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol) should be declared external
+WKA_Token.revokeVestedTokensFor (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_owner' of BasicToken.balanceOf (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#227) is not in mixedCase
+Parameter '_to' of BasicToken.transfer (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#185) is not in mixedCase
+Parameter '_value' of BasicToken.transfer (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#185) is not in mixedCase
+Parameter '_owner' of StandardToken.allowance (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#358-359) is not in mixedCase
+Parameter '_spender' of StandardToken.allowance (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#359) is not in mixedCase
+Parameter '_from' of StandardToken.transferFrom (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#287) is not in mixedCase
+Parameter '_to' of StandardToken.transferFrom (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#287) is not in mixedCase
+Parameter '_value' of StandardToken.transferFrom (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#287-288) is not in mixedCase
+Parameter '_spender' of StandardToken.approve (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#335) is not in mixedCase
+Parameter '_value' of StandardToken.approve (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#335) is not in mixedCase
+Parameter '_spender' of StandardToken.increaseApproval (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#375-377) is not in mixedCase
+Parameter '_addedValue' of StandardToken.increaseApproval (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#377) is not in mixedCase
+Parameter '_spender' of StandardToken.decreaseApproval (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#389) is not in mixedCase
+Parameter '_subtractedValue' of StandardToken.decreaseApproval (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#389-391) is not in mixedCase
+Parameter '_beneficiary' of TokenVesting. (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#583-585) is not in mixedCase
+Parameter '_start' of TokenVesting. (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#585) is not in mixedCase
+Parameter '_cliff' of TokenVesting. (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#587-589) is not in mixedCase
+Parameter '_duration' of TokenVesting. (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#589) is not in mixedCase
+Parameter '_revocable' of TokenVesting. (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#591) is not in mixedCase
+Parameter '_realOwner' of TokenVesting. (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#591) is not in mixedCase
+Parameter '_token' of TokenVault. (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#789) is not in mixedCase
+Parameter '_value' of BurnableToken.burn (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#823) is not in mixedCase
+Contract 'WKA_Token' (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#849-1067) is not in CapWords
+Parameter '_saleTokensAddress' of WKA_Token. (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#903-905) is not in mixedCase
+Parameter '_tokens' of WKA_Token.createTokens (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#963) is not in mixedCase
+Parameter '_destination' of WKA_Token.createTokens (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#963) is not in mixedCase
+Parameter '_beneficiary' of WKA_Token.vestTokensDetail (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#981-985) is not in mixedCase
+Parameter '_start' of WKA_Token.vestTokensDetail (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#985) is not in mixedCase
+Parameter '_cliff' of WKA_Token.vestTokensDetail (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#989) is not in mixedCase
+Parameter '_duration' of WKA_Token.vestTokensDetail (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#991) is not in mixedCase
+Parameter '_revocable' of WKA_Token.vestTokensDetail (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#991) is not in mixedCase
+Parameter '_tokensAmount' of WKA_Token.vestTokensDetail (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#991) is not in mixedCase
+Parameter '_beneficiary' of WKA_Token.vestTokens (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#1029) is not in mixedCase
+Parameter '_tokensAmount' of WKA_Token.vestTokens (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol#1029-1031) is not in mixedCase
+Parameter '_owner' of WKA_Token.releaseVestedTokensFor (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol) is not in mixedCase
+Parameter '_owner' of WKA_Token.lockedBalanceOf (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol) is not in mixedCase
+Parameter '_owner' of WKA_Token.releaseableBalanceOf (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol) is not in mixedCase
+Parameter '_owner' of WKA_Token.revokeVestedTokensFor (/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xa020f57557b321a6964413fb9c03c5ab0700b6f0.sol analyzed (11 contracts), 65 result(s) found

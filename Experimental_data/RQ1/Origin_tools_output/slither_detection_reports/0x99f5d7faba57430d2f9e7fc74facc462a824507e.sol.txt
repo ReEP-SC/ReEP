@@ -1,0 +1,128 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol:
+/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol:175:37: Warning: "msg.gas" has been deprecated in favor of "gasleft()"
+        while(i<usersList.length && msg.gas > 90000){
+                                    ^-----^
+/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol:219:37: Warning: "msg.gas" has been deprecated in favor of "gasleft()"
+        while(p<usersList.length && msg.gas > 90000){
+                                    ^-----^
+
+INFO:Detectors:[93m
+Reentrancy in YFFSmicrostaking.MicroStakeMultiSendToken (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#176-208):
+	External calls:
+	- require(bool)(token.balanceOf(address(this)) >= bonus) (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#191-192)
+	State variables written after the call(s):
+	- users (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#193-198)
+Reentrancy in YFFSmicrostaking.WithdrawTokens (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#256-289):
+	External calls:
+	- require(bool)(token.balanceOf(address(this)) >= _value) (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#268)
+	State variables written after the call(s):
+	- users (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#269-271)
+	- users (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#271-272)
+	- users (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#272-280)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+YFFSmicrostaking.Deposit (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#146-172) does not use the value returned by external calls:
+	-token.transferFrom(msg.sender,address(this),_value) (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#162-168)
+YFFSmicrostaking.WithdrawTokens (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#256-289) does not use the value returned by external calls:
+	-token.transfer(msg.sender,_value) (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#283-284)
+YFFSmicrostaking.ReturnTokens (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol) does not use the value returned by external calls:
+	-ERC20(destination).transfer(account,amount) (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in YFFSmicrostaking.Deposit (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#146-172):
+	External calls:
+	- require(bool)(token.allowance(msg.sender,address(this)) >= _value) (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#151-152)
+	State variables written after the call(s):
+	- totalTokensDeposited (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#158-160)
+	- users (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#156)
+	- users (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#157)
+	- users (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#157-158)
+	- usersList (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#155-156)
+Reentrancy in YFFSmicrostaking.Deposit (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#146-172):
+	External calls:
+	- require(bool)(token.allowance(msg.sender,address(this)) >= _value) (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#151-152)
+	- token.transferFrom(msg.sender,address(this),_value) (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#162-168)
+	- stakeContractBalance = token.balanceOf(address(this)) (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#168-169)
+	State variables written after the call(s):
+	- stakeContractBalance (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#168-169)
+Reentrancy in YFFSmicrostaking.SetEthBonus (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#209-219):
+	External calls:
+	- stakeContractBalance = token.balanceOf(address(this)) (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#215-217)
+	State variables written after the call(s):
+	- indexOfEthSent (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#217)
+Reentrancy in YFFSmicrostaking.WithdrawTokens (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#256-289):
+	External calls:
+	- require(bool)(token.balanceOf(address(this)) >= _value) (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#268)
+	State variables written after the call(s):
+	- totalTokensDeposited (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#282-283)
+Reentrancy in YFFSmicrostaking.WithdrawTokens (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#256-289):
+	External calls:
+	- require(bool)(token.balanceOf(address(this)) >= _value) (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#268)
+	- token.transfer(msg.sender,_value) (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#283-284)
+	- stakeContractBalance = token.balanceOf(address(this)) (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#284-286)
+	State variables written after the call(s):
+	- stakeContractBalance (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#284-286)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Deprecated standard detected @ /sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#179-204:
+	- Usage of "msg.gas" should be replaced with "gasleft()"
+Deprecated standard detected @ /sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#223-248:
+	- Usage of "msg.gas" should be replaced with "gasleft()"
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#deprecated-standards[0m
+INFO:Detectors:[92m
+ERC20Basic.totalSupply (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#57) should be declared external
+ERC20Basic.balanceOf (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#57-58) should be declared external
+ERC20Basic.transfer (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#58-59) should be declared external
+ERC20.allowance (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#67-68) should be declared external
+ERC20.transferFrom (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#68-69) should be declared external
+ERC20.approve (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#69-70) should be declared external
+YFFSmicrostaking.ChangeOwner (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#126-135) should be declared external
+YFFSmicrostaking.ChangeBonus (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#138-144) should be declared external
+YFFSmicrostaking.Deposit (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#146-172) should be declared external
+YFFSmicrostaking.ChangeDepositeStatus (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#173-176) should be declared external
+YFFSmicrostaking.MicroStakeMultiSendToken (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#176-208) should be declared external
+YFFSmicrostaking.SetEthBonus (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#209-219) should be declared external
+YFFSmicrostaking.MicroStakeMultiSendEth (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#219-249) should be declared external
+YFFSmicrostaking.MultiSendTokenComplete (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#250-254) should be declared external
+YFFSmicrostaking.WithdrawTokens (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#256-289) should be declared external
+YFFSmicrostaking.fallback (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#289-290) should be declared external
+YFFSmicrostaking.WithdrawETH (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#290-296) should be declared external
+YFFSmicrostaking.CheckAllowance (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#296-301) should be declared external
+YFFSmicrostaking.GetBonusReceived (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#301-306) should be declared external
+YFFSmicrostaking.GetContributionsCount (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#307-314) should be declared external
+YFFSmicrostaking.GetWithdrawCount (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#314-316) should be declared external
+YFFSmicrostaking.GetLockedTokens (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#316-328) should be declared external
+YFFSmicrostaking.ReturnTokens (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol:
+	- pragma solidity^0.4.23 (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#1): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_token' of YFFSmicrostaking. (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#119) is not in mixedCase
+Parameter '_bonusRate' of YFFSmicrostaking. (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#119-122) is not in mixedCase
+Function 'YFFSmicrostaking.ChangeOwner' (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#126-135) is not in mixedCase
+Parameter '_newOwner' of YFFSmicrostaking.ChangeOwner (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#127-129) is not in mixedCase
+Function 'YFFSmicrostaking.ChangeBonus' (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#138-144) is not in mixedCase
+Parameter '_newBonus' of YFFSmicrostaking.ChangeBonus (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#138-141) is not in mixedCase
+Function 'YFFSmicrostaking.Deposit' (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#146-172) is not in mixedCase
+Parameter '_value' of YFFSmicrostaking.Deposit (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#146) is not in mixedCase
+Function 'YFFSmicrostaking.ChangeDepositeStatus' (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#173-176) is not in mixedCase
+Parameter '_status' of YFFSmicrostaking.ChangeDepositeStatus (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#174-175) is not in mixedCase
+Function 'YFFSmicrostaking.MicroStakeMultiSendToken' (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#176-208) is not in mixedCase
+Function 'YFFSmicrostaking.SetEthBonus' (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#209-219) is not in mixedCase
+Parameter '_EthBonus' of YFFSmicrostaking.SetEthBonus (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#211) is not in mixedCase
+Function 'YFFSmicrostaking.MicroStakeMultiSendEth' (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#219-249) is not in mixedCase
+Function 'YFFSmicrostaking.MultiSendTokenComplete' (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#250-254) is not in mixedCase
+Function 'YFFSmicrostaking.WithdrawTokens' (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#256-289) is not in mixedCase
+Parameter '_value' of YFFSmicrostaking.WithdrawTokens (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#256) is not in mixedCase
+Function 'YFFSmicrostaking.WithdrawETH' (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#290-296) is not in mixedCase
+Function 'YFFSmicrostaking.CheckAllowance' (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#296-301) is not in mixedCase
+Function 'YFFSmicrostaking.GetBonusReceived' (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#301-306) is not in mixedCase
+Function 'YFFSmicrostaking.GetContributionsCount' (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#307-314) is not in mixedCase
+Function 'YFFSmicrostaking.GetWithdrawCount' (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#314-316) is not in mixedCase
+Function 'YFFSmicrostaking.GetLockedTokens' (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#316-328) is not in mixedCase
+Function 'YFFSmicrostaking.ReturnTokens' (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol) is not in mixedCase
+Variable 'YFFSmicrostaking.EthBonus' (/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol#105-106) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x99f5d7faba57430d2f9e7fc74facc462a824507e.sol analyzed (4 contracts), 61 result(s) found

@@ -1,0 +1,35 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xa7e83ca21b34ca287fb278ce17c6be6aca554d46.sol:
+/sb/0xa7e83ca21b34ca287fb278ce17c6be6aca554d46.sol:117:18: Warning: Function declared as view, but this expression (potentially) modifies the state and thus requires non-payable (the default) or payable.
+            if (!address(roulette).call.gas(0x400)(abi.encodeWithSelector(roulette.players.selector, i))) {
+                 ^-------------------------------^
+/sb/0xa7e83ca21b34ca287fb278ce17c6be6aca554d46.sol:117:18: Warning: Function declared as view, but this expression (potentially) modifies the state and thus requires non-payable (the default) or payable.
+            if (!address(roulette).call.gas(0x400)(abi.encodeWithSelector(roulette.players.selector, i))) {
+                 ^-------------------------------------------------------------------------------------^
+
+INFO:Detectors:[91m
+Child.win (/sb/0xa7e83ca21b34ca287fb278ce17c6be6aca554d46.sol#33-49) sends eth to arbitrary user
+	Dangerous calls:
+	- msg.sender.transfer(address(this).balance) (/sb/0xa7e83ca21b34ca287fb278ce17c6be6aca554d46.sol#37-48)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[92m
+AWinner.win has external calls inside a loop:
+	- children[i].win.value(1000000000000000000)(roulette) (/sb/0xa7e83ca21b34ca287fb278ce17c6be6aca554d46.sol#93-97)
+AWinner.win has external calls inside a loop:
+	- require(bool)(address(roulette).call.value(1000000000000000000)()) (/sb/0xa7e83ca21b34ca287fb278ce17c6be6aca554d46.sol#83-85)
+AWinner.getPlayersLength has external calls inside a loop:
+	- ! address(roulette).call.gas(0x400)(abi.encodeWithSelector(roulette.players.selector,i)) (/sb/0xa7e83ca21b34ca287fb278ce17c6be6aca554d46.sol#119-131)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Roulette.players (/sb/0xa7e83ca21b34ca287fb278ce17c6be6aca554d46.sol#17-25) should be declared external
+Child.fallback (/sb/0xa7e83ca21b34ca287fb278ce17c6be6aca554d46.sol#27-33) should be declared external
+Child.win (/sb/0xa7e83ca21b34ca287fb278ce17c6be6aca554d46.sol#33-49) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Low level call in Child.win (/sb/0xa7e83ca21b34ca287fb278ce17c6be6aca554d46.sol#33-49):
+	-require(bool)(target.call.value(msg.value)()) /sb/0xa7e83ca21b34ca287fb278ce17c6be6aca554d46.sol#35-37
+Low level call in AWinner.win (/sb/0xa7e83ca21b34ca287fb278ce17c6be6aca554d46.sol#73-107):
+	-require(bool)(address(roulette).call.value(1000000000000000000)()) /sb/0xa7e83ca21b34ca287fb278ce17c6be6aca554d46.sol#83-85
+Low level call in AWinner.getPlayersLength (/sb/0xa7e83ca21b34ca287fb278ce17c6be6aca554d46.sol#117-133):
+	-! address(roulette).call.gas(0x400)(abi.encodeWithSelector(roulette.players.selector,i)) /sb/0xa7e83ca21b34ca287fb278ce17c6be6aca554d46.sol#119-131
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Slither:/sb/0xa7e83ca21b34ca287fb278ce17c6be6aca554d46.sol analyzed (3 contracts), 10 result(s) found

@@ -1,0 +1,191 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol:
+/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol:21:5: Warning: Functions in interfaces should be declared external.
+    function totalSupply() public view returns (uint supply);
+    ^-------------------------------------------------------^
+/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol:23:5: Warning: Functions in interfaces should be declared external.
+    function balanceOf(address _owner) public view returns (uint balance);
+    ^--------------------------------------------------------------------^
+/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol:25:5: Warning: Functions in interfaces should be declared external.
+    function transfer(address _to, uint _value) public returns (bool success);
+    ^------------------------------------------------------------------------^
+/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol:27:5: Warning: Functions in interfaces should be declared external.
+    function transferFrom(address _from, address _to, uint _value) public returns (bool success);
+    ^-------------------------------------------------------------------------------------------^
+/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol:29:5: Warning: Functions in interfaces should be declared external.
+    function approve(address _spender, uint _value) public returns (bool success);
+    ^----------------------------------------------------------------------------^
+/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol:31:5: Warning: Functions in interfaces should be declared external.
+    function allowance(address _owner, address _spender) public view returns (uint remaining);
+    ^----------------------------------------------------------------------------------------^
+/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol:33:5: Warning: Functions in interfaces should be declared external.
+    function decimals() public view returns(uint digits);
+    ^---------------------------------------------------^
+/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol:489:5: Warning: Functions in interfaces should be declared external.
+    function logImbalance(
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol:505:5: Warning: Functions in interfaces should be declared external.
+    function getRate(
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol:527:5: Warning: Functions in interfaces should be declared external.
+    function getSanityRate(ERC20 src, ERC20 dest) public view returns(uint);
+    ^----------------------------------------------------------------------^
+/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol:681:35: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+        approvedWithdrawAddresses[keccak256(token, addr)] = approve;
+                                  ^--------------------^
+/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol:699:43: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+        require(approvedWithdrawAddresses[keccak256(token, destination)]);
+                                          ^---------------------------^
+/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol:1021:5: Warning: Functions in interfaces should be declared external.
+    function trade(
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol:1045:5: Warning: Functions in interfaces should be declared external.
+    function getConversionRate(ERC20 src, ERC20 dest, uint srcQty, uint blockNumber) public view returns(uint);
+    ^---------------------------------------------------------------------------------------------------------^
+/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol:1069:5: Warning: Functions in interfaces should be declared external.
+    function getExpectedRate(ERC20 src, ERC20 dest, uint srcQty) public view
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol:1365:44: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+        (perSupplierListedPairs[supplier])[keccak256(src, dest)] = add;
+                                           ^------------------^
+/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol:1561:57: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+            if (!(perSupplierListedPairs[suppliers[i]])[keccak256(src, dest)]) continue;
+                                                        ^------------------^
+/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol:1897:13: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+        if (keccak256(rate, sn, quoteKey) != code){
+            ^---------------------------^
+/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol:1255:5: Warning: Function state mutability can be restricted to view
+    function checkBalance(
+    ^ (Relevant source part starts here and spans across multiple lines).
+
+INFO:Detectors:[91m
+Supplier.withdraw (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#732-757) sends eth to arbitrary user
+	Dangerous calls:
+	- destination.transfer(amount) (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#745-747)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[93m
+data in BalanceTracker.decodeTokenImbalanceData (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#2455-2459) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[93m
+MartletInstantlyTrader.listPairForSupplier (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#1443-1485) does not use the value returned by external calls:
+	-src.approve(supplier,2 ** 255) (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#1459-1461)
+	-src.approve(supplier,0) (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#1469)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+MartletInstantlyTrader.findBestRate has external calls inside a loop:
+	- rates[i] = suppliers[i].getConversionRate(src,dest,srcQty,block.number) (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#1659-1665)
+Wrapper.getBalances has external calls inside a loop:
+	- balance = tokens[i].balanceOf(reserve) (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#3171)
+Wrapper.getTokenRates has external calls inside a loop:
+	- buyBases[i] = ratesContract.getBasicRate(tokenList[i],true) (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol)
+Wrapper.getTokenRates has external calls inside a loop:
+	- sellBases[i] = ratesContract.getBasicRate(tokenList[i],false) (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol)
+Wrapper.getTokenIndicies has external calls inside a loop:
+	- (bulkIndex,index,buy,sell) = ratesContract.getCompactData(tokenList[i]) (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol)
+Wrapper.getExpectedRates has external calls inside a loop:
+	- (rates[i],slippage[i]) = network.getExpectedRate(srcs[i],dests[i],qty[i]) (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in MartletInstantlyTrader.listPairForSupplier (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#1443-1485):
+	External calls:
+	- src.approve(supplier,2 ** 255) (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#1459-1461)
+	- src.approve(supplier,0) (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#1469)
+	- setDecimals(src) (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#1477)
+	State variables written after the call(s):
+	- decimals (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#1477)
+Reentrancy in MartletInstantlyTrader.listPairForSupplier (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#1443-1485):
+	External calls:
+	- src.approve(supplier,2 ** 255) (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#1459-1461)
+	- src.approve(supplier,0) (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#1469)
+	- setDecimals(src) (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#1477)
+	- setDecimals(dest) (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#1477)
+	State variables written after the call(s):
+	- decimals (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#1477)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+ERC20.totalSupply (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#21-23) should be declared external
+ERC20.balanceOf (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#23-25) should be declared external
+ERC20.transfer (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#25-27) should be declared external
+ERC20.transferFrom (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#27-29) should be declared external
+ERC20.approve (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#29-31) should be declared external
+ERC20.allowance (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#31-33) should be declared external
+ERC20.decimals (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#33-35) should be declared external
+PermissionGroups.transferAdmin (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#135-147) should be declared external
+PermissionGroups.transferAdminQuickly (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#155-171) should be declared external
+PermissionGroups.claimAdmin (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#183-195) should be declared external
+PermissionGroups.addOperator (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#201-219) should be declared external
+PermissionGroups.removeOperator (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#221-247) should be declared external
+PermissionGroups.addQuoter (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#253-273) should be declared external
+PermissionGroups.removeQuoter (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#273-305) should be declared external
+ConversionAgent.logImbalance (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#2751-2767) should be declared external
+ConversionAgentInterface.logImbalance (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#533-543) should be declared external
+ConversionAgent.getRate (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#2767-2891) should be declared external
+ConversionAgentInterface.getRate (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#543-547) should be declared external
+SanityRatesInterface.getSanityRate (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#551-555) should be declared external
+Supplier.fallback (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#629-633) should be declared external
+Supplier.trade (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#651-683) should be declared external
+Supplier.enableTrade (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#687-697) should be declared external
+Supplier.disableTrade (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#697-705) should be declared external
+Supplier.approveWithdrawAddress (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#709-729) should be declared external
+Supplier.withdraw (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#732-757) should be declared external
+Supplier.setContracts (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#761-787) should be declared external
+Supplier.getSrcQty (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#839-853) should be declared external
+Supplier.getConversionRate (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#853-911) should be declared external
+SupplierInterface.trade (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#1089-1099) should be declared external
+SupplierInterface.getConversionRate (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#1099-1101) should be declared external
+ExpectedRateInterface.getExpectedRate (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#1119-1127) should be declared external
+MartletInstantlyTrader.fallback (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#1179-1195) should be declared external
+MartletInstantlyTrader.trade (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#1237-1317) should be declared external
+MartletInstantlyTrader.addSupplier (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#1371-1420) should be declared external
+MartletInstantlyTrader.listPairForSupplier (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#1443-1485) should be declared external
+MartletInstantlyTrader.setParams (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#1485-1531) should be declared external
+MartletInstantlyTrader.setEnable (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#1531-1541) should be declared external
+MartletInstantlyTrader.setQuoteKey (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#1541-1547) should be declared external
+MartletInstantlyTrader.getQuoteKey (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#1547-1551) should be declared external
+MartletInstantlyTrader.setInfo (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#1553-1557) should be declared external
+MartletInstantlyTrader.getNumSuppliers (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#1561-1565) should be declared external
+MartletInstantlyTrader.getSuppliers (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#1573-1585) should be declared external
+MartletInstantlyTrader.getExpectedRate (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#1724-1745) should be declared external
+BalanceTracker.setTokenControlInfo (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#2095-2113) should be declared external
+BalanceTracker.getTokenControlInfo (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#2113-2123) should be declared external
+ConversionAgent.addToken (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#2543-2569) should be declared external
+ConversionAgent.setBaseRate (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#2623-2655) should be declared external
+ConversionAgent.setQtyStepFunction (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#2655-2685) should be declared external
+ConversionAgent.setImbalanceStepFunction (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#2685-2713) should be declared external
+ConversionAgent.setValidRateDurationInBlocks (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#2717-2719) should be declared external
+ConversionAgent.enableTokenTrade (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#2721-2733) should be declared external
+ConversionAgent.disableTokenTrade (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#2733-2743) should be declared external
+ConversionAgent.setSupplierAddress (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#2743-2751) should be declared external
+ConversionAgent.getBasicRate (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#2893-2907) should be declared external
+ConversionAgent.getCompactData (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#2907-2937) should be declared external
+ConversionAgent.getTokenBasicData (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#2937-2947) should be declared external
+ConversionAgent.getStepFunctionData (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#2949-3059) should be declared external
+ConversionAgent.getListedTokens (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#3071-3075) should be declared external
+Wrapper.getBalances (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#3147-3179) should be declared external
+Wrapper.getByteFromBytes14 (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#3179-3187) should be declared external
+Wrapper.getInt8FromByte (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#3187-3195) should be declared external
+Wrapper.getTokenRates (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol) should be declared external
+Wrapper.getTokenIndicies (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol) should be declared external
+Wrapper.getExpectedRates (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol:
+	- pragma solidity^0.4.22 (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#9-13): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_martletInstantlyTrader' of Supplier. (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#585-587) is not in mixedCase
+Parameter '_ratesContract' of Supplier. (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#587-591) is not in mixedCase
+Parameter '_admin' of Supplier. (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#591) is not in mixedCase
+Parameter '_martletInstantlyTrader' of Supplier.setContracts (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#761) is not in mixedCase
+Parameter '_conversionRates' of Supplier.setContracts (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#761-763) is not in mixedCase
+Parameter '_sanityRates' of Supplier.setContracts (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#763) is not in mixedCase
+Parameter '_admin' of MartletInstantlyTrader. (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#1163-1165) is not in mixedCase
+Parameter '_whiteList' of MartletInstantlyTrader.setParams (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#1487-1489) is not in mixedCase
+Parameter '_expectedRate' of MartletInstantlyTrader.setParams (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#1489) is not in mixedCase
+Parameter '_maxGasPrice' of MartletInstantlyTrader.setParams (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#1491-1497) is not in mixedCase
+Parameter '_negligibleRateDiff' of MartletInstantlyTrader.setParams (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#1497) is not in mixedCase
+Parameter '_validBlkNum' of MartletInstantlyTrader.setParams (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#1497-1499) is not in mixedCase
+Parameter '_enable' of MartletInstantlyTrader.setEnable (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#1533) is not in mixedCase
+Parameter '_quoteKey' of MartletInstantlyTrader.setQuoteKey (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#1541) is not in mixedCase
+Parameter '_admin' of BalanceTracker. (/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol#2093) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xce0f6166b8fe37f1e70c5d0eb370169f0576d707.sol analyzed (14 contracts), 91 result(s) found

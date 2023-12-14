@@ -1,0 +1,106 @@
+INFO:Detectors:[93m
+IERC20 (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#175-186) has incorrect ERC20 function interface(s):
+	-approve (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#175-177)
+	-transfer (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#177-178)
+	-transferFrom (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#178-179)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[93m
+GOLDx.convertDecimals (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#667-674) uses a dangerous strict equality:
+	- _srcDecimals == 0 || _dstDecimals == 0 || _amount == 0
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[92m
+Reentrancy in GOLDx.cancelUpgrade (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#459-467):
+	External calls:
+	- require(bool,string)(getOutstanding() == 0,cancelUpgrade: Add more current anchored asset!) (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#460-461)
+	State variables written after the call(s):
+	- pendingMinBurnAmount (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#464-465)
+	- pendingMinMintAmount (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#463-464)
+	- pendingToken (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#462-463)
+	- pendingUnit (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#463)
+	- upgradeTime (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#461-462)
+Reentrancy in GOLDx.mint (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#530-559):
+	External calls:
+	- _balance = IERC20(token).balanceOf(address(this)) (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#535-536)
+	- require(bool,string)(doTransferFrom(token,msg.sender,address(this),_pie),mint: TransferFrom failed!) (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#536-538)
+	- _wad = rmul(convertDecimals(IERC20(token).decimals(),decimals,IERC20(token).balanceOf(address(this)).sub(_balance)),unit) (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#538-543)
+	State variables written after the call(s):
+	- balanceOf (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#551-552)
+	- balanceOf (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#555-556)
+	- totalSupply (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#553)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+ERC20SafeTransfer.doTransferOut uses assembly (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#188-210)
+	- /sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#196-208
+ERC20SafeTransfer.doTransferFrom uses assembly (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#210-236)
+	- /sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#219-235
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+DSAuthority.canCall (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#8-13) should be declared external
+DSAuth.disableOwnership (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#30-35) should be declared external
+DSAuth.transferOwnership (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#35-40) should be declared external
+DSAuth.acceptOwnership (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#41-47) should be declared external
+DSAuth.setAuthority (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#49-57) should be declared external
+Pausable.pause (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#129-131) should be declared external
+Pausable.unpause (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#137-141) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol:
+	- pragma solidity0.5.16 (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#5-7): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_token' of ERC20SafeTransfer.doTransferOut (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#190-191) is not in mixedCase
+Parameter '_to' of ERC20SafeTransfer.doTransferOut (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#191) is not in mixedCase
+Parameter '_amount' of ERC20SafeTransfer.doTransferOut (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#191) is not in mixedCase
+Parameter '_token' of ERC20SafeTransfer.doTransferFrom (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#212-213) is not in mixedCase
+Parameter '_from' of ERC20SafeTransfer.doTransferFrom (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#213) is not in mixedCase
+Parameter '_to' of ERC20SafeTransfer.doTransferFrom (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#213) is not in mixedCase
+Parameter '_amount' of ERC20SafeTransfer.doTransferFrom (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#213-214) is not in mixedCase
+Parameter '_name' of GOLDx. (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#312-313) is not in mixedCase
+Parameter '_symbol' of GOLDx. (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#313) is not in mixedCase
+Parameter '_token' of GOLDx. (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#313) is not in mixedCase
+Parameter '_name' of GOLDx.initialize (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#320-321) is not in mixedCase
+Parameter '_symbol' of GOLDx.initialize (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#321) is not in mixedCase
+Parameter '_token' of GOLDx.initialize (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#321-322) is not in mixedCase
+Parameter '_newUnit' of GOLDx.setUnit (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#341) is not in mixedCase
+Parameter '_minMintAmount' of GOLDx.setMinMintAmount (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#350) is not in mixedCase
+Parameter '_minBurnAmount' of GOLDx.setMinBurnAmount (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#359) is not in mixedCase
+Parameter '_feeRecipient' of GOLDx.setFeeRecipient (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#368) is not in mixedCase
+Parameter '_sig' of GOLDx.setFee (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#382) is not in mixedCase
+Parameter '_fee' of GOLDx.setFee (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#382) is not in mixedCase
+Parameter '_account' of GOLDx.addBlacklist (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#391) is not in mixedCase
+Parameter '_account' of GOLDx.removeBlacklist (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#400) is not in mixedCase
+Parameter '_upgradeTime' of GOLDx.upgradeProtocol (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#415) is not in mixedCase
+Parameter '_token' of GOLDx.upgradeProtocol (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#416) is not in mixedCase
+Parameter '_unit' of GOLDx.upgradeProtocol (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#417) is not in mixedCase
+Parameter '_minMintAmount' of GOLDx.upgradeProtocol (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#417-418) is not in mixedCase
+Parameter '_minBurnAmount' of GOLDx.upgradeProtocol (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#418) is not in mixedCase
+Parameter '_address' of GOLDx.retrieveBlackAddress (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#470) is not in mixedCase
+Parameter '_address' of GOLDx.wipeBlackAddress (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#483) is not in mixedCase
+Parameter '_src' of GOLDx.checkPrecondition (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#502) is not in mixedCase
+Parameter '_dst' of GOLDx.checkPrecondition (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#502) is not in mixedCase
+Parameter '_wad' of GOLDx.checkPrecondition (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#502) is not in mixedCase
+Parameter '_src' of GOLDx.transfer (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#510-511) is not in mixedCase
+Parameter '_dst' of GOLDx.transfer (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#512-514) is not in mixedCase
+Parameter '_wad' of GOLDx.transfer (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#514) is not in mixedCase
+Parameter '_dst' of GOLDx.mint (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#530) is not in mixedCase
+Parameter '_pie' of GOLDx.mint (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#531) is not in mixedCase
+Parameter '_src' of GOLDx.burn (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#563) is not in mixedCase
+Parameter '_wad' of GOLDx.burn (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#563) is not in mixedCase
+Parameter '_dst' of GOLDx.transfer (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#591) is not in mixedCase
+Parameter '_wad' of GOLDx.transfer (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#591-592) is not in mixedCase
+Parameter '_src' of GOLDx.transferFrom (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#595) is not in mixedCase
+Parameter '_dst' of GOLDx.transferFrom (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#595-596) is not in mixedCase
+Parameter '_wad' of GOLDx.transferFrom (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#596-597) is not in mixedCase
+Parameter '_spender' of GOLDx.approve (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#602) is not in mixedCase
+Parameter '_wad' of GOLDx.approve (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#602) is not in mixedCase
+Parameter '_src' of GOLDx.getTokenBalance (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#617-618) is not in mixedCase
+Parameter '_wad' of GOLDx.getRedeemAmount (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#624-625) is not in mixedCase
+Parameter '_token' of GOLDx.getOutstanding (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#646) is not in mixedCase
+Parameter '_unit' of GOLDx.getOutstanding (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#646) is not in mixedCase
+Parameter '_feeRate' of GOLDx.getFee (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#657) is not in mixedCase
+Parameter '_amount' of GOLDx.getFee (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#658-659) is not in mixedCase
+Parameter '_srcDecimals' of GOLDx.convertDecimals (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#668-669) is not in mixedCase
+Parameter '_dstDecimals' of GOLDx.convertDecimals (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#669-670) is not in mixedCase
+Parameter '_amount' of GOLDx.convertDecimals (/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol#670) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x09a52b4c749d006f7fc0c3f316aeca54d74bb97a.sol analyzed (10 contracts), 68 result(s) found

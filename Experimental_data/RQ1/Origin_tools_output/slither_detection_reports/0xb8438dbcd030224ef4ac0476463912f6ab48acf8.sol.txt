@@ -1,0 +1,82 @@
+INFO:Detectors:[93m
+Reentrancy in UniDappStacking.deposit (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol#259-276):
+	External calls:
+	- require(bool,string)(Token(tokenAddress).transferFrom(msg.sender,address(this),amountToStake),Insufficient Token Allowance) (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol#262-263)
+	- updateAccount(msg.sender) (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol#265)
+	- require(bool,string)(Token(tokenAddress).transfer(owner,fee),Could not transfer deposit fee.) (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol#268-273)
+	State variables written after the call(s):
+	- depositedTokens (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol#273-274)
+Reentrancy in UniDappStacking.updateAccount (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol#226-238):
+	External calls:
+	- require(bool,string)(Token(tokenAddress).transfer(account,pendingDivs),Could not transfer tokens.) (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol#228-230)
+	State variables written after the call(s):
+	- lastClaimedTime (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol#238)
+Reentrancy in UniDappStacking.withdraw (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol#276-302):
+	External calls:
+	- updateAccount(msg.sender) (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol#284)
+	- require(bool,string)(Token(tokenAddress).transfer(owner,fee),Could not transfer withdraw fee.) (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol#286-288)
+	- require(bool,string)(Token(tokenAddress).transfer(msg.sender,amountAfterFee),Could not transfer tokens.) (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol#288-293)
+	State variables written after the call(s):
+	- depositedTokens (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol#294-298)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+EnumerableSet._remove (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol#56-88) does not use the value returned by external calls:
+	-set._values.pop() (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol#77)
+UniDappStacking.deposit (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol#259-276) does not use the value returned by external calls:
+	-holders.add(msg.sender) (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol#276)
+UniDappStacking.withdraw (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol#276-302) does not use the value returned by external calls:
+	-holders.remove(msg.sender) (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol#301)
+UniDappStacking.transferAnyERC20Tokens (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol#316-319) does not use the value returned by external calls:
+	-Token(_tokenAddr).transfer(_to,_amount) (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in UniDappStacking.deposit (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol#259-276):
+	External calls:
+	- require(bool,string)(Token(tokenAddress).transferFrom(msg.sender,address(this),amountToStake),Insufficient Token Allowance) (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol#262-263)
+	- updateAccount(msg.sender) (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol#265)
+	- require(bool,string)(Token(tokenAddress).transfer(owner,fee),Could not transfer deposit fee.) (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol#268-273)
+	State variables written after the call(s):
+	- stakingTime (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol#276)
+Reentrancy in UniDappStacking.updateAccount (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol#226-238):
+	External calls:
+	- require(bool,string)(Token(tokenAddress).transfer(account,pendingDivs),Could not transfer tokens.) (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol#228-230)
+	State variables written after the call(s):
+	- totalClaimedRewards (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol#234-235)
+	- totalEarnedTokens (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol#231-234)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol#186-192) should be declared external
+UniDappStacking.getNumberOfHolders (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol#257-258) should be declared external
+UniDappStacking.deposit (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol#259-276) should be declared external
+UniDappStacking.withdraw (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol#276-302) should be declared external
+UniDappStacking.claimDivs (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol#302-304) should be declared external
+UniDappStacking.transferAnyERC20Tokens (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol#316-319) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol:
+	- pragma solidity0.6.12 (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol#7-9): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'EnumerableSet._add' (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol#45-56) is not in mixedCase
+Function 'EnumerableSet._remove' (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol#56-88) is not in mixedCase
+Function 'EnumerableSet._contains' (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol#89-93) is not in mixedCase
+Function 'EnumerableSet._length' (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol#93-97) is not in mixedCase
+Function 'EnumerableSet._at' (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol#97-107) is not in mixedCase
+Parameter '' of Token.transferFrom (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol#194) is not in mixedCase
+Parameter '_scope_0' of Token.transferFrom (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol#194) is not in mixedCase
+Parameter '_scope_1' of Token.transferFrom (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol#194) is not in mixedCase
+Parameter '' of Token.transfer (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol#196) is not in mixedCase
+Parameter '_scope_0' of Token.transfer (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol#196) is not in mixedCase
+Parameter '_holder' of UniDappStacking.getPendingDivs (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol#239) is not in mixedCase
+Parameter '_tokenAddr' of UniDappStacking.transferAnyERC20Tokens (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol#317) is not in mixedCase
+Parameter '_to' of UniDappStacking.transferAnyERC20Tokens (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol#317-319) is not in mixedCase
+Parameter '_amount' of UniDappStacking.transferAnyERC20Tokens (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol) is not in mixedCase
+Constant 'UniDappStacking.tokenAddress' (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol#203-206) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'UniDappStacking.rewardRate' (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol#209) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'UniDappStacking.rewardInterval' (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol#209-211) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'UniDappStacking.stakingFeeRate' (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol#212) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'UniDappStacking.unstakingFeeRate' (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol#214-216) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'UniDappStacking.cliffTime' (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol#218-219) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'UniDappStacking.stakingAndDaoTokens' (/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol#305) is not in UPPER_CASE_WITH_UNDERSCORES
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xb8438dbcd030224ef4ac0476463912f6ab48acf8.sol analyzed (5 contracts), 37 result(s) found

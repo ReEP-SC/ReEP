@@ -1,0 +1,37 @@
+INFO:Detectors:[93m
+FloatBuyer.withdrawERC20 (/sb/0xbdc1c9dbb7e02726da04212d9bcda8e84d6021cb.sol#62-73) does not use the value returned by external calls:
+	-token.transferFrom(address(this),msg.sender,token.balanceOf(address(this))) (/sb/0xbdc1c9dbb7e02726da04212d9bcda8e84d6021cb.sol#66-73)
+FloatBuyer.approve (/sb/0xbdc1c9dbb7e02726da04212d9bcda8e84d6021cb.sol#73-81) does not use the value returned by external calls:
+	-IERC20(tokenAddress).approve(spender,amount) (/sb/0xbdc1c9dbb7e02726da04212d9bcda8e84d6021cb.sol#79-81)
+FloatBuyer.executeAndBuy (/sb/0xbdc1c9dbb7e02726da04212d9bcda8e84d6021cb.sol#81-116) does not use the value returned by external calls:
+	-usdc.transferFrom(msg.sender,address(this),usdcTokenAmount) (/sb/0xbdc1c9dbb7e02726da04212d9bcda8e84d6021cb.sol#95-96)
+	-IAuctionHouse(auctionHouse).buy(wethInMax,bankInMax,floatOutMin,address(this),deadline) (/sb/0xbdc1c9dbb7e02726da04212d9bcda8e84d6021cb.sol#102-109)
+FloatBuyer.executeAndSell (/sb/0xbdc1c9dbb7e02726da04212d9bcda8e84d6021cb.sol#116-154) does not use the value returned by external calls:
+	-float.transferFrom(msg.sender,address(this),floatIn) (/sb/0xbdc1c9dbb7e02726da04212d9bcda8e84d6021cb.sol#130-133)
+	-IAuctionHouse(auctionHouse).sell(floatIn,wethOutMin,bankOutMin,address(this),deadline) (/sb/0xbdc1c9dbb7e02726da04212d9bcda8e84d6021cb.sol#134-140)
+FloatBuyer._sendOutAll (/sb/0xbdc1c9dbb7e02726da04212d9bcda8e84d6021cb.sol#162-165) does not use the value returned by external calls:
+	-token.transferFrom(address(this),msg.sender,token.balanceOf(address(this))) (/sb/0xbdc1c9dbb7e02726da04212d9bcda8e84d6021cb.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+FloatBuyer.withdrawERC20 (/sb/0xbdc1c9dbb7e02726da04212d9bcda8e84d6021cb.sol#62-73) should be declared external
+FloatBuyer.approve (/sb/0xbdc1c9dbb7e02726da04212d9bcda8e84d6021cb.sol#73-81) should be declared external
+FloatBuyer.executeAndBuy (/sb/0xbdc1c9dbb7e02726da04212d9bcda8e84d6021cb.sol#81-116) should be declared external
+FloatBuyer.executeAndSell (/sb/0xbdc1c9dbb7e02726da04212d9bcda8e84d6021cb.sol#116-154) should be declared external
+FloatBuyer.executeArbitrary (/sb/0xbdc1c9dbb7e02726da04212d9bcda8e84d6021cb.sol#154-162) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xbdc1c9dbb7e02726da04212d9bcda8e84d6021cb.sol:
+	- pragma solidity^0.6.0 (/sb/0xbdc1c9dbb7e02726da04212d9bcda8e84d6021cb.sol#6-8): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Low level call in FloatBuyer.executeAndBuy (/sb/0xbdc1c9dbb7e02726da04212d9bcda8e84d6021cb.sol#81-116):
+	-(success1) = dexAddress.call(dexData) /sb/0xbdc1c9dbb7e02726da04212d9bcda8e84d6021cb.sol#96-99
+Low level call in FloatBuyer.executeAndSell (/sb/0xbdc1c9dbb7e02726da04212d9bcda8e84d6021cb.sol#116-154):
+	-(success1) = dexAddress.call(dexData) /sb/0xbdc1c9dbb7e02726da04212d9bcda8e84d6021cb.sol#143-144
+Low level call in FloatBuyer.executeArbitrary (/sb/0xbdc1c9dbb7e02726da04212d9bcda8e84d6021cb.sol#154-162):
+	-(success) = targetAddress.call(targetCallData) /sb/0xbdc1c9dbb7e02726da04212d9bcda8e84d6021cb.sol#159-161
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Function 'FloatBuyer._sendOutAll' (/sb/0xbdc1c9dbb7e02726da04212d9bcda8e84d6021cb.sol#162-165) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xbdc1c9dbb7e02726da04212d9bcda8e84d6021cb.sol analyzed (3 contracts), 15 result(s) found

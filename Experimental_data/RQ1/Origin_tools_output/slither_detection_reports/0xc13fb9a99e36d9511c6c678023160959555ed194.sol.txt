@@ -1,0 +1,70 @@
+INFO:Detectors:[93m
+CryptoCasherCrowdsale.buyTokens (/sb/0xc13fb9a99e36d9511c6c678023160959555ed194.sol#307-355) does not use the value returned by external calls:
+	-tokenContract.mint(_investor,tokens,owner) (/sb/0xc13fb9a99e36d9511c6c678023160959555ed194.sol#325-327)
+	-tokenContract.mint(addressFundNonKYCReserv,tokens,owner) (/sb/0xc13fb9a99e36d9511c6c678023160959555ed194.sol#329-333)
+CryptoCasherCrowdsale.checkReferalLink (/sb/0xc13fb9a99e36d9511c6c678023160959555ed194.sol#445-483) does not use the value returned by external calls:
+	-tokenContract.mint(referer,_refererTokens,addressFundBlchainReferal) (/sb/0xc13fb9a99e36d9511c6c678023160959555ed194.sol#472-479)
+	-tokenContract.mint(msg.sender,_refererTokens,addressFundBlchainReferal) (/sb/0xc13fb9a99e36d9511c6c678023160959555ed194.sol#479-481)
+CryptoCasherCrowdsale.claimTokens (/sb/0xc13fb9a99e36d9511c6c678023160959555ed194.sol#627-641) does not use the value returned by external calls:
+	-tokenContract.transfer(owner,balance) (/sb/0xc13fb9a99e36d9511c6c678023160959555ed194.sol#637-639)
+CryptoCasherCrowdsale.batchTransferPaidTokens (/sb/0xc13fb9a99e36d9511c6c678023160959555ed194.sol#647-677) does not use the value returned by external calls:
+	-paidTokens[_recipients[j]].sub(_values[j]) (/sb/0xc13fb9a99e36d9511c6c678023160959555ed194.sol)
+	-tokenContract.transferFrom(addressFundNonKYCReserv,_recipients[j],_values[j]) (/sb/0xc13fb9a99e36d9511c6c678023160959555ed194.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+CryptoCasherCrowdsale.batchTransferPaidTokens has external calls inside a loop:
+	- tokenContract.transferFrom(addressFundNonKYCReserv,_recipients[j],_values[j]) (/sb/0xc13fb9a99e36d9511c6c678023160959555ed194.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in CryptoCasherCrowdsale.buyTokens (/sb/0xc13fb9a99e36d9511c6c678023160959555ed194.sol#307-355):
+	External calls:
+	- tokenContract.mint(addressFundNonKYCReserv,tokens,owner) (/sb/0xc13fb9a99e36d9511c6c678023160959555ed194.sol#329-333)
+	State variables written after the call(s):
+	- paidTokens (/sb/0xc13fb9a99e36d9511c6c678023160959555ed194.sol#333-337)
+Reentrancy in CryptoCasherCrowdsale.buyTokens (/sb/0xc13fb9a99e36d9511c6c678023160959555ed194.sol#307-355):
+	External calls:
+	- tokenContract.mint(_investor,tokens,owner) (/sb/0xc13fb9a99e36d9511c6c678023160959555ed194.sol#325-327)
+	- tokenContract.mint(addressFundNonKYCReserv,tokens,owner) (/sb/0xc13fb9a99e36d9511c6c678023160959555ed194.sol#329-333)
+	State variables written after the call(s):
+	- countInvestor (/sb/0xc13fb9a99e36d9511c6c678023160959555ed194.sol#349)
+	- deposited (/sb/0xc13fb9a99e36d9511c6c678023160959555ed194.sol#351-353)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Crowdsale.hardCap should be constant (/sb/0xc13fb9a99e36d9511c6c678023160959555ed194.sol#145-153)
+CryptoCasherCrowdsale.addressFundBlchainReferal should be constant (/sb/0xc13fb9a99e36d9511c6c678023160959555ed194.sol#213-219)
+CryptoCasherCrowdsale.addressFundNonKYCReserv should be constant (/sb/0xc13fb9a99e36d9511c6c678023160959555ed194.sol#205-213)
+CryptoCasherCrowdsale.fundForSale should be constant (/sb/0xc13fb9a99e36d9511c6c678023160959555ed194.sol#201-205)
+CryptoCasherCrowdsale.percentReferal should be constant (/sb/0xc13fb9a99e36d9511c6c678023160959555ed194.sol#227)
+CryptoCasherCrowdsale.weiMinSale should be constant (/sb/0xc13fb9a99e36d9511c6c678023160959555ed194.sol#223-225)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+CryptoCasherCrowdsale.setContractErc20Token (/sb/0xc13fb9a99e36d9511c6c678023160959555ed194.sol#277-294) should be declared external
+CryptoCasherCrowdsale.fallback (/sb/0xc13fb9a99e36d9511c6c678023160959555ed194.sol#297-299) should be declared external
+CryptoCasherCrowdsale.setPriceToken (/sb/0xc13fb9a99e36d9511c6c678023160959555ed194.sol#299-305) should be declared external
+CryptoCasherCrowdsale.claimTokens (/sb/0xc13fb9a99e36d9511c6c678023160959555ed194.sol#627-641) should be declared external
+CryptoCasherCrowdsale.balanceOf (/sb/0xc13fb9a99e36d9511c6c678023160959555ed194.sol) should be declared external
+CryptoCasherCrowdsale.balanceOfNonKYC (/sb/0xc13fb9a99e36d9511c6c678023160959555ed194.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_wallet' of Crowdsale. (/sb/0xc13fb9a99e36d9511c6c678023160959555ed194.sol#155) is not in mixedCase
+Parameter '_owner' of CryptoCasherCrowdsale. (/sb/0xc13fb9a99e36d9511c6c678023160959555ed194.sol#245) is not in mixedCase
+Parameter '_wallet' of CryptoCasherCrowdsale. (/sb/0xc13fb9a99e36d9511c6c678023160959555ed194.sol#245) is not in mixedCase
+Parameter '_addressContract' of CryptoCasherCrowdsale.setContractErc20Token (/sb/0xc13fb9a99e36d9511c6c678023160959555ed194.sol#279-285) is not in mixedCase
+Parameter '_newPrice' of CryptoCasherCrowdsale.setPriceToken (/sb/0xc13fb9a99e36d9511c6c678023160959555ed194.sol#301) is not in mixedCase
+Parameter '_investor' of CryptoCasherCrowdsale.buyTokens (/sb/0xc13fb9a99e36d9511c6c678023160959555ed194.sol#309) is not in mixedCase
+Parameter '_weiAmount' of CryptoCasherCrowdsale.getTotalAmountOfTokens (/sb/0xc13fb9a99e36d9511c6c678023160959555ed194.sol#355) is not in mixedCase
+Parameter '_currentDate' of CryptoCasherCrowdsale.getPeriod (/sb/0xc13fb9a99e36d9511c6c678023160959555ed194.sol#375) is not in mixedCase
+Parameter '_amountToken' of CryptoCasherCrowdsale.checkReferalLink (/sb/0xc13fb9a99e36d9511c6c678023160959555ed194.sol#447) is not in mixedCase
+Parameter '_weiAmount' of CryptoCasherCrowdsale.validPurchaseTokens (/sb/0xc13fb9a99e36d9511c6c678023160959555ed194.sol#509-511) is not in mixedCase
+Parameter '_admin' of CryptoCasherCrowdsale.setContractAdmin (/sb/0xc13fb9a99e36d9511c6c678023160959555ed194.sol#539-541) is not in mixedCase
+Parameter '_isAdmin' of CryptoCasherCrowdsale.setContractAdmin (/sb/0xc13fb9a99e36d9511c6c678023160959555ed194.sol#541) is not in mixedCase
+Parameter '_beneficiary' of CryptoCasherCrowdsale.addToWhitelist (/sb/0xc13fb9a99e36d9511c6c678023160959555ed194.sol#551-553) is not in mixedCase
+Parameter '_beneficiaries' of CryptoCasherCrowdsale.addManyToWhitelist (/sb/0xc13fb9a99e36d9511c6c678023160959555ed194.sol#575-577) is not in mixedCase
+Parameter '_beneficiary' of CryptoCasherCrowdsale.removeFromWhitelist (/sb/0xc13fb9a99e36d9511c6c678023160959555ed194.sol#607) is not in mixedCase
+Parameter '_token' of CryptoCasherCrowdsale.claimTokens (/sb/0xc13fb9a99e36d9511c6c678023160959555ed194.sol#627) is not in mixedCase
+Parameter '_recipients' of CryptoCasherCrowdsale.batchTransferPaidTokens (/sb/0xc13fb9a99e36d9511c6c678023160959555ed194.sol#647) is not in mixedCase
+Parameter '_values' of CryptoCasherCrowdsale.batchTransferPaidTokens (/sb/0xc13fb9a99e36d9511c6c678023160959555ed194.sol#647) is not in mixedCase
+Parameter '_owner' of CryptoCasherCrowdsale.balanceOf (/sb/0xc13fb9a99e36d9511c6c678023160959555ed194.sol) is not in mixedCase
+Parameter '_owner' of CryptoCasherCrowdsale.balanceOfNonKYC (/sb/0xc13fb9a99e36d9511c6c678023160959555ed194.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xc13fb9a99e36d9511c6c678023160959555ed194.sol analyzed (5 contracts), 34 result(s) found

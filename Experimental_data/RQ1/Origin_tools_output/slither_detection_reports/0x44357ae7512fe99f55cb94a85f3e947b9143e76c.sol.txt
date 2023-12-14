@@ -1,0 +1,69 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x44357ae7512fe99f55cb94a85f3e947b9143e76c.sol:
+/sb/0x44357ae7512fe99f55cb94a85f3e947b9143e76c.sol:545:13: Warning: Failure condition of 'send' ignored. Consider using 'transfer' instead.
+            deposites[currentPaymentIndex].depositor.send(toSend);
+            ^---------------------------------------------------^
+
+INFO:Detectors:[92m
+distribution.migrateDeposite has external calls inside a loop:
+	- (depositor,amount,depositeTime,paimentTime) = oldContract.getDeposit(i) (/sb/0x44357ae7512fe99f55cb94a85f3e947b9143e76c.sol#517-519)
+distribution.distribute has external calls inside a loop:
+	- deposites[currentPaymentIndex].depositor.send(toSend) (/sb/0x44357ae7512fe99f55cb94a85f3e947b9143e76c.sol#565-567)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in distribution.migrateDeposite (/sb/0x44357ae7512fe99f55cb94a85f3e947b9143e76c.sol#493-525):
+	External calls:
+	- (depositor,amount,depositeTime,paimentTime) = oldContract.getDeposit(i) (/sb/0x44357ae7512fe99f55cb94a85f3e947b9143e76c.sol#517-519)
+	State variables written after the call(s):
+	- deposites (/sb/0x44357ae7512fe99f55cb94a85f3e947b9143e76c.sol#523)
+	- depositors (/sb/0x44357ae7512fe99f55cb94a85f3e947b9143e76c.sol#523-525)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+distribution.percent should be constant (/sb/0x44357ae7512fe99f55cb94a85f3e947b9143e76c.sol#325-327)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Ownable.owner (/sb/0x44357ae7512fe99f55cb94a85f3e947b9143e76c.sol#65-73) should be declared external
+Ownable.renounceOwnership (/sb/0x44357ae7512fe99f55cb94a85f3e947b9143e76c.sol#117-127) should be declared external
+Ownable.transferOwnership (/sb/0x44357ae7512fe99f55cb94a85f3e947b9143e76c.sol#141-145) should be declared external
+distribution.setDistributorAddress (/sb/0x44357ae7512fe99f55cb94a85f3e947b9143e76c.sol#389-399) should be declared external
+distribution.setNewMinDeposite (/sb/0x44357ae7512fe99f55cb94a85f3e947b9143e76c.sol#401-409) should be declared external
+distribution.setNewMaxDeposite (/sb/0x44357ae7512fe99f55cb94a85f3e947b9143e76c.sol#409-421) should be declared external
+distribution.setNewWallets (/sb/0x44357ae7512fe99f55cb94a85f3e947b9143e76c.sol#421-427) should be declared external
+distribution.setPromoWallet (/sb/0x44357ae7512fe99f55cb94a85f3e947b9143e76c.sol#427-435) should be declared external
+distribution.fallback (/sb/0x44357ae7512fe99f55cb94a85f3e947b9143e76c.sol#453-489) should be declared external
+distribution.addMigrateBalance (/sb/0x44357ae7512fe99f55cb94a85f3e947b9143e76c.sol#489-493) should be declared external
+distribution.migrateDeposite (/sb/0x44357ae7512fe99f55cb94a85f3e947b9143e76c.sol#493-525) should be declared external
+distribution.finishMigration (/sb/0x44357ae7512fe99f55cb94a85f3e947b9143e76c.sol#525-531) should be declared external
+distribution.distribute (/sb/0x44357ae7512fe99f55cb94a85f3e947b9143e76c.sol#531-618) should be declared external
+distribution.getAllDepositorsCount (/sb/0x44357ae7512fe99f55cb94a85f3e947b9143e76c.sol#621-623) should be declared external
+distribution.getAllDepositesCount (/sb/0x44357ae7512fe99f55cb94a85f3e947b9143e76c.sol#623-633) should be declared external
+distribution.getLastDepositId (/sb/0x44357ae7512fe99f55cb94a85f3e947b9143e76c.sol#633-639) should be declared external
+distribution.getDeposit (/sb/0x44357ae7512fe99f55cb94a85f3e947b9143e76c.sol#639-645) should be declared external
+distribution.getDepositesCount (/sb/0x44357ae7512fe99f55cb94a85f3e947b9143e76c.sol#647-653) should be declared external
+distribution.getAmountRaised (/sb/0x44357ae7512fe99f55cb94a85f3e947b9143e76c.sol#653-655) should be declared external
+distribution.getLastPayments (/sb/0x44357ae7512fe99f55cb94a85f3e947b9143e76c.sol#659-677) should be declared external
+distribution.getUserDeposit (/sb/0x44357ae7512fe99f55cb94a85f3e947b9143e76c.sol#677-697) should be declared external
+distribution.getDepositeTime (/sb/0x44357ae7512fe99f55cb94a85f3e947b9143e76c.sol#699-715) should be declared external
+distribution.getPaimentTime (/sb/0x44357ae7512fe99f55cb94a85f3e947b9143e76c.sol#715-727) should be declared external
+distribution.getPaimentStatus (/sb/0x44357ae7512fe99f55cb94a85f3e947b9143e76c.sol#728-743) should be declared external
+Blocker.fallback (/sb/0x44357ae7512fe99f55cb94a85f3e947b9143e76c.sol) should be declared external
+Blocker.Blocker_resume (/sb/0x44357ae7512fe99f55cb94a85f3e947b9143e76c.sol) should be declared external
+Blocker.Blocker_send (/sb/0x44357ae7512fe99f55cb94a85f3e947b9143e76c.sol) should be declared external
+Blocker.Blocker_destroy (/sb/0x44357ae7512fe99f55cb94a85f3e947b9143e76c.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Low level call in Blocker.Blocker_send (/sb/0x44357ae7512fe99f55cb94a85f3e947b9143e76c.sol):
+	-require(bool)(buggycontract.call.value(msg.value).gas(gasleft()())()) /sb/0x44357ae7512fe99f55cb94a85f3e947b9143e76c.sol
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Function 'Ownable._transferOwnership' (/sb/0x44357ae7512fe99f55cb94a85f3e947b9143e76c.sol#153-173) is not in mixedCase
+Contract 'distribution' (/sb/0x44357ae7512fe99f55cb94a85f3e947b9143e76c.sol#305-743) is not in CapWords
+Parameter '_oldContract' of distribution.migrateDeposite (/sb/0x44357ae7512fe99f55cb94a85f3e947b9143e76c.sol#493) is not in mixedCase
+Parameter '_from' of distribution.migrateDeposite (/sb/0x44357ae7512fe99f55cb94a85f3e947b9143e76c.sol#493) is not in mixedCase
+Parameter '_to' of distribution.migrateDeposite (/sb/0x44357ae7512fe99f55cb94a85f3e947b9143e76c.sol#493) is not in mixedCase
+Parameter '_id' of distribution.getDeposit (/sb/0x44357ae7512fe99f55cb94a85f3e947b9143e76c.sol#639) is not in mixedCase
+Function 'Blocker.Blocker_resume' (/sb/0x44357ae7512fe99f55cb94a85f3e947b9143e76c.sol) is not in mixedCase
+Parameter '_stop' of Blocker.Blocker_resume (/sb/0x44357ae7512fe99f55cb94a85f3e947b9143e76c.sol) is not in mixedCase
+Function 'Blocker.Blocker_send' (/sb/0x44357ae7512fe99f55cb94a85f3e947b9143e76c.sol) is not in mixedCase
+Function 'Blocker.Blocker_destroy' (/sb/0x44357ae7512fe99f55cb94a85f3e947b9143e76c.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x44357ae7512fe99f55cb94a85f3e947b9143e76c.sol analyzed (4 contracts), 43 result(s) found

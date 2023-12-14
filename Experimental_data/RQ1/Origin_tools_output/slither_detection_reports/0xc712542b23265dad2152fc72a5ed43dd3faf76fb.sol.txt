@@ -1,0 +1,94 @@
+INFO:Detectors:[93m
+Address.isContract (/sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol#436-457) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+Reentrancy in AavePoolReward.exit (/sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol#723-726):
+	External calls:
+	- withdraw(balanceOf(msg.sender)) (/sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol#724-725)
+	- getReward() (/sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol#725)
+	State variables written after the call(s):
+	- lastUpdateTime (/sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol#725)
+	- rewardPerTokenStored (/sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol#725)
+	- rewards (/sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol#725)
+	- userRewardPerTokenPaid (/sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol#725)
+Reentrancy in AavePoolReward.stake (/sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol#698-706):
+	External calls:
+	- getReward() (/sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol#702)
+	- super.stake(amount) (/sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol#703-704)
+	State variables written after the call(s):
+	- _balances (/sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol#703-704)
+	- _totalSupply (/sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol#703-704)
+Reentrancy in AavePoolReward.withdraw (/sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol#706-713):
+	External calls:
+	- getReward() (/sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol#710)
+	- super.withdraw(amount) (/sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol#710-711)
+	State variables written after the call(s):
+	- _balances (/sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol#710-711)
+	- _totalSupply (/sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol#710-711)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+AavePoolReward.reduceReward (/sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol#713-722) does not use the value returned by external calls:
+	-tokenObj.transfer(router,tokenAmt) (/sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol#721-722)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+AavePoolReward.reduceReward has external calls inside a loop:
+	- tokenAmt = tokenObj.balanceOf(address(this)) (/sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol#719-721)
+AavePoolReward.reduceReward has external calls inside a loop:
+	- tokenObj.transfer(router,tokenAmt) (/sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol#721-722)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+AavePoolReward.notifyRewardAmount (/sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol#738-741) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp >= periodFinish (/sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+Address.isContract uses assembly (/sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol#436-457)
+	- /sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol#452-456
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+Different versions of Solidity is used in /sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol:
+	- Version used: ['^0.5.0', '^0.5.16', '^0.5.5']
+	- /sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol#19-22 declares pragma solidity^0.5.0
+	- /sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol#54 declares pragma solidity^0.5.0
+	- /sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol#215 declares pragma solidity^0.5.0
+	- /sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol#247 declares pragma solidity^0.5.0
+	- /sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol#333-334 declares pragma solidity^0.5.16
+	- /sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol#426 declares pragma solidity^0.5.5
+	- /sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol#497-499 declares pragma solidity^0.5.16
+	- /sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol#592 declares pragma solidity^0.5.0
+	- /sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol#611 declares pragma solidity^0.5.0
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#different-pragma-directives-are-used[0m
+INFO:Detectors:[92m
+Ownable.owner (/sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol#277-281) should be declared external
+Ownable.renounceOwnership (/sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol#302-307) should be declared external
+Ownable.transferOwnership (/sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol#310-312) should be declared external
+AavePoolReward.reduceReward (/sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol#713-722) should be declared external
+AavePoolReward.dev (/sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol:
+	- pragma solidity^0.5.0 (/sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol#19-22): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol#54): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol#215): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol#247): it allows old versions
+	- pragma solidity^0.5.16 (/sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol#333-334): it allows old versions
+	- pragma solidity^0.5.5 (/sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol#426): it allows old versions
+	- pragma solidity^0.5.16 (/sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol#497-499): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol#592): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol#611): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Low level call in Address.sendValue (/sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol#491-496):
+	-(success) = recipient.call.value(amount)() /sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol#493-495
+Low level call in SafeERC20.callOptionalReturn (/sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol#545-583):
+	-(success,returndata) = address(token).call(data) /sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol#568-570
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Function 'Context._msgSender' (/sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol#233-236) is not in mixedCase
+Function 'Context._msgData' (/sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol#238-244) is not in mixedCase
+Function 'Ownable._transferOwnership' (/sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol#320-329) is not in mixedCase
+Parameter '_rewardDistribution' of IRewardDistributionRecipient.setRewardDistribution (/sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol#604-606) is not in mixedCase
+Parameter '_devaddr' of AavePoolReward.dev (/sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol) is not in mixedCase
+Variable 'AavePoolReward.RewardToken' (/sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol#642-643) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xc712542b23265dad2152fc72a5ed43dd3faf76fb.sol analyzed (10 contracts), 24 result(s) found

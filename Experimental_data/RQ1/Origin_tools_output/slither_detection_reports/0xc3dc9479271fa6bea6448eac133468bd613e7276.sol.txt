@@ -1,0 +1,29 @@
+INFO:Detectors:[93m
+TwoYearDreamTokensVesting.withdrawTokens (/sb/0xc3dc9479271fa6bea6448eac133468bd613e7276.sol#381-397) uses a dangerous strict equality:
+	- dreamToken.balanceOf(this) == 0
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Reentrancy in TwoYearDreamTokensVesting.withdrawTokens (/sb/0xc3dc9479271fa6bea6448eac133468bd613e7276.sol#381-397):
+	External calls:
+	- tokensToSend = getAvailableTokensToWithdraw() (/sb/0xc3dc9479271fa6bea6448eac133468bd613e7276.sol#383-387)
+	- sendTokens(tokensToSend) (/sb/0xc3dc9479271fa6bea6448eac133468bd613e7276.sol#387-389)
+	State variables written after the call(s):
+	- tokensSent (/sb/0xc3dc9479271fa6bea6448eac133468bd613e7276.sol#387-389)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+allowedPercent in TwoYearDreamTokensVesting.getTokensUnlockedPercentage (/sb/0xc3dc9479271fa6bea6448eac133468bd613e7276.sol) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[93m
+TwoYearDreamTokensVesting.sendTokens (/sb/0xc3dc9479271fa6bea6448eac133468bd613e7276.sol#399-417) does not use the value returned by external calls:
+	-dreamToken.transfer(withdrawalAddress,tokensToSend) (/sb/0xc3dc9479271fa6bea6448eac133468bd613e7276.sol#411-415)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in TwoYearDreamTokensVesting.initializeVestingFor (/sb/0xc3dc9479271fa6bea6448eac133468bd613e7276.sol#279-297):
+	External calls:
+	- initialTokensBalance = dreamToken.balanceOf(this) (/sb/0xc3dc9479271fa6bea6448eac133468bd613e7276.sol#289-291)
+	State variables written after the call(s):
+	- stages (/sb/0xc3dc9479271fa6bea6448eac133468bd613e7276.sol#297)
+	- vestingStartUnixTimestamp (/sb/0xc3dc9479271fa6bea6448eac133468bd613e7276.sol#295-297)
+	- withdrawalAddress (/sb/0xc3dc9479271fa6bea6448eac133468bd613e7276.sol#295)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Slither:/sb/0xc3dc9479271fa6bea6448eac133468bd613e7276.sol analyzed (3 contracts), 5 result(s) found

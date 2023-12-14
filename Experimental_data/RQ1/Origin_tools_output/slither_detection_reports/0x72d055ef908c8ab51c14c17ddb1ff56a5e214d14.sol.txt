@@ -1,0 +1,112 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol:
+/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol:175:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function StandardToken(string name, string symbol, uint8 decimals, uint256 totalSupply) public {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol:23:3: Warning: Functions in interfaces should be declared external.
+  function balanceOf(address who) public view returns (uint256);
+  ^------------------------------------------------------------^
+/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol:25:3: Warning: Functions in interfaces should be declared external.
+  function transfer(address to, uint256 value) public returns (bool);
+  ^-----------------------------------------------------------------^
+/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol:27:3: Warning: Functions in interfaces should be declared external.
+  function allowance(address owner, address spender) public view returns (uint256);
+  ^-------------------------------------------------------------------------------^
+/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol:29:3: Warning: Functions in interfaces should be declared external.
+  function transferFrom(address from, address to, uint256 value) public returns (bool);
+  ^-----------------------------------------------------------------------------------^
+/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol:31:3: Warning: Functions in interfaces should be declared external.
+  function approve(address spender, uint256 value) public returns (bool);
+  ^---------------------------------------------------------------------^
+/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol:53:5: Warning: Functions in interfaces should be declared external.
+    function transfer(address to, uint value, bytes data) public;
+    ^-----------------------------------------------------------^
+/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol:257:6: Warning: Invoking events without "emit" prefix is deprecated.
+     Transfer(msg.sender, _to, _value);
+     ^-------------------------------^
+/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol:289:5: Warning: Invoking events without "emit" prefix is deprecated.
+    Transfer(_from, _to, _value);
+    ^--------------------------^
+/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol:301:6: Warning: Invoking events without "emit" prefix is deprecated.
+     Approval(msg.sender, _spender, _value);
+     ^------------------------------------^
+/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol:321:6: Warning: Invoking events without "emit" prefix is deprecated.
+     Approval(msg.sender, _spender, allowed[msg.sender][_spender]);
+     ^-----------------------------------------------------------^
+/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol:343:6: Warning: Invoking events without "emit" prefix is deprecated.
+     Approval(msg.sender, _spender, allowed[msg.sender][_spender]);
+     ^-----------------------------------------------------------^
+/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol:367:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Transfer(msg.sender, _to, _value, _data);
+        ^--------------------------------------^
+/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol:373:3: Warning: Function state mutability can be restricted to view
+  function isContract(address _addr) private returns (bool is_contract) {
+  ^ (Relevant source part starts here and spans across multiple lines).
+
+INFO:Detectors:[92m
+StandardToken.StandardToken.name (local variable @ /sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol#183) shadows:
+	- StandardToken.name (function @ /sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol#213-226)
+StandardToken.StandardToken.symbol (local variable @ /sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol#183-185) shadows:
+	- StandardToken.symbol (function @ /sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol#227-241)
+StandardToken.StandardToken.decimals (local variable @ /sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol#185) shadows:
+	- StandardToken.decimals (function @ /sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol#241-249)
+StandardToken.StandardToken.totalSupply (local variable @ /sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol#185-186) shadows:
+	- StandardToken.totalSupply (function @ /sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol#251-255)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+Reentrancy in StandardToken.transfer (/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol#365-391):
+	External calls:
+	- receiver.tokenFallback(msg.sender,_value,_data) (/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol#379-383)
+	State variables written after the call(s):
+	- balances (/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol#383-391)
+	- balances (/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+StandardToken.isContract uses assembly (/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol)
+	- /sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+ERC20.balanceOf (/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol#23-25) should be declared external
+StandardToken.balanceOf (/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol#277-283) should be declared external
+StandardToken.transfer (/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol#255-277) should be declared external
+ERC20.transfer (/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol#25-27) should be declared external
+StandardToken.allowance (/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol#319-329) should be declared external
+ERC20.allowance (/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol#27-29) should be declared external
+ERC20.transferFrom (/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol#29-31) should be declared external
+StandardToken.transferFrom (/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol#283-311) should be declared external
+StandardToken.approve (/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol#311-319) should be declared external
+ERC20.approve (/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol#31-33) should be declared external
+StandardToken.transfer (/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol#365-391) should be declared external
+ERC223.transfer (/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol#53-55) should be declared external
+ERC223ReceivingContract.tokenFallback (/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol#74-93) should be declared external
+StandardToken.name (/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol#213-226) should be declared external
+StandardToken.symbol (/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol#227-241) should be declared external
+StandardToken.decimals (/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol#241-249) should be declared external
+StandardToken.totalSupply (/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol#251-255) should be declared external
+StandardToken.increaseApproval (/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol#329-339) should be declared external
+StandardToken.decreaseApproval (/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol#341-365) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_owner' of StandardToken.balanceOf (/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol#279) is not in mixedCase
+Parameter '_to' of StandardToken.transfer (/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol#255) is not in mixedCase
+Parameter '_value' of StandardToken.transfer (/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol#255-257) is not in mixedCase
+Parameter '_owner' of StandardToken.allowance (/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol#321) is not in mixedCase
+Parameter '_spender' of StandardToken.allowance (/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol#321) is not in mixedCase
+Parameter '_from' of StandardToken.transferFrom (/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol#285) is not in mixedCase
+Parameter '_to' of StandardToken.transferFrom (/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol#285) is not in mixedCase
+Parameter '_value' of StandardToken.transferFrom (/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol#285) is not in mixedCase
+Parameter '_spender' of StandardToken.approve (/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol#311-315) is not in mixedCase
+Parameter '_value' of StandardToken.approve (/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol#317) is not in mixedCase
+Parameter '_to' of StandardToken.transfer (/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol#365-366) is not in mixedCase
+Parameter '_value' of StandardToken.transfer (/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol#367) is not in mixedCase
+Parameter '_data' of StandardToken.transfer (/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol#367) is not in mixedCase
+Function 'StandardToken.StandardToken' (/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol#181-211) is not in mixedCase
+Parameter '_spender' of StandardToken.increaseApproval (/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol#329) is not in mixedCase
+Parameter '_addedValue' of StandardToken.increaseApproval (/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol#329-331) is not in mixedCase
+Parameter '_spender' of StandardToken.decreaseApproval (/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol#343) is not in mixedCase
+Parameter '_subtractedValue' of StandardToken.decreaseApproval (/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol#343) is not in mixedCase
+Variable 'StandardToken._name' (/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol#169-171) is not in mixedCase
+Variable 'StandardToken._symbol' (/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol#171) is not in mixedCase
+Variable 'StandardToken._decimals' (/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol#171) is not in mixedCase
+Variable 'StandardToken._totalSupply' (/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol#175) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x72d055ef908c8ab51c14c17ddb1ff56a5e214d14.sol analyzed (5 contracts), 47 result(s) found

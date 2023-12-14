@@ -1,0 +1,82 @@
+INFO:Detectors:[93m
+Reentrancy in CCMstaking.deposit (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol#256-273):
+	External calls:
+	- require(bool,string)(Token(tokenAddress).transferFrom(msg.sender,address(this),amountToStake),Insufficient Token Allowance) (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol#259-260)
+	- updateAccount(msg.sender) (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol#261-262)
+	- require(bool,string)(Token(tokenAddress).transfer(owner,fee),Could not transfer deposit fee.) (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol#265-270)
+	State variables written after the call(s):
+	- depositedTokens (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol#270-271)
+Reentrancy in CCMstaking.updateAccount (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol#223-235):
+	External calls:
+	- require(bool,string)(Token(tokenAddress).transfer(account,pendingDivs),Could not transfer tokens.) (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol#225-227)
+	State variables written after the call(s):
+	- lastClaimedTime (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol#235)
+Reentrancy in CCMstaking.withdraw (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol#273-298):
+	External calls:
+	- updateAccount(msg.sender) (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol#281)
+	- require(bool,string)(Token(tokenAddress).transfer(owner,fee),Could not transfer withdraw fee.) (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol#283-285)
+	- require(bool,string)(Token(tokenAddress).transfer(msg.sender,amountAfterFee),Could not transfer tokens.) (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol#285-290)
+	State variables written after the call(s):
+	- depositedTokens (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol#291-295)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+EnumerableSet._remove (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol#54-86) does not use the value returned by external calls:
+	-set._values.pop() (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol#74-75)
+CCMstaking.deposit (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol#256-273) does not use the value returned by external calls:
+	-holders.add(msg.sender) (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol#273)
+CCMstaking.withdraw (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol#273-298) does not use the value returned by external calls:
+	-holders.remove(msg.sender) (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol#297-298)
+CCMstaking.transferAnyERC20Tokens (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol#312-315) does not use the value returned by external calls:
+	-Token(_tokenAddr).transfer(_to,_amount) (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in CCMstaking.deposit (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol#256-273):
+	External calls:
+	- require(bool,string)(Token(tokenAddress).transferFrom(msg.sender,address(this),amountToStake),Insufficient Token Allowance) (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol#259-260)
+	- updateAccount(msg.sender) (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol#261-262)
+	- require(bool,string)(Token(tokenAddress).transfer(owner,fee),Could not transfer deposit fee.) (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol#265-270)
+	State variables written after the call(s):
+	- stakingTime (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol#273)
+Reentrancy in CCMstaking.updateAccount (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol#223-235):
+	External calls:
+	- require(bool,string)(Token(tokenAddress).transfer(account,pendingDivs),Could not transfer tokens.) (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol#225-227)
+	State variables written after the call(s):
+	- totalClaimedRewards (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol#231-232)
+	- totalEarnedTokens (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol#228-231)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol#182-189) should be declared external
+CCMstaking.getNumberOfHolders (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol#254) should be declared external
+CCMstaking.deposit (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol#256-273) should be declared external
+CCMstaking.withdraw (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol#273-298) should be declared external
+CCMstaking.claimDivs (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol#298-301) should be declared external
+CCMstaking.transferAnyERC20Tokens (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol#312-315) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xc47be559425e6713b9679554e322c2418d464abf.sol:
+	- pragma solidity0.6.12 (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol#5-7): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'EnumerableSet._add' (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol#43-54) is not in mixedCase
+Function 'EnumerableSet._remove' (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol#54-86) is not in mixedCase
+Function 'EnumerableSet._contains' (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol#87-91) is not in mixedCase
+Function 'EnumerableSet._length' (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol#91-95) is not in mixedCase
+Function 'EnumerableSet._at' (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol#95-105) is not in mixedCase
+Parameter '' of Token.transferFrom (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol#191) is not in mixedCase
+Parameter '_scope_0' of Token.transferFrom (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol#191) is not in mixedCase
+Parameter '_scope_1' of Token.transferFrom (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol#191) is not in mixedCase
+Parameter '' of Token.transfer (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol#193) is not in mixedCase
+Parameter '_scope_0' of Token.transfer (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol#193) is not in mixedCase
+Parameter '_holder' of CCMstaking.getPendingDivs (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol#236) is not in mixedCase
+Parameter '_tokenAddr' of CCMstaking.transferAnyERC20Tokens (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol#313) is not in mixedCase
+Parameter '_to' of CCMstaking.transferAnyERC20Tokens (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol#313-315) is not in mixedCase
+Parameter '_amount' of CCMstaking.transferAnyERC20Tokens (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol) is not in mixedCase
+Constant 'CCMstaking.tokenAddress' (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol#200-203) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'CCMstaking.rewardRate' (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol#205-206) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'CCMstaking.rewardInterval' (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol#206-208) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'CCMstaking.stakingFeeRate' (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol#209-211) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'CCMstaking.unstakingFeeRate' (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol#213-215) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'CCMstaking.cliffTime' (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol#216-217) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'CCMstaking.stakingAndDaoTokens' (/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol#301-302) is not in UPPER_CASE_WITH_UNDERSCORES
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xc47be559425e6713b9679554e322c2418d464abf.sol analyzed (5 contracts), 37 result(s) found

@@ -1,0 +1,186 @@
+INFO:Detectors:[91m
+Revolution.sendDividends (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol) sends eth to arbitrary user
+	Dangerous calls:
+	- addr.send(value) (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol)
+Revolution.sendDividendsWithRefBonus (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol) sends eth to arbitrary user
+	Dangerous calls:
+	- addr.send(value + refBonus) (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[91m
+Reentrancy in Revolution.payout (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#1001-1101):
+	External calls:
+	- m_paysys.latestKeyIndex == m_investors.iterStart() (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#1023-1041)
+	- size = m_investors.size() (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#1046-1049)
+	- investorAddr = m_investors.keyFromIndex(i) (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#1061-1063)
+	- (value,refBonus) = m_investors.investorShortInfo(investorAddr) (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#1065-1073)
+	- require(bool,string)(m_investors.setRefBonus(investorAddr,0),internal error) (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#1081-1083)
+	External calls sending eth:
+	- sendDividendsWithRefBonus(investorAddr,value,refBonus) (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#1085-1090)
+	- sendDividends(investorAddr,value) (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#1091-1093)
+	State variables written after the call(s):
+	- m_nextWave (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#1078-1081)
+	- m_paysys (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#1101)
+Reentrancy in Revolution.payout (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#1001-1101):
+	External calls:
+	- m_paysys.latestKeyIndex == m_investors.iterStart() (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#1023-1041)
+	- size = m_investors.size() (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#1046-1049)
+	- investorAddr = m_investors.keyFromIndex(i) (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#1061-1063)
+	- (value,refBonus) = m_investors.investorShortInfo(investorAddr) (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#1065-1073)
+	- require(bool,string)(m_investors.setRefBonus(investorAddr,0),internal error) (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#1081-1083)
+	- m_paysys.latestKeyIndex = m_investors.iterStart() (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#1096-1099)
+	External calls sending eth:
+	- sendDividendsWithRefBonus(investorAddr,value,refBonus) (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#1085-1090)
+	- sendDividends(investorAddr,value) (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#1091-1093)
+	State variables written after the call(s):
+	- m_paysys (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#1096-1099)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities[0m
+INFO:Detectors:[93m
+ToAddress.toAddr (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#611-619) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+Revolution.doInvest (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#897-998) uses a dangerous strict equality:
+	- m_paysys.mode == Paymode.Pull
+Revolution.doInvest (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#897-998) uses a dangerous strict equality:
+	- m_paysys.mode == Paymode.Pull
+Revolution.payout (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#1001-1101) uses a dangerous strict equality:
+	- m_paysys.latestKeyIndex == m_investors.iterStart()
+	- i == size
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Reentrancy in Revolution.doInvest (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#897-998):
+	External calls:
+	- notZeroNotSender(refs[0]) && m_investors.contains(refs[0]) (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#917-965)
+	- assert(bool)(m_investors.addRefBonus(refs[0],reward)) (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#925-927)
+	State variables written after the call(s):
+	- m_referrals (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#927-931)
+Reentrancy in Revolution.getMyDividends (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#837-895):
+	External calls:
+	- investor = getMemInvestor(msg.sender) (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#847-851)
+	- assert(bool)(m_investors.setPaymentTime(msg.sender,m_paysys.latestTime)) (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#857-865)
+	- assert(bool)(m_investors.setPaymentTime(msg.sender,now)) (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#875-877)
+	- nextWave() (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#885)
+	State variables written after the call(s):
+	- m_investors (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#885)
+	- m_paysys (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#885)
+Reentrancy in Revolution.payout (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#1001-1101):
+	External calls:
+	- m_paysys.latestKeyIndex == m_investors.iterStart() (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#1023-1041)
+	State variables written after the call(s):
+	- m_paysys (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#1041)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+refs in Revolution.fallback (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#765) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[92m
+Revolution.payout has external calls inside a loop:
+	- investorAddr = m_investors.keyFromIndex(i) (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#1061-1063)
+Revolution.payout has external calls inside a loop:
+	- (value,refBonus) = m_investors.investorShortInfo(investorAddr) (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#1065-1073)
+Revolution.payout has external calls inside a loop:
+	- require(bool,string)(m_investors.setRefBonus(investorAddr,0),internal error) (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#1081-1083)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in Revolution.constructor (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#739-755):
+	External calls:
+	- nextWave() (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#755)
+	State variables written after the call(s):
+	- waveStartup (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#755)
+Reentrancy in Revolution.doInvest (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#897-998):
+	External calls:
+	- notZeroNotSender(refs[0]) && m_investors.contains(refs[0]) (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#917-965)
+	- assert(bool)(m_investors.addRefBonus(refs[0],reward)) (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#925-927)
+	- notZeroNotSender(refs[1]) && m_investors.contains(refs[1]) && refs[0] != refs[1] (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#941-965)
+	- assert(bool)(m_investors.addRefBonus(refs[1],reward)) (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#945-953)
+	- notZeroNotSender(refs[2]) && m_investors.contains(refs[2]) && refs[0] != refs[2] && refs[1] != refs[2] (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#953-965)
+	- assert(bool)(m_investors.addRefBonus(refs[2],reward)) (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#965)
+	- m_investors.contains(msg.sender) (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#973-991)
+	- assert(bool)(m_investors.addValue(msg.sender,value)) (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#979-983)
+	- assert(bool)(m_investors.insert(msg.sender,value)) (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#985-989)
+	- assert(bool)(m_investors.setPaymentTime(msg.sender,now)) (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#993-995)
+	External calls sending eth:
+	- adminAddr.transfer(m_adminPercent.mul(msg.value)) (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#967-969)
+	- payerAddr.transfer(m_payerPercent.mul(msg.value)) (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#969)
+	State variables written after the call(s):
+	- investmentsNum (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#997)
+Reentrancy in Revolution.getMyDividends (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#837-895):
+	External calls:
+	- investor = getMemInvestor(msg.sender) (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#847-851)
+	- assert(bool)(m_investors.setPaymentTime(msg.sender,m_paysys.latestTime)) (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#857-865)
+	- assert(bool)(m_investors.setPaymentTime(msg.sender,now)) (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#875-877)
+	- nextWave() (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#885)
+	State variables written after the call(s):
+	- investmentsNum (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#885)
+	- m_nextWave (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#885)
+	- waveStartup (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#885)
+Reentrancy in Revolution.nextWave (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol):
+	External calls:
+	- m_paysys.latestKeyIndex = m_investors.iterStart() (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol)
+	State variables written after the call(s):
+	- investmentsNum (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol)
+	- m_nextWave (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol)
+	- waveStartup (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+ToAddress.toAddr uses assembly (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#611-619)
+	- /sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#617-619
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+InvestorsStorage.insert (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#99-121) should be declared external
+InvestorsStorage.investorFullInfo (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#121-141) should be declared external
+InvestorsStorage.investorBaseInfo (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#141-157) should be declared external
+InvestorsStorage.investorShortInfo (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#159-169) should be declared external
+InvestorsStorage.addRefBonus (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#169-183) should be declared external
+InvestorsStorage.addValue (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#183-193) should be declared external
+InvestorsStorage.setPaymentTime (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#195-207) should be declared external
+InvestorsStorage.setRefBonus (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#213-228) should be declared external
+InvestorsStorage.keyFromIndex (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#229-237) should be declared external
+InvestorsStorage.contains (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#237-251) should be declared external
+InvestorsStorage.size (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#251-253) should be declared external
+InvestorsStorage.iterStart (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#253-257) should be declared external
+Accessibility.provideAccess (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#449-481) should be declared external
+Accessibility.access (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#482-489) should be declared external
+PaymentSystem.paymode (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#518-527) should be declared external
+Revolution.fallback (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#757-773) should be declared external
+Revolution.investorsNumber (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#773-781) should be declared external
+Revolution.balanceETH (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#781-787) should be declared external
+Revolution.payerPercent (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#787-797) should be declared external
+Revolution.dividendsPercent (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#797-807) should be declared external
+Revolution.adminPercent (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#807-813) should be declared external
+Revolution.referrerPercent (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#813-817) should be declared external
+Revolution.investorInfo (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#819-829) should be declared external
+Revolution.latestPayout (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#829-837) should be declared external
+Revolution.payout (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#1001-1101) should be declared external
+Revolution.setAdminAddr (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#1101-1113) should be declared external
+Revolution.setPayerAddr (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#1113-1131) should be declared external
+Revolution.setPullPaymode (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#1131-1139) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol:
+	- pragma solidity^0.4.23 (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#9-14): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Struct 'InvestorsStorage.investor' (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#55-67) is not in CapWords
+Struct 'InvestorsStorage.itmap' (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#67-77) is not in CapWords
+Parameter '_a' of SafeMath.mul (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#257) is not in mixedCase
+Parameter '_b' of SafeMath.mul (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#257-259) is not in mixedCase
+Parameter '_a' of SafeMath.div (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#295) is not in mixedCase
+Parameter '_b' of SafeMath.div (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#295) is not in mixedCase
+Parameter '_a' of SafeMath.sub (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#323) is not in mixedCase
+Parameter '_b' of SafeMath.sub (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#323) is not in mixedCase
+Parameter '_a' of SafeMath.add (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#341) is not in mixedCase
+Parameter '_b' of SafeMath.add (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#341) is not in mixedCase
+Struct 'Percent.percent' (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#373-375) is not in CapWords
+Variable 'Accessibility.m_admins' (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#425-431) is not in mixedCase
+Variable 'PaymentSystem.m_paysys' (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#507) is not in mixedCase
+Variable 'Revolution.m_investors' (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#629) is not in mixedCase
+Variable 'Revolution.m_referrals' (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#629-631) is not in mixedCase
+Variable 'Revolution.m_nextWave' (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#631) is not in mixedCase
+Constant 'Revolution.minInvesment' (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#639) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'Revolution.maxBalance' (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#639-641) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'Revolution.pauseOnNextWave' (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#641-643) is not in UPPER_CASE_WITH_UNDERSCORES
+Variable 'Revolution.m_dividendsPercent' (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#645-647) is not in mixedCase
+Variable 'Revolution.m_adminPercent' (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#647-649) is not in mixedCase
+Variable 'Revolution.m_payerPercent' (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#649-652) is not in mixedCase
+Variable 'Revolution.m_refPercent' (/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol#653-655) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xd85380aca00e6115b046b4edb488b53c531cb852.sol analyzed (8 contracts), 71 result(s) found

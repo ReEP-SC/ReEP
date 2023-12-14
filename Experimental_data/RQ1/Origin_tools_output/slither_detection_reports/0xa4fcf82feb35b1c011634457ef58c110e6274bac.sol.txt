@@ -1,0 +1,127 @@
+INFO:Detectors:[93m
+Reentrancy in _0xbtcBankroll.receiveDividends (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#1413-1443):
+	External calls:
+	- _0xBTC.transferFrom(msg.sender,address(this),amount) (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#1415-1419)
+	- ActualBalance = (_0xBTC.balanceOf(address(this)).sub(NonICOBuyins)) (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#1421-1429)
+	State variables written after the call(s):
+	- reEntered (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#1431)
+Reentrancy in _0xbtcBankroll.receiveDividends (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#1413-1443):
+	External calls:
+	- _0xBTC.transferFrom(msg.sender,address(this),amount) (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#1415-1419)
+	- ActualBalance = (_0xBTC.balanceOf(address(this)).sub(NonICOBuyins)) (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#1421-1429)
+	- _0xBTC.approve(_0xbcc,ActualBalance) (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#1433-1435)
+	- _0xbcc.buyAndSetDivPercentage(ActualBalance,address(0x0),30,) (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#1435-1437)
+	State variables written after the call(s):
+	- reEntered (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#1441)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+_0xbtcBankroll.deposit (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#519-527) does not use the value returned by external calls:
+	-_0xBTC.transferFrom(msg.sender,address(this),value) (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#521-523)
+_0xbtcBankroll.buyTokens (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#533-553) does not use the value returned by external calls:
+	-_0xBTC.approve(_0xbcc,savings) (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#541-543)
+	-_0xbcc.buyAndSetDivPercentage(savings,address(0x0),30,) (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#543-545)
+_0xbtcBankroll.devTokenWithdraw (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#1359-1381) does not use the value returned by external calls:
+	-_0xbcc.transfer(owners[i],amountPerPerson) (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#1377)
+_0xbtcBankroll.receiveDividends (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#1413-1443) does not use the value returned by external calls:
+	-_0xBTC.transferFrom(msg.sender,address(this),amount) (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#1415-1419)
+	-_0xBTC.approve(_0xbcc,ActualBalance) (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#1433-1435)
+	-_0xbcc.buyAndSetDivPercentage(ActualBalance,address(0x0),30,) (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#1435-1437)
+_0xbtcBankroll.buyInWithAllBalance (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#1447-1481) does not use the value returned by external calls:
+	-_0xBTC.approve(_0xbcc,balance) (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#1471-1473)
+	-_0xbcc.buyAndSetDivPercentage(balance,address(0x0),30,) (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#1473-1477)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+_0xbtcBankroll.devTokenWithdraw has external calls inside a loop:
+	- _0xbcc.transfer(owners[i],amountPerPerson) (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#1377)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in _0xbtcBankroll.deposit (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#519-527):
+	External calls:
+	- _0xBTC.transferFrom(msg.sender,address(this),value) (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#521-523)
+	State variables written after the call(s):
+	- NonICOBuyins (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#525)
+Reentrancy in _0xbtcBankroll.permissibleTokenWithdrawal (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#571-633):
+	External calls:
+	- tokenBalance = _0xbcc.balanceOf(address(this)) (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#577-579)
+	State variables written after the call(s):
+	- dailyResetTime (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#599-601)
+	- dailyTknLimit (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#603-607)
+	- tknsDispensedToday (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#608-609)
+	- tknsDispensedToday (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#621)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+_0xbccInterface.buyAndSetDivPercentage (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#15-19) should be declared external
+_0xbccInterface.balanceOf (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#19-23) should be declared external
+_0xbccInterface.transfer (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#23-27) should be declared external
+_0xbccInterface.transferFrom (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#27-31) should be declared external
+_0xbccInterface.exit (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#35) should be declared external
+_0xbccInterface.sell (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#35-39) should be declared external
+_0xbccInterface.withdraw (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#39-49) should be declared external
+ERC20Interface.totalSupply (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#49-53) should be declared external
+ERC20Interface.balanceOf (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#53-57) should be declared external
+ERC20Interface.allowance (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#57-61) should be declared external
+ERC20Interface.transfer (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#61-65) should be declared external
+ERC20Interface.approve (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#65-69) should be declared external
+ERC20Interface.transferFrom (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#69-71) should be declared external
+_0xbtcBankroll.tokenFallback (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#555-563) should be declared external
+ERC223Receiving.tokenFallback (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#83-93) should be declared external
+_0xbtcBankroll.add0xbccAddresses (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#499-513) should be declared external
+_0xbtcBankroll.fallback (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#515-517) should be declared external
+_0xbtcBankroll.deposit (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#519-527) should be declared external
+_0xbtcBankroll.buyTokens (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#533-553) should be declared external
+_0xbtcBankroll.setDailyTokenLimit (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#635-643) should be declared external
+_0xbtcBankroll.addOwner (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#649-665) should be declared external
+_0xbtcBankroll.removeOwner (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#673-709) should be declared external
+_0xbtcBankroll.replaceOwner (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#715-739) should be declared external
+_0xbtcBankroll.submitTransaction (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#777-791) should be declared external
+_0xbtcBankroll.revokeConfirmation (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#817-837) should be declared external
+_0xbtcBankroll.getConfirmationCount (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#975-993) should be declared external
+_0xbtcBankroll.getTransactionCount (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#1009-1029) should be declared external
+_0xbtcBankroll.getOwners (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#1031-1035) should be declared external
+_0xbtcBankroll.getConfirmations (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#1041-1073) should be declared external
+_0xbtcBankroll.getTransactionIds (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#1093-1121) should be declared external
+_0xbtcBankroll.whiteListContract (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#1123-1149) should be declared external
+_0xbtcBankroll.deWhiteListContract (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#1179-1205) should be declared external
+_0xbtcBankroll.contractTokenWithdraw (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#1207-1223) should be declared external
+_0xbtcBankroll.alterTokenGrant (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#1227-1235) should be declared external
+_0xbtcBankroll.queryTokenGrant (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#1237-1243) should be declared external
+_0xbtcBankroll.dailyAccounting (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#1253-1265) should be declared external
+_0xbtcBankroll.retrieveTokens (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#1271-1279) should be declared external
+_0xbtcBankroll.devTokenWithdraw (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#1359-1381) should be declared external
+_0xbtcBankroll.changeDivCardAddress (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#1387-1399) should be declared external
+_0xbtcBankroll.receiveDividends (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#1413-1443) should be declared external
+_0xbtcBankroll.buyInWithAllBalance (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#1447-1481) should be declared external
+_0xbtcBankroll.fromHex (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#1529-1543) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Low level call in _0xbtcBankroll.executeTransaction (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#847-879):
+	-txToExecute.destination.call.value(txToExecute.value)(txToExecute.data) /sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#866-877
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Contract '_0xbccInterface' (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#13-49) is not in CapWords
+Contract '_0xbtcBankroll' (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#97-1543) is not in CapWords
+Event '_0xbtcBankroll._0xBTCLogged' (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#133-135) is not in CapWords
+Parameter '' of _0xbtcBankroll.tokenFallback (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#555) is not in mixedCase
+Parameter '_scope_0' of _0xbtcBankroll.tokenFallback (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#555) is not in mixedCase
+Parameter '_scope_1' of _0xbtcBankroll.tokenFallback (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#557-559) is not in mixedCase
+Parameter '_owners' of _0xbtcBankroll. (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#453) is not in mixedCase
+Parameter '_required' of _0xbtcBankroll. (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#453-455) is not in mixedCase
+Parameter '_btcAddress' of _0xbtcBankroll. (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#455-459) is not in mixedCase
+Parameter '_0xbtc' of _0xbtcBankroll.add0xbccAddresses (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#499) is not in mixedCase
+Parameter '_divcards' of _0xbtcBankroll.add0xbccAddresses (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#499-505) is not in mixedCase
+Parameter '_toWithdraw' of _0xbtcBankroll.permissibleTokenWithdrawal (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#575) is not in mixedCase
+Parameter '_required' of _0xbtcBankroll.changeRequirement (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#753) is not in mixedCase
+Parameter '_contract' of _0xbtcBankroll.alterTokenGrant (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#1227-1233) is not in mixedCase
+Parameter '_newAmount' of _0xbtcBankroll.alterTokenGrant (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#1233) is not in mixedCase
+Parameter '_contract' of _0xbtcBankroll.queryTokenGrant (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#1237) is not in mixedCase
+Parameter '_contract' of _0xbtcBankroll.retrieveTokens (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#1273-1275) is not in mixedCase
+Parameter '_amount' of _0xbtcBankroll.retrieveTokens (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#1275) is not in mixedCase
+Parameter '_contract' of _0xbtcBankroll.allocateTokens (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#1295-1297) is not in mixedCase
+Parameter '_newDivCardAddress' of _0xbtcBankroll.changeDivCardAddress (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#1387-1391) is not in mixedCase
+Constant '_0xbtcBankroll.resetTimer' (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#163-167) is not in UPPER_CASE_WITH_UNDERSCORES
+Variable '_0xbtcBankroll._0xBTC' (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#179) is not in mixedCase
+Variable '_0xbtcBankroll._0xbccAddress' (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#189-193) is not in mixedCase
+Variable '_0xbtcBankroll._0xbcc' (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#193) is not in mixedCase
+Variable '_0xbtcBankroll.NonICOBuyins' (/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol#517-519) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xa4fcf82feb35b1c011634457ef58c110e6274bac.sol analyzed (5 contracts), 78 result(s) found

@@ -1,0 +1,55 @@
+INFO:Detectors:[93m
+tokenPrice in LHASAICO.contribute (/sb/0x5886c1758d431bfba957800b1fa6534d0d2f633b.sol#147-148) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[93m
+LHASAICO.contribute (/sb/0x5886c1758d431bfba957800b1fa6534d0d2f633b.sol#142-198) does not use the value returned by external calls:
+	-LHASA.transfer(msg.sender,tokenBought) (/sb/0x5886c1758d431bfba957800b1fa6534d0d2f633b.sol#188)
+LHASAICO.finished (/sb/0x5886c1758d431bfba957800b1fa6534d0d2f633b.sol#199-213) does not use the value returned by external calls:
+	-LHASA.transfer(owner,remainder) (/sb/0x5886c1758d431bfba957800b1fa6534d0d2f633b.sol#210)
+LHASAICO.claimTokens (/sb/0x5886c1758d431bfba957800b1fa6534d0d2f633b.sol) does not use the value returned by external calls:
+	-LHASA.transfer(owner,remainder) (/sb/0x5886c1758d431bfba957800b1fa6534d0d2f633b.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in LHASAICO.contribute (/sb/0x5886c1758d431bfba957800b1fa6534d0d2f633b.sol#142-198):
+	External calls:
+	- require(bool)(LHASA.balanceOf(this) >= tokenBought) (/sb/0x5886c1758d431bfba957800b1fa6534d0d2f633b.sol#182)
+	State variables written after the call(s):
+	- totalDistributed (/sb/0x5886c1758d431bfba957800b1fa6534d0d2f633b.sol#185-186)
+	- totalRaised (/sb/0x5886c1758d431bfba957800b1fa6534d0d2f633b.sol#182-184)
+Reentrancy in LHASAICO.finished (/sb/0x5886c1758d431bfba957800b1fa6534d0d2f633b.sol#199-213):
+	External calls:
+	- remainder = LHASA.balanceOf(this) (/sb/0x5886c1758d431bfba957800b1fa6534d0d2f633b.sol#200-201)
+	- LHASA.transfer(owner,remainder) (/sb/0x5886c1758d431bfba957800b1fa6534d0d2f633b.sol#210)
+	External calls sending eth:
+	- owner.transfer(address(this).balance) (/sb/0x5886c1758d431bfba957800b1fa6534d0d2f633b.sol#205-207)
+	State variables written after the call(s):
+	- state (/sb/0x5886c1758d431bfba957800b1fa6534d0d2f633b.sol#212)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+LHASAICO.hardcap_PreSale should be constant (/sb/0x5886c1758d431bfba957800b1fa6534d0d2f633b.sol#97-99)
+LHASAICO.hardcap_PrivateSale should be constant (/sb/0x5886c1758d431bfba957800b1fa6534d0d2f633b.sol#95-97)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Owned.transferOwnership (/sb/0x5886c1758d431bfba957800b1fa6534d0d2f633b.sol#55-64) should be declared external
+LHASAToken.balanceOf (/sb/0x5886c1758d431bfba957800b1fa6534d0d2f633b.sol#69-70) should be declared external
+LHASAToken.transfer (/sb/0x5886c1758d431bfba957800b1fa6534d0d2f633b.sol#70-74) should be declared external
+LHASAICO.fallback (/sb/0x5886c1758d431bfba957800b1fa6534d0d2f633b.sol#137-138) should be declared external
+LHASAICO.finished (/sb/0x5886c1758d431bfba957800b1fa6534d0d2f633b.sol#199-213) should be declared external
+LHASAICO.nextState (/sb/0x5886c1758d431bfba957800b1fa6534d0d2f633b.sol#219-221) should be declared external
+LHASAICO.previousState (/sb/0x5886c1758d431bfba957800b1fa6534d0d2f633b.sol#227-229) should be declared external
+LHASAICO.claimTokens (/sb/0x5886c1758d431bfba957800b1fa6534d0d2f633b.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x5886c1758d431bfba957800b1fa6534d0d2f633b.sol:
+	- pragma solidity^0.4.26 (/sb/0x5886c1758d431bfba957800b1fa6534d0d2f633b.sol#5-7): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_newOwner' of Owned.transferOwnership (/sb/0x5886c1758d431bfba957800b1fa6534d0d2f633b.sol#56) is not in mixedCase
+Parameter '_addressOfToken' of LHASAICO. (/sb/0x5886c1758d431bfba957800b1fa6534d0d2f633b.sol#119) is not in mixedCase
+Variable 'LHASAICO.LHASA' (/sb/0x5886c1758d431bfba957800b1fa6534d0d2f633b.sol#94) is not in mixedCase
+Variable 'LHASAICO.hardcap_PrivateSale' (/sb/0x5886c1758d431bfba957800b1fa6534d0d2f633b.sol#95-97) is not in mixedCase
+Variable 'LHASAICO.hardcap_PreSale' (/sb/0x5886c1758d431bfba957800b1fa6534d0d2f633b.sol#97-99) is not in mixedCase
+Variable 'LHASAICO.currentcap_PrivateSale' (/sb/0x5886c1758d431bfba957800b1fa6534d0d2f633b.sol#99-100) is not in mixedCase
+Variable 'LHASAICO.currentcap_PreSale' (/sb/0x5886c1758d431bfba957800b1fa6534d0d2f633b.sol#100) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x5886c1758d431bfba957800b1fa6534d0d2f633b.sol analyzed (4 contracts), 23 result(s) found

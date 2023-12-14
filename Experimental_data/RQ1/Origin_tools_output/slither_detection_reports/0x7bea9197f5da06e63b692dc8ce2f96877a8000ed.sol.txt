@@ -1,0 +1,37 @@
+INFO:Detectors:[91m
+Minion.executeAction (/sb/0x7bea9197f5da06e63b692dc8ce2f96877a8000ed.sol#85-102) sends eth to arbitrary user
+	Dangerous calls:
+	- (success,retData) = action.to.call.value(action.value)(action.data) (/sb/0x7bea9197f5da06e63b692dc8ce2f96877a8000ed.sol#96-97)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[93m
+Reentrancy in Minion.executeAction (/sb/0x7bea9197f5da06e63b692dc8ce2f96877a8000ed.sol#85-102):
+	External calls:
+	- flags = moloch.getProposalFlags(proposalId) (/sb/0x7bea9197f5da06e63b692dc8ce2f96877a8000ed.sol#88-89)
+	State variables written after the call(s):
+	- actions (/sb/0x7bea9197f5da06e63b692dc8ce2f96877a8000ed.sol#95)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+Reentrancy in Minion.proposeAction (/sb/0x7bea9197f5da06e63b692dc8ce2f96877a8000ed.sol#50-85):
+	External calls:
+	- proposalId = moloch.submitProposal(address(this),0,0,0,molochDepositToken,0,molochDepositToken,details) (/sb/0x7bea9197f5da06e63b692dc8ce2f96877a8000ed.sol#60-71)
+	State variables written after the call(s):
+	- actions (/sb/0x7bea9197f5da06e63b692dc8ce2f96877a8000ed.sol#80-81)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Minion.doWithdraw (/sb/0x7bea9197f5da06e63b692dc8ce2f96877a8000ed.sol#45-50) should be declared external
+Minion.proposeAction (/sb/0x7bea9197f5da06e63b692dc8ce2f96877a8000ed.sol#50-85) should be declared external
+Minion.executeAction (/sb/0x7bea9197f5da06e63b692dc8ce2f96877a8000ed.sol#85-102) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x7bea9197f5da06e63b692dc8ce2f96877a8000ed.sol:
+	- pragma solidity0.5.17 (/sb/0x7bea9197f5da06e63b692dc8ce2f96877a8000ed.sol#5-7): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Low level call in Minion.executeAction (/sb/0x7bea9197f5da06e63b692dc8ce2f96877a8000ed.sol#85-102):
+	-(success,retData) = action.to.call.value(action.value)(action.data) /sb/0x7bea9197f5da06e63b692dc8ce2f96877a8000ed.sol#96-97
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Parameter '_moloch' of Minion. (/sb/0x7bea9197f5da06e63b692dc8ce2f96877a8000ed.sol#40) is not in mixedCase
+Parameter '_molochDepositToken' of Minion. (/sb/0x7bea9197f5da06e63b692dc8ce2f96877a8000ed.sol#41) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x7bea9197f5da06e63b692dc8ce2f96877a8000ed.sol analyzed (2 contracts), 10 result(s) found

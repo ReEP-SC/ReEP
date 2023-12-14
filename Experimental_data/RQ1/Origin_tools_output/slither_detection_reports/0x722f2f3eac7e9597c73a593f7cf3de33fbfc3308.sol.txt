@@ -1,0 +1,217 @@
+INFO:Detectors:[93m
+Reentrancy in TokenVesting.release (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#961-977):
+	External calls:
+	- unreleased = releasableAmount(_token) (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#961-963)
+	State variables written after the call(s):
+	- released (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#967)
+Reentrancy in TokenVesting.revoke (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#985-1013):
+	External calls:
+	- balance = _token.balanceOf(address(this)) (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#993-995)
+	- unreleased = releasableAmount(_token) (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#995-997)
+	State variables written after the call(s):
+	- revoked (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1001)
+Reentrancy in PeriodicTokenVesting.revoke (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1211-1243):
+	External calls:
+	- balance = _token.balanceOf(address(this)) (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1221-1223)
+	- unreleased = releasableAmount(_token) (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1223-1225)
+	State variables written after the call(s):
+	- revoked (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1231)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+CnusToken.checkCurrentTotolVestedAmount has external calls inside a loop:
+	- vestedAmountSum = vestedAmountSum.add(tokenVestingContracts[vestedAddresses[i]].vestedAmount(ERC20(address(this)))) (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1675-1687)
+CnusToken.checkCurrentTotalReleasableAmount has external calls inside a loop:
+	- releasableAmountSum = releasableAmountSum.add(tokenVestingContracts[vestedAddresses[i]].releasableAmount(ERC20(address(this)))) (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1709-1717)
+CnusToken.checkCurrentTotalAmountLockedInVesting has external calls inside a loop:
+	- lockedAmountSum = lockedAmountSum.add(tokenVestingContracts[vestedAddresses[i]].tokenAmountLockedInVesting(ERC20(address(this)))) (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1735-1750)
+CnusToken.checkInitialTotalTokenAmountInVesting has external calls inside a loop:
+	- initialTokenVesting = initialTokenVesting.add(tokenVestingContracts[vestedAddresses[i]].initialTokenAmountInVesting(ERC20(address(this)))) (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1771-1777)
+CnusToken.releaseAllVestedToken has external calls inside a loop:
+	- tokenVesting.releasableAmount(ERC20(address(this))) > 0 (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1929-1945)
+CnusToken.releaseAllVestedToken has external calls inside a loop:
+	- tokenVesting.release(ERC20(address(this))) (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1933-1937)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in PeriodicTokenVesting.revoke (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1211-1243):
+	External calls:
+	- balance = _token.balanceOf(address(this)) (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1221-1223)
+	- unreleased = releasableAmount(_token) (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1223-1225)
+	State variables written after the call(s):
+	- revokedAmount (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1233-1235)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+TokenVesting.vestedAmount (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1041-1059) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp < cliff (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1053-1059)
+	- block.timestamp >= start.add(duration) || revoked[_token] (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1053-1059)
+PeriodicTokenVesting.vestedAmount (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1251-1273) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp >= start.add(duration) || revoked[_token] (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1265-1271)
+	- block.timestamp < cliff (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1263-1271)
+PeriodicTokenVesting.constructor (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1081-1115) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(_startInUnixEpochTime.add(_releasePeriodInSeconds.mul(_releaseCount)) > block.timestamp,Worthless vesting) (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1099-1107)
+PeriodicTokenVesting.nextVestingTime (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1135-1157) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp >= start.add(duration) || revoked[_token] (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1139-1157)
+PeriodicTokenVesting.vestingCompletionTime (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1157-1181) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp >= start.add(duration) || revoked[_token] (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1164-1179)
+PeriodicTokenVesting.remainingVestingCount (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1181-1193) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp >= start.add(duration) || revoked[_token] (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1183-1193)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+CnusToken.decimals should be constant (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1291-1299)
+CnusToken.name should be constant (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1289)
+CnusToken.symbol should be constant (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1289)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Different versions of Solidity is used in /sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol:
+	- Version used: ['0.4.24', '^0.4.24']
+	- /sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#9-14 declares pragma solidity0.4.24
+	- /sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#829 declares pragma solidity^0.4.24
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#different-pragma-directives-are-used[0m
+INFO:Detectors:[92m
+Ownable.renounceOwnership (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#93-101) should be declared external
+Ownable.transferOwnership (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#112-119) should be declared external
+BasicToken.totalSupply (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#307-311) should be declared external
+ERC20Basic.totalSupply (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#153-155) should be declared external
+ERC20Basic.balanceOf (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#155-156) should be declared external
+BasicToken.balanceOf (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#367-373) should be declared external
+BurnableToken.burn (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#391-395) should be declared external
+StandardToken.allowance (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#595-611) should be declared external
+ERC20.allowance (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#447-451) should be declared external
+TokenVesting.release (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#961-977) should be declared external
+PeriodicTokenVesting.revoke (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1211-1243) should be declared external
+TokenVesting.revoke (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#985-1013) should be declared external
+PeriodicTokenVesting.initialTokenAmountInVesting (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1115-1123) should be declared external
+PeriodicTokenVesting.tokenAmountLockedInVesting (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1129-1135) should be declared external
+PeriodicTokenVesting.nextVestingTime (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1135-1157) should be declared external
+PeriodicTokenVesting.vestingCompletionTime (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1157-1181) should be declared external
+PeriodicTokenVesting.remainingVestingCount (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1181-1193) should be declared external
+CnusToken.disableLockingForever (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1443-1451) should be declared external
+CnusToken.setGlobalTokenTransferLock (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1453-1469) should be declared external
+CnusToken.lockAddress (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1473-1499) should be declared external
+CnusToken.unlockAddress (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1503-1515) should be declared external
+CnusToken.createNewVesting (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1545-1585) should be declared external
+CnusToken.transferInitialVestAmountFromOwner (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1611-1653) should be declared external
+CnusToken.checkVestedAddressCount (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1657-1661) should be declared external
+CnusToken.checkCurrentTotolVestedAmount (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1663-1689) should be declared external
+CnusToken.checkCurrentTotalReleasableAmount (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1689-1719) should be declared external
+CnusToken.checkCurrentTotalAmountLockedInVesting (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1720-1753) should be declared external
+CnusToken.checkInitialTotalTokenAmountInVesting (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1753-1783) should be declared external
+CnusToken.checkNextVestingTimeForBeneficiary (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1783-1807) should be declared external
+CnusToken.checkVestingCompletionTimeForBeneficiary (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1807-1827) should be declared external
+CnusToken.checkRemainingVestingCountForBeneficiary (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1827-1849) should be declared external
+CnusToken.checkReleasableAmountForBeneficiary (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1849-1869) should be declared external
+CnusToken.checkVestedAmountForBeneficiary (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1869-1885) should be declared external
+CnusToken.checkTokenAmountLockedInVestingForBeneficiary (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1887-1909) should be declared external
+CnusToken.releaseAllVestedToken (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1911-1949) should be declared external
+CnusToken.releaseVestedToken (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1961-1987) should be declared external
+CnusToken.revokeTokenVesting (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1999-2035) should be declared external
+CnusToken.transferMintOwnership (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#2293-2297) should be declared external
+CnusToken.mint (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol) should be declared external
+CnusToken.finishMinting (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol) should be declared external
+CnusToken.checkMisplacedTokenBalance (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol) should be declared external
+CnusToken.refundMisplacedToken (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_newOwner' of Ownable.transferOwnership (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#117) is not in mixedCase
+Function 'Ownable._transferOwnership' (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#127-145) is not in mixedCase
+Parameter '_newOwner' of Ownable._transferOwnership (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#129) is not in mixedCase
+Parameter '_a' of SafeMath.mul (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#183) is not in mixedCase
+Parameter '_b' of SafeMath.mul (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#183-185) is not in mixedCase
+Parameter '_a' of SafeMath.div (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#217) is not in mixedCase
+Parameter '_b' of SafeMath.div (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#217) is not in mixedCase
+Parameter '_a' of SafeMath.sub (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#247) is not in mixedCase
+Parameter '_b' of SafeMath.sub (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#247-249) is not in mixedCase
+Parameter '_a' of SafeMath.add (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#269-270) is not in mixedCase
+Parameter '_b' of SafeMath.add (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#271) is not in mixedCase
+Parameter '_owner' of BasicToken.balanceOf (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#367-369) is not in mixedCase
+Parameter '_to' of BasicToken.transfer (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#321-327) is not in mixedCase
+Parameter '_value' of BasicToken.transfer (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#327-329) is not in mixedCase
+Parameter '_value' of BurnableToken.burn (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#391) is not in mixedCase
+Function 'BurnableToken._burn' (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#395-427) is not in mixedCase
+Parameter '_who' of BurnableToken._burn (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#395-397) is not in mixedCase
+Parameter '_value' of BurnableToken._burn (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#397) is not in mixedCase
+Parameter '_owner' of StandardToken.allowance (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#595) is not in mixedCase
+Parameter '_spender' of StandardToken.allowance (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#595-599) is not in mixedCase
+Parameter '_from' of StandardToken.transferFrom (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#519) is not in mixedCase
+Parameter '_to' of StandardToken.transferFrom (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#519) is not in mixedCase
+Parameter '_value' of StandardToken.transferFrom (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#519) is not in mixedCase
+Parameter '_spender' of StandardToken.approve (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#561-563) is not in mixedCase
+Parameter '_value' of StandardToken.approve (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#563-565) is not in mixedCase
+Parameter '_spender' of StandardToken.increaseApproval (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#637) is not in mixedCase
+Parameter '_addedValue' of StandardToken.increaseApproval (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#637) is not in mixedCase
+Parameter '_spender' of StandardToken.decreaseApproval (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#689) is not in mixedCase
+Parameter '_subtractedValue' of StandardToken.decreaseApproval (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#689-690) is not in mixedCase
+Parameter '_token' of SafeERC20.safeTransfer (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#782-783) is not in mixedCase
+Parameter '_to' of SafeERC20.safeTransfer (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#783) is not in mixedCase
+Parameter '_value' of SafeERC20.safeTransfer (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#783) is not in mixedCase
+Parameter '_token' of SafeERC20.safeTransferFrom (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#793) is not in mixedCase
+Parameter '_from' of SafeERC20.safeTransferFrom (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#795-797) is not in mixedCase
+Parameter '_to' of SafeERC20.safeTransferFrom (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#797) is not in mixedCase
+Parameter '_value' of SafeERC20.safeTransferFrom (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#799-800) is not in mixedCase
+Parameter '_token' of SafeERC20.safeApprove (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#811-813) is not in mixedCase
+Parameter '_spender' of SafeERC20.safeApprove (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#813-817) is not in mixedCase
+Parameter '_value' of SafeERC20.safeApprove (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#817-818) is not in mixedCase
+Parameter '_beneficiary' of TokenVesting. (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#919-921) is not in mixedCase
+Parameter '_start' of TokenVesting. (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#921) is not in mixedCase
+Parameter '_cliff' of TokenVesting. (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#921) is not in mixedCase
+Parameter '_duration' of TokenVesting. (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#923) is not in mixedCase
+Parameter '_revocable' of TokenVesting. (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#923) is not in mixedCase
+Parameter '_token' of TokenVesting.release (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#961) is not in mixedCase
+Parameter '_token' of TokenVesting.revoke (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#987) is not in mixedCase
+Parameter '_token' of TokenVesting.releasableAmount (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1021) is not in mixedCase
+Parameter '_token' of TokenVesting.vestedAmount (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1041-1043) is not in mixedCase
+Parameter '_token' of PeriodicTokenVesting.revoke (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1211-1215) is not in mixedCase
+Parameter '_token' of PeriodicTokenVesting.vestedAmount (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1251) is not in mixedCase
+Parameter '_startInUnixEpochTime' of PeriodicTokenVesting. (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1083) is not in mixedCase
+Parameter '_releasePeriodInSeconds' of PeriodicTokenVesting. (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1083-1085) is not in mixedCase
+Parameter '_releaseCount' of PeriodicTokenVesting. (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1085-1087) is not in mixedCase
+Parameter '_token' of PeriodicTokenVesting.initialTokenAmountInVesting (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1115) is not in mixedCase
+Parameter '_token' of PeriodicTokenVesting.tokenAmountLockedInVesting (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1131) is not in mixedCase
+Parameter '_token' of PeriodicTokenVesting.nextVestingTime (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1137-1139) is not in mixedCase
+Parameter '_token' of PeriodicTokenVesting.vestingCompletionTime (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1159-1160) is not in mixedCase
+Parameter '_token' of PeriodicTokenVesting.remainingVestingCount (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1181) is not in mixedCase
+Parameter '_to' of CnusToken.transfer (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#2057) is not in mixedCase
+Parameter '_value' of CnusToken.transfer (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#2059) is not in mixedCase
+Parameter '_from' of CnusToken.transferFrom (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#2085) is not in mixedCase
+Parameter '_to' of CnusToken.transferFrom (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#2085) is not in mixedCase
+Parameter '_value' of CnusToken.transferFrom (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#2085-2088) is not in mixedCase
+Parameter '_spender' of CnusToken.approve (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#2133) is not in mixedCase
+Parameter '_value' of CnusToken.approve (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#2133-2135) is not in mixedCase
+Parameter '_spender' of CnusToken.increaseApproval (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#2187) is not in mixedCase
+Parameter '_addedValue' of CnusToken.increaseApproval (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#2190-2191) is not in mixedCase
+Parameter '_spender' of CnusToken.decreaseApproval (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#2259) is not in mixedCase
+Parameter '_subtractedValue' of CnusToken.decreaseApproval (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#2259-2261) is not in mixedCase
+Parameter '_beneficiary' of CnusToken.createNewVesting (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1545) is not in mixedCase
+Parameter '_startInUnixEpochTime' of CnusToken.createNewVesting (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1545) is not in mixedCase
+Parameter '_releasePeriodInSeconds' of CnusToken.createNewVesting (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1547-1553) is not in mixedCase
+Parameter '_releaseCount' of CnusToken.createNewVesting (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1553-1555) is not in mixedCase
+Parameter '_beneficiary' of CnusToken.transferInitialVestAmountFromOwner (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1615) is not in mixedCase
+Parameter '_vestAmount' of CnusToken.transferInitialVestAmountFromOwner (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1617-1621) is not in mixedCase
+Parameter '_beneficiary' of CnusToken.checkNextVestingTimeForBeneficiary (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1789-1793) is not in mixedCase
+Parameter '_beneficiary' of CnusToken.checkVestingCompletionTimeForBeneficiary (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1813-1815) is not in mixedCase
+Parameter '_beneficiary' of CnusToken.checkRemainingVestingCountForBeneficiary (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1829) is not in mixedCase
+Parameter '_beneficiary' of CnusToken.checkReleasableAmountForBeneficiary (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1851-1853) is not in mixedCase
+Parameter '_beneficiary' of CnusToken.checkVestedAmountForBeneficiary (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1871-1873) is not in mixedCase
+Parameter '_beneficiary' of CnusToken.checkTokenAmountLockedInVestingForBeneficiary (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1893-1895) is not in mixedCase
+Parameter '_beneficiary' of CnusToken.releaseVestedToken (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#1963) is not in mixedCase
+Parameter '_beneficiary' of CnusToken.revokeTokenVesting (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#2001) is not in mixedCase
+Parameter '_newOwner' of CnusToken.transferMintOwnership (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol#2295) is not in mixedCase
+Parameter '_to' of CnusToken.mint (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol) is not in mixedCase
+Parameter '_amount' of CnusToken.mint (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol) is not in mixedCase
+Parameter '_tokenAddress' of CnusToken.checkMisplacedTokenBalance (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol) is not in mixedCase
+Parameter '_recipient' of CnusToken.refundMisplacedToken (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol) is not in mixedCase
+Parameter '_tokenAddress' of CnusToken.refundMisplacedToken (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol) is not in mixedCase
+Parameter '_value' of CnusToken.refundMisplacedToken (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol) is not in mixedCase
+Function 'CnusToken._transferMintOwnership' (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol) is not in mixedCase
+Parameter '_newOwner' of CnusToken._transferMintOwnership (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol) is not in mixedCase
+Function 'CnusToken._transferMisplacedToken' (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol) is not in mixedCase
+Parameter '_recipient' of CnusToken._transferMisplacedToken (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol) is not in mixedCase
+Parameter '_tokenAddress' of CnusToken._transferMisplacedToken (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol) is not in mixedCase
+Parameter '_value' of CnusToken._transferMisplacedToken (/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x722f2f3eac7e9597c73a593f7cf3de33fbfc3308.sol analyzed (11 contracts), 156 result(s) found

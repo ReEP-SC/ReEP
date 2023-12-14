@@ -1,0 +1,409 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol:
+/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol:3333:27: Warning: Using contract member "balance" inherited from the address type is deprecated. Convert the contract to "address" type to access the member, for example use "address(contract).balance" instead.
+        uint256 balance = this.balance;
+                          ^----------^
+/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol:3827:25: Warning: Using contract member "balance" inherited from the address type is deprecated. Convert the contract to "address" type to access the member, for example use "address(contract).balance" instead.
+        nftAddress.send(this.balance);
+                        ^----------^
+/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol:3827:9: Warning: Failure condition of 'send' ignored. Consider using 'transfer' instead.
+        nftAddress.send(this.balance);
+        ^---------------------------^
+
+INFO:Detectors:[91m
+Reentrancy in PonyAuction.bidOnSiringAuction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2519-2563):
+	External calls:
+	- currentPrice = siringAuction.getCurrentPrice(_sireId) (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2547-2550)
+	- siringAuction.bid.value(msg.value - autoBirthFee)(_sireId) (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2559-2561)
+	- _breedWith(uint32(_matronId),uint32(_sireId)) (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2561-2563)
+	External calls sending eth:
+	- siringAuction.bid.value(msg.value - autoBirthFee)(_sireId) (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2559-2561)
+	State variables written after the call(s):
+	- ponies (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2561-2563)
+	- ponyIndexToOwner (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2561-2563)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities[0m
+INFO:Detectors:[93m
+ERC721 (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#13-53) has incorrect ERC20 function interface(s):
+	-approve (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#27-29)
+	-transfer (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#29-31)
+	-transferFrom (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#31-35)
+PonyOwnership (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1249-1717) has incorrect ERC20 function interface(s):
+	-approve (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1543-1559)
+	-transfer (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1503-1533)
+	-transferFrom (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1575-1601)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[93m
+SaleClockAuction.bid (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol) uses a dangerous strict equality:
+	- seller == address(nonFungibleContract)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Reentrancy in PonyBreeding._giveBirth (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2187-2249):
+	External calls:
+	- (childGenes,retiredAge) = geneScience.createNewGen(matron.genes,sire.genes) (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2202-2209)
+	- (ability[0],ability[1],ability[2],ability[3],ability[4]) = ponyAbility.getBasicAbility(childGenes) (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2221-2229)
+	- maxAbility = _getMaxAbility(_matronId,_sireId,matron.derbyAttendCount,matron.rankingScore,sire.derbyAttendCount,sire.rankingScore,childGenes) (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2231-2239)
+	State variables written after the call(s):
+	- grandPrix (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2239-2245)
+	- league (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2239-2245)
+	- ponies (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2239-2245)
+	- ponyIndexToOwner (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2239-2245)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+PonyBreeding._giveBirth.ability (local variable @ /sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2211-2213) shadows:
+	- PonyBase.ability (state variable @ /sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#855)
+PonyMinting.createPromoPony.ability (local variable @ /sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2725-2727) shadows:
+	- PonyBase.ability (state variable @ /sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#855)
+PonyMinting.createGen0Auction.ability (local variable @ /sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2773) shadows:
+	- PonyBase.ability (state variable @ /sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#855)
+PonyMinting.createCustomGen0Auction.ability (local variable @ /sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2881-2885) shadows:
+	- PonyBase.ability (state variable @ /sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#855)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+PonyCore.sendRankingReward has external calls inside a loop:
+	- _recipients[i].transfer(_rewards[i]) (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#4019-4021)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in PonyBreeding._giveBirth (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2187-2249):
+	External calls:
+	- (childGenes,retiredAge) = geneScience.createNewGen(matron.genes,sire.genes) (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2202-2209)
+	- (ability[0],ability[1],ability[2],ability[3],ability[4]) = ponyAbility.getBasicAbility(childGenes) (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2221-2229)
+	- maxAbility = _getMaxAbility(_matronId,_sireId,matron.derbyAttendCount,matron.rankingScore,sire.derbyAttendCount,sire.rankingScore,childGenes) (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2231-2239)
+	State variables written after the call(s):
+	- ability (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2239-2245)
+	- ownershipTokenCount (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2239-2245)
+	- ponyIndexToApproved (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2239-2245)
+Reentrancy in SaleClockAuction.bid (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol):
+	External calls:
+	- _transfer(msg.sender,_tokenId) (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol)
+	External calls sending eth:
+	- price = _bid(_tokenId,msg.value) (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol)
+	State variables written after the call(s):
+	- gen0SaleCount (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol)
+	- lastGen0SalePrices (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol)
+Reentrancy in ClockAuction.constructor (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol):
+	External calls:
+	- require(bool)(candidateContract.supportsInterface(InterfaceSignature_ERC721)) (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol)
+	State variables written after the call(s):
+	- nonFungibleContract (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol)
+Reentrancy in ClockAuction.createAuction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol):
+	External calls:
+	- require(bool)(_owns(msg.sender,_tokenId)) (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol)
+	- _escrow(msg.sender,_tokenId) (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol)
+	State variables written after the call(s):
+	- tokenIdToAuction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol)
+Reentrancy in SaleClockAuction.createAuction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol):
+	External calls:
+	- _escrow(_seller,_tokenId) (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol)
+	State variables written after the call(s):
+	- tokenIdToAuction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol)
+Reentrancy in SiringClockAuction.createAuction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol):
+	External calls:
+	- _escrow(_seller,_tokenId) (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol)
+	State variables written after the call(s):
+	- tokenIdToAuction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol)
+Reentrancy in PonyMinting.createCustomGen0Auction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2863-2933):
+	External calls:
+	- (ability[0],ability[1],ability[2],ability[3],ability[4]) = ponyAbility.getBasicAbility(_genes) (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2897-2911)
+	State variables written after the call(s):
+	- ability (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2913-2919)
+	- grandPrix (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2913-2919)
+	- league (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2913-2919)
+	- ownershipTokenCount (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2913-2919)
+	- ponies (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2913-2919)
+	- ponyIndexToApproved (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2913-2919)
+	- ponyIndexToApproved (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2919-2921)
+	- ponyIndexToOwner (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2913-2919)
+Reentrancy in PonyMinting.createCustomGen0Auction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2863-2933):
+	External calls:
+	- (ability[0],ability[1],ability[2],ability[3],ability[4]) = ponyAbility.getBasicAbility(_genes) (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2897-2911)
+	- saleAuction.createAuction(ponyId,_startPrice,_endPrice,gen0AuctionDuration,address(this)) (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2921-2931)
+	State variables written after the call(s):
+	- gen0CreatedCount (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2931-2933)
+Reentrancy in PonyMinting.createGen0Auction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2767-2829):
+	External calls:
+	- (ability[0],ability[1],ability[2],ability[3],ability[4]) = ponyAbility.getBasicAbility(_genes) (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2793-2799)
+	State variables written after the call(s):
+	- ability (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2801-2809)
+	- grandPrix (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2801-2809)
+	- league (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2801-2809)
+	- ownershipTokenCount (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2801-2809)
+	- ponies (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2801-2809)
+	- ponyIndexToApproved (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2801-2809)
+	- ponyIndexToApproved (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2809)
+	- ponyIndexToOwner (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2801-2809)
+Reentrancy in PonyMinting.createGen0Auction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2767-2829):
+	External calls:
+	- (ability[0],ability[1],ability[2],ability[3],ability[4]) = ponyAbility.getBasicAbility(_genes) (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2793-2799)
+	- saleAuction.createAuction(ponyId,_computeNextGen0Price(),10000000000000000,gen0AuctionDuration,address(this)) (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2811-2825)
+	State variables written after the call(s):
+	- gen0CreatedCount (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2827-2829)
+Reentrancy in PonyMinting.createPromoPony (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2707-2743):
+	External calls:
+	- (ability[0],ability[1],ability[2],ability[3],ability[4]) = ponyAbility.getBasicAbility(_genes) (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2737-2741)
+	State variables written after the call(s):
+	- ability (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2741-2743)
+	- grandPrix (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2741-2743)
+	- league (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2741-2743)
+	- ownershipTokenCount (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2741-2743)
+	- ponies (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2741-2743)
+	- ponyIndexToApproved (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2741-2743)
+	- ponyIndexToOwner (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2741-2743)
+Reentrancy in PonyBreeding.setGeneScienceAddress (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1753-1777):
+	External calls:
+	- require(bool)(candidateContract.isGeneScience()) (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1767-1773)
+	State variables written after the call(s):
+	- geneScience (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1773-1775)
+Reentrancy in PonyBreeding.setPonyAbilityAddress (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1781-1797):
+	External calls:
+	- require(bool)(candidateContract.isPonyAbility()) (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1795)
+	State variables written after the call(s):
+	- ponyAbility (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1795-1797)
+Reentrancy in PonyAuction.setSaleAuctionAddress (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2375-2397):
+	External calls:
+	- require(bool)(candidateContract.isSaleClockAuction()) (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2387-2389)
+	State variables written after the call(s):
+	- saleAuction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2391-2395)
+Reentrancy in PonyAuction.setSiringAuctionAddress (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2405-2421):
+	External calls:
+	- require(bool)(candidateContract.isSiringClockAuction()) (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2415-2417)
+	State variables written after the call(s):
+	- siringAuction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2419-2421)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+SaleClockAuction.isSaleClockAuction should be constant (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol)
+SiringClockAuction.isSiringClockAuction should be constant (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#208-222) should be declared external
+Pausable.pause (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#301-309) should be declared external
+Pausable.unPause (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#315-327) should be declared external
+PonyMinting.createGen0Auction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2767-2829) should be declared external
+PonyMinting.setMinStartingPrice (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#3043-3047) should be declared external
+PonyMinting.setMaxStartingPrice (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#3057-3067) should be declared external
+PonyMinting.setNextGen0PriceRate (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#3075-3093) should be declared external
+PonyDerby.setDerbyResults (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#3193-3263) should be declared external
+PonyDerby.getDerbyWinningCount (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#3590-3653) should be declared external
+PonyDerby.getAbility (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#3695-3745) should be declared external
+GeneScienceInterface.isGeneScience (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_newCFO' of PonyAccessControl.setCFO (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#473) is not in mixedCase
+Parameter '_newCOO' of PonyAccessControl.setCOO (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#495) is not in mixedCase
+Parameter '_newDerby' of PonyAccessControl.setDerbyAdress (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#505) is not in mixedCase
+Parameter '_newReward' of PonyAccessControl.setRewardAdress (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#517-523) is not in mixedCase
+Event 'PonyBase.carrotPurchased' (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#663-673) is not in CapWords
+Function 'PonyBase._transfer' (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#963-989) is not in mixedCase
+Parameter '_from' of PonyBase._transfer (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#965-967) is not in mixedCase
+Parameter '_to' of PonyBase._transfer (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#967) is not in mixedCase
+Parameter '_tokenId' of PonyBase._transfer (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#967-968) is not in mixedCase
+Function 'PonyBase._createPony' (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1039-1170) is not in mixedCase
+Parameter '_matronId' of PonyBase._createPony (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1041) is not in mixedCase
+Parameter '_sireId' of PonyBase._createPony (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1041) is not in mixedCase
+Parameter '_genes' of PonyBase._createPony (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1043) is not in mixedCase
+Parameter '_retiredAge' of PonyBase._createPony (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1043) is not in mixedCase
+Parameter '_owner' of PonyBase._createPony (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1043-1047) is not in mixedCase
+Parameter '_ability' of PonyBase._createPony (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1047) is not in mixedCase
+Parameter '_maxAbility' of PonyBase._createPony (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1048-1049) is not in mixedCase
+Function 'PonyBase._leagueGrandprixInit' (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1177-1221) is not in mixedCase
+Parameter '_secs' of PonyBase.setSecondsPerBlock (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1235-1237) is not in mixedCase
+Parameter '_owner' of PonyOwnership.balanceOf (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1471-1480) is not in mixedCase
+Parameter '_tokenId' of PonyOwnership.ownerOf (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1633-1637) is not in mixedCase
+Parameter '_to' of PonyOwnership.approve (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1543-1545) is not in mixedCase
+Parameter '_tokenId' of PonyOwnership.approve (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1545-1547) is not in mixedCase
+Parameter '_to' of PonyOwnership.transfer (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1505) is not in mixedCase
+Parameter '_tokenId' of PonyOwnership.transfer (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1505-1507) is not in mixedCase
+Parameter '_from' of PonyOwnership.transferFrom (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1576-1579) is not in mixedCase
+Parameter '_to' of PonyOwnership.transferFrom (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1581) is not in mixedCase
+Parameter '_tokenId' of PonyOwnership.transferFrom (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1581) is not in mixedCase
+Parameter '_interfaceID' of PonyOwnership.supportsInterface (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1357-1361) is not in mixedCase
+Function 'PonyOwnership._owns' (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1387-1415) is not in mixedCase
+Parameter '_claimant' of PonyOwnership._owns (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1389-1391) is not in mixedCase
+Parameter '_tokenId' of PonyOwnership._owns (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1391-1395) is not in mixedCase
+Function 'PonyOwnership._approvedFor' (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1425-1437) is not in mixedCase
+Parameter '_claimant' of PonyOwnership._approvedFor (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1425-1427) is not in mixedCase
+Parameter '_tokenId' of PonyOwnership._approvedFor (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1427-1429) is not in mixedCase
+Function 'PonyOwnership._approve' (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1453-1463) is not in mixedCase
+Parameter '_tokenId' of PonyOwnership._approve (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1454-1455) is not in mixedCase
+Parameter '_approved' of PonyOwnership._approve (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1455) is not in mixedCase
+Parameter '_owner' of PonyOwnership.tokensOfOwner (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1661) is not in mixedCase
+Constant 'PonyOwnership.InterfaceSignature_ERC721' (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1305-1357) is not in UPPER_CASE_WITH_UNDERSCORES
+Parameter '_address' of PonyBreeding.setGeneScienceAddress (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1757-1759) is not in mixedCase
+Parameter '_address' of PonyBreeding.setPonyAbilityAddress (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1781-1783) is not in mixedCase
+Function 'PonyBreeding._isReadyToBreed' (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1805-1813) is not in mixedCase
+Parameter '_pony' of PonyBreeding._isReadyToBreed (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1807) is not in mixedCase
+Function 'PonyBreeding._isSiringPermitted' (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1823-1845) is not in mixedCase
+Parameter '_sireId' of PonyBreeding._isSiringPermitted (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1825) is not in mixedCase
+Parameter '_matronId' of PonyBreeding._isSiringPermitted (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1825-1827) is not in mixedCase
+Function 'PonyBreeding._triggerCooldown' (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1857-1887) is not in mixedCase
+Parameter '_pony' of PonyBreeding._triggerCooldown (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1857-1861) is not in mixedCase
+Function 'PonyBreeding._triggerAgeSixMonth' (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1897-1915) is not in mixedCase
+Parameter '_pony' of PonyBreeding._triggerAgeSixMonth (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1897-1899) is not in mixedCase
+Function 'PonyBreeding._triggerAgeOneMonth' (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1925-1933) is not in mixedCase
+Parameter '_pony' of PonyBreeding._triggerAgeOneMonth (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1925) is not in mixedCase
+Parameter '_ponyId' of PonyBreeding.isReadyToBreed (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1959) is not in mixedCase
+Function 'PonyBreeding._isValidMatingPair' (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1979-2001) is not in mixedCase
+Parameter '_matron' of PonyBreeding._isValidMatingPair (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1979) is not in mixedCase
+Parameter '_matronId' of PonyBreeding._isValidMatingPair (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1979-1981) is not in mixedCase
+Parameter '_sire' of PonyBreeding._isValidMatingPair (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1981) is not in mixedCase
+Parameter '_sireId' of PonyBreeding._isValidMatingPair (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1981-1984) is not in mixedCase
+Function 'PonyBreeding._canBreedWithViaAuction' (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2005-2025) is not in mixedCase
+Parameter '_matronId' of PonyBreeding._canBreedWithViaAuction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2005) is not in mixedCase
+Parameter '_sireId' of PonyBreeding._canBreedWithViaAuction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2005) is not in mixedCase
+Parameter '_matronId' of PonyBreeding.canBreedWith (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2031) is not in mixedCase
+Parameter '_sireId' of PonyBreeding.canBreedWith (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2031-2032) is not in mixedCase
+Function 'PonyBreeding._breedWith' (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2061-2099) is not in mixedCase
+Parameter '_matronId' of PonyBreeding._breedWith (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2063) is not in mixedCase
+Parameter '_sireId' of PonyBreeding._breedWith (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2063-2065) is not in mixedCase
+Parameter '_matronId' of PonyBreeding.breedWithAuto (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2119) is not in mixedCase
+Parameter '_sireId' of PonyBreeding.breedWithAuto (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2119-2121) is not in mixedCase
+Function 'PonyBreeding._giveBirth' (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2187-2249) is not in mixedCase
+Parameter '_matronId' of PonyBreeding._giveBirth (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2189) is not in mixedCase
+Parameter '_sireId' of PonyBreeding._giveBirth (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2189) is not in mixedCase
+Function 'PonyBreeding._getMaxAbility' (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2291-2369) is not in mixedCase
+Parameter '_matronId' of PonyBreeding._getMaxAbility (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2291) is not in mixedCase
+Parameter '_sireId' of PonyBreeding._getMaxAbility (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2291) is not in mixedCase
+Parameter '_matronDerbyAttendCount' of PonyBreeding._getMaxAbility (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2291) is not in mixedCase
+Parameter '_matronRanking' of PonyBreeding._getMaxAbility (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2291) is not in mixedCase
+Parameter '_sireDerbyAttendCount' of PonyBreeding._getMaxAbility (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2291) is not in mixedCase
+Parameter '_sireRanking' of PonyBreeding._getMaxAbility (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2291) is not in mixedCase
+Parameter '_childGenes' of PonyBreeding._getMaxAbility (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2292-2293) is not in mixedCase
+Parameter '_address' of PonyAuction.setSaleAuctionAddress (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2378-2379) is not in mixedCase
+Parameter '_address' of PonyAuction.setSiringAuctionAddress (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2407) is not in mixedCase
+Parameter '_ponyId' of PonyAuction.createSaleAuction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2429) is not in mixedCase
+Parameter '_startingPrice' of PonyAuction.createSaleAuction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2429-2431) is not in mixedCase
+Parameter '_endingPrice' of PonyAuction.createSaleAuction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2431-2433) is not in mixedCase
+Parameter '_duration' of PonyAuction.createSaleAuction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2433-2435) is not in mixedCase
+Parameter '_ponyId' of PonyAuction.createSiringAuction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2477) is not in mixedCase
+Parameter '_startingPrice' of PonyAuction.createSiringAuction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2479) is not in mixedCase
+Parameter '_endingPrice' of PonyAuction.createSiringAuction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2479) is not in mixedCase
+Parameter '_duration' of PonyAuction.createSiringAuction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2481) is not in mixedCase
+Parameter '_sireId' of PonyAuction.bidOnSiringAuction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2519) is not in mixedCase
+Parameter '_matronId' of PonyAuction.bidOnSiringAuction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2521) is not in mixedCase
+Parameter '_genes' of PonyMinting.createPromoPony (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2707-2709) is not in mixedCase
+Parameter '_retiredAge' of PonyMinting.createPromoPony (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2709) is not in mixedCase
+Parameter '_owner' of PonyMinting.createPromoPony (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2709) is not in mixedCase
+Parameter '_maxSpeed' of PonyMinting.createPromoPony (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2709-2711) is not in mixedCase
+Parameter '_maxStamina' of PonyMinting.createPromoPony (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2711) is not in mixedCase
+Parameter '_maxStart' of PonyMinting.createPromoPony (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2711) is not in mixedCase
+Parameter '_maxBurst' of PonyMinting.createPromoPony (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2711) is not in mixedCase
+Parameter '_maxTemperament' of PonyMinting.createPromoPony (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2711) is not in mixedCase
+Parameter '_genes' of PonyMinting.createGen0Auction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2769) is not in mixedCase
+Parameter '_genes' of PonyMinting.createCustomGen0Auction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2865) is not in mixedCase
+Parameter '_retiredAge' of PonyMinting.createCustomGen0Auction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2865-2867) is not in mixedCase
+Parameter '_maxSpeed' of PonyMinting.createCustomGen0Auction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2867) is not in mixedCase
+Parameter '_maxStamina' of PonyMinting.createCustomGen0Auction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2867) is not in mixedCase
+Parameter '_maxStart' of PonyMinting.createCustomGen0Auction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2867-2869) is not in mixedCase
+Parameter '_maxBurst' of PonyMinting.createCustomGen0Auction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2869-2871) is not in mixedCase
+Parameter '_maxTemperament' of PonyMinting.createCustomGen0Auction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2871) is not in mixedCase
+Parameter '_startPrice' of PonyMinting.createCustomGen0Auction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2871-2874) is not in mixedCase
+Parameter '_endPrice' of PonyMinting.createCustomGen0Auction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2876-2877) is not in mixedCase
+Function 'PonyMinting._computeNextGen0Price' (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2961-2996) is not in mixedCase
+Parameter '_duration' of PonyMinting.setAuctionDuration (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2999-3001) is not in mixedCase
+Parameter '_gen0Stat' of PonyMinting.setGen0Stat (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#3007-3011) is not in mixedCase
+Parameter '_minPrice' of PonyMinting.setMinStartingPrice (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#3043) is not in mixedCase
+Parameter '_maxPrice' of PonyMinting.setMaxStartingPrice (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#3059-3061) is not in mixedCase
+Parameter '_increaseRate' of PonyMinting.setNextGen0PriceRate (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#3077-3079) is not in mixedCase
+Variable 'PonyMinting.GEN0_MINIMUM_STARTING_PRICE' (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2613-2616) is not in mixedCase
+Variable 'PonyMinting.GEN0_MAXIMUM_STARTING_PRICE' (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#2619-2625) is not in mixedCase
+Parameter '_id' of PonyDerby.isAttendDerby (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#3113-3115) is not in mixedCase
+Parameter '_id' of PonyDerby.isPonyRetired (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#3135) is not in mixedCase
+Parameter '_id' of PonyDerby.setDerbyResults (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#3201) is not in mixedCase
+Parameter '_derbyType' of PonyDerby.setDerbyResults (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#3201-3202) is not in mixedCase
+Parameter '_ranking' of PonyDerby.setDerbyResults (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#3203-3205) is not in mixedCase
+Parameter '_score' of PonyDerby.setDerbyResults (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#3205-3207) is not in mixedCase
+Parameter '_lucky' of PonyDerby.setDerbyResults (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#3207) is not in mixedCase
+Parameter '_rewardAbility' of PonyDerby.setDerbyResults (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#3207) is not in mixedCase
+Parameter '_id' of PonyDerby.setDerbyResult (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#3303) is not in mixedCase
+Parameter '_derbyType' of PonyDerby.setDerbyResult (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#3303-3305) is not in mixedCase
+Parameter '_ranking' of PonyDerby.setDerbyResult (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#3305) is not in mixedCase
+Parameter '_score' of PonyDerby.setDerbyResult (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#3305) is not in mixedCase
+Parameter '_lucky' of PonyDerby.setDerbyResult (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#3305-3307) is not in mixedCase
+Parameter '_rewardAbility' of PonyDerby.setDerbyResult (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#3307) is not in mixedCase
+Function 'PonyDerby._setLeagueDerbyResult' (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#3479-3517) is not in mixedCase
+Parameter '_id' of PonyDerby._setLeagueDerbyResult (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#3481) is not in mixedCase
+Parameter '_ranking' of PonyDerby._setLeagueDerbyResult (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#3481-3483) is not in mixedCase
+Parameter '_lucky' of PonyDerby._setLeagueDerbyResult (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#3483) is not in mixedCase
+Function 'PonyDerby._setGrandPrixDerbyResult' (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#3531-3571) is not in mixedCase
+Parameter '_id' of PonyDerby._setGrandPrixDerbyResult (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#3533) is not in mixedCase
+Parameter '_ranking' of PonyDerby._setGrandPrixDerbyResult (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#3533-3535) is not in mixedCase
+Parameter '_lucky' of PonyDerby._setGrandPrixDerbyResult (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#3535) is not in mixedCase
+Parameter '_id' of PonyDerby.getDerbyWinningCount (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#3591) is not in mixedCase
+Parameter '_id' of PonyDerby.getAbility (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#3695-3697) is not in mixedCase
+Parameter '_gensis' of PonyCore.genesisPonyInit (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#3781) is not in mixedCase
+Parameter '_ability' of PonyCore.genesisPonyInit (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#3781-3783) is not in mixedCase
+Parameter '_maxAbility' of PonyCore.genesisPonyInit (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#3783) is not in mixedCase
+Parameter '_gen0Stat' of PonyCore.genesisPonyInit (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#3783) is not in mixedCase
+Parameter '_v2Address' of PonyCore.setNewAddress (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#3797-3801) is not in mixedCase
+Parameter '_id' of PonyCore.getPony (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#3835) is not in mixedCase
+Parameter '_value' of PonyCore.withdrawBalance (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#3959) is not in mixedCase
+Parameter '_recipients' of PonyCore.sendRankingReward (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#4003) is not in mixedCase
+Parameter '_rewards' of PonyCore.sendRankingReward (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#4003-4005) is not in mixedCase
+Function 'ClockAuctionBase._owns' (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#4123-4141) is not in mixedCase
+Parameter '_claimant' of ClockAuctionBase._owns (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#4123-4125) is not in mixedCase
+Parameter '_tokenId' of ClockAuctionBase._owns (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#4125-4127) is not in mixedCase
+Function 'ClockAuctionBase._escrow' (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#4155-4163) is not in mixedCase
+Parameter '_owner' of ClockAuctionBase._escrow (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#4155) is not in mixedCase
+Parameter '_tokenId' of ClockAuctionBase._escrow (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#4155-4156) is not in mixedCase
+Function 'ClockAuctionBase._transfer' (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#4181-4199) is not in mixedCase
+Parameter '_receiver' of ClockAuctionBase._transfer (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#4183) is not in mixedCase
+Parameter '_tokenId' of ClockAuctionBase._transfer (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#4183) is not in mixedCase
+Function 'ClockAuctionBase._addAuction' (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#4211-4237) is not in mixedCase
+Parameter '_tokenId' of ClockAuctionBase._addAuction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#4211-4213) is not in mixedCase
+Parameter '_auction' of ClockAuctionBase._addAuction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#4213-4215) is not in mixedCase
+Function 'ClockAuctionBase._cancelAuction' (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#4249-4259) is not in mixedCase
+Parameter '_tokenId' of ClockAuctionBase._cancelAuction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#4251) is not in mixedCase
+Parameter '_seller' of ClockAuctionBase._cancelAuction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#4251) is not in mixedCase
+Function 'ClockAuctionBase._bid' (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#4267-4315) is not in mixedCase
+Parameter '_tokenId' of ClockAuctionBase._bid (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#4269) is not in mixedCase
+Parameter '_bidAmount' of ClockAuctionBase._bid (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#4269-4271) is not in mixedCase
+Function 'ClockAuctionBase._removeAuction' (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol) is not in mixedCase
+Parameter '_tokenId' of ClockAuctionBase._removeAuction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol) is not in mixedCase
+Function 'ClockAuctionBase._isOnAuction' (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol) is not in mixedCase
+Parameter '_auction' of ClockAuctionBase._isOnAuction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol) is not in mixedCase
+Function 'ClockAuctionBase._currentPrice' (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol) is not in mixedCase
+Parameter '_auction' of ClockAuctionBase._currentPrice (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol) is not in mixedCase
+Function 'ClockAuctionBase._computeCurrentPrice' (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol) is not in mixedCase
+Parameter '_startingPrice' of ClockAuctionBase._computeCurrentPrice (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol) is not in mixedCase
+Parameter '_endingPrice' of ClockAuctionBase._computeCurrentPrice (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol) is not in mixedCase
+Parameter '_duration' of ClockAuctionBase._computeCurrentPrice (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol) is not in mixedCase
+Parameter '_secondsPassed' of ClockAuctionBase._computeCurrentPrice (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol) is not in mixedCase
+Function 'ClockAuctionBase._computeCut' (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol) is not in mixedCase
+Parameter '_price' of ClockAuctionBase._computeCut (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol) is not in mixedCase
+Parameter '_nftAddress' of ClockAuction. (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol) is not in mixedCase
+Parameter '_cut' of ClockAuction. (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol) is not in mixedCase
+Parameter '_tokenId' of ClockAuction.createAuction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol) is not in mixedCase
+Parameter '_startingPrice' of ClockAuction.createAuction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol) is not in mixedCase
+Parameter '_endingPrice' of ClockAuction.createAuction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol) is not in mixedCase
+Parameter '_duration' of ClockAuction.createAuction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol) is not in mixedCase
+Parameter '_seller' of ClockAuction.createAuction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol) is not in mixedCase
+Parameter '_tokenId' of ClockAuction.bid (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol) is not in mixedCase
+Parameter '_tokenId' of ClockAuction.cancelAuction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol) is not in mixedCase
+Parameter '_tokenId' of ClockAuction.cancelAuctionWhenPaused (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol) is not in mixedCase
+Parameter '_tokenId' of ClockAuction.getAuction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol) is not in mixedCase
+Parameter '_tokenId' of ClockAuction.getCurrentPrice (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol) is not in mixedCase
+Constant 'ClockAuction.InterfaceSignature_ERC721' (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol) is not in UPPER_CASE_WITH_UNDERSCORES
+Parameter '_tokenId' of SaleClockAuction.createAuction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol) is not in mixedCase
+Parameter '_startingPrice' of SaleClockAuction.createAuction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol) is not in mixedCase
+Parameter '_endingPrice' of SaleClockAuction.createAuction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol) is not in mixedCase
+Parameter '_duration' of SaleClockAuction.createAuction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol) is not in mixedCase
+Parameter '_seller' of SaleClockAuction.createAuction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol) is not in mixedCase
+Parameter '_tokenId' of SaleClockAuction.bid (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol) is not in mixedCase
+Parameter '_tokenId' of SiringClockAuction.createAuction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol) is not in mixedCase
+Parameter '_startingPrice' of SiringClockAuction.createAuction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol) is not in mixedCase
+Parameter '_endingPrice' of SiringClockAuction.createAuction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol) is not in mixedCase
+Parameter '_duration' of SiringClockAuction.createAuction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol) is not in mixedCase
+Parameter '_seller' of SiringClockAuction.createAuction (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol) is not in mixedCase
+Parameter '_tokenId' of SiringClockAuction.bid (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+ERC721 (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#13-53) does not mark important ERC20 parameters as 'indexed':
+	-Transfer (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#35-37) does not index parameter 'from'
+	-Transfer (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#35-37) does not index parameter 'to'
+	-Approval (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#37-41) does not index parameter 'owner'
+	-Approval (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#37-41) does not index parameter 'approved'
+PonyOwnership (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1249-1717) does not mark important ERC20 parameters as 'indexed':
+	-Transfer (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1265-1267) does not index parameter 'from'
+	-Transfer (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1265-1267) does not index parameter 'to'
+	-Approval (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1279-1287) does not index parameter 'owner'
+	-Approval (/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol#1279-1287) does not index parameter 'approved'
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unindexed-erc20-event-parameters[0m
+INFO:Slither:/sb/0xaec5cf7fa497c2b27a6f37ee0c817c619b42c03a.sol analyzed (17 contracts), 246 result(s) found

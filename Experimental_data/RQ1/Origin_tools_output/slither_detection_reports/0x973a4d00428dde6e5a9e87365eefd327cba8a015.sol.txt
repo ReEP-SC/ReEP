@@ -1,0 +1,103 @@
+INFO:Detectors:[91m
+LIBRAToken.balances (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#104-105) is never initialized. It is used in:
+	- constructor (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#135-154)
+	- doTransfer (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#188-249)
+	- balanceOfAt (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#362-370)
+	- destroyTokens (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#400-430)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-state-variables[0m
+INFO:Detectors:[93m
+Reentrancy in DividendManager.claimDividend (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#596-618):
+	External calls:
+	- balance = token.balanceOfAt(msg.sender,dividend.blockNumber) (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#606)
+	State variables written after the call(s):
+	- dividends (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#608-609)
+	- dividends (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#609-614)
+Reentrancy in DividendManager.recycleDividend (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#625-661):
+	External calls:
+	- currentSupply = token.totalSupplyAt(block.number) (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#639-640)
+	State variables written after the call(s):
+	- dividends (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#650-655)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+LIBRAToken.claimTokens (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#505-515) does not use the value returned by external calls:
+	-token.transfer(owner,balance) (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#514-515)
+DividendManager.claimTokens (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol) does not use the value returned by external calls:
+	-claimToken.transfer(owner,balance) (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+LIBRAToken.getValueAt.min (local variable @ /sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#461) shadows:
+	- LIBRAToken.min (function @ /sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#492-494)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+DividendManager.depositDividend has external calls inside a loop:
+	- token.isHolder(notClaimedList[i]) (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#575-582)
+DividendManager.depositDividend has external calls inside a loop:
+	- currentSupply = currentSupply.sub(token.balanceOf(notClaimedList[i])) (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#578-582)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in DividendManager.depositDividend (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#568-594):
+	External calls:
+	- currentSupply = token.totalSupplyHoldersAt(block.number) (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#570-573)
+	State variables written after the call(s):
+	- dividends (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#586-592)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+DividendManager.RECYCLE_TIME should be constant (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#541-542)
+DividendManager.minHolderAmount should be constant (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#542-544)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+LIBRAToken.destroyTokens (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#400-430) should be declared external
+LIBRAToken.enableTransfers (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#435-437) should be declared external
+DividendManager.depositDividend (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#568-594) should be declared external
+DividendManager.admin (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#594-596) should be declared external
+DividendManager.claimDividendAll (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#619-625) should be declared external
+DividendManager.recycleDividend (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#625-661) should be declared external
+DividendManager.registerNotClaimed (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#664-673) should be declared external
+DividendManager.unregisterNotClaimed (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#673-684) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol:
+	- pragma solidity0.5.9 (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#5-8): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_newOwner' of Ownable.transferOwnership (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#64) is not in mixedCase
+Parameter '_to' of LIBRAToken.transfer (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#165) is not in mixedCase
+Parameter '_amount' of LIBRAToken.transfer (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#165) is not in mixedCase
+Parameter '_from' of LIBRAToken.transferFrom (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#173) is not in mixedCase
+Parameter '_to' of LIBRAToken.transferFrom (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#173) is not in mixedCase
+Parameter '_amount' of LIBRAToken.transferFrom (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#173-174) is not in mixedCase
+Parameter '_from' of LIBRAToken.doTransfer (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#188-189) is not in mixedCase
+Parameter '_to' of LIBRAToken.doTransfer (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#189-190) is not in mixedCase
+Parameter '_amount' of LIBRAToken.doTransfer (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#190-192) is not in mixedCase
+Parameter '_owner' of LIBRAToken.balanceOf (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#253) is not in mixedCase
+Parameter '_spender' of LIBRAToken.approve (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#261) is not in mixedCase
+Parameter '_amount' of LIBRAToken.approve (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#261) is not in mixedCase
+Parameter '_spender' of LIBRAToken.increaseApproval (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#283) is not in mixedCase
+Parameter '_addedAmount' of LIBRAToken.increaseApproval (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#283) is not in mixedCase
+Parameter '_spender' of LIBRAToken.decreaseApproval (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#303-304) is not in mixedCase
+Parameter '_subtractedAmount' of LIBRAToken.decreaseApproval (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#304-305) is not in mixedCase
+Parameter '_owner' of LIBRAToken.allowance (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#321) is not in mixedCase
+Parameter '_spender' of LIBRAToken.allowance (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#321) is not in mixedCase
+Parameter '_spender' of LIBRAToken.approveAndCall (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#337-339) is not in mixedCase
+Parameter '_amount' of LIBRAToken.approveAndCall (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#339) is not in mixedCase
+Parameter '_extraData' of LIBRAToken.approveAndCall (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#339) is not in mixedCase
+Parameter '_owner' of LIBRAToken.balanceOfAt (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#365-366) is not in mixedCase
+Parameter '_blockNumber' of LIBRAToken.balanceOfAt (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#366) is not in mixedCase
+Parameter '_blockNumber' of LIBRAToken.totalSupplyAt (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#379) is not in mixedCase
+Parameter '_blockNumber' of LIBRAToken.totalSupplyHoldersAt (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#388) is not in mixedCase
+Parameter '_holder' of LIBRAToken.isHolder (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#398-399) is not in mixedCase
+Parameter '_amount' of LIBRAToken.destroyTokens (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#400) is not in mixedCase
+Parameter '_transfersEnabled' of LIBRAToken.enableTransfers (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#435-436) is not in mixedCase
+Parameter '_block' of LIBRAToken.getValueAt (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#448) is not in mixedCase
+Parameter '_value' of LIBRAToken.updateValueAtNow (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#471) is not in mixedCase
+Parameter '_token' of LIBRAToken.claimTokens (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#506-510) is not in mixedCase
+Parameter '_minHolderAmount' of LIBRAToken.setMinHolderAmount (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#515) is not in mixedCase
+Parameter '_token' of DividendManager. (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#565-566) is not in mixedCase
+Parameter '_dividendIndex' of DividendManager.claimDividend (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#596) is not in mixedCase
+Parameter '_dividendIndex' of DividendManager.recycleDividend (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#626-627) is not in mixedCase
+Parameter '_notClaimed' of DividendManager.registerNotClaimed (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#665) is not in mixedCase
+Parameter '_notClaimed' of DividendManager.unregisterNotClaimed (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#673-674) is not in mixedCase
+Parameter '_token' of DividendManager.claimTokens (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol) is not in mixedCase
+Variable 'DividendManager.RECYCLE_TIME' (/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol#541-542) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x973a4d00428dde6e5a9e87365eefd327cba8a015.sol analyzed (5 contracts), 58 result(s) found

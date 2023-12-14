@@ -1,0 +1,49 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xb4c9ae223aa7e1763a5d88902f74be277df068d9.sol:
+/sb/0xb4c9ae223aa7e1763a5d88902f74be277df068d9.sol:123:2: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+	function STCListing() public  {
+ ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xb4c9ae223aa7e1763a5d88902f74be277df068d9.sol:131:27: Warning: Using contract member "balance" inherited from the address type is deprecated. Convert the contract to "address" type to access the member, for example use "address(contract).balance" instead.
+        require(amount <= this.balance);
+                          ^----------^
+/sb/0xb4c9ae223aa7e1763a5d88902f74be277df068d9.sol:135:3: Warning: Invoking events without "emit" prefix is deprecated.
+		Withdraw(amount);
+		^--------------^
+/sb/0xb4c9ae223aa7e1763a5d88902f74be277df068d9.sol:163:3: Warning: Invoking events without "emit" prefix is deprecated.
+		Received(msg.sender,msg.value);
+		^----------------------------^
+/sb/0xb4c9ae223aa7e1763a5d88902f74be277df068d9.sol:75:3: Warning: No visibility specified. Defaulting to "public". 
+		function approve(address _spender, uint256 _value)  returns (bool success);
+		^-------------------------------------------------------------------------^
+/sb/0xb4c9ae223aa7e1763a5d88902f74be277df068d9.sol:151:2: Warning: No visibility specified. Defaulting to "public". 
+	function() payable {
+ ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xb4c9ae223aa7e1763a5d88902f74be277df068d9.sol:13:3: Warning: Function state mutability can be restricted to pure
+  function safeMul(uint a, uint b) internal returns (uint) {
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xb4c9ae223aa7e1763a5d88902f74be277df068d9.sol:23:3: Warning: Function state mutability can be restricted to pure
+  function safeSub(uint a, uint b) internal returns (uint) {
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xb4c9ae223aa7e1763a5d88902f74be277df068d9.sol:31:3: Warning: Function state mutability can be restricted to pure
+  function safeAdd(uint a, uint b) internal returns (uint) {
+  ^ (Relevant source part starts here and spans across multiple lines).
+
+INFO:Detectors:[93m
+STCListing.claimTokens (/sb/0xb4c9ae223aa7e1763a5d88902f74be277df068d9.sol#173-179) does not use the value returned by external calls:
+	-token.transfer(fundWallet,balance) (/sb/0xb4c9ae223aa7e1763a5d88902f74be277df068d9.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+STCListing.name should be constant (/sb/0xb4c9ae223aa7e1763a5d88902f74be277df068d9.sol#93-99)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Token.balanceOf (/sb/0xb4c9ae223aa7e1763a5d88902f74be277df068d9.sol#69-71) should be declared external
+Token.transfer (/sb/0xb4c9ae223aa7e1763a5d88902f74be277df068d9.sol#71-73) should be declared external
+Token.transferFrom (/sb/0xb4c9ae223aa7e1763a5d88902f74be277df068d9.sol#73-75) should be declared external
+Token.approve (/sb/0xb4c9ae223aa7e1763a5d88902f74be277df068d9.sol#75-77) should be declared external
+Token.allowance (/sb/0xb4c9ae223aa7e1763a5d88902f74be277df068d9.sol#77-79) should be declared external
+STCListing.fallback (/sb/0xb4c9ae223aa7e1763a5d88902f74be277df068d9.sol#161-173) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Function 'STCListing.STCListing' (/sb/0xb4c9ae223aa7e1763a5d88902f74be277df068d9.sol#129-133) is not in mixedCase
+Parameter '_token' of STCListing.claimTokens (/sb/0xb4c9ae223aa7e1763a5d88902f74be277df068d9.sol#175) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xb4c9ae223aa7e1763a5d88902f74be277df068d9.sol analyzed (4 contracts), 10 result(s) found

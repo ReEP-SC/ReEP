@@ -1,0 +1,79 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x9f2e3744d33a464ccac78cab8cc1378e0f91b8ad.sol:
+/sb/0x9f2e3744d33a464ccac78cab8cc1378e0f91b8ad.sol:4:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function owned() public { owner = msg.sender; }
+
+    ^---------------------------------------------^
+/sb/0x9f2e3744d33a464ccac78cab8cc1378e0f91b8ad.sol:65:9: Warning: Invoking events without "emit" prefix is deprecated.
+        EtherReceived(msg.sender, msg.value);
+
+        ^----------------------------------^
+/sb/0x9f2e3744d33a464ccac78cab8cc1378e0f91b8ad.sol:71:17: Warning: Using contract member "balance" inherited from the address type is deprecated. Convert the contract to "address" type to access the member, for example use "address(contract).balance" instead.
+        require(this.balance > 0);
+
+                ^----------^
+/sb/0x9f2e3744d33a464ccac78cab8cc1378e0f91b8ad.sol:72:27: Warning: Using contract member "balance" inherited from the address type is deprecated. Convert the contract to "address" type to access the member, for example use "address(contract).balance" instead.
+        return owner.send(this.balance);
+
+                          ^----------^
+
+INFO:Detectors:[91m
+AutoWallet.sweep (/sb/0x9f2e3744d33a464ccac78cab8cc1378e0f91b8ad.sol#137-149) sends eth to arbitrary user
+	Dangerous calls:
+	- owner.send(this.balance) (/sb/0x9f2e3744d33a464ccac78cab8cc1378e0f91b8ad.sol#149)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[93m
+ERC721 (/sb/0x9f2e3744d33a464ccac78cab8cc1378e0f91b8ad.sol#65-111) has incorrect ERC20 function interface(s):
+	-approve (/sb/0x9f2e3744d33a464ccac78cab8cc1378e0f91b8ad.sol#73-75)
+	-transfer (/sb/0x9f2e3744d33a464ccac78cab8cc1378e0f91b8ad.sol#75-77)
+	-transferFrom (/sb/0x9f2e3744d33a464ccac78cab8cc1378e0f91b8ad.sol#77-83)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[92m
+AutoWallet.transferNonFungibleTokenMulti has external calls inside a loop:
+	- token.transfer(_to,_tokenIds[i]) (/sb/0x9f2e3744d33a464ccac78cab8cc1378e0f91b8ad.sol#233-235)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+ERC20.balanceOf (/sb/0x9f2e3744d33a464ccac78cab8cc1378e0f91b8ad.sol#41-43) should be declared external
+ERC20.transfer (/sb/0x9f2e3744d33a464ccac78cab8cc1378e0f91b8ad.sol#43-45) should be declared external
+ERC20.transferFrom (/sb/0x9f2e3744d33a464ccac78cab8cc1378e0f91b8ad.sol#45-47) should be declared external
+ERC20.approve (/sb/0x9f2e3744d33a464ccac78cab8cc1378e0f91b8ad.sol#47-49) should be declared external
+ERC20.allowance (/sb/0x9f2e3744d33a464ccac78cab8cc1378e0f91b8ad.sol#49-51) should be declared external
+ERC721.totalSupply (/sb/0x9f2e3744d33a464ccac78cab8cc1378e0f91b8ad.sol#67-69) should be declared external
+ERC721.balanceOf (/sb/0x9f2e3744d33a464ccac78cab8cc1378e0f91b8ad.sol#69-71) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x9f2e3744d33a464ccac78cab8cc1378e0f91b8ad.sol:
+	- pragma solidity^0.4.15 (/sb/0x9f2e3744d33a464ccac78cab8cc1378e0f91b8ad.sol#1): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Contract 'owned' (/sb/0x9f2e3744d33a464ccac78cab8cc1378e0f91b8ad.sol#5-39) is not in CapWords
+Parameter '_newOwner' of AutoWallet.changeOwner (/sb/0x9f2e3744d33a464ccac78cab8cc1378e0f91b8ad.sol#113-115) is not in mixedCase
+Parameter '_tokenContractAddress' of AutoWallet.transferToken (/sb/0x9f2e3744d33a464ccac78cab8cc1378e0f91b8ad.sol#149) is not in mixedCase
+Parameter '_to' of AutoWallet.transferToken (/sb/0x9f2e3744d33a464ccac78cab8cc1378e0f91b8ad.sol#151) is not in mixedCase
+Parameter '_amount' of AutoWallet.transferToken (/sb/0x9f2e3744d33a464ccac78cab8cc1378e0f91b8ad.sol#151) is not in mixedCase
+Parameter '_tokenContractAddress' of AutoWallet.sweepToken (/sb/0x9f2e3744d33a464ccac78cab8cc1378e0f91b8ad.sol#163) is not in mixedCase
+Parameter '_tokenContractAddress' of AutoWallet.transferTokenFrom (/sb/0x9f2e3744d33a464ccac78cab8cc1378e0f91b8ad.sol#177) is not in mixedCase
+Parameter '_from' of AutoWallet.transferTokenFrom (/sb/0x9f2e3744d33a464ccac78cab8cc1378e0f91b8ad.sol#178-179) is not in mixedCase
+Parameter '_to' of AutoWallet.transferTokenFrom (/sb/0x9f2e3744d33a464ccac78cab8cc1378e0f91b8ad.sol#179) is not in mixedCase
+Parameter '_amount' of AutoWallet.transferTokenFrom (/sb/0x9f2e3744d33a464ccac78cab8cc1378e0f91b8ad.sol#179) is not in mixedCase
+Parameter '_tokenContractAddress' of AutoWallet.approveTokenTransfer (/sb/0x9f2e3744d33a464ccac78cab8cc1378e0f91b8ad.sol#187-189) is not in mixedCase
+Parameter '_spender' of AutoWallet.approveTokenTransfer (/sb/0x9f2e3744d33a464ccac78cab8cc1378e0f91b8ad.sol#189) is not in mixedCase
+Parameter '_amount' of AutoWallet.approveTokenTransfer (/sb/0x9f2e3744d33a464ccac78cab8cc1378e0f91b8ad.sol#189) is not in mixedCase
+Parameter '_tokenContractAddress' of AutoWallet.transferNonFungibleToken (/sb/0x9f2e3744d33a464ccac78cab8cc1378e0f91b8ad.sol#199-201) is not in mixedCase
+Parameter '_to' of AutoWallet.transferNonFungibleToken (/sb/0x9f2e3744d33a464ccac78cab8cc1378e0f91b8ad.sol#201) is not in mixedCase
+Parameter '_tokenId' of AutoWallet.transferNonFungibleToken (/sb/0x9f2e3744d33a464ccac78cab8cc1378e0f91b8ad.sol#201) is not in mixedCase
+Parameter '_tokenContractAddress' of AutoWallet.transferNonFungibleTokenFrom (/sb/0x9f2e3744d33a464ccac78cab8cc1378e0f91b8ad.sol#211) is not in mixedCase
+Parameter '_from' of AutoWallet.transferNonFungibleTokenFrom (/sb/0x9f2e3744d33a464ccac78cab8cc1378e0f91b8ad.sol#211) is not in mixedCase
+Parameter '_to' of AutoWallet.transferNonFungibleTokenFrom (/sb/0x9f2e3744d33a464ccac78cab8cc1378e0f91b8ad.sol#211-213) is not in mixedCase
+Parameter '_tokenId' of AutoWallet.transferNonFungibleTokenFrom (/sb/0x9f2e3744d33a464ccac78cab8cc1378e0f91b8ad.sol#213) is not in mixedCase
+Parameter '_tokenContractAddress' of AutoWallet.transferNonFungibleTokenMulti (/sb/0x9f2e3744d33a464ccac78cab8cc1378e0f91b8ad.sol#221) is not in mixedCase
+Parameter '_to' of AutoWallet.transferNonFungibleTokenMulti (/sb/0x9f2e3744d33a464ccac78cab8cc1378e0f91b8ad.sol#222-223) is not in mixedCase
+Parameter '_tokenIds' of AutoWallet.transferNonFungibleTokenMulti (/sb/0x9f2e3744d33a464ccac78cab8cc1378e0f91b8ad.sol#223) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+ERC721 (/sb/0x9f2e3744d33a464ccac78cab8cc1378e0f91b8ad.sol#65-111) does not mark important ERC20 parameters as 'indexed':
+	-Transfer (/sb/0x9f2e3744d33a464ccac78cab8cc1378e0f91b8ad.sol#83-85) does not index parameter 'from'
+	-Transfer (/sb/0x9f2e3744d33a464ccac78cab8cc1378e0f91b8ad.sol#83-85) does not index parameter 'to'
+	-Approval (/sb/0x9f2e3744d33a464ccac78cab8cc1378e0f91b8ad.sol#85-91) does not index parameter 'owner'
+	-Approval (/sb/0x9f2e3744d33a464ccac78cab8cc1378e0f91b8ad.sol#85-91) does not index parameter 'approved'
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unindexed-erc20-event-parameters[0m
+INFO:Slither:/sb/0x9f2e3744d33a464ccac78cab8cc1378e0f91b8ad.sol analyzed (4 contracts), 35 result(s) found

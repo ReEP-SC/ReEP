@@ -1,0 +1,165 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol:
+/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol:165:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function RightAndRoles(address[] _roles) public {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol:345:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function GuidedByRoles(IRightAndRoles _rightAndRoles) public {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol:415:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function Allocation(IRightAndRoles _rightAndRoles,ERC20Basic _token, uint256 _unlockPart1, uint256 _unlockPart2) GuidedByRoles(_rightAndRoles) public{
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol:499:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function Creator() public{
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol:633:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function FinancialStrategy(IRightAndRoles _rightAndRoles) GuidedByRoles(_rightAndRoles) public {
+    ^ (Relevant source part starts here and spans across multiple lines).
+
+INFO:Detectors:[91m
+FinancialStrategy.refund (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#973-999) sends eth to arbitrary user
+	Dangerous calls:
+	- _investor.transfer(depositedValue) (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#991-993)
+FinancialStrategy.getBeneficiaryCash (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#1005-1025) sends eth to arbitrary user
+	Dangerous calls:
+	- _beneficiary.transfer(move) (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[91m
+FinancialStrategy.percent (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#633) is never initialized. It is used in:
+	- internalCalc (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#865-971)
+FinancialStrategy.wallets (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#653) is never initialized. It is used in:
+	- getPartnerCash (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol)
+	- onlyPartnersOrAdmin (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-state-variables[0m
+INFO:Detectors:[93m
+FinancialStrategy.getBeneficiaryCash (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#1005-1025) uses a dangerous strict equality:
+	- move == 0
+FinancialStrategy.getBeneficiaryCash (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#1005-1025) uses a dangerous strict equality:
+	- move == 0
+FinancialStrategy.internalCalc (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#865-971) uses a dangerous strict equality:
+	- free == 0
+FinancialStrategy.getBeneficiaryCash (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#1005-1025) uses a dangerous strict equality:
+	- move == 0
+FinancialStrategy.internalCalc (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#865-971) uses a dangerous strict equality:
+	- free == 0
+FinancialStrategy.setup (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#717-857) uses a dangerous strict equality:
+	- require(bool)(address(this).balance == 0)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Reentrancy in Allocation.unlockFor (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#467-503):
+	External calls:
+	- unlockedToken = token.balanceOf(this).mul(share).div(totalShare) (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#487)
+	State variables written after the call(s):
+	- shares (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#489-495)
+	- totalShare (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#495-499)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+Allocation.unlockFor (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#467-503) does not use the value returned by external calls:
+	-token.transfer(_owner,unlockedToken) (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#501)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in Allocation.addShare (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#447-459):
+	External calls:
+	- require(bool)(rightAndRoles.onlyRoles(msg.sender,1)) (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#449-453)
+	State variables written after the call(s):
+	- shares (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#453-457)
+	- totalShare (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#457-459)
+Reentrancy in FinancialStrategy.deposit (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#685-709):
+	External calls:
+	- require(bool)(rightAndRoles.onlyRoles(msg.sender,1)) (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#691-693)
+	State variables written after the call(s):
+	- cashHistory (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#705)
+	- deposited (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#693-699)
+	- newCash (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#699-701)
+Reentrancy in FinancialStrategy.getBeneficiaryCash (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#1005-1025):
+	External calls:
+	- require(bool)(rightAndRoles.onlyRoles(msg.sender,1)) (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#1007-1009)
+	- _beneficiary = rightAndRoles.wallets(2,0) (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#1009-1011)
+	State variables written after the call(s):
+	- benReady (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol)
+	- benTook (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol)
+	- benWallet (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#1015)
+Reentrancy in FinancialStrategy.getPartnerCash (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol):
+	External calls:
+	- require(bool)(rightAndRoles.onlyRoles(msg.sender,1)) (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol)
+	- onlyPartnersOrAdmin(_msgsender) (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol)
+	State variables written after the call(s):
+	- ready (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol)
+	- took (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol)
+Reentrancy in FinancialStrategy.setup (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#717-857):
+	External calls:
+	- require(bool)(rightAndRoles.onlyRoles(msg.sender,1)) (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#723-725)
+	State variables written after the call(s):
+	- benReady (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#827-831)
+	- cap (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#851-855)
+	- debt (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#827-831)
+	- newCash (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#827-831)
+	- ready (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#827-831)
+	- state (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#771)
+	- state (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#787)
+	- state (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#809-811)
+	- step (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#787-789)
+	- total (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#827-831)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+FinancialStrategy.freeCash (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#857-865) should be declared external
+IFinancialStrategy.freeCash (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#49-51) should be declared external
+ERC20Basic.totalSupply (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#69) should be declared external
+ERC20Basic.balanceOf (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#71) should be declared external
+ERC20Basic.transfer (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#73) should be declared external
+IToken.setUnpausedWallet (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#327-329) should be declared external
+IToken.mint (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#329-331) should be declared external
+IToken.totalSupply (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#331) should be declared external
+IToken.setPause (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#333) should be declared external
+IToken.setMigrationAgent (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#333-335) should be declared external
+IToken.migrateAll (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#335) should be declared external
+IToken.markTokens (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#336-343) should be declared external
+IToken.freezedTokenOf (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#344-347) should be declared external
+IToken.defrostDate (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#347-357) should be declared external
+IToken.freezeTokens (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#357) should be declared external
+ERC20Provider.transferTokens (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#377-393) should be declared external
+Allocation.unlockFor (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#467-503) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol:
+	- pragma solidity^0.4.21 (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#9-13): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_wallet' of RightAndRoles.changeWallet (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#249-251) is not in mixedCase
+Parameter '_role' of RightAndRoles.changeWallet (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#251) is not in mixedCase
+Parameter '_mode' of RightAndRoles.setManagerPowerful (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#289) is not in mixedCase
+Parameter '_sender' of RightAndRoles.onlyRoles (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#293) is not in mixedCase
+Parameter '_roleMask' of RightAndRoles.onlyRoles (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#293-295) is not in mixedCase
+Function 'RightAndRoles.RightAndRoles' (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#175-193) is not in mixedCase
+Parameter '_roles' of RightAndRoles.RightAndRoles (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#175-176) is not in mixedCase
+Parameter '_clon' of RightAndRoles.changeClons (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#195) is not in mixedCase
+Parameter '_role' of RightAndRoles.changeClons (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#195-197) is not in mixedCase
+Parameter '_mod' of RightAndRoles.changeClons (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#197) is not in mixedCase
+Parameter '_role' of RightAndRoles.getCloneWallets (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#321-323) is not in mixedCase
+Function 'GuidedByRoles.GuidedByRoles' (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#361-371) is not in mixedCase
+Parameter '_rightAndRoles' of GuidedByRoles.GuidedByRoles (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#363-369) is not in mixedCase
+Parameter '_token' of ERC20Provider.transferTokens (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#377-379) is not in mixedCase
+Parameter '_to' of ERC20Provider.transferTokens (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#379) is not in mixedCase
+Parameter '_value' of ERC20Provider.transferTokens (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#379) is not in mixedCase
+Parameter '_beneficiary' of Allocation.addShare (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#447) is not in mixedCase
+Parameter '_proportion' of Allocation.addShare (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#447) is not in mixedCase
+Parameter '_percenForFirstPart' of Allocation.addShare (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#447-449) is not in mixedCase
+Function 'Allocation.Allocation' (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#429-443) is not in mixedCase
+Parameter '_token' of Allocation.Allocation (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#431) is not in mixedCase
+Parameter '_unlockPart1' of Allocation.Allocation (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#431) is not in mixedCase
+Parameter '_unlockPart2' of Allocation.Allocation (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#431) is not in mixedCase
+Parameter '_owner' of Allocation.unlockFor (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#467-469) is not in mixedCase
+Parameter '_token' of Creator.createAllocation (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#575) is not in mixedCase
+Parameter '_unlockPart1' of Creator.createAllocation (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#575) is not in mixedCase
+Parameter '_unlockPart2' of Creator.createAllocation (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#575) is not in mixedCase
+Function 'Creator.Creator' (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#523-567) is not in mixedCase
+Parameter '_investor' of FinancialStrategy.deposit (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#685-687) is not in mixedCase
+Parameter '_investor' of FinancialStrategy.refund (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#973) is not in mixedCase
+Parameter '_state' of FinancialStrategy.setup (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#719-721) is not in mixedCase
+Parameter '_params' of FinancialStrategy.setup (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#721) is not in mixedCase
+Parameter '_user' of FinancialStrategy.getPartnerCash (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol) is not in mixedCase
+Parameter '_msgsender' of FinancialStrategy.getPartnerCash (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol) is not in mixedCase
+Function 'FinancialStrategy.FinancialStrategy' (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#671-681) is not in mixedCase
+Parameter '_allValue' of FinancialStrategy.internalCalc (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol#867-869) is not in mixedCase
+Parameter '_sender' of FinancialStrategy.onlyPartnersOrAdmin (/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x987a4a425190f5edfee695db77a2c8212f6df16f.sol analyzed (13 contracts), 69 result(s) found

@@ -1,0 +1,58 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xb8be713fee0b3f437be4793a23f96fec7eae4316.sol:
+/sb/0xb8be713fee0b3f437be4793a23f96fec7eae4316.sol:83:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function RewardClaimHandler(Token _rewardToken) public {
+    ^ (Relevant source part starts here and spans across multiple lines).
+
+INFO:Detectors:[93m
+Reentrancy in RewardClaimHandler.claimReward (/sb/0xb8be713fee0b3f437be4793a23f96fec7eae4316.sol#135-145):
+	External calls:
+	- require(bool)(winners.length > 0 && rewardToken.transfer(msg.sender,rewardAmounts[msg.sender])) (/sb/0xb8be713fee0b3f437be4793a23f96fec7eae4316.sol#139-145)
+	State variables written after the call(s):
+	- rewardAmounts (/sb/0xb8be713fee0b3f437be4793a23f96fec7eae4316.sol#145)
+Reentrancy in RewardClaimHandler.registerRewards (/sb/0xb8be713fee0b3f437be4793a23f96fec7eae4316.sol#94-135):
+	External calls:
+	- require(bool)(rewardToken.transferFrom(msg.sender,this,totalAmount)) (/sb/0xb8be713fee0b3f437be4793a23f96fec7eae4316.sol#127-133)
+	State variables written after the call(s):
+	- winners (/sb/0xb8be713fee0b3f437be4793a23f96fec7eae4316.sol#135)
+Reentrancy in RewardClaimHandler.retractRewards (/sb/0xb8be713fee0b3f437be4793a23f96fec7eae4316.sol#149-179):
+	External calls:
+	- require(bool)(rewardToken.transfer(msg.sender,totalAmount)) (/sb/0xb8be713fee0b3f437be4793a23f96fec7eae4316.sol)
+	State variables written after the call(s):
+	- winners (/sb/0xb8be713fee0b3f437be4793a23f96fec7eae4316.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+Reentrancy in RewardClaimHandler.registerRewards (/sb/0xb8be713fee0b3f437be4793a23f96fec7eae4316.sol#94-135):
+	External calls:
+	- require(bool)(rewardToken.transferFrom(msg.sender,this,totalAmount)) (/sb/0xb8be713fee0b3f437be4793a23f96fec7eae4316.sol#127-133)
+	State variables written after the call(s):
+	- guaranteedClaimEndTime (/sb/0xb8be713fee0b3f437be4793a23f96fec7eae4316.sol#135)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Different versions of Solidity is used in /sb/0xb8be713fee0b3f437be4793a23f96fec7eae4316.sol:
+	- Version used: ['^0.4.18', '^0.4.21']
+	- /sb/0xb8be713fee0b3f437be4793a23f96fec7eae4316.sol#9-13 declares pragma solidity^0.4.21
+	- /sb/0xb8be713fee0b3f437be4793a23f96fec7eae4316.sol#19-25 declares pragma solidity^0.4.18
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#different-pragma-directives-are-used[0m
+INFO:Detectors:[92m
+Token.transfer (/sb/0xb8be713fee0b3f437be4793a23f96fec7eae4316.sol#49-51) should be declared external
+Token.transferFrom (/sb/0xb8be713fee0b3f437be4793a23f96fec7eae4316.sol#51-53) should be declared external
+Token.approve (/sb/0xb8be713fee0b3f437be4793a23f96fec7eae4316.sol#53-55) should be declared external
+Token.balanceOf (/sb/0xb8be713fee0b3f437be4793a23f96fec7eae4316.sol#55-57) should be declared external
+Token.allowance (/sb/0xb8be713fee0b3f437be4793a23f96fec7eae4316.sol#57-59) should be declared external
+Token.totalSupply (/sb/0xb8be713fee0b3f437be4793a23f96fec7eae4316.sol#65-69) should be declared external
+RewardClaimHandler.registerRewards (/sb/0xb8be713fee0b3f437be4793a23f96fec7eae4316.sol#94-135) should be declared external
+RewardClaimHandler.claimReward (/sb/0xb8be713fee0b3f437be4793a23f96fec7eae4316.sol#135-145) should be declared external
+RewardClaimHandler.retractRewards (/sb/0xb8be713fee0b3f437be4793a23f96fec7eae4316.sol#149-179) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xb8be713fee0b3f437be4793a23f96fec7eae4316.sol:
+	- pragma solidity^0.4.21 (/sb/0xb8be713fee0b3f437be4793a23f96fec7eae4316.sol#9-13): it allows old versions
+	- pragma solidity^0.4.18 (/sb/0xb8be713fee0b3f437be4793a23f96fec7eae4316.sol#19-25): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'RewardClaimHandler.RewardClaimHandler' (/sb/0xb8be713fee0b3f437be4793a23f96fec7eae4316.sol#85-93) is not in mixedCase
+Parameter '_rewardToken' of RewardClaimHandler.RewardClaimHandler (/sb/0xb8be713fee0b3f437be4793a23f96fec7eae4316.sol#87-89) is not in mixedCase
+Parameter '_winners' of RewardClaimHandler.registerRewards (/sb/0xb8be713fee0b3f437be4793a23f96fec7eae4316.sol#97) is not in mixedCase
+Parameter '_rewardAmounts' of RewardClaimHandler.registerRewards (/sb/0xb8be713fee0b3f437be4793a23f96fec7eae4316.sol#97-99) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xb8be713fee0b3f437be4793a23f96fec7eae4316.sol analyzed (2 contracts), 19 result(s) found

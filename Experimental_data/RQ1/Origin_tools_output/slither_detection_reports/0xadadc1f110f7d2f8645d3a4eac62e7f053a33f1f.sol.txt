@@ -1,0 +1,207 @@
+INFO:Detectors:[93m
+Subscriptions._extendSubscription (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1337-1373) uses a dangerous strict equality:
+	- require(bool,string)(keccak256(bytes)(bytes(tier)) == keccak256(bytes)(bytes(virtualChains[vcId].tier)),given tier must match the VC tier)
+Subscriptions._extendSubscription (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1337-1373) uses a dangerous strict equality:
+	- require(bool,string)(keccak256(bytes)(bytes(tier)) == keccak256(bytes)(bytes(virtualChains[vcId].tier)),given tier must match the VC tier)
+Subscriptions.importSubscription (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1309-1321) uses a dangerous strict equality:
+	- require(bool,string)(virtualChains[vcId].owner == address(0),the vcId already exists)
+Subscriptions._extendSubscription (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1337-1373) uses a dangerous strict equality:
+	- require(bool,string)(keccak256(bytes)(bytes(tier)) == keccak256(bytes)(bytes(virtualChains[vcId].tier)),given tier must match the VC tier)
+Subscriptions.importSubscription (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1309-1321) uses a dangerous strict equality:
+	- require(bool,string)(virtualChains[vcId].owner == address(0),the vcId already exists)
+Subscriptions.setVcConfigRecord (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1166-1175) uses a dangerous strict equality:
+	- require(bool,string)(msg.sender == virtualChains[vcId].owner,only vc owner can set a vc config record)
+Subscriptions._extendSubscription (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1337-1373) uses a dangerous strict equality:
+	- require(bool,string)(keccak256(bytes)(bytes(tier)) == keccak256(bytes)(bytes(virtualChains[vcId].tier)),given tier must match the VC tier)
+Subscriptions.importSubscription (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1309-1321) uses a dangerous strict equality:
+	- require(bool,string)(virtualChains[vcId].owner == address(0),the vcId already exists)
+Subscriptions.setVcConfigRecord (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1166-1175) uses a dangerous strict equality:
+	- require(bool,string)(msg.sender == virtualChains[vcId].owner,only vc owner can set a vc config record)
+Subscriptions.setVcOwner (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1183-1196) uses a dangerous strict equality:
+	- require(bool,string)(msg.sender == virtualChains[vcId].owner,only the vc owner can transfer ownership)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Reentrancy in Subscriptions._extendSubscription (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1337-1373):
+	External calls:
+	- require(bool,string)(erc20.transferFrom(msg.sender,address(this),amount),failed to transfer subscription fees from subscriber to subscriptions) (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1349-1354)
+	- require(bool,string)(erc20.approve(address(feesWallet),amount),failed to approve rewards to acquire subscription fees) (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1354-1365)
+	- feesWallet.fillFeeBuckets(amount,rate,fromTimestamp) (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1366)
+	State variables written after the call(s):
+	- virtualChains (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1368-1369)
+	- virtualChains (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1369)
+Reentrancy in ContractRegistryAccessor.constructor (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#814-819):
+	External calls:
+	- setContractRegistry(_contractRegistry) (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#816-819)
+	State variables written after the call(s):
+	- _registryAdmin (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#819)
+Reentrancy in Subscriptions.constructor (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1096-1105):
+	External calls:
+	- setGenesisRefTimeDelay(_genesisRefTimeDelay) (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1102-1103)
+	- setMinimumInitialVcPayment(_minimumInitialVcPayment) (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1103)
+	State variables written after the call(s):
+	- settings (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1103)
+Reentrancy in Subscriptions.importSubscription (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1309-1321):
+	External calls:
+	- (name,tier,rate,expiresAt,genRefTime,owner,deploymentSubset,isCertified) = previousSubscriptionsContract.getVcData(vcId) (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1311-1314)
+	State variables written after the call(s):
+	- virtualChains (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1314-1319)
+Reentrancy in ContractRegistry.setContract (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1435-1448):
+	External calls:
+	- removeManagedContract(contracts[contractName]) (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1441-1442)
+	State variables written after the call(s):
+	- contracts (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1442-1443)
+	- managedContractAddresses (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1443)
+Reentrancy in ContractRegistryAccessor.setContractRegistry (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#931-940):
+	External calls:
+	- require(bool,string)(newContractRegistry.getPreviousContractRegistry() == address(contractRegistry),new contract registry must provide the previous contract registry) (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#935-938)
+	State variables written after the call(s):
+	- contractRegistry (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#939)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+ContractRegistry.removeManagedContract (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1553-1557) does not use the value returned by external calls:
+	-managedContractAddresses.pop() (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1556-1557)
+MonthlySubscriptionPlan.createVC (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol) does not use the value returned by external calls:
+	-subs.createVC(name,tier,monthlyRate,amount,msg.sender,isCertified,deploymentSubset) (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+ContractRegistryAccessor.setRegistryAdmin._registryAdmin (local variable @ /sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#946) shadows:
+	- WithClaimableRegistryManagement._registryAdmin (state variable @ /sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#660-664)
+ContractRegistryAccessor.constructor._registryAdmin (local variable @ /sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#815) shadows:
+	- WithClaimableRegistryManagement._registryAdmin (state variable @ /sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#660-664)
+Lockable.constructor._registryAdmin (local variable @ /sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#990) shadows:
+	- WithClaimableRegistryManagement._registryAdmin (state variable @ /sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#660-664)
+ManagedContract.constructor._registryAdmin (local variable @ /sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1054) shadows:
+	- WithClaimableRegistryManagement._registryAdmin (state variable @ /sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#660-664)
+Subscriptions.constructor._registryAdmin (local variable @ /sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1097-1098) shadows:
+	- WithClaimableRegistryManagement._registryAdmin (state variable @ /sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#660-664)
+ContractRegistry.constructor.registryAdmin (local variable @ /sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1409-1410) shadows:
+	- WithClaimableRegistryManagement.registryAdmin (function @ /sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#680-682)
+MonthlySubscriptionPlan.constructor._registryAdmin (local variable @ /sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1566) shadows:
+	- WithClaimableRegistryManagement._registryAdmin (state variable @ /sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#660-664)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+ContractRegistry.lockContracts has external calls inside a loop:
+	- ILockable(managedContractAddresses[i]).lock() (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1468-1469)
+ContractRegistry.unlockContracts has external calls inside a loop:
+	- ILockable(managedContractAddresses[i]).unlock() (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1472-1473)
+ContractRegistry.setNewContractRegistry has external calls inside a loop:
+	- IContractRegistryAccessor(managedContractAddresses[i]).setContractRegistry(newRegistry) (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1508-1512)
+ContractRegistry.setNewContractRegistry has external calls inside a loop:
+	- IManagedContract(managedContractAddresses[i]).refreshContracts() (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1513-1520)
+ContractRegistry.notifyOnContractsChange has external calls inside a loop:
+	- IManagedContract(managedContractAddresses[i]).refreshContracts() (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1540-1541)
+ContractRegistry.removeManagedContract has external calls inside a loop:
+	- managedContractAddresses.pop() (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1556-1557)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in Subscriptions.createVC (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1130-1146):
+	External calls:
+	- require(bool,string)(protocolContract.deploymentSubsetExists(deploymentSubset) == true,No such deployment subset) (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1134-1135)
+	State variables written after the call(s):
+	- nextVcId (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1137)
+	- virtualChains (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1145-1146)
+Reentrancy in Subscriptions.importSubscription (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1309-1321):
+	External calls:
+	- (name,tier,rate,expiresAt,genRefTime,owner,deploymentSubset,isCertified) = previousSubscriptionsContract.getVcData(vcId) (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1311-1314)
+	State variables written after the call(s):
+	- nextVcId (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1320)
+Reentrancy in Subscriptions.refreshContracts (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1381-1386):
+	External calls:
+	- generalFeesWallet = IFeesWallet(getGeneralFeesWallet()) (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1382-1386)
+	- certifiedFeesWallet = IFeesWallet(getCertifiedFeesWallet()) (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1386)
+	State variables written after the call(s):
+	- certifiedFeesWallet (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1386)
+Reentrancy in Subscriptions.refreshContracts (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1381-1386):
+	External calls:
+	- generalFeesWallet = IFeesWallet(getGeneralFeesWallet()) (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1382-1386)
+	- certifiedFeesWallet = IFeesWallet(getCertifiedFeesWallet()) (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1386)
+	- protocolContract = IProtocol(getProtocolContract()) (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1386)
+	State variables written after the call(s):
+	- protocolContract (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1386)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Subscriptions.setVcConfigRecord (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1166-1175) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(msg.sender == virtualChains[vcId].owner,only vc owner can set a vc config record) (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1169-1173)
+Subscriptions.setVcOwner (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1183-1196) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(msg.sender == virtualChains[vcId].owner,only the vc owner can transfer ownership) (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1186-1190)
+Subscriptions.importSubscription (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1309-1321) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(virtualChains[vcId].owner == address(0),the vcId already exists) (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1311)
+Subscriptions._extendSubscription (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1337-1373) uses timestamp for comparisons
+	Dangerous comparisons:
+	- vc.expiresAt > now (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1365-1366)
+	- require(bool,string)(vc.genRefTime != 0,vc does not exist) (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1345)
+	- require(bool,string)(keccak256(bytes)(bytes(tier)) == keccak256(bytes)(bytes(virtualChains[vcId].tier)),given tier must match the VC tier) (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1345-1347)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+Different versions of Solidity is used in /sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol:
+	- Version used: ['0.6.12', '^0.6.0']
+	- /sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#9-12 declares pragma solidity^0.6.0
+	- /sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#176-178 declares pragma solidity^0.6.0
+	- /sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#251 declares pragma solidity0.6.12
+	- /sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#394-395 declares pragma solidity0.6.12
+	- /sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#434 declares pragma solidity0.6.12
+	- /sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#455-456 declares pragma solidity0.6.12
+	- /sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#517-519 declares pragma solidity0.6.12
+	- /sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#524 declares pragma solidity0.6.12
+	- /sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#602 declares pragma solidity0.6.12
+	- /sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#621-622 declares pragma solidity^0.6.0
+	- /sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#652 declares pragma solidity0.6.12
+	- /sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#759-762 declares pragma solidity0.6.12
+	- /sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#802-803 declares pragma solidity0.6.12
+	- /sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#950 declares pragma solidity0.6.12
+	- /sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#981-982 declares pragma solidity0.6.12
+	- /sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1043 declares pragma solidity0.6.12
+	- /sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1063-1064 declares pragma solidity0.6.12
+	- /sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1391 declares pragma solidity0.6.12
+	- /sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1558 declares pragma solidity0.6.12
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#different-pragma-directives-are-used[0m
+INFO:Detectors:[92m
+WithClaimableRegistryManagement.renounceRegistryManagement (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#700-707) should be declared external
+WithClaimableRegistryManagement.transferRegistryManagement (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#736-741) should be declared external
+WithClaimableRegistryManagement.pendingRegistryAdmin (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#755-758) should be declared external
+Initializable.isInitializationComplete (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#793-797) should be declared external
+ContractRegistryAccessor.getContractRegistry (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#942-946) should be declared external
+IContractRegistryAccessor.getContractRegistry (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#615-618) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol:
+	- pragma solidity^0.6.0 (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#9-12): it allows old versions
+	- pragma solidity^0.6.0 (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#176-178): it allows old versions
+	- pragma solidity0.6.12 (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#251): it allows old versions
+	- pragma solidity0.6.12 (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#394-395): it allows old versions
+	- pragma solidity0.6.12 (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#434): it allows old versions
+	- pragma solidity0.6.12 (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#455-456): it allows old versions
+	- pragma solidity0.6.12 (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#517-519): it allows old versions
+	- pragma solidity0.6.12 (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#524): it allows old versions
+	- pragma solidity0.6.12 (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#602): it allows old versions
+	- pragma solidity^0.6.0 (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#621-622): it allows old versions
+	- pragma solidity0.6.12 (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#652): it allows old versions
+	- pragma solidity0.6.12 (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#759-762): it allows old versions
+	- pragma solidity0.6.12 (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#802-803): it allows old versions
+	- pragma solidity0.6.12 (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#950): it allows old versions
+	- pragma solidity0.6.12 (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#981-982): it allows old versions
+	- pragma solidity0.6.12 (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1043): it allows old versions
+	- pragma solidity0.6.12 (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1063-1064): it allows old versions
+	- pragma solidity0.6.12 (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1391): it allows old versions
+	- pragma solidity0.6.12 (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1558): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'Context._msgSender' (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#641-645) is not in mixedCase
+Function 'Context._msgData' (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#645-650) is not in mixedCase
+Function 'WithClaimableRegistryManagement._transferRegistryManagement' (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#708-717) is not in mixedCase
+Parameter '_registryAdmin' of ContractRegistryAccessor.setRegistryAdmin (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#946) is not in mixedCase
+Parameter '_contractRegistry' of ContractRegistryAccessor. (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#814-815) is not in mixedCase
+Parameter '_registryAdmin' of ContractRegistryAccessor. (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#815) is not in mixedCase
+Parameter '_erc20' of Subscriptions. (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1098) is not in mixedCase
+Parameter '_genesisRefTimeDelay' of Subscriptions. (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1098-1099) is not in mixedCase
+Parameter '_minimumInitialVcPayment' of Subscriptions. (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1099) is not in mixedCase
+Function 'Subscriptions._extendSubscription' (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1337-1373) is not in mixedCase
+Parameter '_previousContractRegistry' of ContractRegistry. (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1408-1409) is not in mixedCase
+Parameter '_erc20' of MonthlySubscriptionPlan. (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1566) is not in mixedCase
+Parameter '_tier' of MonthlySubscriptionPlan. (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1566-1567) is not in mixedCase
+Parameter '_monthlyRate' of MonthlySubscriptionPlan. (/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol#1567) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xadadc1f110f7d2f8645d3a4eac62e7f053a33f1f.sol analyzed (19 contracts), 55 result(s) found

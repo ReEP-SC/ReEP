@@ -1,0 +1,174 @@
+INFO:Detectors:[91m
+Market.sendMoneyMother (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#1045-1095) sends eth to arbitrary user
+	Dangerous calls:
+	- publicContract.ownerOf(mother[m]).transfer(motherMoney) (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#1085)
+Market.sendMoney (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#1101-1131) sends eth to arbitrary user
+	Dangerous calls:
+	- _to.transfer(procentOne * (100 - (commission + percentBank + commission_mom))) (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#1115-1120)
+	- ownerMoney.transfer(procentOne * commission) (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#1121-1127)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[91m
+Reentrancy in Market.buyBunny (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#985-1043):
+	External calls:
+	- require(bool)(checkContract()) (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#995)
+	- require(bool)(publicContract.ownerOf(_bunnyId) != msg.sender) (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#997-999)
+	- sendMoney(publicContract.ownerOf(_bunnyId),lastmoney) (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#1017-1019)
+	- publicContract.transferFrom(publicContract.ownerOf(_bunnyId),msg.sender,_bunnyId) (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#1019-1021)
+	- sendMoneyMother(_bunnyId) (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#1021-1023)
+	- stopMarket(_bunnyId) (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#1023-1025)
+	External calls sending eth:
+	- checkTimeWin() (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#1015)
+	- sendMoney(publicContract.ownerOf(_bunnyId),lastmoney) (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#1017-1019)
+	- sendMoneyMother(_bunnyId) (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#1021-1023)
+	State variables written after the call(s):
+	- bunnyCost (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#1023-1025)
+	- lastOwner (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#1037-1039)
+	- lastSaleTime (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#1039-1041)
+	- stepTimeBank (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#1027-1030)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities[0m
+INFO:Detectors:[93m
+Market.transferFromBunny (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#957-969) does not use the value returned by external calls:
+	-publicContract.transferFrom(publicContract.ownerOf(_bunnyId),msg.sender,_bunnyId) (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#965-969)
+Market.buyBunny (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#985-1043) does not use the value returned by external calls:
+	-publicContract.transferFrom(publicContract.ownerOf(_bunnyId),msg.sender,_bunnyId) (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#1019-1021)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Market.sendMoneyMother has external calls inside a loop:
+	- publicContract.ownerOf(mother[m]).transfer(motherMoney) (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#1085)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in Market.buyAdvert (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol):
+	External calls:
+	- require(bool)(checkContract()) (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol)
+	State variables written after the call(s):
+	- added_to_the_bank (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol)
+	- advertising (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol)
+	- bankMoney (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol)
+Reentrancy in Market.buyBunny (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#985-1043):
+	External calls:
+	- require(bool)(checkContract()) (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#995)
+	- require(bool)(publicContract.ownerOf(_bunnyId) != msg.sender) (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#997-999)
+	State variables written after the call(s):
+	- lastmoney (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#999)
+	- totalClosedBID (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#1011)
+Reentrancy in Market.buyBunny (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#985-1043):
+	External calls:
+	- require(bool)(checkContract()) (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#995)
+	- require(bool)(publicContract.ownerOf(_bunnyId) != msg.sender) (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#997-999)
+	External calls sending eth:
+	- checkTimeWin() (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#1015)
+	State variables written after the call(s):
+	- added_to_the_bank (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#1015)
+	- advertising (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#1015)
+	- bankMoney (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#1015)
+	- lastSaleTime (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#1015)
+	- numberOfWins (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#1015)
+	- reallyPrice (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#1015)
+Reentrancy in Market.buyBunny (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#985-1043):
+	External calls:
+	- require(bool)(checkContract()) (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#995)
+	- require(bool)(publicContract.ownerOf(_bunnyId) != msg.sender) (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#997-999)
+	- sendMoney(publicContract.ownerOf(_bunnyId),lastmoney) (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#1017-1019)
+	- publicContract.transferFrom(publicContract.ownerOf(_bunnyId),msg.sender,_bunnyId) (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#1019-1021)
+	- sendMoneyMother(_bunnyId) (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#1021-1023)
+	- stopMarket(_bunnyId) (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#1023-1025)
+	External calls sending eth:
+	- checkTimeWin() (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#1015)
+	- sendMoney(publicContract.ownerOf(_bunnyId),lastmoney) (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#1017-1019)
+	- sendMoneyMother(_bunnyId) (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#1021-1023)
+	State variables written after the call(s):
+	- reallyPrice (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#1027-1030)
+Reentrancy in Market.startMarket (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#827-857):
+	External calls:
+	- require(bool)(checkContract()) (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#833-836)
+	- require(bool)(publicContract.ownerOf(_bunnyId) == msg.sender) (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#843-845)
+	State variables written after the call(s):
+	- bunnyCost (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#845-847)
+	- marketCount (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#857)
+	- timeCost (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#847-853)
+Reentrancy in Market.stopMarket (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#877-891):
+	External calls:
+	- require(bool)(checkContract()) (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#879)
+	- require(bool)(publicContract.ownerOf(_bunnyId) == msg.sender) (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#881-883)
+	State variables written after the call(s):
+	- bunnyCost (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#883-885)
+	- marketCount (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#889-891)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Market.timeBunny (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#927-957) uses timestamp for comparisons
+	Dangerous comparisons:
+	- _tmp > 0 (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#947-955)
+	- timeCost[_bunnyId] > 0 && block.timestamp >= _tmp (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#937-955)
+Market.checkTimeWin (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#1131-1145) uses timestamp for comparisons
+	Dangerous comparisons:
+	- lastSaleTime + stepTimeBank < block.timestamp (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#1133-1145)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+Market.commission_mom should be constant (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#477-484)
+Market.sec should be constant (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#511)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Ownable.transferMoney (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#93-107) should be declared external
+Ownable.transferOwner (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#109-121) should be declared external
+Ownable.getOwnerMoney (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#133-137) should be declared external
+Whitelist.getInWhitelist (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#219-221) should be declared external
+Whitelist.addAddressesToWhitelist (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#231-253) should be declared external
+Whitelist.removeAddressesFromWhitelist (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#297-319) should be declared external
+PublicInterface.transferFrom (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#379-389) should be declared external
+PublicInterface.ownerOf (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#389-395) should be declared external
+PublicInterface.isUIntPublic (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#395) should be declared external
+PublicInterface.getRabbitMother (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#397-399) should be declared external
+PublicInterface.getRabbitMotherSumm (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#399-401) should be declared external
+Market.getProperty (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#555-633) should be declared external
+Market.setRangePrice (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#645-655) should be declared external
+Market.setMinTimeBank (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#657-669) should be declared external
+Market.setCoefficientTimeStep (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#671-683) should be declared external
+Market.setPercentCommission (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#685-699) should be declared external
+Market.setPercentBank (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#699-705) should be declared external
+Market.setMinPrice (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#709-721) should be declared external
+Market.setStepTime (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#725-739) should be declared external
+Market.setPause (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#765-771) should be declared external
+Market.startMarket (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#827-857) should be declared external
+Market.transferFromBunny (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#957-969) should be declared external
+Market.buyBunny (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#985-1043) should be declared external
+Market.ownerOf (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol) should be declared external
+Market.buyAdvert (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol) should be declared external
+Market.noAdvert (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol) should be declared external
+Market.getMoney (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol:
+	- pragma solidity^0.4.4 (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#9-15): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_add' of Ownable.transferMoney (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#95-97) is not in mixedCase
+Parameter '_add' of Ownable.transferOwner (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#111-115) is not in mixedCase
+Parameter '_rangePrice' of Market.setRangePrice (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#645-647) is not in mixedCase
+Parameter '_minTimeBank' of Market.setMinTimeBank (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#657-659) is not in mixedCase
+Parameter '_coefficientTimeStep' of Market.setCoefficientTimeStep (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#671-673) is not in mixedCase
+Parameter '_commission' of Market.setPercentCommission (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#687) is not in mixedCase
+Parameter '_percentBank' of Market.setPercentBank (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#701) is not in mixedCase
+Parameter '_minPrice' of Market.setMinPrice (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#711) is not in mixedCase
+Parameter '_stepTimeBank' of Market.setStepTime (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#725) is not in mixedCase
+Parameter '_pubAddress' of Market.transferContract (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#753) is not in mixedCase
+Parameter '_bunnyid' of Market.currentPrice (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#785-789) is not in mixedCase
+Parameter '_bunnyId' of Market.startMarket (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#829-830) is not in mixedCase
+Parameter '_money' of Market.startMarket (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#831) is not in mixedCase
+Parameter '_bunnyId' of Market.stopMarket (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#877) is not in mixedCase
+Parameter '_bunnyId' of Market.timeBunny (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#929-931) is not in mixedCase
+Parameter '_bunnyId' of Market.transferFromBunny (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#957-959) is not in mixedCase
+Parameter '_bunnyId' of Market.buyBunny (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#989) is not in mixedCase
+Parameter '_bunnyId' of Market.sendMoneyMother (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#1045) is not in mixedCase
+Parameter '_to' of Market.sendMoney (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#1103-1107) is not in mixedCase
+Parameter '_money' of Market.sendMoney (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#1107-1109) is not in mixedCase
+Parameter '_money' of Market.addBank (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#1193) is not in mixedCase
+Parameter '_bunnyId' of Market.ownerOf (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol) is not in mixedCase
+Parameter '_text' of Market.buyAdvert (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol) is not in mixedCase
+Parameter '_value' of Market.getMoney (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol) is not in mixedCase
+Variable 'Market.commission_mom' (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#477-484) is not in mixedCase
+Variable 'Market.added_to_the_bank' (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#493-495) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+Market.sec (/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol#511) is never used in Market
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0x877fc4cf32fe40cd658dc186fa24dc74891f6ad9.sol analyzed (5 contracts), 70 result(s) found

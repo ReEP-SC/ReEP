@@ -1,0 +1,261 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol:
+/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol:581:9: Warning: Invoking events without "emit" prefix is deprecated.
+        DotTokenCreated(curves[endpoint]);
+        ^-------------------------------^
+/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol:695:13: Warning: Invoking events without "emit" prefix is deprecated.
+            Unbonded(endpoint, numDots, msg.sender);
+            ^-------------------------------------^
+/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol:381:5: Warning: No visibility specified. Defaulting to "public". 
+    constructor(
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol:441:5: Warning: No visibility specified. Defaulting to "public". 
+    function close() onlyOwner {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol:453:5: Warning: No visibility specified. Defaulting to "public". 
+    function judge(bytes32 endpoint) {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol:469:5: Warning: No visibility specified. Defaulting to "public". 
+    function settle() {
+    ^ (Relevant source part starts here and spans across multiple lines).
+
+INFO:Detectors:[93m
+SampleContest.reset (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#549-571) uses a dangerous strict equality:
+	- require(bool,string)(reserveToken.balanceOf(address(this)) == 0,funds remain)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Reentrancy in SampleContest.initializeCurve (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#573-613):
+	External calls:
+	- registry = RegistryInterface(coord.getContract(REGISTRY)) (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#589-591)
+	- require(bool,string)(registry.isProviderInitiated(address(this)),Provider not intiialized) (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#591-595)
+	- registry.initiateProviderCurve(endpoint,curve,address(this)) (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#595-599)
+	- curves[endpoint] = newToken(bytes32ToString(endpoint),bytes32ToString(symbol)) (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#599-601)
+	State variables written after the call(s):
+	- curves (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#599-601)
+Reentrancy in SampleContest.reset (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#549-571):
+	External calls:
+	- require(bool,string)(reserveToken.balanceOf(address(this)) == 0,funds remain) (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#564-565)
+	State variables written after the call(s):
+	- status (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#567-571)
+Reentrancy in SampleContest.settle (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#489-539):
+	External calls:
+	- bondage = BondageInterface(coord.getContract(BONDAGE)) (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#499-501)
+	- numWin = bondage.getDotsIssued(address(this),winner) (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#523-525)
+	- winValue = reserveToken.balanceOf(address(this)) / numWin (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#527-533)
+	State variables written after the call(s):
+	- status (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#533-535)
+Reentrancy in SampleContest.unbond (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#663-777):
+	External calls:
+	- bondage = BondageInterface(coord.getContract(BONDAGE)) (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#671-673)
+	- issued = bondage.getDotsIssued(address(this),endpoint) (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#673)
+	- bondage.unbond(address(this),winner,numDots) (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#675-677)
+	- currentCost = CurrentCostInterface(coord.getContract(CURRENT_COST)) (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#677-679)
+	- reserveCost = currentCost._costOfNDots(address(this),endpoint,issued + 1 - numDots,numDots - 1) (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#683-689)
+	State variables written after the call(s):
+	- status (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#705)
+Reentrancy in SampleContest.unbond (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#663-777):
+	External calls:
+	- bondage = BondageInterface(coord.getContract(BONDAGE)) (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#671-673)
+	- issued = bondage.getDotsIssued(address(this),endpoint) (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#673)
+	- bondage.unbond(address(this),winner,numDots) (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#675-677)
+	- currentCost = CurrentCostInterface(coord.getContract(CURRENT_COST)) (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#677-679)
+	- reserveCost = currentCost._costOfNDots(address(this),endpoint,issued + 1 - numDots,numDots - 1) (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#683-689)
+	- reward = (winValue * FactoryTokenInterface(getTokenAddress(winner)).balanceOf(msg.sender)) + reserveCost (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#763-765)
+	- curveToken.burnFrom(msg.sender,numDots) (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#767)
+	- reserveToken.transfer(msg.sender,reward) (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#773)
+	State variables written after the call(s):
+	- redeemed (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#773)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+SampleContest.constructor (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#399-443) does not use the value returned by external calls:
+	-reserveToken.approve(coord.getContract(BONDAGE),~ uint256(0)) (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#421-425)
+	-registry.initiateProvider(providerPubKey,providerTitle) (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#433-435)
+SampleContest.settle (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#489-539) does not use the value returned by external calls:
+	-bondage.unbond(address(this),curves_list[i],dots) (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#517-519)
+SampleContest.initializeCurve (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#573-613) does not use the value returned by external calls:
+	-registry.initiateProviderCurve(endpoint,curve,address(this)) (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#595-599)
+SampleContest.bond (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#615-659) does not use the value returned by external calls:
+	-reserveToken.approve(address(bondage),numReserve) (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#645-651)
+	-bondage.bond(address(this),endpoint,numDots) (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#651-655)
+	-FactoryTokenInterface(curves[endpoint]).mint(msg.sender,numDots) (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#655-657)
+SampleContest.unbond (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#663-777) does not use the value returned by external calls:
+	-bondage.unbond(address(this),winner,numDots) (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#675-677)
+	-bondage.unbond(address(this),endpoint,numDots) (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#713-715)
+	-reserveToken.transfer(msg.sender,reward) (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#773)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+SampleContest.settle has external calls inside a loop:
+	- dots = bondage.getDotsIssued(address(this),curves_list[i]) (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#507-509)
+SampleContest.settle has external calls inside a loop:
+	- bondage.unbond(address(this),curves_list[i],dots) (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#517-519)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in SampleContest.constructor (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#399-443):
+	External calls:
+	- reserveToken = FactoryTokenInterface(coord.getContract(ZAP_TOKEN)) (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#407-411)
+	- reserveToken.approve(coord.getContract(BONDAGE),~ uint256(0)) (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#421-425)
+	State variables written after the call(s):
+	- tokenFactory (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#427)
+Reentrancy in SampleContest.constructor (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#399-443):
+	External calls:
+	- reserveToken = FactoryTokenInterface(coord.getContract(ZAP_TOKEN)) (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#407-411)
+	- reserveToken.approve(coord.getContract(BONDAGE),~ uint256(0)) (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#421-425)
+	- registry = RegistryInterface(coord.getContract(REGISTRY)) (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#427-431)
+	- registry.initiateProvider(providerPubKey,providerTitle) (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#433-435)
+	State variables written after the call(s):
+	- status (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#436-441)
+Reentrancy in SampleContest.initializeCurve (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#573-613):
+	External calls:
+	- registry = RegistryInterface(coord.getContract(REGISTRY)) (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#589-591)
+	- require(bool,string)(registry.isProviderInitiated(address(this)),Provider not intiialized) (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#591-595)
+	- registry.initiateProviderCurve(endpoint,curve,address(this)) (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#595-599)
+	- curves[endpoint] = newToken(bytes32ToString(endpoint),bytes32ToString(symbol)) (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#599-601)
+	State variables written after the call(s):
+	- curves_list (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#605)
+Reentrancy in SampleContest.reset (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#549-571):
+	External calls:
+	- require(bool,string)(reserveToken.balanceOf(address(this)) == 0,funds remain) (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#564-565)
+	State variables written after the call(s):
+	- curves_list (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#567)
+	- redeemed_list (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#567)
+Reentrancy in SampleContest.settle (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#489-539):
+	External calls:
+	- bondage = BondageInterface(coord.getContract(BONDAGE)) (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#499-501)
+	- numWin = bondage.getDotsIssued(address(this),winner) (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#523-525)
+	- winValue = reserveToken.balanceOf(address(this)) / numWin (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#527-533)
+	State variables written after the call(s):
+	- winValue (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#527-533)
+Reentrancy in SampleContest.unbond (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#663-777):
+	External calls:
+	- bondage = BondageInterface(coord.getContract(BONDAGE)) (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#671-673)
+	- issued = bondage.getDotsIssued(address(this),endpoint) (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#673)
+	- bondage.unbond(address(this),winner,numDots) (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#675-677)
+	- currentCost = CurrentCostInterface(coord.getContract(CURRENT_COST)) (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#677-679)
+	State variables written after the call(s):
+	- currentCost (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#677-679)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#47-61) should be declared external
+FactoryTokenInterface.balanceOf (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#75) should be declared external
+FactoryTokenInterface.transfer (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#77) should be declared external
+FactoryTokenInterface.transferFrom (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#77-79) should be declared external
+FactoryTokenInterface.approve (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#81) should be declared external
+FactoryTokenInterface.allowance (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#81-85) should be declared external
+FactoryTokenInterface.mint (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#85-91) should be declared external
+FactoryTokenInterface.burnFrom (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#91-95) should be declared external
+TokenFactoryInterface.create (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#109-119) should be declared external
+ZapCoordinatorInterface.getContractName (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#127-129) should be declared external
+ZapCoordinatorInterface.getContract (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#134-139) should be declared external
+BondageInterface.currentCostOfDot (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#161-163) should be declared external
+BondageInterface.getDotsIssued (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#165) should be declared external
+BondageInterface.getBoundDots (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#167-173) should be declared external
+BondageInterface.getZapBound (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#173-177) should be declared external
+BondageInterface.dotLimit (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#177-183) should be declared external
+CurrentCostInterface._currentCostOfDot (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#187-193) should be declared external
+CurrentCostInterface._dotLimit (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#193-197) should be declared external
+CurrentCostInterface._costOfNDots (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#201-203) should be declared external
+RegistryInterface.initiateProvider (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#207-209) should be declared external
+RegistryInterface.initiateProviderCurve (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#209-211) should be declared external
+RegistryInterface.setEndpointParams (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#211-213) should be declared external
+RegistryInterface.getEndpointParams (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#213-217) should be declared external
+RegistryInterface.getProviderPublicKey (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#217-219) should be declared external
+RegistryInterface.getProviderTitle (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#219-221) should be declared external
+RegistryInterface.setProviderParameter (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#221-223) should be declared external
+RegistryInterface.setProviderTitle (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#223-225) should be declared external
+RegistryInterface.clearEndpoint (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#225) should be declared external
+RegistryInterface.getProviderParameter (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#225-227) should be declared external
+RegistryInterface.getAllProviderParams (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#227-229) should be declared external
+RegistryInterface.getProviderCurveLength (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#229-233) should be declared external
+RegistryInterface.getProviderCurve (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#233-235) should be declared external
+RegistryInterface.isProviderInitiated (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#235-239) should be declared external
+RegistryInterface.getProviderEndpoints (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#247-249) should be declared external
+RegistryInterface.getEndpointBroker (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#249-253) should be declared external
+SampleContest.initializeContest (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#443-469) should be declared external
+SampleContest.close (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#469-476) should be declared external
+SampleContest.judge (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#477-489) should be declared external
+SampleContest.settle (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#489-539) should be declared external
+SampleContest.reset (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#549-571) should be declared external
+SampleContest.initializeCurve (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#573-613) should be declared external
+SampleContest.bond (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#615-659) should be declared external
+SampleContest.unbond (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#663-777) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '' of BondageInterface.bond (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#149) is not in mixedCase
+Parameter '_scope_0' of BondageInterface.bond (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#149) is not in mixedCase
+Parameter '_scope_1' of BondageInterface.bond (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#149) is not in mixedCase
+Parameter '' of BondageInterface.unbond (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#151) is not in mixedCase
+Parameter '_scope_0' of BondageInterface.unbond (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#151) is not in mixedCase
+Parameter '_scope_1' of BondageInterface.unbond (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#151) is not in mixedCase
+Parameter '' of BondageInterface.delegateBond (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#151-153) is not in mixedCase
+Parameter '_scope_0' of BondageInterface.delegateBond (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#153) is not in mixedCase
+Parameter '_scope_1' of BondageInterface.delegateBond (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#153) is not in mixedCase
+Parameter '_scope_2' of BondageInterface.delegateBond (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#153) is not in mixedCase
+Parameter '' of BondageInterface.escrowDots (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#155) is not in mixedCase
+Parameter '_scope_0' of BondageInterface.escrowDots (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#155) is not in mixedCase
+Parameter '_scope_1' of BondageInterface.escrowDots (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#155) is not in mixedCase
+Parameter '_scope_2' of BondageInterface.escrowDots (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#155) is not in mixedCase
+Parameter '' of BondageInterface.releaseDots (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#155-157) is not in mixedCase
+Parameter '_scope_0' of BondageInterface.releaseDots (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#157) is not in mixedCase
+Parameter '_scope_1' of BondageInterface.releaseDots (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#157) is not in mixedCase
+Parameter '_scope_2' of BondageInterface.releaseDots (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#157) is not in mixedCase
+Parameter '' of BondageInterface.returnDots (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#157-159) is not in mixedCase
+Parameter '_scope_0' of BondageInterface.returnDots (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#159) is not in mixedCase
+Parameter '_scope_1' of BondageInterface.returnDots (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#159) is not in mixedCase
+Parameter '_scope_2' of BondageInterface.returnDots (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#159) is not in mixedCase
+Parameter '' of BondageInterface.calcZapForDots (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#161) is not in mixedCase
+Parameter '_scope_0' of BondageInterface.calcZapForDots (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#161) is not in mixedCase
+Parameter '_scope_1' of BondageInterface.calcZapForDots (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#161) is not in mixedCase
+Parameter '' of BondageInterface.currentCostOfDot (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#163) is not in mixedCase
+Parameter '_scope_0' of BondageInterface.currentCostOfDot (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#163) is not in mixedCase
+Parameter '_scope_1' of BondageInterface.currentCostOfDot (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#163) is not in mixedCase
+Parameter '' of BondageInterface.getDotsIssued (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#165) is not in mixedCase
+Parameter '_scope_0' of BondageInterface.getDotsIssued (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#165) is not in mixedCase
+Parameter '' of BondageInterface.getBoundDots (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#167) is not in mixedCase
+Parameter '_scope_0' of BondageInterface.getBoundDots (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#167) is not in mixedCase
+Parameter '_scope_1' of BondageInterface.getBoundDots (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#167) is not in mixedCase
+Parameter '' of BondageInterface.getZapBound (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#173) is not in mixedCase
+Parameter '_scope_0' of BondageInterface.getZapBound (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#173) is not in mixedCase
+Parameter '' of BondageInterface.dotLimit (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#181) is not in mixedCase
+Parameter '_scope_0' of BondageInterface.dotLimit (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#181) is not in mixedCase
+Function 'CurrentCostInterface._currentCostOfDot' (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#187-193) is not in mixedCase
+Parameter '' of CurrentCostInterface._currentCostOfDot (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#187) is not in mixedCase
+Parameter '_scope_0' of CurrentCostInterface._currentCostOfDot (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#187) is not in mixedCase
+Parameter '_scope_1' of CurrentCostInterface._currentCostOfDot (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#187) is not in mixedCase
+Function 'CurrentCostInterface._dotLimit' (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#193-197) is not in mixedCase
+Parameter '' of CurrentCostInterface._dotLimit (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#193) is not in mixedCase
+Parameter '_scope_0' of CurrentCostInterface._dotLimit (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#193) is not in mixedCase
+Function 'CurrentCostInterface._costOfNDots' (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#201-203) is not in mixedCase
+Parameter '' of CurrentCostInterface._costOfNDots (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#201-203) is not in mixedCase
+Parameter '_scope_0' of CurrentCostInterface._costOfNDots (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#203) is not in mixedCase
+Parameter '_scope_1' of CurrentCostInterface._costOfNDots (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#203) is not in mixedCase
+Parameter '_scope_2' of CurrentCostInterface._costOfNDots (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#203) is not in mixedCase
+Parameter '' of RegistryInterface.initiateProvider (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#209) is not in mixedCase
+Parameter '_scope_0' of RegistryInterface.initiateProvider (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#209) is not in mixedCase
+Parameter '' of RegistryInterface.initiateProviderCurve (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#211) is not in mixedCase
+Parameter '_scope_0' of RegistryInterface.initiateProviderCurve (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#211) is not in mixedCase
+Parameter '_scope_1' of RegistryInterface.initiateProviderCurve (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#211) is not in mixedCase
+Parameter '' of RegistryInterface.setEndpointParams (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#213) is not in mixedCase
+Parameter '_scope_0' of RegistryInterface.setEndpointParams (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#213) is not in mixedCase
+Parameter '' of RegistryInterface.getEndpointParams (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#215) is not in mixedCase
+Parameter '_scope_0' of RegistryInterface.getEndpointParams (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#215) is not in mixedCase
+Parameter '' of RegistryInterface.getProviderPublicKey (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#217) is not in mixedCase
+Parameter '' of RegistryInterface.getProviderTitle (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#221) is not in mixedCase
+Parameter '' of RegistryInterface.setProviderParameter (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#223) is not in mixedCase
+Parameter '_scope_0' of RegistryInterface.setProviderParameter (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#223) is not in mixedCase
+Parameter '' of RegistryInterface.setProviderTitle (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#223-225) is not in mixedCase
+Parameter '' of RegistryInterface.clearEndpoint (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#225) is not in mixedCase
+Parameter '' of RegistryInterface.getProviderParameter (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#227) is not in mixedCase
+Parameter '_scope_0' of RegistryInterface.getProviderParameter (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#227) is not in mixedCase
+Parameter '' of RegistryInterface.getAllProviderParams (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#229) is not in mixedCase
+Parameter '' of RegistryInterface.getProviderCurveLength (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#231) is not in mixedCase
+Parameter '_scope_0' of RegistryInterface.getProviderCurveLength (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#231) is not in mixedCase
+Parameter '' of RegistryInterface.getProviderCurve (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#233) is not in mixedCase
+Parameter '_scope_0' of RegistryInterface.getProviderCurve (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#233) is not in mixedCase
+Parameter '' of RegistryInterface.isProviderInitiated (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#235) is not in mixedCase
+Parameter '' of RegistryInterface.getProviderEndpoints (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#247) is not in mixedCase
+Parameter '' of RegistryInterface.getEndpointBroker (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#251) is not in mixedCase
+Parameter '_scope_0' of RegistryInterface.getEndpointBroker (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#251) is not in mixedCase
+Parameter '_ttl' of SampleContest.initializeContest (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#449-453) is not in mixedCase
+Variable 'SampleContest.curves_list' (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#365) is not in mixedCase
+Variable 'SampleContest.redeemed_list' (/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol#373-375) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x3d98e87f01bc2f5ed1ed7b6e629ca4e800ef6a1e.sol analyzed (8 contracts), 140 result(s) found

@@ -1,0 +1,58 @@
+INFO:Detectors:[93m
+Contract locking ether found in /sb/0xafb7ae966a9a7801beace4a7d5bbee91d860f616.sol:
+	Contract LockableToken has payable functions:
+	 - approveAndCall (/sb/0xafb7ae966a9a7801beace4a7d5bbee91d860f616.sol#61-63)
+	 - transferAndCall (/sb/0xafb7ae966a9a7801beace4a7d5bbee91d860f616.sol#63-65)
+	 - transferFromAndCall (/sb/0xafb7ae966a9a7801beace4a7d5bbee91d860f616.sol#65-73)
+	But does not have a function to withdraw the ether
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#contracts-that-lock-ether[0m
+INFO:Detectors:[93m
+Token.withdrawToken (/sb/0xafb7ae966a9a7801beace4a7d5bbee91d860f616.sol#151-159) does not use the value returned by external calls:
+	-token.transfer(owner,tokenBalance()) (/sb/0xafb7ae966a9a7801beace4a7d5bbee91d860f616.sol#155-159)
+Token.buyTokens (/sb/0xafb7ae966a9a7801beace4a7d5bbee91d860f616.sol#161-173) does not use the value returned by external calls:
+	-token.transfer(_buyer,tokens) (/sb/0xafb7ae966a9a7801beace4a7d5bbee91d860f616.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+LockableToken.allowance.owner (local variable @ /sb/0xafb7ae966a9a7801beace4a7d5bbee91d860f616.sol#53-55) shadows:
+	- Ownable.owner (state variable @ /sb/0xafb7ae966a9a7801beace4a7d5bbee91d860f616.sol#13-17)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+Reentrancy in Token.buyTokens (/sb/0xafb7ae966a9a7801beace4a7d5bbee91d860f616.sol#161-173):
+	External calls:
+	- require(bool,string)(tokenBalance() >= tokens,Not enough tokens for sale) (/sb/0xafb7ae966a9a7801beace4a7d5bbee91d860f616.sol#169-173)
+	- token.transfer(_buyer,tokens) (/sb/0xafb7ae966a9a7801beace4a7d5bbee91d860f616.sol)
+	State variables written after the call(s):
+	- SellAmount (/sb/0xafb7ae966a9a7801beace4a7d5bbee91d860f616.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0xafb7ae966a9a7801beace4a7d5bbee91d860f616.sol#35-43) should be declared external
+LockableToken.totalSupply (/sb/0xafb7ae966a9a7801beace4a7d5bbee91d860f616.sol#45-47) should be declared external
+LockableToken.balanceOf (/sb/0xafb7ae966a9a7801beace4a7d5bbee91d860f616.sol#47-49) should be declared external
+LockableToken.transfer (/sb/0xafb7ae966a9a7801beace4a7d5bbee91d860f616.sol#49-51) should be declared external
+LockableToken.allowance (/sb/0xafb7ae966a9a7801beace4a7d5bbee91d860f616.sol#53-55) should be declared external
+LockableToken.transferFrom (/sb/0xafb7ae966a9a7801beace4a7d5bbee91d860f616.sol#55-57) should be declared external
+LockableToken.approve (/sb/0xafb7ae966a9a7801beace4a7d5bbee91d860f616.sol#57-59) should be declared external
+LockableToken.approveAndCall (/sb/0xafb7ae966a9a7801beace4a7d5bbee91d860f616.sol#61-63) should be declared external
+LockableToken.transferAndCall (/sb/0xafb7ae966a9a7801beace4a7d5bbee91d860f616.sol#63-65) should be declared external
+LockableToken.transferFromAndCall (/sb/0xafb7ae966a9a7801beace4a7d5bbee91d860f616.sol#65-73) should be declared external
+Token.fallback (/sb/0xafb7ae966a9a7801beace4a7d5bbee91d860f616.sol#97-99) should be declared external
+Token.tokenDetail (/sb/0xafb7ae966a9a7801beace4a7d5bbee91d860f616.sol#105-113) should be declared external
+Token.tokenPrice (/sb/0xafb7ae966a9a7801beace4a7d5bbee91d860f616.sol#113-115) should be declared external
+Token.tokenAddress (/sb/0xafb7ae966a9a7801beace4a7d5bbee91d860f616.sol#115-133) should be declared external
+Token.withdrawEther (/sb/0xafb7ae966a9a7801beace4a7d5bbee91d860f616.sol#137-151) should be declared external
+Token.withdrawToken (/sb/0xafb7ae966a9a7801beace4a7d5bbee91d860f616.sol#151-159) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xafb7ae966a9a7801beace4a7d5bbee91d860f616.sol:
+	- pragma solidity^0.4.0 (/sb/0xafb7ae966a9a7801beace4a7d5bbee91d860f616.sol#9-11): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_detail' of Token.tokenDetail (/sb/0xafb7ae966a9a7801beace4a7d5bbee91d860f616.sol#105) is not in mixedCase
+Parameter '_price' of Token.tokenPrice (/sb/0xafb7ae966a9a7801beace4a7d5bbee91d860f616.sol#113) is not in mixedCase
+Parameter '_token' of Token.tokenAddress (/sb/0xafb7ae966a9a7801beace4a7d5bbee91d860f616.sol#116-117) is not in mixedCase
+Parameter '_buyer' of Token.buyTokens (/sb/0xafb7ae966a9a7801beace4a7d5bbee91d860f616.sol#161) is not in mixedCase
+Variable 'Token.Detail' (/sb/0xafb7ae966a9a7801beace4a7d5bbee91d860f616.sol#79-83) is not in mixedCase
+Variable 'Token.SellAmount' (/sb/0xafb7ae966a9a7801beace4a7d5bbee91d860f616.sol#83) is not in mixedCase
+Variable 'Token.WeiRatio' (/sb/0xafb7ae966a9a7801beace4a7d5bbee91d860f616.sol#85) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xafb7ae966a9a7801beace4a7d5bbee91d860f616.sol analyzed (3 contracts), 29 result(s) found

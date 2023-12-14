@@ -1,0 +1,321 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol:
+/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol:85:48: Warning: This declaration shadows an existing declaration.
+    function decimals() external view returns (uint8 decimals);
+                                               ^------------^
+/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol:85:5: The shadowed declaration is here:
+    function decimals() external view returns (uint8 decimals);
+    ^---------------------------------------------------------^
+/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol:1801:9: Warning: Unused local variable.
+        bytes32 lockhash;
+        ^--------------^
+/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol:2785:5: Warning: Function state mutability can be restricted to view
+    function isAllowedToMonitor(
+    ^ (Relevant source part starts here and spans across multiple lines).
+
+INFO:Detectors:[93m
+ECVerify.ecverify (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#10-50) is declared view but contains assembly code
+Utils.contractExists (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#109-120) is declared view but contains assembly code
+TokenNetwork.getLockedAmountFromLock (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#1871-1905) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+TokenNetwork.isOpen (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#382-384) uses a dangerous strict equality:
+	- require(bool)(channels[channel_identifier].state == ChannelState.Opened)
+	- require(bool)(channels[channel_identifier].state == ChannelState.Opened)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Reentrancy in MonitoringService.claimReward (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2931-2976):
+	External calls:
+	- (settle_block_number,channel_state) = token_network.getChannelInfo(channel_identifier,closing_participant,non_closing_participant) (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2941-2946)
+	- require(bool,string)(user_deposit.transfer(reward.reward_sender_address,reward.monitoring_service_address,reward.reward_amount),UDC did not transfer) (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2973-2975)
+	State variables written after the call(s):
+	- rewards (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol)
+Reentrancy in ServiceRegistry.constructor (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2273-2300):
+	External calls:
+	- require(bool,string)(token.totalSupply() > 0,total supply zero) (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2295)
+	State variables written after the call(s):
+	- min_price (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2298-2300)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+participant1_settlement in TokenNetwork.getSettleTransferAmounts (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#1526-1527) is a local variable never initialiazed
+participant2_settlement in TokenNetwork.getSettleTransferAmounts (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#1527) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[92m
+Token.decimals.decimals (local variable @ /sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#89) shadows:
+	- Token.decimals (function @ /sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#89)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+Reentrancy in TokenNetwork.constructor (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#406-441):
+	External calls:
+	- require(bool)(token.totalSupply() > 0) (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#438)
+	State variables written after the call(s):
+	- channel_participant_deposit_limit (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#439-440)
+	- deprecation_executor (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#438-439)
+	- token_network_deposit_limit (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#441)
+Reentrancy in ServiceRegistry.constructor (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2273-2300):
+	External calls:
+	- require(bool,string)(token.totalSupply() > 0,total supply zero) (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2295)
+	State variables written after the call(s):
+	- controller (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2296)
+	- decay_constant (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2298-2300)
+	- price_bump_denominator (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2298-2300)
+	- price_bump_numerator (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2298-2300)
+	- registration_duration (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2298-2300)
+	- set_price (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2297)
+	- set_price (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2298-2300)
+	- set_price_at (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2298)
+	- set_price_at (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2298-2300)
+Reentrancy in UserDeposit.constructor (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2438-2454):
+	External calls:
+	- require(bool,string)(token.totalSupply() > 0,token has no total supply) (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2446-2447)
+	State variables written after the call(s):
+	- whole_balance_limit (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2451-2454)
+Reentrancy in TokenNetwork.openChannel (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#457-497):
+	External calls:
+	- require(bool)(token.balanceOf(address(this)) < token_network_deposit_limit) (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#465-466)
+	State variables written after the call(s):
+	- channel_counter (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#468-470)
+	- channels (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#492-493)
+	- channels (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#493-494)
+	- participants_hash_to_channel_identifier (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#476-477)
+Reentrancy in TokenNetwork.unlock (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#1028-1099):
+	External calls:
+	- (computed_locksroot,unlocked_amount) = getHashAndUnlockedAmount(locks) (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#1051-1052)
+	State variables written after the call(s):
+	- unlock_identifier_to_unlock_data (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#1085-1086)
+Reentrancy in MonitoringService.updateReward (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2721-2777):
+	External calls:
+	- token_network_token = address(token_network.token()) (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2732-2736)
+	- require(bool,string)(token_network_registry.token_to_token_networks(token_network_token) == address(token_network),Unknown TokenNetwork) (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2736-2738)
+	- channel_identifier = token_network.getChannelIdentifier(closing_participant,non_closing_participant) (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2739-2741)
+	- raiden_node_address = recoverAddressFromRewardProof(token_network.chain_id(),token_network_address,non_closing_participant,non_closing_signature,reward_amount,reward_proof_signature) (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2742-2751)
+	State variables written after the call(s):
+	- rewards (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2767-2777)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+ECVerify.ecverify uses assembly (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#10-50)
+	- /sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#25-34
+Utils.contractExists uses assembly (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#109-120)
+	- /sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#118-119
+TokenNetwork.getLockedAmountFromLock uses assembly (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#1871-1905)
+	- /sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#1887-1900
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+SecretRegistry.registerSecretBatch (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#148-157) should be declared external
+SecretRegistry.getSecretRevealBlockHeight (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#164-169) should be declared external
+TokenNetwork.deprecate (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#442-444) should be declared external
+TokenNetwork.openChannel (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#457-497) should be declared external
+TokenNetwork.setTotalDeposit (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#515-562) should be declared external
+TokenNetwork.closeChannel (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#690-746) should be declared external
+TokenNetwork.settleChannel (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#880-1010) should be declared external
+TokenNetwork.unlock (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#1028-1099) should be declared external
+ServiceRegistryConfigurableParameters.setDeprecationSwitch (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2094-2097) should be declared external
+ServiceRegistryConfigurableParameters.changeParameters (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2097-2110) should be declared external
+ServiceRegistry.deposit (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2310-2349) should be declared external
+ServiceRegistry.setURL (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2352-2359) should be declared external
+ServiceRegistry.everMadeDepositsLen (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2365-2371) should be declared external
+MonitoringService.monitor (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2799-2853) should be declared external
+MonitoringService.claimReward (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2931-2976) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol:
+	- pragma solidity0.5.4 (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#5-8): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter 'contract_address' of Utils.contractExists (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#110) is not in mixedCase
+Variable 'SecretRegistry.secrethash_to_block' (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#125-127) is not in mixedCase
+Parameter '_token_address' of TokenNetwork. (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#407) is not in mixedCase
+Parameter '_secret_registry' of TokenNetwork. (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#407-408) is not in mixedCase
+Parameter '_chain_id' of TokenNetwork. (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#408) is not in mixedCase
+Parameter '_settlement_timeout_min' of TokenNetwork. (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#409-410) is not in mixedCase
+Parameter '_settlement_timeout_max' of TokenNetwork. (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#410) is not in mixedCase
+Parameter '_deprecation_executor' of TokenNetwork. (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#411) is not in mixedCase
+Parameter '_channel_participant_deposit_limit' of TokenNetwork. (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#411-412) is not in mixedCase
+Parameter '_token_network_deposit_limit' of TokenNetwork. (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#412-413) is not in mixedCase
+Parameter 'settle_timeout' of TokenNetwork.openChannel (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#458-459) is not in mixedCase
+Parameter 'channel_identifier' of TokenNetwork.setTotalDeposit (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#515-516) is not in mixedCase
+Parameter 'total_deposit' of TokenNetwork.setTotalDeposit (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#516) is not in mixedCase
+Parameter 'channel_identifier' of TokenNetwork.setTotalWithdraw (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#585) is not in mixedCase
+Parameter 'total_withdraw' of TokenNetwork.setTotalWithdraw (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#586) is not in mixedCase
+Parameter 'expiration_block' of TokenNetwork.setTotalWithdraw (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#586-587) is not in mixedCase
+Parameter 'participant_signature' of TokenNetwork.setTotalWithdraw (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#587-589) is not in mixedCase
+Parameter 'partner_signature' of TokenNetwork.setTotalWithdraw (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#589-590) is not in mixedCase
+Parameter 'channel_identifier' of TokenNetwork.closeChannel (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#690-691) is not in mixedCase
+Parameter 'non_closing_participant' of TokenNetwork.closeChannel (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#691) is not in mixedCase
+Parameter 'closing_participant' of TokenNetwork.closeChannel (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#693) is not in mixedCase
+Parameter 'balance_hash' of TokenNetwork.closeChannel (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#694) is not in mixedCase
+Parameter 'additional_hash' of TokenNetwork.closeChannel (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#696) is not in mixedCase
+Parameter 'non_closing_signature' of TokenNetwork.closeChannel (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#696-697) is not in mixedCase
+Parameter 'closing_signature' of TokenNetwork.closeChannel (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#697) is not in mixedCase
+Parameter 'channel_identifier' of TokenNetwork.updateNonClosingBalanceProof (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#776) is not in mixedCase
+Parameter 'closing_participant' of TokenNetwork.updateNonClosingBalanceProof (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#776-778) is not in mixedCase
+Parameter 'non_closing_participant' of TokenNetwork.updateNonClosingBalanceProof (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#778) is not in mixedCase
+Parameter 'balance_hash' of TokenNetwork.updateNonClosingBalanceProof (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#780-781) is not in mixedCase
+Parameter 'additional_hash' of TokenNetwork.updateNonClosingBalanceProof (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#781) is not in mixedCase
+Parameter 'closing_signature' of TokenNetwork.updateNonClosingBalanceProof (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#782) is not in mixedCase
+Parameter 'non_closing_signature' of TokenNetwork.updateNonClosingBalanceProof (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#782-783) is not in mixedCase
+Parameter 'channel_identifier' of TokenNetwork.settleChannel (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#880) is not in mixedCase
+Parameter 'participant1_transferred_amount' of TokenNetwork.settleChannel (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#881) is not in mixedCase
+Parameter 'participant1_locked_amount' of TokenNetwork.settleChannel (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#882) is not in mixedCase
+Parameter 'participant1_locksroot' of TokenNetwork.settleChannel (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#882) is not in mixedCase
+Parameter 'participant2_transferred_amount' of TokenNetwork.settleChannel (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#883-884) is not in mixedCase
+Parameter 'participant2_locked_amount' of TokenNetwork.settleChannel (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#884) is not in mixedCase
+Parameter 'participant2_locksroot' of TokenNetwork.settleChannel (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#884-885) is not in mixedCase
+Parameter 'channel_identifier' of TokenNetwork.unlock (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#1028-1030) is not in mixedCase
+Parameter 'channel_identifier' of TokenNetwork.getChannelInfo (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#1239) is not in mixedCase
+Parameter 'channel_identifier' of TokenNetwork.getChannelParticipantInfo (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#1300) is not in mixedCase
+Parameter 'channel_identifier' of TokenNetwork.getUnlockIdentifier (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#1365-1367) is not in mixedCase
+Parameter 'balance_hash' of TokenNetwork.updateBalanceProofData (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#1377-1378) is not in mixedCase
+Parameter 'channel_identifier' of TokenNetwork.storeUnlockData (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#1393-1394) is not in mixedCase
+Parameter 'locked_amount' of TokenNetwork.storeUnlockData (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#1395-1396) is not in mixedCase
+Parameter 'participant1_state' of TokenNetwork.getChannelAvailableDeposit (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#1408) is not in mixedCase
+Parameter 'participant2_state' of TokenNetwork.getChannelAvailableDeposit (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#1409-1410) is not in mixedCase
+Parameter 'participant1_state' of TokenNetwork.getSettleTransferAmounts (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#1427) is not in mixedCase
+Parameter 'participant1_transferred_amount' of TokenNetwork.getSettleTransferAmounts (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#1427-1428) is not in mixedCase
+Parameter 'participant1_locked_amount' of TokenNetwork.getSettleTransferAmounts (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#1428-1429) is not in mixedCase
+Parameter 'participant2_state' of TokenNetwork.getSettleTransferAmounts (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#1429) is not in mixedCase
+Parameter 'participant2_transferred_amount' of TokenNetwork.getSettleTransferAmounts (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#1429-1430) is not in mixedCase
+Parameter 'participant2_locked_amount' of TokenNetwork.getSettleTransferAmounts (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#1430) is not in mixedCase
+Parameter 'participant1_settlement' of TokenNetwork.getMaxPossibleReceivableAmount (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#1611-1613) is not in mixedCase
+Parameter 'participant2_settlement' of TokenNetwork.getMaxPossibleReceivableAmount (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#1613) is not in mixedCase
+Parameter 'transferred_amount' of TokenNetwork.verifyBalanceHashData (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#1692-1693) is not in mixedCase
+Parameter 'locked_amount' of TokenNetwork.verifyBalanceHashData (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#1693-1694) is not in mixedCase
+Parameter 'channel_identifier' of TokenNetwork.recoverAddressFromBalanceProof (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#1721) is not in mixedCase
+Parameter 'balance_hash' of TokenNetwork.recoverAddressFromBalanceProof (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#1721-1722) is not in mixedCase
+Parameter 'additional_hash' of TokenNetwork.recoverAddressFromBalanceProof (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#1724) is not in mixedCase
+Parameter 'message_type_id' of TokenNetwork.recoverAddressFromBalanceProofCounterSignature (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#1748-1749) is not in mixedCase
+Parameter 'channel_identifier' of TokenNetwork.recoverAddressFromBalanceProofCounterSignature (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#1749-1752) is not in mixedCase
+Parameter 'balance_hash' of TokenNetwork.recoverAddressFromBalanceProofCounterSignature (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#1752) is not in mixedCase
+Parameter 'additional_hash' of TokenNetwork.recoverAddressFromBalanceProofCounterSignature (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#1753-1755) is not in mixedCase
+Parameter 'closing_signature' of TokenNetwork.recoverAddressFromBalanceProofCounterSignature (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#1755-1756) is not in mixedCase
+Parameter 'non_closing_signature' of TokenNetwork.recoverAddressFromBalanceProofCounterSignature (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#1756-1757) is not in mixedCase
+Parameter 'channel_identifier' of TokenNetwork.recoverAddressFromWithdrawMessage (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#1814-1815) is not in mixedCase
+Parameter 'total_withdraw' of TokenNetwork.recoverAddressFromWithdrawMessage (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#1817-1819) is not in mixedCase
+Parameter 'expiration_block' of TokenNetwork.recoverAddressFromWithdrawMessage (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#1819-1820) is not in mixedCase
+Function 'TokenNetwork.failsafe_subtract' (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#1915-1917) is not in mixedCase
+Function 'TokenNetwork.failsafe_addition' (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#1924-1931) is not in mixedCase
+Variable 'TokenNetwork.secret_registry' (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#202-203) is not in mixedCase
+Variable 'TokenNetwork.chain_id' (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#206) is not in mixedCase
+Variable 'TokenNetwork.settlement_timeout_min' (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#206-209) is not in mixedCase
+Variable 'TokenNetwork.settlement_timeout_max' (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#209-210) is not in mixedCase
+Variable 'TokenNetwork.channel_participant_deposit_limit' (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#214-215) is not in mixedCase
+Variable 'TokenNetwork.token_network_deposit_limit' (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#218) is not in mixedCase
+Variable 'TokenNetwork.channel_counter' (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#222) is not in mixedCase
+Constant 'TokenNetwork.signature_prefix' (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#224-225) is not in UPPER_CASE_WITH_UNDERSCORES
+Variable 'TokenNetwork.deprecation_executor' (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#226-227) is not in mixedCase
+Variable 'TokenNetwork.safety_deprecation_switch' (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#227-229) is not in mixedCase
+Variable 'TokenNetwork.participants_hash_to_channel_identifier' (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#235) is not in mixedCase
+Variable 'TokenNetwork.unlock_identifier_to_unlock_data' (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#245-247) is not in mixedCase
+Parameter '_secret_registry_address' of TokenNetworkRegistry. (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#1971-1972) is not in mixedCase
+Parameter '_chain_id' of TokenNetworkRegistry. (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#1972) is not in mixedCase
+Parameter '_settlement_timeout_min' of TokenNetworkRegistry. (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#1973) is not in mixedCase
+Parameter '_settlement_timeout_max' of TokenNetworkRegistry. (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#1974-1976) is not in mixedCase
+Parameter '_max_token_networks' of TokenNetworkRegistry. (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#1976-1978) is not in mixedCase
+Parameter '_token_address' of TokenNetworkRegistry.createERC20TokenNetwork (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2001) is not in mixedCase
+Parameter '_channel_participant_deposit_limit' of TokenNetworkRegistry.createERC20TokenNetwork (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2001-2002) is not in mixedCase
+Parameter '_token_network_deposit_limit' of TokenNetworkRegistry.createERC20TokenNetwork (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2002) is not in mixedCase
+Variable 'TokenNetworkRegistry.secret_registry_address' (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#1935) is not in mixedCase
+Variable 'TokenNetworkRegistry.chain_id' (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#1935-1936) is not in mixedCase
+Variable 'TokenNetworkRegistry.settlement_timeout_min' (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#1936-1937) is not in mixedCase
+Variable 'TokenNetworkRegistry.settlement_timeout_max' (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#1937-1938) is not in mixedCase
+Variable 'TokenNetworkRegistry.max_token_networks' (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#1938) is not in mixedCase
+Variable 'TokenNetworkRegistry.deprecation_executor' (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#1939-1941) is not in mixedCase
+Variable 'TokenNetworkRegistry.token_network_created' (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#1941-1944) is not in mixedCase
+Variable 'TokenNetworkRegistry.token_to_token_networks' (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#1945-1946) is not in mixedCase
+Parameter '_price_bump_numerator' of ServiceRegistryConfigurableParameters.changeParameters (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2098) is not in mixedCase
+Parameter '_price_bump_denominator' of ServiceRegistryConfigurableParameters.changeParameters (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2098-2099) is not in mixedCase
+Parameter '_decay_constant' of ServiceRegistryConfigurableParameters.changeParameters (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2099) is not in mixedCase
+Parameter '_min_price' of ServiceRegistryConfigurableParameters.changeParameters (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2100) is not in mixedCase
+Parameter '_registration_duration' of ServiceRegistryConfigurableParameters.changeParameters (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2101-2103) is not in mixedCase
+Parameter '_price_bump_numerator' of ServiceRegistryConfigurableParameters.changeParametersInternal (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2111) is not in mixedCase
+Parameter '_price_bump_denominator' of ServiceRegistryConfigurableParameters.changeParametersInternal (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2111) is not in mixedCase
+Parameter '_decay_constant' of ServiceRegistryConfigurableParameters.changeParametersInternal (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2112) is not in mixedCase
+Parameter '_min_price' of ServiceRegistryConfigurableParameters.changeParametersInternal (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2113) is not in mixedCase
+Parameter '_registration_duration' of ServiceRegistryConfigurableParameters.changeParametersInternal (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2113-2114) is not in mixedCase
+Parameter '_price_bump_numerator' of ServiceRegistryConfigurableParameters.setPriceBumpParameters (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2126-2127) is not in mixedCase
+Parameter '_price_bump_denominator' of ServiceRegistryConfigurableParameters.setPriceBumpParameters (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2127-2128) is not in mixedCase
+Parameter '_min_price' of ServiceRegistryConfigurableParameters.setMinPrice (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2137-2139) is not in mixedCase
+Parameter '_decay_constant' of ServiceRegistryConfigurableParameters.setDecayConstant (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2148) is not in mixedCase
+Parameter '_registration_duration' of ServiceRegistryConfigurableParameters.setRegistrationDuration (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2154-2155) is not in mixedCase
+Parameter '_set_price' of ServiceRegistryConfigurableParameters.decayedPrice (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2181) is not in mixedCase
+Parameter '_seconds_passed' of ServiceRegistryConfigurableParameters.decayedPrice (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2181) is not in mixedCase
+Variable 'ServiceRegistryConfigurableParameters.set_price' (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2078-2079) is not in mixedCase
+Variable 'ServiceRegistryConfigurableParameters.set_price_at' (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2079-2080) is not in mixedCase
+Variable 'ServiceRegistryConfigurableParameters.decay_constant' (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2083) is not in mixedCase
+Variable 'ServiceRegistryConfigurableParameters.min_price' (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2084) is not in mixedCase
+Variable 'ServiceRegistryConfigurableParameters.price_bump_numerator' (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2086) is not in mixedCase
+Variable 'ServiceRegistryConfigurableParameters.price_bump_denominator' (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2086-2087) is not in mixedCase
+Variable 'ServiceRegistryConfigurableParameters.registration_duration' (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2090-2091) is not in mixedCase
+Parameter '_token' of Deposit. (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2226) is not in mixedCase
+Parameter '_release_at' of Deposit. (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2226) is not in mixedCase
+Parameter '_withdrawer' of Deposit. (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2226-2227) is not in mixedCase
+Parameter '_service_registry' of Deposit. (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2227-2228) is not in mixedCase
+Parameter '_to' of Deposit.withdraw (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2242) is not in mixedCase
+Variable 'Deposit.service_registry' (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2216-2218) is not in mixedCase
+Variable 'Deposit.release_at' (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2221) is not in mixedCase
+Parameter '_token_for_registration' of ServiceRegistry. (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2274) is not in mixedCase
+Parameter '_controller' of ServiceRegistry. (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2275) is not in mixedCase
+Parameter '_initial_price' of ServiceRegistry. (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2275-2277) is not in mixedCase
+Parameter '_price_bump_numerator' of ServiceRegistry. (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2277-2278) is not in mixedCase
+Parameter '_price_bump_denominator' of ServiceRegistry. (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2278) is not in mixedCase
+Parameter '_decay_constant' of ServiceRegistry. (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2279) is not in mixedCase
+Parameter '_min_price' of ServiceRegistry. (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2280) is not in mixedCase
+Parameter '_registration_duration' of ServiceRegistry. (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2280-2282) is not in mixedCase
+Parameter '_limit_amount' of ServiceRegistry.deposit (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2310) is not in mixedCase
+Parameter 'new_url' of ServiceRegistry.setURL (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2352-2353) is not in mixedCase
+Parameter '_address' of ServiceRegistry.hasValidRegistration (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2373) is not in mixedCase
+Variable 'ServiceRegistry.service_valid_till' (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2255) is not in mixedCase
+Variable 'ServiceRegistry.ever_made_deposits' (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2260-2261) is not in mixedCase
+Parameter '_token_address' of UserDeposit. (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2438-2440) is not in mixedCase
+Parameter '_whole_balance_limit' of UserDeposit. (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2440) is not in mixedCase
+Parameter '_msc_address' of UserDeposit.init (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2458) is not in mixedCase
+Parameter '_one_to_n_address' of UserDeposit.init (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2458-2459) is not in mixedCase
+Parameter 'new_total_deposit' of UserDeposit.deposit (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2493-2494) is not in mixedCase
+Constant 'UserDeposit.withdraw_delay' (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2407-2408) is not in UPPER_CASE_WITH_UNDERSCORES
+Variable 'UserDeposit.msc_address' (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2412) is not in mixedCase
+Variable 'UserDeposit.one_to_n_address' (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2412) is not in mixedCase
+Variable 'UserDeposit.total_deposit' (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2416) is not in mixedCase
+Variable 'UserDeposit.withdraw_plans' (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2420-2421) is not in mixedCase
+Variable 'UserDeposit.whole_balance' (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2421-2422) is not in mixedCase
+Variable 'UserDeposit.whole_balance_limit' (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2425) is not in mixedCase
+Parameter '_token_address' of MonitoringService. (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2671-2672) is not in mixedCase
+Parameter '_service_registry_address' of MonitoringService. (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2672) is not in mixedCase
+Parameter '_udc_address' of MonitoringService. (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2672-2673) is not in mixedCase
+Parameter '_token_network_registry_address' of MonitoringService. (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2673-2674) is not in mixedCase
+Parameter 'token_network_address' of MonitoringService.updateReward (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2721) is not in mixedCase
+Parameter 'closing_participant' of MonitoringService.updateReward (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2722-2723) is not in mixedCase
+Parameter 'non_closing_participant' of MonitoringService.updateReward (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2723-2724) is not in mixedCase
+Parameter 'reward_amount' of MonitoringService.updateReward (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2724-2725) is not in mixedCase
+Parameter 'monitoring_service_address' of MonitoringService.updateReward (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2726-2727) is not in mixedCase
+Parameter 'non_closing_signature' of MonitoringService.updateReward (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2727-2728) is not in mixedCase
+Parameter 'reward_proof_signature' of MonitoringService.updateReward (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2729) is not in mixedCase
+Parameter 'closing_participant' of MonitoringService.monitor (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2800) is not in mixedCase
+Parameter 'non_closing_participant' of MonitoringService.monitor (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2800-2802) is not in mixedCase
+Parameter 'balance_hash' of MonitoringService.monitor (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2802) is not in mixedCase
+Parameter 'additional_hash' of MonitoringService.monitor (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2802-2804) is not in mixedCase
+Parameter 'closing_signature' of MonitoringService.monitor (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2804) is not in mixedCase
+Parameter 'non_closing_signature' of MonitoringService.monitor (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2804-2805) is not in mixedCase
+Parameter 'reward_amount' of MonitoringService.monitor (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2805) is not in mixedCase
+Parameter 'token_network_address' of MonitoringService.monitor (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2805-2806) is not in mixedCase
+Parameter 'reward_proof_signature' of MonitoringService.monitor (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2806) is not in mixedCase
+Parameter 'token_network' of MonitoringService.isAllowedToMonitor (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2853-2854) is not in mixedCase
+Parameter 'channel_identifier' of MonitoringService.isAllowedToMonitor (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2854) is not in mixedCase
+Parameter 'closing_participant' of MonitoringService.isAllowedToMonitor (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2854-2855) is not in mixedCase
+Parameter 'non_closing_participant' of MonitoringService.isAllowedToMonitor (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2855) is not in mixedCase
+Parameter 'monitoring_service_address' of MonitoringService.isAllowedToMonitor (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2855-2856) is not in mixedCase
+Parameter 'closed_at_block' of MonitoringService.firstBlockAllowedToMonitor (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2885) is not in mixedCase
+Parameter 'settle_timeout' of MonitoringService.firstBlockAllowedToMonitor (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2885) is not in mixedCase
+Parameter 'monitoring_service_address' of MonitoringService.firstBlockAllowedToMonitor (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2886) is not in mixedCase
+Parameter 'channel_identifier' of MonitoringService.claimReward (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2931-2932) is not in mixedCase
+Parameter 'token_network_address' of MonitoringService.claimReward (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2932) is not in mixedCase
+Parameter 'closing_participant' of MonitoringService.claimReward (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2932) is not in mixedCase
+Parameter 'non_closing_participant' of MonitoringService.claimReward (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2933) is not in mixedCase
+Parameter 'chain_id' of MonitoringService.recoverAddressFromRewardProof (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol) is not in mixedCase
+Parameter 'token_network_address' of MonitoringService.recoverAddressFromRewardProof (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol) is not in mixedCase
+Parameter 'non_closing_participant' of MonitoringService.recoverAddressFromRewardProof (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol) is not in mixedCase
+Parameter 'non_closing_signature' of MonitoringService.recoverAddressFromRewardProof (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol) is not in mixedCase
+Parameter 'reward_amount' of MonitoringService.recoverAddressFromRewardProof (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol) is not in mixedCase
+Variable 'MonitoringService.service_registry' (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2638-2639) is not in mixedCase
+Variable 'MonitoringService.user_deposit' (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2639) is not in mixedCase
+Variable 'MonitoringService.token_network_registry' (/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol#2639-2640) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x86ee1a3c68fd72d4df5b23f930f37531fbe120c1.sol analyzed (11 contracts), 230 result(s) found

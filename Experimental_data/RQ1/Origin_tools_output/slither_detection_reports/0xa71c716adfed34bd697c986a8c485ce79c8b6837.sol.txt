@@ -1,0 +1,93 @@
+INFO:Detectors:[93m
+YearnOptionsV1Manager.getChainId (/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+Reentrancy in YearnOptionsV1Manager.deposit (/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol#528-544):
+	External calls:
+	- IERC20(reserve).transferFrom(msg.sender,address(this),amount) (/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol#530-532)
+	- liquidityBalance() == 0 (/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol#532-538)
+	- _shares = amount.mul(totalSupply).div(liquidityBalance()) (/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol#535-538)
+	State variables written after the call(s):
+	- totalSupply (/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol#541-542)
+Reentrancy in YearnOptionsV1Manager.exercise (/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol#617-629):
+	External calls:
+	- IERC20(_pos.asset).transferFrom(msg.sender,address(this),_pos.amountIn) (/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol#620-622)
+	- IERC20(reserve).transfer(msg.sender,_pos.amountOut) (/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol#622-623)
+	State variables written after the call(s):
+	- positions (/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol#623-627)
+	- positions (/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol#627)
+Reentrancy in YearnOptionsV1Manager.withdraw (/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol#506-515):
+	External calls:
+	- r = liquidityBalance().mul(_shares).div(totalSupply) (/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol#510-511)
+	State variables written after the call(s):
+	- totalSupply (/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol#511-512)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+YearnOptionsV1Manager.inCaseTokensGetStuck (/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol#493-502) does not use the value returned by external calls:
+	-IERC20(token).transfer(governance,IERC20(token).balanceOf(address(this))) (/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol#497-502)
+YearnOptionsV1Manager.withdraw (/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol#506-515) does not use the value returned by external calls:
+	-IERC20(reserve).transfer(msg.sender,r) (/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol#512-514)
+YearnOptionsV1Manager.deposit (/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol#528-544) does not use the value returned by external calls:
+	-IERC20(reserve).transferFrom(msg.sender,address(this),amount) (/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol#530-532)
+YearnOptionsV1Manager.createOption (/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol#595-611) does not use the value returned by external calls:
+	-IERC20(tokenIn).transferFrom(msg.sender,address(this),calculateFee(tokenIn,amountIn,amountOut)) (/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol#604-605)
+YearnOptionsV1Manager.exercise (/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol#617-629) does not use the value returned by external calls:
+	-IERC20(_pos.asset).transferFrom(msg.sender,address(this),_pos.amountIn) (/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol#620-622)
+	-IERC20(reserve).transfer(msg.sender,_pos.amountOut) (/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol#622-623)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in YearnOptionsV1Manager.createOption (/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol#595-611):
+	External calls:
+	- require(bool,string)(liquidityBalance() > reserveInUse,::createOption: insufficient liquidity) (/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol#601-602)
+	- IERC20(tokenIn).transferFrom(msg.sender,address(this),calculateFee(tokenIn,amountIn,amountOut)) (/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol#604-605)
+	State variables written after the call(s):
+	- nextIndex (/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol#610-611)
+	- options (/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol#607-608)
+	- positions (/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol#606-607)
+Reentrancy in YearnOptionsV1Manager.deposit (/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol#528-544):
+	External calls:
+	- IERC20(reserve).transferFrom(msg.sender,address(this),amount) (/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol#530-532)
+	- liquidityBalance() == 0 (/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol#532-538)
+	- _shares = amount.mul(totalSupply).div(liquidityBalance()) (/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol#535-538)
+	State variables written after the call(s):
+	- balances (/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol#541-542)
+Reentrancy in YearnOptionsV1Manager.withdraw (/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol#506-515):
+	External calls:
+	- r = liquidityBalance().mul(_shares).div(totalSupply) (/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol#510-511)
+	State variables written after the call(s):
+	- balances (/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol#511-512)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+YearnOptionsV1Manager.close (/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol#576-587) uses timestamp for comparisons
+	Dangerous comparisons:
+	- _pos.expire > block.timestamp (/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol#582-584)
+YearnOptionsV1Manager.exercise (/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol#617-629) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(_pos.expire < block.timestamp,::exercise: position expired) (/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol#619-620)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+YearnOptionsV1Manager.getChainId uses assembly (/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol)
+	- /sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+YearnOptionsV1Manager.name should be constant (/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol#284-285)
+YearnOptionsV1Manager.symbol should be constant (/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol#287-288)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+YearnOptionsV1Manager.approve (/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol#649-652) should be declared external
+YearnOptionsV1Manager.transfer (/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol#696-698) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol:
+	- pragma solidity^0.6.12 (/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol#6-8): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Struct 'YearnOptionsV1Manager.position' (/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol#330-336) is not in CapWords
+Parameter '_governance' of YearnOptionsV1Manager.setGovernance (/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol#454) is not in mixedCase
+Function 'YearnOptionsV1Manager._mint' (/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol#465-474) is not in mixedCase
+Function 'YearnOptionsV1Manager._burn' (/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol#474-483) is not in mixedCase
+Parameter '_shares' of YearnOptionsV1Manager.withdraw (/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol#509-510) is not in mixedCase
+Function 'YearnOptionsV1Manager._transferTokens' (/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol) is not in mixedCase
+Constant 'YearnOptionsV1Manager.reserve' (/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol#444-447) is not in UPPER_CASE_WITH_UNDERSCORES
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xa71c716adfed34bd697c986a8c485ce79c8b6837.sol analyzed (4 contracts), 26 result(s) found

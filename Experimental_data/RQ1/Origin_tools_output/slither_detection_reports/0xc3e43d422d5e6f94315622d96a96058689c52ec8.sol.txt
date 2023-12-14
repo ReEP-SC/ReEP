@@ -1,0 +1,72 @@
+INFO:Detectors:[93m
+Reentrancy in BitNauticCrowdsaleTokenDistributor.grantAdvisorsTokens (/sb/0xc3e43d422d5e6f94315622d96a96058689c52ec8.sol#170-177):
+	External calls:
+	- token.mint(beneficiary,advisorSupply) (/sb/0xc3e43d422d5e6f94315622d96a96058689c52ec8.sol#174-176)
+	State variables written after the call(s):
+	- advisorSupply (/sb/0xc3e43d422d5e6f94315622d96a96058689c52ec8.sol#176-177)
+Reentrancy in BitNauticCrowdsaleTokenDistributor.grantBountyTokens (/sb/0xc3e43d422d5e6f94315622d96a96058689c52ec8.sol#156-162):
+	External calls:
+	- token.mint(beneficiary,bountySupply) (/sb/0xc3e43d422d5e6f94315622d96a96058689c52ec8.sol#160-162)
+	State variables written after the call(s):
+	- bountySupply (/sb/0xc3e43d422d5e6f94315622d96a96058689c52ec8.sol#162)
+Reentrancy in BitNauticCrowdsaleTokenDistributor.grantContributorTokens (/sb/0xc3e43d422d5e6f94315622d96a96058689c52ec8.sol#138-149):
+	External calls:
+	- require(bool)(crowdsale.creditOf(contributor) > 0) (/sb/0xc3e43d422d5e6f94315622d96a96058689c52ec8.sol#141-142)
+	- require(bool)(whitelist.AMLWhitelisted(contributor)) (/sb/0xc3e43d422d5e6f94315622d96a96058689c52ec8.sol#142-143)
+	- assert(bool)(token.mint(contributor,crowdsale.creditOf(contributor))) (/sb/0xc3e43d422d5e6f94315622d96a96058689c52ec8.sol#148)
+	State variables written after the call(s):
+	- hasClaimedTokens (/sb/0xc3e43d422d5e6f94315622d96a96058689c52ec8.sol#148-149)
+Reentrancy in BitNauticCrowdsaleTokenDistributor.grantFoundersTokens (/sb/0xc3e43d422d5e6f94315622d96a96058689c52ec8.sol#177-185):
+	External calls:
+	- token.mint(beneficiary,founderSupply) (/sb/0xc3e43d422d5e6f94315622d96a96058689c52ec8.sol#181-183)
+	State variables written after the call(s):
+	- founderSupply (/sb/0xc3e43d422d5e6f94315622d96a96058689c52ec8.sol#184)
+Reentrancy in BitNauticCrowdsaleTokenDistributor.grantReserveTokens (/sb/0xc3e43d422d5e6f94315622d96a96058689c52ec8.sol#163-170):
+	External calls:
+	- token.mint(beneficiary,reserveSupply) (/sb/0xc3e43d422d5e6f94315622d96a96058689c52ec8.sol#167-169)
+	State variables written after the call(s):
+	- reserveSupply (/sb/0xc3e43d422d5e6f94315622d96a96058689c52ec8.sol#169)
+Reentrancy in BitNauticCrowdsaleTokenDistributor.grantTeamTokens (/sb/0xc3e43d422d5e6f94315622d96a96058689c52ec8.sol):
+	External calls:
+	- token.mint(beneficiary,teamSupply) (/sb/0xc3e43d422d5e6f94315622d96a96058689c52ec8.sol)
+	State variables written after the call(s):
+	- teamSupply (/sb/0xc3e43d422d5e6f94315622d96a96058689c52ec8.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+BitNauticCrowdsaleTokenDistributor.grantBountyTokens (/sb/0xc3e43d422d5e6f94315622d96a96058689c52ec8.sol#156-162) does not use the value returned by external calls:
+	-token.mint(beneficiary,bountySupply) (/sb/0xc3e43d422d5e6f94315622d96a96058689c52ec8.sol#160-162)
+BitNauticCrowdsaleTokenDistributor.grantReserveTokens (/sb/0xc3e43d422d5e6f94315622d96a96058689c52ec8.sol#163-170) does not use the value returned by external calls:
+	-token.mint(beneficiary,reserveSupply) (/sb/0xc3e43d422d5e6f94315622d96a96058689c52ec8.sol#167-169)
+BitNauticCrowdsaleTokenDistributor.grantAdvisorsTokens (/sb/0xc3e43d422d5e6f94315622d96a96058689c52ec8.sol#170-177) does not use the value returned by external calls:
+	-token.mint(beneficiary,advisorSupply) (/sb/0xc3e43d422d5e6f94315622d96a96058689c52ec8.sol#174-176)
+BitNauticCrowdsaleTokenDistributor.grantFoundersTokens (/sb/0xc3e43d422d5e6f94315622d96a96058689c52ec8.sol#177-185) does not use the value returned by external calls:
+	-token.mint(beneficiary,founderSupply) (/sb/0xc3e43d422d5e6f94315622d96a96058689c52ec8.sol#181-183)
+BitNauticCrowdsaleTokenDistributor.grantTeamTokens (/sb/0xc3e43d422d5e6f94315622d96a96058689c52ec8.sol) does not use the value returned by external calls:
+	-token.mint(beneficiary,teamSupply) (/sb/0xc3e43d422d5e6f94315622d96a96058689c52ec8.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0xc3e43d422d5e6f94315622d96a96058689c52ec8.sol#78-88) should be declared external
+BitNauticCrowdsaleTokenDistributor.privateSale (/sb/0xc3e43d422d5e6f94315622d96a96058689c52ec8.sol#127-131) should be declared external
+BitNauticCrowdsaleTokenDistributor.claimBitNauticTokens (/sb/0xc3e43d422d5e6f94315622d96a96058689c52ec8.sol#135) should be declared external
+BitNauticCrowdsaleTokenDistributor.transferTokenOwnership (/sb/0xc3e43d422d5e6f94315622d96a96058689c52ec8.sol#150-155) should be declared external
+BitNauticCrowdsaleTokenDistributor.grantBountyTokens (/sb/0xc3e43d422d5e6f94315622d96a96058689c52ec8.sol#156-162) should be declared external
+BitNauticCrowdsaleTokenDistributor.grantReserveTokens (/sb/0xc3e43d422d5e6f94315622d96a96058689c52ec8.sol#163-170) should be declared external
+BitNauticCrowdsaleTokenDistributor.grantAdvisorsTokens (/sb/0xc3e43d422d5e6f94315622d96a96058689c52ec8.sol#170-177) should be declared external
+BitNauticCrowdsaleTokenDistributor.grantFoundersTokens (/sb/0xc3e43d422d5e6f94315622d96a96058689c52ec8.sol#177-185) should be declared external
+BitNauticCrowdsaleTokenDistributor.grantTeamTokens (/sb/0xc3e43d422d5e6f94315622d96a96058689c52ec8.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xc3e43d422d5e6f94315622d96a96058689c52ec8.sol:
+	- pragma solidity^0.4.23 (/sb/0xc3e43d422d5e6f94315622d96a96058689c52ec8.sol#1): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'BitNauticWhitelist.AMLWhitelisted' (/sb/0xc3e43d422d5e6f94315622d96a96058689c52ec8.sol#97) is not in mixedCase
+Parameter '' of BitNauticWhitelist.AMLWhitelisted (/sb/0xc3e43d422d5e6f94315622d96a96058689c52ec8.sol#97) is not in mixedCase
+Parameter '' of BitNauticCrowdsale.creditOf (/sb/0xc3e43d422d5e6f94315622d96a96058689c52ec8.sol#100-101) is not in mixedCase
+Parameter '_token' of BitNauticCrowdsaleTokenDistributor. (/sb/0xc3e43d422d5e6f94315622d96a96058689c52ec8.sol#120) is not in mixedCase
+Parameter '_whitelist' of BitNauticCrowdsaleTokenDistributor. (/sb/0xc3e43d422d5e6f94315622d96a96058689c52ec8.sol#120-121) is not in mixedCase
+Parameter '_crowdsale' of BitNauticCrowdsaleTokenDistributor. (/sb/0xc3e43d422d5e6f94315622d96a96058689c52ec8.sol#121-124) is not in mixedCase
+Constant 'BitNauticCrowdsaleTokenDistributor.ICOStartTime' (/sb/0xc3e43d422d5e6f94315622d96a96058689c52ec8.sol#104) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'BitNauticCrowdsaleTokenDistributor.ICOEndTime' (/sb/0xc3e43d422d5e6f94315622d96a96058689c52ec8.sol#106-107) is not in UPPER_CASE_WITH_UNDERSCORES
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xc3e43d422d5e6f94315622d96a96058689c52ec8.sol analyzed (6 contracts), 29 result(s) found

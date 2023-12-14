@@ -1,0 +1,189 @@
+INFO:Detectors:[91m
+UpgradeabilityProxy.constructor (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#1023-1033) uses delegatecall to a input-controlled function id
+	(success) = _logic.delegatecall(_data) (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#1029-1030)
+BaseAdminUpgradeabilityProxy.upgradeToAndCall (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#1135-1141) uses delegatecall to a input-controlled function id
+	(success) = newImplementation.delegatecall(data) (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#1138-1140)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#controlled-delegatecall[0m
+INFO:Detectors:[93m
+Initializable.isConstructor (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#335-356) is declared view but contains assembly code
+OpenZeppelinUpgradesAddress.isContract (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#926-943) is declared view but contains assembly code
+BaseUpgradeabilityProxy._implementation (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#977-985) is declared view but contains assembly code
+BaseAdminUpgradeabilityProxy._admin (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#1142-1143) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+i in Organization.initialize (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#434) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[93m
+OrganizationFactory.createAndAddToDirectory (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#1389-1418) does not use the value returned by external calls:
+	-sd.add(newOrganizationAddress) (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#1407)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+AdminUpgradeabilityProxy.constructor._admin (local variable @ /sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#1191) shadows:
+	- BaseAdminUpgradeabilityProxy._admin (function @ /sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#1142-1143)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+Organization.setInterfaces has external calls inside a loop:
+	- ! this.supportsInterface(interfaceIds[i]) (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#596-600)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in OrganizationFactory.createAndAddToDirectory (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#1389-1418):
+	External calls:
+	- newOrganizationAddress = address(app.create(wt-contracts,Organization,_owner,abi.encodeWithSignature(initialize(address,string,bytes32),address(this),orgJsonUri,orgJsonHash))) (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#1398-1406)
+	- sd.add(newOrganizationAddress) (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#1407)
+	State variables written after the call(s):
+	- _createdOrganizations (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#1410-1413)
+	- _createdOrganizationsIndex (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#1407-1409)
+Reentrancy in OrganizationFactory.createOrganization (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#1352-1368):
+	External calls:
+	- newOrganizationAddress = address(app.create(wt-contracts,Organization,_owner,abi.encodeWithSignature(initialize(address,string,bytes32),msg.sender,orgJsonUri,orgJsonHash))) (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#1355-1364)
+	State variables written after the call(s):
+	- _createdOrganizations (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#1365-1366)
+	- _createdOrganizationsIndex (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#1364-1365)
+Reentrancy in App.setPackage (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#1251-1260):
+	External calls:
+	- require(bool,string)(package.hasVersion(version),The requested version must be registered in the given package) (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#1253-1258)
+	State variables written after the call(s):
+	- providers (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#1258)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Initializable.isConstructor uses assembly (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#335-356)
+	- /sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#355-356
+Proxy._delegate uses assembly (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#866-891)
+	- /sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#867-891
+OpenZeppelinUpgradesAddress.isContract uses assembly (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#926-943)
+	- /sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#940
+BaseUpgradeabilityProxy._implementation uses assembly (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#977-985)
+	- /sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#984-985
+BaseUpgradeabilityProxy._setImplementation uses assembly (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#993-997)
+	- /sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#997
+BaseAdminUpgradeabilityProxy._admin uses assembly (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#1142-1143)
+	- /sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#1143
+BaseAdminUpgradeabilityProxy._setAdmin uses assembly (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#1145-1146)
+	- /sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#1145-1146
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+Different versions of Solidity is used in /sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol:
+	- Version used: ['>=0.4.24<0.6.0', '^0.5.0', '^0.5.6']
+	- /sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#7-10 declares pragma solidity^0.5.6
+	- /sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#79 declares pragma solidity^0.5.6
+	- /sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#154 declares pragma solidity^0.5.0
+	- /sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#180-181 declares pragma solidity^0.5.0
+	- /sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#235 declares pragma solidity^0.5.6
+	- /sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#292-293 declares pragma solidity>=0.4.24<0.6.0
+	- /sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#360 declares pragma solidity^0.5.6
+	- /sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#606-607 declares pragma solidity^0.5.0
+	- /sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#613 declares pragma solidity^0.5.0
+	- /sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#698-700 declares pragma solidity^0.5.0
+	- /sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#840-841 declares pragma solidity^0.5.0
+	- /sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#900 declares pragma solidity^0.5.0
+	- /sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#946 declares pragma solidity^0.5.0
+	- /sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#999-1000 declares pragma solidity^0.5.0
+	- /sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#1036 declares pragma solidity^0.5.0
+	- /sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#1154 declares pragma solidity^0.5.0
+	- /sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#1202 declares pragma solidity^0.5.0
+	- /sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#1315-1316 declares pragma solidity^0.5.6
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#different-pragma-directives-are-used[0m
+INFO:Detectors:[92m
+AbstractOrganizationFactory.owner (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#27-30) should be declared external
+OrganizationFactory.owner (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol) should be declared external
+AbstractOrganizationFactory.getCreatedOrganizationsLength (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#54-57) should be declared external
+OrganizationFactory.getCreatedOrganizationsLength (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#1441-1446) should be declared external
+OrganizationFactory.getCreatedOrganizations (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#1450-1452) should be declared external
+AbstractOrganizationFactory.getCreatedOrganizations (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#59-63) should be declared external
+OrganizationFactory.createdOrganizationsIndex (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#1458-1461) should be declared external
+AbstractOrganizationFactory.createdOrganizationsIndex (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#64-67) should be declared external
+OrganizationFactory.createdOrganizations (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol) should be declared external
+AbstractOrganizationFactory.createdOrganizations (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#69-74) should be declared external
+AbstractSegmentDirectory.owner (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#106-107) should be declared external
+AbstractSegmentDirectory.getSegment (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#110-112) should be declared external
+AbstractSegmentDirectory.getLifToken (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#116-117) should be declared external
+AbstractSegmentDirectory.getOrganizationsLength (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#131-133) should be declared external
+AbstractSegmentDirectory.getOrganizations (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#138) should be declared external
+AbstractSegmentDirectory.organizationsIndex (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#141-143) should be declared external
+AbstractSegmentDirectory.organizations (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#148-151) should be declared external
+Organization.owner (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#565-568) should be declared external
+OrganizationInterface.owner (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#256-257) should be declared external
+Organization.initialize (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#422-454) should be declared external
+Organization.changeOrgJsonUriAndHash (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#505-507) should be declared external
+Organization.addAssociatedKey (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#514-522) should be declared external
+Organization.removeAssociatedKey (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#527-537) should be declared external
+Organization.transferOwnership (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#561-564) should be declared external
+Organization.setInterfaces (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#577-601) should be declared external
+ImplementationProvider.getImplementation (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#612) should be declared external
+OpenZeppelinUpgradesOwnable.owner (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#654-657) should be declared external
+OpenZeppelinUpgradesOwnable.renounceOwnership (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#675-681) should be declared external
+OpenZeppelinUpgradesOwnable.transferOwnership (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#689-690) should be declared external
+Package.getVersion (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#729-736) should be declared external
+Package.getContract (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#741-744) should be declared external
+Package.addVersion (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#757-784) should be declared external
+Package.getLatest (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#798-801) should be declared external
+App.getPackage (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#1240-1246) should be declared external
+App.setPackage (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#1251-1260) should be declared external
+App.unsetPackage (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#1263-1265) should be declared external
+App.create (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#1306-1314) should be declared external
+OrganizationFactory.initialize (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#1423-1437) should be declared external
+OrganizationFactory.transferOwnership (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol:
+	- pragma solidity^0.5.6 (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#7-10): it allows old versions
+	- pragma solidity^0.5.6 (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#79): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#154): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#180-181): it allows old versions
+	- pragma solidity^0.5.6 (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#235): it allows old versions
+	- pragma solidity^0.5.6 (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#360): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#606-607): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#613): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#698-700): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#840-841): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#900): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#946): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#999-1000): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#1036): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#1154): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#1202): it allows old versions
+	- pragma solidity^0.5.6 (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#1315-1316): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Low level call in UpgradeabilityProxy.constructor (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#1023-1033):
+	-(success) = _logic.delegatecall(_data) /sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#1029-1030
+Low level call in BaseAdminUpgradeabilityProxy.upgradeToAndCall (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#1135-1141):
+	-(success) = newImplementation.delegatecall(data) /sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#1138-1140
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Function 'ERC165._registerInterface' (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#225-234) is not in mixedCase
+Variable 'Initializable.______gap' (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#357-358) is not in mixedCase
+Parameter '__owner' of Organization.initialize (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#422-423) is not in mixedCase
+Parameter '_orgJsonUri' of Organization.initialize (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#423-424) is not in mixedCase
+Parameter '_orgJsonHash' of Organization.initialize (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#424-425) is not in mixedCase
+Parameter '_orgJsonUri' of Organization.changeOrgJsonUri (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#468-469) is not in mixedCase
+Parameter '_orgJsonHash' of Organization.changeOrgJsonHash (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#482-483) is not in mixedCase
+Parameter '_orgJsonUri' of Organization.changeOrgJsonUriAndHash (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#505) is not in mixedCase
+Parameter '_orgJsonHash' of Organization.changeOrgJsonUriAndHash (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#506) is not in mixedCase
+Variable 'Organization._owner' (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#372-373) is not in mixedCase
+Function 'OpenZeppelinUpgradesOwnable._transferOwnership' (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#693-697) is not in mixedCase
+Function 'Proxy._implementation' (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#852-855) is not in mixedCase
+Function 'Proxy._delegate' (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#866-891) is not in mixedCase
+Function 'Proxy._willFallback' (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#896) is not in mixedCase
+Function 'Proxy._fallback' (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#897-899) is not in mixedCase
+Function 'BaseUpgradeabilityProxy._implementation' (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#977-985) is not in mixedCase
+Function 'BaseUpgradeabilityProxy._upgradeTo' (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#990-992) is not in mixedCase
+Function 'BaseUpgradeabilityProxy._setImplementation' (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#993-997) is not in mixedCase
+Parameter '_logic' of UpgradeabilityProxy. (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#1023) is not in mixedCase
+Parameter '_data' of UpgradeabilityProxy. (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#1023-1024) is not in mixedCase
+Function 'BaseAdminUpgradeabilityProxy._willFallback' (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#1148-1149) is not in mixedCase
+Function 'BaseAdminUpgradeabilityProxy._admin' (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#1142-1143) is not in mixedCase
+Function 'BaseAdminUpgradeabilityProxy._setAdmin' (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#1145-1146) is not in mixedCase
+Parameter '_admin' of AdminUpgradeabilityProxy. (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#1191) is not in mixedCase
+Parameter '__owner' of OrganizationFactory.initialize (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#1425) is not in mixedCase
+Parameter '_app' of OrganizationFactory.initialize (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#1425) is not in mixedCase
+Function 'OrganizationFactory._transferOwnership' (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol) is not in mixedCase
+Variable 'OrganizationFactory._owner' (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#1324) is not in mixedCase
+Variable 'OrganizationFactory._createdOrganizations' (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#1332) is not in mixedCase
+Variable 'OrganizationFactory._createdOrganizationsIndex' (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#1333-1334) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+Initializable.______gap (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#357-358) is never used in Organization
+Initializable.______gap (/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol#357-358) is never used in OrganizationFactory
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0xa2c34a55f6189cddde6b28b24e2e5738b76e1699.sol analyzed (18 contracts), 95 result(s) found

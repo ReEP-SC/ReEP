@@ -1,0 +1,57 @@
+INFO:Detectors:[93m
+Vesting (/sb/0x8723eb25fc67a6ea3693718019fe7294f078d2b2.sol#234-350) has incorrect ERC20 function interface(s):
+	-transfer (/sb/0x8723eb25fc67a6ea3693718019fe7294f078d2b2.sol#333-350)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[93m
+Vesting.initialize (/sb/0x8723eb25fc67a6ea3693718019fe7294f078d2b2.sol#254-284) does not use the value returned by external calls:
+	-token.transferFrom(msg.sender,address(this),_totalTokens) (/sb/0x8723eb25fc67a6ea3693718019fe7294f078d2b2.sol#267-268)
+Vesting.claim (/sb/0x8723eb25fc67a6ea3693718019fe7294f078d2b2.sol#286-307) does not use the value returned by external calls:
+	-token.transfer(user,claimAmount) (/sb/0x8723eb25fc67a6ea3693718019fe7294f078d2b2.sol#306)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in Vesting.initialize (/sb/0x8723eb25fc67a6ea3693718019fe7294f078d2b2.sol#254-284):
+	External calls:
+	- token.transferFrom(msg.sender,address(this),_totalTokens) (/sb/0x8723eb25fc67a6ea3693718019fe7294f078d2b2.sol#267-268)
+	State variables written after the call(s):
+	- grantedToken (/sb/0x8723eb25fc67a6ea3693718019fe7294f078d2b2.sol#272-275)
+	- starts (/sb/0x8723eb25fc67a6ea3693718019fe7294f078d2b2.sol#271-272)
+	- totalTokens (/sb/0x8723eb25fc67a6ea3693718019fe7294f078d2b2.sol#268-271)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Vesting.claim (/sb/0x8723eb25fc67a6ea3693718019fe7294f078d2b2.sol#286-307) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(releaseStart <= block.timestamp,Release has not started) (/sb/0x8723eb25fc67a6ea3693718019fe7294f078d2b2.sol#288-290)
+Vesting.releasable (/sb/0x8723eb25fc67a6ea3693718019fe7294f078d2b2.sol#317-325) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp < releaseStart (/sb/0x8723eb25fc67a6ea3693718019fe7294f078d2b2.sol#321-322)
+	- block.timestamp >= releaseEnd (/sb/0x8723eb25fc67a6ea3693718019fe7294f078d2b2.sol#322-323)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+Ownable.owner (/sb/0x8723eb25fc67a6ea3693718019fe7294f078d2b2.sol#37-42) should be declared external
+Ownable.transferOwnership (/sb/0x8723eb25fc67a6ea3693718019fe7294f078d2b2.sol#61-66) should be declared external
+Ownable.receiveOwnership (/sb/0x8723eb25fc67a6ea3693718019fe7294f078d2b2.sol#66-72) should be declared external
+Vesting.initialize (/sb/0x8723eb25fc67a6ea3693718019fe7294f078d2b2.sol#254-284) should be declared external
+Vesting.claim (/sb/0x8723eb25fc67a6ea3693718019fe7294f078d2b2.sol#286-307) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x8723eb25fc67a6ea3693718019fe7294f078d2b2.sol:
+	- pragma solidity^0.6.12 (/sb/0x8723eb25fc67a6ea3693718019fe7294f078d2b2.sol#7-10): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'Ownable._transferOwnership' (/sb/0x8723eb25fc67a6ea3693718019fe7294f078d2b2.sol#76-85) is not in mixedCase
+Variable 'Ownable.__gap' (/sb/0x8723eb25fc67a6ea3693718019fe7294f078d2b2.sol#85-87) is not in mixedCase
+Parameter '_token' of Vesting.initialize (/sb/0x8723eb25fc67a6ea3693718019fe7294f078d2b2.sol#254) is not in mixedCase
+Parameter '_totalTokens' of Vesting.initialize (/sb/0x8723eb25fc67a6ea3693718019fe7294f078d2b2.sol#254-255) is not in mixedCase
+Parameter '_start' of Vesting.initialize (/sb/0x8723eb25fc67a6ea3693718019fe7294f078d2b2.sol#255) is not in mixedCase
+Parameter '_period' of Vesting.initialize (/sb/0x8723eb25fc67a6ea3693718019fe7294f078d2b2.sol#255) is not in mixedCase
+Parameter '_recipients' of Vesting.initialize (/sb/0x8723eb25fc67a6ea3693718019fe7294f078d2b2.sol#255-257) is not in mixedCase
+Parameter '_grantedToken' of Vesting.initialize (/sb/0x8723eb25fc67a6ea3693718019fe7294f078d2b2.sol#257-258) is not in mixedCase
+Parameter '_user' of Vesting.claimableAmount (/sb/0x8723eb25fc67a6ea3693718019fe7294f078d2b2.sol#314) is not in mixedCase
+Parameter '_user' of Vesting.releasable (/sb/0x8723eb25fc67a6ea3693718019fe7294f078d2b2.sol#317-320) is not in mixedCase
+Parameter '_to' of Vesting.transfer (/sb/0x8723eb25fc67a6ea3693718019fe7294f078d2b2.sol#333) is not in mixedCase
+Parameter '_amountInFullTokens' of Vesting.transfer (/sb/0x8723eb25fc67a6ea3693718019fe7294f078d2b2.sol#333) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+Ownable.__gap (/sb/0x8723eb25fc67a6ea3693718019fe7294f078d2b2.sol#85-87) is never used in Ownable
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0x8723eb25fc67a6ea3693718019fe7294f078d2b2.sol analyzed (4 contracts), 25 result(s) found

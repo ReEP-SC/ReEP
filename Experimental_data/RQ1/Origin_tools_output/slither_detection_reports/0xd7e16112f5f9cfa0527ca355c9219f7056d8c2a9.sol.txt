@@ -1,0 +1,86 @@
+INFO:Detectors:[93m
+Reentrancy in Crowdsale.unlockList (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#365-383):
+	External calls:
+	- token.unlock(addresses[i]) (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#371)
+	State variables written after the call(s):
+	- index (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#375-377)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+Crowdsale.buyTokens (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#395-455) does not use the value returned by external calls:
+	-token.transferFrom(tokenHolder,msg.sender,totalAmount) (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#429-431)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Crowdsale.unlockList has external calls inside a loop:
+	- token.unlock(addresses[i]) (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#371)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in Crowdsale.buyTokens (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#395-455):
+	External calls:
+	- balance = token.allowance(tokenHolder,address(this)) (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#411-413)
+	- token.transferFrom(tokenHolder,msg.sender,totalAmount) (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#429-431)
+	External calls sending eth:
+	- msg.sender.transfer(cashBack) (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#423-425)
+	- multisig.transfer(msg.value + cash) (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#427-429)
+	State variables written after the call(s):
+	- addresses (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#435-437)
+	- tokens (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#443-445)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Crowdsale.buyTokens (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#395-455) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool)(block.timestamp > startIco && block.timestamp < startIco.add(periodIco)) (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#397-401)
+Crowdsale.getBonuses (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#455-461) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp < startIco.add(periodPreIco) (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#457-461)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+Ownable.renounceOwnership (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#183-189) should be declared external
+Ownable.transferOwnership (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#199-203) should be declared external
+ERC20.totalSupply (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#223-225) should be declared external
+ERC20.balanceOf (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#225-227) should be declared external
+ERC20.allowance (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#228-231) should be declared external
+ERC20.transfer (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#231-235) should be declared external
+ERC20.approve (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#235-237) should be declared external
+ERC20.transferFrom (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#239-245) should be declared external
+ERC20.lock (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#245-249) should be declared external
+ERC20.transferOwnership (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#255-259) should be declared external
+Crowdsale.setIndCap (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#313-319) should be declared external
+Crowdsale.getIndCapInETH (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol) should be declared external
+Crowdsale.getPriceETH (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_a' of SafeMath.mul (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#19) is not in mixedCase
+Parameter '_b' of SafeMath.mul (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#19) is not in mixedCase
+Parameter '_a' of SafeMath.div (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#47) is not in mixedCase
+Parameter '_b' of SafeMath.div (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#48-49) is not in mixedCase
+Parameter '_a' of SafeMath.sub (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#67) is not in mixedCase
+Parameter '_b' of SafeMath.sub (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#67-68) is not in mixedCase
+Parameter '_a' of SafeMath.add (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#83-85) is not in mixedCase
+Parameter '_b' of SafeMath.add (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#85) is not in mixedCase
+Parameter '_newOwner' of Ownable.transferOwnership (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#199) is not in mixedCase
+Function 'Ownable._transferOwnership' (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#215-223) is not in mixedCase
+Parameter '_newOwner' of Ownable._transferOwnership (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#217) is not in mixedCase
+Parameter '_AS' of Crowdsale. (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#283) is not in mixedCase
+Parameter '_multisig' of Crowdsale. (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#283-285) is not in mixedCase
+Parameter '_tokenHolder' of Crowdsale. (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#285) is not in mixedCase
+Parameter '_priceETH' of Crowdsale. (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#285-287) is not in mixedCase
+Parameter '_startIcoUNIX' of Crowdsale. (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#287) is not in mixedCase
+Parameter '_periodPreIcoSEC' of Crowdsale. (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#287-289) is not in mixedCase
+Parameter '_periodIcoSEC' of Crowdsale. (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#289-291) is not in mixedCase
+Parameter '_indCapETH' of Crowdsale.setIndCap (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#313-315) is not in mixedCase
+Parameter '_newPriceETH' of Crowdsale.setPriceETH (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#319) is not in mixedCase
+Parameter '_priceETH' of Crowdsale.setRate (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#323) is not in mixedCase
+Parameter '_newOwner' of Crowdsale.transferTokenOwnership (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#333) is not in mixedCase
+Function 'Crowdsale._lock' (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#339-347) is not in mixedCase
+Parameter '_address' of Crowdsale._lock (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#341) is not in mixedCase
+Parameter '_value' of Crowdsale._lock (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#341-344) is not in mixedCase
+Parameter '_period' of Crowdsale._lock (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#345) is not in mixedCase
+Parameter '_address' of Crowdsale.lock (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#348-349) is not in mixedCase
+Parameter '_value' of Crowdsale.lock (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#349) is not in mixedCase
+Parameter '_period' of Crowdsale.lock (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#349-351) is not in mixedCase
+Parameter '_address' of Crowdsale.unlock (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#357-361) is not in mixedCase
+Parameter '_days' of Crowdsale.extendPeriodPreICO (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#385) is not in mixedCase
+Parameter '_days' of Crowdsale.extendPeriodICO (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol#389-391) is not in mixedCase
+Parameter '_address' of Crowdsale.tokenBalanceOf (/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xd7e16112f5f9cfa0527ca355c9219f7056d8c2a9.sol analyzed (4 contracts), 52 result(s) found

@@ -1,0 +1,89 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xc91370a1c69f9d48f40c30f5a18eb2d60baba7be.sol:
+/sb/0xc91370a1c69f9d48f40c30f5a18eb2d60baba7be.sol:31:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function Ownable() public {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xc91370a1c69f9d48f40c30f5a18eb2d60baba7be.sol:54:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function WorldCupTeam(address _parent, string _name) public {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xc91370a1c69f9d48f40c30f5a18eb2d60baba7be.sol:91:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function EtherWorldCup() public {}
+    ^--------------------------------^
+/sb/0xc91370a1c69f9d48f40c30f5a18eb2d60baba7be.sol:42:9: Warning: Invoking events without "emit" prefix is deprecated.
+        OwnershipTransferred(owner, newOwner);
+        ^-----------------------------------^
+/sb/0xc91370a1c69f9d48f40c30f5a18eb2d60baba7be.sol:114:9: Warning: Invoking events without "emit" prefix is deprecated.
+        UpdatedBetOnTeams(_team, _addr, _betAmt);
+        ^--------------------------------------^
+/sb/0xc91370a1c69f9d48f40c30f5a18eb2d60baba7be.sol:169:24: Warning: Using contract member "balance" inherited from the address type is deprecated. Convert the contract to "address" type to access the member, for example use "address(contract).balance" instead.
+        owner.transfer(this.balance);
+                       ^----------^
+/sb/0xc91370a1c69f9d48f40c30f5a18eb2d60baba7be.sol:103:5: Warning: No visibility specified. Defaulting to "public". 
+    function () payable {}
+    ^--------------------^
+/sb/0xc91370a1c69f9d48f40c30f5a18eb2d60baba7be.sol:106:5: Warning: No visibility specified. Defaulting to "public". 
+    function UpdateBetOnTeams(string _team, address _addr, uint256 _betAmt) 
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xc91370a1c69f9d48f40c30f5a18eb2d60baba7be.sol:4:5: Warning: Function state mutability can be restricted to pure
+    function mul(uint256 a, uint256 b) internal constant returns (uint256) {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xc91370a1c69f9d48f40c30f5a18eb2d60baba7be.sol:10:5: Warning: Function state mutability can be restricted to pure
+    function div(uint256 a, uint256 b) internal constant returns (uint256) {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xc91370a1c69f9d48f40c30f5a18eb2d60baba7be.sol:15:5: Warning: Function state mutability can be restricted to pure
+    function sub(uint256 a, uint256 b) internal constant returns (uint256) {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xc91370a1c69f9d48f40c30f5a18eb2d60baba7be.sol:20:5: Warning: Function state mutability can be restricted to pure
+    function add(uint256 a, uint256 b) internal constant returns (uint256) {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xc91370a1c69f9d48f40c30f5a18eb2d60baba7be.sol:137:5: Warning: Function state mutability can be restricted to view
+    function getPlayerBet(string _team, address _addr) 
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xc91370a1c69f9d48f40c30f5a18eb2d60baba7be.sol:144:5: Warning: Function state mutability can be restricted to view
+    function getPlayersPick(string _team) 
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xc91370a1c69f9d48f40c30f5a18eb2d60baba7be.sol:151:5: Warning: Function state mutability can be restricted to view
+    function getTeamBet(string _team) 
+    ^ (Relevant source part starts here and spans across multiple lines).
+
+INFO:Detectors:[92m
+EtherWorldCup.distributeWinnerPool has external calls inside a loop:
+	- winners[i].transfer(sendAmt) (/sb/0xc91370a1c69f9d48f40c30f5a18eb2d60baba7be.sol#139-141)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+EtherWorldCup.totalShare should be constant (/sb/0xc91370a1c69f9d48f40c30f5a18eb2d60baba7be.sol#87)
+WorldCupTeam.endTime should be constant (/sb/0xc91370a1c69f9d48f40c30f5a18eb2d60baba7be.sol#52-54)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0xc91370a1c69f9d48f40c30f5a18eb2d60baba7be.sol#40-49) should be declared external
+WorldCupTeam.fallback (/sb/0xc91370a1c69f9d48f40c30f5a18eb2d60baba7be.sol#65-73) should be declared external
+EtherWorldCup.permitChildContract (/sb/0xc91370a1c69f9d48f40c30f5a18eb2d60baba7be.sol#97-106) should be declared external
+EtherWorldCup.fallback (/sb/0xc91370a1c69f9d48f40c30f5a18eb2d60baba7be.sol#106) should be declared external
+EtherWorldCup.UpdateBetOnTeams (/sb/0xc91370a1c69f9d48f40c30f5a18eb2d60baba7be.sol#108-121) should be declared external
+EtherWorldCup.distributeWinnerPool (/sb/0xc91370a1c69f9d48f40c30f5a18eb2d60baba7be.sol#126-141) should be declared external
+EtherWorldCup.getPlayerBet (/sb/0xc91370a1c69f9d48f40c30f5a18eb2d60baba7be.sol#141-151) should be declared external
+EtherWorldCup.getPlayersPick (/sb/0xc91370a1c69f9d48f40c30f5a18eb2d60baba7be.sol#151-158) should be declared external
+EtherWorldCup.getTeamBet (/sb/0xc91370a1c69f9d48f40c30f5a18eb2d60baba7be.sol#158-165) should be declared external
+EtherWorldCup.updateCommission (/sb/0xc91370a1c69f9d48f40c30f5a18eb2d60baba7be.sol#166-171) should be declared external
+EtherWorldCup.safeDrain (/sb/0xc91370a1c69f9d48f40c30f5a18eb2d60baba7be.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Function 'Ownable.Ownable' (/sb/0xc91370a1c69f9d48f40c30f5a18eb2d60baba7be.sol#32-36) is not in mixedCase
+Function 'WorldCupTeam.WorldCupTeam' (/sb/0xc91370a1c69f9d48f40c30f5a18eb2d60baba7be.sol#54-60) is not in mixedCase
+Parameter '_parent' of WorldCupTeam.WorldCupTeam (/sb/0xc91370a1c69f9d48f40c30f5a18eb2d60baba7be.sol#55) is not in mixedCase
+Parameter '_name' of WorldCupTeam.WorldCupTeam (/sb/0xc91370a1c69f9d48f40c30f5a18eb2d60baba7be.sol#56) is not in mixedCase
+Function 'EtherWorldCup.EtherWorldCup' (/sb/0xc91370a1c69f9d48f40c30f5a18eb2d60baba7be.sol#94-96) is not in mixedCase
+Parameter '_teams' of EtherWorldCup.permitChildContract (/sb/0xc91370a1c69f9d48f40c30f5a18eb2d60baba7be.sol#97-98) is not in mixedCase
+Function 'EtherWorldCup.UpdateBetOnTeams' (/sb/0xc91370a1c69f9d48f40c30f5a18eb2d60baba7be.sol#108-121) is not in mixedCase
+Parameter '_team' of EtherWorldCup.UpdateBetOnTeams (/sb/0xc91370a1c69f9d48f40c30f5a18eb2d60baba7be.sol#110) is not in mixedCase
+Parameter '_addr' of EtherWorldCup.UpdateBetOnTeams (/sb/0xc91370a1c69f9d48f40c30f5a18eb2d60baba7be.sol#110) is not in mixedCase
+Parameter '_betAmt' of EtherWorldCup.UpdateBetOnTeams (/sb/0xc91370a1c69f9d48f40c30f5a18eb2d60baba7be.sol#110) is not in mixedCase
+Parameter '_winTeam' of EtherWorldCup.distributeWinnerPool (/sb/0xc91370a1c69f9d48f40c30f5a18eb2d60baba7be.sol#126) is not in mixedCase
+Parameter '_share' of EtherWorldCup.distributeWinnerPool (/sb/0xc91370a1c69f9d48f40c30f5a18eb2d60baba7be.sol#126) is not in mixedCase
+Parameter '_team' of EtherWorldCup.getPlayerBet (/sb/0xc91370a1c69f9d48f40c30f5a18eb2d60baba7be.sol#144) is not in mixedCase
+Parameter '_addr' of EtherWorldCup.getPlayerBet (/sb/0xc91370a1c69f9d48f40c30f5a18eb2d60baba7be.sol#144) is not in mixedCase
+Parameter '_team' of EtherWorldCup.getPlayersPick (/sb/0xc91370a1c69f9d48f40c30f5a18eb2d60baba7be.sol#151-152) is not in mixedCase
+Parameter '_team' of EtherWorldCup.getTeamBet (/sb/0xc91370a1c69f9d48f40c30f5a18eb2d60baba7be.sol#158-159) is not in mixedCase
+Parameter '_newPercent' of EtherWorldCup.updateCommission (/sb/0xc91370a1c69f9d48f40c30f5a18eb2d60baba7be.sol#167-169) is not in mixedCase
+Variable 'EtherWorldCup.PlayersBet' (/sb/0xc91370a1c69f9d48f40c30f5a18eb2d60baba7be.sol#81-83) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xc91370a1c69f9d48f40c30f5a18eb2d60baba7be.sol analyzed (4 contracts), 31 result(s) found

@@ -1,0 +1,90 @@
+INFO:Detectors:[93m
+Reentrancy in HUBRISSTAKE.claim (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol#165-171):
+	External calls:
+	- token.transfer(owner,principle + totalReward) (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol#169-171)
+	State variables written after the call(s):
+	- isClaimed (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol#171)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+HUBRISSTAKE.claim (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol#165-171) does not use the value returned by external calls:
+	-token.transfer(owner,principle + totalReward) (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol#169-171)
+HUBRISSTAKING.stake (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol#231-257) does not use the value returned by external calls:
+	-token.transferFrom(msg.sender,address(stakeObj),_principle) (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol#249-253)
+	-token.transfer(address(stakeObj),totalReward) (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol#253-255)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+HUBRISSTAKING.totalPrinciple has external calls inside a loop:
+	- ! stakes[_owner][i].isClaimed() (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol#275-279)
+HUBRISSTAKING.totalPrinciple has external calls inside a loop:
+	- result += stakes[_owner][i].principle() (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol#277-279)
+HUBRISSTAKING.accumulatedReward has external calls inside a loop:
+	- ! stakes[_owner][i].isClaimed() (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol#295-309)
+HUBRISSTAKING.accumulatedReward has external calls inside a loop:
+	- result += stakes[_owner][i].accumulatedReward() (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol#297-303)
+HUBRISSTAKING.isReadyToClaim has external calls inside a loop:
+	- stakes[_owner][i].isReadyToClaim() (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol#317-321)
+HUBRISSTAKING.claim has external calls inside a loop:
+	- stakes[msg.sender][i].isReadyToClaim() (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol)
+HUBRISSTAKING.claim has external calls inside a loop:
+	- stakes[msg.sender][i].claim() (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in HUBRISSTAKING.stake (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol#231-257):
+	External calls:
+	- token.transferFrom(msg.sender,address(stakeObj),_principle) (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol#249-253)
+	- token.transfer(address(stakeObj),totalReward) (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol#253-255)
+	State variables written after the call(s):
+	- stakes (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol#255-257)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+HUBRISSTAKE.accumulatedReward (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol#119-139) uses timestamp for comparisons
+	Dangerous comparisons:
+	- durationElapsed > duration (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol#129-137)
+HUBRISSTAKE.isReadyToClaim (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol#139-158) uses timestamp for comparisons
+	Dangerous comparisons:
+	- today < (startDay + duration) (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol#151-153)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+ERC20Basic.totalSupply (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol#15-17) should be declared external
+ERC20Basic.balanceOf (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol#17-19) should be declared external
+ERC20Basic.transfer (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol#19-21) should be declared external
+ERC20.allowance (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol#29-31) should be declared external
+ERC20.transferFrom (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol#31-33) should be declared external
+ERC20.approve (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol#33-35) should be declared external
+Ownable.transferOwnership (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol#66-81) should be declared external
+HUBRISSTAKE.accumulatedReward (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol#119-139) should be declared external
+HUBRISSTAKE.claim (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol#165-171) should be declared external
+HUBRISSTAKING.setThresholdAndReward (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol#201-229) should be declared external
+HUBRISSTAKING.stake (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol#231-257) should be declared external
+HUBRISSTAKING.totalPrinciple (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol#258-279) should be declared external
+HUBRISSTAKING.accumulatedReward (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol#283-311) should be declared external
+HUBRISSTAKING.isReadyToClaim (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol#311-325) should be declared external
+HUBRISSTAKING.claim (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol#327-339) should be declared external
+HUBRISSTAKING.getStakes (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol:
+	- pragma solidity^0.5.7 (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol#9-13): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_token' of HUBRISSTAKE. (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol#93-95) is not in mixedCase
+Parameter '_owner' of HUBRISSTAKE. (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol#95) is not in mixedCase
+Parameter '_principle' of HUBRISSTAKE. (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol#95) is not in mixedCase
+Parameter '_totalReward' of HUBRISSTAKE. (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol#95-97) is not in mixedCase
+Parameter '_duration' of HUBRISSTAKE. (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol#98-99) is not in mixedCase
+Parameter '_token' of HUBRISSTAKING. (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol#189) is not in mixedCase
+Parameter 'threshold_1Month' of HUBRISSTAKING.setThresholdAndReward (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol#201-203) is not in mixedCase
+Parameter 'reward_1month' of HUBRISSTAKING.setThresholdAndReward (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol#203) is not in mixedCase
+Parameter 'threshold_3Month' of HUBRISSTAKING.setThresholdAndReward (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol#203-205) is not in mixedCase
+Parameter 'reward_3month' of HUBRISSTAKING.setThresholdAndReward (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol#205-207) is not in mixedCase
+Parameter 'threshold_6Month' of HUBRISSTAKING.setThresholdAndReward (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol#207) is not in mixedCase
+Parameter 'reward_6month' of HUBRISSTAKING.setThresholdAndReward (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol#207-209) is not in mixedCase
+Parameter 'threshold_12Month' of HUBRISSTAKING.setThresholdAndReward (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol#209-211) is not in mixedCase
+Parameter 'reward_12month' of HUBRISSTAKING.setThresholdAndReward (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol#211) is not in mixedCase
+Parameter '_principle' of HUBRISSTAKING.stake (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol#231) is not in mixedCase
+Parameter '_owner' of HUBRISSTAKING.totalPrinciple (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol#263-265) is not in mixedCase
+Parameter '_owner' of HUBRISSTAKING.accumulatedReward (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol#287-291) is not in mixedCase
+Parameter '_owner' of HUBRISSTAKING.isReadyToClaim (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol#313) is not in mixedCase
+Parameter '_owner' of HUBRISSTAKING.getStakes (/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xc6fa9b2c0febcc1dee33e7050cf5a52ecc53022f.sol analyzed (5 contracts), 49 result(s) found

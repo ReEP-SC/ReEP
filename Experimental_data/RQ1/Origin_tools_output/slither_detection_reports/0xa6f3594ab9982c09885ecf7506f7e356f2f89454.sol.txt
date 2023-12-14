@@ -1,0 +1,30 @@
+INFO:Detectors:[93m
+Reentrancy in CliffTokenVesting.addBeneficiary (/sb/0xa6f3594ab9982c09885ecf7506f7e356f2f89454.sol#259-293):
+	External calls:
+	- require(bool)(token.transferFrom(msg.sender,address(this),amount)) (/sb/0xa6f3594ab9982c09885ecf7506f7e356f2f89454.sol#273-283)
+	State variables written after the call(s):
+	- beneficiary (/sb/0xa6f3594ab9982c09885ecf7506f7e356f2f89454.sol#283-293)
+Reentrancy in CliffTokenVesting.release (/sb/0xa6f3594ab9982c09885ecf7506f7e356f2f89454.sol#209-233):
+	External calls:
+	- token.transfer(account,unreleased) (/sb/0xa6f3594ab9982c09885ecf7506f7e356f2f89454.sol#217)
+	State variables written after the call(s):
+	- beneficiary (/sb/0xa6f3594ab9982c09885ecf7506f7e356f2f89454.sol#229-231)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+CliffTokenVesting.release (/sb/0xa6f3594ab9982c09885ecf7506f7e356f2f89454.sol#209-233) does not use the value returned by external calls:
+	-token.transfer(account,unreleased) (/sb/0xa6f3594ab9982c09885ecf7506f7e356f2f89454.sol#217)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+CliffTokenVesting.vestedAmount (/sb/0xa6f3594ab9982c09885ecf7506f7e356f2f89454.sol#299-315) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp < beneficiary[account].cliff (/sb/0xa6f3594ab9982c09885ecf7506f7e356f2f89454.sol#303-315)
+	- block.timestamp >= beneficiary[account].start.add(beneficiary[account].duration) (/sb/0xa6f3594ab9982c09885ecf7506f7e356f2f89454.sol#307-315)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+CliffTokenVesting.nonce should be constant (/sb/0xa6f3594ab9982c09885ecf7506f7e356f2f89454.sol#155)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+CliffTokenVesting.release (/sb/0xa6f3594ab9982c09885ecf7506f7e356f2f89454.sol#209-233) should be declared external
+CliffTokenVesting.addBeneficiary (/sb/0xa6f3594ab9982c09885ecf7506f7e356f2f89454.sol#259-293) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Slither:/sb/0xa6f3594ab9982c09885ecf7506f7e356f2f89454.sol analyzed (3 contracts), 7 result(s) found

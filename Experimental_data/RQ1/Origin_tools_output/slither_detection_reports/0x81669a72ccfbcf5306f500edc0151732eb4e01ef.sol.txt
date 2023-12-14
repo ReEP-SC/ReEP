@@ -1,0 +1,61 @@
+INFO:Detectors:[93m
+Reentrancy in TokenVesting.release (/sb/0x81669a72ccfbcf5306f500edc0151732eb4e01ef.sol#541-571):
+	External calls:
+	- unreleased = releasableAmount() (/sb/0x81669a72ccfbcf5306f500edc0151732eb4e01ef.sol#549)
+	State variables written after the call(s):
+	- released (/sb/0x81669a72ccfbcf5306f500edc0151732eb4e01ef.sol#561-563)
+Reentrancy in TokenVesting.revoke (/sb/0x81669a72ccfbcf5306f500edc0151732eb4e01ef.sol#575-597):
+	External calls:
+	- balance = token.balanceOf(this) (/sb/0x81669a72ccfbcf5306f500edc0151732eb4e01ef.sol#579-581)
+	- unreleased = releasableAmount() (/sb/0x81669a72ccfbcf5306f500edc0151732eb4e01ef.sol#583)
+	State variables written after the call(s):
+	- revoked (/sb/0x81669a72ccfbcf5306f500edc0151732eb4e01ef.sol#587-591)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+Reentrancy in TokenVesting.initialize (/sb/0x81669a72ccfbcf5306f500edc0151732eb4e01ef.sol#485-515):
+	External calls:
+	- require(bool)(tokensAvailable() == initialTokens) (/sb/0x81669a72ccfbcf5306f500edc0151732eb4e01ef.sol#499-501)
+	- currentBalance = token.balanceOf(this) (/sb/0x81669a72ccfbcf5306f500edc0151732eb4e01ef.sol#503-507)
+	State variables written after the call(s):
+	- currentBalance (/sb/0x81669a72ccfbcf5306f500edc0151732eb4e01ef.sol#503-507)
+	- initialized (/sb/0x81669a72ccfbcf5306f500edc0151732eb4e01ef.sol#515)
+	- totalBalance (/sb/0x81669a72ccfbcf5306f500edc0151732eb4e01ef.sol#511-513)
+Reentrancy in TokenVesting.vestedAmount (/sb/0x81669a72ccfbcf5306f500edc0151732eb4e01ef.sol):
+	External calls:
+	- currentBalance = token.balanceOf(this) (/sb/0x81669a72ccfbcf5306f500edc0151732eb4e01ef.sol)
+	State variables written after the call(s):
+	- totalBalance (/sb/0x81669a72ccfbcf5306f500edc0151732eb4e01ef.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+TokenVesting.vestedAmount (/sb/0x81669a72ccfbcf5306f500edc0151732eb4e01ef.sol) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp < cliff (/sb/0x81669a72ccfbcf5306f500edc0151732eb4e01ef.sol)
+	- block.timestamp >= start.add(duration) || revoked[token] (/sb/0x81669a72ccfbcf5306f500edc0151732eb4e01ef.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+ERC20Basic.totalSupply (/sb/0x81669a72ccfbcf5306f500edc0151732eb4e01ef.sol#21-23) should be declared external
+ERC20Basic.balanceOf (/sb/0x81669a72ccfbcf5306f500edc0151732eb4e01ef.sol#23-25) should be declared external
+ERC20Basic.transfer (/sb/0x81669a72ccfbcf5306f500edc0151732eb4e01ef.sol#25-27) should be declared external
+ERC20.allowance (/sb/0x81669a72ccfbcf5306f500edc0151732eb4e01ef.sol#35-41) should be declared external
+ERC20.transferFrom (/sb/0x81669a72ccfbcf5306f500edc0151732eb4e01ef.sol#41-47) should be declared external
+ERC20.approve (/sb/0x81669a72ccfbcf5306f500edc0151732eb4e01ef.sol#47-51) should be declared external
+Ownable.renounceOwnership (/sb/0x81669a72ccfbcf5306f500edc0151732eb4e01ef.sol#275-281) should be declared external
+Ownable.transferOwnership (/sb/0x81669a72ccfbcf5306f500edc0151732eb4e01ef.sol#295-299) should be declared external
+TokenVesting.initialize (/sb/0x81669a72ccfbcf5306f500edc0151732eb4e01ef.sol#485-515) should be declared external
+TokenVesting.release (/sb/0x81669a72ccfbcf5306f500edc0151732eb4e01ef.sol#541-571) should be declared external
+TokenVesting.revoke (/sb/0x81669a72ccfbcf5306f500edc0151732eb4e01ef.sol#575-597) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_newOwner' of Ownable.transferOwnership (/sb/0x81669a72ccfbcf5306f500edc0151732eb4e01ef.sol#297) is not in mixedCase
+Function 'Ownable._transferOwnership' (/sb/0x81669a72ccfbcf5306f500edc0151732eb4e01ef.sol#313-325) is not in mixedCase
+Parameter '_newOwner' of Ownable._transferOwnership (/sb/0x81669a72ccfbcf5306f500edc0151732eb4e01ef.sol#315) is not in mixedCase
+Parameter '_beneficiary' of TokenVesting. (/sb/0x81669a72ccfbcf5306f500edc0151732eb4e01ef.sol#439-441) is not in mixedCase
+Parameter '_start' of TokenVesting. (/sb/0x81669a72ccfbcf5306f500edc0151732eb4e01ef.sol#443) is not in mixedCase
+Parameter '_cliff' of TokenVesting. (/sb/0x81669a72ccfbcf5306f500edc0151732eb4e01ef.sol#443-451) is not in mixedCase
+Parameter '_duration' of TokenVesting. (/sb/0x81669a72ccfbcf5306f500edc0151732eb4e01ef.sol#453-455) is not in mixedCase
+Parameter '_revocable' of TokenVesting. (/sb/0x81669a72ccfbcf5306f500edc0151732eb4e01ef.sol#455) is not in mixedCase
+Parameter '_rollback' of TokenVesting. (/sb/0x81669a72ccfbcf5306f500edc0151732eb4e01ef.sol#457-459) is not in mixedCase
+Parameter '_token' of TokenVesting. (/sb/0x81669a72ccfbcf5306f500edc0151732eb4e01ef.sol#459) is not in mixedCase
+Constant 'TokenVesting.initialTokens' (/sb/0x81669a72ccfbcf5306f500edc0151732eb4e01ef.sol#385-387) is not in UPPER_CASE_WITH_UNDERSCORES
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x81669a72ccfbcf5306f500edc0151732eb4e01ef.sol analyzed (6 contracts), 27 result(s) found

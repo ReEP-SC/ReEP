@@ -1,0 +1,83 @@
+INFO:Detectors:[91m
+SystemAccount.withdraw (/sb/0x9d89005c62f4f12a87c847ffababbf9b4bf16ace.sol#1159-1187) sends eth to arbitrary user
+	Dangerous calls:
+	- to.transfer(weiAmount) (/sb/0x9d89005c62f4f12a87c847ffababbf9b4bf16ace.sol#1165)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[93m
+ECRecovery.recover (/sb/0x9d89005c62f4f12a87c847ffababbf9b4bf16ace.sol#571-641) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+Locker._createLock (/sb/0x9d89005c62f4f12a87c847ffababbf9b4bf16ace.sol#2201-2245) uses a dangerous strict equality:
+	- require(bool,string)(lockedUntil == expiration,lockedUntil overflow)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Reentrancy in AugmintToken._transferFrom (/sb/0x9d89005c62f4f12a87c847ffababbf9b4bf16ace.sol#1031-1061):
+	External calls:
+	- _transfer(from,to,amount,narrative) (/sb/0x9d89005c62f4f12a87c847ffababbf9b4bf16ace.sol#1057-1059)
+	State variables written after the call(s):
+	- allowed (/sb/0x9d89005c62f4f12a87c847ffababbf9b4bf16ace.sol#1059-1061)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+InterestEarnedAccount.transferInterest (/sb/0x9d89005c62f4f12a87c847ffababbf9b4bf16ace.sol#1269-1299) does not use the value returned by external calls:
+	-augmintToken.transfer(locker,interestAmount) (/sb/0x9d89005c62f4f12a87c847ffababbf9b4bf16ace.sol#1295-1299)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Locker.getLockProducts has external calls inside a loop:
+	- response[i] = (lockProduct.perTermInterest,lockProduct.durationInSecs,lockProduct.minimumLockAmount,monetarySupervisor.getMaxLockAmount(lockProduct.minimumLockAmount,lockProduct.perTermInterest),1) (/sb/0x9d89005c62f4f12a87c847ffababbf9b4bf16ace.sol#2091-2105)
+Locker.getLockProducts has external calls inside a loop:
+	- response[i] = (lockProduct.perTermInterest,lockProduct.durationInSecs,lockProduct.minimumLockAmount,monetarySupervisor.getMaxLockAmount(lockProduct.minimumLockAmount,lockProduct.perTermInterest),0) (/sb/0x9d89005c62f4f12a87c847ffababbf9b4bf16ace.sol#2091-2105)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in AugmintToken._transfer (/sb/0x9d89005c62f4f12a87c847ffababbf9b4bf16ace.sol#1061-1073):
+	External calls:
+	- fee = feeAccount.calculateTransferFee(from,to,transferAmount) (/sb/0x9d89005c62f4f12a87c847ffababbf9b4bf16ace.sol#1067-1069)
+	State variables written after the call(s):
+	- balances (/sb/0x9d89005c62f4f12a87c847ffababbf9b4bf16ace.sol#1069-1071)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+ECRecovery.recover uses assembly (/sb/0x9d89005c62f4f12a87c847ffababbf9b4bf16ace.sol#571-641)
+	- /sb/0x9d89005c62f4f12a87c847ffababbf9b4bf16ace.sol#601-621
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+AugmintTokenInterface.stabilityBoardProxy should be constant (/sb/0x9d89005c62f4f12a87c847ffababbf9b4bf16ace.sol#415)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Restricted.grantMultiplePermissions (/sb/0x9d89005c62f4f12a87c847ffababbf9b4bf16ace.sol#93-111) should be declared external
+Restricted.revokeMultiplePermissions (/sb/0x9d89005c62f4f12a87c847ffababbf9b4bf16ace.sol#125-149) should be declared external
+AugmintReserves.fallback (/sb/0x9d89005c62f4f12a87c847ffababbf9b4bf16ace.sol#1217-1235) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_spender' of AugmintToken.approve (/sb/0x9d89005c62f4f12a87c847ffababbf9b4bf16ace.sol#787) is not in mixedCase
+Parameter '_owner' of AugmintToken.balanceOf (/sb/0x9d89005c62f4f12a87c847ffababbf9b4bf16ace.sol#987) is not in mixedCase
+Parameter '_owner' of AugmintToken.allowance (/sb/0x9d89005c62f4f12a87c847ffababbf9b4bf16ace.sol#989) is not in mixedCase
+Parameter '_spender' of AugmintToken.allowance (/sb/0x9d89005c62f4f12a87c847ffababbf9b4bf16ace.sol#989) is not in mixedCase
+Parameter '_spender' of AugmintToken.increaseApproval (/sb/0x9d89005c62f4f12a87c847ffababbf9b4bf16ace.sol#809-811) is not in mixedCase
+Parameter '_addedValue' of AugmintToken.increaseApproval (/sb/0x9d89005c62f4f12a87c847ffababbf9b4bf16ace.sol#811) is not in mixedCase
+Parameter '_spender' of AugmintToken.decreaseApproval (/sb/0x9d89005c62f4f12a87c847ffababbf9b4bf16ace.sol#817) is not in mixedCase
+Parameter '_subtractedValue' of AugmintToken.decreaseApproval (/sb/0x9d89005c62f4f12a87c847ffababbf9b4bf16ace.sol#817-823) is not in mixedCase
+Parameter '_name' of AugmintToken. (/sb/0x9d89005c62f4f12a87c847ffababbf9b4bf16ace.sol#707-711) is not in mixedCase
+Parameter '_symbol' of AugmintToken. (/sb/0x9d89005c62f4f12a87c847ffababbf9b4bf16ace.sol#711) is not in mixedCase
+Parameter '_peggedSymbol' of AugmintToken. (/sb/0x9d89005c62f4f12a87c847ffababbf9b4bf16ace.sol#711-713) is not in mixedCase
+Parameter '_decimals' of AugmintToken. (/sb/0x9d89005c62f4f12a87c847ffababbf9b4bf16ace.sol#713-715) is not in mixedCase
+Parameter '_feeAccount' of AugmintToken. (/sb/0x9d89005c62f4f12a87c847ffababbf9b4bf16ace.sol#715-717) is not in mixedCase
+Function 'AugmintToken._checkHashAndTransferExecutorFee' (/sb/0x9d89005c62f4f12a87c847ffababbf9b4bf16ace.sol#995-1021) is not in mixedCase
+Function 'AugmintToken._increaseApproval' (/sb/0x9d89005c62f4f12a87c847ffababbf9b4bf16ace.sol#1021-1031) is not in mixedCase
+Parameter '_approver' of AugmintToken._increaseApproval (/sb/0x9d89005c62f4f12a87c847ffababbf9b4bf16ace.sol#1021-1023) is not in mixedCase
+Parameter '_spender' of AugmintToken._increaseApproval (/sb/0x9d89005c62f4f12a87c847ffababbf9b4bf16ace.sol#1023) is not in mixedCase
+Parameter '_addedValue' of AugmintToken._increaseApproval (/sb/0x9d89005c62f4f12a87c847ffababbf9b4bf16ace.sol#1023) is not in mixedCase
+Function 'AugmintToken._transferFrom' (/sb/0x9d89005c62f4f12a87c847ffababbf9b4bf16ace.sol#1031-1061) is not in mixedCase
+Function 'AugmintToken._transfer' (/sb/0x9d89005c62f4f12a87c847ffababbf9b4bf16ace.sol#1061-1073) is not in mixedCase
+Function 'AugmintToken._transfer' (/sb/0x9d89005c62f4f12a87c847ffababbf9b4bf16ace.sol#1077-1123) is not in mixedCase
+Parameter '' of MonetarySupervisor.transferNotification (/sb/0x9d89005c62f4f12a87c847ffababbf9b4bf16ace.sol#1639) is not in mixedCase
+Parameter '_augmintToken' of MonetarySupervisor. (/sb/0x9d89005c62f4f12a87c847ffababbf9b4bf16ace.sol#1413-1415) is not in mixedCase
+Parameter '_augmintReserves' of MonetarySupervisor. (/sb/0x9d89005c62f4f12a87c847ffababbf9b4bf16ace.sol#1415-1419) is not in mixedCase
+Parameter '_interestEarnedAccount' of MonetarySupervisor. (/sb/0x9d89005c62f4f12a87c847ffababbf9b4bf16ace.sol#1419-1421) is not in mixedCase
+Parameter '_lockProductId' of Locker.transferNotification (/sb/0x9d89005c62f4f12a87c847ffababbf9b4bf16ace.sol#1979) is not in mixedCase
+Parameter '_augmintToken' of Locker. (/sb/0x9d89005c62f4f12a87c847ffababbf9b4bf16ace.sol#1909-1911) is not in mixedCase
+Parameter '_monetarySupervisor' of Locker. (/sb/0x9d89005c62f4f12a87c847ffababbf9b4bf16ace.sol#1911-1913) is not in mixedCase
+Function 'Locker._createLock' (/sb/0x9d89005c62f4f12a87c847ffababbf9b4bf16ace.sol#2201-2245) is not in mixedCase
+Contract 'Main0007_stopOldLocker' (/sb/0x9d89005c62f4f12a87c847ffababbf9b4bf16ace.sol) is not in CapWords
+Parameter '' of Main0007_stopOldLocker.execute (/sb/0x9d89005c62f4f12a87c847ffababbf9b4bf16ace.sol) is not in mixedCase
+Constant 'Main0007_stopOldLocker.oldLocker' (/sb/0x9d89005c62f4f12a87c847ffababbf9b4bf16ace.sol) is not in UPPER_CASE_WITH_UNDERSCORES
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x9d89005c62f4f12a87c847ffababbf9b4bf16ace.sol analyzed (14 contracts), 45 result(s) found

@@ -1,0 +1,40 @@
+INFO:Detectors:[93m
+Repay.repay (/sb/0x52f28c876969de6175bd16d7515ff430c15d7117.sol#57-68) does not use the value returned by external calls:
+	-IERC20(dai).transferFrom(msg.sender,address(this),_amount) (/sb/0x52f28c876969de6175bd16d7515ff430c15d7117.sol#58-60)
+	-IERC20(dai).approve(yvdai,_amount) (/sb/0x52f28c876969de6175bd16d7515ff430c15d7117.sol#60-61)
+	-IERC20(yvdai).transfer(strategy,shares) (/sb/0x52f28c876969de6175bd16d7515ff430c15d7117.sol#64)
+Repay.harvest (/sb/0x52f28c876969de6175bd16d7515ff430c15d7117.sol#68-80) does not use the value returned by external calls:
+	-IERC20(dai).transferFrom(msg.sender,address(this),_amount) (/sb/0x52f28c876969de6175bd16d7515ff430c15d7117.sol#71-72)
+	-IERC20(dai).approve(yvdai,_amount) (/sb/0x52f28c876969de6175bd16d7515ff430c15d7117.sol#72-73)
+	-IERC20(yvdai).transfer(strategy,shares) (/sb/0x52f28c876969de6175bd16d7515ff430c15d7117.sol#76-79)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in Repay.constructor (/sb/0x52f28c876969de6175bd16d7515ff430c15d7117.sol#46-51):
+	External calls:
+	- yvdai = Controller(ctrl).vaults(dai) (/sb/0x52f28c876969de6175bd16d7515ff430c15d7117.sol#48)
+	- strategy = Controller(ctrl).strategies(weth) (/sb/0x52f28c876969de6175bd16d7515ff430c15d7117.sol#49-51)
+	State variables written after the call(s):
+	- strategy (/sb/0x52f28c876969de6175bd16d7515ff430c15d7117.sol#49-51)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Repay.ctrl should be constant (/sb/0x52f28c876969de6175bd16d7515ff430c15d7117.sol#37-38)
+Repay.dai should be constant (/sb/0x52f28c876969de6175bd16d7515ff430c15d7117.sol#39-42)
+Repay.weth should be constant (/sb/0x52f28c876969de6175bd16d7515ff430c15d7117.sol#38-39)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x52f28c876969de6175bd16d7515ff430c15d7117.sol:
+	- pragma solidity^0.6.12 (/sb/0x52f28c876969de6175bd16d7515ff430c15d7117.sol#7-9): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '' of Controller.vaults (/sb/0x52f28c876969de6175bd16d7515ff430c15d7117.sol#22) is not in mixedCase
+Parameter '' of Controller.strategies (/sb/0x52f28c876969de6175bd16d7515ff430c15d7117.sol#23) is not in mixedCase
+Parameter '' of Strategy.forceRebalance (/sb/0x52f28c876969de6175bd16d7515ff430c15d7117.sol#28) is not in mixedCase
+Parameter '' of Strategy.setKeeper (/sb/0x52f28c876969de6175bd16d7515ff430c15d7117.sol#32) is not in mixedCase
+Parameter '' of Vault.deposit (/sb/0x52f28c876969de6175bd16d7515ff430c15d7117.sol#36-37) is not in mixedCase
+Parameter '_governance' of Repay.setGovernance (/sb/0x52f28c876969de6175bd16d7515ff430c15d7117.sol#52) is not in mixedCase
+Parameter '_amount' of Repay.repay (/sb/0x52f28c876969de6175bd16d7515ff430c15d7117.sol#57-58) is not in mixedCase
+Parameter '_repay' of Repay.repay (/sb/0x52f28c876969de6175bd16d7515ff430c15d7117.sol#58) is not in mixedCase
+Parameter '_amount' of Repay.harvest (/sb/0x52f28c876969de6175bd16d7515ff430c15d7117.sol#68) is not in mixedCase
+Parameter '_keeper' of Repay.setKeeper (/sb/0x52f28c876969de6175bd16d7515ff430c15d7117.sol#80-81) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x52f28c876969de6175bd16d7515ff430c15d7117.sol analyzed (5 contracts), 15 result(s) found

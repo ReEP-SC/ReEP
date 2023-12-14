@@ -1,0 +1,110 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol:
+/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol:90:3: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+  function Ownable() public {
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol:384:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function PeriodicReleaseLock(ERC20Basic _token, uint256 _firstReleasePeriod, uint256 _regularReleasePeriod) public {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol:476:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function Tutoreum() public {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol:108:5: Warning: Invoking events without "emit" prefix is deprecated.
+    OwnershipTransferred(owner, newOwner);
+    ^-----------------------------------^
+/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol:192:5: Warning: Invoking events without "emit" prefix is deprecated.
+    Transfer(msg.sender, _to, _value);
+    ^-------------------------------^
+/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol:235:5: Warning: Invoking events without "emit" prefix is deprecated.
+    Transfer(_from, _to, _value);
+    ^--------------------------^
+/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol:251:5: Warning: Invoking events without "emit" prefix is deprecated.
+    Approval(msg.sender, _spender, _value);
+    ^------------------------------------^
+/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol:277:5: Warning: Invoking events without "emit" prefix is deprecated.
+    Approval(msg.sender, _spender, allowed[msg.sender][_spender]);
+    ^-----------------------------------------------------------^
+/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol:298:5: Warning: Invoking events without "emit" prefix is deprecated.
+    Approval(msg.sender, _spender, allowed[msg.sender][_spender]);
+    ^-----------------------------------------------------------^
+/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol:329:5: Warning: Invoking events without "emit" prefix is deprecated.
+    Burn(burner, _value);
+    ^------------------^
+/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol:420:9: Warning: Invoking events without "emit" prefix is deprecated.
+        FreezeTokens(_target, _frozenAmount);
+        ^----------------------------------^
+/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol:451:9: Warning: Invoking events without "emit" prefix is deprecated.
+        ReleaseTokens(target, actualReleaseAmount);
+        ^----------------------------------------^
+/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol:479:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Transfer(0x0, msg.sender, INITIAL_SUPPLY);
+        ^---------------------------------------^
+
+INFO:Detectors:[92m
+Reentrancy in Tutoreum.transferAndFreeze (/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol#493-496):
+	External calls:
+	- require(bool)(_lock.token() == this) (/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol)
+	State variables written after the call(s):
+	- balances (/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol)
+	- balances (/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+TokenWithOwner.owner should be constant (/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol#354-355)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+ERC20Basic.totalSupply (/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol#33-34) should be declared external
+BasicToken.totalSupply (/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol#182-185) should be declared external
+BasicToken.balanceOf (/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol#212-214) should be declared external
+ERC20Basic.balanceOf (/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol#34-35) should be declared external
+ERC20.allowance (/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol#45-46) should be declared external
+StandardToken.allowance (/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol#268-270) should be declared external
+StandardToken.transferFrom (/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol#232-243) should be declared external
+ERC20.transferFrom (/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol#46-47) should be declared external
+ERC20.approve (/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol#47-48) should be declared external
+StandardToken.approve (/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol#256-259) should be declared external
+Ownable.transferOwnership (/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol#108-118) should be declared external
+StandardToken.increaseApproval (/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol#282-286) should be declared external
+StandardToken.decreaseApproval (/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol#296-319) should be declared external
+BurnableToken.burn (/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol#327-351) should be declared external
+PeriodicReleaseLock.frozenStatusOf (/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol#404-413) should be declared external
+PeriodicReleaseLock.freeze (/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol#414-436) should be declared external
+PeriodicReleaseLock.release (/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol#438-470) should be declared external
+PeriodicReleaseLock.missingTokensFallback (/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol#472-482) should be declared external
+Tutoreum.transferAndFreeze (/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol#493-496) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol:
+	- pragma solidity^0.4.18 (/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol#1): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'Ownable.Ownable' (/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol#95-97) is not in mixedCase
+Parameter '_owner' of BasicToken.balanceOf (/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol#213) is not in mixedCase
+Parameter '_to' of BasicToken.transfer (/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol#189-190) is not in mixedCase
+Parameter '_value' of BasicToken.transfer (/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol#190) is not in mixedCase
+Parameter '_owner' of StandardToken.allowance (/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol#268-269) is not in mixedCase
+Parameter '_spender' of StandardToken.allowance (/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol#269) is not in mixedCase
+Parameter '_from' of StandardToken.transferFrom (/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol#232) is not in mixedCase
+Parameter '_to' of StandardToken.transferFrom (/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol#232-233) is not in mixedCase
+Parameter '_value' of StandardToken.transferFrom (/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol#233) is not in mixedCase
+Parameter '_spender' of StandardToken.approve (/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol#256-257) is not in mixedCase
+Parameter '_value' of StandardToken.approve (/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol#257) is not in mixedCase
+Parameter '_spender' of StandardToken.increaseApproval (/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol#282) is not in mixedCase
+Parameter '_addedValue' of StandardToken.increaseApproval (/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol#282) is not in mixedCase
+Parameter '_spender' of StandardToken.decreaseApproval (/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol#298) is not in mixedCase
+Parameter '_subtractedValue' of StandardToken.decreaseApproval (/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol#298) is not in mixedCase
+Parameter '_value' of BurnableToken.burn (/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol#327-328) is not in mixedCase
+Function 'PeriodicReleaseLock.PeriodicReleaseLock' (/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol#393-404) is not in mixedCase
+Parameter '_token' of PeriodicReleaseLock.PeriodicReleaseLock (/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol#393) is not in mixedCase
+Parameter '_firstReleasePeriod' of PeriodicReleaseLock.PeriodicReleaseLock (/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol#393) is not in mixedCase
+Parameter '_regularReleasePeriod' of PeriodicReleaseLock.PeriodicReleaseLock (/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol#393-394) is not in mixedCase
+Parameter '_target' of PeriodicReleaseLock.frozenStatusOf (/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol#404) is not in mixedCase
+Parameter '_target' of PeriodicReleaseLock.freeze (/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol#414) is not in mixedCase
+Parameter '_frozenAmount' of PeriodicReleaseLock.freeze (/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol#414-416) is not in mixedCase
+Parameter '_releaseAmount' of PeriodicReleaseLock.freeze (/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol#416) is not in mixedCase
+Function 'Tutoreum.Tutoreum' (/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol#489-493) is not in mixedCase
+Parameter '_to' of Tutoreum.transferAndFreeze (/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol#494-496) is not in mixedCase
+Parameter '_lock' of Tutoreum.transferAndFreeze (/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol) is not in mixedCase
+Parameter '_transferAmount' of Tutoreum.transferAndFreeze (/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol) is not in mixedCase
+Parameter '_frozenAmount' of Tutoreum.transferAndFreeze (/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol) is not in mixedCase
+Parameter '_releaseAmount' of Tutoreum.transferAndFreeze (/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xc316074c2eb9d7076088da1571ee349186c777ad.sol analyzed (12 contracts), 52 result(s) found

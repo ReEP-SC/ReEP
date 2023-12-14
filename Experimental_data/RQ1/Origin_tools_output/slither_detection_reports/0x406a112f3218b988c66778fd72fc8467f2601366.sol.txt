@@ -1,0 +1,47 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x406a112f3218b988c66778fd72fc8467f2601366.sol:
+/sb/0x406a112f3218b988c66778fd72fc8467f2601366.sol:415:71: Warning: The "returndatasize" instruction is only available after the Metropolis hard fork. Before that it acts as an invalid instruction.
+            mstore(freeMemoryPtrPosition, add(returndataMemoryOffset, returndatasize))
+                                                                      ^------------^
+/sb/0x406a112f3218b988c66778fd72fc8467f2601366.sol:419:57: Warning: The "returndatasize" instruction is only available after the Metropolis hard fork. Before that it acts as an invalid instruction.
+            returndatacopy(returndataMemoryOffset, 0x0, returndatasize)
+                                                        ^------------^
+/sb/0x406a112f3218b988c66778fd72fc8467f2601366.sol:419:13: Warning: The "returndatacopy" instruction is only available after the Metropolis hard fork. Before that it acts as an invalid instruction.
+            returndatacopy(returndataMemoryOffset, 0x0, returndatasize)
+            ^------------^
+/sb/0x406a112f3218b988c66778fd72fc8467f2601366.sol:431:48: Warning: The "returndatasize" instruction is only available after the Metropolis hard fork. Before that it acts as an invalid instruction.
+                revert(returndataMemoryOffset, returndatasize)
+                                               ^------------^
+/sb/0x406a112f3218b988c66778fd72fc8467f2601366.sol:437:48: Warning: The "returndatasize" instruction is only available after the Metropolis hard fork. Before that it acts as an invalid instruction.
+                return(returndataMemoryOffset, returndatasize)
+                                               ^------------^
+
+INFO:Detectors:[93m
+Contract locking ether found in /sb/0x406a112f3218b988c66778fd72fc8467f2601366.sol:
+	Contract ManagerProxy has payable functions:
+	 - fallback (/sb/0x406a112f3218b988c66778fd72fc8467f2601366.sol#391-445)
+	But does not have a function to withdraw the ether
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#contracts-that-lock-ether[0m
+INFO:Detectors:[92m
+ManagerProxy.fallback uses assembly (/sb/0x406a112f3218b988c66778fd72fc8467f2601366.sol#391-445)
+	- /sb/0x406a112f3218b988c66778fd72fc8467f2601366.sol#395-445
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0x406a112f3218b988c66778fd72fc8467f2601366.sol#83-99) should be declared external
+Pausable.pause (/sb/0x406a112f3218b988c66778fd72fc8467f2601366.sol#167-175) should be declared external
+Pausable.unpause (/sb/0x406a112f3218b988c66778fd72fc8467f2601366.sol#185-189) should be declared external
+IController.getContract (/sb/0x406a112f3218b988c66778fd72fc8467f2601366.sol#207-213) should be declared external
+ManagerProxy.fallback (/sb/0x406a112f3218b988c66778fd72fc8467f2601366.sol#391-445) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x406a112f3218b988c66778fd72fc8467f2601366.sol:
+	- pragma solidity0.4.18 (/sb/0x406a112f3218b988c66778fd72fc8467f2601366.sol#9-14): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'Ownable.Ownable' (/sb/0x406a112f3218b988c66778fd72fc8467f2601366.sol#47-57) is not in mixedCase
+Parameter '_controller' of Manager.setController (/sb/0x406a112f3218b988c66778fd72fc8467f2601366.sol#305) is not in mixedCase
+Function 'Manager.Manager' (/sb/0x406a112f3218b988c66778fd72fc8467f2601366.sol#285-291) is not in mixedCase
+Parameter '_controller' of Manager.Manager (/sb/0x406a112f3218b988c66778fd72fc8467f2601366.sol#285) is not in mixedCase
+Function 'ManagerProxy.ManagerProxy' (/sb/0x406a112f3218b988c66778fd72fc8467f2601366.sol#365-367) is not in mixedCase
+Parameter '_targetContractId' of ManagerProxy.ManagerProxy (/sb/0x406a112f3218b988c66778fd72fc8467f2601366.sol#365) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x406a112f3218b988c66778fd72fc8467f2601366.sol analyzed (7 contracts), 14 result(s) found

@@ -1,0 +1,80 @@
+INFO:Detectors:[91m
+ERC20.______gap (/sb/0x34628b19f2267f31e4acee652a234216903e2385.sol#394-397) shadows:
+	- Initializable.______gap (/sb/0x34628b19f2267f31e4acee652a234216903e2385.sol#61)
+TokenTimelock.______gap (/sb/0x34628b19f2267f31e4acee652a234216903e2385.sol) shadows:
+	- Initializable.______gap (/sb/0x34628b19f2267f31e4acee652a234216903e2385.sol#61)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variable-shadowing[0m
+INFO:Detectors:[93m
+Initializable.isConstructor (/sb/0x34628b19f2267f31e4acee652a234216903e2385.sol#46-57) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+TokenTimelock.increaseReleaseTime (/sb/0x34628b19f2267f31e4acee652a234216903e2385.sol#523-531) uses a dangerous strict equality:
+	- require(bool)(amount == 0)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Reentrancy in TokenTimelock.increaseReleaseTime (/sb/0x34628b19f2267f31e4acee652a234216903e2385.sol#523-531):
+	External calls:
+	- amount = _token.balanceOf(address(this)) (/sb/0x34628b19f2267f31e4acee652a234216903e2385.sol)
+	State variables written after the call(s):
+	- _releaseTime (/sb/0x34628b19f2267f31e4acee652a234216903e2385.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+TokenTimelock.initialize.token (local variable @ /sb/0x34628b19f2267f31e4acee652a234216903e2385.sol#470-471) shadows:
+	- TokenTimelock.token (function @ /sb/0x34628b19f2267f31e4acee652a234216903e2385.sol#486-488)
+TokenTimelock.initialize.beneficiary (local variable @ /sb/0x34628b19f2267f31e4acee652a234216903e2385.sol#472) shadows:
+	- TokenTimelock.beneficiary (function @ /sb/0x34628b19f2267f31e4acee652a234216903e2385.sol#490-493)
+TokenTimelock.initialize.releaseTime (local variable @ /sb/0x34628b19f2267f31e4acee652a234216903e2385.sol#472) shadows:
+	- TokenTimelock.releaseTime (function @ /sb/0x34628b19f2267f31e4acee652a234216903e2385.sol#497-499)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+TokenTimelock.initialize (/sb/0x34628b19f2267f31e4acee652a234216903e2385.sol#470-484) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool)(releaseTime > block.timestamp) (/sb/0x34628b19f2267f31e4acee652a234216903e2385.sol#479)
+TokenTimelock.release (/sb/0x34628b19f2267f31e4acee652a234216903e2385.sol#502-509) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool)(block.timestamp >= _releaseTime) (/sb/0x34628b19f2267f31e4acee652a234216903e2385.sol#505)
+TokenTimelock.increaseReleaseTime (/sb/0x34628b19f2267f31e4acee652a234216903e2385.sol#523-531) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool)(newReleaseTime < block.timestamp + 172800000) (/sb/0x34628b19f2267f31e4acee652a234216903e2385.sol)
+	- require(bool)(newReleaseTime > block.timestamp) (/sb/0x34628b19f2267f31e4acee652a234216903e2385.sol#530-531)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+Initializable.isConstructor uses assembly (/sb/0x34628b19f2267f31e4acee652a234216903e2385.sol#46-57)
+	- /sb/0x34628b19f2267f31e4acee652a234216903e2385.sol#54-57
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+IERC20.totalSupply (/sb/0x34628b19f2267f31e4acee652a234216903e2385.sol#79-81) should be declared external
+ERC20.totalSupply (/sb/0x34628b19f2267f31e4acee652a234216903e2385.sol#199-201) should be declared external
+ERC20.balanceOf (/sb/0x34628b19f2267f31e4acee652a234216903e2385.sol#208-209) should be declared external
+IERC20.balanceOf (/sb/0x34628b19f2267f31e4acee652a234216903e2385.sol#81-82) should be declared external
+IERC20.allowance (/sb/0x34628b19f2267f31e4acee652a234216903e2385.sol#82-86) should be declared external
+ERC20.allowance (/sb/0x34628b19f2267f31e4acee652a234216903e2385.sol#225-228) should be declared external
+IERC20.transfer (/sb/0x34628b19f2267f31e4acee652a234216903e2385.sol#86-89) should be declared external
+ERC20.transfer (/sb/0x34628b19f2267f31e4acee652a234216903e2385.sol#234-236) should be declared external
+IERC20.approve (/sb/0x34628b19f2267f31e4acee652a234216903e2385.sol#89-90) should be declared external
+ERC20.approve (/sb/0x34628b19f2267f31e4acee652a234216903e2385.sol#251-254) should be declared external
+IERC20.transferFrom (/sb/0x34628b19f2267f31e4acee652a234216903e2385.sol#90-96) should be declared external
+ERC20.transferFrom (/sb/0x34628b19f2267f31e4acee652a234216903e2385.sol#267-275) should be declared external
+ERC20.increaseAllowance (/sb/0x34628b19f2267f31e4acee652a234216903e2385.sol#291-300) should be declared external
+ERC20.decreaseAllowance (/sb/0x34628b19f2267f31e4acee652a234216903e2385.sol#315-327) should be declared external
+TokenTimelock.initialize (/sb/0x34628b19f2267f31e4acee652a234216903e2385.sol#470-484) should be declared external
+TokenTimelock.token (/sb/0x34628b19f2267f31e4acee652a234216903e2385.sol#486-488) should be declared external
+TokenTimelock.beneficiary (/sb/0x34628b19f2267f31e4acee652a234216903e2385.sol#490-493) should be declared external
+TokenTimelock.releaseTime (/sb/0x34628b19f2267f31e4acee652a234216903e2385.sol#497-499) should be declared external
+TokenTimelock.release (/sb/0x34628b19f2267f31e4acee652a234216903e2385.sol#502-509) should be declared external
+TokenTimelock.increaseReleaseTime (/sb/0x34628b19f2267f31e4acee652a234216903e2385.sol#523-531) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Variable 'Initializable.______gap' (/sb/0x34628b19f2267f31e4acee652a234216903e2385.sol#61) is not in mixedCase
+Function 'ERC20._transfer' (/sb/0x34628b19f2267f31e4acee652a234216903e2385.sol#335-341) is not in mixedCase
+Function 'ERC20._mint' (/sb/0x34628b19f2267f31e4acee652a234216903e2385.sol#351-358) is not in mixedCase
+Function 'ERC20._burn' (/sb/0x34628b19f2267f31e4acee652a234216903e2385.sol#364-370) is not in mixedCase
+Function 'ERC20._burnFrom' (/sb/0x34628b19f2267f31e4acee652a234216903e2385.sol#377-394) is not in mixedCase
+Variable 'ERC20.______gap' (/sb/0x34628b19f2267f31e4acee652a234216903e2385.sol#394-397) is not in mixedCase
+Variable 'TokenTimelock.______gap' (/sb/0x34628b19f2267f31e4acee652a234216903e2385.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+ERC20.______gap (/sb/0x34628b19f2267f31e4acee652a234216903e2385.sol#394-397) is never used in ERC20
+TokenTimelock.______gap (/sb/0x34628b19f2267f31e4acee652a234216903e2385.sol) is never used in TokenTimelock
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0x34628b19f2267f31e4acee652a234216903e2385.sol analyzed (6 contracts), 41 result(s) found

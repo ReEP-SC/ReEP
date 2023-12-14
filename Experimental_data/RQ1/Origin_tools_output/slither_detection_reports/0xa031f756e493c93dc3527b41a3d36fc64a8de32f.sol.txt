@@ -1,0 +1,211 @@
+INFO:Detectors:[91m
+MultiSigAdministration.actions (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#621-631) is never initialized. It is used in:
+	- _getAction (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1017-1023)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-state-variables[0m
+INFO:Detectors:[93m
+Reentrancy in MultiSigProxyOwner.requestBurn (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1451-1490):
+	External calls:
+	- token.transferFrom(msg.sender,address(this),_value) (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1459-1461)
+	State variables written after the call(s):
+	- burnRequests (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1465-1471)
+Reentrancy in MultiSigProxyOwner.requestBurn (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1451-1490):
+	External calls:
+	- token.transferFrom(msg.sender,address(this),_value) (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1459-1461)
+	- burnRequests[msg.sender].actionId = multiSigAdmin.initiateAction(address(this),burn(address,uint256),abi.encode(msg.sender,_value)) (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1471-1479)
+	State variables written after the call(s):
+	- burnRequests (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1471-1479)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+MultiSigProxyOwner.constructor (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1413-1451) does not use the value returned by external calls:
+	-multiSigAdmin.register(address(this),creators,_admins,_quorum) (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1439-1447)
+MultiSigProxyOwner.requestBurn (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1451-1490) does not use the value returned by external calls:
+	-token.transferFrom(msg.sender,address(this),_value) (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1459-1461)
+MultiSigProxyOwner.cancelBurn (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1493-1517) does not use the value returned by external calls:
+	-token.transfer(msg.sender,_value) (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol)
+MultiSigProxyOwner.burn (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol) does not use the value returned by external calls:
+	-token.burn(_value) (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+ERC20Detailed.constructor.name (local variable @ /sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#23) shadows:
+	- ERC20Detailed.name (function @ /sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#35-43)
+ERC20Detailed.constructor.symbol (local variable @ /sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#23) shadows:
+	- ERC20Detailed.symbol (function @ /sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#43-51)
+ERC20Detailed.constructor.decimals (local variable @ /sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#23-25) shadows:
+	- ERC20Detailed.decimals (function @ /sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#52-65)
+ERC20Extended.constructor._name (local variable @ /sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#527-529) shadows:
+	- ERC20Detailed._name (state variable @ /sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#15-17)
+ERC20Extended.constructor._symbol (local variable @ /sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#529-531) shadows:
+	- ERC20Detailed._symbol (state variable @ /sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#17-19)
+ERC20Extended.constructor._decimals (local variable @ /sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#531-533) shadows:
+	- ERC20Detailed._decimals (state variable @ /sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#19-23)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+Reentrancy in MultiSigAdministration.register (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#693-723):
+	External calls:
+	- require(bool,string)(msg.sender == _tenant || msg.sender == Ownable(_tenant).owner(),ONLY_TENANT_OR_TENANT_OWNER) (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#705-717)
+	State variables written after the call(s):
+	- isAdmin (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#717-721)
+	- isCreator (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#717-721)
+	- isRegistered (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#717-721)
+	- numOfAdmins (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#717-721)
+	- quorums (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#717-721)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+ERC20Detailed.name (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#35-43) should be declared external
+ERC20Detailed.symbol (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#43-51) should be declared external
+ERC20Detailed.decimals (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#52-65) should be declared external
+ERC20.transfer (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#151-159) should be declared external
+IERC20.transfer (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#65-69) should be declared external
+IERC20.approve (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#69-73) should be declared external
+ERC20.approve (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#161-165) should be declared external
+IERC20.transferFrom (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#73-81) should be declared external
+ERC20.transferFrom (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#165-181) should be declared external
+IERC20.totalSupply (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#81-85) should be declared external
+ERC20.totalSupply (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#125-133) should be declared external
+ERC20.balanceOf (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#133-137) should be declared external
+IERC20.balanceOf (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#85) should be declared external
+IERC20.allowance (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#86-93) should be declared external
+ERC20.allowance (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#141-147) should be declared external
+Ownable.owner (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#287-291) should be declared external
+Ownable.transferOwnership (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#306-317) should be declared external
+ERC20Extended.burn (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#535-539) should be declared external
+ERC20Extended.mint (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#539-543) should be declared external
+MultiSigAdministration.register (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#693-723) should be declared external
+MultiSigAdministration.initiateAdminAction (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#723-767) should be declared external
+MultiSigAdministration.initiateAction (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#769-797) should be declared external
+MultiSigAdministration.approveAction (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#798-815) should be declared external
+MultiSigAdministration.rejectAction (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#815-835) should be declared external
+MultiSigAdministration.addAdmin (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#835-861) should be declared external
+MultiSigAdministration.removeAdmin (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#863-895) should be declared external
+MultiSigAdministration.changeQuorum (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#895-905) should be declared external
+MultiSigAdministration.addCreator (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#905-911) should be declared external
+MultiSigAdministration.removeCreator (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#911-919) should be declared external
+MultiSigAdministration.getAction (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#919-994) should be declared external
+MultiSigAdministration.hasApprovedBy (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#995-1011) should be declared external
+MultiSigProxyOwner.requestBurn (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1451-1490) should be declared external
+MultiSigProxyOwner.cancelBurn (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1493-1517) should be declared external
+MultiSigProxyOwner.burn (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol) should be declared external
+MultiSigProxyOwner.mint (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol) should be declared external
+MultiSigProxyOwner.transferOwnership (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol) should be declared external
+MultiSigProxyOwner.setBurnMin (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol:
+	- pragma solidity>=0.5.4<0.6.0 (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#9-13): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Low level call in MultiSigAction.complete (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#425-473):
+	-(_success) = _self.callbackAddress.call(abi.encodePacked(bytes4(keccak256(bytes)(bytes(_self.callbackSig))),_self.callbackData)) /sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#455-469
+Low level call in MultiSigProxyOwner.cancelBurn (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1493-1517):
+	-(_success) = address(multiSigAdmin).call(abi.encodeWithSignature(rejectAction(address,uint256),address(this),_actionId)) /sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1507-1517
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Function 'ERC20._transfer' (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#181-197) is not in mixedCase
+Function 'ERC20._mint' (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#197-213) is not in mixedCase
+Function 'ERC20._burn' (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#215-231) is not in mixedCase
+Function 'ERC20._approve' (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#231-255) is not in mixedCase
+Function 'Ownable._transferOwnership' (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#317-331) is not in mixedCase
+Parameter '_self' of MultiSigAction.init (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#361-363) is not in mixedCase
+Parameter '_actionType' of MultiSigAction.init (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#363-365) is not in mixedCase
+Parameter '_callbackAddress' of MultiSigAction.init (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#365-371) is not in mixedCase
+Parameter '_callbackSig' of MultiSigAction.init (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#371) is not in mixedCase
+Parameter '_callbackData' of MultiSigAction.init (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#371-373) is not in mixedCase
+Parameter '_quorum' of MultiSigAction.init (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#373) is not in mixedCase
+Parameter '_self' of MultiSigAction.approve (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#391) is not in mixedCase
+Parameter '_self' of MultiSigAction.reject (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#411-413) is not in mixedCase
+Parameter '_self' of MultiSigAction.complete (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#425-431) is not in mixedCase
+Parameter '_self' of MultiSigAction.isCompleted (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#485) is not in mixedCase
+Parameter '_value' of ERC20Extended.burn (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#536-537) is not in mixedCase
+Parameter '_to' of ERC20Extended.mint (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#539) is not in mixedCase
+Parameter '_value' of ERC20Extended.mint (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#539) is not in mixedCase
+Parameter '_tenant' of MultiSigAdministration.register (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#695) is not in mixedCase
+Parameter '_creators' of MultiSigAdministration.register (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#695-699) is not in mixedCase
+Parameter '_admins' of MultiSigAdministration.register (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#699-701) is not in mixedCase
+Parameter '_quorum' of MultiSigAdministration.register (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#703) is not in mixedCase
+Parameter '_tenant' of MultiSigAdministration.initiateAdminAction (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#725-727) is not in mixedCase
+Parameter '_adminAction' of MultiSigAdministration.initiateAdminAction (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#729) is not in mixedCase
+Parameter '_callbackData' of MultiSigAdministration.initiateAdminAction (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#729) is not in mixedCase
+Parameter '_tenant' of MultiSigAdministration.initiateAction (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#771-773) is not in mixedCase
+Parameter '_callbackSig' of MultiSigAdministration.initiateAction (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#773) is not in mixedCase
+Parameter '_callbackData' of MultiSigAdministration.initiateAction (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#773-775) is not in mixedCase
+Parameter '_tenant' of MultiSigAdministration.approveAction (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#799) is not in mixedCase
+Parameter '_id' of MultiSigAdministration.approveAction (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#801) is not in mixedCase
+Parameter '_tenant' of MultiSigAdministration.rejectAction (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#819) is not in mixedCase
+Parameter '_id' of MultiSigAdministration.rejectAction (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#819) is not in mixedCase
+Parameter '_tenant' of MultiSigAdministration.addAdmin (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#835-837) is not in mixedCase
+Parameter '_admin' of MultiSigAdministration.addAdmin (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#837) is not in mixedCase
+Parameter '_increaseQuorum' of MultiSigAdministration.addAdmin (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#837) is not in mixedCase
+Parameter '_tenant' of MultiSigAdministration.removeAdmin (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#867-869) is not in mixedCase
+Parameter '_admin' of MultiSigAdministration.removeAdmin (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#869) is not in mixedCase
+Parameter '_decreaseQuorum' of MultiSigAdministration.removeAdmin (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#870-871) is not in mixedCase
+Parameter '_tenant' of MultiSigAdministration.changeQuorum (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#899) is not in mixedCase
+Parameter '_quorum' of MultiSigAdministration.changeQuorum (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#899) is not in mixedCase
+Parameter '_tenant' of MultiSigAdministration.addCreator (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#907) is not in mixedCase
+Parameter '_creator' of MultiSigAdministration.addCreator (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#907-909) is not in mixedCase
+Parameter '_tenant' of MultiSigAdministration.removeCreator (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#913-915) is not in mixedCase
+Parameter '_creator' of MultiSigAdministration.removeCreator (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#915) is not in mixedCase
+Parameter '_tenant' of MultiSigAdministration.getAction (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#921-925) is not in mixedCase
+Parameter '_id' of MultiSigAdministration.getAction (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#925) is not in mixedCase
+Parameter '_tenant' of MultiSigAdministration.hasApprovedBy (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#995) is not in mixedCase
+Parameter '_id' of MultiSigAdministration.hasApprovedBy (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#995-997) is not in mixedCase
+Parameter '_admin' of MultiSigAdministration.hasApprovedBy (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#997) is not in mixedCase
+Function 'MultiSigAdministration._getAction' (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1017-1023) is not in mixedCase
+Parameter '_tenant' of MultiSigAdministration._getAction (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1017) is not in mixedCase
+Parameter '_id' of MultiSigAdministration._getAction (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1017-1019) is not in mixedCase
+Function 'MultiSigAdministration._isActionValid' (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1023-1033) is not in mixedCase
+Parameter '_tenant' of MultiSigAdministration._isActionValid (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1023-1024) is not in mixedCase
+Parameter '_id' of MultiSigAdministration._isActionValid (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1026-1027) is not in mixedCase
+Function 'MultiSigAdministration._getAdminActionCallbackSig' (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1033-1069) is not in mixedCase
+Parameter '_adminAction' of MultiSigAdministration._getAdminActionCallbackSig (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1035) is not in mixedCase
+Function 'MultiSigAdministration._addCreator' (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1069-1087) is not in mixedCase
+Parameter '_tenant' of MultiSigAdministration._addCreator (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1069) is not in mixedCase
+Parameter '_creator' of MultiSigAdministration._addCreator (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1069) is not in mixedCase
+Function 'MultiSigAdministration._removeCreator' (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1090-1105) is not in mixedCase
+Parameter '_tenant' of MultiSigAdministration._removeCreator (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1093-1095) is not in mixedCase
+Parameter '_creator' of MultiSigAdministration._removeCreator (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1095-1097) is not in mixedCase
+Function 'MultiSigAdministration._addAdmin' (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1105-1131) is not in mixedCase
+Parameter '_tenant' of MultiSigAdministration._addAdmin (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1105-1107) is not in mixedCase
+Parameter '_admin' of MultiSigAdministration._addAdmin (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1107) is not in mixedCase
+Function 'MultiSigAdministration._removeAdmin' (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1131-1155) is not in mixedCase
+Parameter '_tenant' of MultiSigAdministration._removeAdmin (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1135-1137) is not in mixedCase
+Parameter '_admin' of MultiSigAdministration._removeAdmin (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1138-1141) is not in mixedCase
+Function 'MultiSigAdministration._changeQuorum' (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1155-1167) is not in mixedCase
+Parameter '_tenant' of MultiSigAdministration._changeQuorum (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1155-1157) is not in mixedCase
+Parameter '_quorum' of MultiSigAdministration._changeQuorum (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1157) is not in mixedCase
+Function 'MultiSigAdministration._register' (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1167-1223) is not in mixedCase
+Parameter '_tenant' of MultiSigAdministration._register (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1169) is not in mixedCase
+Parameter '_creators' of MultiSigAdministration._register (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1169-1173) is not in mixedCase
+Parameter '_admins' of MultiSigAdministration._register (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1177) is not in mixedCase
+Parameter '_quorum' of MultiSigAdministration._register (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1177-1179) is not in mixedCase
+Function 'MultiSigAdministration._initiateAction' (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1223-1281) is not in mixedCase
+Parameter '_actionType' of MultiSigAdministration._initiateAction (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1225) is not in mixedCase
+Parameter '_tenant' of MultiSigAdministration._initiateAction (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1227-1229) is not in mixedCase
+Parameter '_callbackAddress' of MultiSigAdministration._initiateAction (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1229) is not in mixedCase
+Parameter '_callbackSig' of MultiSigAdministration._initiateAction (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1231-1237) is not in mixedCase
+Parameter '_callbackData' of MultiSigAdministration._initiateAction (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1239-1243) is not in mixedCase
+Function 'MultiSigAdministration._approveAction' (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1287-1333) is not in mixedCase
+Parameter '_tenant' of MultiSigAdministration._approveAction (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1287-1289) is not in mixedCase
+Parameter '_id' of MultiSigAdministration._approveAction (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1289) is not in mixedCase
+Function 'MultiSigAdministration._rejectAction' (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1334-1375) is not in mixedCase
+Parameter '_tenant' of MultiSigAdministration._rejectAction (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1337) is not in mixedCase
+Parameter '_id' of MultiSigAdministration._rejectAction (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1337-1339) is not in mixedCase
+Parameter '_token' of MultiSigProxyOwner. (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1415-1417) is not in mixedCase
+Parameter '_multiSigAdmin' of MultiSigProxyOwner. (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1419) is not in mixedCase
+Parameter '_admins' of MultiSigProxyOwner. (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1419-1423) is not in mixedCase
+Parameter '_quorum' of MultiSigProxyOwner. (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1423-1426) is not in mixedCase
+Parameter '_burnMin' of MultiSigProxyOwner. (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1427-1432) is not in mixedCase
+Parameter '_value' of MultiSigProxyOwner.requestBurn (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol#1451) is not in mixedCase
+Parameter '_owner' of MultiSigProxyOwner.burn (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol) is not in mixedCase
+Parameter '_value' of MultiSigProxyOwner.burn (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol) is not in mixedCase
+Parameter '_to' of MultiSigProxyOwner.mint (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol) is not in mixedCase
+Parameter '_value' of MultiSigProxyOwner.mint (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol) is not in mixedCase
+Parameter '_newOwner' of MultiSigProxyOwner.transferOwnership (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol) is not in mixedCase
+Parameter '_burnMin' of MultiSigProxyOwner.setBurnMin (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol) is not in mixedCase
+Function 'MultiSigProxyOwner._setBurnMin' (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol) is not in mixedCase
+Parameter '_burnMin' of MultiSigProxyOwner._setBurnMin (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol) is not in mixedCase
+Function 'MultiSigProxyOwner._burnRequestExist' (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol) is not in mixedCase
+Parameter '_owner' of MultiSigProxyOwner._burnRequestExist (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol) is not in mixedCase
+Function 'MultiSigProxyOwner._deleteBurnRequest' (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol) is not in mixedCase
+Parameter '_owner' of MultiSigProxyOwner._deleteBurnRequest (/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xa031f756e493c93dc3527b41a3d36fc64a8de32f.sol analyzed (9 contracts), 161 result(s) found

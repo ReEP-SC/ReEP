@@ -1,0 +1,52 @@
+INFO:Detectors:[91m
+Reentrancy in Get102Token.fallback (/sb/0xcc7354764426615d8f4d3567167273f0648144d9.sol#199-225):
+	External calls:
+	- require(bool)(TOKEN.balanceOf(address(this)) >= TOKEN_PER_TXN) (/sb/0xcc7354764426615d8f4d3567167273f0648144d9.sol#201-204)
+	- require(bool)(TOKEN.balanceOf(msg.sender) == 0) (/sb/0xcc7354764426615d8f4d3567167273f0648144d9.sol#204-205)
+	- require(bool)(! TOKEN.inWhitelist(msg.sender)) (/sb/0xcc7354764426615d8f4d3567167273f0648144d9.sol#205-207)
+	- (__etherPrice,None,None,__tokenUsdPrice,None,None,None,None,None,None,None,None) = TOKEN_PUBLIC_SALE.status() (/sb/0xcc7354764426615d8f4d3567167273f0648144d9.sol#210-212)
+	External calls sending eth:
+	- msg.sender.transfer(msg.value.sub(__wei)) (/sb/0xcc7354764426615d8f4d3567167273f0648144d9.sol#221-223)
+	- _receiver.transfer(__wei) (/sb/0xcc7354764426615d8f4d3567167273f0648144d9.sol#223-225)
+	State variables written after the call(s):
+	- _alreadyGot (/sb/0xcc7354764426615d8f4d3567167273f0648144d9.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities[0m
+INFO:Detectors:[93m
+Get102Token.fallback (/sb/0xcc7354764426615d8f4d3567167273f0648144d9.sol#199-225) uses a dangerous strict equality:
+	- require(bool)(TOKEN.balanceOf(msg.sender) == 0)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[92m
+Reentrancy in Get102Token.fallback (/sb/0xcc7354764426615d8f4d3567167273f0648144d9.sol#199-225):
+	External calls:
+	- require(bool)(TOKEN.balanceOf(address(this)) >= TOKEN_PER_TXN) (/sb/0xcc7354764426615d8f4d3567167273f0648144d9.sol#201-204)
+	- require(bool)(TOKEN.balanceOf(msg.sender) == 0) (/sb/0xcc7354764426615d8f4d3567167273f0648144d9.sol#204-205)
+	- require(bool)(! TOKEN.inWhitelist(msg.sender)) (/sb/0xcc7354764426615d8f4d3567167273f0648144d9.sol#205-207)
+	- (__etherPrice,None,None,__tokenUsdPrice,None,None,None,None,None,None,None,None) = TOKEN_PUBLIC_SALE.status() (/sb/0xcc7354764426615d8f4d3567167273f0648144d9.sol#210-212)
+	External calls sending eth:
+	- msg.sender.transfer(msg.value.sub(__wei)) (/sb/0xcc7354764426615d8f4d3567167273f0648144d9.sol#221-223)
+	- _receiver.transfer(__wei) (/sb/0xcc7354764426615d8f4d3567167273f0648144d9.sol#223-225)
+	State variables written after the call(s):
+	- _txs (/sb/0xcc7354764426615d8f4d3567167273f0648144d9.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Get102Token.TOKEN_PER_TXN should be constant (/sb/0xcc7354764426615d8f4d3567167273f0648144d9.sol#188-191)
+Get102Token.WEI_MIN should be constant (/sb/0xcc7354764426615d8f4d3567167273f0648144d9.sol#188)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Ownable.owner (/sb/0xcc7354764426615d8f4d3567167273f0648144d9.sol#63-68) should be declared external
+Pausable.paused (/sb/0xcc7354764426615d8f4d3567167273f0648144d9.sol#127-132) should be declared external
+Get102Token.txs (/sb/0xcc7354764426615d8f4d3567167273f0648144d9.sol#198-199) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xcc7354764426615d8f4d3567167273f0648144d9.sol:
+	- pragma solidity^0.5.7 (/sb/0xcc7354764426615d8f4d3567167273f0648144d9.sol#5-9): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Variable 'Ownable._receiver' (/sb/0xcc7354764426615d8f4d3567167273f0648144d9.sol#52) is not in mixedCase
+Variable 'Get102Token.TOKEN' (/sb/0xcc7354764426615d8f4d3567167273f0648144d9.sol#179-182) is not in mixedCase
+Variable 'Get102Token.TOKEN_PUBLIC_SALE' (/sb/0xcc7354764426615d8f4d3567167273f0648144d9.sol#182-186) is not in mixedCase
+Variable 'Get102Token.WEI_MIN' (/sb/0xcc7354764426615d8f4d3567167273f0648144d9.sol#188) is not in mixedCase
+Variable 'Get102Token.TOKEN_PER_TXN' (/sb/0xcc7354764426615d8f4d3567167273f0648144d9.sol#188-191) is not in mixedCase
+Variable 'Get102Token._alreadyGot' (/sb/0xcc7354764426615d8f4d3567167273f0648144d9.sol#192-196) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xcc7354764426615d8f4d3567167273f0648144d9.sol analyzed (7 contracts), 14 result(s) found

@@ -1,0 +1,109 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol:
+/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol:113:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Approval(msg.sender, _spender, _value);
+        ^------------------------------------^
+/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol:131:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Transfer(msg.sender, _to, _value);
+        ^-------------------------------^
+/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol:146:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Transfer(_from, _to, _value);
+        ^--------------------------^
+/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol:107:6: Warning: No visibility specified. Defaulting to "public". 
+     function balanceOf(address _owner) constant returns (uint256 balance) {
+     ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol:111:5: Warning: No visibility specified. Defaulting to "public". 
+    function approve(address _spender, uint _value) {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol:117:5: Warning: No visibility specified. Defaulting to "public". 
+    function allowance(address _owner, address _spender) constant returns (uint256 remaining) {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol:160:6: Warning: No visibility specified. Defaulting to "public". 
+     function getEffectiveCount() constant  returns (uint) {
+     ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol:161:10: Warning: Unused local variable.
+         ERC20 token =ERC20(mbtcAddr);
+         ^---------^
+/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol:173:5: Warning: No visibility specified. Defaulting to "public". 
+    function getUserCount() constant  returns (uint) {
+    ^ (Relevant source part starts here and spans across multiple lines).
+
+INFO:Detectors:[93m
+ERC20Basic (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#46-62) has incorrect ERC20 function interface(s):
+	-transfer (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#58)
+ERC20 (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#62-72) has incorrect ERC20 function interface(s):
+	-transferFrom (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#63-65)
+	-approve (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#65)
+MBTCXToken (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#74-193) has incorrect ERC20 function interface(s):
+	-transfer (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#124-137)
+	-transferFrom (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#137-153)
+	-approve (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#113-118)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[93m
+MBTCXToken.decimals (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#80-81) shadows:
+	- ERC20Basic.decimals (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#47-48)
+MBTCXToken.name (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#77-78) shadows:
+	- ERC20Basic.name (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#48-49)
+MBTCXToken.symbol (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#78-79) shadows:
+	- ERC20Basic.symbol (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#49)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variable-shadowing-from-abstract-contracts[0m
+INFO:Detectors:[93m
+effective in MBTCXToken.getEffectiveCount (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#166) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[92m
+MBTCXToken.settle has external calls inside a loop:
+	- token.transfer(users[i],amount) (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+ERC20Basic.decimals should be constant (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#47-48)
+ERC20Basic.name should be constant (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#48-49)
+ERC20Basic.symbol should be constant (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#49)
+MBTCXToken._initialSupply should be constant (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#81)
+MBTCXToken.decimals should be constant (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#80-81)
+MBTCXToken.mbtcAddr should be constant (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#86-91)
+MBTCXToken.mbtcDecimals should be constant (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#91)
+MBTCXToken.name should be constant (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#77-78)
+MBTCXToken.symbol should be constant (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#78-79)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+MBTCXToken.totalSupply (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#107-108) should be declared external
+ERC20Basic.totalSupply (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#55-56) should be declared external
+ERC20Basic.balanceOf (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#56-58) should be declared external
+MBTCXToken.balanceOf (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#109-113) should be declared external
+MBTCXToken.transfer (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#124-137) should be declared external
+ERC20Basic.transfer (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#58) should be declared external
+ERC20.allowance (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#62-63) should be declared external
+MBTCXToken.allowance (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#118-123) should be declared external
+MBTCXToken.transferFrom (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#137-153) should be declared external
+ERC20.transferFrom (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#63-65) should be declared external
+ERC20.approve (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#65) should be declared external
+MBTCXToken.approve (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#113-118) should be declared external
+MBTCXToken.withdrawToken (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#153-163) should be declared external
+MBTCXToken.getEffectiveCount (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#163-179) should be declared external
+MBTCXToken.getUserCount (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#179-182) should be declared external
+MBTCXToken.settle (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#182-193) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol:
+	- pragma solidity^0.4.26 (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#9-11): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Variable 'ERC20Basic._totalSupply' (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#55) is not in mixedCase
+Parameter '_owner' of MBTCXToken.balanceOf (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#111) is not in mixedCase
+Parameter '_to' of MBTCXToken.transfer (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#124) is not in mixedCase
+Parameter '_value' of MBTCXToken.transfer (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#124-125) is not in mixedCase
+Parameter '_owner' of MBTCXToken.allowance (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#119-121) is not in mixedCase
+Parameter '_spender' of MBTCXToken.allowance (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#121-122) is not in mixedCase
+Parameter '_from' of MBTCXToken.transferFrom (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#137) is not in mixedCase
+Parameter '_to' of MBTCXToken.transferFrom (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#137-138) is not in mixedCase
+Parameter '_value' of MBTCXToken.transferFrom (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#138) is not in mixedCase
+Parameter '_spender' of MBTCXToken.approve (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#113) is not in mixedCase
+Parameter '_value' of MBTCXToken.approve (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#113-115) is not in mixedCase
+Parameter '_tokenAddress' of MBTCXToken.withdrawToken (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#154) is not in mixedCase
+Parameter '_addr' of MBTCXToken.withdrawToken (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#154-155) is not in mixedCase
+Parameter '_tokenAmount' of MBTCXToken.withdrawToken (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#155-156) is not in mixedCase
+Parameter '_startIndex' of MBTCXToken.settle (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#182) is not in mixedCase
+Parameter '_count' of MBTCXToken.settle (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#182) is not in mixedCase
+Parameter '_enchangeRate' of MBTCXToken.settle (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#182-183) is not in mixedCase
+Variable 'MBTCXToken._initialSupply' (/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol#81) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xc368d9061c6fa74b5c04d7e974f59de524ec08e5.sol analyzed (4 contracts), 44 result(s) found

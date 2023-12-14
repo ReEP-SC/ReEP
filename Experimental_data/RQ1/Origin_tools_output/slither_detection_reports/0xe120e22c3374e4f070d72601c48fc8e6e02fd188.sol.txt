@@ -1,0 +1,40 @@
+INFO:Detectors:[93m
+Contract locking ether found in /sb/0xe120e22c3374e4f070d72601c48fc8e6e02fd188.sol:
+	Contract SwapContractPDATAtoCCT has payable functions:
+	 - fallback (/sb/0xe120e22c3374e4f070d72601c48fc8e6e02fd188.sol#151-161)
+	But does not have a function to withdraw the ether
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#contracts-that-lock-ether[0m
+INFO:Detectors:[93m
+Reentrancy in SwapContractPDATAtoCCT.sendCurrentPayment (/sb/0xe120e22c3374e4f070d72601c48fc8e6e02fd188.sol#195-229):
+	External calls:
+	- company_token.transfer(PartnerAccount,unsealedAmount) (/sb/0xe120e22c3374e4f070d72601c48fc8e6e02fd188.sol#209-213)
+	State variables written after the call(s):
+	- alreadyTransfered (/sb/0xe120e22c3374e4f070d72601c48fc8e6e02fd188.sol#213-215)
+	- currentBalance (/sb/0xe120e22c3374e4f070d72601c48fc8e6e02fd188.sol#215-217)
+Reentrancy in SwapContractPDATAtoCCT.sendCurrentPayment (/sb/0xe120e22c3374e4f070d72601c48fc8e6e02fd188.sol#195-229):
+	External calls:
+	- company_token.transfer(PartnerAccount,currentBalance) (/sb/0xe120e22c3374e4f070d72601c48fc8e6e02fd188.sol#221-229)
+	State variables written after the call(s):
+	- alreadyTransfered (/sb/0xe120e22c3374e4f070d72601c48fc8e6e02fd188.sol)
+	- currentBalance (/sb/0xe120e22c3374e4f070d72601c48fc8e6e02fd188.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+SwapContractPDATAtoCCT.sendCurrentPayment (/sb/0xe120e22c3374e4f070d72601c48fc8e6e02fd188.sol#195-229) does not use the value returned by external calls:
+	-company_token.transfer(PartnerAccount,unsealedAmount) (/sb/0xe120e22c3374e4f070d72601c48fc8e6e02fd188.sol#209-213)
+	-company_token.transfer(PartnerAccount,currentBalance) (/sb/0xe120e22c3374e4f070d72601c48fc8e6e02fd188.sol#221-229)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+OpiriaToken.transfer (/sb/0xe120e22c3374e4f070d72601c48fc8e6e02fd188.sol#35-37) should be declared external
+OpiriaToken.balanceOf (/sb/0xe120e22c3374e4f070d72601c48fc8e6e02fd188.sol#37-43) should be declared external
+SwapContractPDATAtoCCT.fallback (/sb/0xe120e22c3374e4f070d72601c48fc8e6e02fd188.sol#151-161) should be declared external
+SwapContractPDATAtoCCT.getBalance (/sb/0xe120e22c3374e4f070d72601c48fc8e6e02fd188.sol#169-184) should be declared external
+SwapContractPDATAtoCCT.setOwner (/sb/0xe120e22c3374e4f070d72601c48fc8e6e02fd188.sol#189-195) should be declared external
+SwapContractPDATAtoCCT.sendCurrentPayment (/sb/0xe120e22c3374e4f070d72601c48fc8e6e02fd188.sol#195-229) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_company_token' of SwapContractPDATAtoCCT. (/sb/0xe120e22c3374e4f070d72601c48fc8e6e02fd188.sol#105) is not in mixedCase
+Parameter '_owner' of SwapContractPDATAtoCCT.setOwner (/sb/0xe120e22c3374e4f070d72601c48fc8e6e02fd188.sol#189) is not in mixedCase
+Variable 'SwapContractPDATAtoCCT.company_token' (/sb/0xe120e22c3374e4f070d72601c48fc8e6e02fd188.sol#53-55) is not in mixedCase
+Variable 'SwapContractPDATAtoCCT.PartnerAccount' (/sb/0xe120e22c3374e4f070d72601c48fc8e6e02fd188.sol#55-57) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xe120e22c3374e4f070d72601c48fc8e6e02fd188.sol analyzed (10 contracts), 14 result(s) found

@@ -1,0 +1,131 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol:
+/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol:22:21: Warning: "throw" is deprecated in favour of "revert()", "require()" and "assert()".
+    if (!assertion) throw;
+                    ^---^
+/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol:34:3: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+  function Ownable() {
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol:44:7: Warning: "throw" is deprecated in favour of "revert()", "require()" and "assert()".
+      throw;
+      ^---^
+/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol:21:3: Warning: This declaration shadows a builtin symbol.
+  function assert(bool assertion) internal {
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol:125:20: Warning: Using contract member "balance" inherited from the address type is deprecated. Convert the contract to "address" type to access the member, for example use "address(contract).balance" instead.
+    owner.transfer(this.balance);
+                   ^----------^
+/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol:133:20: Warning: Using contract member "balance" inherited from the address type is deprecated. Convert the contract to "address" type to access the member, for example use "address(contract).balance" instead.
+    owner.transfer(this.balance);
+                   ^----------^
+/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol:137:25: Warning: Using contract member "balance" inherited from the address type is deprecated. Convert the contract to "address" type to access the member, for example use "address(contract).balance" instead.
+    msg.sender.transfer(this.balance);
+                        ^----------^
+/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol:34:3: Warning: No visibility specified. Defaulting to "public". 
+  function Ownable() {
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol:54:3: Warning: No visibility specified. Defaulting to "public". 
+  function transferOwnership(address newOwner) onlyOwner {
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol:64:3: Warning: No visibility specified. Defaulting to "public". 
+  function balanceOf(address who) constant returns (uint);
+  ^------------------------------------------------------^
+/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol:65:3: Warning: No visibility specified. Defaulting to "public". 
+  function transfer(address to, uint value);
+  ^----------------------------------------^
+/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol:70:3: Warning: No visibility specified. Defaulting to "public". 
+  function allowance(address owner, address spender) constant returns (uint);
+  ^-------------------------------------------------------------------------^
+/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol:71:3: Warning: No visibility specified. Defaulting to "public". 
+  function transferFrom(address from, address to, uint value);
+  ^----------------------------------------------------------^
+/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol:72:3: Warning: No visibility specified. Defaulting to "public". 
+  function approve(address spender, uint value);
+  ^--------------------------------------------^
+/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol:83:3: Warning: No visibility specified. Defaulting to "public". 
+  function update_eth_ratio( uint new_eth_ratio) 
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol:89:3: Warning: No visibility specified. Defaulting to "public". 
+  function update_bitcoin_ratio(uint new_bitcoin_ratio) 
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol:95:3: Warning: No visibility specified. Defaulting to "public". 
+  function update_ratio(uint new_bitcoin_ratio, uint new_eth_ratio) 
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol:102:3: Warning: No visibility specified. Defaulting to "public". 
+  function send(address _tokenAddr, address dest, uint value)
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol:108:3: Warning: No visibility specified. Defaulting to "public". 
+  function multisend(address _tokenAddr, address[] dests, uint[] values)
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol:136:3: Warning: No visibility specified. Defaulting to "public". 
+  function withdraw() onlyOwner {
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol:21:3: Warning: Function state mutability can be restricted to pure
+  function assert(bool assertion) internal {
+  ^ (Relevant source part starts here and spans across multiple lines).
+
+INFO:Detectors:[91m
+BitcoinStore.fallback (/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol#122-130) sends eth to arbitrary user
+	Dangerous calls:
+	- owner.transfer(this.balance) (/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol#130)
+BitcoinStore.buy (/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol#130-139) sends eth to arbitrary user
+	Dangerous calls:
+	- owner.transfer(this.balance) (/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[93m
+ERC20Basic (/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol#64-70) has incorrect ERC20 function interface(s):
+	-transfer (/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol#66)
+ERC20 (/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol#70-79) has incorrect ERC20 function interface(s):
+	-transferFrom (/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol#72-73)
+	-approve (/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol#73)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[92m
+SafeMath.assert (function @ /sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol#21-26) shadows built-in symbol "assert"
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#builtin-symbol-shadowing[0m
+INFO:Detectors:[92m
+BitcoinStore.multisend has external calls inside a loop:
+	- ERC20(_tokenAddr).transfer(dests[i],values[i]) (/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol#119)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+ERC20Basic.totalSupply should be constant (/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol#64-65)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Deprecated standard detected @ /sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol#26:
+	- Usage of "throw" should be replaced with "revert()"
+Deprecated standard detected @ /sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol#51:
+	- Usage of "throw" should be replaced with "revert()"
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#deprecated-standards[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol#54-64) should be declared external
+ERC20Basic.balanceOf (/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol#65-66) should be declared external
+ERC20Basic.transfer (/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol#66) should be declared external
+ERC20.allowance (/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol#70-72) should be declared external
+ERC20.transferFrom (/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol#72-73) should be declared external
+ERC20.approve (/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol#73) should be declared external
+BitcoinStore.update_eth_ratio (/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol#86-92) should be declared external
+BitcoinStore.update_bitcoin_ratio (/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol#92-98) should be declared external
+BitcoinStore.update_ratio (/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol#98-105) should be declared external
+BitcoinStore.send (/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol#105-110) should be declared external
+BitcoinStore.multisend (/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol#111-121) should be declared external
+BitcoinStore.buy (/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol#130-139) should be declared external
+BitcoinStore.withdraw (/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol:
+	- pragma solidity^0.4.11 (/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol#1): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'Ownable.Ownable' (/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol#35-40) is not in mixedCase
+Function 'BitcoinStore.update_eth_ratio' (/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol#86-92) is not in mixedCase
+Parameter 'new_eth_ratio' of BitcoinStore.update_eth_ratio (/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol#89) is not in mixedCase
+Function 'BitcoinStore.update_bitcoin_ratio' (/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol#92-98) is not in mixedCase
+Parameter 'new_bitcoin_ratio' of BitcoinStore.update_bitcoin_ratio (/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol#95) is not in mixedCase
+Function 'BitcoinStore.update_ratio' (/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol#98-105) is not in mixedCase
+Parameter 'new_bitcoin_ratio' of BitcoinStore.update_ratio (/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol#98-99) is not in mixedCase
+Parameter 'new_eth_ratio' of BitcoinStore.update_ratio (/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol#99-102) is not in mixedCase
+Parameter '_tokenAddr' of BitcoinStore.send (/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol#105-108) is not in mixedCase
+Parameter '_tokenAddr' of BitcoinStore.multisend (/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol#112) is not in mixedCase
+Constant 'BitcoinStore.Bitcoin_address' (/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol#79-80) is not in UPPER_CASE_WITH_UNDERSCORES
+Variable 'BitcoinStore.bitcoin_ratio' (/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol#83) is not in mixedCase
+Variable 'BitcoinStore.eth_ratio' (/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol#83-86) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x711f388038efef6ca032ef9d9a0c79efc1579db6.sol analyzed (5 contracts), 36 result(s) found

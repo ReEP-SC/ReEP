@@ -1,0 +1,63 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xbf95d4957d481473e39c70d3bc08896740e3ca96.sol:
+/sb/0xbf95d4957d481473e39c70d3bc08896740e3ca96.sol:321:36: Warning: Function declared as view, but this expression (potentially) modifies the state and thus requires non-payable (the default) or payable.
+    function admin() external view ifAdmin returns (address) {
+                                   ^-----^
+
+INFO:Detectors:[93m
+ImplementationStorage.implementation (/sb/0xbf95d4957d481473e39c70d3bc08896740e3ca96.sol#63-84) is declared view but contains assembly code
+AddressUtils.isContract (/sb/0xbf95d4957d481473e39c70d3bc08896740e3ca96.sol#111-145) is declared view but contains assembly code
+CvcProxy.currentAdmin (/sb/0xbf95d4957d481473e39c70d3bc08896740e3ca96.sol#431-445) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[92m
+CvcMigrator.migrate has external calls inside a loop:
+	- CvcProxy(migration.proxy).upgradeToAndCall(migration.implementation,migration.data) (/sb/0xbf95d4957d481473e39c70d3bc08896740e3ca96.sol#723-725)
+CvcMigrator.migrate has external calls inside a loop:
+	- CvcProxy(migration.proxy).upgradeTo(migration.implementation) (/sb/0xbf95d4957d481473e39c70d3bc08896740e3ca96.sol#733-739)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in CvcMigrator.addUpgrade (/sb/0xbf95d4957d481473e39c70d3bc08896740e3ca96.sol#679-701):
+	External calls:
+	- require(bool,string)(CvcProxy(_proxy).implementation() != _implementation,Migrator error: proxy contract already uses specified implementation) (/sb/0xbf95d4957d481473e39c70d3bc08896740e3ca96.sol#687-699)
+	State variables written after the call(s):
+	- migrations (/sb/0xbf95d4957d481473e39c70d3bc08896740e3ca96.sol#701)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+ImplementationStorage.implementation uses assembly (/sb/0xbf95d4957d481473e39c70d3bc08896740e3ca96.sol#63-84)
+	- /sb/0xbf95d4957d481473e39c70d3bc08896740e3ca96.sol#77-84
+AddressUtils.isContract uses assembly (/sb/0xbf95d4957d481473e39c70d3bc08896740e3ca96.sol#111-145)
+	- /sb/0xbf95d4957d481473e39c70d3bc08896740e3ca96.sol#141-145
+CvcProxy.delegate uses assembly (/sb/0xbf95d4957d481473e39c70d3bc08896740e3ca96.sol#381-427)
+	- /sb/0xbf95d4957d481473e39c70d3bc08896740e3ca96.sol#385-427
+CvcProxy.currentAdmin uses assembly (/sb/0xbf95d4957d481473e39c70d3bc08896740e3ca96.sol#431-445)
+	- /sb/0xbf95d4957d481473e39c70d3bc08896740e3ca96.sol#443-445
+CvcProxy.setAdmin uses assembly (/sb/0xbf95d4957d481473e39c70d3bc08896740e3ca96.sol#453-461)
+	- /sb/0xbf95d4957d481473e39c70d3bc08896740e3ca96.sol#455-461
+CvcProxy.setImplementation uses assembly (/sb/0xbf95d4957d481473e39c70d3bc08896740e3ca96.sol#481-503)
+	- /sb/0xbf95d4957d481473e39c70d3bc08896740e3ca96.sol#499-503
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+Ownable.renounceOwnership (/sb/0xbf95d4957d481473e39c70d3bc08896740e3ca96.sol#583-587) should be declared external
+Ownable.transferOwnership (/sb/0xbf95d4957d481473e39c70d3bc08896740e3ca96.sol#605-607) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Low level call in CvcProxy.upgradeToAndCall (/sb/0xbf95d4957d481473e39c70d3bc08896740e3ca96.sol#307-333):
+	-require(bool,string)(address(this).call.value(msg.value)(_data),Upgrade error: initialization method call failed) /sb/0xbf95d4957d481473e39c70d3bc08896740e3ca96.sol#325-333
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Parameter '_newAdmin' of CvcProxy.changeAdmin (/sb/0xbf95d4957d481473e39c70d3bc08896740e3ca96.sol#273) is not in mixedCase
+Parameter '_implementation' of CvcProxy.upgradeTo (/sb/0xbf95d4957d481473e39c70d3bc08896740e3ca96.sol#293) is not in mixedCase
+Parameter '_implementation' of CvcProxy.upgradeToAndCall (/sb/0xbf95d4957d481473e39c70d3bc08896740e3ca96.sol#313-315) is not in mixedCase
+Parameter '_data' of CvcProxy.upgradeToAndCall (/sb/0xbf95d4957d481473e39c70d3bc08896740e3ca96.sol#315) is not in mixedCase
+Parameter '_newImplementation' of CvcProxy.upgradeImplementation (/sb/0xbf95d4957d481473e39c70d3bc08896740e3ca96.sol#351-353) is not in mixedCase
+Parameter '_newImplementation' of CvcProxy.setImplementation (/sb/0xbf95d4957d481473e39c70d3bc08896740e3ca96.sol#483) is not in mixedCase
+Parameter '_newOwner' of Ownable.transferOwnership (/sb/0xbf95d4957d481473e39c70d3bc08896740e3ca96.sol#606-607) is not in mixedCase
+Function 'Ownable._transferOwnership' (/sb/0xbf95d4957d481473e39c70d3bc08896740e3ca96.sol#617-627) is not in mixedCase
+Parameter '_newOwner' of Ownable._transferOwnership (/sb/0xbf95d4957d481473e39c70d3bc08896740e3ca96.sol#617-619) is not in mixedCase
+Parameter '_proxy' of CvcMigrator.addUpgrade (/sb/0xbf95d4957d481473e39c70d3bc08896740e3ca96.sol#679) is not in mixedCase
+Parameter '_implementation' of CvcMigrator.addUpgrade (/sb/0xbf95d4957d481473e39c70d3bc08896740e3ca96.sol#679-681) is not in mixedCase
+Parameter '_data' of CvcMigrator.addUpgrade (/sb/0xbf95d4957d481473e39c70d3bc08896740e3ca96.sol#681) is not in mixedCase
+Parameter '_target' of CvcMigrator.changeProxyAdmin (/sb/0xbf95d4957d481473e39c70d3bc08896740e3ca96.sol#763) is not in mixedCase
+Parameter '_newOwner' of CvcMigrator.changeProxyAdmin (/sb/0xbf95d4957d481473e39c70d3bc08896740e3ca96.sol#763) is not in mixedCase
+Parameter '_index' of CvcMigrator.getMigration (/sb/0xbf95d4957d481473e39c70d3bc08896740e3ca96.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xbf95d4957d481473e39c70d3bc08896740e3ca96.sol analyzed (5 contracts), 30 result(s) found

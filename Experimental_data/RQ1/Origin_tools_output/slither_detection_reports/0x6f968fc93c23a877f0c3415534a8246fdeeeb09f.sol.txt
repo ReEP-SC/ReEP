@@ -1,0 +1,87 @@
+INFO:Detectors:[91m
+ShareholderVomer.safeEthTransfer (/sb/0x6f968fc93c23a877f0c3415534a8246fdeeeb09f.sol#310-313) sends eth to arbitrary user
+	Dangerous calls:
+	- (ok) = payableTarget.call.value(amount)() (/sb/0x6f968fc93c23a877f0c3415534a8246fdeeeb09f.sol#310-312)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[91m
+Reentrancy in ShareholderVomer.fallback (/sb/0x6f968fc93c23a877f0c3415534a8246fdeeeb09f.sol#337-385):
+	External calls:
+	- safeEthTransfer(msg.sender,rewardETH) (/sb/0x6f968fc93c23a877f0c3415534a8246fdeeeb09f.sol#370-371)
+	External calls sending eth:
+	- support1.transfer(msg.value.mul(25).div(100)) (/sb/0x6f968fc93c23a877f0c3415534a8246fdeeeb09f.sol#349-350)
+	- support2.transfer(msg.value.mul(5).div(100)) (/sb/0x6f968fc93c23a877f0c3415534a8246fdeeeb09f.sol#350-351)
+	- safeEthTransfer(msg.sender,rewardETH) (/sb/0x6f968fc93c23a877f0c3415534a8246fdeeeb09f.sol#370-371)
+	State variables written after the call(s):
+	- investors (/sb/0x6f968fc93c23a877f0c3415534a8246fdeeeb09f.sol#375-376)
+	- investors (/sb/0x6f968fc93c23a877f0c3415534a8246fdeeeb09f.sol#382)
+	- investors (/sb/0x6f968fc93c23a877f0c3415534a8246fdeeeb09f.sol)
+	- investors (/sb/0x6f968fc93c23a877f0c3415534a8246fdeeeb09f.sol)
+	- investors (/sb/0x6f968fc93c23a877f0c3415534a8246fdeeeb09f.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities[0m
+INFO:Detectors:[93m
+Initializable.isConstructor (/sb/0x6f968fc93c23a877f0c3415534a8246fdeeeb09f.sol#79-91) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+ERC20Token (/sb/0x6f968fc93c23a877f0c3415534a8246fdeeeb09f.sol#97-104) has incorrect ERC20 function interface(s):
+	-transfer (/sb/0x6f968fc93c23a877f0c3415534a8246fdeeeb09f.sol#98)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[92m
+Reentrancy in ShareholderVomer.fallback (/sb/0x6f968fc93c23a877f0c3415534a8246fdeeeb09f.sol#337-385):
+	External calls:
+	- safeEthTransfer(msg.sender,rewardETH) (/sb/0x6f968fc93c23a877f0c3415534a8246fdeeeb09f.sol#370-371)
+	External calls sending eth:
+	- support1.transfer(msg.value.mul(25).div(100)) (/sb/0x6f968fc93c23a877f0c3415534a8246fdeeeb09f.sol#349-350)
+	- support2.transfer(msg.value.mul(5).div(100)) (/sb/0x6f968fc93c23a877f0c3415534a8246fdeeeb09f.sol#350-351)
+	- safeEthTransfer(msg.sender,rewardETH) (/sb/0x6f968fc93c23a877f0c3415534a8246fdeeeb09f.sol#370-371)
+	State variables written after the call(s):
+	- totalUsers (/sb/0x6f968fc93c23a877f0c3415534a8246fdeeeb09f.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+ShareholderVomer.safeEthTransfer (/sb/0x6f968fc93c23a877f0c3415534a8246fdeeeb09f.sol#310-313) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool)(ok) (/sb/0x6f968fc93c23a877f0c3415534a8246fdeeeb09f.sol#312-313)
+ShareholderVomer.fallback (/sb/0x6f968fc93c23a877f0c3415534a8246fdeeeb09f.sol#337-385) uses timestamp for comparisons
+	Dangerous comparisons:
+	- rewardETH > 0 (/sb/0x6f968fc93c23a877f0c3415534a8246fdeeeb09f.sol#369-371)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+Initializable.isConstructor uses assembly (/sb/0x6f968fc93c23a877f0c3415534a8246fdeeeb09f.sol#79-91)
+	- /sb/0x6f968fc93c23a877f0c3415534a8246fdeeeb09f.sol#90
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+ERC20Token.transfer (/sb/0x6f968fc93c23a877f0c3415534a8246fdeeeb09f.sol#98) should be declared external
+ERC20Token.transferFrom (/sb/0x6f968fc93c23a877f0c3415534a8246fdeeeb09f.sol#101-103) should be declared external
+Ownable.changeOwnerCandidate (/sb/0x6f968fc93c23a877f0c3415534a8246fdeeeb09f.sol#220-228) should be declared external
+Ownable.acceptOwner (/sb/0x6f968fc93c23a877f0c3415534a8246fdeeeb09f.sol#228-232) should be declared external
+ShareholderVomer.initialize (/sb/0x6f968fc93c23a877f0c3415534a8246fdeeeb09f.sol#264-270) should be declared external
+ShareholderVomer.setSupport1 (/sb/0x6f968fc93c23a877f0c3415534a8246fdeeeb09f.sol#270-276) should be declared external
+ShareholderVomer.setSupport2 (/sb/0x6f968fc93c23a877f0c3415534a8246fdeeeb09f.sol#276-283) should be declared external
+ShareholderVomer.setRateIn_Wei (/sb/0x6f968fc93c23a877f0c3415534a8246fdeeeb09f.sol#284-289) should be declared external
+ShareholderVomer.setRateOut_Wei (/sb/0x6f968fc93c23a877f0c3415534a8246fdeeeb09f.sol#289-294) should be declared external
+ShareholderVomer.withdraw (/sb/0x6f968fc93c23a877f0c3415534a8246fdeeeb09f.sol#294-298) should be declared external
+ShareholderVomer.changeOwnerCandidate (/sb/0x6f968fc93c23a877f0c3415534a8246fdeeeb09f.sol#298-301) should be declared external
+ShareholderVomer.acceptOwner (/sb/0x6f968fc93c23a877f0c3415534a8246fdeeeb09f.sol#301-305) should be declared external
+ShareholderVomer.transferTokens (/sb/0x6f968fc93c23a877f0c3415534a8246fdeeeb09f.sol#306-310) should be declared external
+ShareholderVomer.getInfo (/sb/0x6f968fc93c23a877f0c3415534a8246fdeeeb09f.sol#313-336) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x6f968fc93c23a877f0c3415534a8246fdeeeb09f.sol:
+	- pragma solidity^0.5.16 (/sb/0x6f968fc93c23a877f0c3415534a8246fdeeeb09f.sol#1): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Low level call in ShareholderVomer.safeEthTransfer (/sb/0x6f968fc93c23a877f0c3415534a8246fdeeeb09f.sol#310-313):
+	-(ok) = payableTarget.call.value(amount)() /sb/0x6f968fc93c23a877f0c3415534a8246fdeeeb09f.sol#310-312
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Variable 'Initializable.______gap' (/sb/0x6f968fc93c23a877f0c3415534a8246fdeeeb09f.sol#96-97) is not in mixedCase
+Parameter '_newAddress' of ShareholderVomer.setSupport1 (/sb/0x6f968fc93c23a877f0c3415534a8246fdeeeb09f.sol#271-273) is not in mixedCase
+Parameter '_newAddress' of ShareholderVomer.setSupport2 (/sb/0x6f968fc93c23a877f0c3415534a8246fdeeeb09f.sol#279) is not in mixedCase
+Function 'ShareholderVomer.setRateIn_Wei' (/sb/0x6f968fc93c23a877f0c3415534a8246fdeeeb09f.sol#284-289) is not in mixedCase
+Parameter '_newValue' of ShareholderVomer.setRateIn_Wei (/sb/0x6f968fc93c23a877f0c3415534a8246fdeeeb09f.sol#284) is not in mixedCase
+Function 'ShareholderVomer.setRateOut_Wei' (/sb/0x6f968fc93c23a877f0c3415534a8246fdeeeb09f.sol#289-294) is not in mixedCase
+Parameter '_newValue' of ShareholderVomer.setRateOut_Wei (/sb/0x6f968fc93c23a877f0c3415534a8246fdeeeb09f.sol#289-290) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+Initializable.______gap (/sb/0x6f968fc93c23a877f0c3415534a8246fdeeeb09f.sol#96-97) is never used in ShareholderVomer
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0x6f968fc93c23a877f0c3415534a8246fdeeeb09f.sol analyzed (5 contracts), 32 result(s) found

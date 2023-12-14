@@ -1,0 +1,81 @@
+INFO:Detectors:[93m
+Reentrancy in Exchange.deleteOrder (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol#657-667):
+	External calls:
+	- require(bool)(o.from == msg.sender || ! isValid(_hash)) (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol#661-665)
+	- pull(o.from,o.numberOfDai,true) (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol#665)
+	State variables written after the call(s):
+	- orders (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol#665-667)
+Reentrancy in Exchange.fillOrders (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol#667-727):
+	External calls:
+	- remainingDai = dai.allowance(msg.sender,address(this)) (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol#673-675)
+	- require(bool,string)(isValid(hash),invalid order) (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol#679-681)
+	- pull(_from,vDai,false) (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol#707)
+	State variables written after the call(s):
+	- orders (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol#711-713)
+Reentrancy in Exchange.fillOrders (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol#667-727):
+	External calls:
+	- remainingDai = dai.allowance(msg.sender,address(this)) (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol#673-675)
+	- require(bool,string)(isValid(hash),invalid order) (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol#679-681)
+	- _postOrder(o.buy,o.closingTime,o.numberOfTokens.sub(nTokens),o.numberOfDai.sub(vDai),o.token,o.from) (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol#713-719)
+	- pull(_from,vDai,false) (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol#707)
+	State variables written after the call(s):
+	- orders (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol#713-719)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+Reentrancy in LoanEscrow.deposit (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol#507-557):
+	External calls:
+	- require(bool,string)(dai.allowance(address(this),MONEY_MARKET_ADDRESS) == 0,non-zero initial moneyMarket allowance) (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol#515-523)
+	- require(bool,string)(dai.approve(MONEY_MARKET_ADDRESS,_amountDai),approving moneyMarket failed) (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol#523-525)
+	- errorCode = moneyMarket.supply(DAI_ADDRESS,_amountDai) (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol#525-527)
+	- require(bool,string)(dai.allowance(address(this),MONEY_MARKET_ADDRESS) == 0,allowance not fully consumed by moneyMarket) (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol#533-539)
+	State variables written after the call(s):
+	- deposited (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol#547)
+	- deposits (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol#539-543)
+Reentrancy in LoanEscrow.pull (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol#557-587):
+	External calls:
+	- errorCode = moneyMarket.withdraw(DAI_ADDRESS,_amountDai) (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol#559-565)
+	State variables written after the call(s):
+	- deposited (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol#577-581)
+	- deposits (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol#573-575)
+	- pulled (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol#585)
+	- pulls (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol#581-585)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Secondary.primary (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol#289-295) should be declared external
+Secondary.transferPrimary (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol#311-321) should be declared external
+MoneyMarketInterface.getSupplyBalance (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol#439-441) should be declared external
+MoneyMarketInterface.supply (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol#441-445) should be declared external
+MoneyMarketInterface.withdraw (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol#445) should be declared external
+LoanEscrow.withdrawInterest (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol#491-505) should be declared external
+WhitelistInterface.hasRole (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol#587-595) should be declared external
+WhitelistProxyInterface.whitelist (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol#599-606) should be declared external
+Exchange.deleteOrder (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol#657-667) should be declared external
+Exchange.fillOrders (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol#667-727) should be declared external
+Exchange.postOrder (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol#747-757) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_from' of LoanEscrow.deposit (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol#507) is not in mixedCase
+Parameter '_amountDai' of LoanEscrow.deposit (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol#507-509) is not in mixedCase
+Parameter '_to' of LoanEscrow.pull (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol#557-559) is not in mixedCase
+Parameter '_amountDai' of LoanEscrow.pull (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol#559) is not in mixedCase
+Parameter '_hash' of Exchange.deleteOrder (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol#661) is not in mixedCase
+Parameter '_hashes' of Exchange.fillOrders (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol#667) is not in mixedCase
+Parameter '_from' of Exchange.fillOrders (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol#667-671) is not in mixedCase
+Parameter '_hash' of Exchange.isValid (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol#727) is not in mixedCase
+Parameter '_buy' of Exchange.postOrder (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol#747) is not in mixedCase
+Parameter '_closingTime' of Exchange.postOrder (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol#747-751) is not in mixedCase
+Parameter '_from' of Exchange.postOrder (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol#751) is not in mixedCase
+Parameter '_numberOfTokens' of Exchange.postOrder (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol#751-753) is not in mixedCase
+Parameter '_numberOfDai' of Exchange.postOrder (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol#753) is not in mixedCase
+Parameter '_token' of Exchange.postOrder (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol#753) is not in mixedCase
+Function 'Exchange._deleteOrder' (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol) is not in mixedCase
+Parameter '_hash' of Exchange._deleteOrder (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol) is not in mixedCase
+Function 'Exchange._postOrder' (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol) is not in mixedCase
+Parameter '_buy' of Exchange._postOrder (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol) is not in mixedCase
+Parameter '_closingTime' of Exchange._postOrder (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol) is not in mixedCase
+Parameter '_numberOfTokens' of Exchange._postOrder (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol) is not in mixedCase
+Parameter '_numberOfDai' of Exchange._postOrder (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol) is not in mixedCase
+Parameter '_token' of Exchange._postOrder (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol) is not in mixedCase
+Parameter '_from' of Exchange._postOrder (/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xfc3d64132b31f4f29657f342ca1bdb6d2498ff19.sol analyzed (10 contracts), 39 result(s) found

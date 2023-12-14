@@ -1,0 +1,68 @@
+INFO:Detectors:[91m
+ICO.getEth (/sb/0x04354727df77efab18c55491d06845a3a49bcfa3.sol) sends eth to arbitrary user
+	Dangerous calls:
+	- sender.transfer(address(this).balance) (/sb/0x04354727df77efab18c55491d06845a3a49bcfa3.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[93m
+Reentrancy in ICO.setFinish (/sb/0x04354727df77efab18c55491d06845a3a49bcfa3.sol#384-388):
+	External calls:
+	- token.burn(token.balanceOf(address(this))) (/sb/0x04354727df77efab18c55491d06845a3a49bcfa3.sol#385-386)
+	State variables written after the call(s):
+	- finish (/sb/0x04354727df77efab18c55491d06845a3a49bcfa3.sol#386-388)
+Reentrancy in ICO.setToken (/sb/0x04354727df77efab18c55491d06845a3a49bcfa3.sol#369-378):
+	External calls:
+	- require(bool,string)(addr.balanceOf(address(this)) > 0,Invalid token) (/sb/0x04354727df77efab18c55491d06845a3a49bcfa3.sol#374-377)
+	State variables written after the call(s):
+	- token (/sb/0x04354727df77efab18c55491d06845a3a49bcfa3.sol#378)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+ICO.fallback (/sb/0x04354727df77efab18c55491d06845a3a49bcfa3.sol) does not use the value returned by external calls:
+	-token.transfer(msg.sender,msg.value * price) (/sb/0x04354727df77efab18c55491d06845a3a49bcfa3.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+ERC20.totalSupply (/sb/0x04354727df77efab18c55491d06845a3a49bcfa3.sol#182-187) should be declared external
+IERC20.totalSupply (/sb/0x04354727df77efab18c55491d06845a3a49bcfa3.sol#29-32) should be declared external
+IERC20.balanceOf (/sb/0x04354727df77efab18c55491d06845a3a49bcfa3.sol#32-35) should be declared external
+ERC20.balanceOf (/sb/0x04354727df77efab18c55491d06845a3a49bcfa3.sol#187-193) should be declared external
+IERC20.transfer (/sb/0x04354727df77efab18c55491d06845a3a49bcfa3.sol#35-38) should be declared external
+ERC20.transfer (/sb/0x04354727df77efab18c55491d06845a3a49bcfa3.sol#193-198) should be declared external
+IERC20.approve (/sb/0x04354727df77efab18c55491d06845a3a49bcfa3.sol#41-44) should be declared external
+ERC20.approve (/sb/0x04354727df77efab18c55491d06845a3a49bcfa3.sol#204-206) should be declared external
+ERC20.transferFrom (/sb/0x04354727df77efab18c55491d06845a3a49bcfa3.sol#206-213) should be declared external
+IERC20.transferFrom (/sb/0x04354727df77efab18c55491d06845a3a49bcfa3.sol#44-47) should be declared external
+ERC20.name (/sb/0x04354727df77efab18c55491d06845a3a49bcfa3.sol#168-172) should be declared external
+ERC20.symbol (/sb/0x04354727df77efab18c55491d06845a3a49bcfa3.sol#173-177) should be declared external
+ERC20.decimals (/sb/0x04354727df77efab18c55491d06845a3a49bcfa3.sol#178-182) should be declared external
+ERC20.increaseAllowance (/sb/0x04354727df77efab18c55491d06845a3a49bcfa3.sol#214-218) should be declared external
+ERC20.decreaseAllowance (/sb/0x04354727df77efab18c55491d06845a3a49bcfa3.sol#218-225) should be declared external
+Ownable.renounceOwnership (/sb/0x04354727df77efab18c55491d06845a3a49bcfa3.sol#306-314) should be declared external
+Ownable.transferOwnership (/sb/0x04354727df77efab18c55491d06845a3a49bcfa3.sol#314-321) should be declared external
+Token.sendMining (/sb/0x04354727df77efab18c55491d06845a3a49bcfa3.sol#338-343) should be declared external
+Token.sendShop (/sb/0x04354727df77efab18c55491d06845a3a49bcfa3.sol#345-346) should be declared external
+Token.sendBounty (/sb/0x04354727df77efab18c55491d06845a3a49bcfa3.sol#346-348) should be declared external
+Token.burn (/sb/0x04354727df77efab18c55491d06845a3a49bcfa3.sol#348-354) should be declared external
+Token.burnFrom (/sb/0x04354727df77efab18c55491d06845a3a49bcfa3.sol#355-362) should be declared external
+ICO.setToken (/sb/0x04354727df77efab18c55491d06845a3a49bcfa3.sol#369-378) should be declared external
+ICO.setPrice (/sb/0x04354727df77efab18c55491d06845a3a49bcfa3.sol#378-384) should be declared external
+ICO.setFinish (/sb/0x04354727df77efab18c55491d06845a3a49bcfa3.sol#384-388) should be declared external
+ICO.getEth (/sb/0x04354727df77efab18c55491d06845a3a49bcfa3.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x04354727df77efab18c55491d06845a3a49bcfa3.sol:
+	- pragma solidity0.6.12 (/sb/0x04354727df77efab18c55491d06845a3a49bcfa3.sol#10-15): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'Context._msgSender' (/sb/0x04354727df77efab18c55491d06845a3a49bcfa3.sol#16-20) is not in mixedCase
+Function 'Context._msgData' (/sb/0x04354727df77efab18c55491d06845a3a49bcfa3.sol#20-27) is not in mixedCase
+Function 'ERC20._transfer' (/sb/0x04354727df77efab18c55491d06845a3a49bcfa3.sol#225-240) is not in mixedCase
+Function 'ERC20._mint' (/sb/0x04354727df77efab18c55491d06845a3a49bcfa3.sol#240-251) is not in mixedCase
+Function 'ERC20._burn' (/sb/0x04354727df77efab18c55491d06845a3a49bcfa3.sol#251-261) is not in mixedCase
+Function 'ERC20._approve' (/sb/0x04354727df77efab18c55491d06845a3a49bcfa3.sol#261-276) is not in mixedCase
+Function 'ERC20._setupDecimals' (/sb/0x04354727df77efab18c55491d06845a3a49bcfa3.sol#276-281) is not in mixedCase
+Function 'ERC20._beforeTokenTransfer' (/sb/0x04354727df77efab18c55491d06845a3a49bcfa3.sol#281-284) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+Token.SYMBOL (/sb/0x04354727df77efab18c55491d06845a3a49bcfa3.sol#322-324) is never used in Token
+Token.NAME (/sb/0x04354727df77efab18c55491d06845a3a49bcfa3.sol#324) is never used in Token
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0x04354727df77efab18c55491d06845a3a49bcfa3.sol analyzed (7 contracts), 40 result(s) found

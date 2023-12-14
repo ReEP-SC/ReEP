@@ -1,0 +1,60 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xbf84007b302226cb54c91130bb1bcf1e004063d0.sol:
+Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing "SPDX-License-Identifier: <SPDX-License>" to each source file. Use "SPDX-License-Identifier: UNLICENSED" for non-open-source code. Please see https://spdx.org for more information.
+--> /sb/0xbf84007b302226cb54c91130bb1bcf1e004063d0.sol
+
+
+INFO:Detectors:[93m
+SwapperV2Orbi.depositERC20Token (/sb/0xbf84007b302226cb54c91130bb1bcf1e004063d0.sol#51-55) does not use the value returned by external calls:
+	-ERC20Token1.transferFrom(msg.sender,address(this),amount) (/sb/0xbf84007b302226cb54c91130bb1bcf1e004063d0.sol#52-55)
+SwapperV2Orbi.swapERC20Token0ForERC20Token1 (/sb/0xbf84007b302226cb54c91130bb1bcf1e004063d0.sol#55-64) does not use the value returned by external calls:
+	-ERC20Token0.transferFrom(msg.sender,address(this),inputTokens) (/sb/0xbf84007b302226cb54c91130bb1bcf1e004063d0.sol#58-59)
+	-ERC20Token1.transfer(msg.sender,amountERC20TokenToTransfer) (/sb/0xbf84007b302226cb54c91130bb1bcf1e004063d0.sol#59-61)
+SwapperV2Orbi.endPresale (/sb/0xbf84007b302226cb54c91130bb1bcf1e004063d0.sol#65-74) does not use the value returned by external calls:
+	-ERC20Token0.transfer(msg.sender,ERC20Token0.balanceOf(address(this))) (/sb/0xbf84007b302226cb54c91130bb1bcf1e004063d0.sol#66-67)
+	-ERC20Token1.transfer(msg.sender,ERC20Token1.balanceOf(address(this))) (/sb/0xbf84007b302226cb54c91130bb1bcf1e004063d0.sol#67-69)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in SwapperV2Orbi.endPresale (/sb/0xbf84007b302226cb54c91130bb1bcf1e004063d0.sol#65-74):
+	External calls:
+	- ERC20Token0.transfer(msg.sender,ERC20Token0.balanceOf(address(this))) (/sb/0xbf84007b302226cb54c91130bb1bcf1e004063d0.sol#66-67)
+	- ERC20Token1.transfer(msg.sender,ERC20Token1.balanceOf(address(this))) (/sb/0xbf84007b302226cb54c91130bb1bcf1e004063d0.sol#67-69)
+	External calls sending eth:
+	- address(msg.sender).transfer(address(this).balance) (/sb/0xbf84007b302226cb54c91130bb1bcf1e004063d0.sol#69-72)
+	State variables written after the call(s):
+	- presaleActive (/sb/0xbf84007b302226cb54c91130bb1bcf1e004063d0.sol)
+Reentrancy in SwapperV2Orbi.swapERC20Token0ForERC20Token1 (/sb/0xbf84007b302226cb54c91130bb1bcf1e004063d0.sol#55-64):
+	External calls:
+	- ERC20Token0.transferFrom(msg.sender,address(this),inputTokens) (/sb/0xbf84007b302226cb54c91130bb1bcf1e004063d0.sol#58-59)
+	- ERC20Token1.transfer(msg.sender,amountERC20TokenToTransfer) (/sb/0xbf84007b302226cb54c91130bb1bcf1e004063d0.sol#59-61)
+	State variables written after the call(s):
+	- token0Raised (/sb/0xbf84007b302226cb54c91130bb1bcf1e004063d0.sol#61-64)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+SwapperV2Orbi.weiRaised should be constant (/sb/0xbf84007b302226cb54c91130bb1bcf1e004063d0.sol#26-27)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+ERC20TokenObject.totalSupply (/sb/0xbf84007b302226cb54c91130bb1bcf1e004063d0.sol#9-10) should be declared external
+ERC20TokenObject.balanceOf (/sb/0xbf84007b302226cb54c91130bb1bcf1e004063d0.sol#10-11) should be declared external
+ERC20TokenObject.transferFrom (/sb/0xbf84007b302226cb54c91130bb1bcf1e004063d0.sol#11-12) should be declared external
+ERC20TokenObject.transfer (/sb/0xbf84007b302226cb54c91130bb1bcf1e004063d0.sol#12-13) should be declared external
+ERC20TokenObject.allowance (/sb/0xbf84007b302226cb54c91130bb1bcf1e004063d0.sol#13-14) should be declared external
+ERC20TokenObject.approve (/sb/0xbf84007b302226cb54c91130bb1bcf1e004063d0.sol#14-15) should be declared external
+ERC20TokenObject.increaseAllowance (/sb/0xbf84007b302226cb54c91130bb1bcf1e004063d0.sol#15-16) should be declared external
+ERC20TokenObject.decreaseAllowance (/sb/0xbf84007b302226cb54c91130bb1bcf1e004063d0.sol#16-20) should be declared external
+SwapperV2Orbi.setERC20TokenAddresses (/sb/0xbf84007b302226cb54c91130bb1bcf1e004063d0.sol#42-51) should be declared external
+SwapperV2Orbi.depositERC20Token (/sb/0xbf84007b302226cb54c91130bb1bcf1e004063d0.sol#51-55) should be declared external
+SwapperV2Orbi.swapERC20Token0ForERC20Token1 (/sb/0xbf84007b302226cb54c91130bb1bcf1e004063d0.sol#55-64) should be declared external
+SwapperV2Orbi.endPresale (/sb/0xbf84007b302226cb54c91130bb1bcf1e004063d0.sol#65-74) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xbf84007b302226cb54c91130bb1bcf1e004063d0.sol:
+	- pragma solidity^0.6.6 (/sb/0xbf84007b302226cb54c91130bb1bcf1e004063d0.sol#5-7): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Variable 'SwapperV2Orbi._owner' (/sb/0xbf84007b302226cb54c91130bb1bcf1e004063d0.sol#22-23) is not in mixedCase
+Variable 'SwapperV2Orbi.ERC20TokenAddress0' (/sb/0xbf84007b302226cb54c91130bb1bcf1e004063d0.sol#23-24) is not in mixedCase
+Variable 'SwapperV2Orbi.ERC20TokenAddress1' (/sb/0xbf84007b302226cb54c91130bb1bcf1e004063d0.sol#24-25) is not in mixedCase
+Variable 'SwapperV2Orbi.ERC20Token0' (/sb/0xbf84007b302226cb54c91130bb1bcf1e004063d0.sol#28-29) is not in mixedCase
+Variable 'SwapperV2Orbi.ERC20Token1' (/sb/0xbf84007b302226cb54c91130bb1bcf1e004063d0.sol#29-31) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xbf84007b302226cb54c91130bb1bcf1e004063d0.sol analyzed (2 contracts), 24 result(s) found

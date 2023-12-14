@@ -1,0 +1,76 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x70c86655abce9db09c075d07b4eb11d4fa63cc8b.sol:
+/sb/0x70c86655abce9db09c075d07b4eb11d4fa63cc8b.sol:57:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function Ownable() public {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x70c86655abce9db09c075d07b4eb11d4fa63cc8b.sol:143:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function StreamityTariff(address streamityContract) public {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x70c86655abce9db09c075d07b4eb11d4fa63cc8b.sol:157:29: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+        bytes32 _hashDeal = keccak256(_tradeID, _value);
+                            ^-------------------------^
+/sb/0x70c86655abce9db09c075d07b4eb11d4fa63cc8b.sol:82:5: Warning: No visibility specified. Defaulting to "public". 
+    function transfer(address _to, uint256 _value) returns (bool success);
+    ^--------------------------------------------------------------------^
+/sb/0x70c86655abce9db09c075d07b4eb11d4fa63cc8b.sol:83:5: Warning: No visibility specified. Defaulting to "public". 
+    function approveAndCall(address _spender, uint256 _value, bytes _extraData) returns (bool success);
+    ^-------------------------------------------------------------------------------------------------^
+/sb/0x70c86655abce9db09c075d07b4eb11d4fa63cc8b.sol:84:5: Warning: No visibility specified. Defaulting to "public". 
+    function approve(address _spender, uint256 _value) returns (bool success);
+    ^------------------------------------------------------------------------^
+/sb/0x70c86655abce9db09c075d07b4eb11d4fa63cc8b.sol:85:5: Warning: No visibility specified. Defaulting to "public". 
+    function transferFrom(address _from, address _to, uint256 _value) returns (bool success);
+    ^---------------------------------------------------------------------------------------^
+
+INFO:Detectors:[93m
+ECRecovery.recover (/sb/0x70c86655abce9db09c075d07b4eb11d4fa63cc8b.sol#104-139) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+Reentrancy in StreamityTariff.payAltCoin (/sb/0x70c86655abce9db09c075d07b4eb11d4fa63cc8b.sol#158-166):
+	External calls:
+	- result = streamityContractAddress.transferFrom(msg.sender,address(this),_value) (/sb/0x70c86655abce9db09c075d07b4eb11d4fa63cc8b.sol#161-164)
+	State variables written after the call(s):
+	- stmTransfers (/sb/0x70c86655abce9db09c075d07b4eb11d4fa63cc8b.sol#165-166)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+StreamityTariff.withdrawCommisionToAddressAltCoin (/sb/0x70c86655abce9db09c075d07b4eb11d4fa63cc8b.sol#181-186) does not use the value returned by external calls:
+	-streamityContractAddress.transfer(_to,_amount) (/sb/0x70c86655abce9db09c075d07b4eb11d4fa63cc8b.sol#184-186)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+ECRecovery.recover uses assembly (/sb/0x70c86655abce9db09c075d07b4eb11d4fa63cc8b.sol#104-139)
+	- /sb/0x70c86655abce9db09c075d07b4eb11d4fa63cc8b.sol#116-125
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+TokenERC20.allowTransactions should be constant (/sb/0x70c86655abce9db09c075d07b4eb11d4fa63cc8b.sol#80-81)
+TokenERC20.decimals should be constant (/sb/0x70c86655abce9db09c075d07b4eb11d4fa63cc8b.sol#80)
+TokenERC20.name should be constant (/sb/0x70c86655abce9db09c075d07b4eb11d4fa63cc8b.sol#77-78)
+TokenERC20.standard should be constant (/sb/0x70c86655abce9db09c075d07b4eb11d4fa63cc8b.sol#76-77)
+TokenERC20.symbol should be constant (/sb/0x70c86655abce9db09c075d07b4eb11d4fa63cc8b.sol#78-79)
+TokenERC20.totalSupply should be constant (/sb/0x70c86655abce9db09c075d07b4eb11d4fa63cc8b.sol#79-80)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0x70c86655abce9db09c075d07b4eb11d4fa63cc8b.sol#67-75) should be declared external
+TokenERC20.transfer (/sb/0x70c86655abce9db09c075d07b4eb11d4fa63cc8b.sol#83) should be declared external
+TokenERC20.approveAndCall (/sb/0x70c86655abce9db09c075d07b4eb11d4fa63cc8b.sol#83-85) should be declared external
+TokenERC20.approve (/sb/0x70c86655abce9db09c075d07b4eb11d4fa63cc8b.sol#85) should be declared external
+TokenERC20.transferFrom (/sb/0x70c86655abce9db09c075d07b4eb11d4fa63cc8b.sol#85-92) should be declared external
+ECRecovery.recover (/sb/0x70c86655abce9db09c075d07b4eb11d4fa63cc8b.sol#104-139) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x70c86655abce9db09c075d07b4eb11d4fa63cc8b.sol:
+	- pragma solidity^0.4.26 (/sb/0x70c86655abce9db09c075d07b4eb11d4fa63cc8b.sol#9-11): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'Ownable.Ownable' (/sb/0x70c86655abce9db09c075d07b4eb11d4fa63cc8b.sol#59-62) is not in mixedCase
+Function 'StreamityTariff.StreamityTariff' (/sb/0x70c86655abce9db09c075d07b4eb11d4fa63cc8b.sol#145-154) is not in mixedCase
+Parameter '_tradeID' of StreamityTariff.payAltCoin (/sb/0x70c86655abce9db09c075d07b4eb11d4fa63cc8b.sol#158-159) is not in mixedCase
+Parameter '_value' of StreamityTariff.payAltCoin (/sb/0x70c86655abce9db09c075d07b4eb11d4fa63cc8b.sol#159) is not in mixedCase
+Parameter '_sign' of StreamityTariff.payAltCoin (/sb/0x70c86655abce9db09c075d07b4eb11d4fa63cc8b.sol#159) is not in mixedCase
+Parameter '_hashDeal' of StreamityTariff.verifyDeal (/sb/0x70c86655abce9db09c075d07b4eb11d4fa63cc8b.sol#168-169) is not in mixedCase
+Parameter '_sign' of StreamityTariff.verifyDeal (/sb/0x70c86655abce9db09c075d07b4eb11d4fa63cc8b.sol#169) is not in mixedCase
+Parameter '_hashDeal' of StreamityTariff.startDeal (/sb/0x70c86655abce9db09c075d07b4eb11d4fa63cc8b.sol#174) is not in mixedCase
+Parameter '_value' of StreamityTariff.startDeal (/sb/0x70c86655abce9db09c075d07b4eb11d4fa63cc8b.sol#174-175) is not in mixedCase
+Parameter '_tradeID' of StreamityTariff.startDeal (/sb/0x70c86655abce9db09c075d07b4eb11d4fa63cc8b.sol#175-177) is not in mixedCase
+Parameter '_to' of StreamityTariff.withdrawCommisionToAddressAltCoin (/sb/0x70c86655abce9db09c075d07b4eb11d4fa63cc8b.sol#181-182) is not in mixedCase
+Parameter '_amount' of StreamityTariff.withdrawCommisionToAddressAltCoin (/sb/0x70c86655abce9db09c075d07b4eb11d4fa63cc8b.sol#182-183) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x70c86655abce9db09c075d07b4eb11d4fa63cc8b.sol analyzed (5 contracts), 24 result(s) found

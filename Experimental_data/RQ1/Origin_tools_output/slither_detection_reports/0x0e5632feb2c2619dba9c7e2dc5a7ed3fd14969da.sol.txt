@@ -1,0 +1,119 @@
+INFO:Detectors:[93m
+ArconaMarketplaceContract.cancelAuction (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#547-565) uses a dangerous strict equality:
+	- require(bool)(msg.sender == auctions[_auctionId].owner)
+ArconaMarketplaceContract.cancelAuction (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#547-565) uses a dangerous strict equality:
+	- require(bool)(msg.sender == auctions[_auctionId].owner)
+ArconaMarketplaceContract.getToken (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#505-547) uses a dangerous strict equality:
+	- require(bool)(msg.sender == auctions[_auctionId].winner)
+ArconaMarketplaceContract.cancelAuction (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#547-565) uses a dangerous strict equality:
+	- require(bool)(msg.sender == auctions[_auctionId].owner)
+ArconaMarketplaceContract.getToken (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#505-547) uses a dangerous strict equality:
+	- require(bool)(msg.sender == auctions[_auctionId].winner)
+ArconaMarketplaceContract.migrateAuction (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#591-641) uses a dangerous strict equality:
+	- require(bool)(msg.sender == auctions[_auctionId].owner)
+ArconaMarketplaceContract.cancelAuction (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#547-565) uses a dangerous strict equality:
+	- require(bool)(msg.sender == auctions[_auctionId].owner)
+ArconaMarketplaceContract.getToken (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#505-547) uses a dangerous strict equality:
+	- require(bool)(msg.sender == auctions[_auctionId].winner)
+ArconaMarketplaceContract.migrateAuction (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#591-641) uses a dangerous strict equality:
+	- require(bool)(msg.sender == auctions[_auctionId].owner)
+ArconaMarketplaceContract.restartAuction (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#565-589) uses a dangerous strict equality:
+	- require(bool)(msg.sender == auctions[_auctionId].owner)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Reentrancy in ArconaMarketplaceContract.getToken (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#505-547):
+	External calls:
+	- require(bool)(arconaToken.transferFrom(msg.sender,this,fullPrice)) (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#517-521)
+	- arconaToken.transfer(auctions[_auctionId].owner,fullPrice) (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#533-535)
+	- require(bool)(ERC721Interface(auctions[_auctionId].token).transfer(auctions[_auctionId].winner,auctions[_auctionId].tokenId)) (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#539-541)
+	State variables written after the call(s):
+	- auctions (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#541-547)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+ArconaMarketplaceContract.getToken (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#505-547) does not use the value returned by external calls:
+	-arconaToken.transfer(auctions[_auctionId].owner,fullPrice) (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#533-535)
+ArconaMarketplaceContract.withdrawTokens (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol) does not use the value returned by external calls:
+	-arconaToken.transfer(profitAddress,arconaToken.balanceOf(this)) (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in ArconaMarketplaceContract._createAuction (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#419-467):
+	External calls:
+	- require(bool)(ERC721Interface(_token).transferFrom(_from,this,_tokenId)) (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#425-427)
+	State variables written after the call(s):
+	- auctionIndex (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#459-461)
+	- auctions (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#429-459)
+	- lastAuctionId (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#429-459)
+	- ownedAuctions (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#461-463)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+ERC721Interface.balanceOf (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#76-77) should be declared external
+ERC721Interface.ownerOf (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#79-80) should be declared external
+ERC721Interface.transfer (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#81-83) should be declared external
+ERC721Interface.approve (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#83-85) should be declared external
+ERC721Interface.takeOwnership (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#85-87) should be declared external
+ERC721Interface.totalSupply (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#87-89) should be declared external
+ERC721Interface.owns (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#89) should be declared external
+ERC721Interface.allowance (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#91) should be declared external
+ERC721Interface.transferFrom (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#93-101) should be declared external
+ERC20.allowance (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#105-107) should be declared external
+ERC20.transferFrom (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#107-109) should be declared external
+ERC20.approve (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#109-111) should be declared external
+ERC20.totalSupply (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#111-113) should be declared external
+ERC20.balanceOf (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#113-115) should be declared external
+ERC20.transfer (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#115-117) should be declared external
+ArconaMarketplaceContract.fallback (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#373-377) should be declared external
+ArconaMarketplaceContract.receiveCreateAuction (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#377-403) should be declared external
+ArconaMarketplaceContract.withdrawTokens (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol) should be declared external
+ArconaMarketplaceContract.destruct (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_adminAddress' of Ownable.addAdmin (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#199) is not in mixedCase
+Parameter '_adminAddress' of Ownable.delAdmin (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#211) is not in mixedCase
+Parameter '_adminAddress' of Ownable.isAdmin (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#221) is not in mixedCase
+Parameter '_newOwner' of Ownable.transferOwnership (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#243) is not in mixedCase
+Parameter '_token' of ArconaMarketplaceContract. (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#369) is not in mixedCase
+Parameter '_profitAddress' of ArconaMarketplaceContract. (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#369) is not in mixedCase
+Parameter '_from' of ArconaMarketplaceContract.receiveCreateAuction (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#379-381) is not in mixedCase
+Parameter '_token' of ArconaMarketplaceContract.receiveCreateAuction (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#382-387) is not in mixedCase
+Parameter '_tokenId' of ArconaMarketplaceContract.receiveCreateAuction (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#387) is not in mixedCase
+Parameter '_startPrice' of ArconaMarketplaceContract.receiveCreateAuction (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#387) is not in mixedCase
+Parameter '_duration' of ArconaMarketplaceContract.receiveCreateAuction (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#387) is not in mixedCase
+Parameter '_token' of ArconaMarketplaceContract.createAuction (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#403) is not in mixedCase
+Parameter '_tokenId' of ArconaMarketplaceContract.createAuction (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#403) is not in mixedCase
+Parameter '_startPrice' of ArconaMarketplaceContract.createAuction (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#403) is not in mixedCase
+Parameter '_duration' of ArconaMarketplaceContract.createAuction (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#403) is not in mixedCase
+Function 'ArconaMarketplaceContract._createAuction' (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#419-467) is not in mixedCase
+Parameter '_from' of ArconaMarketplaceContract._createAuction (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#421) is not in mixedCase
+Parameter '_token' of ArconaMarketplaceContract._createAuction (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#421) is not in mixedCase
+Parameter '_tokenId' of ArconaMarketplaceContract._createAuction (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#421) is not in mixedCase
+Parameter '_startPrice' of ArconaMarketplaceContract._createAuction (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#421-423) is not in mixedCase
+Parameter '_duration' of ArconaMarketplaceContract._createAuction (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#423) is not in mixedCase
+Parameter '_winner' of ArconaMarketplaceContract.setWinner (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#469) is not in mixedCase
+Parameter '_auctionId' of ArconaMarketplaceContract.setWinner (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#469-471) is not in mixedCase
+Parameter '_finalPrice' of ArconaMarketplaceContract.setWinner (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#471) is not in mixedCase
+Parameter '_executeTime' of ArconaMarketplaceContract.setWinner (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#471-473) is not in mixedCase
+Parameter '_auctionId' of ArconaMarketplaceContract.getToken (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#505) is not in mixedCase
+Parameter '_auctionId' of ArconaMarketplaceContract.cancelAuction (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#549) is not in mixedCase
+Parameter '_auctionId' of ArconaMarketplaceContract.restartAuction (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#567-571) is not in mixedCase
+Parameter '_startPrice' of ArconaMarketplaceContract.restartAuction (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#571) is not in mixedCase
+Parameter '_duration' of ArconaMarketplaceContract.restartAuction (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#571) is not in mixedCase
+Parameter '_auctionId' of ArconaMarketplaceContract.migrateAuction (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#591) is not in mixedCase
+Parameter '_newAuction' of ArconaMarketplaceContract.migrateAuction (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#592-593) is not in mixedCase
+Parameter '_owner' of ArconaMarketplaceContract.ownerAuctionCount (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#643) is not in mixedCase
+Parameter '_owner' of ArconaMarketplaceContract.auctionsOf (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#655) is not in mixedCase
+Parameter '_token' of ArconaMarketplaceContract.addAcceptedToken (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#665-667) is not in mixedCase
+Parameter '_token' of ArconaMarketplaceContract.delAcceptedToken (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#681) is not in mixedCase
+Parameter '_address' of ArconaMarketplaceContract.addWhiteList (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#699-701) is not in mixedCase
+Parameter '_address' of ArconaMarketplaceContract.delWhiteList (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#719) is not in mixedCase
+Parameter '_hours' of ArconaMarketplaceContract.setDefaultExecuteTime (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#733) is not in mixedCase
+Parameter '_fee' of ArconaMarketplaceContract.setAuctionFee (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#743) is not in mixedCase
+Parameter '_gasInTokens' of ArconaMarketplaceContract.setGasInTokens (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#753) is not in mixedCase
+Parameter '_minDuration' of ArconaMarketplaceContract.setMinDuration (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#763) is not in mixedCase
+Parameter '_maxDuration' of ArconaMarketplaceContract.setMaxDuration (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#771-772) is not in mixedCase
+Parameter '_profitAddress' of ArconaMarketplaceContract.setProfitAddress (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol#775) is not in mixedCase
+Parameter '_token' of ArconaMarketplaceContract.isAcceptedToken (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol) is not in mixedCase
+Parameter '_address' of ArconaMarketplaceContract.inWhiteList (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol) is not in mixedCase
+Parameter '_value' of ArconaMarketplaceContract.valueFromPercent (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol) is not in mixedCase
+Parameter '_percent' of ArconaMarketplaceContract.valueFromPercent (/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x0e5632feb2c2619dba9c7e2dc5a7ed3fd14969da.sol analyzed (6 contracts), 75 result(s) found

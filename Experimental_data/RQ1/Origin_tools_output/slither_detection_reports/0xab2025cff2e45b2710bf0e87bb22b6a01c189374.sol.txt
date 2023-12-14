@@ -1,0 +1,127 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol:
+/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol:252:21: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function canBuy(uint amount) public pure returns (bool possibl ...
+                    ^---------^
+/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol:256:22: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function canSell(uint amount) public pure returns (bool possibl ...
+                     ^---------^
+
+INFO:Detectors:[91m
+Reentrancy in ERC20TokenLatch.placeBuyOrder (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#152-204):
+	External calls:
+	- transfer(msg.sender,qty) (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#187-188)
+	External calls sending eth:
+	- msg.sender.transfer(msg.value - cost) (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#161-162)
+	- owner.transfer(fee) (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#162-163)
+	- sell_order_owners[i].transfer((sell_order_price[i] * qty) / 10000) (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#186)
+	- owner.transfer(((price10000 - sell_order_price[i]) * qty) / 10000) (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#191-194)
+	State variables written after the call(s):
+	- min_sell_price_idx (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#199)
+	- num_sell_orders (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#199)
+	- sell_order_owners (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#199)
+	- sell_order_price (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#199)
+	- sell_order_qty (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#199)
+Reentrancy in ERC20TokenLatch.placeSellOrder (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#207-256):
+	External calls:
+	- require(bool)(ERC20(latched_contract).allowance(msg.sender,address(this)) >= tokens) (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#209-211)
+	- ERC20(latched_contract).transferFrom(msg.sender,address(this),tokens) (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#213-215)
+	- transfer(buy_order_owners[i],qty) (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#240-242)
+	External calls sending eth:
+	- msg.sender.transfer((sell_price * qty) / 10000) (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#242-243)
+	- owner.transfer(((buy_order_price[i] - sell_price) * qty) / 10000) (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#248-249)
+	State variables written after the call(s):
+	- buy_order_owners (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#252)
+	- buy_order_price (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#252)
+	- buy_order_qty (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#252)
+	- max_buy_price_idx (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#252)
+	- num_buy_orders (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#252)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities[0m
+INFO:Detectors:[93m
+ERC20TokenLatch (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#23-275) has incorrect ERC20 function interface(s):
+	-transfer (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#122-127)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[93m
+ERC20TokenLatch.destroy (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol) uses a dangerous strict equality:
+	- require(bool)(ERC20(latched_contract).balanceOf(address(this)) == 0)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+ERC20TokenLatch.transfer (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#122-127) does not use the value returned by external calls:
+	-ERC20(latched_contract).transfer(target,qty) (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#125-127)
+ERC20TokenLatch.placeSellOrder (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#207-256) does not use the value returned by external calls:
+	-ERC20(latched_contract).transferFrom(msg.sender,address(this),tokens) (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#213-215)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+ERC20TokenLatch.placeBuyOrder has external calls inside a loop:
+	- sell_order_owners[i].transfer((sell_order_price[i] * left) / 10000) (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#173-174)
+ERC20TokenLatch.placeBuyOrder has external calls inside a loop:
+	- owner.transfer(((price10000 - sell_order_price[i]) * left) / 10000) (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#179)
+ERC20TokenLatch.placeBuyOrder has external calls inside a loop:
+	- sell_order_owners[i].transfer((sell_order_price[i] * qty) / 10000) (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#186)
+ERC20TokenLatch.placeBuyOrder has external calls inside a loop:
+	- owner.transfer(((price10000 - sell_order_price[i]) * qty) / 10000) (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#191-194)
+ERC20TokenLatch.placeSellOrder has external calls inside a loop:
+	- msg.sender.transfer((sell_price * left) / 10000) (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#229-231)
+ERC20TokenLatch.placeSellOrder has external calls inside a loop:
+	- owner.transfer(((buy_order_price[i] - sell_price) * left) / 10000) (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#232-233)
+ERC20TokenLatch.placeSellOrder has external calls inside a loop:
+	- msg.sender.transfer((sell_price * qty) / 10000) (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#242-243)
+ERC20TokenLatch.placeSellOrder has external calls inside a loop:
+	- owner.transfer(((buy_order_price[i] - sell_price) * qty) / 10000) (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#248-249)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in ERC20TokenLatch.placeSellOrder (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#207-256):
+	External calls:
+	- require(bool)(ERC20(latched_contract).allowance(msg.sender,address(this)) >= tokens) (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#209-211)
+	- ERC20(latched_contract).transferFrom(msg.sender,address(this),tokens) (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#213-215)
+	State variables written after the call(s):
+	- buy_order_qty (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#227)
+	- min_sell_price_idx (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#254-256)
+	- num_sell_orders (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#254-256)
+	- sell_order_owners (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#254-256)
+	- sell_order_price (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#254-256)
+	- sell_order_qty (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#254-256)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+ERC20TokenLatch.trade_increment should be constant (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#25-27)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+ERC20.totalSupply (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#12-13) should be declared external
+ERC20.balanceOf (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#13-14) should be declared external
+ERC20.allowance (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#14-15) should be declared external
+ERC20.transfer (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#15-16) should be declared external
+ERC20.approve (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#16-17) should be declared external
+ERC20.transferFrom (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#17-19) should be declared external
+ERC20TokenLatch.balanceOf (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#112-116) should be declared external
+ERC20TokenLatch.totalSupply (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#118-120) should be declared external
+ERC20TokenLatch.getFee (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#128-129) should be declared external
+ERC20TokenLatch.getSellReturn (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#138-143) should be declared external
+ERC20TokenLatch.getBuyCost (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#143-150) should be declared external
+ERC20TokenLatch.buy (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#150-152) should be declared external
+ERC20TokenLatch.sell (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#204-206) should be declared external
+ERC20TokenLatch.canBuy (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#256-260) should be declared external
+ERC20TokenLatch.canSell (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#261-270) should be declared external
+ERC20TokenLatch.get_tradable (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#270-272) should be declared external
+ERC20TokenLatch.setFee (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#272-275) should be declared external
+ERC20TokenLatch.destroy (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol:
+	- pragma solidity^0.5.1 (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#5-7): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'ERC20TokenLatch.get_tradable' (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#270-272) is not in mixedCase
+Parameter 'new_fee' of ERC20TokenLatch.setFee (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#273) is not in mixedCase
+Variable 'ERC20TokenLatch.trade_increment' (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#25-27) is not in mixedCase
+Variable 'ERC20TokenLatch.latched_contract' (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#31-33) is not in mixedCase
+Variable 'ERC20TokenLatch.buy_order_owners' (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#33-34) is not in mixedCase
+Variable 'ERC20TokenLatch.buy_order_qty' (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#34-35) is not in mixedCase
+Variable 'ERC20TokenLatch.buy_order_price' (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#35-36) is not in mixedCase
+Variable 'ERC20TokenLatch.num_buy_orders' (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#37) is not in mixedCase
+Variable 'ERC20TokenLatch.max_buy_price_idx' (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#38-39) is not in mixedCase
+Variable 'ERC20TokenLatch.sell_order_owners' (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#39-40) is not in mixedCase
+Variable 'ERC20TokenLatch.sell_order_qty' (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#40-41) is not in mixedCase
+Variable 'ERC20TokenLatch.sell_order_price' (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#41-42) is not in mixedCase
+Variable 'ERC20TokenLatch.num_sell_orders' (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#43-44) is not in mixedCase
+Variable 'ERC20TokenLatch.min_sell_price_idx' (/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol#45) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xab2025cff2e45b2710bf0e87bb22b6a01c189374.sol analyzed (2 contracts), 49 result(s) found

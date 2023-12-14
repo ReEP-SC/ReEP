@@ -1,0 +1,73 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x5c310678d08322bc68194054b67416de7eb91a2c.sol:
+/sb/0x5c310678d08322bc68194054b67416de7eb91a2c.sol:90:21: Warning: Return value of low-level calls not used.
+                    participants[payoutOrder].etherAddress.call.value(payoutToSend).gas(1000000)();
+                    ^----------------------------------------------------------------------------^
+
+INFO:Detectors:[91m
+BoomerangLiquidity.payout (/sb/0x5c310678d08322bc68194054b67416de7eb91a2c.sol#80-103) sends eth to arbitrary user
+	Dangerous calls:
+	- flmContract.buy.value(investment)() (/sb/0x5c310678d08322bc68194054b67416de7eb91a2c.sol#85)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[91m
+Reentrancy in BoomerangLiquidity.payout (/sb/0x5c310678d08322bc68194054b67416de7eb91a2c.sol#80-103):
+	External calls:
+	- flmContract.buy.value(investment)() (/sb/0x5c310678d08322bc68194054b67416de7eb91a2c.sol#85)
+	- participants[payoutOrder].etherAddress.call.value(payoutToSend).gas(1000000)() (/sb/0x5c310678d08322bc68194054b67416de7eb91a2c.sol#91-94)
+	External calls sending eth:
+	- flmContract.buy.value(investment)() (/sb/0x5c310678d08322bc68194054b67416de7eb91a2c.sol#85)
+	- ! participants[payoutOrder].etherAddress.send(payoutToSend) (/sb/0x5c310678d08322bc68194054b67416de7eb91a2c.sol#90-95)
+	- participants[payoutOrder].etherAddress.call.value(payoutToSend).gas(1000000)() (/sb/0x5c310678d08322bc68194054b67416de7eb91a2c.sol#91-94)
+	State variables written after the call(s):
+	- payoutOrder (/sb/0x5c310678d08322bc68194054b67416de7eb91a2c.sol#101-102)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities[0m
+INFO:Detectors:[93m
+BoomerangLiquidity.payout (/sb/0x5c310678d08322bc68194054b67416de7eb91a2c.sol#80-103) does not use the value returned by external calls:
+	-flmContract.buy.value(investment)() (/sb/0x5c310678d08322bc68194054b67416de7eb91a2c.sol#85)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+BoomerangLiquidity.payout has external calls inside a loop:
+	- ! participants[payoutOrder].etherAddress.send(payoutToSend) (/sb/0x5c310678d08322bc68194054b67416de7eb91a2c.sol#90-95)
+BoomerangLiquidity.payout has external calls inside a loop:
+	- participants[payoutOrder].etherAddress.call.value(payoutToSend).gas(1000000)() (/sb/0x5c310678d08322bc68194054b67416de7eb91a2c.sol#91-94)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in BoomerangLiquidity.payout (/sb/0x5c310678d08322bc68194054b67416de7eb91a2c.sol#80-103):
+	External calls:
+	- flmContract.buy.value(investment)() (/sb/0x5c310678d08322bc68194054b67416de7eb91a2c.sol#85)
+	State variables written after the call(s):
+	- participants (/sb/0x5c310678d08322bc68194054b67416de7eb91a2c.sol#88-89)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+ERC20Interface.totalSupply (/sb/0x5c310678d08322bc68194054b67416de7eb91a2c.sol#4-5) should be declared external
+ERC20Interface.balanceOf (/sb/0x5c310678d08322bc68194054b67416de7eb91a2c.sol#5-6) should be declared external
+ERC20Interface.allowance (/sb/0x5c310678d08322bc68194054b67416de7eb91a2c.sol#6-7) should be declared external
+ERC20Interface.transfer (/sb/0x5c310678d08322bc68194054b67416de7eb91a2c.sol#7-8) should be declared external
+ERC20Interface.approve (/sb/0x5c310678d08322bc68194054b67416de7eb91a2c.sol#8-9) should be declared external
+ERC20Interface.transferFrom (/sb/0x5c310678d08322bc68194054b67416de7eb91a2c.sol#9-11) should be declared external
+FLMContract.withdraw (/sb/0x5c310678d08322bc68194054b67416de7eb91a2c.sol#16-17) should be declared external
+FLMContract.buy (/sb/0x5c310678d08322bc68194054b67416de7eb91a2c.sol#17-18) should be declared external
+FLMContract.myTokens (/sb/0x5c310678d08322bc68194054b67416de7eb91a2c.sol#18-21) should be declared external
+Owned.changeOwner (/sb/0x5c310678d08322bc68194054b67416de7eb91a2c.sol#34-38) should be declared external
+Owned.acceptOwnership (/sb/0x5c310678d08322bc68194054b67416de7eb91a2c.sol#39-45) should be declared external
+BoomerangLiquidity.fallback (/sb/0x5c310678d08322bc68194054b67416de7eb91a2c.sol#74-75) should be declared external
+BoomerangLiquidity.payout (/sb/0x5c310678d08322bc68194054b67416de7eb91a2c.sol#80-103) should be declared external
+BoomerangLiquidity.myTokens (/sb/0x5c310678d08322bc68194054b67416de7eb91a2c.sol#103-110) should be declared external
+BoomerangLiquidity.withdraw (/sb/0x5c310678d08322bc68194054b67416de7eb91a2c.sol#110-113) should be declared external
+BoomerangLiquidity.donate (/sb/0x5c310678d08322bc68194054b67416de7eb91a2c.sol#113-114) should be declared external
+BoomerangLiquidity.transferAnyERC20Token (/sb/0x5c310678d08322bc68194054b67416de7eb91a2c.sol#115-119) should be declared external
+BoomerangLiquidity.exitScam (/sb/0x5c310678d08322bc68194054b67416de7eb91a2c.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x5c310678d08322bc68194054b67416de7eb91a2c.sol:
+	- pragma solidity0.4.21 (/sb/0x5c310678d08322bc68194054b67416de7eb91a2c.sol#1): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Low level call in BoomerangLiquidity.payout (/sb/0x5c310678d08322bc68194054b67416de7eb91a2c.sol#80-103):
+	-participants[payoutOrder].etherAddress.call.value(payoutToSend).gas(1000000)() /sb/0x5c310678d08322bc68194054b67416de7eb91a2c.sol#91-94
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Function 'Owned.Owned' (/sb/0x5c310678d08322bc68194054b67416de7eb91a2c.sol#25-29) is not in mixedCase
+Parameter '_newOwner' of Owned.changeOwner (/sb/0x5c310678d08322bc68194054b67416de7eb91a2c.sol#34-35) is not in mixedCase
+Function 'BoomerangLiquidity.BoomerangLiquidity' (/sb/0x5c310678d08322bc68194054b67416de7eb91a2c.sol#56-63) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x5c310678d08322bc68194054b67416de7eb91a2c.sol analyzed (4 contracts), 29 result(s) found

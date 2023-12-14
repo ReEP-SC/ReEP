@@ -1,0 +1,119 @@
+INFO:Detectors:[93m
+StakeDice._cancelBet (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#487-533) uses a dangerous strict equality:
+	- require(bool)(bets[_betIndex].status == BetStatus.IN_PROGRESS)
+StakeDice._cancelBet (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#487-533) uses a dangerous strict equality:
+	- require(bool)(bets[_betIndex].status == BetStatus.IN_PROGRESS)
+StakeDice.betPlaced (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#335-487) uses a dangerous strict equality:
+	- playersToTotalBets[msg.sender] == 0
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Contract locking ether found in /sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol:
+	Contract StakeDiceGame has payable functions:
+	 - fallback (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#29-39)
+	But does not have a function to withdraw the ether
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#contracts-that-lock-ether[0m
+INFO:Detectors:[93m
+Reentrancy in StakeDice.betPlaced (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#335-487):
+	External calls:
+	- require(bool)(_amount <= StakeDiceGame(gameContract).maximumBet()) (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#349-351)
+	- stakeTokenContract.transferFrom(msg.sender,this,_amount) (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#357)
+	- potentialRevenue = StakeDiceGame(gameContract).multiplierOnWin() * _amount / 10000 (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#364-367)
+	- bets.push(Bet(msg.sender,StakeDiceGame(gameContract).winningChance(),_amount,potentialRevenue,0,BetStatus.IN_PROGRESS)) (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#367-381)
+	State variables written after the call(s):
+	- bets (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#409)
+	- bets (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#441-443)
+	- bets (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#463)
+Reentrancy in StakeDice.betPlaced (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#335-487):
+	External calls:
+	- require(bool)(_amount <= StakeDiceGame(gameContract).maximumBet()) (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#349-351)
+	- stakeTokenContract.transferFrom(msg.sender,this,_amount) (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#357)
+	- potentialRevenue = StakeDiceGame(gameContract).multiplierOnWin() * _amount / 10000 (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#364-367)
+	- bets.push(Bet(msg.sender,StakeDiceGame(gameContract).winningChance(),_amount,potentialRevenue,0,BetStatus.IN_PROGRESS)) (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#367-381)
+	- stakeTokenContract.balanceOf(this) < bet.potentialRevenue (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#425-461)
+	- _cancelBet(betIndex) (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#431-433)
+	State variables written after the call(s):
+	- bets (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#431-433)
+	- playersToTotalBets (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#431-433)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+StakeDiceGame.withdrawStakeTokens (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#197-219) does not use the value returned by external calls:
+	-stakeDice.stakeTokenContract().transfer(_to,_amount) (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#215-217)
+StakeDice.betPlaced (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#335-487) does not use the value returned by external calls:
+	-stakeTokenContract.transferFrom(msg.sender,this,_amount) (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#357)
+	-stakeTokenContract.transfer(bet.gambler,bet.potentialRevenue) (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#451-455)
+	-stakeTokenContract.transfer(bet.gambler,1) (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#477-481)
+StakeDice._cancelBet (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#487-533) does not use the value returned by external calls:
+	-stakeTokenContract.transfer(bets[_betIndex].gambler,bets[_betIndex].betAmount) (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#505-507)
+StakeDice.withdrawStakeTokens (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol) does not use the value returned by external calls:
+	-stakeTokenContract.transfer(owner,_amount) (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in StakeDice._cancelBet (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#487-533):
+	External calls:
+	- stakeTokenContract.transfer(bets[_betIndex].gambler,bets[_betIndex].betAmount) (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#505-507)
+	State variables written after the call(s):
+	- playersToTotalBets (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#523-533)
+Reentrancy in StakeDice.betPlaced (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#335-487):
+	External calls:
+	- require(bool)(_amount <= StakeDiceGame(gameContract).maximumBet()) (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#349-351)
+	- stakeTokenContract.transferFrom(msg.sender,this,_amount) (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#357)
+	- potentialRevenue = StakeDiceGame(gameContract).multiplierOnWin() * _amount / 10000 (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#364-367)
+	State variables written after the call(s):
+	- playersToBetIndices (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#367)
+Reentrancy in StakeDice.betPlaced (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#335-487):
+	External calls:
+	- require(bool)(_amount <= StakeDiceGame(gameContract).maximumBet()) (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#349-351)
+	- stakeTokenContract.transferFrom(msg.sender,this,_amount) (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#357)
+	- potentialRevenue = StakeDiceGame(gameContract).multiplierOnWin() * _amount / 10000 (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#364-367)
+	- bets.push(Bet(msg.sender,StakeDiceGame(gameContract).winningChance(),_amount,potentialRevenue,0,BetStatus.IN_PROGRESS)) (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#367-381)
+	State variables written after the call(s):
+	- allPlayers (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#387)
+	- betsLength (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#381)
+	- playersToTotalBets (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#389-391)
+Reentrancy in StakeDiceGame.setWinningChance (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#177-191):
+	External calls:
+	- require(bool)(msg.sender == stakeDice.owner()) (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#181-182)
+	State variables written after the call(s):
+	- winningChance (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#189-191)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+StakeDice.betPlaced (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#335-487) uses timestamp for comparisons
+	Dangerous comparisons:
+	- playersToTotalBets[msg.sender] == 0 (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#383-389)
+	- stakeTokenContract.balanceOf(this) < bet.potentialRevenue (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#425-461)
+	- randomNumber < bet.winningChance / 100 (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#412-487)
+	- require(bool)(bet.status == BetStatus.IN_PROGRESS) (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#393-395)
+StakeDice._cancelBet (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#487-533) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool)(bets[_betIndex].status == BetStatus.IN_PROGRESS) (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#495)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+StakeToken.transfer (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#13-15) should be declared external
+StakeToken.transferFrom (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#15-17) should be declared external
+StakeToken.balanceOf (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#17-23) should be declared external
+StakeDiceGame.maximumBet (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#83-97) should be declared external
+StakeDice.createDefaultGames (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#600-649) should be declared external
+StakeDice.cancelBet (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#661-669) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_stakeDice' of StakeDiceGame. (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#151) is not in mixedCase
+Parameter '_winningChance' of StakeDiceGame. (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#151-153) is not in mixedCase
+Parameter '_newWinningChance' of StakeDiceGame.setWinningChance (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#177-179) is not in mixedCase
+Parameter '_amount' of StakeDiceGame.withdrawStakeTokens (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#197-199) is not in mixedCase
+Parameter '_to' of StakeDiceGame.withdrawStakeTokens (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#199) is not in mixedCase
+Parameter '_player' of StakeDice.playerAmountOfBets (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#254-255) is not in mixedCase
+Parameter '_amount' of StakeDice.betPlaced (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#335) is not in mixedCase
+Function 'StakeDice._cancelBet' (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#487-533) is not in mixedCase
+Parameter '_betIndex' of StakeDice._cancelBet (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#489) is not in mixedCase
+Parameter '_stakeTokenContract' of StakeDice. (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#557) is not in mixedCase
+Parameter '_houseEdge' of StakeDice. (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#557-559) is not in mixedCase
+Parameter '_minimumBet' of StakeDice. (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#559-561) is not in mixedCase
+Parameter '_betIndex' of StakeDice.cancelBet (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#664-665) is not in mixedCase
+Parameter '_winningChance' of StakeDice.addNewStakeDiceGame (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#673) is not in mixedCase
+Parameter '_newHouseEdge' of StakeDice.setHouseEdge (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#701-703) is not in mixedCase
+Parameter '_newMinimumBet' of StakeDice.setMinimumBet (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#727) is not in mixedCase
+Parameter '_amount' of StakeDice.withdrawEther (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#752-755) is not in mixedCase
+Parameter '_newOwner' of StakeDice.transferOwnership (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol#767-769) is not in mixedCase
+Parameter '_amount' of StakeDice.withdrawStakeTokens (/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xa69d21a791347acb29ec457e9e5bc6e39c1a5c61.sol analyzed (3 contracts), 40 result(s) found

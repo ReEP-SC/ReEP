@@ -1,0 +1,82 @@
+INFO:Detectors:[93m
+Reentrancy in MKGECstaking.deposit (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol#256-273):
+	External calls:
+	- require(bool,string)(Token(tokenAddress).transferFrom(msg.sender,address(this),amountToStake),Insufficient Token Allowance) (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol#259-260)
+	- updateAccount(msg.sender) (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol#261-262)
+	- require(bool,string)(Token(tokenAddress).transfer(owner,fee),Could not transfer deposit fee.) (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol#265-270)
+	State variables written after the call(s):
+	- depositedTokens (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol#270-271)
+Reentrancy in MKGECstaking.updateAccount (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol#223-235):
+	External calls:
+	- require(bool,string)(Token(tokenAddress).transfer(account,pendingDivs),Could not transfer tokens.) (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol#225-227)
+	State variables written after the call(s):
+	- lastClaimedTime (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol#235)
+Reentrancy in MKGECstaking.withdraw (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol#273-298):
+	External calls:
+	- updateAccount(msg.sender) (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol#281)
+	- require(bool,string)(Token(tokenAddress).transfer(owner,fee),Could not transfer withdraw fee.) (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol#283-285)
+	- require(bool,string)(Token(tokenAddress).transfer(msg.sender,amountAfterFee),Could not transfer tokens.) (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol#285-290)
+	State variables written after the call(s):
+	- depositedTokens (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol#291-295)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+EnumerableSet._remove (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol#54-86) does not use the value returned by external calls:
+	-set._values.pop() (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol#74-75)
+MKGECstaking.deposit (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol#256-273) does not use the value returned by external calls:
+	-holders.add(msg.sender) (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol#273)
+MKGECstaking.withdraw (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol#273-298) does not use the value returned by external calls:
+	-holders.remove(msg.sender) (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol#297)
+MKGECstaking.transferAnyERC20Tokens (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol#312-315) does not use the value returned by external calls:
+	-Token(_tokenAddr).transfer(_to,_amount) (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in MKGECstaking.deposit (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol#256-273):
+	External calls:
+	- require(bool,string)(Token(tokenAddress).transferFrom(msg.sender,address(this),amountToStake),Insufficient Token Allowance) (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol#259-260)
+	- updateAccount(msg.sender) (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol#261-262)
+	- require(bool,string)(Token(tokenAddress).transfer(owner,fee),Could not transfer deposit fee.) (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol#265-270)
+	State variables written after the call(s):
+	- stakingTime (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol#273)
+Reentrancy in MKGECstaking.updateAccount (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol#223-235):
+	External calls:
+	- require(bool,string)(Token(tokenAddress).transfer(account,pendingDivs),Could not transfer tokens.) (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol#225-227)
+	State variables written after the call(s):
+	- totalClaimedRewards (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol#231-232)
+	- totalEarnedTokens (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol#228-231)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol#182-189) should be declared external
+MKGECstaking.getNumberOfHolders (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol#254) should be declared external
+MKGECstaking.deposit (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol#256-273) should be declared external
+MKGECstaking.withdraw (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol#273-298) should be declared external
+MKGECstaking.claimDivs (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol#298-301) should be declared external
+MKGECstaking.transferAnyERC20Tokens (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol#312-315) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol:
+	- pragma solidity0.6.12 (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol#5-7): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'EnumerableSet._add' (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol#43-54) is not in mixedCase
+Function 'EnumerableSet._remove' (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol#54-86) is not in mixedCase
+Function 'EnumerableSet._contains' (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol#87-91) is not in mixedCase
+Function 'EnumerableSet._length' (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol#91-95) is not in mixedCase
+Function 'EnumerableSet._at' (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol#95-105) is not in mixedCase
+Parameter '' of Token.transferFrom (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol#191) is not in mixedCase
+Parameter '_scope_0' of Token.transferFrom (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol#191) is not in mixedCase
+Parameter '_scope_1' of Token.transferFrom (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol#191) is not in mixedCase
+Parameter '' of Token.transfer (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol#193) is not in mixedCase
+Parameter '_scope_0' of Token.transfer (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol#193) is not in mixedCase
+Parameter '_holder' of MKGECstaking.getPendingDivs (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol#236) is not in mixedCase
+Parameter '_tokenAddr' of MKGECstaking.transferAnyERC20Tokens (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol#313) is not in mixedCase
+Parameter '_to' of MKGECstaking.transferAnyERC20Tokens (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol#313-315) is not in mixedCase
+Parameter '_amount' of MKGECstaking.transferAnyERC20Tokens (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol) is not in mixedCase
+Constant 'MKGECstaking.tokenAddress' (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol#200-203) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'MKGECstaking.rewardRate' (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol#205-206) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'MKGECstaking.rewardInterval' (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol#206-208) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'MKGECstaking.stakingFeeRate' (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol#209-211) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'MKGECstaking.unstakingFeeRate' (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol#213-215) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'MKGECstaking.cliffTime' (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol#216) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'MKGECstaking.stakingAndDaoTokens' (/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol#301-302) is not in UPPER_CASE_WITH_UNDERSCORES
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xa2a0820828d01e685a02877ea74e4940fe7e1242.sol analyzed (5 contracts), 37 result(s) found

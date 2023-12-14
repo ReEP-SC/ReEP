@@ -1,0 +1,55 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x8719a425a7966728f134a76d7fd8fad243ddb52e.sol:
+/sb/0x8719a425a7966728f134a76d7fd8fad243ddb52e.sol:499:77: Warning: Using "years" as a unit denomination is deprecated.
+        if (protocolTransfer || whitelistedTransfer || platformLaunchDate + 1 years <= now) {
+                                                                            ^-----^
+
+INFO:Detectors:[92m
+Reentrancy in FoamTokenController.constructor (/sb/0x8719a425a7966728f134a76d7fd8fad243ddb52e.sol#361-393):
+	External calls:
+	- saleTokensPerUnit = sale.saleTokensPerUnit() (/sb/0x8719a425a7966728f134a76d7fd8fad243ddb52e.sol#387)
+	- extraTokensPerUnit = sale.extraTokensPerUnit() (/sb/0x8719a425a7966728f134a76d7fd8fad243ddb52e.sol#391)
+	State variables written after the call(s):
+	- extraTokensPerUnit (/sb/0x8719a425a7966728f134a76d7fd8fad243ddb52e.sol#391)
+Reentrancy in FoamTokenController.setWhitelisted (/sb/0x8719a425a7966728f134a76d7fd8fad243ddb52e.sol#393-423):
+	External calls:
+	- require(bool)(sale.unitContributions(msg.sender) != 0) (/sb/0x8719a425a7966728f134a76d7fd8fad243ddb52e.sol#407)
+	- require(bool)(sale.unitContributions(_whitelisted) == 0) (/sb/0x8719a425a7966728f134a76d7fd8fad243ddb52e.sol#411-413)
+	State variables written after the call(s):
+	- proposedPair (/sb/0x8719a425a7966728f134a76d7fd8fad243ddb52e.sol#413-417)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+FoamTokenController.acceptedAddress should be constant (/sb/0x8719a425a7966728f134a76d7fd8fad243ddb52e.sol#353-357)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Ownable.renounceOwnership (/sb/0x8719a425a7966728f134a76d7fd8fad243ddb52e.sol#199-205) should be declared external
+Ownable.transferOwnership (/sb/0x8719a425a7966728f134a76d7fd8fad243ddb52e.sol#217-223) should be declared external
+FoamTokenController.setWhitelisted (/sb/0x8719a425a7966728f134a76d7fd8fad243ddb52e.sol#393-423) should be declared external
+FoamTokenController.confirmWhitelisted (/sb/0x8719a425a7966728f134a76d7fd8fad243ddb52e.sol#423-439) should be declared external
+FoamTokenController.blacklistAddresses (/sb/0x8719a425a7966728f134a76d7fd8fad243ddb52e.sol#441-453) should be declared external
+FoamTokenController.changeRegistry (/sb/0x8719a425a7966728f134a76d7fd8fad243ddb52e.sol#453-471) should be declared external
+FoamTokenController.setPlatformLaunchDate (/sb/0x8719a425a7966728f134a76d7fd8fad243ddb52e.sol#473-485) should be declared external
+FoamTokenController.setProtocolContract (/sb/0x8719a425a7966728f134a76d7fd8fad243ddb52e.sol#487-495) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_newOwner' of Ownable.transferOwnership (/sb/0x8719a425a7966728f134a76d7fd8fad243ddb52e.sol#217-221) is not in mixedCase
+Function 'Ownable._transferOwnership' (/sb/0x8719a425a7966728f134a76d7fd8fad243ddb52e.sol#237-245) is not in mixedCase
+Parameter '_newOwner' of Ownable._transferOwnership (/sb/0x8719a425a7966728f134a76d7fd8fad243ddb52e.sol#237) is not in mixedCase
+Parameter '' of SaleInterface.unitContributions (/sb/0x8719a425a7966728f134a76d7fd8fad243ddb52e.sol#283) is not in mixedCase
+Parameter '' of RegistryInterface.totalStaked (/sb/0x8719a425a7966728f134a76d7fd8fad243ddb52e.sol#301) is not in mixedCase
+Parameter '' of RegistryInterface.numApplications (/sb/0x8719a425a7966728f134a76d7fd8fad243ddb52e.sol#309) is not in mixedCase
+Parameter '_from' of FoamTokenController.transferAllowed (/sb/0x8719a425a7966728f134a76d7fd8fad243ddb52e.sol#499) is not in mixedCase
+Parameter '_to' of FoamTokenController.transferAllowed (/sb/0x8719a425a7966728f134a76d7fd8fad243ddb52e.sol#499) is not in mixedCase
+Parameter '_registry' of FoamTokenController. (/sb/0x8719a425a7966728f134a76d7fd8fad243ddb52e.sol#361) is not in mixedCase
+Parameter '_sale' of FoamTokenController. (/sb/0x8719a425a7966728f134a76d7fd8fad243ddb52e.sol#361-365) is not in mixedCase
+Parameter '_launchDate' of FoamTokenController. (/sb/0x8719a425a7966728f134a76d7fd8fad243ddb52e.sol#365) is not in mixedCase
+Parameter '_whitelisted' of FoamTokenController.setWhitelisted (/sb/0x8719a425a7966728f134a76d7fd8fad243ddb52e.sol#393-395) is not in mixedCase
+Parameter '_whitelistor' of FoamTokenController.confirmWhitelisted (/sb/0x8719a425a7966728f134a76d7fd8fad243ddb52e.sol#423) is not in mixedCase
+Parameter '_addresses' of FoamTokenController.blacklistAddresses (/sb/0x8719a425a7966728f134a76d7fd8fad243ddb52e.sol#441-442) is not in mixedCase
+Parameter '_isBlacklisted' of FoamTokenController.blacklistAddresses (/sb/0x8719a425a7966728f134a76d7fd8fad243ddb52e.sol#443) is not in mixedCase
+Parameter '_newRegistry' of FoamTokenController.changeRegistry (/sb/0x8719a425a7966728f134a76d7fd8fad243ddb52e.sol#455-459) is not in mixedCase
+Parameter '_launchDate' of FoamTokenController.setPlatformLaunchDate (/sb/0x8719a425a7966728f134a76d7fd8fad243ddb52e.sol#477) is not in mixedCase
+Parameter '_contract' of FoamTokenController.setProtocolContract (/sb/0x8719a425a7966728f134a76d7fd8fad243ddb52e.sol#493) is not in mixedCase
+Parameter '_isProtocolContract' of FoamTokenController.setProtocolContract (/sb/0x8719a425a7966728f134a76d7fd8fad243ddb52e.sol#493) is not in mixedCase
+Parameter '_contributor' of FoamTokenController.purchaseCheck (/sb/0x8719a425a7966728f134a76d7fd8fad243ddb52e.sol#543) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x8719a425a7966728f134a76d7fd8fad243ddb52e.sol analyzed (6 contracts), 31 result(s) found

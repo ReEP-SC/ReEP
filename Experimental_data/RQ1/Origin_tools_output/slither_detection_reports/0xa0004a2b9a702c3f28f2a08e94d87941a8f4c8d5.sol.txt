@@ -1,0 +1,96 @@
+INFO:Detectors:[93m
+Initializable.isConstructor (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#328-349) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+TrueLender.loanValue (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#877-894) uses a dangerous strict equality:
+	- _balance == 0
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+TrueLender.distribute (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#955-968) does not use the value returned by external calls:
+	-_loans[index].transfer(recipient,numerator.mul(_loans[index].balanceOf(address(this))).div(denominator)) (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#963-967)
+TrueLender.initialize (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#752-767) does not use the value returned by external calls:
+	-currencyToken.approve(address(_pool),uint256(- 1)) (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#757-758)
+TrueLender.fund (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#846-877) does not use the value returned by external calls:
+	-currencyToken.approve(address(loanToken),receivedAmount) (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#875-876)
+TrueLender.reclaim (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#909-941) does not use the value returned by external calls:
+	-_loans.pop() (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#936)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+TrueLender.distribute has external calls inside a loop:
+	- _loans[index].transfer(recipient,numerator.mul(_loans[index].balanceOf(address(this))).div(denominator)) (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#963-967)
+TrueLender.reclaim has external calls inside a loop:
+	- _loans.pop() (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#936)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in TrueLender.fund (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#846-877):
+	External calls:
+	- require(bool,string)(loanToken.isLoanToken(),TrueLender: Only LoanTokens can be funded) (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#847-850)
+	- (amount,apy,term) = loanToken.getParameters() (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#850-851)
+	- receivedAmount = loanToken.receivedAmount() (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#852-853)
+	- (start,no,yes) = ratingAgency.getResults(address(loanToken)) (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#853-856)
+	- pool.borrow(amount,receivedAmount) (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#872-875)
+	- currencyToken.approve(address(loanToken),receivedAmount) (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#875-876)
+	- loanToken.fund() (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#876)
+	State variables written after the call(s):
+	- _loans (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#876)
+Reentrancy in TrueLender.initialize (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#752-767):
+	External calls:
+	- currencyToken = _pool.currencyToken() (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#755-757)
+	- currencyToken.approve(address(_pool),uint256(- 1)) (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#757-758)
+	State variables written after the call(s):
+	- maxApy (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#762)
+	- maxSize (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#766)
+	- maxTerm (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#767)
+	- minApy (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#762)
+	- minSize (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#764-766)
+	- minTerm (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#766)
+	- participationFactor (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#763)
+	- ratingAgency (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#761-762)
+	- riskAversion (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#764)
+	- votingPeriod (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#767)
+Reentrancy in TrueLender.reclaim (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#909-941):
+	External calls:
+	- require(bool,string)(loanToken.isLoanToken(),TrueLender: Only LoanTokens can be used to reclaimed) (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#910-914)
+	- require(bool,string)(loanToken.status() == ILoanToken.Status.Settled || loanToken.status() == ILoanToken.Status.Defaulted,TrueLender: LoanToken is not closed yet) (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#916-921)
+	- balanceBefore = currencyToken.balanceOf(address(this)) (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#922-923)
+	- loanToken.redeem(loanToken.balanceOf(address(this))) (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#923-924)
+	- balanceAfter = currencyToken.balanceOf(address(this)) (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#924-926)
+	- pool.repay(fundsReclaimed) (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#928-930)
+	State variables written after the call(s):
+	- _loans (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#935-936)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+TrueLender.loanValue (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#877-894) uses timestamp for comparisons
+	Dangerous comparisons:
+	- passed > loan.term() (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#884-888)
+TrueLender.votingLastedLongEnough (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#981-983) uses timestamp for comparisons
+	Dangerous comparisons:
+	- start.add(votingPeriod) <= block.timestamp (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#983)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+Initializable.isConstructor uses assembly (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#328-349)
+	- /sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#347-349
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+Ownable.owner (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#394-396) should be declared external
+Ownable.renounceOwnership (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#409-416) should be declared external
+Ownable.transferOwnership (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#420-429) should be declared external
+TrueLender.initialize (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#752-767) should be declared external
+TrueLender.loans (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#839-840) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol:
+	- pragma solidity0.6.10 (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#584-585): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'Context._msgSender' (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#269-275) is not in mixedCase
+Function 'Context._msgData' (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#275-284) is not in mixedCase
+Variable 'Initializable.______gap' (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#352-353) is not in mixedCase
+Parameter '_pool' of TrueLender.initialize (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#754) is not in mixedCase
+Parameter '_ratingAgency' of TrueLender.initialize (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#754) is not in mixedCase
+Variable 'TrueLender._loans' (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#640-641) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+Initializable.______gap (/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol#352-353) is never used in TrueLender
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0xa0004a2b9a702c3f28f2a08e94d87941a8f4c8d5.sol analyzed (10 contracts), 27 result(s) found

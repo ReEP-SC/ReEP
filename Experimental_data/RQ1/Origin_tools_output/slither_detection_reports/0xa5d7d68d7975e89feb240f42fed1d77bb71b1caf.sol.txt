@@ -1,0 +1,184 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol:
+/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol:589:59: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function checkAndUpdateUniqueness(BaseWallet _wallet, uint256 _nonce, bytes32 _signHash) internal returns (bool) {
+                                                          ^------------^
+/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol:716:75: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function checkAndUpdateUniqueness(BaseWallet _wallet, uint256 _nonce, bytes32 _signHash) internal returns (bool) {
+                                                                          ^---------------^
+/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol:720:53: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function validateSignatures(BaseWallet _wallet, bytes memory _data, bytes32 _signHash, bytes memory _signatures) internal view returns (bool) {
+                                                    ^----------------^
+/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol:725:36: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function getRequiredSignatures(BaseWallet _wallet, bytes memory _data) internal view returns (uint256) {
+                                   ^----------------^
+/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol:725:56: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function getRequiredSignatures(BaseWallet _wallet, bytes memory _data) internal view returns (uint256) {
+                                                       ^----------------^
+/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol:936:9: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+        bytes32 _loanId
+        ^-------------^
+
+INFO:Detectors:[93m
+RelayerModule.recoverSigner (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#632-649) is declared view but contains assembly code
+RelayerModule.verifyData (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#698-713) is declared view but contains assembly code
+RelayerModule.functionPrefix (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#715-720) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+CompoundManager.closeLoan (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#831-854) uses a dangerous strict equality:
+	- collateral == 0
+CompoundManager.closeLoan (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#831-854) uses a dangerous strict equality:
+	- collateral == 0
+CompoundManager.exitMarketIfNeeded (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol) uses a dangerous strict equality:
+	- collateral == 0 && debt == 0
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+BaseModule.recoverToken (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#455-461) does not use the value returned by external calls:
+	-ERC20(_token).transfer(address(registry),total) (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#461)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+CompoundManager.closeLoan has external calls inside a loop:
+	- debt = CToken(cToken).borrowBalanceCurrent(address(_wallet)) (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#841-843)
+CompoundManager.closeLoan has external calls inside a loop:
+	- collateral = CToken(cToken).balanceOf(address(_wallet)) (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#847-849)
+CompoundManager.closeLoan has external calls inside a loop:
+	- _wallet.invoke(address(comptroller),0,abi.encodeWithSignature(exitMarket(address),address(cToken))) (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#851-853)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+RelayerModule.recoverSigner uses assembly (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#632-649)
+	- /sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#644-648
+RelayerModule.verifyData uses assembly (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#698-713)
+	- /sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#708-711
+RelayerModule.functionPrefix uses assembly (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#715-720)
+	- /sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#720
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+BaseWallet.implementation should be constant (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#45-46)
+BaseWallet.modules should be constant (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#49)
+BaseWallet.owner should be constant (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#46)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+ERC20.totalSupply (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#15-16) should be declared external
+ERC20.decimals (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#16-17) should be declared external
+ERC20.balanceOf (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#17-18) should be declared external
+ERC20.allowance (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#18-19) should be declared external
+ERC20.transfer (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#19-20) should be declared external
+ERC20.approve (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#20-21) should be declared external
+ERC20.transferFrom (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#21-25) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol:
+	- pragma solidity^0.5.4 (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#9-12): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Low level call in RelayerModule.execute (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#531-557):
+	-(success,None) = address(this).call(_data) /sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#554
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Parameter '_wallet' of BaseModule.init (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#435) is not in mixedCase
+Parameter '_wallet' of BaseModule.addModule (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#443-444) is not in mixedCase
+Parameter '_module' of BaseModule.addModule (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#444) is not in mixedCase
+Parameter '_token' of BaseModule.recoverToken (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#455-456) is not in mixedCase
+Parameter '_registry' of BaseModule. (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#405) is not in mixedCase
+Parameter '_name' of BaseModule. (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#405) is not in mixedCase
+Parameter '_wallet' of BaseModule.isOwner (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#470) is not in mixedCase
+Parameter '_addr' of BaseModule.isOwner (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#470-471) is not in mixedCase
+Parameter '_wallet' of RelayerModule.execute (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#531) is not in mixedCase
+Parameter '_data' of RelayerModule.execute (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#531) is not in mixedCase
+Parameter '_nonce' of RelayerModule.execute (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#531) is not in mixedCase
+Parameter '_signatures' of RelayerModule.execute (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#532) is not in mixedCase
+Parameter '_gasPrice' of RelayerModule.execute (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#532) is not in mixedCase
+Parameter '_gasLimit' of RelayerModule.execute (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#532-533) is not in mixedCase
+Parameter '_wallet' of RelayerModule.getNonce (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#559) is not in mixedCase
+Parameter '_from' of RelayerModule.getSignHash (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#585) is not in mixedCase
+Parameter '_to' of RelayerModule.getSignHash (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#585-586) is not in mixedCase
+Parameter '_value' of RelayerModule.getSignHash (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#586-587) is not in mixedCase
+Parameter '_data' of RelayerModule.getSignHash (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#587) is not in mixedCase
+Parameter '_nonce' of RelayerModule.getSignHash (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#587-588) is not in mixedCase
+Parameter '_gasPrice' of RelayerModule.getSignHash (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#589) is not in mixedCase
+Parameter '_gasLimit' of RelayerModule.getSignHash (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#589) is not in mixedCase
+Parameter '_wallet' of RelayerModule.checkAndUpdateUniqueness (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#603) is not in mixedCase
+Parameter '_signHash' of RelayerModule.checkAndUpdateUniqueness (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#603-604) is not in mixedCase
+Parameter '_wallet' of RelayerModule.checkAndUpdateNonce (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#618) is not in mixedCase
+Parameter '_nonce' of RelayerModule.checkAndUpdateNonce (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#618) is not in mixedCase
+Parameter '_signedHash' of RelayerModule.recoverSigner (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#632) is not in mixedCase
+Parameter '_wallet' of RelayerModule.refund (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#660-663) is not in mixedCase
+Parameter '_gasUsed' of RelayerModule.refund (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#663) is not in mixedCase
+Parameter '_gasPrice' of RelayerModule.refund (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#663) is not in mixedCase
+Parameter '_gasLimit' of RelayerModule.refund (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#663) is not in mixedCase
+Parameter '_signatures' of RelayerModule.refund (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#663-664) is not in mixedCase
+Parameter '_relayer' of RelayerModule.refund (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#664) is not in mixedCase
+Parameter '_wallet' of RelayerModule.verifyRefund (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#683) is not in mixedCase
+Parameter '_gasUsed' of RelayerModule.verifyRefund (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#683) is not in mixedCase
+Parameter '_gasPrice' of RelayerModule.verifyRefund (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#683) is not in mixedCase
+Parameter '_signatures' of RelayerModule.verifyRefund (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#683-684) is not in mixedCase
+Parameter '_wallet' of RelayerModule.verifyData (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#698) is not in mixedCase
+Parameter '_data' of RelayerModule.verifyData (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#699) is not in mixedCase
+Parameter '_data' of RelayerModule.functionPrefix (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#715-716) is not in mixedCase
+Parameter '_wallet' of OnlyOwnerModule.validateSignatures (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#740) is not in mixedCase
+Parameter '_signHash' of OnlyOwnerModule.validateSignatures (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#741) is not in mixedCase
+Parameter '_signatures' of OnlyOwnerModule.validateSignatures (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#741-742) is not in mixedCase
+Parameter '_wallet' of OnlyOwnerModule.checkAndUpdateUniqueness (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#735) is not in mixedCase
+Parameter '_nonce' of OnlyOwnerModule.checkAndUpdateUniqueness (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#735) is not in mixedCase
+Parameter '_wallet' of CompoundManager.openLoan (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#804-807) is not in mixedCase
+Parameter '_collateral' of CompoundManager.openLoan (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#807) is not in mixedCase
+Parameter '_collateralAmount' of CompoundManager.openLoan (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#807) is not in mixedCase
+Parameter '_debtToken' of CompoundManager.openLoan (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#807) is not in mixedCase
+Parameter '_debtAmount' of CompoundManager.openLoan (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#807) is not in mixedCase
+Parameter '_wallet' of CompoundManager.closeLoan (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#834-835) is not in mixedCase
+Parameter '_loanId' of CompoundManager.closeLoan (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#835) is not in mixedCase
+Parameter '_wallet' of CompoundManager.addCollateral (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#863-864) is not in mixedCase
+Parameter '_loanId' of CompoundManager.addCollateral (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#864-865) is not in mixedCase
+Parameter '_collateral' of CompoundManager.addCollateral (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#865-866) is not in mixedCase
+Parameter '_collateralAmount' of CompoundManager.addCollateral (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#867) is not in mixedCase
+Parameter '_wallet' of CompoundManager.removeCollateral (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#888) is not in mixedCase
+Parameter '_loanId' of CompoundManager.removeCollateral (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#889) is not in mixedCase
+Parameter '_collateral' of CompoundManager.removeCollateral (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#890) is not in mixedCase
+Parameter '_collateralAmount' of CompoundManager.removeCollateral (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#891-892) is not in mixedCase
+Parameter '_wallet' of CompoundManager.addDebt (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#913) is not in mixedCase
+Parameter '_loanId' of CompoundManager.addDebt (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#914) is not in mixedCase
+Parameter '_debtToken' of CompoundManager.addDebt (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#915-916) is not in mixedCase
+Parameter '_debtAmount' of CompoundManager.addDebt (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#917) is not in mixedCase
+Parameter '_wallet' of CompoundManager.removeDebt (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#932) is not in mixedCase
+Parameter '_loanId' of CompoundManager.removeDebt (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#932) is not in mixedCase
+Parameter '_debtToken' of CompoundManager.removeDebt (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#933-934) is not in mixedCase
+Parameter '_debtAmount' of CompoundManager.removeDebt (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#935) is not in mixedCase
+Parameter '_wallet' of CompoundManager.getLoan (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#961) is not in mixedCase
+Parameter '_wallet' of CompoundManager.addInvestment (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#996) is not in mixedCase
+Parameter '_token' of CompoundManager.addInvestment (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#996-997) is not in mixedCase
+Parameter '_amount' of CompoundManager.addInvestment (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#997) is not in mixedCase
+Parameter '_period' of CompoundManager.addInvestment (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#997) is not in mixedCase
+Parameter '_wallet' of CompoundManager.removeInvestment (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#1016) is not in mixedCase
+Parameter '_token' of CompoundManager.removeInvestment (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#1016) is not in mixedCase
+Parameter '_fraction' of CompoundManager.removeInvestment (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#1017) is not in mixedCase
+Parameter '_wallet' of CompoundManager.getInvestment (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#1034) is not in mixedCase
+Parameter '_token' of CompoundManager.getInvestment (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#1034) is not in mixedCase
+Parameter '_guardianStorage' of CompoundManager. (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#783) is not in mixedCase
+Parameter '_comptroller' of CompoundManager. (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#783-784) is not in mixedCase
+Parameter '_compoundRegistry' of CompoundManager. (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#785-786) is not in mixedCase
+Parameter '_wallet' of CompoundManager.mint (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#1052-1053) is not in mixedCase
+Parameter '_cToken' of CompoundManager.mint (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#1053) is not in mixedCase
+Parameter '_token' of CompoundManager.mint (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#1053) is not in mixedCase
+Parameter '_amount' of CompoundManager.mint (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#1053) is not in mixedCase
+Parameter '_wallet' of CompoundManager.redeem (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#1072) is not in mixedCase
+Parameter '_cToken' of CompoundManager.redeem (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#1072) is not in mixedCase
+Parameter '_amount' of CompoundManager.redeem (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#1072) is not in mixedCase
+Parameter '_wallet' of CompoundManager.redeemUnderlying (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#1084) is not in mixedCase
+Parameter '_cToken' of CompoundManager.redeemUnderlying (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#1084-1085) is not in mixedCase
+Parameter '_amount' of CompoundManager.redeemUnderlying (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#1085-1086) is not in mixedCase
+Parameter '_wallet' of CompoundManager.borrow (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#1094-1095) is not in mixedCase
+Parameter '_cToken' of CompoundManager.borrow (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#1095) is not in mixedCase
+Parameter '_amount' of CompoundManager.borrow (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#1095) is not in mixedCase
+Parameter '_wallet' of CompoundManager.repayBorrow (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#1107) is not in mixedCase
+Parameter '_cToken' of CompoundManager.repayBorrow (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#1107) is not in mixedCase
+Parameter '_amount' of CompoundManager.repayBorrow (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#1107) is not in mixedCase
+Parameter '_wallet' of CompoundManager.enterMarketIfNeeded (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol) is not in mixedCase
+Parameter '_cToken' of CompoundManager.enterMarketIfNeeded (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol) is not in mixedCase
+Parameter '_comptroller' of CompoundManager.enterMarketIfNeeded (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol) is not in mixedCase
+Parameter '_wallet' of CompoundManager.exitMarketIfNeeded (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol) is not in mixedCase
+Parameter '_cToken' of CompoundManager.exitMarketIfNeeded (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol) is not in mixedCase
+Parameter '_comptroller' of CompoundManager.exitMarketIfNeeded (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+CompoundManager.NAME (/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol#757-761) is never used in CompoundManager
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0xa5d7d68d7975e89feb240f42fed1d77bb71b1caf.sol analyzed (15 contracts), 126 result(s) found

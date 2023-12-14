@@ -1,0 +1,119 @@
+INFO:Detectors:[93m
+TALEVotingBonus.claimCompoundDAI (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol) uses a dangerous strict equality:
+	- require(bool,string)(cDai.redeem(balance) == 0,Cannot redeem from compound)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Reentrancy in TALEVotingBonus.claimRewards (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#1053-1071):
+	External calls:
+	- require(bool,string)(token.transfer(msg.sender,availableRewards),transfer failed in transfer of rewards) (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#1061-1065)
+	State variables written after the call(s):
+	- daiStakes (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#1065-1067)
+Reentrancy in TALEVotingBonus.stakeDAI (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#1075-1130):
+	External calls:
+	- require(bool,string)(dai.transferFrom(msg.sender,address(this),daiAmount),failed in transferFrom of dai Tokens) (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#1098-1101)
+	- require(bool,string)(dai.approve(address(cDai),daiAmount),failed in approve of dai Tokens) (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#1104-1108)
+	- require(bool,string)(token.transfer(msg.sender,tokenRewardsToUser),failed sending token rewards) (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#1115-1119)
+	State variables written after the call(s):
+	- daiStakes (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#1119-1123)
+Reentrancy in TALEVotingBonus.unstakeDAI (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#1134-1176):
+	External calls:
+	- require(bool,string)(cDai.redeemUnderlying(amountToRedeem) == 0,Cannot redeem from compound) (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#1150-1155)
+	- require(bool,string)(dai.transfer(msg.sender,amountToRedeem),transfer failed in withdraw) (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#1155-1158)
+	- require(bool,string)(token.transfer(msg.sender,availableRewards),transfer failed in transfer of rewards) (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#1160-1163)
+	State variables written after the call(s):
+	- daiStakes (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#1170)
+	- daiStakes (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#1170-1172)
+	- daiStakes (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#1172)
+	- daiStakes (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#1172)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+Reentrancy in TALEVotingBonus.stakeDAI (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#1075-1130):
+	External calls:
+	- require(bool,string)(dai.transferFrom(msg.sender,address(this),daiAmount),failed in transferFrom of dai Tokens) (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#1098-1101)
+	- require(bool,string)(dai.approve(address(cDai),daiAmount),failed in approve of dai Tokens) (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#1104-1108)
+	- require(bool,string)(token.transfer(msg.sender,tokenRewardsToUser),failed sending token rewards) (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#1115-1119)
+	- assert(bool)(cDai.mint(daiAmount) == 0) (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#1124-1125)
+	State variables written after the call(s):
+	- totalDaiStaked (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#1125-1128)
+Reentrancy in TALEVotingBonus.unstakeDAI (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#1134-1176):
+	External calls:
+	- require(bool,string)(cDai.redeemUnderlying(amountToRedeem) == 0,Cannot redeem from compound) (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#1150-1155)
+	- require(bool,string)(dai.transfer(msg.sender,amountToRedeem),transfer failed in withdraw) (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#1155-1158)
+	- require(bool,string)(token.transfer(msg.sender,availableRewards),transfer failed in transfer of rewards) (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#1160-1163)
+	State variables written after the call(s):
+	- totalDaiStaked (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#1166-1168)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+CTokenStorage._notEntered should be constant (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#282-284)
+CTokenStorage.accrualBlockNumber should be constant (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#343)
+CTokenStorage.admin should be constant (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#313)
+CTokenStorage.borrowIndex should be constant (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#348-349)
+CTokenStorage.decimals should be constant (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#295)
+CTokenStorage.initialExchangeRateMantissa should be constant (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#333)
+CTokenStorage.name should be constant (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#287)
+CTokenStorage.pendingAdmin should be constant (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#317-318)
+CTokenStorage.reserveFactorMantissa should be constant (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#338)
+CTokenStorage.symbol should be constant (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#291-293)
+CTokenStorage.totalBorrows should be constant (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#354-355)
+CTokenStorage.totalReserves should be constant (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#358-360)
+CTokenStorage.totalSupply should be constant (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#363)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Different versions of Solidity is used in /sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol:
+	- Version used: ['0.5.7', '^0.5.0', '^0.5.7']
+	- /sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#7-10 declares pragma solidity0.5.7
+	- /sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#101 declares pragma solidity^0.5.7
+	- /sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#226-228 declares pragma solidity^0.5.7
+	- /sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#277 declares pragma solidity^0.5.7
+	- /sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#571 declares pragma solidity0.5.7
+	- /sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#745-746 declares pragma solidity0.5.7
+	- /sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#787 declares pragma solidity0.5.7
+	- /sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#865-866 declares pragma solidity^0.5.0
+	- /sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#941-942 declares pragma solidity0.5.7
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#different-pragma-directives-are-used[0m
+INFO:Detectors:[92m
+CTokenInterface.borrowBalanceStored (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#542-543) should be declared external
+CTokenInterface.exchangeRateCurrent (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#543-544) should be declared external
+CTokenInterface.exchangeRateStored (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#544-545) should be declared external
+CTokenInterface.accrueInterest (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#546) should be declared external
+Ownable.renounceOwnership (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#847-852) should be declared external
+Ownable.transferOwnership (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#856-857) should be declared external
+TALEVotingBonus.getAPY (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#1179-1185) should be declared external
+TALEVotingBonus.getDaiStakeInfo (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#1186-1220) should be declared external
+TALEVotingBonus.getTokenBalance (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#1221-1224) should be declared external
+TALEVotingBonus.getCompoundDaiBalance (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#1225-1233) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol:
+	- pragma solidity0.5.7 (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#7-10): it allows old versions
+	- pragma solidity^0.5.7 (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#101): it allows old versions
+	- pragma solidity^0.5.7 (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#226-228): it allows old versions
+	- pragma solidity^0.5.7 (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#277): it allows old versions
+	- pragma solidity0.5.7 (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#571): it allows old versions
+	- pragma solidity0.5.7 (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#745-746): it allows old versions
+	- pragma solidity0.5.7 (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#787): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#865-866): it allows old versions
+	- pragma solidity0.5.7 (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#941-942): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Variable 'CTokenStorage._notEntered' (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#282-284) is not in mixedCase
+Constant 'CTokenStorage.borrowRateMaxMantissa' (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#300-303) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'CTokenStorage.reserveFactorMaxMantissa' (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#308-310) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'CTokenInterface.isCToken' (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#399) is not in UPPER_CASE_WITH_UNDERSCORES
+Function 'Context._msgSender' (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#771-776) is not in mixedCase
+Function 'Context._msgData' (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#777-785) is not in mixedCase
+Function 'Ownable._transferOwnership' (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#858-865) is not in mixedCase
+Parameter '_token' of TALEVotingBonus. (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#987) is not in mixedCase
+Parameter '_daiToken' of TALEVotingBonus. (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#987-988) is not in mixedCase
+Parameter '_cDai' of TALEVotingBonus. (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#988) is not in mixedCase
+Parameter '_tokenRewardAmount' of TALEVotingBonus. (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#988-990) is not in mixedCase
+Parameter '_minDAIStakingTime' of TALEVotingBonus. (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#990) is not in mixedCase
+Parameter '_minDAIStakingAmount' of TALEVotingBonus. (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol#990-991) is not in mixedCase
+Parameter '_value' of TALEVotingBonus.setTokenRewardAmount (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol) is not in mixedCase
+Parameter '_value' of TALEVotingBonus.setMinDAIStakingAmount (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol) is not in mixedCase
+Parameter '_value' of TALEVotingBonus.setMinDAIStakingTime (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol) is not in mixedCase
+Parameter '_dai' of TALEVotingBonus.setDaiTokenAddress (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol) is not in mixedCase
+Parameter '_cDai' of TALEVotingBonus.setCDaiTokenAddress (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol) is not in mixedCase
+Parameter '_token' of TALEVotingBonus.setTokenAddress (/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x8d4a094ca8caca85a145b29c2fc8372a57fc03f1.sol analyzed (10 contracts), 38 result(s) found

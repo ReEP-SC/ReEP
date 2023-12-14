@@ -1,0 +1,180 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol:
+/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol:936:9: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+        address _operator,
+        ^---------------^
+/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol:937:9: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+        address _from,
+        ^-----------^
+/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol:938:9: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+        uint256 _tokenId,
+        ^--------------^
+/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol:939:9: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+        bytes calldata _data
+        ^------------------^
+
+INFO:Detectors:[91m
+Account.invoke (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#54-67) sends eth to arbitrary user
+	Dangerous calls:
+	- (success,_res) = _target.call.value(_value)(_data) (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#62-63)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[93m
+BaseLogic.recover (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#719-753) is declared view but contains assembly code
+BaseLogic.getSignerAddress (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#759-777) is declared view but contains assembly code
+BaseLogic.getMethodId (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#778-788) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+isBackup in AccountBaseLogic.checkRelation (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#843) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[92m
+Account.init has external calls inside a loop:
+	- require(bool,string)(LogicManager(manager).isAuthorized(logic),must be authorized logic) (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#38-40)
+Account.init has external calls inside a loop:
+	- BaseLogic(logic).initAccount(this) (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#41-43)
+AccountBaseLogic.checkRelation has external calls inside a loop:
+	- backup = accountStorage.getBackupAddress(_client,i) (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#844-845)
+AccountBaseLogic.checkRelation has external calls inside a loop:
+	- effectiveDate = accountStorage.getBackupEffectiveDate(_client,i) (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#845-846)
+AccountBaseLogic.checkRelation has external calls inside a loop:
+	- expiryDate = accountStorage.getBackupExpiryDate(_client,i) (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#846-847)
+AccountBaseLogic.clearRelatedProposalAfterAdminKeyChanged has external calls inside a loop:
+	- backup = accountStorage.getBackupAddress(_client,i) (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#875-878)
+AccountBaseLogic.clearRelatedProposalAfterAdminKeyChanged has external calls inside a loop:
+	- accountStorage.clearProposalData(_client,backup,CHANGE_ADMIN_KEY_BY_BACKUP) (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#880-881)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Account.fallback uses assembly (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#95-120)
+	- /sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#104-120
+BaseLogic.recover uses assembly (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#719-753)
+	- /sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#724-726
+BaseLogic.getSignerAddress uses assembly (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#759-777)
+	- /sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#763-777
+BaseLogic.getMethodId uses assembly (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#778-788)
+	- /sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#786-787
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+Account.implementation should be constant (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#6-8)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol:
+	- pragma solidity^0.5.4 (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#1): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Low level call in Account.invoke (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#54-67):
+	-(success,_res) = _target.call.value(_value)(_data) /sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#62-63
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Parameter '_manager' of Account.init (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#29) is not in mixedCase
+Parameter '_accountStorage' of Account.init (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#29) is not in mixedCase
+Parameter '_logics' of Account.init (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#29) is not in mixedCase
+Parameter '_keys' of Account.init (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#29) is not in mixedCase
+Parameter '_backups' of Account.init (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#29-32) is not in mixedCase
+Parameter '_target' of Account.invoke (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#55) is not in mixedCase
+Parameter '_value' of Account.invoke (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#56) is not in mixedCase
+Parameter '_data' of Account.invoke (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#56) is not in mixedCase
+Parameter '_module' of Account.enableStaticCall (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#71-72) is not in mixedCase
+Parameter '_method' of Account.enableStaticCall (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#72) is not in mixedCase
+Parameter '_newMgr' of Account.changeManager (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#82) is not in mixedCase
+Parameter '_newOwner' of Owned.changeOwner (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#141) is not in mixedCase
+Struct 'LogicManager.pending' (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#154-162) is not in CapWords
+Struct 'LogicManager.pendingTime' (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#175-184) is not in CapWords
+Parameter '_initialLogics' of LogicManager. (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#187-188) is not in mixedCase
+Parameter '_pendingTime' of LogicManager. (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#188) is not in mixedCase
+Parameter '_pendingTime' of LogicManager.submitUpdatePendingTime (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#209) is not in mixedCase
+Parameter '_logic' of LogicManager.isAuthorized (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#224-225) is not in mixedCase
+Parameter '_logic' of LogicManager.submitUpdate (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#240-241) is not in mixedCase
+Parameter '_value' of LogicManager.submitUpdate (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#241) is not in mixedCase
+Parameter '_logic' of LogicManager.cancelUpdate (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#252) is not in mixedCase
+Parameter '_logic' of LogicManager.triggerUpdateLogic (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#257) is not in mixedCase
+Parameter '_logic' of LogicManager.updateLogic (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#272-273) is not in mixedCase
+Parameter '_value' of LogicManager.updateLogic (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#273) is not in mixedCase
+Parameter '_logic' of LogicManager.removeLogic (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#288) is not in mixedCase
+Parameter '_account' of AccountStorage.getOperationKeyCount (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#360-362) is not in mixedCase
+Parameter '_account' of AccountStorage.increaseKeyCount (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#363-364) is not in mixedCase
+Parameter '_account' of AccountStorage.getKeyData (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#369) is not in mixedCase
+Parameter '_index' of AccountStorage.getKeyData (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#369) is not in mixedCase
+Parameter '_account' of AccountStorage.setKeyData (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#375) is not in mixedCase
+Parameter '_index' of AccountStorage.setKeyData (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#375) is not in mixedCase
+Parameter '_key' of AccountStorage.setKeyData (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#375) is not in mixedCase
+Parameter '_account' of AccountStorage.getKeyStatus (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#382) is not in mixedCase
+Parameter '_index' of AccountStorage.getKeyStatus (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#382-385) is not in mixedCase
+Parameter '_account' of AccountStorage.setKeyStatus (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#388) is not in mixedCase
+Parameter '_index' of AccountStorage.setKeyStatus (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#388) is not in mixedCase
+Parameter '_status' of AccountStorage.setKeyStatus (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#388-389) is not in mixedCase
+Parameter '_account' of AccountStorage.getBackupAddress (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#397) is not in mixedCase
+Parameter '_index' of AccountStorage.getBackupAddress (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#397) is not in mixedCase
+Parameter '_account' of AccountStorage.getBackupEffectiveDate (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#402) is not in mixedCase
+Parameter '_index' of AccountStorage.getBackupEffectiveDate (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#402) is not in mixedCase
+Parameter '_account' of AccountStorage.getBackupExpiryDate (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#406) is not in mixedCase
+Parameter '_index' of AccountStorage.getBackupExpiryDate (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#406) is not in mixedCase
+Parameter '_account' of AccountStorage.setBackup (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#412) is not in mixedCase
+Parameter '_index' of AccountStorage.setBackup (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#412-413) is not in mixedCase
+Parameter '_backup' of AccountStorage.setBackup (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#413-414) is not in mixedCase
+Parameter '_effective' of AccountStorage.setBackup (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#414) is not in mixedCase
+Parameter '_expiry' of AccountStorage.setBackup (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#414) is not in mixedCase
+Parameter '_account' of AccountStorage.setBackupExpiryDate (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#421-424) is not in mixedCase
+Parameter '_index' of AccountStorage.setBackupExpiryDate (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#424) is not in mixedCase
+Parameter '_expiry' of AccountStorage.setBackupExpiryDate (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#424) is not in mixedCase
+Parameter '_account' of AccountStorage.clearBackupData (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#431) is not in mixedCase
+Parameter '_index' of AccountStorage.clearBackupData (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#431) is not in mixedCase
+Parameter '_account' of AccountStorage.getDelayDataHash (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#436) is not in mixedCase
+Parameter '_actionId' of AccountStorage.getDelayDataHash (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#436) is not in mixedCase
+Parameter '_account' of AccountStorage.getDelayDataDueTime (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#438-439) is not in mixedCase
+Parameter '_actionId' of AccountStorage.getDelayDataDueTime (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#439-442) is not in mixedCase
+Parameter '_account' of AccountStorage.setDelayData (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#443-446) is not in mixedCase
+Parameter '_actionId' of AccountStorage.setDelayData (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#446) is not in mixedCase
+Parameter '_hash' of AccountStorage.setDelayData (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#446) is not in mixedCase
+Parameter '_dueTime' of AccountStorage.setDelayData (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#446) is not in mixedCase
+Parameter '_account' of AccountStorage.clearDelayData (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#451-453) is not in mixedCase
+Parameter '_actionId' of AccountStorage.clearDelayData (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#453) is not in mixedCase
+Parameter '_client' of AccountStorage.getProposalDataHash (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#458) is not in mixedCase
+Parameter '_proposer' of AccountStorage.getProposalDataHash (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#458) is not in mixedCase
+Parameter '_actionId' of AccountStorage.getProposalDataHash (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#458) is not in mixedCase
+Parameter '_client' of AccountStorage.getProposalDataApproval (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#462) is not in mixedCase
+Parameter '_proposer' of AccountStorage.getProposalDataApproval (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#462) is not in mixedCase
+Parameter '_actionId' of AccountStorage.getProposalDataApproval (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#463) is not in mixedCase
+Parameter '_client' of AccountStorage.setProposalData (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#466-467) is not in mixedCase
+Parameter '_proposer' of AccountStorage.setProposalData (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#467-468) is not in mixedCase
+Parameter '_actionId' of AccountStorage.setProposalData (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#468) is not in mixedCase
+Parameter '_hash' of AccountStorage.setProposalData (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#468) is not in mixedCase
+Parameter '_approvedBackup' of AccountStorage.setProposalData (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#468-469) is not in mixedCase
+Parameter '_client' of AccountStorage.clearProposalData (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#492) is not in mixedCase
+Parameter '_proposer' of AccountStorage.clearProposalData (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#492) is not in mixedCase
+Parameter '_actionId' of AccountStorage.clearProposalData (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#493-494) is not in mixedCase
+Parameter '_account' of AccountStorage.initAccount (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#503) is not in mixedCase
+Parameter '_keys' of AccountStorage.initAccount (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#503) is not in mixedCase
+Parameter '_backups' of AccountStorage.initAccount (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#503-504) is not in mixedCase
+Parameter '_accountStorage' of BaseLogic. (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#669-670) is not in mixedCase
+Parameter '_key' of BaseLogic.getKeyNonce (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#675-676) is not in mixedCase
+Parameter '_data' of BaseLogic.getSignHash (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#678) is not in mixedCase
+Parameter '_nonce' of BaseLogic.getSignHash (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#678) is not in mixedCase
+Parameter '_signingKey' of BaseLogic.verifySig (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#687-689) is not in mixedCase
+Parameter '_signature' of BaseLogic.verifySig (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#689) is not in mixedCase
+Parameter '_signHash' of BaseLogic.verifySig (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#689) is not in mixedCase
+Parameter '_b' of BaseLogic.getSignerAddress (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#759) is not in mixedCase
+Parameter '_b' of BaseLogic.getMethodId (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#778) is not in mixedCase
+Parameter '_account' of BaseLogic.checkKeyStatus (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#788) is not in mixedCase
+Parameter '_index' of BaseLogic.checkKeyStatus (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#788-789) is not in mixedCase
+Parameter '_key' of BaseLogic.checkAndUpdateNonce (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#795) is not in mixedCase
+Parameter '_nonce' of BaseLogic.checkAndUpdateNonce (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#795-796) is not in mixedCase
+Parameter '_client' of AccountBaseLogic.checkRelation (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#839) is not in mixedCase
+Parameter '_backup' of AccountBaseLogic.checkRelation (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#839) is not in mixedCase
+Parameter '_effectiveDate' of AccountBaseLogic.isEffectiveBackup (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#852-853) is not in mixedCase
+Parameter '_expiryDate' of AccountBaseLogic.isEffectiveBackup (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#853) is not in mixedCase
+Parameter '_client' of AccountBaseLogic.clearRelatedProposalAfterAdminKeyChanged (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#862-863) is not in mixedCase
+Parameter '_account' of CommonStaticLogic.initAccount (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#910) is not in mixedCase
+Parameter '_data' of CommonStaticLogic.isValidSignature (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#933) is not in mixedCase
+Parameter '_signature' of CommonStaticLogic.isValidSignature (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#933-935) is not in mixedCase
+Parameter '_msgHash' of CommonStaticLogic.isValidSignature (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol) is not in mixedCase
+Parameter '_signature' of CommonStaticLogic.isValidSignature (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+AccountBaseLogic.DELAY_CHANGE_ADMIN_KEY (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#799-800) is never used in AccountBaseLogic
+AccountBaseLogic.DELAY_CHANGE_OPERATION_KEY (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#800-801) is never used in AccountBaseLogic
+AccountBaseLogic.DELAY_UNFREEZE_KEY (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#801-802) is never used in AccountBaseLogic
+AccountBaseLogic.DELAY_CHANGE_BACKUP (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#802-803) is never used in AccountBaseLogic
+AccountBaseLogic.DELAY_CHANGE_ADMIN_KEY_BY_BACKUP (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#803-804) is never used in AccountBaseLogic
+AccountBaseLogic.CHANGE_ADMIN_KEY (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#806-807) is never used in AccountBaseLogic
+AccountBaseLogic.CHANGE_ALL_OPERATION_KEYS (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#827-828) is never used in AccountBaseLogic
+AccountBaseLogic.UNFREEZE (/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol#829) is never used in AccountBaseLogic
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0x910119bee96c7a03dd2597d4596e88bdf3aff682.sol analyzed (8 contracts), 123 result(s) found

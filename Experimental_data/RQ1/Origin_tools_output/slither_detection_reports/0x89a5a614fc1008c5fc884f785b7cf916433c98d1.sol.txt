@@ -1,0 +1,65 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x89a5a614fc1008c5fc884f785b7cf916433c98d1.sol:
+Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing "SPDX-License-Identifier: <SPDX-License>" to each source file. Use "SPDX-License-Identifier: UNLICENSED" for non-open-source code. Please see https://spdx.org for more information.
+--> /sb/0x89a5a614fc1008c5fc884f785b7cf916433c98d1.sol
+
+
+INFO:Detectors:[93m
+MoonbeamSale.startSale (/sb/0x89a5a614fc1008c5fc884f785b7cf916433c98d1.sol#161-163) uses a dangerous strict equality:
+	- require(bool)(msg.sender == owner && startDate == 0)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+MoonbeamSale.fallback (/sb/0x89a5a614fc1008c5fc884f785b7cf916433c98d1.sol#87-111) does not use the value returned by external calls:
+	-Token.transfer(msg.sender,amount) (/sb/0x89a5a614fc1008c5fc884f785b7cf916433c98d1.sol#111)
+MoonbeamSale.contribute (/sb/0x89a5a614fc1008c5fc884f785b7cf916433c98d1.sol#113-137) does not use the value returned by external calls:
+	-Token.transfer(msg.sender,amount) (/sb/0x89a5a614fc1008c5fc884f785b7cf916433c98d1.sol#137)
+MoonbeamSale.burn (/sb/0x89a5a614fc1008c5fc884f785b7cf916433c98d1.sol#150-157) does not use the value returned by external calls:
+	-Token.transfer(address(0),Token.balanceOf(address(this))) (/sb/0x89a5a614fc1008c5fc884f785b7cf916433c98d1.sol#156-157)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in MoonbeamSale.contribute (/sb/0x89a5a614fc1008c5fc884f785b7cf916433c98d1.sol#113-137):
+	External calls:
+	- require(bool)(Token.balanceOf(address(this)) > 0) (/sb/0x89a5a614fc1008c5fc884f785b7cf916433c98d1.sol#115-117)
+	State variables written after the call(s):
+	- amount (/sb/0x89a5a614fc1008c5fc884f785b7cf916433c98d1.sol#120)
+	- amount (/sb/0x89a5a614fc1008c5fc884f785b7cf916433c98d1.sol#122-123)
+	- amount (/sb/0x89a5a614fc1008c5fc884f785b7cf916433c98d1.sol#126-127)
+	- amount (/sb/0x89a5a614fc1008c5fc884f785b7cf916433c98d1.sol#128-129)
+Reentrancy in MoonbeamSale.contribute (/sb/0x89a5a614fc1008c5fc884f785b7cf916433c98d1.sol#113-137):
+	External calls:
+	- require(bool)(Token.balanceOf(address(this)) > 0) (/sb/0x89a5a614fc1008c5fc884f785b7cf916433c98d1.sol#115-117)
+	- require(bool)(amount <= Token.balanceOf(address(this))) (/sb/0x89a5a614fc1008c5fc884f785b7cf916433c98d1.sol#130-131)
+	State variables written after the call(s):
+	- collectedETH (/sb/0x89a5a614fc1008c5fc884f785b7cf916433c98d1.sol#135-136)
+	- totalSold (/sb/0x89a5a614fc1008c5fc884f785b7cf916433c98d1.sol#132-135)
+Reentrancy in MoonbeamSale.fallback (/sb/0x89a5a614fc1008c5fc884f785b7cf916433c98d1.sol#87-111):
+	External calls:
+	- require(bool)(Token.balanceOf(address(this)) > 0) (/sb/0x89a5a614fc1008c5fc884f785b7cf916433c98d1.sol#89-90)
+	State variables written after the call(s):
+	- amount (/sb/0x89a5a614fc1008c5fc884f785b7cf916433c98d1.sol#94-95)
+	- amount (/sb/0x89a5a614fc1008c5fc884f785b7cf916433c98d1.sol#96-97)
+	- amount (/sb/0x89a5a614fc1008c5fc884f785b7cf916433c98d1.sol#99-101)
+	- amount (/sb/0x89a5a614fc1008c5fc884f785b7cf916433c98d1.sol#102-104)
+Reentrancy in MoonbeamSale.fallback (/sb/0x89a5a614fc1008c5fc884f785b7cf916433c98d1.sol#87-111):
+	External calls:
+	- require(bool)(Token.balanceOf(address(this)) > 0) (/sb/0x89a5a614fc1008c5fc884f785b7cf916433c98d1.sol#89-90)
+	- require(bool)(amount <= Token.balanceOf(address(this))) (/sb/0x89a5a614fc1008c5fc884f785b7cf916433c98d1.sol#104-105)
+	State variables written after the call(s):
+	- collectedETH (/sb/0x89a5a614fc1008c5fc884f785b7cf916433c98d1.sol#107-110)
+	- totalSold (/sb/0x89a5a614fc1008c5fc884f785b7cf916433c98d1.sol#106-107)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+MoonbeamSale.withdrawETH (/sb/0x89a5a614fc1008c5fc884f785b7cf916433c98d1.sol#139-147) should be declared external
+MoonbeamSale.endPresale (/sb/0x89a5a614fc1008c5fc884f785b7cf916433c98d1.sol#147-149) should be declared external
+MoonbeamSale.burn (/sb/0x89a5a614fc1008c5fc884f785b7cf916433c98d1.sol#150-157) should be declared external
+MoonbeamSale.startSale (/sb/0x89a5a614fc1008c5fc884f785b7cf916433c98d1.sol#161-163) should be declared external
+MoonbeamSale.availableTokens (/sb/0x89a5a614fc1008c5fc884f785b7cf916433c98d1.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x89a5a614fc1008c5fc884f785b7cf916433c98d1.sol:
+	- pragma solidity0.6.8 (/sb/0x89a5a614fc1008c5fc884f785b7cf916433c98d1.sol#1): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_wallet' of MoonbeamSale. (/sb/0x89a5a614fc1008c5fc884f785b7cf916433c98d1.sol#80-83) is not in mixedCase
+Variable 'MoonbeamSale.Token' (/sb/0x89a5a614fc1008c5fc884f785b7cf916433c98d1.sol#74-75) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x89a5a614fc1008c5fc884f785b7cf916433c98d1.sol analyzed (3 contracts), 16 result(s) found

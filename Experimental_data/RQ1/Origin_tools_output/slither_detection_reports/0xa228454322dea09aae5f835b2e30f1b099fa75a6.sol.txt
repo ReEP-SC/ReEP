@@ -1,0 +1,98 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol:
+/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol:338:5: Warning: Unused local variable.
+    bool res = tokenAddress.send(address(this).balance);
+    ^------^
+
+INFO:Detectors:[93m
+ERC721 (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#7-31) has incorrect ERC20 function interface(s):
+	-approve (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#23-24)
+	-transfer (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#24-25)
+	-transferFrom (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#25-30)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[93m
+CurioAuction.bid (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#286-302) uses a dangerous strict equality:
+	- seller == address(tokenContract)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[92m
+Reentrancy in CurioAuction.bid (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#286-302):
+	External calls:
+	- _transfer(msg.sender,_tokenId) (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#297)
+	External calls sending eth:
+	- _bid(_tokenId,msg.value) (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#291-295)
+	State variables written after the call(s):
+	- releaseTokensSaleCount (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#301)
+Reentrancy in CurioAuction.constructor (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#177-194):
+	External calls:
+	- require(bool)(candidateContract.implementsERC721()) (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#183-187)
+	State variables written after the call(s):
+	- auctionPriceLimit (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#193-194)
+	- tokenContract (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#187-188)
+Reentrancy in CurioAuction.createAuction (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#210-245):
+	External calls:
+	- _deposit(_seller,_tokenId) (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#233)
+	State variables written after the call(s):
+	- tokenIdToAuction (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#243-244)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+CurioAuction.isCurioAuction should be constant (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#149-150)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+ERC721.implementsERC721 (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#19-20) should be declared external
+ERC721.totalSupply (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#20-21) should be declared external
+ERC721.balanceOf (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#21-22) should be declared external
+Ownable.transferOwnership (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#59-69) should be declared external
+Pausable.pause (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#101-104) should be declared external
+Pausable.unpause (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#112-114) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol:
+	- pragma solidity^0.4.23 (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#1): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_tokenAddress' of CurioAuction. (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#177) is not in mixedCase
+Parameter '_fee' of CurioAuction. (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#177-178) is not in mixedCase
+Parameter '_auctionPriceLimit' of CurioAuction. (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#178) is not in mixedCase
+Parameter '_tokenId' of CurioAuction.createAuction (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#211) is not in mixedCase
+Parameter '_startingPrice' of CurioAuction.createAuction (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#211) is not in mixedCase
+Parameter '_endingPrice' of CurioAuction.createAuction (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#211-212) is not in mixedCase
+Parameter '_duration' of CurioAuction.createAuction (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#212) is not in mixedCase
+Parameter '_seller' of CurioAuction.createAuction (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#212-214) is not in mixedCase
+Parameter '_tokenId' of CurioAuction.getAuction (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#250) is not in mixedCase
+Parameter '_tokenId' of CurioAuction.getCurrentPrice (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#275) is not in mixedCase
+Parameter '_tokenId' of CurioAuction.bid (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#286) is not in mixedCase
+Parameter '_tokenId' of CurioAuction.cancelAuction (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#313-314) is not in mixedCase
+Parameter '_tokenId' of CurioAuction.cancelAuctionWhenPaused (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#328) is not in mixedCase
+Parameter '_newAuctionPriceLimit' of CurioAuction.setAuctionPriceLimit (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#355) is not in mixedCase
+Function 'CurioAuction._owns' (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#385-395) is not in mixedCase
+Parameter '_claimant' of CurioAuction._owns (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#386-387) is not in mixedCase
+Parameter '_tokenId' of CurioAuction._owns (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#387-389) is not in mixedCase
+Function 'CurioAuction._deposit' (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#400-410) is not in mixedCase
+Parameter '_owner' of CurioAuction._deposit (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#401-402) is not in mixedCase
+Parameter '_tokenId' of CurioAuction._deposit (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#402-404) is not in mixedCase
+Function 'CurioAuction._transfer' (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#420-423) is not in mixedCase
+Parameter '_receiver' of CurioAuction._transfer (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#420) is not in mixedCase
+Parameter '_tokenId' of CurioAuction._transfer (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#420) is not in mixedCase
+Function 'CurioAuction._addAuction' (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#430-447) is not in mixedCase
+Parameter '_tokenId' of CurioAuction._addAuction (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#434) is not in mixedCase
+Parameter '_auction' of CurioAuction._addAuction (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#434) is not in mixedCase
+Function 'CurioAuction._removeAuction' (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#455-461) is not in mixedCase
+Parameter '_tokenId' of CurioAuction._removeAuction (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#456) is not in mixedCase
+Function 'CurioAuction._cancelAuction' (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#466-478) is not in mixedCase
+Parameter '_tokenId' of CurioAuction._cancelAuction (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#469-470) is not in mixedCase
+Parameter '_seller' of CurioAuction._cancelAuction (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#470-471) is not in mixedCase
+Function 'CurioAuction._isOnAuction' (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#481-484) is not in mixedCase
+Parameter '_auction' of CurioAuction._isOnAuction (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#481) is not in mixedCase
+Function 'CurioAuction._calculateFee' (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#486-491) is not in mixedCase
+Parameter '_price' of CurioAuction._calculateFee (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#487) is not in mixedCase
+Function 'CurioAuction._currentPrice' (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#499-513) is not in mixedCase
+Parameter '_auction' of CurioAuction._currentPrice (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#500) is not in mixedCase
+Function 'CurioAuction._calculateCurrentPrice' (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#523-554) is not in mixedCase
+Parameter '_startingPrice' of CurioAuction._calculateCurrentPrice (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#524) is not in mixedCase
+Parameter '_endingPrice' of CurioAuction._calculateCurrentPrice (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#524) is not in mixedCase
+Parameter '_duration' of CurioAuction._calculateCurrentPrice (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#524) is not in mixedCase
+Parameter '_secondsPassed' of CurioAuction._calculateCurrentPrice (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#524-525) is not in mixedCase
+Function 'CurioAuction._bid' (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#563-579) is not in mixedCase
+Parameter '_tokenId' of CurioAuction._bid (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#563-565) is not in mixedCase
+Parameter '_bidAmount' of CurioAuction._bid (/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol#565) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xa228454322dea09aae5f835b2e30f1b099fa75a6.sol analyzed (4 contracts), 58 result(s) found

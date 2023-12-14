@@ -1,0 +1,93 @@
+INFO:Detectors:[93m
+Reentrancy in VaultTimely.deposit (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#388-405):
+	External calls:
+	- require(bool,string)(Token(trustedDepositTokenAddress).transferFrom(msg.sender,address(this),amountToDeposit),Insufficient Token Allowance) (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#392-397)
+	- updateAccount(msg.sender) (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#397-398)
+	State variables written after the call(s):
+	- depositedTokens (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#398-400)
+Reentrancy in VaultTimely.emergencyWithdraw (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#427-452):
+	External calls:
+	- require(bool,string)(Token(trustedDepositTokenAddress).transfer(owner,fee),Could not transfer fee!) (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#435-440)
+	- require(bool,string)(Token(trustedDepositTokenAddress).transfer(msg.sender,amountAfterFee),Could not transfer tokens.) (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#441-446)
+	State variables written after the call(s):
+	- depositedTokens (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#446-448)
+Reentrancy in VaultTimely.updateAccount (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#344-360):
+	External calls:
+	- require(bool,string)(Token(trustedRewardTokenAddress).transfer(account,pendingDivs),Could not transfer tokens.) (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#347-350)
+	State variables written after the call(s):
+	- lastClaimedTime (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#358-360)
+Reentrancy in VaultTimely.withdraw (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#405-424):
+	External calls:
+	- updateAccount(msg.sender) (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#410)
+	- require(bool,string)(Token(trustedDepositTokenAddress).transfer(owner,fee),Could not transfer fee!) (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#413-417)
+	- require(bool,string)(Token(trustedDepositTokenAddress).transfer(msg.sender,amountAfterFee),Could not transfer tokens.) (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#417-419)
+	State variables written after the call(s):
+	- depositedTokens (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#419-420)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+EnumerableSet._remove (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#80-116) does not use the value returned by external calls:
+	-set._values.pop() (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#105-107)
+VaultTimely.deposit (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#388-405) does not use the value returned by external calls:
+	-holders.add(msg.sender) (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#404)
+VaultTimely.withdraw (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#405-424) does not use the value returned by external calls:
+	-holders.remove(msg.sender) (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#421-423)
+VaultTimely.emergencyWithdraw (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#427-452) does not use the value returned by external calls:
+	-holders.remove(msg.sender) (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#450-452)
+VaultTimely.transferAnyERC20Tokens (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol) does not use the value returned by external calls:
+	-Token(_tokenAddr).transfer(_to,_amount) (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in VaultTimely.deposit (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#388-405):
+	External calls:
+	- require(bool,string)(Token(trustedDepositTokenAddress).transferFrom(msg.sender,address(this),amountToDeposit),Insufficient Token Allowance) (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#392-397)
+	- updateAccount(msg.sender) (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#397-398)
+	State variables written after the call(s):
+	- depositTime (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#404-405)
+Reentrancy in VaultTimely.updateAccount (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#344-360):
+	External calls:
+	- require(bool,string)(Token(trustedRewardTokenAddress).transfer(account,pendingDivs),Could not transfer tokens.) (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#347-350)
+	State variables written after the call(s):
+	- totalClaimedRewards (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#352-355)
+	- totalEarnedTokens (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#351-352)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+VaultTimely.adminCanClaimAfter should be constant (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#329)
+VaultTimely.cliffTime should be constant (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#319-321)
+VaultTimely.rewardRatePercentX100 should be constant (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#318)
+VaultTimely.vaultDuration should be constant (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#325-327)
+VaultTimely.withdrawFeePercentX100 should be constant (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#321-322)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#295-302) should be declared external
+VaultTimely.getNumberOfHolders (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#386-388) should be declared external
+VaultTimely.deposit (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#388-405) should be declared external
+VaultTimely.withdraw (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#405-424) should be declared external
+VaultTimely.emergencyWithdraw (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#427-452) should be declared external
+VaultTimely.claim (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#452-454) should be declared external
+VaultTimely.getDepositorsList (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#454-474) should be declared external
+VaultTimely.transferAnyERC20Tokens (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol:
+	- pragma solidity0.6.11 (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#5-7): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'EnumerableSet._add' (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#61-76) is not in mixedCase
+Function 'EnumerableSet._remove' (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#80-116) is not in mixedCase
+Function 'EnumerableSet._contains' (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#117-123) is not in mixedCase
+Function 'EnumerableSet._length' (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#128-130) is not in mixedCase
+Function 'EnumerableSet._at' (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#138-151) is not in mixedCase
+Parameter '' of Token.transferFrom (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#302-304) is not in mixedCase
+Parameter '_scope_0' of Token.transferFrom (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#304) is not in mixedCase
+Parameter '_scope_1' of Token.transferFrom (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#304) is not in mixedCase
+Parameter '' of Token.transfer (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#305) is not in mixedCase
+Parameter '_scope_0' of Token.transfer (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#305) is not in mixedCase
+Parameter '_holder' of VaultTimely.getPendingDivs (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#361) is not in mixedCase
+Parameter '_tokenAddr' of VaultTimely.transferAnyERC20Tokens (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol) is not in mixedCase
+Parameter '_to' of VaultTimely.transferAnyERC20Tokens (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol) is not in mixedCase
+Parameter '_amount' of VaultTimely.transferAnyERC20Tokens (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol) is not in mixedCase
+Constant 'VaultTimely.trustedDepositTokenAddress' (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#309-311) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'VaultTimely.trustedRewardTokenAddress' (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#314-318) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'VaultTimely.rewardInterval' (/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol#318-319) is not in UPPER_CASE_WITH_UNDERSCORES
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x8e9dcb00d0c06e3554dcd19be4ecb4e889209530.sol analyzed (5 contracts), 38 result(s) found

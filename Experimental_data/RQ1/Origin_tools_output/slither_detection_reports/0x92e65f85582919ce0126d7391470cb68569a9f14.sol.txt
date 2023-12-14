@@ -1,0 +1,38 @@
+INFO:Detectors:[93m
+CSTWallet.depositERC20 (/sb/0x92e65f85582919ce0126d7391470cb68569a9f14.sol#529-551) does not use the value returned by external calls:
+	-tokenInstance.transferFrom(account,address(this),amount) (/sb/0x92e65f85582919ce0126d7391470cb68569a9f14.sol#547-549)
+CSTWallet.emergencyWithdrawERC20 (/sb/0x92e65f85582919ce0126d7391470cb68569a9f14.sol#573-597) does not use the value returned by external calls:
+	-IERC20(tokenTarget).transfer(emergencyWithdrawAddress,amount) (/sb/0x92e65f85582919ce0126d7391470cb68569a9f14.sol#589-595)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in CSTWallet.depositERC20 (/sb/0x92e65f85582919ce0126d7391470cb68569a9f14.sol#529-551):
+	External calls:
+	- require(bool,string)(tokenInstance.allowance(account,address(this)) >= amount,Owner did not allow this smart contract to transfer.) (/sb/0x92e65f85582919ce0126d7391470cb68569a9f14.sol#541-543)
+	- tokenInstance.transferFrom(account,address(this),amount) (/sb/0x92e65f85582919ce0126d7391470cb68569a9f14.sol#547-549)
+	State variables written after the call(s):
+	- balances (/sb/0x92e65f85582919ce0126d7391470cb68569a9f14.sol#549)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+PauserRole.addPauser (/sb/0x92e65f85582919ce0126d7391470cb68569a9f14.sol#143-151) should be declared external
+PauserRole.renouncePauser (/sb/0x92e65f85582919ce0126d7391470cb68569a9f14.sol#151-159) should be declared external
+Pausable.paused (/sb/0x92e65f85582919ce0126d7391470cb68569a9f14.sol#211-223) should be declared external
+Pausable.pause (/sb/0x92e65f85582919ce0126d7391470cb68569a9f14.sol#259-274) should be declared external
+Pausable.unpause (/sb/0x92e65f85582919ce0126d7391470cb68569a9f14.sol#281-291) should be declared external
+Ownable.owner (/sb/0x92e65f85582919ce0126d7391470cb68569a9f14.sol#341-345) should be declared external
+Ownable.renounceOwnership (/sb/0x92e65f85582919ce0126d7391470cb68569a9f14.sol#379-391) should be declared external
+Ownable.transferOwnership (/sb/0x92e65f85582919ce0126d7391470cb68569a9f14.sol#399-411) should be declared external
+CSTWallet.depositERC20 (/sb/0x92e65f85582919ce0126d7391470cb68569a9f14.sol#529-551) should be declared external
+CSTWallet.withdrawERC20 (/sb/0x92e65f85582919ce0126d7391470cb68569a9f14.sol#551-573) should be declared external
+CSTWallet.emergencyWithdrawERC20 (/sb/0x92e65f85582919ce0126d7391470cb68569a9f14.sol#573-597) should be declared external
+CSTWallet.emergencyWithdrawETH (/sb/0x92e65f85582919ce0126d7391470cb68569a9f14.sol#597-623) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x92e65f85582919ce0126d7391470cb68569a9f14.sol:
+	- pragma solidity^0.4.13 (/sb/0x92e65f85582919ce0126d7391470cb68569a9f14.sol#9-13): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'PauserRole._addPauser' (/sb/0x92e65f85582919ce0126d7391470cb68569a9f14.sol#159-171) is not in mixedCase
+Function 'PauserRole._removePauser' (/sb/0x92e65f85582919ce0126d7391470cb68569a9f14.sol#171-183) is not in mixedCase
+Function 'Ownable._transferOwnership' (/sb/0x92e65f85582919ce0126d7391470cb68569a9f14.sol#421-431) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x92e65f85582919ce0126d7391470cb68569a9f14.sol analyzed (6 contracts), 19 result(s) found

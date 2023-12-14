@@ -1,0 +1,61 @@
+INFO:Detectors:[93m
+Reentrancy in TokenLogic.removeQuitAccount (/sb/0x8934561259f1cb8b302aa7e1b05ed0d0676f54e3.sol#407-425):
+	External calls:
+	- _tokenStore.transfer(account,msg.sender,_tokenStore.balanceOf(account)) (/sb/0x8934561259f1cb8b302aa7e1b05ed0d0676f54e3.sol#417-423)
+	State variables written after the call(s):
+	- _quitLock (/sb/0x8934561259f1cb8b302aa7e1b05ed0d0676f54e3.sol#423-425)
+Reentrancy in TokenLogic.replaceAccount (/sb/0x8934561259f1cb8b302aa7e1b05ed0d0676f54e3.sol#591-601):
+	External calls:
+	- _tokenStore.transfer(oldAccount,newAccount,_tokenStore.balanceOf(oldAccount)) (/sb/0x8934561259f1cb8b302aa7e1b05ed0d0676f54e3.sol#597-599)
+	State variables written after the call(s):
+	- _whiteList (/sb/0x8934561259f1cb8b302aa7e1b05ed0d0676f54e3.sol#601)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+TokenLogic.allowance.owner (local variable @ /sb/0x8934561259f1cb8b302aa7e1b05ed0d0676f54e3.sol#439-441) shadows:
+	- Ownable.owner (function @ /sb/0x8934561259f1cb8b302aa7e1b05ed0d0676f54e3.sol#105-111)
+TokenLogic.approve.owner (local variable @ /sb/0x8934561259f1cb8b302aa7e1b05ed0d0676f54e3.sol#487) shadows:
+	- Ownable.owner (function @ /sb/0x8934561259f1cb8b302aa7e1b05ed0d0676f54e3.sol#105-111)
+TokenLogic.increaseAllowance.owner (local variable @ /sb/0x8934561259f1cb8b302aa7e1b05ed0d0676f54e3.sol#523) shadows:
+	- Ownable.owner (function @ /sb/0x8934561259f1cb8b302aa7e1b05ed0d0676f54e3.sol#105-111)
+TokenLogic.decreaseAllowance.owner (local variable @ /sb/0x8934561259f1cb8b302aa7e1b05ed0d0676f54e3.sol#539) shadows:
+	- Ownable.owner (function @ /sb/0x8934561259f1cb8b302aa7e1b05ed0d0676f54e3.sol#105-111)
+TokenLogic.constructor.tokenStore (local variable @ /sb/0x8934561259f1cb8b302aa7e1b05ed0d0676f54e3.sol#217) shadows:
+	- TokenLogic.tokenStore (function @ /sb/0x8934561259f1cb8b302aa7e1b05ed0d0676f54e3.sol#233-239)
+TokenLogic.constructor.tokenFront (local variable @ /sb/0x8934561259f1cb8b302aa7e1b05ed0d0676f54e3.sol#217-219) shadows:
+	- TokenLogic.tokenFront (function @ /sb/0x8934561259f1cb8b302aa7e1b05ed0d0676f54e3.sol#251-253)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+TokenLogic.batchTransfer has external calls inside a loop:
+	- _tokenStore.transfer(msg.sender,addressArr[idx],valueArr[idx]) (/sb/0x8934561259f1cb8b302aa7e1b05ed0d0676f54e3.sol#585-587)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in TokenLogic.removeQuitAccount (/sb/0x8934561259f1cb8b302aa7e1b05ed0d0676f54e3.sol#407-425):
+	External calls:
+	- _tokenStore.transfer(account,msg.sender,_tokenStore.balanceOf(account)) (/sb/0x8934561259f1cb8b302aa7e1b05ed0d0676f54e3.sol#417-423)
+	State variables written after the call(s):
+	- _whiteList (/sb/0x8934561259f1cb8b302aa7e1b05ed0d0676f54e3.sol#423)
+Reentrancy in TokenLogic.transferOwnership (/sb/0x8934561259f1cb8b302aa7e1b05ed0d0676f54e3.sol#294-309):
+	External calls:
+	- _tokenStore.transfer(msg.sender,newOwner,_tokenStore.balanceOf(msg.sender)) (/sb/0x8934561259f1cb8b302aa7e1b05ed0d0676f54e3.sol#301-307)
+	State variables written after the call(s):
+	- _owner (/sb/0x8934561259f1cb8b302aa7e1b05ed0d0676f54e3.sol#309)
+	- _whiteList (/sb/0x8934561259f1cb8b302aa7e1b05ed0d0676f54e3.sol#307-309)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+TokenLogic.tokenStore (/sb/0x8934561259f1cb8b302aa7e1b05ed0d0676f54e3.sol#233-239) should be declared external
+TokenLogic.setTokenStore (/sb/0x8934561259f1cb8b302aa7e1b05ed0d0676f54e3.sol#243-251) should be declared external
+TokenLogic.tokenFront (/sb/0x8934561259f1cb8b302aa7e1b05ed0d0676f54e3.sol#251-253) should be declared external
+TokenLogic.setTokenFront (/sb/0x8934561259f1cb8b302aa7e1b05ed0d0676f54e3.sol#255-263) should be declared external
+TokenLogic.setWhiteList (/sb/0x8934561259f1cb8b302aa7e1b05ed0d0676f54e3.sol#315-337) should be declared external
+TokenLogic.getTradingTime (/sb/0x8934561259f1cb8b302aa7e1b05ed0d0676f54e3.sol#357-361) should be declared external
+TokenLogic.setTradingTime (/sb/0x8934561259f1cb8b302aa7e1b05ed0d0676f54e3.sol#363-389) should be declared external
+TokenLogic.setQuitLock (/sb/0x8934561259f1cb8b302aa7e1b05ed0d0676f54e3.sol#395-407) should be declared external
+TokenLogic.removeQuitAccount (/sb/0x8934561259f1cb8b302aa7e1b05ed0d0676f54e3.sol#407-425) should be declared external
+TokenLogic.batchTransfer (/sb/0x8934561259f1cb8b302aa7e1b05ed0d0676f54e3.sol#549-591) should be declared external
+TokenLogic.replaceAccount (/sb/0x8934561259f1cb8b302aa7e1b05ed0d0676f54e3.sol#591-601) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Function 'Ownable._transferOwnership' (/sb/0x8934561259f1cb8b302aa7e1b05ed0d0676f54e3.sol#133-149) is not in mixedCase
+Variable 'Ownable._owner' (/sb/0x8934561259f1cb8b302aa7e1b05ed0d0676f54e3.sol#83) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x8934561259f1cb8b302aa7e1b05ed0d0676f54e3.sol analyzed (6 contracts), 24 result(s) found

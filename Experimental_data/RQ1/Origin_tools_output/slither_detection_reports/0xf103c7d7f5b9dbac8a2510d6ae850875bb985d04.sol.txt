@@ -1,0 +1,184 @@
+INFO:Detectors:[91m
+Vault.______gap (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#806-807) shadows:
+	- Initializable.______gap (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#129)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variable-shadowing[0m
+INFO:Detectors:[93m
+Initializable.isConstructor (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#112-127) is declared view but contains assembly code
+Adminable._admin (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#183-186) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+TransferrableToken (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#583-590) has incorrect ERC20 function interface(s):
+	-transferFrom (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#584-588)
+	-approve (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#588-590)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[93m
+Bridge.submitPeriod (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#256-293) uses a dangerous strict equality:
+	- require(bool,string)(periods[_root].timestamp == 0,Trying to submit the same root twice)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Reentrancy in SwapRegistry.createExchange (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#1072-1083):
+	External calls:
+	- nativeToken = vault.getTokenAddr(0) (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#1075-1076)
+	- SwapExchange(exchange).setup(nativeToken,_token) (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#1079-1083)
+	State variables written after the call(s):
+	- tokenToExchange (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol)
+Reentrancy in Vault.registerNST (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#775-805):
+	External calls:
+	- require(bool,string)(TransferrableToken(_token).supportsInterface(0x80ac58cd) == true,Not an ERC721 token) (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#787-796)
+	State variables written after the call(s):
+	- nstTokenCount (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#800)
+	- tokenColors (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#801)
+Reentrancy in Vault.registerToken (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#744-775):
+	External calls:
+	- require(bool,string)(TransferrableToken(_token).supportsInterface(0x80ac58cd) == true,Not an ERC721 token) (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#759-761)
+	State variables written after the call(s):
+	- nftTokenCount (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#763)
+Reentrancy in Vault.registerToken (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#744-775):
+	External calls:
+	- require(bool,string)(TransferrableToken(_token).supportsInterface(0x80ac58cd) == true,Not an ERC721 token) (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#759-761)
+	- require(bool,string)(ERC20(_token).totalSupply() >= 0,Not an ERC20 token) (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#763-765)
+	State variables written after the call(s):
+	- tokenColors (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#768-769)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+SwapRegistry.claim (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#988-1047) does not use the value returned by external calls:
+	-token.mint(msg.sender,reward.sub(tax)) (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#1046)
+	-token.mint(bridge.admin(),tax) (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#1046-1047)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+SwapRegistry.claim has external calls inside a loop:
+	- (height,None,None,None) = bridge.periods(right) (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#1018)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in SwapRegistry.createExchange (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#1072-1083):
+	External calls:
+	- nativeToken = vault.getTokenAddr(0) (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#1075-1076)
+	- SwapExchange(exchange).setup(nativeToken,_token) (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#1079-1083)
+	State variables written after the call(s):
+	- exchangeToToken (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol)
+Reentrancy in Vault.registerNST (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#775-805):
+	External calls:
+	- require(bool,string)(TransferrableToken(_token).supportsInterface(0x80ac58cd) == true,Not an ERC721 token) (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#787-796)
+	State variables written after the call(s):
+	- tokens (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#801-803)
+Reentrancy in Vault.registerToken (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#744-775):
+	External calls:
+	- require(bool,string)(ERC20(_token).totalSupply() >= 0,Not an ERC20 token) (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#763-765)
+	State variables written after the call(s):
+	- erc20TokenCount (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#765)
+Reentrancy in Vault.registerToken (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#744-775):
+	External calls:
+	- require(bool,string)(TransferrableToken(_token).supportsInterface(0x80ac58cd) == true,Not an ERC721 token) (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#759-761)
+	- require(bool,string)(ERC20(_token).totalSupply() >= 0,Not an ERC20 token) (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#763-765)
+	State variables written after the call(s):
+	- tokens (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#769-773)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Bridge.submitPeriod (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#256-293) uses timestamp for comparisons
+	Dangerous comparisons:
+	- newHeight > periods[tipHash].height (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#267-276)
+	- require(bool,string)(periods[_root].timestamp == 0,Trying to submit the same root twice) (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#262-264)
+	- require(bool,string)(periods[_prevHash].timestamp > 0,Parent node should exist) (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#260-262)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+Initializable.isConstructor uses assembly (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#112-127)
+	- /sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#122-123
+Adminable._admin uses assembly (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#183-186)
+	- /sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#185-186
+SwapRegistry.claim uses assembly (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#988-1047)
+	- /sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#1004-1007
+	- /sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#1008-1010
+	- /sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#1011-1018
+SwapRegistry.createClone uses assembly (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol)
+	- /sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+Bridge.initialize (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#227-246) should be declared external
+Bridge.setOperator (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#246-248) should be declared external
+Bridge.getParentBlockInterval (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#250-253) should be declared external
+Bridge.setParentBlockInterval (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#253-256) should be declared external
+Bridge.submitPeriod (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#256-293) should be declared external
+ERC20.transfer (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#365-367) should be declared external
+IERC20.transfer (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#295-297) should be declared external
+IERC20.approve (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#297-299) should be declared external
+ERC20.approve (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#382-385) should be declared external
+ERC20.transferFrom (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#397-402) should be declared external
+IERC20.transferFrom (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#299-301) should be declared external
+IERC20.totalSupply (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#303) should be declared external
+ERC20.totalSupply (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#339-344) should be declared external
+ERC20.balanceOf (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#347-349) should be declared external
+IERC20.balanceOf (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#303-309) should be declared external
+IERC20.allowance (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#309-310) should be declared external
+ERC20.allowance (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#358-364) should be declared external
+ERC20.increaseAllowance (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#414-420) should be declared external
+ERC20.decreaseAllowance (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#433-442) should be declared external
+TransferrableToken.transferFrom (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#584-588) should be declared external
+TransferrableToken.approve (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#588-590) should be declared external
+Vault.initialize (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#740-741) should be declared external
+Vault.getTokenAddr (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#741-744) should be declared external
+Vault.registerToken (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#744-775) should be declared external
+Vault.registerNST (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#775-805) should be declared external
+SwapExchange.setup (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#826-849) should be declared external
+MinterRole.addMinter (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#907-913) should be declared external
+MinterRole.renounceMinter (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#914-915) should be declared external
+ERC20Mintable.mint (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#941-948) should be declared external
+SwapRegistry.initialize (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#970-988) should be declared external
+SwapRegistry.claim (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#988-1047) should be declared external
+SwapRegistry.getTaxRate (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#1047-1048) should be declared external
+SwapRegistry.setTaxRate (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#1049-1052) should be declared external
+SwapRegistry.getInflationRate (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#1052-1056) should be declared external
+SwapRegistry.setInflationRate (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#1056-1064) should be declared external
+SwapRegistry.createExchange (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#1072-1083) should be declared external
+SwapRegistry.getExchangeCodeAddr (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol) should be declared external
+SwapRegistry.setExchangeCodeAddr (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol) should be declared external
+SwapRegistry.getExchange (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol) should be declared external
+SwapRegistry.getToken (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Variable 'Initializable.______gap' (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#129) is not in mixedCase
+Function 'Adminable._admin' (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#183-186) is not in mixedCase
+Parameter '_parentBlockInterval' of Bridge.initialize (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#227-228) is not in mixedCase
+Parameter '_operator' of Bridge.setOperator (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#246) is not in mixedCase
+Parameter '_parentBlockInterval' of Bridge.setParentBlockInterval (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#255) is not in mixedCase
+Parameter '_prevHash' of Bridge.submitPeriod (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#257-258) is not in mixedCase
+Parameter '_root' of Bridge.submitPeriod (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#258-259) is not in mixedCase
+Function 'ERC20._transfer' (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#448-455) is not in mixedCase
+Function 'ERC20._mint' (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#464-471) is not in mixedCase
+Function 'ERC20._burn' (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#478-483) is not in mixedCase
+Function 'ERC20._burnFrom' (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#496-505) is not in mixedCase
+Function 'ERC165._registerInterface' (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#558-564) is not in mixedCase
+Parameter '_bridge' of Vault.initialize (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#740-741) is not in mixedCase
+Parameter '_color' of Vault.getTokenAddr (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#741-742) is not in mixedCase
+Parameter '_token' of Vault.registerToken (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#745) is not in mixedCase
+Parameter '_isERC721' of Vault.registerToken (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#745-746) is not in mixedCase
+Parameter '_token' of Vault.registerNST (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#777) is not in mixedCase
+Variable 'Vault.______gap' (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#806-807) is not in mixedCase
+Parameter '_nativeToken' of SwapExchange.setup (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#826-827) is not in mixedCase
+Parameter '_tokenAddr' of SwapExchange.setup (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#827-828) is not in mixedCase
+Function 'MinterRole._addMinter' (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#916-929) is not in mixedCase
+Function 'MinterRole._removeMinter' (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#929-935) is not in mixedCase
+Parameter '_bridge' of SwapRegistry.initialize (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#971) is not in mixedCase
+Parameter '_vault' of SwapRegistry.initialize (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#971-972) is not in mixedCase
+Parameter '_poaReward' of SwapRegistry.initialize (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#972-973) is not in mixedCase
+Parameter '_slotId' of SwapRegistry.claim (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#989-990) is not in mixedCase
+Parameter '_consensusRoots' of SwapRegistry.claim (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#990-991) is not in mixedCase
+Parameter '_cas' of SwapRegistry.claim (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#991) is not in mixedCase
+Parameter '_validatorData' of SwapRegistry.claim (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#991-992) is not in mixedCase
+Parameter '_rest' of SwapRegistry.claim (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#992-993) is not in mixedCase
+Parameter '_taxRate' of SwapRegistry.setTaxRate (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#1049) is not in mixedCase
+Parameter '_inflationRate' of SwapRegistry.setInflationRate (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#1057-1060) is not in mixedCase
+Parameter '_token' of SwapRegistry.createExchange (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#1072) is not in mixedCase
+Parameter '_exchangeCodeAddr' of SwapRegistry.setExchangeCodeAddr (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol) is not in mixedCase
+Parameter '_token' of SwapRegistry.getExchange (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol) is not in mixedCase
+Parameter '_exchange' of SwapRegistry.getToken (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol) is not in mixedCase
+Constant 'SwapRegistry.maxTax' (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#960-961) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'SwapRegistry.inflationFactor' (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#963-965) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'SwapRegistry.maxInflation' (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#965-966) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'SwapRegistry.poaSupplyTarget' (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#968-969) is not in UPPER_CASE_WITH_UNDERSCORES
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+Initializable.______gap (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#129) is never used in Bridge
+Vault.______gap (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#806-807) is never used in Vault
+Initializable.______gap (/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol#129) is never used in SwapRegistry
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0xf103c7d7f5b9dbac8a2510d6ae850875bb985d04.sol analyzed (17 contracts), 103 result(s) found

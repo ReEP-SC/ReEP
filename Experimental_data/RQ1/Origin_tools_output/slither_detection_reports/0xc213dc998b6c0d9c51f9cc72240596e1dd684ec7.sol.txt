@@ -1,0 +1,32 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xc213dc998b6c0d9c51f9cc72240596e1dd684ec7.sol:
+/sb/0xc213dc998b6c0d9c51f9cc72240596e1dd684ec7.sol:25:24: Warning: Unused local variable.
+        (bool success, bytes memory data) = msg.sender.call.value(_weiToWithdraw)("");
+                       ^---------------^
+
+INFO:Detectors:[91m
+Reentrancy in EtherStore.withdrawFunds (/sb/0xc213dc998b6c0d9c51f9cc72240596e1dd684ec7.sol#19-30):
+	External calls:
+	- (success,data) = msg.sender.call.value(_weiToWithdraw)() (/sb/0xc213dc998b6c0d9c51f9cc72240596e1dd684ec7.sol#25-26)
+	State variables written after the call(s):
+	- balances (/sb/0xc213dc998b6c0d9c51f9cc72240596e1dd684ec7.sol#27-28)
+	- lastWithdrawTime (/sb/0xc213dc998b6c0d9c51f9cc72240596e1dd684ec7.sol#28-30)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities[0m
+INFO:Detectors:[92m
+EtherStore.withdrawalLimit should be constant (/sb/0xc213dc998b6c0d9c51f9cc72240596e1dd684ec7.sol#10-11)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+EtherStore.depositFunds (/sb/0xc213dc998b6c0d9c51f9cc72240596e1dd684ec7.sol#14-18) should be declared external
+EtherStore.withdrawFunds (/sb/0xc213dc998b6c0d9c51f9cc72240596e1dd684ec7.sol#19-30) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xc213dc998b6c0d9c51f9cc72240596e1dd684ec7.sol:
+	- pragma solidity0.5.0 (/sb/0xc213dc998b6c0d9c51f9cc72240596e1dd684ec7.sol#5-8): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Low level call in EtherStore.withdrawFunds (/sb/0xc213dc998b6c0d9c51f9cc72240596e1dd684ec7.sol#19-30):
+	-(success,data) = msg.sender.call.value(_weiToWithdraw)() /sb/0xc213dc998b6c0d9c51f9cc72240596e1dd684ec7.sol#25-26
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Parameter '_weiToWithdraw' of EtherStore.withdrawFunds (/sb/0xc213dc998b6c0d9c51f9cc72240596e1dd684ec7.sol#19-20) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xc213dc998b6c0d9c51f9cc72240596e1dd684ec7.sol analyzed (1 contracts), 7 result(s) found

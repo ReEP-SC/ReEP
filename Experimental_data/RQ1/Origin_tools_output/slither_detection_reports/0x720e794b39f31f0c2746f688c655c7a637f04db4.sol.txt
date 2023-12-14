@@ -1,0 +1,77 @@
+INFO:Detectors:[91m
+CNCICO.successful (/sb/0x720e794b39f31f0c2746f688c655c7a637f04db4.sol#268-292) sends eth to arbitrary user
+	Dangerous calls:
+	- creator.transfer(address(this).balance) (/sb/0x720e794b39f31f0c2746f688c655c7a637f04db4.sol#289-290)
+CNCICO.retrieveOnFail (/sb/0x720e794b39f31f0c2746f688c655c7a637f04db4.sol#350-355) sends eth to arbitrary user
+	Dangerous calls:
+	- creator.transfer(address(this).balance) (/sb/0x720e794b39f31f0c2746f688c655c7a637f04db4.sol#354-355)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[93m
+CNCICO.successful (/sb/0x720e794b39f31f0c2746f688c655c7a637f04db4.sol#268-292) does not use the value returned by external calls:
+	-tokenReward.transfer(creator,remanent) (/sb/0x720e794b39f31f0c2746f688c655c7a637f04db4.sol#284-285)
+CNCICO.retrieveOnFail (/sb/0x720e794b39f31f0c2746f688c655c7a637f04db4.sol#350-355) does not use the value returned by external calls:
+	-tokenReward.transfer(creator,tokenReward.balanceOf(this)) (/sb/0x720e794b39f31f0c2746f688c655c7a637f04db4.sol#352-354)
+CNCICO.externalTokensRecovery (/sb/0x720e794b39f31f0c2746f688c655c7a637f04db4.sol#361-368) does not use the value returned by external calls:
+	-_address.transfer(msg.sender,remainder) (/sb/0x720e794b39f31f0c2746f688c655c7a637f04db4.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in CNCICO.claimTokensByAdmin (/sb/0x720e794b39f31f0c2746f688c655c7a637f04db4.sol#309-324):
+	External calls:
+	- require(bool)(tokenReward.transfer(_target,tokens)) (/sb/0x720e794b39f31f0c2746f688c655c7a637f04db4.sol#319-321)
+	State variables written after the call(s):
+	- tokensSent (/sb/0x720e794b39f31f0c2746f688c655c7a637f04db4.sol#322-323)
+Reentrancy in CNCICO.claimTokensByUser (/sb/0x720e794b39f31f0c2746f688c655c7a637f04db4.sol#293-307):
+	External calls:
+	- require(bool)(tokenReward.transfer(msg.sender,tokens)) (/sb/0x720e794b39f31f0c2746f688c655c7a637f04db4.sol#301-303)
+	State variables written after the call(s):
+	- tokensSent (/sb/0x720e794b39f31f0c2746f688c655c7a637f04db4.sol#304-305)
+Reentrancy in CNCICO.contribute (/sb/0x720e794b39f31f0c2746f688c655c7a637f04db4.sol#174-228):
+	External calls:
+	- require(bool)(tokenReward.transfer(msg.sender,tokenBought.add(tempBalance))) (/sb/0x720e794b39f31f0c2746f688c655c7a637f04db4.sol#205-207)
+	State variables written after the call(s):
+	- tokensSent (/sb/0x720e794b39f31f0c2746f688c655c7a637f04db4.sol#210-211)
+Reentrancy in CNCICO.contribute (/sb/0x720e794b39f31f0c2746f688c655c7a637f04db4.sol#174-228):
+	External calls:
+	- require(bool)(tokenReward.transfer(msg.sender,tokenBought.add(tempBalance))) (/sb/0x720e794b39f31f0c2746f688c655c7a637f04db4.sol#205-207)
+	- checkIfFundingCompleteOrExpired() (/sb/0x720e794b39f31f0c2746f688c655c7a637f04db4.sol#226)
+	External calls sending eth:
+	- checkIfFundingCompleteOrExpired() (/sb/0x720e794b39f31f0c2746f688c655c7a637f04db4.sol#226)
+	State variables written after the call(s):
+	- completedAt (/sb/0x720e794b39f31f0c2746f688c655c7a637f04db4.sol#226)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+CNCICO.MainSaleDeadline should be constant (/sb/0x720e794b39f31f0c2746f688c655c7a637f04db4.sol#117-119)
+CNCICO.MainSaleStart should be constant (/sb/0x720e794b39f31f0c2746f688c655c7a637f04db4.sol#116)
+CNCICO.PreSaleLimit should be constant (/sb/0x720e794b39f31f0c2746f688c655c7a637f04db4.sol#123-124)
+CNCICO.hardCap should be constant (/sb/0x720e794b39f31f0c2746f688c655c7a637f04db4.sol#129)
+CNCICO.softCap should be constant (/sb/0x720e794b39f31f0c2746f688c655c7a637f04db4.sol#126-128)
+CNCICO.version should be constant (/sb/0x720e794b39f31f0c2746f688c655c7a637f04db4.sol#140)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+ERC20Basic.totalSupply (/sb/0x720e794b39f31f0c2746f688c655c7a637f04db4.sol#49-50) should be declared external
+ERC20Basic.balanceOf (/sb/0x720e794b39f31f0c2746f688c655c7a637f04db4.sol#50-51) should be declared external
+ERC20Basic.transfer (/sb/0x720e794b39f31f0c2746f688c655c7a637f04db4.sol#51-52) should be declared external
+ERC20Basic.transferFrom (/sb/0x720e794b39f31f0c2746f688c655c7a637f04db4.sol#52-53) should be declared external
+admined.adminshipLevel (/sb/0x720e794b39f31f0c2746f688c655c7a637f04db4.sol#86-95) should be declared external
+CNCICO.claimTokensByUser (/sb/0x720e794b39f31f0c2746f688c655c7a637f04db4.sol#293-307) should be declared external
+CNCICO.claimTokensByAdmin (/sb/0x720e794b39f31f0c2746f688c655c7a637f04db4.sol#309-324) should be declared external
+CNCICO.refund (/sb/0x720e794b39f31f0c2746f688c655c7a637f04db4.sol#325-349) should be declared external
+CNCICO.retrieveOnFail (/sb/0x720e794b39f31f0c2746f688c655c7a637f04db4.sol#350-355) should be declared external
+CNCICO.externalTokensRecovery (/sb/0x720e794b39f31f0c2746f688c655c7a637f04db4.sol#361-368) should be declared external
+CNCICO.fallback (/sb/0x720e794b39f31f0c2746f688c655c7a637f04db4.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Contract 'admined' (/sb/0x720e794b39f31f0c2746f688c655c7a637f04db4.sol#62-102) is not in CapWords
+Parameter '_newAdmin' of admined.adminshipLevel (/sb/0x720e794b39f31f0c2746f688c655c7a637f04db4.sol#87) is not in mixedCase
+Parameter '_level' of admined.adminshipLevel (/sb/0x720e794b39f31f0c2746f688c655c7a637f04db4.sol#87-88) is not in mixedCase
+Parameter '_addressOfTokenUsedAsReward' of CNCICO. (/sb/0x720e794b39f31f0c2746f688c655c7a637f04db4.sol#162) is not in mixedCase
+Parameter '_target' of CNCICO.claimTokensByAdmin (/sb/0x720e794b39f31f0c2746f688c655c7a637f04db4.sol#310) is not in mixedCase
+Parameter '_address' of CNCICO.externalTokensRecovery (/sb/0x720e794b39f31f0c2746f688c655c7a637f04db4.sol#363-365) is not in mixedCase
+Variable 'CNCICO.PreSaleStart' (/sb/0x720e794b39f31f0c2746f688c655c7a637f04db4.sol#114) is not in mixedCase
+Constant 'CNCICO.PreSaleDeadline' (/sb/0x720e794b39f31f0c2746f688c655c7a637f04db4.sol#115) is not in UPPER_CASE_WITH_UNDERSCORES
+Variable 'CNCICO.MainSaleStart' (/sb/0x720e794b39f31f0c2746f688c655c7a637f04db4.sol#116) is not in mixedCase
+Variable 'CNCICO.MainSaleDeadline' (/sb/0x720e794b39f31f0c2746f688c655c7a637f04db4.sol#117-119) is not in mixedCase
+Variable 'CNCICO.PreSaleDistributed' (/sb/0x720e794b39f31f0c2746f688c655c7a637f04db4.sol#122-123) is not in mixedCase
+Variable 'CNCICO.PreSaleLimit' (/sb/0x720e794b39f31f0c2746f688c655c7a637f04db4.sol#123-124) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x720e794b39f31f0c2746f688c655c7a637f04db4.sol analyzed (4 contracts), 33 result(s) found

@@ -1,0 +1,89 @@
+INFO:Detectors:[93m
+Reentrancy in HuddlDistribution.launchDistribution (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol#795-823):
+	External calls:
+	- (userShare,reserveShare,contributorShare) = getDistributionShares(token.totalSupply()) (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol#797-809)
+	- token.transfer(usersPool,userShare) (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol#809)
+	- token.transfer(contributorsPool,contributorShare) (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol#811-817)
+	- token.transfer(reservePool,reserveShare) (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol#817)
+	State variables written after the call(s):
+	- contributorDistPercent (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol#817-819)
+	- reserveDistPercent (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol#817-819)
+Reentrancy in HuddlDistribution.releaseTokens (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol#849-937):
+	External calls:
+	- amount = getTokensToMint() (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol#873-875)
+	- (userShare,reserveShare,contributorShare) = getDistributionShares(amount) (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol#893-903)
+	State variables written after the call(s):
+	- contributorDistPercent (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol#909-917)
+	- inflationRate (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol#907)
+	- reserveDistPercent (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol#909-917)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+HuddlDistribution.launchDistribution (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol#795-823) does not use the value returned by external calls:
+	-token.transfer(usersPool,userShare) (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol#809)
+	-token.transfer(contributorsPool,contributorShare) (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol#811-817)
+	-token.transfer(reservePool,reserveShare) (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol#817)
+HuddlDistribution.releaseTokens (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol#849-937) does not use the value returned by external calls:
+	-token.mint(usersPool,userShare) (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol#921)
+	-token.mint(contributorsPool,contributorShare) (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol#921-923)
+	-token.mint(reservePool,reserveShare) (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol#923-927)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+HuddlToken.constructor.name (local variable @ /sb/0x5137a403dd25e48de528912a4af62881e625d801.sol) shadows:
+	- HuddlToken.name (function @ /sb/0x5137a403dd25e48de528912a4af62881e625d801.sol)
+HuddlToken.constructor.symbol (local variable @ /sb/0x5137a403dd25e48de528912a4af62881e625d801.sol) shadows:
+	- HuddlToken.symbol (function @ /sb/0x5137a403dd25e48de528912a4af62881e625d801.sol)
+HuddlToken.constructor.decimals (local variable @ /sb/0x5137a403dd25e48de528912a4af62881e625d801.sol) shadows:
+	- HuddlToken.decimals (function @ /sb/0x5137a403dd25e48de528912a4af62881e625d801.sol)
+HuddlToken.constructor.totalSupply (local variable @ /sb/0x5137a403dd25e48de528912a4af62881e625d801.sol) shadows:
+	- ERC20.totalSupply (function @ /sb/0x5137a403dd25e48de528912a4af62881e625d801.sol#1297-1299)
+	- IERC20.totalSupply (function @ /sb/0x5137a403dd25e48de528912a4af62881e625d801.sol#25-29)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+HuddlDistribution.lastReleasedQuarter should be constant (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol#425-427)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+IHuddlToken.decimals (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol#99-105) should be declared external
+Ownable.owner (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol#311-317) should be declared external
+Ownable.renounceOwnership (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol#353-364) should be declared external
+Ownable.transferOwnership (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol#373-383) should be declared external
+IERC20.totalSupply (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol#25-29) should be declared external
+ERC20.totalSupply (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol#1297-1299) should be declared external
+ERC20.balanceOf (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol#1303-1305) should be declared external
+IERC20.balanceOf (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol#29-33) should be declared external
+IERC20.allowance (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol#33-39) should be declared external
+ERC20.allowance (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol#1321-1333) should be declared external
+ERC20.transfer (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol#1341-1357) should be declared external
+IERC20.transfer (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol#39-43) should be declared external
+IERC20.approve (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol#43-49) should be declared external
+ERC20.approve (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol#1391-1411) should be declared external
+IERC20.transferFrom (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol#49-59) should be declared external
+ERC20.transferFrom (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol#1425-1445) should be declared external
+ERC20.increaseAllowance (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol#1479-1501) should be declared external
+ERC20.decreaseAllowance (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol#1527-1545) should be declared external
+MinterRole.addMinter (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol#1857-1865) should be declared external
+MinterRole.renounceMinter (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol#1868-1875) should be declared external
+ERC20Mintable.mint (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol#1925-1945) should be declared external
+HuddlToken.name (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol) should be declared external
+HuddlToken.symbol (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol) should be declared external
+HuddlToken.decimals (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol) should be declared external
+Migrations.setCompleted (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol) should be declared external
+Migrations.upgrade (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Function 'Ownable._transferOwnership' (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol#399-413) is not in mixedCase
+Parameter '_usersPool' of HuddlDistribution. (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol#547-549) is not in mixedCase
+Parameter '_contributorsPool' of HuddlDistribution. (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol#551) is not in mixedCase
+Parameter '_reservePool' of HuddlDistribution. (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol#553) is not in mixedCase
+Function 'ERC20._transfer' (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol#1559-1571) is not in mixedCase
+Function 'ERC20._mint' (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol#1591-1619) is not in mixedCase
+Function 'ERC20._burn' (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol#1638-1661) is not in mixedCase
+Function 'ERC20._burnFrom' (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol#1693-1735) is not in mixedCase
+Function 'MinterRole._addMinter' (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol#1875-1879) is not in mixedCase
+Function 'MinterRole._removeMinter' (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol#1879-1881) is not in mixedCase
+Parameter 'new_address' of Migrations.upgrade (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol) is not in mixedCase
+Variable 'Migrations.last_completed_migration' (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+HuddlDistribution.lastReleasedQuarter (/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol#425-427) is never used in HuddlDistribution
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0x5137a403dd25e48de528912a4af62881e625d801.sol analyzed (11 contracts), 48 result(s) found

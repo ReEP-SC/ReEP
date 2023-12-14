@@ -1,0 +1,128 @@
+INFO:Detectors:[93m
+BKC_Token.releaseableBalanceOf (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#563-569) uses a dangerous strict equality:
+	- vestingOf[_owner] == address(0)
+BKC_Token.releaseableBalanceOf (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#563-569) uses a dangerous strict equality:
+	- vestingOf[_owner] == address(0)
+BKC_Token.vestTokensDetailInt (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#482-500) uses a dangerous strict equality:
+	- vestingOf[_beneficiary] == 0x0
+BKC_Token.releaseableBalanceOf (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#563-569) uses a dangerous strict equality:
+	- vestingOf[_owner] == address(0)
+BKC_Token.vestTokensDetailInt (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#482-500) uses a dangerous strict equality:
+	- vestingOf[_beneficiary] == 0x0
+BKC_Token.vestTokensStartAtInt (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#501-520) uses a dangerous strict equality:
+	- vestingOf[_beneficiary] == 0x0
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Contract locking ether found in /sb/0x89c922de9900170d7a95e377665366613d5a718e.sol:
+	Contract BKC_Token has payable functions:
+	 - constructor (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#442-452)
+	But does not have a function to withdraw the ether
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#contracts-that-lock-ether[0m
+INFO:Detectors:[93m
+Reentrancy in TokenVesting.release (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#307-314):
+	External calls:
+	- unreleased = releasableAmount(token) (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#308-309)
+	State variables written after the call(s):
+	- released (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#309-310)
+Reentrancy in TokenVesting.revoke (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#323-337):
+	External calls:
+	- balance = token.balanceOf(this) (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#329-330)
+	- unreleased = releasableAmount(token) (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#330-331)
+	State variables written after the call(s):
+	- revoked (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#332-333)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+TokenVault.fillUpAllowance (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#390-394) does not use the value returned by external calls:
+	-token.approve(token,amount) (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#393-394)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+TokenVesting.vestedAmount (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#347-366) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp >= start.add(duration) || revoked[token] (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#357-366)
+	- block.timestamp < cliff (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#356-366)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+BKC_Token.daySecond should be constant (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#432-434)
+BKC_Token.lock365Days should be constant (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#436)
+BKC_Token.lock90Days should be constant (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#434)
+BKC_Token.unlock100Days should be constant (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#434-435)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+ERC20Basic.totalSupply (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#61) should be declared external
+BasicToken.totalSupply (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#81-86) should be declared external
+ERC20Basic.balanceOf (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#61-62) should be declared external
+BasicToken.balanceOf (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#106-114) should be declared external
+ERC20Basic.transfer (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#62-63) should be declared external
+BasicToken.transfer (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#90-102) should be declared external
+StandardToken.allowance (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#177-179) should be declared external
+ERC20.allowance (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#116-117) should be declared external
+ERC20.transferFrom (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#117-118) should be declared external
+StandardToken.transferFrom (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#140-153) should be declared external
+StandardToken.approve (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#162-169) should be declared external
+ERC20.approve (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#118-122) should be declared external
+StandardToken.increaseApproval (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#183-190) should be declared external
+StandardToken.decreaseApproval (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#190-204) should be declared external
+TokenVesting.release (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#307-314) should be declared external
+TokenVesting.revoke (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#323-337) should be declared external
+TokenVault.fillUpAllowance (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#390-394) should be declared external
+BurnableToken.burn (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#401-414) should be declared external
+BKC_Token.lockedBalanceOf (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#558-559) should be declared external
+BKC_Token.releaseableBalanceOf (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#563-569) should be declared external
+BKC_Token.revokeVestedTokensFor (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_owner' of BasicToken.balanceOf (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#111) is not in mixedCase
+Parameter '_to' of BasicToken.transfer (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#90-91) is not in mixedCase
+Parameter '_value' of BasicToken.transfer (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#91) is not in mixedCase
+Parameter '_owner' of StandardToken.allowance (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#177) is not in mixedCase
+Parameter '_spender' of StandardToken.allowance (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#177) is not in mixedCase
+Parameter '_from' of StandardToken.transferFrom (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#140-141) is not in mixedCase
+Parameter '_to' of StandardToken.transferFrom (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#141) is not in mixedCase
+Parameter '_value' of StandardToken.transferFrom (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#141) is not in mixedCase
+Parameter '_spender' of StandardToken.approve (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#163) is not in mixedCase
+Parameter '_value' of StandardToken.approve (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#163-166) is not in mixedCase
+Parameter '_spender' of StandardToken.increaseApproval (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#184) is not in mixedCase
+Parameter '_addedValue' of StandardToken.increaseApproval (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#184) is not in mixedCase
+Parameter '_spender' of StandardToken.decreaseApproval (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#191) is not in mixedCase
+Parameter '_subtractedValue' of StandardToken.decreaseApproval (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#191-192) is not in mixedCase
+Parameter '_beneficiary' of TokenVesting. (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#283) is not in mixedCase
+Parameter '_start' of TokenVesting. (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#284) is not in mixedCase
+Parameter '_cliff' of TokenVesting. (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#284-285) is not in mixedCase
+Parameter '_duration' of TokenVesting. (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#285-286) is not in mixedCase
+Parameter '_revocable' of TokenVesting. (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#286-287) is not in mixedCase
+Parameter '_realOwner' of TokenVesting. (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#287-288) is not in mixedCase
+Parameter '_token' of TokenVault. (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#383) is not in mixedCase
+Parameter '_value' of BurnableToken.burn (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#401) is not in mixedCase
+Contract 'BKC_Token' (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#415-569) is not in CapWords
+Parameter '_saleTokensAddress' of BKC_Token. (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#442) is not in mixedCase
+Parameter '_tokens' of BKC_Token.createTokensInt (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#473) is not in mixedCase
+Parameter '_destination' of BKC_Token.createTokensInt (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#473-474) is not in mixedCase
+Parameter '_beneficiary' of BKC_Token.vestTokensDetailInt (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#483) is not in mixedCase
+Parameter '_startS' of BKC_Token.vestTokensDetailInt (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#483) is not in mixedCase
+Parameter '_cliffS' of BKC_Token.vestTokensDetailInt (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#484) is not in mixedCase
+Parameter '_durationS' of BKC_Token.vestTokensDetailInt (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#485-487) is not in mixedCase
+Parameter '_revocable' of BKC_Token.vestTokensDetailInt (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#487) is not in mixedCase
+Parameter '_tokensAmountInt' of BKC_Token.vestTokensDetailInt (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#487-490) is not in mixedCase
+Parameter '_beneficiary' of BKC_Token.vestTokensStartAtInt (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#502-503) is not in mixedCase
+Parameter '_tokensAmountInt' of BKC_Token.vestTokensStartAtInt (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#503-505) is not in mixedCase
+Parameter '_startS' of BKC_Token.vestTokensStartAtInt (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#505-506) is not in mixedCase
+Parameter '_afterDay' of BKC_Token.vestTokensStartAtInt (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#506) is not in mixedCase
+Parameter '_cliffDay' of BKC_Token.vestTokensStartAtInt (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#506) is not in mixedCase
+Parameter '_durationDay' of BKC_Token.vestTokensStartAtInt (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#507) is not in mixedCase
+Parameter '_beneficiary' of BKC_Token.vestTokensFromNowInt (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#522) is not in mixedCase
+Parameter '_tokensAmountInt' of BKC_Token.vestTokensFromNowInt (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#522) is not in mixedCase
+Parameter '_afterDay' of BKC_Token.vestTokensFromNowInt (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#522) is not in mixedCase
+Parameter '_cliffDay' of BKC_Token.vestTokensFromNowInt (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#522) is not in mixedCase
+Parameter '_durationDay' of BKC_Token.vestTokensFromNowInt (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#522) is not in mixedCase
+Parameter '_beneficiary' of BKC_Token.vestCmdNow1PercentInt (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#527) is not in mixedCase
+Parameter '_tokensAmountInt' of BKC_Token.vestCmdNow1PercentInt (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#527-528) is not in mixedCase
+Parameter '_beneficiary' of BKC_Token.vestCmd3Month1PercentInt (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#533) is not in mixedCase
+Parameter '_tokensAmountInt' of BKC_Token.vestCmd3Month1PercentInt (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#533-534) is not in mixedCase
+Parameter '_beneficiary' of BKC_Token.vestCmd1YearInstantInt (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#540) is not in mixedCase
+Parameter '_tokensAmountInt' of BKC_Token.vestCmd1YearInstantInt (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#540-543) is not in mixedCase
+Parameter '_owner' of BKC_Token.releaseVestedTokensFor (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#553) is not in mixedCase
+Parameter '_owner' of BKC_Token.lockedBalanceOf (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#558) is not in mixedCase
+Parameter '_owner' of BKC_Token.releaseableBalanceOf (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol#563-564) is not in mixedCase
+Parameter '_owner' of BKC_Token.revokeVestedTokensFor (/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x89c922de9900170d7a95e377665366613d5a718e.sol analyzed (11 contracts), 83 result(s) found

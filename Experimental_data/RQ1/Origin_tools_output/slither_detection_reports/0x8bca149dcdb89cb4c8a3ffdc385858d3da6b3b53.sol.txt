@@ -1,0 +1,96 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol:
+/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol:537:36: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function stake(uint256 amount, bytes calldata data) external {
+                                   ^-----------------^
+/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol:547:53: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function stakeFor(address user, uint256 amount, bytes calldata data) external onlyOwner {
+                                                    ^-----------------^
+/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol:596:38: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function unstake(uint256 amount, bytes calldata data) external {
+                                     ^-----------------^
+
+INFO:Detectors:[93m
+Reentrancy in TokenGeyser._stakeFor (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#557-590):
+	External calls:
+	- require(bool,string)(totalStakingShares == 0 || totalStaked() > 0,TokenGeyser: Invalid state. Staking shares exist, but no staking tokens do) (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#560-563)
+	- updateAccounting() (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#568-570)
+	- mintedStakingShares = totalStakingShares.mul(amount).div(totalStaked()) (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#563-566)
+	State variables written after the call(s):
+	- _userTotals (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#572-573)
+	- _userTotals (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#573-575)
+	- totalStakingShares (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#579-580)
+Reentrancy in TokenGeyser._unstake (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#614-677):
+	External calls:
+	- updateAccounting() (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#615-617)
+	- require(bool,string)(totalStakedFor(msg.sender) >= amount,TokenGeyser: unstake amount is greater than total user stakes) (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#619-621)
+	- stakingSharesToBurn = totalStakingShares.mul(amount).div(totalStaked()) (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#621-622)
+	- rewardAmount = computeNewReward(rewardAmount,newStakingShareSecondsToBurn,stakeTimeSec) (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#639-640)
+	State variables written after the call(s):
+	- _userStakes (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#642-643)
+Reentrancy in TokenGeyser._unstake (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#614-677):
+	External calls:
+	- updateAccounting() (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#615-617)
+	- require(bool,string)(totalStakedFor(msg.sender) >= amount,TokenGeyser: unstake amount is greater than total user stakes) (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#619-621)
+	- stakingSharesToBurn = totalStakingShares.mul(amount).div(totalStaked()) (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#621-622)
+	State variables written after the call(s):
+	- _totalStakingShareSeconds (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#658-659)
+	- _userTotals (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#652-653)
+	- _userTotals (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#653-654)
+	- totalStakingShares (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#659-660)
+Reentrancy in TokenGeyser.lockTokens (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#814-840):
+	External calls:
+	- updateAccounting() (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#819-821)
+	- lockedTokens = totalLocked() (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#821-822)
+	State variables written after the call(s):
+	- totalLockedShares (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#833-835)
+	- unlockSchedules (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#831-833)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+schedule in TokenGeyser.lockTokens (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#826-827) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[92m
+Reentrancy in TokenGeyser._stakeFor (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#557-590):
+	External calls:
+	- require(bool,string)(totalStakingShares == 0 || totalStaked() > 0,TokenGeyser: Invalid state. Staking shares exist, but no staking tokens do) (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#560-563)
+	- updateAccounting() (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#568-570)
+	- mintedStakingShares = totalStakingShares.mul(amount).div(totalStaked()) (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#563-566)
+	State variables written after the call(s):
+	- _userStakes (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#576-578)
+Reentrancy in TokenGeyser.unlockTokens (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#845-869):
+	External calls:
+	- lockedTokens = totalLocked() (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#847-849)
+	State variables written after the call(s):
+	- totalLockedShares (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#857-858)
+	- unlockSchedules (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#854-855)
+Reentrancy in TokenGeyser.updateAccounting (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#748-786):
+	External calls:
+	- unlockTokens() (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#751-753)
+	State variables written after the call(s):
+	- _lastAccountingTimestampSec (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#759-761)
+	- _totalStakingShareSeconds (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#758-759)
+	- _userTotals (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#767-770)
+	- _userTotals (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#770-772)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Ownable.owner (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#325-329) should be declared external
+Ownable.renounceOwnership (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#351-356) should be declared external
+Ownable.transferOwnership (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#360-364) should be declared external
+TokenPool.balance (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#388-392) should be declared external
+TokenGeyser.getDistributionToken (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#527-532) should be declared external
+TokenGeyser.unstakeQuery (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#604-608) should be declared external
+TokenGeyser.unlockScheduleCount (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#803-807) should be declared external
+TokenGeyser.rescueFundsFromStakingPool (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#906-911) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol:
+	- pragma solidity0.5.17 (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#7-11): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'Context._msgSender' (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#54-58) is not in mixedCase
+Function 'Context._msgData' (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#58-64) is not in mixedCase
+Function 'Ownable._transferOwnership' (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#367-374) is not in mixedCase
+Parameter '_token' of TokenPool. (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#384) is not in mixedCase
+Function 'TokenGeyser._stakeFor' (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#557-590) is not in mixedCase
+Function 'TokenGeyser._unstake' (/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol#614-677) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x8bca149dcdb89cb4c8a3ffdc385858d3da6b3b53.sol analyzed (7 contracts), 23 result(s) found

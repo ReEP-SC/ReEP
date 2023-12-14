@@ -1,0 +1,304 @@
+INFO:Detectors:[91m
+DEX.recoverTokens (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#758-763) sends eth to arbitrary user
+	Dangerous calls:
+	- msg.sender.transfer(address(this).balance) (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#760)
+DEXAdapter.recoverTokens (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1123-1130) sends eth to arbitrary user
+	Dangerous calls:
+	- msg.sender.transfer(address(this).balance) (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1125-1128)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[93m
+ECDSA.recover (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#121-164) is declared view but contains assembly code
+DEXAdapter._bytesToAddress (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+Reentrancy in DEXReserve.addLiquidity (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#685-708):
+	External calls:
+	- baseAmount = expectedBaseTokenAmount(_tokenAmount) (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#691-692)
+	- require(bool,string)(BaseToken.transferFrom(_liquidityProvider,address(this),baseAmount),failed to transfer base token) (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#696-697)
+	- require(bool,string)(BaseToken.transferFrom(_liquidityProvider,address(this),_maxBaseToken),failed to transfer base token) (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#701-703)
+	- Token.transferFrom(msg.sender,address(this),_tokenAmount) (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#704-707)
+	State variables written after the call(s):
+	- _totalSupply (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#707-708)
+Reentrancy in DEXReserve.removeLiquidity (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#678-685):
+	External calls:
+	- baseTokenAmount = calculateBaseTokenValue(_liquidity) (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#681-682)
+	- quoteTokenAmount = calculateQuoteTokenValue(_liquidity) (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#682-683)
+	State variables written after the call(s):
+	- _balances (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#683)
+	- _totalSupply (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#683)
+Reentrancy in ShifterRegistry.setShifter (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#959-988):
+	External calls:
+	- symbol = ERC20Shifted(_tokenAddress).symbol() (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#969-971)
+	State variables written after the call(s):
+	- shifterByToken (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#981-984)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+DEXReserve.buy (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#643-653) does not use the value returned by external calls:
+	-BaseToken.transferFrom(_from,address(this),_baseTokenAmount) (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#646-650)
+DEXReserve.sell (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#653-661) does not use the value returned by external calls:
+	-Token.transferFrom(_from,address(this),_tokenAmount) (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#658-659)
+DEXReserve.removeLiquidity (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#678-685) does not use the value returned by external calls:
+	-BaseToken.transfer(msg.sender,baseTokenAmount) (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#683-684)
+	-Token.transfer(msg.sender,quoteTokenAmount) (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#684)
+DEXReserve.addLiquidity (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#685-708) does not use the value returned by external calls:
+	-Token.transferFrom(msg.sender,address(this),_tokenAmount) (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#704-707)
+DEX.recoverTokens (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#758-763) does not use the value returned by external calls:
+	-ERC20(_token).transfer(msg.sender,ERC20(_token).balanceOf(address(this))) (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#761-762)
+DEX.trade (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#765-801) does not use the value returned by external calls:
+	-ERC20(BaseToken).approve(address(reserves[_dst]),intermediteAmount) (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#786-791)
+DEXAdapter.recoverTokens (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1123-1130) does not use the value returned by external calls:
+	-ERC20(_token).transfer(msg.sender,ERC20(_token).balanceOf(address(this))) (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1129-1130)
+DEXAdapter.trade (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1131-1152) does not use the value returned by external calls:
+	-shifter.shiftOut(_refundAddress,transferredAmt) (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1146)
+DEXAdapter.addLiquidity (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1165-1193) does not use the value returned by external calls:
+	-shifterRegistry.getShifterByToken(_token).shiftOut(_refundAddress,shiftedAmount) (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1177-1178)
+	-ERC20(_token).approve(address(reserve),transferredAmount) (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1190-1191)
+DEXAdapter.removeLiquidity (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1194-1210) does not use the value returned by external calls:
+	-reserve.transferFrom(msg.sender,address(this),_liquidity) (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1200-1204)
+	-reserve.BaseToken().transfer(msg.sender,baseTokenAmount) (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1206-1208)
+	-shifterRegistry.getShifterByToken(address(reserve.Token())).shiftOut(_tokenAddress,quoteTokenAmount) (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1208-1210)
+DEXAdapter._doTrade (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1210-1232) does not use the value returned by external calls:
+	-ERC20(_src).approve(address(dex.reserves(_dst)),_amount) (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1221-1224)
+	-ERC20(_src).approve(address(dex.reserves(_src)),_amount) (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1225-1229)
+	-shifter.shiftOut(_to,recvAmt) (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+ERC20Detailed.constructor.name (local variable @ /sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#351-354) shadows:
+	- ERC20Detailed.name (function @ /sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#361-363)
+ERC20Detailed.constructor.symbol (local variable @ /sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#354) shadows:
+	- ERC20Detailed.symbol (function @ /sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#363-368)
+ERC20Detailed.constructor.decimals (local variable @ /sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#354) shadows:
+	- ERC20Detailed.decimals (function @ /sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#368-372)
+ERC20Shifted.constructor._name (local variable @ /sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#429-431) shadows:
+	- ERC20Detailed._name (state variable @ /sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#345-349)
+ERC20Shifted.constructor._symbol (local variable @ /sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#431) shadows:
+	- ERC20Detailed._symbol (state variable @ /sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#349)
+ERC20Shifted.constructor._decimals (local variable @ /sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#431-432) shadows:
+	- ERC20Detailed._decimals (state variable @ /sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#349)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+Reentrancy in DEXReserve.addLiquidity (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#685-708):
+	External calls:
+	- baseAmount = expectedBaseTokenAmount(_tokenAmount) (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#691-692)
+	- require(bool,string)(BaseToken.transferFrom(_liquidityProvider,address(this),baseAmount),failed to transfer base token) (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#696-697)
+	- require(bool,string)(BaseToken.transferFrom(_liquidityProvider,address(this),_maxBaseToken),failed to transfer base token) (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#701-703)
+	- Token.transferFrom(msg.sender,address(this),_tokenAmount) (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#704-707)
+	State variables written after the call(s):
+	- _balances (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#707-708)
+Reentrancy in ShifterRegistry.setShifter (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#959-988):
+	External calls:
+	- symbol = ERC20Shifted(_tokenAddress).symbol() (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#969-971)
+	State variables written after the call(s):
+	- numShifters (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#984)
+	- tokenBySymbol (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#981)
+Reentrancy in Shifter.shiftIn (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#548-590):
+	External calls:
+	- token.mint(msg.sender,receivedAmount) (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#584)
+	- token.mint(feeRecipient,absoluteFee) (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#585)
+	State variables written after the call(s):
+	- nextShiftID (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#589)
+Reentrancy in Shifter.shiftOut (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#591-610):
+	External calls:
+	- token.burn(msg.sender,_amount) (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#603-604)
+	- token.mint(feeRecipient,absoluteFee) (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#604)
+	State variables written after the call(s):
+	- nextShiftID (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#609)
+Reentrancy in DEXAdapter.trade (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1131-1152):
+	External calls:
+	- shifter = shifterRegistry.getShifterByToken(address(_src)) (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1140-1143)
+	- transferredAmt = shifter.shiftIn(pHash,_amount,_nHash,_sig) (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1144-1145)
+	State variables written after the call(s):
+	- transferredAmt (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1144-1145)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+ECDSA.recover uses assembly (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#121-164)
+	- /sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#136-148
+DEXAdapter._bytesToAddress uses assembly (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol)
+	- /sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+DEX.ethereum should be constant (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#751-754)
+Shifter.version should be constant (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#458-459)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Ownable.owner (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#87-89) should be declared external
+Ownable.renounceOwnership (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#100-106) should be declared external
+Ownable.transferOwnership (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#107-111) should be declared external
+ERC20.transfer (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#259-264) should be declared external
+IERC20.transfer (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#220-223) should be declared external
+ERC20.allowance (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#264-269) should be declared external
+IERC20.allowance (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#223-226) should be declared external
+ERC20.approve (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#270-275) should be declared external
+IERC20.approve (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#226-229) should be declared external
+IERC20.transferFrom (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#229-233) should be declared external
+ERC20.transferFrom (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#276-282) should be declared external
+ERC20.increaseAllowance (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#282-288) should be declared external
+ERC20.decreaseAllowance (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#288-292) should be declared external
+ERC20Detailed.name (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#361-363) should be declared external
+ERC20Detailed.symbol (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#363-368) should be declared external
+ERC20Detailed.decimals (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#368-372) should be declared external
+Claimable.owner (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#389-394) should be declared external
+Claimable.renounceOwnership (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#407-415) should be declared external
+Claimable.transferOwnership (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#415-417) should be declared external
+Claimable.claimOwnership (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#417-424) should be declared external
+ERC20Shifted.burn (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#435-446) should be declared external
+ERC20Shifted.mint (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#447-454) should be declared external
+Shifter.claimTokenOwnership (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#507-508) should be declared external
+Shifter.transferTokenOwnership (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#511-518) should be declared external
+Shifter.updateMintAuthority (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#518-528) should be declared external
+Shifter.updateMinimumShiftOutAmount (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#534-538) should be declared external
+Shifter.updateFee (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#544-547) should be declared external
+Shifter.shiftIn (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#548-590) should be declared external
+Shifter.shiftOut (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#591-610) should be declared external
+DEX.trade (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#765-801) should be declared external
+DEX.calculateReceiveAmount (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#801-817) should be declared external
+DEXAdapter.encodePayload (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1161-1165) should be declared external
+DEXAdapter.calculateReceiveAmount (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol:
+	- pragma solidity^0.5.8 (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#19-22): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'Ownable._transferOwnership' (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#111-119) is not in mixedCase
+Parameter '_value' of String.fromBytes32 (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#175) is not in mixedCase
+Parameter '_addr' of String.fromAddress (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#190) is not in mixedCase
+Function 'ERC20._transfer' (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#292-303) is not in mixedCase
+Function 'ERC20._mint' (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#304-312) is not in mixedCase
+Function 'ERC20._burn' (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#315-321) is not in mixedCase
+Function 'ERC20._approve' (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#321-336) is not in mixedCase
+Function 'ERC20._burnFrom' (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#337-344) is not in mixedCase
+Parameter '_from' of ERC20Shifted.burn (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#438) is not in mixedCase
+Parameter '_amount' of ERC20Shifted.burn (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#438) is not in mixedCase
+Parameter '_to' of ERC20Shifted.mint (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#447-450) is not in mixedCase
+Parameter '_amount' of ERC20Shifted.mint (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#450) is not in mixedCase
+Parameter '_token' of Shifter. (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#492-493) is not in mixedCase
+Parameter '_feeRecipient' of Shifter. (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#493) is not in mixedCase
+Parameter '_mintAuthority' of Shifter. (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#493) is not in mixedCase
+Parameter '_fee' of Shifter. (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#493-494) is not in mixedCase
+Parameter '_minShiftOutAmount' of Shifter. (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#494) is not in mixedCase
+Parameter '_nextTokenOwner' of Shifter.transferTokenOwnership (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#514) is not in mixedCase
+Parameter '_nextMintAuthority' of Shifter.updateMintAuthority (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#523-524) is not in mixedCase
+Parameter '_minShiftOutAmount' of Shifter.updateMinimumShiftOutAmount (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#537) is not in mixedCase
+Parameter '_nextFeeRecipient' of Shifter.updateFeeRecipient (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#539) is not in mixedCase
+Parameter '_nextFee' of Shifter.updateFee (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#545-546) is not in mixedCase
+Parameter '_pHash' of Shifter.shiftIn (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#549) is not in mixedCase
+Parameter '_amount' of Shifter.shiftIn (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#549-550) is not in mixedCase
+Parameter '_nHash' of Shifter.shiftIn (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#550) is not in mixedCase
+Parameter '_sig' of Shifter.shiftIn (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#550) is not in mixedCase
+Parameter '_to' of Shifter.shiftOut (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#593-594) is not in mixedCase
+Parameter '_amount' of Shifter.shiftOut (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#594-598) is not in mixedCase
+Parameter '_signedMessageHash' of Shifter.verifySignature (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#610) is not in mixedCase
+Parameter '_sig' of Shifter.verifySignature (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#610-614) is not in mixedCase
+Parameter '_pHash' of Shifter.hashForSignature (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#615-616) is not in mixedCase
+Parameter '_amount' of Shifter.hashForSignature (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#616) is not in mixedCase
+Parameter '_to' of Shifter.hashForSignature (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#616) is not in mixedCase
+Parameter '_nHash' of Shifter.hashForSignature (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#616) is not in mixedCase
+Parameter '_baseToken' of DEXReserve. (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#639) is not in mixedCase
+Parameter '_token' of DEXReserve. (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#639-640) is not in mixedCase
+Parameter '_feeInBIPS' of DEXReserve. (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#642) is not in mixedCase
+Parameter '_to' of DEXReserve.buy (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#643-644) is not in mixedCase
+Parameter '_from' of DEXReserve.buy (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#644) is not in mixedCase
+Parameter '_baseTokenAmount' of DEXReserve.buy (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#644) is not in mixedCase
+Parameter '_to' of DEXReserve.sell (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#653) is not in mixedCase
+Parameter '_from' of DEXReserve.sell (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#653) is not in mixedCase
+Parameter '_tokenAmount' of DEXReserve.sell (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#653) is not in mixedCase
+Parameter '_sendAmt' of DEXReserve.calculateBuyRcvAmt (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#661) is not in mixedCase
+Parameter '_sendAmt' of DEXReserve.calculateSellRcvAmt (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#669) is not in mixedCase
+Parameter '_liquidity' of DEXReserve.removeLiquidity (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#679) is not in mixedCase
+Parameter '_liquidityProvider' of DEXReserve.addLiquidity (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#685) is not in mixedCase
+Parameter '_maxBaseToken' of DEXReserve.addLiquidity (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#685-686) is not in mixedCase
+Parameter '_tokenAmount' of DEXReserve.addLiquidity (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#687) is not in mixedCase
+Parameter '_deadline' of DEXReserve.addLiquidity (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#687) is not in mixedCase
+Parameter '_liquidity' of DEXReserve.calculateBaseTokenValue (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#709) is not in mixedCase
+Parameter '_liquidity' of DEXReserve.calculateQuoteTokenValue (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#718-719) is not in mixedCase
+Parameter '_quoteTokenAmount' of DEXReserve.expectedBaseTokenAmount (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#724-725) is not in mixedCase
+Function 'DEXReserve._removeFees' (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#733-741) is not in mixedCase
+Parameter '_amount' of DEXReserve._removeFees (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#733) is not in mixedCase
+Variable 'DEXReserve.FeeInBIPS' (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#636) is not in mixedCase
+Variable 'DEXReserve.BaseToken' (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#636) is not in mixedCase
+Variable 'DEXReserve.Token' (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#636-637) is not in mixedCase
+Contract 'BTC_DAI_Reserve' (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#741-745) is not in CapWords
+Contract 'ZEC_DAI_Reserve' (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#745-750) is not in CapWords
+Parameter '_baseToken' of DEX. (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#757) is not in mixedCase
+Parameter '_token' of DEX.recoverTokens (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#758) is not in mixedCase
+Parameter '_erc20' of DEX.registerReserve (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#763) is not in mixedCase
+Parameter '_reserve' of DEX.registerReserve (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#763) is not in mixedCase
+Parameter '_to' of DEX.trade (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#765) is not in mixedCase
+Parameter '_src' of DEX.trade (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#765) is not in mixedCase
+Parameter '_dst' of DEX.trade (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#765) is not in mixedCase
+Parameter '_sendAmount' of DEX.trade (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#765-766) is not in mixedCase
+Parameter '_src' of DEX.calculateReceiveAmount (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#802) is not in mixedCase
+Parameter '_dst' of DEX.calculateReceiveAmount (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#802) is not in mixedCase
+Parameter '_sendAmount' of DEX.calculateReceiveAmount (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#802-803) is not in mixedCase
+Variable 'DEX.BaseToken' (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#750-751) is not in mixedCase
+Parameter '_tokenAddress' of ShifterRegistry.setShifter (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#960) is not in mixedCase
+Parameter '_shifterAddress' of ShifterRegistry.setShifter (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#960) is not in mixedCase
+Parameter '_tokenAddress' of ShifterRegistry.updateShifter (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#989) is not in mixedCase
+Parameter '_newShifterAddress' of ShifterRegistry.updateShifter (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#989-990) is not in mixedCase
+Parameter '_symbol' of ShifterRegistry.removeShifter (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1010-1011) is not in mixedCase
+Parameter '_start' of ShifterRegistry.getShifters (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1036-1037) is not in mixedCase
+Parameter '_count' of ShifterRegistry.getShifters (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1037) is not in mixedCase
+Parameter '_start' of ShifterRegistry.getShiftedTokens (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1067) is not in mixedCase
+Parameter '_count' of ShifterRegistry.getShiftedTokens (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1067) is not in mixedCase
+Parameter '_tokenAddress' of ShifterRegistry.getShifterByToken (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1097) is not in mixedCase
+Parameter '_tokenSymbol' of ShifterRegistry.getShifterBySymbol (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1106-1107) is not in mixedCase
+Parameter '_tokenSymbol' of ShifterRegistry.getTokenBySymbol (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1112) is not in mixedCase
+Parameter '_dex' of DEXAdapter. (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1118) is not in mixedCase
+Parameter '_shifterRegistry' of DEXAdapter. (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1118) is not in mixedCase
+Parameter '_token' of DEXAdapter.recoverTokens (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1124) is not in mixedCase
+Parameter '_src' of DEXAdapter.trade (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1132) is not in mixedCase
+Parameter '_dst' of DEXAdapter.trade (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1132) is not in mixedCase
+Parameter '_minDstAmt' of DEXAdapter.trade (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1132) is not in mixedCase
+Parameter '_to' of DEXAdapter.trade (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1132) is not in mixedCase
+Parameter '_refundBN' of DEXAdapter.trade (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1132-1135) is not in mixedCase
+Parameter '_refundAddress' of DEXAdapter.trade (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1135-1136) is not in mixedCase
+Parameter '_amount' of DEXAdapter.trade (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1136) is not in mixedCase
+Parameter '_nHash' of DEXAdapter.trade (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1136) is not in mixedCase
+Parameter '_sig' of DEXAdapter.trade (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1136) is not in mixedCase
+Parameter '_src' of DEXAdapter.hashTradePayload (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1153) is not in mixedCase
+Parameter '_dst' of DEXAdapter.hashTradePayload (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1153) is not in mixedCase
+Parameter '_minDstAmt' of DEXAdapter.hashTradePayload (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1153-1154) is not in mixedCase
+Parameter '_to' of DEXAdapter.hashTradePayload (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1154) is not in mixedCase
+Parameter '_refundBN' of DEXAdapter.hashTradePayload (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1154) is not in mixedCase
+Parameter '_refundAddress' of DEXAdapter.hashTradePayload (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1154-1155) is not in mixedCase
+Parameter '_liquidityProvider' of DEXAdapter.hashLiquidityPayload (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1157) is not in mixedCase
+Parameter '_maxBaseToken' of DEXAdapter.hashLiquidityPayload (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1157) is not in mixedCase
+Parameter '_token' of DEXAdapter.hashLiquidityPayload (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1157) is not in mixedCase
+Parameter '_refundBN' of DEXAdapter.hashLiquidityPayload (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1157-1158) is not in mixedCase
+Parameter '_refundAddress' of DEXAdapter.hashLiquidityPayload (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1158) is not in mixedCase
+Parameter '_src' of DEXAdapter.encodePayload (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1161) is not in mixedCase
+Parameter '_dst' of DEXAdapter.encodePayload (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1161-1162) is not in mixedCase
+Parameter '_minDstAmt' of DEXAdapter.encodePayload (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1162) is not in mixedCase
+Parameter '_to' of DEXAdapter.encodePayload (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1162) is not in mixedCase
+Parameter '_refundBN' of DEXAdapter.encodePayload (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1162-1163) is not in mixedCase
+Parameter '_refundAddress' of DEXAdapter.encodePayload (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1163) is not in mixedCase
+Parameter '_liquidityProvider' of DEXAdapter.addLiquidity (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1165) is not in mixedCase
+Parameter '_maxBaseToken' of DEXAdapter.addLiquidity (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1165) is not in mixedCase
+Parameter '_token' of DEXAdapter.addLiquidity (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1165-1168) is not in mixedCase
+Parameter '_deadline' of DEXAdapter.addLiquidity (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1168) is not in mixedCase
+Parameter '_refundAddress' of DEXAdapter.addLiquidity (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1168) is not in mixedCase
+Parameter '_amount' of DEXAdapter.addLiquidity (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1168) is not in mixedCase
+Parameter '_nHash' of DEXAdapter.addLiquidity (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1168) is not in mixedCase
+Parameter '_sig' of DEXAdapter.addLiquidity (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1168-1169) is not in mixedCase
+Parameter '_token' of DEXAdapter.removeLiquidity (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1195) is not in mixedCase
+Parameter '_liquidity' of DEXAdapter.removeLiquidity (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1195-1196) is not in mixedCase
+Parameter '_tokenAddress' of DEXAdapter.removeLiquidity (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1197) is not in mixedCase
+Function 'DEXAdapter._doTrade' (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1210-1232) is not in mixedCase
+Parameter '_src' of DEXAdapter._doTrade (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1210) is not in mixedCase
+Parameter '_dst' of DEXAdapter._doTrade (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1210-1211) is not in mixedCase
+Parameter '_minDstAmt' of DEXAdapter._doTrade (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1211) is not in mixedCase
+Parameter '_to' of DEXAdapter._doTrade (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1211-1212) is not in mixedCase
+Parameter '_amount' of DEXAdapter._doTrade (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol#1212) is not in mixedCase
+Function 'DEXAdapter._transferIn' (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol) is not in mixedCase
+Parameter '_src' of DEXAdapter._transferIn (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol) is not in mixedCase
+Parameter '_amount' of DEXAdapter._transferIn (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol) is not in mixedCase
+Parameter '_nHash' of DEXAdapter._transferIn (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol) is not in mixedCase
+Parameter '_pHash' of DEXAdapter._transferIn (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol) is not in mixedCase
+Parameter '_sig' of DEXAdapter._transferIn (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol) is not in mixedCase
+Function 'DEXAdapter._bytesToAddress' (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol) is not in mixedCase
+Parameter '_src' of DEXAdapter.calculateReceiveAmount (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol) is not in mixedCase
+Parameter '_dst' of DEXAdapter.calculateReceiveAmount (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol) is not in mixedCase
+Parameter '_sendAmount' of DEXAdapter.calculateReceiveAmount (/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xaf0efc4e638a43a27a21d218d07c7499f85f8042.sol analyzed (20 contracts), 206 result(s) found

@@ -1,0 +1,61 @@
+INFO:Detectors:[93m
+GemstoneMine.unStakeGemLP (/sb/0x6ef27ae66bb3de4d5fcbb3c4b275ddbe8c7eb314.sol#403-410) does not use the value returned by external calls:
+	-gemTokenLP.transfer(msg.sender,amount) (/sb/0x6ef27ae66bb3de4d5fcbb3c4b275ddbe8c7eb314.sol#410)
+GemstoneMine.unStakeSecondTokenLP (/sb/0x6ef27ae66bb3de4d5fcbb3c4b275ddbe8c7eb314.sol#410-414) does not use the value returned by external calls:
+	-secondTokenLP.transfer(msg.sender,amount) (/sb/0x6ef27ae66bb3de4d5fcbb3c4b275ddbe8c7eb314.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in GemstoneMine.stakeGemLP (/sb/0x6ef27ae66bb3de4d5fcbb3c4b275ddbe8c7eb314.sol#389-395):
+	External calls:
+	- require(bool,string)(gemTokenLP.transferFrom(msg.sender,address(this),amount),can't stake) (/sb/0x6ef27ae66bb3de4d5fcbb3c4b275ddbe8c7eb314.sol#392-393)
+	State variables written after the call(s):
+	- _stakedTokens (/sb/0x6ef27ae66bb3de4d5fcbb3c4b275ddbe8c7eb314.sol#394-395)
+	- totalAmountGemLPStaked (/sb/0x6ef27ae66bb3de4d5fcbb3c4b275ddbe8c7eb314.sol#393-394)
+Reentrancy in GemstoneMine.stakeSecondTokenLP (/sb/0x6ef27ae66bb3de4d5fcbb3c4b275ddbe8c7eb314.sol#395-403):
+	External calls:
+	- require(bool,string)(secondTokenLP.transferFrom(msg.sender,address(this),amount),can't stake) (/sb/0x6ef27ae66bb3de4d5fcbb3c4b275ddbe8c7eb314.sol#399-400)
+	State variables written after the call(s):
+	- _stakedTokens (/sb/0x6ef27ae66bb3de4d5fcbb3c4b275ddbe8c7eb314.sol#401-402)
+	- totalAmountSecondaryLPStaked (/sb/0x6ef27ae66bb3de4d5fcbb3c4b275ddbe8c7eb314.sol#400)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Ownable.owner (/sb/0x6ef27ae66bb3de4d5fcbb3c4b275ddbe8c7eb314.sol#51-55) should be declared external
+Ownable.renounceOwnership (/sb/0x6ef27ae66bb3de4d5fcbb3c4b275ddbe8c7eb314.sol#77-82) should be declared external
+Ownable.transferOwnership (/sb/0x6ef27ae66bb3de4d5fcbb3c4b275ddbe8c7eb314.sol#86-90) should be declared external
+GemstoneMine.getStakedGemLPBalanceFrom (/sb/0x6ef27ae66bb3de4d5fcbb3c4b275ddbe8c7eb314.sol#306-310) should be declared external
+GemstoneMine.getStakedSecondaryLPBalanceFrom (/sb/0x6ef27ae66bb3de4d5fcbb3c4b275ddbe8c7eb314.sol#310-319) should be declared external
+GemstoneMine.getLastBlockFrom (/sb/0x6ef27ae66bb3de4d5fcbb3c4b275ddbe8c7eb314.sol#319-320) should be declared external
+GemstoneMine.getLastPoints (/sb/0x6ef27ae66bb3de4d5fcbb3c4b275ddbe8c7eb314.sol#320-323) should be declared external
+GemstoneMine.setSecondTokenAddress (/sb/0x6ef27ae66bb3de4d5fcbb3c4b275ddbe8c7eb314.sol#369-380) should be declared external
+GemstoneMine.setSecondTokenDifficulty (/sb/0x6ef27ae66bb3de4d5fcbb3c4b275ddbe8c7eb314.sol#385-387) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x6ef27ae66bb3de4d5fcbb3c4b275ddbe8c7eb314.sol:
+	- pragma solidity>=0.5.0<0.6.0 (/sb/0x6ef27ae66bb3de4d5fcbb3c4b275ddbe8c7eb314.sol#5-8): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'Context._msgSender' (/sb/0x6ef27ae66bb3de4d5fcbb3c4b275ddbe8c7eb314.sol#14-18) is not in mixedCase
+Function 'Context._msgData' (/sb/0x6ef27ae66bb3de4d5fcbb3c4b275ddbe8c7eb314.sol#18-25) is not in mixedCase
+Function 'Ownable._transferOwnership' (/sb/0x6ef27ae66bb3de4d5fcbb3c4b275ddbe8c7eb314.sol#93-102) is not in mixedCase
+Struct 'GemstoneMine.stakeTracker' (/sb/0x6ef27ae66bb3de4d5fcbb3c4b275ddbe8c7eb314.sol#287-289) is not in CapWords
+Event 'GemstoneMine.staked' (/sb/0x6ef27ae66bb3de4d5fcbb3c4b275ddbe8c7eb314.sol#281-284) is not in CapWords
+Event 'GemstoneMine.unstaked' (/sb/0x6ef27ae66bb3de4d5fcbb3c4b275ddbe8c7eb314.sol#284-287) is not in CapWords
+Parameter '_address' of GemstoneMine.getStakedGemLPBalanceFrom (/sb/0x6ef27ae66bb3de4d5fcbb3c4b275ddbe8c7eb314.sol#308-309) is not in mixedCase
+Parameter '_address' of GemstoneMine.getStakedSecondaryLPBalanceFrom (/sb/0x6ef27ae66bb3de4d5fcbb3c4b275ddbe8c7eb314.sol#313) is not in mixedCase
+Parameter '_address' of GemstoneMine.getLastBlockFrom (/sb/0x6ef27ae66bb3de4d5fcbb3c4b275ddbe8c7eb314.sol#319) is not in mixedCase
+Parameter '_address' of GemstoneMine.getLastPoints (/sb/0x6ef27ae66bb3de4d5fcbb3c4b275ddbe8c7eb314.sol#322) is not in mixedCase
+Function 'GemstoneMine._getLPAddress' (/sb/0x6ef27ae66bb3de4d5fcbb3c4b275ddbe8c7eb314.sol#329-333) is not in mixedCase
+Function 'GemstoneMine._resetPoints' (/sb/0x6ef27ae66bb3de4d5fcbb3c4b275ddbe8c7eb314.sol#337-339) is not in mixedCase
+Parameter '_address' of GemstoneMine._resetPoints (/sb/0x6ef27ae66bb3de4d5fcbb3c4b275ddbe8c7eb314.sol#338) is not in mixedCase
+Function 'GemstoneMine._updatePoints' (/sb/0x6ef27ae66bb3de4d5fcbb3c4b275ddbe8c7eb314.sol#342-345) is not in mixedCase
+Function 'GemstoneMine._getGemLPDifficulty' (/sb/0x6ef27ae66bb3de4d5fcbb3c4b275ddbe8c7eb314.sol#354-356) is not in mixedCase
+Function 'GemstoneMine._getSecondTokenLPDifficulty' (/sb/0x6ef27ae66bb3de4d5fcbb3c4b275ddbe8c7eb314.sol#357-362) is not in mixedCase
+Parameter '_address' of GemstoneMine.setGemAddress (/sb/0x6ef27ae66bb3de4d5fcbb3c4b275ddbe8c7eb314.sol#363) is not in mixedCase
+Parameter '_address' of GemstoneMine.setSecondTokenAddress (/sb/0x6ef27ae66bb3de4d5fcbb3c4b275ddbe8c7eb314.sol#370) is not in mixedCase
+Parameter '_difficulty' of GemstoneMine.setGemDifficulty (/sb/0x6ef27ae66bb3de4d5fcbb3c4b275ddbe8c7eb314.sol#381-382) is not in mixedCase
+Parameter '_scale' of GemstoneMine.setGemDifficulty (/sb/0x6ef27ae66bb3de4d5fcbb3c4b275ddbe8c7eb314.sol#382) is not in mixedCase
+Parameter '_difficulty' of GemstoneMine.setSecondTokenDifficulty (/sb/0x6ef27ae66bb3de4d5fcbb3c4b275ddbe8c7eb314.sol#386) is not in mixedCase
+Parameter '_scale' of GemstoneMine.setSecondTokenDifficulty (/sb/0x6ef27ae66bb3de4d5fcbb3c4b275ddbe8c7eb314.sol#386) is not in mixedCase
+Constant 'GemstoneMine.uniswapV2Factory' (/sb/0x6ef27ae66bb3de4d5fcbb3c4b275ddbe8c7eb314.sol#324-328) is not in UPPER_CASE_WITH_UNDERSCORES
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x6ef27ae66bb3de4d5fcbb3c4b275ddbe8c7eb314.sol analyzed (6 contracts), 37 result(s) found

@@ -1,0 +1,148 @@
+INFO:Detectors:[93m
+Contract locking ether found in /sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol:
+	Contract IBancorConverterExtended has payable functions:
+	 - quickConvert2 (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#49-50)
+	 - quickConvert (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#59-60)
+	But does not have a function to withdraw the ether
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#contracts-that-lock-ether[0m
+INFO:Detectors:[93m
+Reentrancy in ContractRegistryClient.updateRegistry (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#291-315):
+	External calls:
+	- newRegistry = addressOf(CONTRACT_REGISTRY) (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#294-295)
+	- require(bool)(IContractRegistry(newRegistry).addressOf(CONTRACT_REGISTRY) != address(0)) (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#301-305)
+	State variables written after the call(s):
+	- registry (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#313-314)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+BancorConverterUpgrader.copyConnectors has external calls inside a loop:
+	- connectorAddress = _oldConverter.connectorTokens(i) (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#568-570)
+BancorConverterUpgrader.copyConnectors has external calls inside a loop:
+	- (virtualBalance,weight,isVirtualBalanceEnabled,None,None) = _oldConverter.connectors(connectorAddress) (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#570-572)
+BancorConverterUpgrader.copyConnectors has external calls inside a loop:
+	- _newConverter.addConnector(connectorToken,weight,isVirtualBalanceEnabled) (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#573-574)
+BancorConverterUpgrader.copyConnectors has external calls inside a loop:
+	- _newConverter.updateConnector(connectorToken,weight,isVirtualBalanceEnabled,virtualBalance) (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#575-579)
+BancorConverterUpgrader.transferConnectorsBalances has external calls inside a loop:
+	- connectorAddress = _oldConverter.connectorTokens(i) (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol)
+BancorConverterUpgrader.transferConnectorsBalances has external calls inside a loop:
+	- connectorBalance = connector.balanceOf(_oldConverter) (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol)
+BancorConverterUpgrader.transferConnectorsBalances has external calls inside a loop:
+	- _oldConverter.withdrawTokens(connector,address(_newConverter),connectorBalance) (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in ContractRegistryClient.updateRegistry (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#291-315):
+	External calls:
+	- newRegistry = addressOf(CONTRACT_REGISTRY) (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#294-295)
+	- require(bool)(IContractRegistry(newRegistry).addressOf(CONTRACT_REGISTRY) != address(0)) (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#301-305)
+	State variables written after the call(s):
+	- prevRegistry (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#308)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+BancorConverterUpgrader.version should be constant (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#420)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+IERC20Token.name (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#14-15) should be declared external
+IERC20Token.symbol (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#15-16) should be declared external
+IERC20Token.decimals (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#16-17) should be declared external
+IERC20Token.totalSupply (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#17-18) should be declared external
+IERC20Token.balanceOf (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#18-19) should be declared external
+IERC20Token.allowance (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#19-21) should be declared external
+IERC20Token.transfer (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#21-22) should be declared external
+IERC20Token.transferFrom (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#22-23) should be declared external
+IERC20Token.approve (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#23-26) should be declared external
+IWhitelist.isWhitelisted (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#34-37) should be declared external
+IBancorConverter.getReturn (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#47-48) should be declared external
+IBancorConverter.convert2 (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#48-49) should be declared external
+IBancorConverter.quickConvert2 (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#49-50) should be declared external
+IBancorConverter.conversionWhitelist (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#50-51) should be declared external
+IBancorConverter.conversionFee (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#51-52) should be declared external
+IBancorConverterExtended.conversionFee (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#381-382) should be declared external
+IBancorConverter.reserves (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#52-53) should be declared external
+IBancorConverter.getReserveBalance (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#53-54) should be declared external
+IBancorConverter.reserveTokens (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#54-57) should be declared external
+IBancorConverterExtended.reserveTokens (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#386-387) should be declared external
+IBancorConverter.change (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#57-58) should be declared external
+IBancorConverter.convert (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#58-59) should be declared external
+IBancorConverter.quickConvert (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#59-60) should be declared external
+IBancorConverter.connectors (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#60-61) should be declared external
+IBancorConverter.getConnectorBalance (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#61-62) should be declared external
+IBancorConverterExtended.connectorTokens (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#384-386) should be declared external
+IBancorConverter.connectorTokens (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#62-63) should be declared external
+IBancorConverter.connectorTokenCount (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#64-66) should be declared external
+IBancorConverterExtended.connectorTokenCount (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#382-383) should be declared external
+IBancorConverterUpgrader.upgrade (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#76-79) should be declared external
+BancorConverterUpgrader.upgrade (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#451-455) should be declared external
+BancorConverterUpgrader.upgrade (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#465-468) should be declared external
+IBancorConverterUpgrader.upgrade (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#79-81) should be declared external
+IOwned.owner (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#90-91) should be declared external
+Owned.transferOwnership (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#190-194) should be declared external
+IOwned.transferOwnership (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#91-94) should be declared external
+IOwned.acceptOwnership (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#95-101) should be declared external
+Owned.acceptOwnership (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#200-212) should be declared external
+ISmartToken.disableTransfers (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#105-106) should be declared external
+ISmartToken.issue (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#106-109) should be declared external
+ISmartToken.destroy (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#109-114) should be declared external
+IContractRegistry.addressOf (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#120) should be declared external
+IContractRegistry.getAddress (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#123-131) should be declared external
+IBancorConverterFactory.createConverter (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#138-152) should be declared external
+ContractRegistryClient.updateRegistry (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#291-315) should be declared external
+ContractRegistryClient.restoreRegistry (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#315-318) should be declared external
+ContractRegistryClient.restrictRegistryUpdate (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#325-331) should be declared external
+IContractFeatures.isSupported (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#353-356) should be declared external
+IContractFeatures.enableFeatures (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#356-357) should be declared external
+IBancorConverterExtended.token (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#380-381) should be declared external
+IBancorConverterExtended.maxConversionFee (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#381) should be declared external
+IBancorConverterExtended.reserveTokenCount (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#384) should be declared external
+IBancorConverterExtended.setConversionWhitelist (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#387-388) should be declared external
+IBancorConverterExtended.transferTokenOwnership (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#388) should be declared external
+IBancorConverterExtended.withdrawTokens (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#388-393) should be declared external
+IBancorConverterExtended.acceptTokenOwnership (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#394) should be declared external
+IBancorConverterExtended.setConversionFee (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#394) should be declared external
+IBancorConverterExtended.addConnector (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#395-396) should be declared external
+IBancorConverterExtended.updateConnector (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#397-398) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol:
+	- pragma solidity0.4.26 (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#7-10): it allows old versions
+	- pragma solidity0.4.26 (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#30-31): it allows old versions
+	- pragma solidity0.4.26 (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#44-45): it allows old versions
+	- pragma solidity0.4.26 (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#72-74): it allows old versions
+	- pragma solidity0.4.26 (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#87): it allows old versions
+	- pragma solidity0.4.26 (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#103-104): it allows old versions
+	- pragma solidity0.4.26 (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#117): it allows old versions
+	- pragma solidity0.4.26 (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#134-135): it allows old versions
+	- pragma solidity0.4.26 (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#153-154): it allows old versions
+	- pragma solidity0.4.26 (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#214-215): it allows old versions
+	- pragma solidity0.4.26 (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#246): it allows old versions
+	- pragma solidity0.4.26 (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#351): it allows old versions
+	- pragma solidity0.4.26 (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#360): it allows old versions
+	- pragma solidity0.4.26 (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#378): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_newOwner' of Owned.transferOwnership (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#190-192) is not in mixedCase
+Parameter '_registry' of ContractRegistryClient. (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#284-285) is not in mixedCase
+Parameter '_onlyOwnerCanUpdateRegistry' of ContractRegistryClient.restrictRegistryUpdate (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#325-327) is not in mixedCase
+Parameter '_contractName' of ContractRegistryClient.addressOf (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#342) is not in mixedCase
+Parameter '_version' of BancorConverterUpgrader.upgrade (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#451-453) is not in mixedCase
+Parameter '_version' of BancorConverterUpgrader.upgrade (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#465) is not in mixedCase
+Parameter '_converter' of BancorConverterUpgrader.upgradeOld (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#476) is not in mixedCase
+Parameter '_oldConverter' of BancorConverterUpgrader.acceptConverterOwnership (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#511) is not in mixedCase
+Parameter '_oldConverter' of BancorConverterUpgrader.createConverter (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#521-523) is not in mixedCase
+Parameter '_oldConverter' of BancorConverterUpgrader.copyConnectors (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#559) is not in mixedCase
+Parameter '_newConverter' of BancorConverterUpgrader.copyConnectors (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#559-560) is not in mixedCase
+Parameter '_oldConverter' of BancorConverterUpgrader.copyConversionFee (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#583-584) is not in mixedCase
+Parameter '_newConverter' of BancorConverterUpgrader.copyConversionFee (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#584) is not in mixedCase
+Parameter '_oldConverter' of BancorConverterUpgrader.transferConnectorsBalances (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#598-599) is not in mixedCase
+Parameter '_newConverter' of BancorConverterUpgrader.transferConnectorsBalances (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+ContractRegistryClient.BANCOR_NETWORK (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#250-251) is never used in BancorConverterUpgrader
+ContractRegistryClient.BANCOR_FORMULA (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#251) is never used in BancorConverterUpgrader
+ContractRegistryClient.BANCOR_CONVERTER_UPGRADER (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#252-254) is never used in BancorConverterUpgrader
+ContractRegistryClient.BANCOR_CONVERTER_REGISTRY (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#254-255) is never used in BancorConverterUpgrader
+ContractRegistryClient.BANCOR_CONVERTER_REGISTRY_DATA (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#255-257) is never used in BancorConverterUpgrader
+ContractRegistryClient.BNT_TOKEN (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#257-258) is never used in BancorConverterUpgrader
+ContractRegistryClient.BANCOR_X (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#258-259) is never used in BancorConverterUpgrader
+ContractRegistryClient.BANCOR_X_UPGRADER (/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol#259) is never used in BancorConverterUpgrader
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0xc724bc5f3dd616c8fadb75a23c00c13880a6268f.sol analyzed (15 contracts), 87 result(s) found

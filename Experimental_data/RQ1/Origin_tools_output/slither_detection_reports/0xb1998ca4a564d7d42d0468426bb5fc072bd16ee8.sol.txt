@@ -1,0 +1,227 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol:
+/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol:451:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function VeiagToken (address _ico) public {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol:639:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function LockedOutTokens(
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol:779:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function VeiagTokenVesting(
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol:814:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function Whitelistable() public {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol:892:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function VeiagCrowdsale(
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol:458:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Transfer(address(0), _ico, INITIAL_TOTAL_SUPPLY);
+        ^----------------------------------------------^
+
+INFO:Detectors:[93m
+Reentrancy in VeiagCrowdsale.manualSendTokens (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#1090-1103):
+	External calls:
+	- token.transferFromIco(_address,_tokensAmount) (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#1095)
+	State variables written after the call(s):
+	- tokensRemainingPreIco (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#1096)
+Reentrancy in VeiagCrowdsale.manualSendTokens (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#1090-1103):
+	External calls:
+	- token.transferFromIco(_address,_tokensAmount) (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#1098)
+	State variables written after the call(s):
+	- tokensRemainingIco (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#1099)
+Reentrancy in TokenVesting.release (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#717-727):
+	External calls:
+	- unreleased = releasableAmount(_token) (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#718)
+	State variables written after the call(s):
+	- released (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#722)
+Reentrancy in TokenVesting.revoke (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#734-748):
+	External calls:
+	- balance = _token.balanceOf(address(this)) (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#738)
+	- unreleased = releasableAmount(_token) (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#740)
+	State variables written after the call(s):
+	- revoked (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#743)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+TokenTimelock.release (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#568-576) does not use the value returned by external calls:
+	-token.transfer(beneficiary,amount) (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#575)
+TokenVesting.release (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#717-727) does not use the value returned by external calls:
+	-_token.transfer(beneficiary,unreleased) (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#724)
+TokenVesting.revoke (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#734-748) does not use the value returned by external calls:
+	-_token.transfer(owner,refund) (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#745)
+VeiagCrowdsale.VeiagCrowdsale (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#892-925) does not use the value returned by external calls:
+	-token.transferFromIco(lockedTokens,RESERVED_LOCKED_TOKENS) (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#916)
+	-token.transferFromIco(teamsTokenVesting,RESERVED_TEAMS_TOKENS) (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#917)
+	-token.transferFromIco(foundersTokenVesting,RESERVED_FOUNDERS_TOKENS) (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#918)
+	-token.transferFromIco(_marketingWallet,RESERVED_MARKETING_TOKENS) (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#919)
+VeiagCrowdsale.sellTokensPreIco (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#1022-1050) does not use the value returned by external calls:
+	-token.transferFromIco(msg.sender,tokensAmount) (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#1045)
+VeiagCrowdsale.sellTokensIco (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#1055-1083) does not use the value returned by external calls:
+	-token.transferFromIco(msg.sender,tokensAmount) (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#1078)
+VeiagCrowdsale.manualSendTokens (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#1090-1103) does not use the value returned by external calls:
+	-token.transferFromIco(_address,_tokensAmount) (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#1095)
+	-token.transferFromIco(_address,_tokensAmount) (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#1098)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in VeiagCrowdsale.manualSendTokens (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#1090-1103):
+	External calls:
+	- token.transferFromIco(_address,_tokensAmount) (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#1095)
+	State variables written after the call(s):
+	- tokensSoldPreIco (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#1096)
+	- tokensSoldTotal (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#1096)
+	- totalInvestedAmount (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#1096)
+	- weiRaisedPreIco (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#1096)
+	- weiRaisedTotal (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#1096)
+Reentrancy in VeiagCrowdsale.manualSendTokens (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#1090-1103):
+	External calls:
+	- token.transferFromIco(_address,_tokensAmount) (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#1098)
+	State variables written after the call(s):
+	- tokensSoldIco (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#1099)
+	- tokensSoldTotal (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#1099)
+	- totalInvestedAmount (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#1099)
+	- weiRaisedIco (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#1099)
+	- weiRaisedTotal (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#1099)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+TokenTimelock.constructor (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#551-563) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool)(_releaseTime > block.timestamp) (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#559)
+TokenTimelock.release (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#568-576) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool)(block.timestamp >= releaseTime) (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#570)
+TokenVesting.vestedAmount (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#762-773) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp < cliff (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#766-772)
+	- block.timestamp >= start.add(duration) || revoked[_token] (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#768-772)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+Ownable.renounceOwnership (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#105-108) should be declared external
+Ownable.transferOwnership (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#114-116) should be declared external
+Whitelist.setApiAddress (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#152-155) should be declared external
+Whitelist.addWallet (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#162-167) should be declared external
+Whitelist.removeWallet (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#174-179) should be declared external
+Pausable.unpause (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#229-232) should be declared external
+ERC20Basic.totalSupply (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#241) should be declared external
+BasicToken.totalSupply (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#261-263) should be declared external
+BasicToken.balanceOf (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#285-287) should be declared external
+ERC20Basic.balanceOf (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#242) should be declared external
+StandardToken.allowance (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#372-381) should be declared external
+ERC20.allowance (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#298-299) should be declared external
+ERC20.approve (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#304) should be declared external
+StandardToken.approve (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#360-364) should be declared external
+StandardToken.increaseApproval (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#392-403) should be declared external
+StandardToken.decreaseApproval (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#414-429) should be declared external
+VeiagToken.transferFromIco (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#489-491) should be declared external
+MintableToken.mint (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#609-623) should be declared external
+MintableToken.finishMinting (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#629-633) should be declared external
+TokenVesting.setStart (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#710-712) should be declared external
+TokenVesting.revoke (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#734-748) should be declared external
+VeiagTokenVesting.grant (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#793-795) should be declared external
+VeiagCrowdsale.SetStartVesting (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#926-933) should be declared external
+VeiagCrowdsale.SetStartTimeIco (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#935-950) should be declared external
+VeiagCrowdsale.fallback (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#957-965) should be declared external
+VeiagCrowdsale.setExchangeRatePreIco (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#999-1001) should be declared external
+VeiagCrowdsale.setIcoFirstWeekRate (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#1003-1005) should be declared external
+VeiagCrowdsale.setIcoSecondWeekRate (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#1007-1009) should be declared external
+VeiagCrowdsale.setIcoThirdWeekRate (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#1011-1013) should be declared external
+VeiagCrowdsale.setIcoRate (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#1015-1017) should be declared external
+VeiagCrowdsale.manualSendTokens (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#1090-1103) should be declared external
+Factory.createCrowdsale (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#1140-1168) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_newOwner' of Ownable.transferOwnership (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#114) is not in mixedCase
+Function 'Ownable._transferOwnership' (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#122-126) is not in mixedCase
+Parameter '_newOwner' of Ownable._transferOwnership (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#122) is not in mixedCase
+Parameter '_api' of Whitelist.setApiAddress (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#152) is not in mixedCase
+Parameter '_wallet' of Whitelist.addWallet (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#162) is not in mixedCase
+Parameter '_wallet' of Whitelist.removeWallet (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#174) is not in mixedCase
+Parameter '_wallet' of Whitelist.isWhitelisted (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#185) is not in mixedCase
+Parameter '_owner' of BasicToken.balanceOf (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#285) is not in mixedCase
+Parameter '_to' of BasicToken.transfer (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#270) is not in mixedCase
+Parameter '_value' of BasicToken.transfer (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#270) is not in mixedCase
+Parameter '_owner' of StandardToken.allowance (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#373) is not in mixedCase
+Parameter '_spender' of StandardToken.allowance (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#374) is not in mixedCase
+Parameter '_from' of StandardToken.transferFrom (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#333) is not in mixedCase
+Parameter '_to' of StandardToken.transferFrom (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#334) is not in mixedCase
+Parameter '_value' of StandardToken.transferFrom (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#335) is not in mixedCase
+Parameter '_spender' of StandardToken.approve (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#360) is not in mixedCase
+Parameter '_value' of StandardToken.approve (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#360) is not in mixedCase
+Parameter '_spender' of StandardToken.increaseApproval (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#393) is not in mixedCase
+Parameter '_addedValue' of StandardToken.increaseApproval (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#394) is not in mixedCase
+Parameter '_spender' of StandardToken.decreaseApproval (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#415) is not in mixedCase
+Parameter '_subtractedValue' of StandardToken.decreaseApproval (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#416) is not in mixedCase
+Parameter '_to' of VeiagToken.transfer (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#469) is not in mixedCase
+Parameter '_value' of VeiagToken.transfer (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#469) is not in mixedCase
+Parameter '_from' of VeiagToken.transferFrom (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#480) is not in mixedCase
+Parameter '_to' of VeiagToken.transferFrom (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#480) is not in mixedCase
+Parameter '_value' of VeiagToken.transferFrom (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#480) is not in mixedCase
+Function 'VeiagToken.VeiagToken' (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#451-461) is not in mixedCase
+Parameter '_ico' of VeiagToken.VeiagToken (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#451) is not in mixedCase
+Parameter '_to' of VeiagToken.transferFromIco (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#489) is not in mixedCase
+Parameter '_value' of VeiagToken.transferFromIco (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#489) is not in mixedCase
+Parameter '_token' of SafeERC20.safeTransfer (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#502) is not in mixedCase
+Parameter '_to' of SafeERC20.safeTransfer (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#503) is not in mixedCase
+Parameter '_value' of SafeERC20.safeTransfer (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#504) is not in mixedCase
+Parameter '_token' of SafeERC20.safeTransferFrom (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#512) is not in mixedCase
+Parameter '_from' of SafeERC20.safeTransferFrom (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#513) is not in mixedCase
+Parameter '_to' of SafeERC20.safeTransferFrom (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#514) is not in mixedCase
+Parameter '_value' of SafeERC20.safeTransferFrom (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#515) is not in mixedCase
+Parameter '_token' of SafeERC20.safeApprove (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#523) is not in mixedCase
+Parameter '_spender' of SafeERC20.safeApprove (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#524) is not in mixedCase
+Parameter '_value' of SafeERC20.safeApprove (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#525) is not in mixedCase
+Parameter '_token' of TokenTimelock. (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#552) is not in mixedCase
+Parameter '_beneficiary' of TokenTimelock. (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#553) is not in mixedCase
+Parameter '_releaseTime' of TokenTimelock. (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#554) is not in mixedCase
+Parameter '_to' of MintableToken.mint (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#610) is not in mixedCase
+Parameter '_amount' of MintableToken.mint (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#611) is not in mixedCase
+Function 'LockedOutTokens.LockedOutTokens' (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#639-645) is not in mixedCase
+Parameter '_beneficiary' of TokenVesting. (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#692) is not in mixedCase
+Parameter '_start' of TokenVesting. (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#693) is not in mixedCase
+Parameter '_cliff' of TokenVesting. (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#694) is not in mixedCase
+Parameter '_duration' of TokenVesting. (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#695) is not in mixedCase
+Parameter '_revocable' of TokenVesting. (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#696) is not in mixedCase
+Parameter '_start' of TokenVesting.setStart (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#710) is not in mixedCase
+Parameter '_token' of TokenVesting.release (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#717) is not in mixedCase
+Parameter '_token' of TokenVesting.revoke (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#734) is not in mixedCase
+Parameter '_token' of TokenVesting.releasableAmount (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#754) is not in mixedCase
+Parameter '_token' of TokenVesting.vestedAmount (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#762) is not in mixedCase
+Parameter '_token' of VeiagTokenVesting.release (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#797) is not in mixedCase
+Function 'VeiagTokenVesting.VeiagTokenVesting' (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#779-791) is not in mixedCase
+Parameter '_token' of VeiagTokenVesting.VeiagTokenVesting (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#780) is not in mixedCase
+Function 'Whitelistable.Whitelistable' (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#814-816) is not in mixedCase
+Function 'VeiagCrowdsale.VeiagCrowdsale' (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#892-925) is not in mixedCase
+Parameter '_startTimePreIco' of VeiagCrowdsale.VeiagCrowdsale (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#893) is not in mixedCase
+Parameter '_endTimePreIco' of VeiagCrowdsale.VeiagCrowdsale (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#894) is not in mixedCase
+Parameter '_startTimeIco' of VeiagCrowdsale.VeiagCrowdsale (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#895) is not in mixedCase
+Parameter '_endTimeIco' of VeiagCrowdsale.VeiagCrowdsale (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#896) is not in mixedCase
+Parameter '_lockedWallet' of VeiagCrowdsale.VeiagCrowdsale (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#897) is not in mixedCase
+Parameter '_teamsWallet' of VeiagCrowdsale.VeiagCrowdsale (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#898) is not in mixedCase
+Parameter '_foundersWallet' of VeiagCrowdsale.VeiagCrowdsale (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#899) is not in mixedCase
+Parameter '_marketingWallet' of VeiagCrowdsale.VeiagCrowdsale (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#900) is not in mixedCase
+Function 'VeiagCrowdsale.SetStartVesting' (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#926-933) is not in mixedCase
+Parameter '_startTimeVestingForFounders' of VeiagCrowdsale.SetStartVesting (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#926) is not in mixedCase
+Function 'VeiagCrowdsale.SetStartTimeIco' (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#935-950) is not in mixedCase
+Parameter '_startTimeIco' of VeiagCrowdsale.SetStartTimeIco (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#935) is not in mixedCase
+Parameter '_exchangeRatePreIco' of VeiagCrowdsale.setExchangeRatePreIco (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#999) is not in mixedCase
+Parameter '_icoFirstWeekRate' of VeiagCrowdsale.setIcoFirstWeekRate (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#1003) is not in mixedCase
+Parameter '_icoSecondWeekRate' of VeiagCrowdsale.setIcoSecondWeekRate (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#1007) is not in mixedCase
+Parameter '_icoThirdWeekRate' of VeiagCrowdsale.setIcoThirdWeekRate (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#1011) is not in mixedCase
+Parameter '_icoRate' of VeiagCrowdsale.setIcoRate (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#1015) is not in mixedCase
+Parameter '_address' of VeiagCrowdsale.manualSendTokens (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#1090) is not in mixedCase
+Parameter '_tokensAmount' of VeiagCrowdsale.manualSendTokens (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#1090) is not in mixedCase
+Parameter '_weiAmount' of VeiagCrowdsale.addPreIcoPurchaseInfo (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#1110) is not in mixedCase
+Parameter '_tokensAmount' of VeiagCrowdsale.addPreIcoPurchaseInfo (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#1110) is not in mixedCase
+Parameter '_weiAmount' of VeiagCrowdsale.addIcoPurchaseInfo (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#1126) is not in mixedCase
+Parameter '_tokensAmount' of VeiagCrowdsale.addIcoPurchaseInfo (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#1126) is not in mixedCase
+Parameter '_startTimePreIco' of Factory.createCrowdsale (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#1141) is not in mixedCase
+Parameter '_endTimePreIco' of Factory.createCrowdsale (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#1142) is not in mixedCase
+Parameter '_startTimeIco' of Factory.createCrowdsale (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#1143) is not in mixedCase
+Parameter '_endTimeIco' of Factory.createCrowdsale (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#1144) is not in mixedCase
+Parameter '_lockedWallet' of Factory.createCrowdsale (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#1145) is not in mixedCase
+Parameter '_teamsWallet' of Factory.createCrowdsale (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#1146) is not in mixedCase
+Parameter '_foundersWallet' of Factory.createCrowdsale (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#1147) is not in mixedCase
+Parameter '_marketingWallet' of Factory.createCrowdsale (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#1148) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+VeiagCrowdsale.DECIMALS (/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol#822) is never used in VeiagCrowdsale
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0xb1998ca4a564d7d42d0468426bb5fc072bd16ee8.sol analyzed (18 contracts), 141 result(s) found

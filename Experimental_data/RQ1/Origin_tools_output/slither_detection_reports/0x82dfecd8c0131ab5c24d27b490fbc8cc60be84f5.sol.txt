@@ -1,0 +1,190 @@
+INFO:Detectors:[91m
+Reentrancy in DIDToken.exchangeDIDForEther (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#235-299):
+	External calls:
+	- DIDPerEther = distense.getParameterValueByTitle(distense.didPerEtherParameterTitle()) (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#253-255)
+	External calls sending eth:
+	- msg.sender.transfer(numWeiToIssue) (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#283-289)
+	State variables written after the call(s):
+	- DIDHolders (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#291)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities[0m
+INFO:Detectors:[93m
+Reentrancy in Tasks.addTask (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1185-1239):
+	External calls:
+	- tasks[_taskId].reward = distense.getParameterValueByTitle(distense.defaultRewardParameterTitle()) (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1217-1223)
+	State variables written after the call(s):
+	- tasks (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1223-1225)
+	- tasks (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1233-1237)
+	- tasksTitles (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1229-1233)
+Reentrancy in DIDToken.exchangeDIDForEther (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#235-299):
+	External calls:
+	- DIDPerEther = distense.getParameterValueByTitle(distense.didPerEtherParameterTitle()) (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#253-255)
+	State variables written after the call(s):
+	- DIDHolders (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#265-273)
+	- DIDHolders (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#273-279)
+Reentrancy in DIDToken.investEtherForDID (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#299-343):
+	External calls:
+	- require(bool)(getNumWeiAddressMayInvest(msg.sender) >= msg.value) (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#299-303)
+	- DIDPerEther = SafeMath.div(distense.getParameterValueByTitle(distense.didPerEtherParameterTitle()),1000000000000000000) (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#307-309)
+	State variables written after the call(s):
+	- DIDHolders (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#317-323)
+	- DIDHolders (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#323-333)
+	- DIDHolders (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#333)
+	- investedAggregate (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#333-335)
+Reentrancy in Tasks.taskRewardVote (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1265-1413):
+	External calls:
+	- balance = didToken.getAddressBalance(msg.sender) (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1271-1275)
+	- require(bool)(balance > distense.getParameterValueByTitle(distense.numDIDRequiredToTaskRewardVoteParameterTitle())) (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1307-1309)
+	- require(bool)((_reward * 1000000000000000000) <= distense.getParameterValueByTitle(distense.maxRewardParameterTitle())) (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1323-1331)
+	State variables written after the call(s):
+	- tasks (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1331)
+Reentrancy in Tasks.taskRewardVote (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1265-1413):
+	External calls:
+	- balance = didToken.getAddressBalance(msg.sender) (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1271-1275)
+	- require(bool)(balance > distense.getParameterValueByTitle(distense.numDIDRequiredToTaskRewardVoteParameterTitle())) (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1307-1309)
+	- require(bool)((_reward * 1000000000000000000) <= distense.getParameterValueByTitle(distense.maxRewardParameterTitle())) (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1323-1331)
+	- pctDIDOwned = didToken.pctDIDOwned(msg.sender) (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1334-1337)
+	State variables written after the call(s):
+	- tasks (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1337-1339)
+Reentrancy in Tasks.taskRewardVote (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1265-1413):
+	External calls:
+	- balance = didToken.getAddressBalance(msg.sender) (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1271-1275)
+	- require(bool)(balance > distense.getParameterValueByTitle(distense.numDIDRequiredToTaskRewardVoteParameterTitle())) (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1307-1309)
+	- require(bool)((_reward * 1000000000000000000) <= distense.getParameterValueByTitle(distense.maxRewardParameterTitle())) (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1323-1331)
+	- pctDIDOwned = didToken.pctDIDOwned(msg.sender) (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1334-1337)
+	- votingPowerLimit = distense.getParameterValueByTitle(distense.votingPowerLimitParameterTitle()) (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1341-1355)
+	State variables written after the call(s):
+	- tasks (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1379)
+	- tasks (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1389)
+	- tasks (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1389)
+Reentrancy in Tasks.taskRewardVote (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1265-1413):
+	External calls:
+	- balance = didToken.getAddressBalance(msg.sender) (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1271-1275)
+	- require(bool)(balance > distense.getParameterValueByTitle(distense.numDIDRequiredToTaskRewardVoteParameterTitle())) (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1307-1309)
+	- require(bool)((_reward * 1000000000000000000) <= distense.getParameterValueByTitle(distense.maxRewardParameterTitle())) (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1323-1331)
+	- pctDIDOwned = didToken.pctDIDOwned(msg.sender) (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1334-1337)
+	- votingPowerLimit = distense.getParameterValueByTitle(distense.votingPowerLimitParameterTitle()) (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1341-1355)
+	- pctDIDVotedThreshold = distense.getParameterValueByTitle(distense.pctDIDToDetermineTaskRewardParameterTitle()) (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1391-1395)
+	- minNumVoters = distense.getParameterValueByTitle(distense.minNumberOfTaskRewardVotersParameterTitle()) (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1395-1403)
+	State variables written after the call(s):
+	- tasks (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1409-1411)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+update in Distense.voteOnParameter (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#963) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[92m
+Reentrancy in Tasks.addTask (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1185-1239):
+	External calls:
+	- tasks[_taskId].reward = distense.getParameterValueByTitle(distense.defaultRewardParameterTitle()) (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1217-1223)
+	State variables written after the call(s):
+	- taskIds (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1225-1229)
+Reentrancy in DIDToken.exchangeDIDForEther (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#235-299):
+	External calls:
+	- DIDPerEther = distense.getParameterValueByTitle(distense.didPerEtherParameterTitle()) (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#253-255)
+	State variables written after the call(s):
+	- totalSupply (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#279-283)
+Reentrancy in DIDToken.exchangeDIDForEther (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#235-299):
+	External calls:
+	- DIDPerEther = distense.getParameterValueByTitle(distense.didPerEtherParameterTitle()) (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#253-255)
+	External calls sending eth:
+	- msg.sender.transfer(numWeiToIssue) (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#283-289)
+	State variables written after the call(s):
+	- DIDHoldersArray (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#291)
+Reentrancy in DIDToken.investEtherForDID (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#299-343):
+	External calls:
+	- require(bool)(getNumWeiAddressMayInvest(msg.sender) >= msg.value) (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#299-303)
+	- DIDPerEther = SafeMath.div(distense.getParameterValueByTitle(distense.didPerEtherParameterTitle()),1000000000000000000) (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#307-309)
+	State variables written after the call(s):
+	- totalSupply (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#315-317)
+Reentrancy in Distense.voteOnParameter (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#937-1035):
+	External calls:
+	- votersDIDPercent = didToken.pctDIDOwned(msg.sender) (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#943-945)
+	State variables written after the call(s):
+	- parameters (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1025)
+	- parameters (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1025-1027)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+DIDToken.PullRequestsAddress should be constant (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#89)
+DIDToken.investmentLimitAddress should be constant (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#91-93)
+DIDToken.investmentLimitAggregate should be constant (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#89-91)
+Distense.defaultRewardParameterTitle should be constant (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#645-649)
+Distense.didPerEtherParameterTitle should be constant (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#649-651)
+Distense.maxRewardParameterTitle should be constant (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#605-607)
+Distense.minNumberOfTaskRewardVotersParameterTitle should be constant (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#629-633)
+Distense.numDIDRequiredToAddTaskParameterTitle should be constant (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#641-643)
+Distense.numDIDRequiredToApproveVotePullRequestParameterTitle should be constant (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#611-617)
+Distense.numDIDRequiredToTaskRewardVoteParameterTitle should be constant (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#619-625)
+Distense.pctDIDRequiredToMergePullRequestTitle should be constant (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#599-601)
+Distense.pctDIDToDetermineTaskRewardParameterTitle should be constant (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#593-595)
+Distense.votingIntervalParameterTitle should be constant (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#589)
+Distense.votingPowerLimitParameterTitle should be constant (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#653-655)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Approvable.approve (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#29-39) should be declared external
+Approvable.revokeApproval (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#39-51) should be declared external
+DIDToken.getWeiAggregateMayInvest (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#421-429) should be declared external
+DIDToken.getAddressBalance (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#437-443) should be declared external
+DIDToken.getWeiInvested (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#451-459) should be declared external
+DIDToken.deleteDIDHolder (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#497-530) should be declared external
+DIDToken.setDistenseAddress (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#531-537) should be declared external
+Distense.voteOnParameter (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#937-1035) should be declared external
+Distense.getParameterByTitle (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1035-1039) should be declared external
+Distense.getNumParameters (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1039-1053) should be declared external
+Distense.setDIDTokenAddress (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1087-1099) should be declared external
+Tasks.setDIDTokenAddress (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol) should be declared external
+Tasks.setDistenseAddress (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol) should be declared external
+SafeMath.percent (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_address' of Approvable.approve (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#29-31) is not in mixedCase
+Parameter '_address' of Approvable.revokeApproval (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#39-41) is not in mixedCase
+Parameter '_recipient' of DIDToken.issueDID (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#143-147) is not in mixedCase
+Parameter '_numDID' of DIDToken.issueDID (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#147) is not in mixedCase
+Parameter '_address' of DIDToken.decrementDID (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#189) is not in mixedCase
+Parameter '_numDID' of DIDToken.decrementDID (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#191) is not in mixedCase
+Parameter '_numDIDToExchange' of DIDToken.exchangeDIDForEther (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#237) is not in mixedCase
+Parameter '_contributor' of DIDToken.incrementDIDFromContributions (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#343-345) is not in mixedCase
+Parameter '_reward' of DIDToken.incrementDIDFromContributions (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#345) is not in mixedCase
+Parameter '_contributor' of DIDToken.incrementTasksCompleted (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#361) is not in mixedCase
+Parameter '_address' of DIDToken.pctDIDOwned (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#367-368) is not in mixedCase
+Parameter '_contributor' of DIDToken.getNumWeiAddressMayInvest (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#375) is not in mixedCase
+Parameter '_contributor' of DIDToken.rewardContributor (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#401-403) is not in mixedCase
+Parameter '_reward' of DIDToken.rewardContributor (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#403) is not in mixedCase
+Parameter '_address' of DIDToken.getAddressBalance (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#441) is not in mixedCase
+Parameter '_address' of DIDToken.getNumContributionsDID (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#447-449) is not in mixedCase
+Parameter '_address' of DIDToken.getWeiInvested (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#451) is not in mixedCase
+Parameter 'DIDPerEther' of DIDToken.calculateNumDIDToIssue (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#461) is not in mixedCase
+Parameter '_numDIDToExchange' of DIDToken.calculateNumWeiToIssue (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#465) is not in mixedCase
+Parameter '_DIDPerEther' of DIDToken.calculateNumWeiToIssue (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#465-467) is not in mixedCase
+Parameter '_distenseAddress' of DIDToken.setDistenseAddress (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#531) is not in mixedCase
+Variable 'DIDToken.DIDHoldersArray' (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#85) is not in mixedCase
+Variable 'DIDToken.PullRequestsAddress' (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#89) is not in mixedCase
+Variable 'DIDToken.DistenseAddress' (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#89) is not in mixedCase
+Variable 'DIDToken.DIDHolders' (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#129-133) is not in mixedCase
+Parameter '_DIDTokenAddress' of Distense. (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#655-657) is not in mixedCase
+Parameter '_title' of Distense.getParameterValueByTitle (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#887) is not in mixedCase
+Parameter '_title' of Distense.voteOnParameter (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#937-939) is not in mixedCase
+Parameter '_voteValue' of Distense.voteOnParameter (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#939) is not in mixedCase
+Parameter '_title' of Distense.getParameterByTitle (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1035-1037) is not in mixedCase
+Parameter '_title' of Distense.updateParameterValue (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1057-1059) is not in mixedCase
+Parameter '_newValue' of Distense.updateParameterValue (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1059) is not in mixedCase
+Parameter '_title' of Distense.updateLastVotedOnParameter (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1079) is not in mixedCase
+Parameter '_didTokenAddress' of Distense.setDIDTokenAddress (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1087-1093) is not in mixedCase
+Variable 'Distense.DIDTokenAddress' (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#543-549) is not in mixedCase
+Parameter '_DIDTokenAddress' of Tasks. (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1169-1171) is not in mixedCase
+Parameter '_DistenseAddress' of Tasks. (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1173-1177) is not in mixedCase
+Parameter '_taskId' of Tasks.addTask (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1187) is not in mixedCase
+Parameter '_title' of Tasks.addTask (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1187-1189) is not in mixedCase
+Parameter '_taskId' of Tasks.getTaskById (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1243) is not in mixedCase
+Parameter '_taskId' of Tasks.taskExists (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1259) is not in mixedCase
+Parameter '_taskId' of Tasks.taskRewardVote (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1265-1267) is not in mixedCase
+Parameter '_reward' of Tasks.taskRewardVote (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1267) is not in mixedCase
+Parameter '_taskId' of Tasks.getTaskReward (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1415-1417) is not in mixedCase
+Parameter '_taskId' of Tasks.getTaskRewardAndStatus (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1421) is not in mixedCase
+Parameter '_taskId' of Tasks.setTaskRewardPaid (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1439) is not in mixedCase
+Parameter '_taskId' of Tasks.deleteTask (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1467) is not in mixedCase
+Parameter '_DIDTokenAddress' of Tasks.setDIDTokenAddress (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol) is not in mixedCase
+Parameter '_DistenseAddress' of Tasks.setDistenseAddress (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol) is not in mixedCase
+Variable 'Tasks.DIDTokenAddress' (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1117-1122) is not in mixedCase
+Variable 'Tasks.DistenseAddress' (/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol#1123) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x82dfecd8c0131ab5c24d27b490fbc8cc60be84f5.sol analyzed (5 contracts), 80 result(s) found

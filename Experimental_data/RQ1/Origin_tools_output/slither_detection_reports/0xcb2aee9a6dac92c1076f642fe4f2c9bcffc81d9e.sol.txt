@@ -1,0 +1,257 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol:
+Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing "SPDX-License-Identifier: <SPDX-License>" to each source file. Use "SPDX-License-Identifier: UNLICENSED" for non-open-source code. Please see https://spdx.org for more information.
+--> /sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol
+
+Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+   --> /sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol:166:95:
+    |
+166 | function startStaking(address _sender, uint256 _amountToStake, address[] memory _addressList, uint256[] memory uintList) public {
+    |                                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning: Contract code size exceeds 24576 bytes (a limit introduced in Spurious Dragon). This contract may not be deployable on mainnet. Consider enabling the optimizer (with a low "runs" value!), turning off revert strings, or using libraries.
+  --> /sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol:27:1:
+   |
+27 | contract MinereumStaking
+   | ^ (Relevant source part starts here and spans across multiple lines).
+
+
+INFO:Detectors:[91m
+MinereumStaking.Bonus (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#38-39) is never initialized. It is used in:
+	- BonusGet (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#114-115)
+	- BonusGetAt (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#124-125)
+	- BonusLength (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#132-133)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-state-variables[0m
+INFO:Detectors:[93m
+MinereumContract (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#7-11) has incorrect ERC20 function interface(s):
+	-transfer (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#8-11)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[93m
+MinereumStaking.startStaking (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#167-260) uses a dangerous strict equality:
+	- daysParticipated[_sender][daysParticipated[_sender].length - 1] == currentPeriod
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Reentrancy in MinereumStaking.PayoutBonus (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#398-429):
+	External calls:
+	- external1.mintNewCoins(AddressBonus[msg.sender]) (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#414-416)
+	- mneContract.transfer(_address,AddressBonus[msg.sender]) (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#419-421)
+	- mneContract.transfer(msg.sender,AddressBonus[msg.sender]) (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#422-424)
+	State variables written after the call(s):
+	- BonusPaid (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#426-427)
+Reentrancy in MinereumStaking.PayoutStaking (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#264-297):
+	External calls:
+	- external1.mintNewCoins(coinsToMint) (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#280-281)
+	- mneContract.transfer(_address,amountToPay) (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#289)
+	- mneContract.transfer(msg.sender,amountToPay) (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#289-290)
+	State variables written after the call(s):
+	- StakingPaid (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#293-296)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+MinereumStaking.updateExternal1 uses tx.origin for authorization:
+	- tx.origin == updaterAddress (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#106-107)
+MinereumStaking.updateGenesis uses tx.origin for authorization:
+	- tx.origin == updaterAddress (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#108)
+MinereumStaking.updatePublicCalls uses tx.origin for authorization:
+	- tx.origin == updaterAddress (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#109)
+MinereumStaking.updateMneContract uses tx.origin for authorization:
+	- tx.origin == updaterAddress (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#111)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-usage-of-txorigin[0m
+INFO:Detectors:[93m
+referrerRateFinal in MinereumStaking.startStaking (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#217) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[92m
+Reentrancy in MinereumStaking.PayoutBonus (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#398-429):
+	External calls:
+	- external1.mintNewCoins(AddressBonus[msg.sender]) (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#414-416)
+	- mneContract.transfer(_address,AddressBonus[msg.sender]) (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#419-421)
+	- mneContract.transfer(msg.sender,AddressBonus[msg.sender]) (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#422-424)
+	State variables written after the call(s):
+	- newBonusCoins (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#424-426)
+Reentrancy in MinereumStaking.PayoutStaking (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#264-297):
+	External calls:
+	- external1.mintNewCoins(coinsToMint) (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#280-281)
+	- mneContract.transfer(_address,amountToPay) (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#289)
+	- mneContract.transfer(msg.sender,amountToPay) (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#289-290)
+	State variables written after the call(s):
+	- newStakingCoins (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#291)
+	- paidStakingCoins (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#291-293)
+Reentrancy in MinereumStaking.startStaking (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#167-260):
+	External calls:
+	- pc.stakeBalances(_addressList[1]) > 0 (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#217-229)
+	- ! gn.isAnyGenesisAddress(_addressList[1]) (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#219-229)
+	- gn.isGenesisAddressLevel1(_addressList[1]) (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#221-229)
+	- gn.isGenesisAddressLevel2(_addressList[1]) (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#224-229)
+	State variables written after the call(s):
+	- AddressBonus (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#239-241)
+	- AddressBonus (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#254-259)
+	- BonusAmount (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#236-237)
+	- BonusAmount (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#245-246)
+	- BonusDay (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#232-234)
+	- BonusDay (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#242-244)
+	- BonusFrom (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#234-236)
+	- BonusFrom (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#244)
+	- BonusPaid (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#237-238)
+	- BonusPaid (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#246-250)
+	- bonusAddress (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#238-239)
+	- bonusAddress (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#252-253)
+	- overallBonus (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#259-260)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+MinereumStaking.GetCurrentDay (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#147-158) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp < startDate (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#151-158)
+MinereumStaking.startStaking (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#167-260) uses timestamp for comparisons
+	Dangerous comparisons:
+	- daysParticipated[_sender][daysParticipated[_sender].length - 1] == currentPeriod (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#187-200)
+	- currentPeriod > 364 (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#184)
+	- block.timestamp < startDate (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#179-184)
+MinereumStaking.PayoutStaking (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#264-297) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp >= startDate + (daysParticipated[msg.sender][0] * 86400) + 31556926 + contingency (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#268-297)
+MinereumStaking.PayoutBonus (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#398-429) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp >= startDate + (BonusDay[msg.sender][0] * 86400) + 31556926 + contingency (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#403-429)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+MinereumStaking.updateStartDate (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#77-87) should be declared external
+MinereumStaking.updateVars (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#87-105) should be declared external
+MinereumStaking.updateExternal1 (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#106-107) should be declared external
+MinereumStaking.updateGenesis (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#107-108) should be declared external
+MinereumStaking.updatePublicCalls (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#108-109) should be declared external
+MinereumStaking.updateMneContract (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#109-111) should be declared external
+MinereumStaking.daysParticipatedGet (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#111-112) should be declared external
+MinereumStaking.mneSentPerDayGet (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#112-114) should be declared external
+MinereumStaking.BonusGet (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#114-115) should be declared external
+MinereumStaking.BonusDayGet (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#115-116) should be declared external
+MinereumStaking.BonusFromGet (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#116) should be declared external
+MinereumStaking.BonusAmountGet (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#117-118) should be declared external
+MinereumStaking.AddressBonusGet (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#118-119) should be declared external
+MinereumStaking.StakingPaidGet (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#119-121) should be declared external
+MinereumStaking.BonusPaidGet (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#121) should be declared external
+MinereumStaking.daysParticipatedGetAt (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#121-122) should be declared external
+MinereumStaking.mneSentPerDayGetAt (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#122-124) should be declared external
+MinereumStaking.BonusGetAt (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#124-125) should be declared external
+MinereumStaking.BonusDayGetAt (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#125-126) should be declared external
+MinereumStaking.BonusFromGetAt (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#126-127) should be declared external
+MinereumStaking.BonusAmountGetAt (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#127-129) should be declared external
+MinereumStaking.StakingPaidGetAt (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#129) should be declared external
+MinereumStaking.daysParticipatedLength (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#130-131) should be declared external
+MinereumStaking.mneSentPerDayLength (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#131-132) should be declared external
+MinereumStaking.BonusLength (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#132-133) should be declared external
+MinereumStaking.BonusDayLength (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#133-134) should be declared external
+MinereumStaking.BonusFromLength (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#134-135) should be declared external
+MinereumStaking.BonusAmountLength (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#135-136) should be declared external
+MinereumStaking.StakingPaidLength (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#136-137) should be declared external
+MinereumStaking.mnePerDayLength (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#137-138) should be declared external
+MinereumStaking.maxInterestRateLength (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#138-139) should be declared external
+MinereumStaking.participatedAddressLength (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#139-141) should be declared external
+MinereumStaking.bonusAddressLength (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#141-147) should be declared external
+MinereumStaking.TransferAllFundsOut (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#158-167) should be declared external
+MinereumStaking.startStaking (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#167-260) should be declared external
+MinereumStaking.PayoutAllStaking (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#260-264) should be declared external
+MinereumStaking.AmountMNESent (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#297-325) should be declared external
+MinereumStaking.AmountToPayStaking (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#325-378) should be declared external
+MinereumStaking.AmountToPayBonus (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#378-384) should be declared external
+MinereumStaking.DateStakingPayoutPossible (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#385-392) should be declared external
+MinereumStaking.DateBonusPayoutPossible (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#392-398) should be declared external
+MinereumStaking.PayoutBonus (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#398-429) should be declared external
+MinereumStaking.FillMaxInterestRate1 (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#429-622) should be declared external
+MinereumStaking.FillMaxInterestRate2 (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#622-786) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol:
+	- pragma solidity^0.6.1 (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#5-7): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '' of PublicCalls.stakeBalances (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#24) is not in mixedCase
+Parameter '_startDate' of MinereumStaking.updateStartDate (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#79) is not in mixedCase
+Parameter '_blockPayouts' of MinereumStaking.updateVars (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#87) is not in mixedCase
+Parameter '_blockStaking' of MinereumStaking.updateVars (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#87) is not in mixedCase
+Parameter '_referralRate' of MinereumStaking.updateVars (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#87) is not in mixedCase
+Parameter '_referrerRateNormal' of MinereumStaking.updateVars (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#87) is not in mixedCase
+Parameter '_referrerRateLevel2' of MinereumStaking.updateVars (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#87) is not in mixedCase
+Parameter '_referrerRateLevel3' of MinereumStaking.updateVars (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#88-89) is not in mixedCase
+Parameter '_referrerRateShare' of MinereumStaking.updateVars (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#89-91) is not in mixedCase
+Parameter '_contingency' of MinereumStaking.updateVars (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#91-92) is not in mixedCase
+Parameter '_address' of MinereumStaking.updateExternal1 (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#106) is not in mixedCase
+Parameter '_address' of MinereumStaking.updateGenesis (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#108) is not in mixedCase
+Parameter '_address' of MinereumStaking.updatePublicCalls (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#109) is not in mixedCase
+Parameter '_address' of MinereumStaking.updateMneContract (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#109-111) is not in mixedCase
+Parameter '_address' of MinereumStaking.daysParticipatedGet (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#112) is not in mixedCase
+Parameter '_address' of MinereumStaking.mneSentPerDayGet (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#113) is not in mixedCase
+Function 'MinereumStaking.BonusGet' (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#114-115) is not in mixedCase
+Parameter '_address' of MinereumStaking.BonusGet (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#114) is not in mixedCase
+Function 'MinereumStaking.BonusDayGet' (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#115-116) is not in mixedCase
+Parameter '_address' of MinereumStaking.BonusDayGet (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#115) is not in mixedCase
+Function 'MinereumStaking.BonusFromGet' (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#116) is not in mixedCase
+Parameter '_address' of MinereumStaking.BonusFromGet (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#116) is not in mixedCase
+Function 'MinereumStaking.BonusAmountGet' (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#117-118) is not in mixedCase
+Parameter '_address' of MinereumStaking.BonusAmountGet (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#117) is not in mixedCase
+Function 'MinereumStaking.AddressBonusGet' (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#118-119) is not in mixedCase
+Parameter '_address' of MinereumStaking.AddressBonusGet (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#118) is not in mixedCase
+Function 'MinereumStaking.StakingPaidGet' (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#119-121) is not in mixedCase
+Parameter '_address' of MinereumStaking.StakingPaidGet (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#119) is not in mixedCase
+Function 'MinereumStaking.BonusPaidGet' (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#121) is not in mixedCase
+Parameter '_address' of MinereumStaking.BonusPaidGet (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#121) is not in mixedCase
+Parameter '_address' of MinereumStaking.daysParticipatedGetAt (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#122) is not in mixedCase
+Parameter '_address' of MinereumStaking.mneSentPerDayGetAt (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#123) is not in mixedCase
+Function 'MinereumStaking.BonusGetAt' (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#124-125) is not in mixedCase
+Parameter '_address' of MinereumStaking.BonusGetAt (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#124) is not in mixedCase
+Function 'MinereumStaking.BonusDayGetAt' (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#125-126) is not in mixedCase
+Parameter '_address' of MinereumStaking.BonusDayGetAt (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#125) is not in mixedCase
+Function 'MinereumStaking.BonusFromGetAt' (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#126-127) is not in mixedCase
+Parameter '_address' of MinereumStaking.BonusFromGetAt (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#126) is not in mixedCase
+Function 'MinereumStaking.BonusAmountGetAt' (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#127-129) is not in mixedCase
+Parameter '_address' of MinereumStaking.BonusAmountGetAt (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#127) is not in mixedCase
+Function 'MinereumStaking.StakingPaidGetAt' (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#129) is not in mixedCase
+Parameter '_address' of MinereumStaking.StakingPaidGetAt (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#129) is not in mixedCase
+Parameter '_address' of MinereumStaking.daysParticipatedLength (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#130) is not in mixedCase
+Parameter '_address' of MinereumStaking.mneSentPerDayLength (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#131) is not in mixedCase
+Function 'MinereumStaking.BonusLength' (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#132-133) is not in mixedCase
+Parameter '_address' of MinereumStaking.BonusLength (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#132) is not in mixedCase
+Function 'MinereumStaking.BonusDayLength' (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#133-134) is not in mixedCase
+Parameter '_address' of MinereumStaking.BonusDayLength (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#133) is not in mixedCase
+Function 'MinereumStaking.BonusFromLength' (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#134-135) is not in mixedCase
+Parameter '_address' of MinereumStaking.BonusFromLength (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#134) is not in mixedCase
+Function 'MinereumStaking.BonusAmountLength' (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#135-136) is not in mixedCase
+Parameter '_address' of MinereumStaking.BonusAmountLength (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#135) is not in mixedCase
+Function 'MinereumStaking.StakingPaidLength' (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#136-137) is not in mixedCase
+Parameter '_address' of MinereumStaking.StakingPaidLength (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#136) is not in mixedCase
+Function 'MinereumStaking.GetCurrentDay' (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#147-158) is not in mixedCase
+Function 'MinereumStaking.TransferAllFundsOut' (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#158-167) is not in mixedCase
+Parameter '_address' of MinereumStaking.TransferAllFundsOut (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#158) is not in mixedCase
+Parameter '_amount' of MinereumStaking.TransferAllFundsOut (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#159-162) is not in mixedCase
+Parameter '_sender' of MinereumStaking.startStaking (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#167) is not in mixedCase
+Parameter '_amountToStake' of MinereumStaking.startStaking (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#167-169) is not in mixedCase
+Parameter '_addressList' of MinereumStaking.startStaking (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#169) is not in mixedCase
+Function 'MinereumStaking.PayoutAllStaking' (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#260-264) is not in mixedCase
+Parameter '_address' of MinereumStaking.PayoutAllStaking (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#260) is not in mixedCase
+Function 'MinereumStaking.PayoutStaking' (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#264-297) is not in mixedCase
+Parameter '_address' of MinereumStaking.PayoutStaking (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#264) is not in mixedCase
+Function 'MinereumStaking.AmountMNESent' (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#297-325) is not in mixedCase
+Parameter '_address' of MinereumStaking.AmountMNESent (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#298) is not in mixedCase
+Parameter '_excludeCurrent' of MinereumStaking.AmountMNESent (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#298-299) is not in mixedCase
+Parameter '_currentOnly' of MinereumStaking.AmountMNESent (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#299) is not in mixedCase
+Function 'MinereumStaking.AmountToPayStaking' (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#325-378) is not in mixedCase
+Parameter '_address' of MinereumStaking.AmountToPayStaking (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#326) is not in mixedCase
+Parameter '_checkID' of MinereumStaking.AmountToPayStaking (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#326-328) is not in mixedCase
+Parameter '_excludeCurrent' of MinereumStaking.AmountToPayStaking (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#328) is not in mixedCase
+Parameter '_currentOnly' of MinereumStaking.AmountToPayStaking (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#328) is not in mixedCase
+Function 'MinereumStaking.AmountToPayBonus' (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#378-384) is not in mixedCase
+Parameter '_address' of MinereumStaking.AmountToPayBonus (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#378-381) is not in mixedCase
+Function 'MinereumStaking.DateStakingPayoutPossible' (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#385-392) is not in mixedCase
+Parameter '_address' of MinereumStaking.DateStakingPayoutPossible (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#386) is not in mixedCase
+Function 'MinereumStaking.DateBonusPayoutPossible' (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#392-398) is not in mixedCase
+Parameter '_address' of MinereumStaking.DateBonusPayoutPossible (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#392-394) is not in mixedCase
+Function 'MinereumStaking.PayoutBonus' (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#398-429) is not in mixedCase
+Parameter '_address' of MinereumStaking.PayoutBonus (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#398-400) is not in mixedCase
+Function 'MinereumStaking.FillMaxInterestRate1' (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#429-622) is not in mixedCase
+Function 'MinereumStaking.FillMaxInterestRate2' (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#622-786) is not in mixedCase
+Variable 'MinereumStaking.Bonus' (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#38-39) is not in mixedCase
+Variable 'MinereumStaking.BonusDay' (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#39-40) is not in mixedCase
+Variable 'MinereumStaking.BonusFrom' (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#40-41) is not in mixedCase
+Variable 'MinereumStaking.BonusAmount' (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#41-42) is not in mixedCase
+Variable 'MinereumStaking.AddressBonus' (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#42-43) is not in mixedCase
+Variable 'MinereumStaking.StakingPaid' (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#43-44) is not in mixedCase
+Variable 'MinereumStaking.BonusPaid' (/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol#44-46) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xcb2aee9a6dac92c1076f642fe4f2c9bcffc81d9e.sol analyzed (5 contracts), 153 result(s) found

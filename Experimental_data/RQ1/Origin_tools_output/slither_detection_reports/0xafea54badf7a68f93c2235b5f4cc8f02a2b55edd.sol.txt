@@ -1,0 +1,54 @@
+INFO:Detectors:[91m
+Exchange._fillOrder (/sb/0xafea54badf7a68f93c2235b5f4cc8f02a2b55edd.sol#1033-1137) sends eth to arbitrary user
+	Dangerous calls:
+	- sell.maker.transfer(tradedWei) (/sb/0xafea54badf7a68f93c2235b5f4cc8f02a2b55edd.sol#1125-1131)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[93m
+Reentrancy in Exchange._fillOrder (/sb/0xafea54badf7a68f93c2235b5f4cc8f02a2b55edd.sol#1033-1137):
+	External calls:
+	- (publishedRate,None) = rates.rates(augmintToken.peggedSymbol()) (/sb/0xafea54badf7a68f93c2235b5f4cc8f02a2b55edd.sol#1077-1081)
+	State variables written after the call(s):
+	- buyTokenOrders (/sb/0xafea54badf7a68f93c2235b5f4cc8f02a2b55edd.sol#1111)
+	- buyTokenOrders (/sb/0xafea54badf7a68f93c2235b5f4cc8f02a2b55edd.sol#1113)
+	- sellTokenOrders (/sb/0xafea54badf7a68f93c2235b5f4cc8f02a2b55edd.sol#1115-1117)
+	- sellTokenOrders (/sb/0xafea54badf7a68f93c2235b5f4cc8f02a2b55edd.sol#1119)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+Exchange.placeSellTokenOrder (/sb/0xafea54badf7a68f93c2235b5f4cc8f02a2b55edd.sol#833-845) does not use the value returned by external calls:
+	-augmintToken.transferFrom(msg.sender,this,tokenAmount) (/sb/0xafea54badf7a68f93c2235b5f4cc8f02a2b55edd.sol#841-843)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in Exchange._fillOrder (/sb/0xafea54badf7a68f93c2235b5f4cc8f02a2b55edd.sol#1033-1137):
+	External calls:
+	- (publishedRate,None) = rates.rates(augmintToken.peggedSymbol()) (/sb/0xafea54badf7a68f93c2235b5f4cc8f02a2b55edd.sol#1077-1081)
+	State variables written after the call(s):
+	- activeBuyOrders (/sb/0xafea54badf7a68f93c2235b5f4cc8f02a2b55edd.sol#1113)
+	- activeSellOrders (/sb/0xafea54badf7a68f93c2235b5f4cc8f02a2b55edd.sol#1119)
+Reentrancy in Exchange.placeSellTokenOrder (/sb/0xafea54badf7a68f93c2235b5f4cc8f02a2b55edd.sol#833-845):
+	External calls:
+	- augmintToken.transferFrom(msg.sender,this,tokenAmount) (/sb/0xafea54badf7a68f93c2235b5f4cc8f02a2b55edd.sol#841-843)
+	State variables written after the call(s):
+	- activeSellOrders (/sb/0xafea54badf7a68f93c2235b5f4cc8f02a2b55edd.sol#843-845)
+	- orderCount (/sb/0xafea54badf7a68f93c2235b5f4cc8f02a2b55edd.sol#843-845)
+	- sellTokenOrders (/sb/0xafea54badf7a68f93c2235b5f4cc8f02a2b55edd.sol#843-845)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+AugmintTokenInterface.decimals should be constant (/sb/0xafea54badf7a68f93c2235b5f4cc8f02a2b55edd.sol#543)
+AugmintTokenInterface.name should be constant (/sb/0xafea54badf7a68f93c2235b5f4cc8f02a2b55edd.sol#541)
+AugmintTokenInterface.peggedSymbol should be constant (/sb/0xafea54badf7a68f93c2235b5f4cc8f02a2b55edd.sol#541-543)
+AugmintTokenInterface.symbol should be constant (/sb/0xafea54badf7a68f93c2235b5f4cc8f02a2b55edd.sol#541)
+AugmintTokenInterface.totalSupply should be constant (/sb/0xafea54badf7a68f93c2235b5f4cc8f02a2b55edd.sol#543-545)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Restricted.grantMultiplePermissions (/sb/0xafea54badf7a68f93c2235b5f4cc8f02a2b55edd.sol#99-117) should be declared external
+Restricted.revokeMultiplePermissions (/sb/0xafea54badf7a68f93c2235b5f4cc8f02a2b55edd.sol#131-156) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_augmintToken' of Exchange. (/sb/0xafea54badf7a68f93c2235b5f4cc8f02a2b55edd.sol#793-795) is not in mixedCase
+Parameter '_rates' of Exchange. (/sb/0xafea54badf7a68f93c2235b5f4cc8f02a2b55edd.sol#795-799) is not in mixedCase
+Function 'Exchange._fillOrder' (/sb/0xafea54badf7a68f93c2235b5f4cc8f02a2b55edd.sol#1033-1137) is not in mixedCase
+Function 'Exchange._placeSellTokenOrder' (/sb/0xafea54badf7a68f93c2235b5f4cc8f02a2b55edd.sol#1137-1149) is not in mixedCase
+Function 'Exchange._removeBuyOrder' (/sb/0xafea54badf7a68f93c2235b5f4cc8f02a2b55edd.sol) is not in mixedCase
+Function 'Exchange._removeSellOrder' (/sb/0xafea54badf7a68f93c2235b5f4cc8f02a2b55edd.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xafea54badf7a68f93c2235b5f4cc8f02a2b55edd.sol analyzed (8 contracts), 14 result(s) found

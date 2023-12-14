@@ -1,0 +1,115 @@
+INFO:Detectors:[91m
+BErc20WBTCDelegator.delegateTo (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#791-801) uses delegatecall to a input-controlled function id
+	(success,returnData) = callee.delegatecall(data) (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#792-793)
+BErc20WBTCDelegator.delegateAndReturn (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#841-854) uses delegatecall to a input-controlled function id
+	(success) = implementation.delegatecall(msg.data) (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#842-844)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#controlled-delegatecall[0m
+INFO:Detectors:[93m
+BErc20WBTCDelegator.delegateToViewImplementation (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#818-828) is declared view but contains assembly code
+BErc20WBTCDelegator.delegateToViewAndReturn (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#828-841) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+Reentrancy in BErc20WBTCDelegator._setImplementation (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#448-463):
+	External calls:
+	- delegateToImplementation(abi.encodeWithSignature(_resignImplementation())) (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#452-453)
+	State variables written after the call(s):
+	- implementation (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#456-458)
+Reentrancy in BErc20WBTCDelegator.constructor (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#412-442):
+	External calls:
+	- delegateTo(implementation_,abi.encodeWithSignature(initialize(address,address,address,uint256,string,string,uint8),underlying_,bController_,interestRateModel_,initialExchangeRateMantissa_,name_,symbol_,decimals_)) (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#426-435)
+	- _setImplementation(implementation_,false,becomeImplementationData) (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#436-438)
+	State variables written after the call(s):
+	- admin (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#439-440)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+BErc20WBTCDelegator.delegateTo uses assembly (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#791-801)
+	- /sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#793-798
+BErc20WBTCDelegator.delegateToViewImplementation uses assembly (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#818-828)
+	- /sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#820-825
+BErc20WBTCDelegator.delegateToViewAndReturn uses assembly (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#828-841)
+	- /sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#831-839
+BErc20WBTCDelegator.delegateAndReturn uses assembly (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#841-854)
+	- /sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#844-852
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+BErc20Storage.underlying should be constant (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#325-327)
+BTokenStorage._notEntered should be constant (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#83-85)
+BTokenStorage.accrualBlockNumber should be constant (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#144-146)
+BTokenStorage.borrowIndex should be constant (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#149-151)
+BTokenStorage.decimals should be constant (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#98-100)
+BTokenStorage.initialExchangeRateMantissa should be constant (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#134-136)
+BTokenStorage.name should be constant (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#88-90)
+BTokenStorage.pendingAdmin should be constant (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#119-121)
+BTokenStorage.reserveFactorMantissa should be constant (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#139-141)
+BTokenStorage.symbol should be constant (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#93-95)
+BTokenStorage.totalBorrows should be constant (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#154-156)
+BTokenStorage.totalReserves should be constant (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#159-161)
+BTokenStorage.totalSupply should be constant (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#164-166)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+BErc20WBTCDelegator.borrowBalanceStored (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#658-663) should be declared external
+BTokenInterface.borrowBalanceStored (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#301-302) should be declared external
+BErc20WBTCDelegator.exchangeRateCurrent (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#667-671) should be declared external
+BTokenInterface.exchangeRateCurrent (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#302-303) should be declared external
+BTokenInterface.exchangeRateStored (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#303-304) should be declared external
+BErc20WBTCDelegator.exchangeRateStored (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#676-680) should be declared external
+BErc20WBTCDelegator.accrueInterest (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#693-697) should be declared external
+BTokenInterface.accrueInterest (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#305-306) should be declared external
+BErc20WBTCDelegator._setBController (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#729-734) should be declared external
+BTokenInterface._setBController (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#312-313) should be declared external
+BTokenInterface._setInterestRateModel (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#315-318) should be declared external
+BErc20WBTCDelegator._setInterestRateModel (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#779-784) should be declared external
+BDelegateInterface._becomeImplementation (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#386-388) should be declared external
+BDelegateInterface._resignImplementation (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#391-394) should be declared external
+BErc20WBTCDelegator.delegateToViewImplementation (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#818-828) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol:
+	- pragma solidity^0.5.16 (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#5-8): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Low level call in BErc20WBTCDelegator.delegateTo (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#791-801):
+	-(success,returnData) = callee.delegatecall(data) /sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#792-793
+Low level call in BErc20WBTCDelegator.delegateToViewImplementation (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#818-828):
+	-(success,returnData) = address(this).staticcall(abi.encodeWithSignature(delegateToImplementation(bytes),data)) /sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#819-820
+Low level call in BErc20WBTCDelegator.delegateToViewAndReturn (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#828-841):
+	-(success) = address(this).staticcall(abi.encodeWithSignature(delegateToImplementation(bytes),msg.data)) /sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#829-831
+Low level call in BErc20WBTCDelegator.delegateAndReturn (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#841-854):
+	-(success) = implementation.delegatecall(msg.data) /sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#842-844
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Constant 'BControllerInterface.isBController' (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#13-15) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'InterestRateModel.isInterestRateModel' (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#53-55) is not in UPPER_CASE_WITH_UNDERSCORES
+Variable 'BTokenStorage._notEntered' (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#83-85) is not in mixedCase
+Constant 'BTokenStorage.borrowRateMaxMantissa' (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#104-106) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'BTokenStorage.reserveFactorMaxMantissa' (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#109-111) is not in UPPER_CASE_WITH_UNDERSCORES
+Function 'BTokenInterface._setPendingAdmin' (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#310-311) is not in mixedCase
+Function 'BTokenInterface._acceptAdmin' (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#311-312) is not in mixedCase
+Function 'BTokenInterface._setBController' (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#312-313) is not in mixedCase
+Function 'BTokenInterface._setReserveFactor' (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#313-314) is not in mixedCase
+Function 'BTokenInterface._reduceReserves' (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#314-315) is not in mixedCase
+Function 'BTokenInterface._setInterestRateModel' (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#315-318) is not in mixedCase
+Constant 'BTokenInterface.isBToken' (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#199-202) is not in UPPER_CASE_WITH_UNDERSCORES
+Function 'BErc20Interface._addReserves' (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#346-349) is not in mixedCase
+Function 'BDelegatorInterface._setImplementation' (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#374-377) is not in mixedCase
+Function 'BDelegateInterface._becomeImplementation' (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#386-388) is not in mixedCase
+Function 'BDelegateInterface._resignImplementation' (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#391-394) is not in mixedCase
+Function 'BErc20WBTCDelegator._setPendingAdmin' (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#719-724) is not in mixedCase
+Function 'BErc20WBTCDelegator._acceptAdmin' (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#749-753) is not in mixedCase
+Function 'BErc20WBTCDelegator._setBController' (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#729-734) is not in mixedCase
+Function 'BErc20WBTCDelegator._setReserveFactor' (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#739-744) is not in mixedCase
+Function 'BErc20WBTCDelegator._reduceReserves' (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#768-773) is not in mixedCase
+Function 'BErc20WBTCDelegator._setInterestRateModel' (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#779-784) is not in mixedCase
+Function 'BErc20WBTCDelegator._addReserves' (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#758-763) is not in mixedCase
+Function 'BErc20WBTCDelegator._setImplementation' (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#448-463) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+BTokenStorage._notEntered (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#83-85) is never used in BErc20WBTCDelegator
+BTokenStorage.borrowRateMaxMantissa (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#104-106) is never used in BErc20WBTCDelegator
+BTokenStorage.reserveFactorMaxMantissa (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#109-111) is never used in BErc20WBTCDelegator
+BTokenStorage.initialExchangeRateMantissa (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#134-136) is never used in BErc20WBTCDelegator
+BTokenStorage.accountTokens (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#169-171) is never used in BErc20WBTCDelegator
+BTokenStorage.transferAllowances (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#174-176) is never used in BErc20WBTCDelegator
+BTokenStorage.accountBorrows (/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol#189-191) is never used in BErc20WBTCDelegator
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0x8ee4f840d0f8d6734022eefe4da8e5c6681b9724.sol analyzed (10 contracts), 56 result(s) found

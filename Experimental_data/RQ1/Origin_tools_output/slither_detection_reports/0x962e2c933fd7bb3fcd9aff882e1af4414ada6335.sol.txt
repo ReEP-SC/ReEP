@@ -1,0 +1,136 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol:
+/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol:113:90: Warning: This looks like an address but has an invalid checksum. If this is not used as an address, please prepend '00'. Correct checksummed address: '0x42503C3dcca420ADF53DfF5bb1Fb176b8773AAa0'. For more information please see https://solidity.readthedocs.io/en/develop/types.html#address-literals
+    JIincForwarderInterface constant private Jekyll_Island_Inc = JIincForwarderInterface(0x42503c3dcca420adf53dff5bb1fb176b8773aaa0);
+                                                                                         ^----------------------------------------^
+/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol:115:69: Warning: This looks like an address but has an invalid checksum. If this is not used as an address, please prepend '00'. Correct checksummed address: '0x0D5C01a161A12901C214D2985ac1f6D7fa4644d6'. For more information please see https://solidity.readthedocs.io/en/develop/types.html#address-literals
+    TeamJustInterface constant private TeamJust = TeamJustInterface(0x0d5c01a161a12901c214d2985ac1f6d7fa4644d6);
+                                                                    ^----------------------------------------^
+
+INFO:Detectors:[93m
+NameFilter.nameFilter (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#1483-1695) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+Reentrancy in PlayerBook.addGame (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#1297-1329):
+	External calls:
+	- multiSigDev(addGame) == true (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#1301-1329)
+	State variables written after the call(s):
+	- gameIDs_ (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#1305-1307)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+_affID in PlayerBook.registerNameXaddr (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#613-615) is a local variable never initialiazed
+_affID in PlayerBook.registerNameXaddrFromDapp (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#1185-1187) is a local variable never initialiazed
+_affID in PlayerBook.registerNameXname (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#693) is a local variable never initialiazed
+_affID in PlayerBook.registerNameXnameFromDapp (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#1255-1257) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[93m
+PlayerBook.registerNameCore (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#879-975) does not use the value returned by external calls:
+	-Jekyll_Island_Inc.deposit.value(address(this).balance)() (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#933-937)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+PlayerBook.addMeToGame has external calls inside a loop:
+	- games_[_gameID].receivePlayerNameList(_pID,plyrNameList_[_pID][ii]) (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#787-789)
+PlayerBook.addMeToAllGames has external calls inside a loop:
+	- games_[i].receivePlayerInfo(_pID,_addr,_name,_laff) (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#817-823)
+PlayerBook.addMeToAllGames has external calls inside a loop:
+	- games_[i].receivePlayerNameList(_pID,plyrNameList_[_pID][ii]) (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#827-828)
+PlayerBook.registerNameCore has external calls inside a loop:
+	- games_[i].receivePlayerInfo(_pID,_addr,_name,_affID) (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#951-957)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in PlayerBook.addGame (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#1297-1329):
+	External calls:
+	- multiSigDev(addGame) == true (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#1301-1329)
+	State variables written after the call(s):
+	- gID_ (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#1303)
+	- gameNames_ (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#1307)
+	- games_ (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#1307-1309)
+Reentrancy in PlayerBook.setRegistrationFee (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#1329-1341):
+	External calls:
+	- multiSigDev(setRegistrationFee) == true (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#1333-1341)
+	State variables written after the call(s):
+	- registrationFee_ (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#1339-1341)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+NameFilter.nameFilter uses assembly (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#1483-1695)
+	- /sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#1693-1695
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+PlayerBook.deleteAnyProposal (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#131) should be declared external
+PlayerBook.checkData (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#131) should be declared external
+PlayerBook.checkSignersByAddress (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#131-141) should be declared external
+PlayerBook.checkSignersByName (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#141-151) should be declared external
+PlayerBook.checkIfNameValid (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#405-417) should be declared external
+PlayerBook.registerNameXID (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#485-561) should be declared external
+PlayerBook.registerNameXaddr (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#561-645) should be declared external
+PlayerBook.registerNameXname (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#647-719) should be declared external
+PlayerBook.addMeToGame (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#745-791) should be declared external
+PlayerBook.addMeToAllGames (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#797-831) should be declared external
+PlayerBook.useMyOldName (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#845-869) should be declared external
+PlayerBook.addGame (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#1297-1329) should be declared external
+PlayerBook.setRegistrationFee (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#1329-1341) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Event 'PlayerBook.onNewName' (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#381-393) is not in CapWords
+Parameter '_whatFunction' of PlayerBook.multiSigDev (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#129) is not in mixedCase
+Parameter '_whatFunction' of PlayerBook.deleteProposal (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#129-131) is not in mixedCase
+Parameter '_whatFunction' of PlayerBook.deleteAnyProposal (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#131) is not in mixedCase
+Parameter '_whatFunction' of PlayerBook.checkData (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#131) is not in mixedCase
+Parameter '_whatFunction' of PlayerBook.checkSignersByAddress (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#133) is not in mixedCase
+Parameter '_signerA' of PlayerBook.checkSignersByAddress (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#133) is not in mixedCase
+Parameter '_signerB' of PlayerBook.checkSignersByAddress (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#133) is not in mixedCase
+Parameter '_signerC' of PlayerBook.checkSignersByAddress (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#133-135) is not in mixedCase
+Parameter '_whatFunction' of PlayerBook.checkSignersByName (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#143) is not in mixedCase
+Parameter '_signerA' of PlayerBook.checkSignersByName (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#143) is not in mixedCase
+Parameter '_signerB' of PlayerBook.checkSignersByName (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#143) is not in mixedCase
+Parameter '_signerC' of PlayerBook.checkSignersByName (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#143) is not in mixedCase
+Parameter '_nameStr' of PlayerBook.checkIfNameValid (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#405-407) is not in mixedCase
+Parameter '_nameString' of PlayerBook.registerNameXID (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#485-487) is not in mixedCase
+Parameter '_affCode' of PlayerBook.registerNameXID (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#487) is not in mixedCase
+Parameter '_all' of PlayerBook.registerNameXID (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#487-489) is not in mixedCase
+Parameter '_nameString' of PlayerBook.registerNameXaddr (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#563-565) is not in mixedCase
+Parameter '_affCode' of PlayerBook.registerNameXaddr (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#565) is not in mixedCase
+Parameter '_all' of PlayerBook.registerNameXaddr (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#565) is not in mixedCase
+Parameter '_nameString' of PlayerBook.registerNameXname (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#647-649) is not in mixedCase
+Parameter '_affCode' of PlayerBook.registerNameXname (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#651-653) is not in mixedCase
+Parameter '_all' of PlayerBook.registerNameXname (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#653-655) is not in mixedCase
+Parameter '_gameID' of PlayerBook.addMeToGame (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#747) is not in mixedCase
+Parameter '_nameString' of PlayerBook.useMyOldName (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#845-849) is not in mixedCase
+Parameter '_pID' of PlayerBook.registerNameCore (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#881) is not in mixedCase
+Parameter '_addr' of PlayerBook.registerNameCore (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#881) is not in mixedCase
+Parameter '_affID' of PlayerBook.registerNameCore (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#881-883) is not in mixedCase
+Parameter '_name' of PlayerBook.registerNameCore (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#883-885) is not in mixedCase
+Parameter '_isNewPlayer' of PlayerBook.registerNameCore (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#885-886) is not in mixedCase
+Parameter '_all' of PlayerBook.registerNameCore (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#887-889) is not in mixedCase
+Parameter '_addr' of PlayerBook.determinePID (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#993) is not in mixedCase
+Parameter '_addr' of PlayerBook.getPlayerID (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#1029) is not in mixedCase
+Parameter '_pID' of PlayerBook.getPlayerName (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#1039) is not in mixedCase
+Parameter '_pID' of PlayerBook.getPlayerLAff (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#1049-1051) is not in mixedCase
+Parameter '_pID' of PlayerBook.getPlayerAddr (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#1059) is not in mixedCase
+Parameter '_addr' of PlayerBook.registerNameXIDFromDapp (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#1077) is not in mixedCase
+Parameter '_name' of PlayerBook.registerNameXIDFromDapp (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#1077) is not in mixedCase
+Parameter '_affCode' of PlayerBook.registerNameXIDFromDapp (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#1077-1079) is not in mixedCase
+Parameter '_all' of PlayerBook.registerNameXIDFromDapp (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#1079-1081) is not in mixedCase
+Parameter '_addr' of PlayerBook.registerNameXaddrFromDapp (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#1147-1149) is not in mixedCase
+Parameter '_name' of PlayerBook.registerNameXaddrFromDapp (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#1149) is not in mixedCase
+Parameter '_affCode' of PlayerBook.registerNameXaddrFromDapp (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#1149) is not in mixedCase
+Parameter '_all' of PlayerBook.registerNameXaddrFromDapp (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#1149) is not in mixedCase
+Parameter '_addr' of PlayerBook.registerNameXnameFromDapp (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#1225) is not in mixedCase
+Parameter '_name' of PlayerBook.registerNameXnameFromDapp (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#1225-1227) is not in mixedCase
+Parameter '_affCode' of PlayerBook.registerNameXnameFromDapp (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#1227-1229) is not in mixedCase
+Parameter '_all' of PlayerBook.registerNameXnameFromDapp (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#1229) is not in mixedCase
+Parameter '_gameAddress' of PlayerBook.addGame (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#1297) is not in mixedCase
+Parameter '_gameNameStr' of PlayerBook.addGame (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#1297) is not in mixedCase
+Parameter '_fee' of PlayerBook.setRegistrationFee (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#1331) is not in mixedCase
+Constant 'PlayerBook.Jekyll_Island_Inc' (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#127) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'PlayerBook.TeamJust' (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#127-129) is not in UPPER_CASE_WITH_UNDERSCORES
+Parameter '_input' of NameFilter.nameFilter (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#1483) is not in mixedCase
+Parameter '_requiredSignatures' of MSFun.multiSig (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#2133) is not in mixedCase
+Parameter '_whatFunction' of MSFun.multiSig (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol#2133) is not in mixedCase
+Parameter '_whatFunction' of MSFun.deleteProposal (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol) is not in mixedCase
+Parameter '_whatFunction' of MSFun.whatProposal (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol) is not in mixedCase
+Parameter '_whatFunction' of MSFun.checkMsgData (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol) is not in mixedCase
+Parameter '_whatFunction' of MSFun.checkCount (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol) is not in mixedCase
+Parameter '_whatFunction' of MSFun.checkSigner (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol) is not in mixedCase
+Parameter '_signer' of MSFun.checkSigner (/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x962e2c933fd7bb3fcd9aff882e1af4414ada6335.sol analyzed (7 contracts), 89 result(s) found

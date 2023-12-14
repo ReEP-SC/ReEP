@@ -1,0 +1,52 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xc9988f33ff94733fb7f8c2ae0a00c43202290773.sol:
+/sb/0xc9988f33ff94733fb7f8c2ae0a00c43202290773.sol:1047:13: Warning: Unused local variable.
+            uint256 merchantBalanceStart = token.balanceOf(merchantWallet);
+            ^--------------------------^
+
+INFO:Detectors:[93m
+MerchantModule.split (/sb/0xc9988f33ff94733fb7f8c2ae0a00c43202290773.sol#985-1179) uses a dangerous strict equality:
+	- splitterBalanceStart == 0
+	- require(bool,string)((networkBalanceStart.add(networkSplit) == networkWallet.balance) && (merchantBalanceStart.add(merchantSplit) == merchantWallet.balance),MerchantModule::withdraw: INVALID_EXEC SPLIT_PAYOUT)
+	- require(bool,string)((networkBalanceStart.add(networkSplit) == networkWallet.balance) && (merchantBalanceStart.add(merchantSplit) == merchantWallet.balance),MerchantModule::withdraw: INVALID_EXEC SPLIT_PAYOUT)
+	- splitterBalanceStart_scope_0 == 0
+	- require(bool,string)(networkSplit_scope_3.add(merchantSplit_scope_4) == splitterBalanceStart_scope_0,MerchantModule::withdraw: INVALID_EXEC TOKEN_SPLIT)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Contract locking ether found in /sb/0xc9988f33ff94733fb7f8c2ae0a00c43202290773.sol:
+	Contract ModuleManager has payable functions:
+	 - fallback (/sb/0xc9988f33ff94733fb7f8c2ae0a00c43202290773.sol#127-129)
+	But does not have a function to withdraw the ether
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#contracts-that-lock-ether[0m
+INFO:Detectors:[93m
+MerchantModule.cancelCXSubscription (/sb/0xc9988f33ff94733fb7f8c2ae0a00c43202290773.sol) does not use the value returned by external calls:
+	-SM(customer).cancelSubscriptionAsRecipient(to,value,data,operation,safeTxGas,dataGas,gasPrice,gasToken,refundReceiver,meta,signatures) (/sb/0xc9988f33ff94733fb7f8c2ae0a00c43202290773.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Executor.executeCall uses assembly (/sb/0xc9988f33ff94733fb7f8c2ae0a00c43202290773.sol#177-197)
+	- /sb/0xc9988f33ff94733fb7f8c2ae0a00c43202290773.sol#189-197
+Executor.executeDelegateCall uses assembly (/sb/0xc9988f33ff94733fb7f8c2ae0a00c43202290773.sol#197-221)
+	- /sb/0xc9988f33ff94733fb7f8c2ae0a00c43202290773.sol#213-221
+Executor.executeCreate uses assembly (/sb/0xc9988f33ff94733fb7f8c2ae0a00c43202290773.sol#221-239)
+	- /sb/0xc9988f33ff94733fb7f8c2ae0a00c43202290773.sol#235-239
+SecuredTokenTransfer.transferToken uses assembly (/sb/0xc9988f33ff94733fb7f8c2ae0a00c43202290773.sol#835-879)
+	- /sb/0xc9988f33ff94733fb7f8c2ae0a00c43202290773.sol#851-879
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+MasterCopy.changeMasterCopy (/sb/0xc9988f33ff94733fb7f8c2ae0a00c43202290773.sol#57-79) should be declared external
+ModuleManager.enableModule (/sb/0xc9988f33ff94733fb7f8c2ae0a00c43202290773.sol#295-317) should be declared external
+ModuleManager.disableModule (/sb/0xc9988f33ff94733fb7f8c2ae0a00c43202290773.sol#329-351) should be declared external
+ModuleManager.execTransactionFromModule (/sb/0xc9988f33ff94733fb7f8c2ae0a00c43202290773.sol#363-393) should be declared external
+ModuleManager.getModules (/sb/0xc9988f33ff94733fb7f8c2ae0a00c43202290773.sol#399-459) should be declared external
+MerchantModule.setup (/sb/0xc9988f33ff94733fb7f8c2ae0a00c43202290773.sol#959-981) should be declared external
+MerchantModule.split (/sb/0xc9988f33ff94733fb7f8c2ae0a00c43202290773.sol#985-1179) should be declared external
+MerchantModule.cancelCXSubscription (/sb/0xc9988f33ff94733fb7f8c2ae0a00c43202290773.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xc9988f33ff94733fb7f8c2ae0a00c43202290773.sol:
+	- pragma solidity^0.5.0 (/sb/0xc9988f33ff94733fb7f8c2ae0a00c43202290773.sol#9-17): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_masterCopy' of MasterCopy.changeMasterCopy (/sb/0xc9988f33ff94733fb7f8c2ae0a00c43202290773.sol#59-63) is not in mixedCase
+Parameter '_oracleRegistry' of MerchantModule.setup (/sb/0xc9988f33ff94733fb7f8c2ae0a00c43202290773.sol#959-961) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xc9988f33ff94733fb7f8c2ae0a00c43202290773.sol analyzed (13 contracts), 18 result(s) found

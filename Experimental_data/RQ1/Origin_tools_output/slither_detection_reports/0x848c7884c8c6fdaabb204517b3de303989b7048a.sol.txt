@@ -1,0 +1,253 @@
+INFO:Detectors:[91m
+Reentrancy in Bank.fallback (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#2077-2163):
+	External calls:
+	- DEEXContract.transfer(msg.sender,payoutDeex) (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#2149-2151)
+	External calls sending eth:
+	- msg.sender.transfer(payout) (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#2125)
+	State variables written after the call(s):
+	- withdrawn (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#2157)
+Reentrancy in Bank.getWinners (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1897-2077):
+	External calls:
+	- DEEXContract.balanceOf(address(HamstersContract)) > 0 (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1949-1971)
+	- DEEXContract.transferFrom(address(HamstersContract),address(this),DEEXContract.balanceOf(address(HamstersContract))) (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1957-1971)
+	- DEEXContract.transferFrom(address(DragonsContract),address(this),DEEXContract.balanceOf(address(DragonsContract))) (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1973-1989)
+	- DEEXContract.transfer(team,tokenReturn) (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#2033-2035)
+	- lastBalanceDeex = DEEXContract.balanceOf(address(this)) (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#2039-2041)
+	External calls sending eth:
+	- team.transfer(remainder) (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#2019-2021)
+	State variables written after the call(s):
+	- countOfDragons (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#2065)
+	- countOfHamsters (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#2065)
+	- currentDeadline (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#2071-2075)
+	- jackPot (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#2059)
+	- lastBalanceDeex (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#2039-2041)
+	- probabilityOfDragons (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#2071)
+	- remainder (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#2047-2049)
+	- remainderDeex (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#2051-2057)
+	- totalDeexSupplyOfDragons (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#2047)
+	- totalDeexSupplyOfHamsters (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#2045)
+	- totalSupplyOfDragons (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#2043-2045)
+	- totalSupplyOfHamsters (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#2041-2043)
+	- winner (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#2061)
+	- withdrawn (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#2059-2061)
+	- withdrawnDeex (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#2061-2063)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities[0m
+INFO:Detectors:[93m
+Bank.getWinners (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1897-2077) uses a dangerous strict equality:
+	- randomNumber == 0
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Reentrancy in Bank.calculateProbability (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1789-1893):
+	External calls:
+	- totalDeexSupplyOfHamsters = DEEXContract.balanceOf(address(HamstersContract)) (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1791-1799)
+	- totalDeexSupplyOfDragons = DEEXContract.balanceOf(address(DragonsContract)) (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1801-1805)
+	- totalDeexSupplyOfHamsters = DEEXContract.balanceOf(address(HamstersContract)) (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1887-1889)
+	- totalDeexSupplyOfDragons = DEEXContract.balanceOf(address(DragonsContract)) (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1891-1893)
+	State variables written after the call(s):
+	- totalDeexSupplyOfDragons (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1891-1893)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+Bank.getWinners (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1897-2077) does not use the value returned by external calls:
+	-DEEXContract.transferFrom(address(HamstersContract),address(this),DEEXContract.balanceOf(address(HamstersContract))) (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1957-1971)
+	-DEEXContract.transferFrom(address(DragonsContract),address(this),DEEXContract.balanceOf(address(DragonsContract))) (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1973-1989)
+	-DEEXContract.transfer(team,tokenReturn) (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#2033-2035)
+Bank.fallback (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#2077-2163) does not use the value returned by external calls:
+	-DEEXContract.transfer(msg.sender,payoutDeex) (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#2149-2151)
+Dragons.constructor (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol) does not use the value returned by external calls:
+	-DEEXContract.approve(_bankAddress,9999999999999999999000000000000000000) (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol)
+Hamsters.constructor (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol) does not use the value returned by external calls:
+	-DEEXContract.approve(_bankAddress,9999999999999999999000000000000000000) (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in Bank.calculateProbability (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1789-1893):
+	External calls:
+	- totalDeexSupplyOfHamsters = DEEXContract.balanceOf(address(HamstersContract)) (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1791-1799)
+	- totalDeexSupplyOfDragons = DEEXContract.balanceOf(address(DragonsContract)) (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1801-1805)
+	State variables written after the call(s):
+	- probabilityOfDragons (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1829-1837)
+	- probabilityOfDragons (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1841-1843)
+	- probabilityOfDragons (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1849-1851)
+	- probabilityOfDragons (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1885-1887)
+	- probabilityOfHamsters (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1855-1857)
+	- probabilityOfHamsters (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1865-1871)
+	- probabilityOfHamsters (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1873-1875)
+	- probabilityOfHamsters (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1879)
+	- totalDeexSupplyOfDragons (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1801-1805)
+	- totalDeexSupplyOfDragons (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1817)
+	- totalDeexSupplyOfHamsters (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1813)
+Reentrancy in Dragons.constructor (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol):
+	External calls:
+	- BankContract.setDragonsAddress(address(this)) (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol)
+	State variables written after the call(s):
+	- DEEXContract (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol)
+Reentrancy in Hamsters.constructor (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol):
+	External calls:
+	- BankContract.setHamstersAddress(address(this)) (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol)
+	State variables written after the call(s):
+	- DEEXContract (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol)
+Reentrancy in Bank.fallback (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#2077-2163):
+	External calls:
+	- DEEXContract.transfer(msg.sender,payoutDeex) (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#2149-2151)
+	External calls sending eth:
+	- msg.sender.transfer(payout) (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#2125)
+	State variables written after the call(s):
+	- lastHeroHistory (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#2155)
+	- lastRoundHero (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#2157)
+Reentrancy in Bank.getWinners (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1897-2077):
+	External calls:
+	- DEEXContract.balanceOf(address(HamstersContract)) > 0 (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1949-1971)
+	- DEEXContract.transferFrom(address(HamstersContract),address(this),DEEXContract.balanceOf(address(HamstersContract))) (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1957-1971)
+	- DEEXContract.transferFrom(address(DragonsContract),address(this),DEEXContract.balanceOf(address(DragonsContract))) (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1973-1989)
+	State variables written after the call(s):
+	- lastCountOfDragons (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#2005-2007)
+	- lastCountOfHamsters (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#2007-2009)
+	- lastJackPot (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#2005)
+	- lastRoundHero (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#2001-2003)
+	- lastTotalDeexSupplyOfDragons (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1995-1999)
+	- lastTotalDeexSupplyOfHamsters (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1999-2001)
+	- lastTotalSupplyOfDragons (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1992-1995)
+	- lastTotalSupplyOfHamsters (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1989)
+	- lastWinner (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#2005)
+	- lastWithdrawn (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#2013)
+	- lastWithdrawnDeex (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#2015)
+	- remainder (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#2017-2019)
+Reentrancy in Bank.getWinners (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1897-2077):
+	External calls:
+	- DEEXContract.balanceOf(address(HamstersContract)) > 0 (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1949-1971)
+	- DEEXContract.transferFrom(address(HamstersContract),address(this),DEEXContract.balanceOf(address(HamstersContract))) (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1957-1971)
+	- DEEXContract.transferFrom(address(DragonsContract),address(this),DEEXContract.balanceOf(address(DragonsContract))) (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1973-1989)
+	External calls sending eth:
+	- team.transfer(remainder) (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#2019-2021)
+	State variables written after the call(s):
+	- lastBalance (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#2021-2027)
+	- remainderDeex (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#2027-2029)
+	- tokenReturn (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#2029-2033)
+Reentrancy in Bank.getWinners (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1897-2077):
+	External calls:
+	- DEEXContract.balanceOf(address(HamstersContract)) > 0 (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1949-1971)
+	- DEEXContract.transferFrom(address(HamstersContract),address(this),DEEXContract.balanceOf(address(HamstersContract))) (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1957-1971)
+	- DEEXContract.transferFrom(address(DragonsContract),address(this),DEEXContract.balanceOf(address(DragonsContract))) (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1973-1989)
+	- DEEXContract.transfer(team,tokenReturn) (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#2033-2035)
+	- lastBalanceDeex = DEEXContract.balanceOf(address(this)) (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#2039-2041)
+	External calls sending eth:
+	- team.transfer(remainder) (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#2019-2021)
+	State variables written after the call(s):
+	- currentRound (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#2075)
+	- defaultCurrentDeadlineInHours (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#2071-2075)
+	- defaultLastDeadlineInHours (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#2071-2075)
+	- lastDeadline (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#2071-2075)
+	- probabilityOfHamsters (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#2065-2069)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Bank.getState (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1669-1683) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp > currentDeadline (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1671-1679)
+Bank.setInfo (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1695-1767) uses timestamp for comparisons
+	Dangerous comparisons:
+	- currentDeadline.add(120) <= lastDeadline (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1761-1767)
+Bank.getWinners (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1897-2077) uses timestamp for comparisons
+	Dangerous comparisons:
+	- 1 <= winningNumber && winningNumber <= probabilityOfDragons (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1934-1941)
+	- probabilityOfDragons < winningNumber && winningNumber <= 10000 (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1941-1947)
+	- randomNumber == 0 (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1927)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+Bank.finished should be constant (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1519-1523)
+Bank.lastProbabilityOfDragons should be constant (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1501)
+Bank.lastProbabilityOfHamsters should be constant (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1499-1501)
+Bank.team should be constant (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1433-1437)
+CryptoTeam.team should be constant (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol)
+DEEX.decimals should be constant (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#133)
+DEEX.name should be constant (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#115-117)
+DEEX.symbol should be constant (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#123-125)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+allowanceRecipient.receiveApproval (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#69-81) should be declared external
+tokenRecipient.tokenFallback (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#83-103) should be declared external
+DEEX.initContract (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#261-311) should be declared external
+DEEX.transfer (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#393-401) should be declared external
+DEEX.approveAllAndCall (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#575-583) should be declared external
+DEEX.transferAllAndCall (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#647-657) should be declared external
+DEEX.changeOwner (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#659-669) should be declared external
+DEEX.startSale (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#703-787) should be declared external
+DEEX.changePriceSetter (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#835-849) should be declared external
+DEEX.setMinMaxPriceInWei (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#849-867) should be declared external
+DEEX.setTokenPriceInWei (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#867-901) should be declared external
+DEEX.withdrawAllToOwner (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1003-1029) should be declared external
+DEEX.addReferrer (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1059-1067) should be declared external
+DEEX.removeReferrer (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1067-1073) should be declared external
+DEEX.setReferralBonuses (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1073-1085) should be declared external
+DEEX.buyTokensWithReferrerAddress (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1085-1199) should be declared external
+DEEX.getReferrerBonusTokens (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1200-1223) should be declared external
+Ownable.transferOwnership (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1389-1399) should be declared external
+Bank.setRateToken (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1547-1553) should be declared external
+Bank.setRoundTime (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1601-1617) should be declared external
+Bank.setDEEXAddress (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1625-1631) should be declared external
+Bank.getNow (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1657-1659) should be declared external
+Bank.setInfo (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1695-1767) should be declared external
+Bank.getWinners (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1897-2077) should be declared external
+Bank.calculateETHPrize (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#2167-2202) should be declared external
+Bank.calculateDeexPrize (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#2205-2253) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol:
+	- pragma solidity0.5.6 (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#9-17): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Contract 'allowanceRecipient' (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#69-81) is not in CapWords
+Contract 'tokenRecipient' (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#83-103) is not in CapWords
+Parameter '_to' of DEEX.transfer (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#395) is not in mixedCase
+Parameter '_value' of DEEX.transfer (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#395) is not in mixedCase
+Parameter '_from' of DEEX.transferFrom (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#405-407) is not in mixedCase
+Parameter '_to' of DEEX.transferFrom (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#407) is not in mixedCase
+Parameter '_value' of DEEX.transferFrom (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#407) is not in mixedCase
+Parameter '_spender' of DEEX.approve (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#507) is not in mixedCase
+Parameter '_value' of DEEX.approve (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#507-509) is not in mixedCase
+Parameter '_spender' of DEEX.approveAndCall (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#541-543) is not in mixedCase
+Parameter '_value' of DEEX.approveAndCall (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#543) is not in mixedCase
+Parameter '_extraData' of DEEX.approveAndCall (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#543) is not in mixedCase
+Parameter '_spender' of DEEX.approveAllAndCall (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#575-579) is not in mixedCase
+Parameter '_extraData' of DEEX.approveAllAndCall (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#579) is not in mixedCase
+Parameter '_to' of DEEX.transferAndCall (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#607) is not in mixedCase
+Parameter '_value' of DEEX.transferAndCall (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#607-609) is not in mixedCase
+Parameter '_extraData' of DEEX.transferAndCall (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#609) is not in mixedCase
+Parameter '_to' of DEEX.transferAllAndCall (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#649) is not in mixedCase
+Parameter '_extraData' of DEEX.transferAllAndCall (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#649-651) is not in mixedCase
+Parameter '_newOwner' of DEEX.changeOwner (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#661) is not in mixedCase
+Parameter '_startUnixTime' of DEEX.startSale (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#703) is not in mixedCase
+Parameter '_endUnixTime' of DEEX.startSale (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#703-707) is not in mixedCase
+Parameter '_priceSetter' of DEEX.changePriceSetter (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#837) is not in mixedCase
+Parameter '_priceMinWei' of DEEX.setMinMaxPriceInWei (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#853-859) is not in mixedCase
+Parameter '_priceMaxWei' of DEEX.setMinMaxPriceInWei (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#859) is not in mixedCase
+Parameter '_priceInWei' of DEEX.setTokenPriceInWei (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#867) is not in mixedCase
+Parameter '_referrer' of DEEX.addReferrer (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1063) is not in mixedCase
+Parameter '_referrer' of DEEX.removeReferrer (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1071) is not in mixedCase
+Parameter '_referralBonus' of DEEX.setReferralBonuses (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1077) is not in mixedCase
+Parameter '_referrerBonus' of DEEX.setReferralBonuses (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1077) is not in mixedCase
+Parameter '_referrer' of DEEX.buyTokensWithReferrerAddress (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1085-1086) is not in mixedCase
+Parameter '_rate' of Bank.setRateToken (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1547) is not in mixedCase
+Parameter '_rateModifier' of Bank.setRateToken (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1547) is not in mixedCase
+Function 'Bank._setRoundTime' (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1565-1587) is not in mixedCase
+Parameter '_currentDeadlineInHours' of Bank._setRoundTime (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1565-1567) is not in mixedCase
+Parameter '_lastDeadlineInHours' of Bank._setRoundTime (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1567) is not in mixedCase
+Parameter '_currentDeadlineInHours' of Bank.setRoundTime (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1603) is not in mixedCase
+Parameter '_lastDeadlineInHours' of Bank.setRoundTime (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1603-1605) is not in mixedCase
+Parameter '_DEEXAddress' of Bank.setDEEXAddress (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1625-1627) is not in mixedCase
+Parameter '_DragonsAddress' of Bank.setDragonsAddress (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1637-1639) is not in mixedCase
+Parameter '_HamstersAddress' of Bank.setHamstersAddress (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1649-1651) is not in mixedCase
+Parameter '_lastHero' of Bank.setInfo (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1697) is not in mixedCase
+Parameter '_deposit' of Bank.setInfo (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1697) is not in mixedCase
+Parameter '_difference' of Bank.estimateTokenPercent (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1771-1773) is not in mixedCase
+Parameter '_lastParticipant' of Bank.calculateLastETHPrize (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#2263-2271) is not in mixedCase
+Parameter '_lastParticipant' of Bank.calculateLastDeexPrize (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#2309) is not in mixedCase
+Variable 'Bank.DragonsContract' (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1529) is not in mixedCase
+Variable 'Bank.HamstersContract' (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1529) is not in mixedCase
+Variable 'Bank.DEEXContract' (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol#1531) is not in mixedCase
+Variable 'CryptoTeam.BankContract' (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol) is not in mixedCase
+Variable 'CryptoTeam.DEEXContract' (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol) is not in mixedCase
+Parameter '_bankAddress' of Dragons. (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol) is not in mixedCase
+Parameter '_DEEXAddress' of Dragons. (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol) is not in mixedCase
+Parameter '_bankAddress' of Hamsters. (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol) is not in mixedCase
+Parameter '_DEEXAddress' of Hamsters. (/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x848c7884c8c6fdaabb204517b3de303989b7048a.sol analyzed (9 contracts), 101 result(s) found

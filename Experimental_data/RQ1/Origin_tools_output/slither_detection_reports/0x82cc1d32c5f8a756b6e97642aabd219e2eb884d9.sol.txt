@@ -1,0 +1,202 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol:
+/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol:1597:5: Warning: Functions in interfaces should be declared external.
+    function maxGasPrice() public view returns(uint);
+    ^-----------------------------------------------^
+/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol:1599:5: Warning: Functions in interfaces should be declared external.
+    function getUserCapInWei(address user) public view returns(uint);
+    ^---------------------------------------------------------------^
+/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol:1601:5: Warning: Functions in interfaces should be declared external.
+    function getUserCapInTokenWei(address user, DetailedERC20 token) public view returns(uint);
+    ^-----------------------------------------------------------------------------------------^
+/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol:1603:5: Warning: Functions in interfaces should be declared external.
+    function enabled() public view returns(bool);
+    ^-------------------------------------------^
+/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol:1605:5: Warning: Functions in interfaces should be declared external.
+    function info(bytes32 id) public view returns(uint);
+    ^--------------------------------------------------^
+/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol:1609:5: Warning: Functions in interfaces should be declared external.
+    function getExpectedRate(DetailedERC20 src, DetailedERC20 dest, uint srcQty) public view
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol:1615:5: Warning: Functions in interfaces should be declared external.
+    function tradeWithHint(DetailedERC20 src, uint srcAmount, DetailedERC20 dest, address destAddress, uint maxDestAmount,
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol:1781:27: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function proxyPayment(address _owner) public payable returns(bool) {
+                          ^------------^
+/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol:1791:25: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function onTransfer(address _from, address _to, uint _amount) public returns(bool) {
+                        ^-----------^
+/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol:1791:40: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function onTransfer(address _from, address _to, uint _amount) public returns(bool) {
+                                       ^---------^
+/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol:1791:53: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function onTransfer(address _from, address _to, uint _amount) public returns(bool) {
+                                                    ^----------^
+/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol:1801:24: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function onApprove(address _owner, address _spender, uint _amount) public
+                       ^------------^
+/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol:1801:40: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function onApprove(address _owner, address _spender, uint _amount) public
+                                       ^--------------^
+/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol:1801:58: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function onApprove(address _owner, address _spender, uint _amount) public
+                                                         ^----------^
+
+INFO:Detectors:[91m
+MiniMeToken.balances (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#639) is never initialized. It is used in:
+	- doTransfer (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#831-899)
+	- balanceOfAt (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1069-1109)
+	- generateTokens (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1257-1297)
+	- destroyTokens (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1305-1329)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-state-variables[0m
+INFO:Detectors:[93m
+MiniMeToken.isContract (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1467-1483) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+IAO._register (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1805-1873) uses a dangerous strict equality:
+	- require(bool,string)(kro.balanceOf(msg.sender) == 0,Already joined)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Reentrancy in MiniMeToken.approve (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#931-961):
+	External calls:
+	- require(bool)(TokenController(owner).onApprove(msg.sender,_spender,_amount)) (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#955-957)
+	State variables written after the call(s):
+	- allowed (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#959)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+hint in IAO.registerWithETH (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1909) is a local variable never initialiazed
+hint in IAO.registerWithToken (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[93m
+MiniMeToken.claimTokens (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1533-1549) does not use the value returned by external calls:
+	-token.transfer(owner,balance) (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1543-1545)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+MiniMeToken.getValueAt.min (local variable @ /sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1389-1391) shadows:
+	- MiniMeToken.min (function @ /sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1485-1489)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+MiniMeToken.isContract uses assembly (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1467-1483)
+	- /sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1481-1483
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+MiniMeToken.version should be constant (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#573-575)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Ownable.renounceOwnership (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#93-101) should be declared external
+Ownable.transferOwnership (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#112-119) should be declared external
+ERC20Basic.totalSupply (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#345-349) should be declared external
+ERC20Basic.balanceOf (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#349-351) should be declared external
+ERC20Basic.transfer (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#351-357) should be declared external
+ERC20.allowance (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#371-385) should be declared external
+ERC20.transferFrom (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#385-387) should be declared external
+ERC20.approve (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#389-393) should be declared external
+IAO.proxyPayment (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1875-1877) should be declared external
+TokenController.proxyPayment (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#445) should be declared external
+IAO.onTransfer (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1877-1879) should be declared external
+TokenController.onTransfer (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#459-463) should be declared external
+TokenController.onApprove (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#485-489) should be declared external
+IAO.onApprove (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1879-1885) should be declared external
+ApproveAndCallFallBack.receiveApproval (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#541-543) should be declared external
+MiniMeToken.transfer (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#749-755) should be declared external
+MiniMeToken.transferFrom (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#779-811) should be declared external
+MiniMeToken.allowance (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#977-993) should be declared external
+MiniMeToken.approveAndCall (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1023-1035) should be declared external
+MiniMeToken.createCloneToken (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1209-1243) should be declared external
+MiniMeToken.generateTokens (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1257-1297) should be declared external
+MiniMeToken.destroyTokens (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1305-1329) should be declared external
+MiniMeToken.enableTransfers (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1345-1355) should be declared external
+MiniMeToken.fallback (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1515-1525) should be declared external
+MiniMeToken.claimTokens (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1533-1549) should be declared external
+MiniMeTokenFactory.createCloneToken (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1631-1659) should be declared external
+KyberNetworkProxyInterface.maxGasPrice (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1665-1669) should be declared external
+KyberNetworkProxyInterface.getUserCapInWei (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1669-1675) should be declared external
+KyberNetworkProxyInterface.getUserCapInTokenWei (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1675-1679) should be declared external
+KyberNetworkProxyInterface.enabled (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1679-1683) should be declared external
+KyberNetworkProxyInterface.info (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1683-1687) should be declared external
+KyberNetworkProxyInterface.getExpectedRate (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1691-1703) should be declared external
+KyberNetworkProxyInterface.tradeWithHint (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1703-1707) should be declared external
+IAO.setActive (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1763-1769) should be declared external
+IAO.transferKROContractOwnership (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1769-1805) should be declared external
+IAO.registerWithDAI (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1887-1903) should be declared external
+IAO.registerWithToken (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol) should be declared external
+IAO.fallback (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_newOwner' of Ownable.transferOwnership (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#117) is not in mixedCase
+Function 'Ownable._transferOwnership' (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#127-151) is not in mixedCase
+Parameter '_newOwner' of Ownable._transferOwnership (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#129) is not in mixedCase
+Parameter '_a' of SafeMath.mul (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#161) is not in mixedCase
+Parameter '_b' of SafeMath.mul (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#161) is not in mixedCase
+Parameter '_a' of SafeMath.div (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#195) is not in mixedCase
+Parameter '_b' of SafeMath.div (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#195) is not in mixedCase
+Parameter '_a' of SafeMath.sub (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#225) is not in mixedCase
+Parameter '_b' of SafeMath.sub (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#225) is not in mixedCase
+Parameter '_a' of SafeMath.add (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#243) is not in mixedCase
+Parameter '_b' of SafeMath.add (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#243) is not in mixedCase
+Parameter '_name' of DetailedERC20. (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#427) is not in mixedCase
+Parameter '_symbol' of DetailedERC20. (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#427) is not in mixedCase
+Parameter '_decimals' of DetailedERC20. (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#427) is not in mixedCase
+Parameter '_tokenFactory' of MiniMeToken. (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#693-695) is not in mixedCase
+Parameter '_parentToken' of MiniMeToken. (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#695-703) is not in mixedCase
+Parameter '_parentSnapShotBlock' of MiniMeToken. (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#703-707) is not in mixedCase
+Parameter '_tokenName' of MiniMeToken. (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#707-711) is not in mixedCase
+Parameter '_decimalUnits' of MiniMeToken. (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#711) is not in mixedCase
+Parameter '_tokenSymbol' of MiniMeToken. (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#711-713) is not in mixedCase
+Parameter '_transfersEnabled' of MiniMeToken. (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#713) is not in mixedCase
+Parameter '_to' of MiniMeToken.transfer (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#751) is not in mixedCase
+Parameter '_amount' of MiniMeToken.transfer (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#751) is not in mixedCase
+Parameter '_from' of MiniMeToken.transferFrom (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#779) is not in mixedCase
+Parameter '_to' of MiniMeToken.transferFrom (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#779) is not in mixedCase
+Parameter '_amount' of MiniMeToken.transferFrom (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#779-781) is not in mixedCase
+Parameter '_from' of MiniMeToken.doTransfer (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#833) is not in mixedCase
+Parameter '_to' of MiniMeToken.doTransfer (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#833) is not in mixedCase
+Parameter '_amount' of MiniMeToken.doTransfer (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#833) is not in mixedCase
+Parameter '_owner' of MiniMeToken.balanceOf (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#905) is not in mixedCase
+Parameter '_spender' of MiniMeToken.approve (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#933) is not in mixedCase
+Parameter '_amount' of MiniMeToken.approve (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#933) is not in mixedCase
+Parameter '_owner' of MiniMeToken.allowance (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#979-981) is not in mixedCase
+Parameter '_spender' of MiniMeToken.allowance (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#981-983) is not in mixedCase
+Parameter '_spender' of MiniMeToken.approveAndCall (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1023) is not in mixedCase
+Parameter '_amount' of MiniMeToken.approveAndCall (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1023) is not in mixedCase
+Parameter '_extraData' of MiniMeToken.approveAndCall (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1024-1025) is not in mixedCase
+Parameter '_owner' of MiniMeToken.balanceOfAt (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1071) is not in mixedCase
+Parameter '_blockNumber' of MiniMeToken.balanceOfAt (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1071) is not in mixedCase
+Parameter '_blockNumber' of MiniMeToken.totalSupplyAt (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1127-1129) is not in mixedCase
+Parameter '_cloneTokenName' of MiniMeToken.createCloneToken (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1211) is not in mixedCase
+Parameter '_cloneDecimalUnits' of MiniMeToken.createCloneToken (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1213) is not in mixedCase
+Parameter '_cloneTokenSymbol' of MiniMeToken.createCloneToken (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1213-1215) is not in mixedCase
+Parameter '_snapshotBlock' of MiniMeToken.createCloneToken (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1215) is not in mixedCase
+Parameter '_transfersEnabled' of MiniMeToken.createCloneToken (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1215-1216) is not in mixedCase
+Parameter '_owner' of MiniMeToken.generateTokens (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1257) is not in mixedCase
+Parameter '_amount' of MiniMeToken.generateTokens (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1257-1259) is not in mixedCase
+Parameter '_owner' of MiniMeToken.destroyTokens (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1305) is not in mixedCase
+Parameter '_amount' of MiniMeToken.destroyTokens (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1305) is not in mixedCase
+Parameter '_transfersEnabled' of MiniMeToken.enableTransfers (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1351) is not in mixedCase
+Parameter '_block' of MiniMeToken.getValueAt (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1369-1371) is not in mixedCase
+Parameter '_value' of MiniMeToken.updateValueAtNow (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1425) is not in mixedCase
+Parameter '_addr' of MiniMeToken.isContract (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1469) is not in mixedCase
+Parameter '_token' of MiniMeToken.claimTokens (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1535) is not in mixedCase
+Parameter '_parentToken' of MiniMeTokenFactory.createCloneToken (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1633) is not in mixedCase
+Parameter '_snapshotBlock' of MiniMeTokenFactory.createCloneToken (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1636-1641) is not in mixedCase
+Parameter '_tokenName' of MiniMeTokenFactory.createCloneToken (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1641) is not in mixedCase
+Parameter '_decimalUnits' of MiniMeTokenFactory.createCloneToken (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1641) is not in mixedCase
+Parameter '_tokenSymbol' of MiniMeTokenFactory.createCloneToken (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1641) is not in mixedCase
+Parameter '_transfersEnabled' of MiniMeTokenFactory.createCloneToken (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1641-1645) is not in mixedCase
+Parameter '_kroAddr' of IAO. (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1753) is not in mixedCase
+Parameter '_beneficiary' of IAO. (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1753) is not in mixedCase
+Parameter '_secretHash' of IAO. (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1753-1755) is not in mixedCase
+Parameter '_isActive' of IAO.setActive (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1763) is not in mixedCase
+Parameter '_newOwner' of IAO.transferKROContractOwnership (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1769-1777) is not in mixedCase
+Parameter '_secret' of IAO.transferKROContractOwnership (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1777) is not in mixedCase
+Function 'IAO._register' (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1805-1873) is not in mixedCase
+Parameter '_donationInDAI' of IAO._register (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1813) is not in mixedCase
+Parameter '_referrer' of IAO._register (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1813-1817) is not in mixedCase
+Parameter '_donationInDAI' of IAO.registerWithDAI (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1887-1889) is not in mixedCase
+Parameter '_referrer' of IAO.registerWithDAI (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1889-1891) is not in mixedCase
+Parameter '_referrer' of IAO.registerWithETH (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol#1903-1905) is not in mixedCase
+Parameter '_token' of IAO.registerWithToken (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol) is not in mixedCase
+Parameter '_donationInTokens' of IAO.registerWithToken (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol) is not in mixedCase
+Parameter '_referrer' of IAO.registerWithToken (/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x82cc1d32c5f8a756b6e97642aabd219e2eb884d9.sol analyzed (12 contracts), 123 result(s) found

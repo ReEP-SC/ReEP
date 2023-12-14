@@ -1,0 +1,154 @@
+INFO:Detectors:[91m
+__unstable__TokenVault.transferFunds (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#808-817) sends eth to arbitrary user
+	Dangerous calls:
+	- to.transfer(amount) (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#817)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[93m
+Address.isContract (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#185-198) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+Reentrancy in MoonStaking.claimMoonInEpool (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#1027-1043):
+	External calls:
+	- _vault.transferToken(moon,_msgSender(),_getEarned(eRate,eAdapter,eStakingPool)) (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#1035-1039)
+	State variables written after the call(s):
+	- users (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#1040-1042)
+	- users (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#1042)
+Reentrancy in MoonStaking.claimMoonInTpool (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#1006-1023):
+	External calls:
+	- _vault.transferToken(moon,_msgSender(),_getEarned(pool.rate,pool.adapter,tokenStakingPool)) (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#1016-1022)
+	State variables written after the call(s):
+	- users (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#1022)
+	- users (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#1022-1023)
+Reentrancy in MoonStaking.stake (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#950-969):
+	External calls:
+	- require(bool,string)(token.balanceOf(_msgSender()) >= _value,Insufficient Funds) (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#951-952)
+	- require(bool,string)(token.allowance(_msgSender(),address(this)) >= _value,Insufficient Funds Approved) (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#952-953)
+	- _forwardFundsToken(token,_value) (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#955)
+	State variables written after the call(s):
+	- pools (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#967-968)
+Reentrancy in MoonStaking.withdrawEPool (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#990-1004):
+	External calls:
+	- _vault.transferToken(moon,_msgSender(),_getEarned(eRate,eAdapter,eStakingPool)) (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#998-1000)
+	State variables written after the call(s):
+	- users (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#1001)
+	- users (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#1001-1002)
+Reentrancy in MoonStaking.withdrawEPool (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#990-1004):
+	External calls:
+	- _vault.transferToken(moon,_msgSender(),_getEarned(eRate,eAdapter,eStakingPool)) (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#998-1000)
+	- _vault.transferFunds(_msgSender(),eStakingPool.staked) (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#1003)
+	State variables written after the call(s):
+	- users (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#1003-1004)
+Reentrancy in MoonStaking.withdrawTokenPool (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#970-989):
+	External calls:
+	- _vault.transferToken(moon,_msgSender(),_getEarned(pool.rate,pool.adapter,tokenStakingPool)) (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#976-978)
+	State variables written after the call(s):
+	- users (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#979-981)
+	- users (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#981-985)
+Reentrancy in MoonStaking.withdrawTokenPool (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#970-989):
+	External calls:
+	- _vault.transferToken(moon,_msgSender(),_getEarned(pool.rate,pool.adapter,tokenStakingPool)) (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#976-978)
+	- _vault.transferToken(IERC20(token),_msgSender(),tokenStakingPool.staked) (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#987-988)
+	State variables written after the call(s):
+	- users (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#988)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+__unstable__TokenVault.transferToken (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#800-808) does not use the value returned by external calls:
+	-token.transfer(to,amount) (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#805-807)
+MoonStaking.supplyVault (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#1069-1073) does not use the value returned by external calls:
+	-moon.transferFrom(_msgSender(),address(_vault),amount) (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#1072-1073)
+MoonStaking._forwardFundsToken (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol) does not use the value returned by external calls:
+	-erc20Token.transferFrom(_msgSender(),address(_vault),_value) (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in MoonStaking.stake (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#950-969):
+	External calls:
+	- require(bool,string)(token.balanceOf(_msgSender()) >= _value,Insufficient Funds) (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#951-952)
+	- require(bool,string)(token.allowance(_msgSender(),address(this)) >= _value,Insufficient Funds Approved) (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#952-953)
+	- _forwardFundsToken(token,_value) (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#955)
+	State variables written after the call(s):
+	- users (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#959-960)
+	- users (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#960-961)
+	- users (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#961-966)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+MoonStaking.withdrawTokenPool (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#970-989) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(tokenStakingPool.staked > 0 != tokenStakingPool.earned > 0,Not available) (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#973)
+MoonStaking.withdrawEPool (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#990-1004) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(eStakingPool.staked > 0 != eStakingPool.earned > 0,Not available) (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#992-993)
+MoonStaking.claimMoonInTpool (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#1006-1023) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(tokenStakingPool.staked > 0 != tokenStakingPool.earned > 0,Not available) (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#1013-1015)
+MoonStaking.claimMoonInEpool (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#1027-1043) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(eStakingPool.staked > 0 != eStakingPool.earned > 0,Not available) (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#1033-1034)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+Address.isContract uses assembly (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#185-198)
+	- /sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#195-196
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+SupporterRole.addSupporter (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#380-385) should be declared external
+SupporterRole.renounceSupporter (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#386-389) should be declared external
+PauserRole.addPauser (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#422-427) should be declared external
+PauserRole.renouncePauser (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#427-430) should be declared external
+Pausable.paused (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#476-480) should be declared external
+Pausable.pause (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#499-503) should be declared external
+Pausable.unpause (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#506-509) should be declared external
+Ownable.renounceOwnership (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#565-568) should be declared external
+Ownable.transferOwnership (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#575-576) should be declared external
+Secondary.primary (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#770-772) should be declared external
+Secondary.transferPrimary (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#775-785) should be declared external
+__unstable__TokenVault.transferToken (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#800-808) should be declared external
+__unstable__TokenVault.transferFunds (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#808-817) should be declared external
+MoonStaking.updatePoolRate (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#859-865) should be declared external
+MoonStaking.updateEpoolRate (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#872-877) should be declared external
+MoonStaking.poolTokenInfo (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#894-902) should be declared external
+MoonStaking.poolInfo (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#904-911) should be declared external
+MoonStaking.poolEInfo (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#914-918) should be declared external
+MoonStaking.getEarnedEpool (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#919-922) should be declared external
+MoonStaking.getEarnedTpool (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#927-934) should be declared external
+MoonStaking.stakeE (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#935-943) should be declared external
+MoonStaking.stake (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#950-969) should be declared external
+MoonStaking.withdrawTokenPool (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#970-989) should be declared external
+MoonStaking.withdrawEPool (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#990-1004) should be declared external
+MoonStaking.claimMoonInTpool (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#1006-1023) should be declared external
+MoonStaking.claimMoonInEpool (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#1027-1043) should be declared external
+MoonStaking.getReserved (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#1044-1055) should be declared external
+MoonStaking.getReservedByAddress (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#1057-1064) should be declared external
+MoonStaking.supplyVault (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#1069-1073) should be declared external
+MoonStaking.depriveToken (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#1079-1081) should be declared external
+MoonStaking.depriveFunds (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol:
+	- pragma solidity^0.5.5 (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#5-7): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Low level call in Address.sendValue (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#226-242):
+	-(success) = recipient.call.value(amount)() /sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#233-237
+Low level call in SafeERC20.callOptionalReturn (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#629-662):
+	-(success,returndata) = address(token).call(data) /sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#650-653
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Function 'Context._msgSender' (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#346-349) is not in mixedCase
+Function 'Context._msgData' (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#349-359) is not in mixedCase
+Function 'SupporterRole._addSupporter' (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#389-395) is not in mixedCase
+Function 'SupporterRole._removeSupporter' (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#395-399) is not in mixedCase
+Function 'PauserRole._addPauser' (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#430-431) is not in mixedCase
+Function 'PauserRole._removePauser' (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#432-433) is not in mixedCase
+Function 'Ownable._transferOwnership' (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#578-585) is not in mixedCase
+Contract '__unstable__TokenVault' (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#799-819) is not in CapWords
+Parameter '_moon' of MoonStaking. (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#850) is not in mixedCase
+Parameter '_rate' of MoonStaking.updatePoolRate (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#859-860) is not in mixedCase
+Parameter '_adapter' of MoonStaking.updatePoolRate (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#860) is not in mixedCase
+Parameter '_rate' of MoonStaking.updateEpoolRate (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#872) is not in mixedCase
+Parameter '_adapter' of MoonStaking.updateEpoolRate (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#872) is not in mixedCase
+Parameter '_pool' of MoonStaking.poolTokenInfo (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#894-895) is not in mixedCase
+Parameter '_value' of MoonStaking.stake (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol#950) is not in mixedCase
+Function 'MoonStaking._forwardFundsToken' (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol) is not in mixedCase
+Parameter '_value' of MoonStaking._forwardFundsToken (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol) is not in mixedCase
+Function 'MoonStaking._getEarned' (/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xc6a57e7fe10b37d1e1f678247b9b25c6a2d8d7f7.sol analyzed (14 contracts), 70 result(s) found

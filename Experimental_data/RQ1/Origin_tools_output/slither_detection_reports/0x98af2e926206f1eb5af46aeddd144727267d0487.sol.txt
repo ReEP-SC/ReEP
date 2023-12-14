@@ -1,0 +1,171 @@
+INFO:Detectors:[93m
+AddressUtils.isContract (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#1230-1249) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+Reentrancy in TokenVesting.release (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#833-841):
+	External calls:
+	- unreleased = releasableAmount(token) (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#837)
+	State variables written after the call(s):
+	- released (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#838-840)
+Reentrancy in TokenVesting.revoke (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#848-857):
+	External calls:
+	- balance = token.balanceOf(this) (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#850-852)
+	- unreleased = releasableAmount(token) (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#853-854)
+	State variables written after the call(s):
+	- revoked (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#855-856)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+Reentrancy in NokuTokenBurner.tokenReceived (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#367-396):
+	External calls:
+	- assert(bool)(BurnableERC20(_token).burn(amountToBurn)) (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#375-380)
+	State variables written after the call(s):
+	- burnedTokens (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#380-383)
+Reentrancy in NokuTokenBurner.tokenReceived (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#367-396):
+	External calls:
+	- assert(bool)(BurnableERC20(_token).burn(amountToBurn)) (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#375-380)
+	- assert(bool)(BurnableERC20(_token).transfer(wallet,amountToTransfer)) (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#387-391)
+	State variables written after the call(s):
+	- transferredTokens (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#393-396)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+TokenTimelock.constructor (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#736-751) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool)(_releaseTime > block.timestamp) (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#747-748)
+TokenTimelock.release (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#755-767) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool)(block.timestamp >= releaseTime) (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#758-761)
+TokenVesting.vestedAmount (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#869-882) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp >= start.add(duration) || revoked[token] (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#877-882)
+	- block.timestamp < cliff (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#875-882)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+AddressUtils.isContract uses assembly (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#1230-1249)
+	- /sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#1247
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+NokuPricingPlan.payFee (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#25-28) should be declared external
+NokuPricingPlan.usageFee (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#34-37) should be declared external
+Ownable.renounceOwnership (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#75-80) should be declared external
+Ownable.transferOwnership (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#84-89) should be declared external
+NokuCustomToken.isCustomToken (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#144-146) should be declared external
+NokuCustomToken.finishBurning (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#151-156) should be declared external
+NokuCustomToken.setPricingPlan (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#160-172) should be declared external
+Pausable.pause (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#208-214) should be declared external
+Pausable.unpause (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#218-223) should be declared external
+BasicToken.totalSupply (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#409-410) should be declared external
+ERC20Basic.totalSupply (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#280) should be declared external
+StandardToken.allowance (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#556-563) should be declared external
+ERC20.allowance (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#295-301) should be declared external
+StandardToken.approve (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#537-549) should be declared external
+ERC20.approve (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#304-308) should be declared external
+BurnableERC20.burn (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#312-314) should be declared external
+NokuTokenBurner.setBurningPercentage (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#352-361) should be declared external
+NokuTokenBurner.tokenReceived (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#367-396) should be declared external
+StandardToken.increaseApproval (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#576-586) should be declared external
+StandardToken.decreaseApproval (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#604-617) should be declared external
+MintableToken.finishMinting (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#671-679) should be declared external
+TokenTimelock.release (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#755-767) should be declared external
+TokenVesting.release (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#833-841) should be declared external
+TokenVesting.revoke (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#848-857) should be declared external
+NokuCustomERC20.setMintingFeeEnabled (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#989-999) should be declared external
+NokuCustomERC20.setInformation (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#1006-1012) should be declared external
+NokuCustomERC20.finishTransferFeePayment (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#1015-1020) should be declared external
+NokuCustomERC20.setTransferFeePercentage (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#1026-1037) should be declared external
+NokuCustomERC20.mintLocked (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#1141-1144) should be declared external
+NokuCustomERC20.mintTimelocked (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#1152-1164) should be declared external
+NokuCustomERC20.mintVested (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#1178-1195) should be declared external
+NokuCustomERC20.releaseVested (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#1200-1203) should be declared external
+NokuCustomERC20.revokeVested (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#1206-1218) should be declared external
+NokuCustomService.setPricingPlan (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#1263-1276) should be declared external
+NokuCustomERC20Service.createCustomToken (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#1297-1299) should be declared external
+NokuCustomERC20Service.createCustomToken (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol:
+	- pragma solidity^0.4.23 (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#9-11): it allows old versions
+	- pragma solidity^0.4.23 (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#771): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_newOwner' of Ownable.transferOwnership (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#87-88) is not in mixedCase
+Function 'Ownable._transferOwnership' (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#92-102) is not in mixedCase
+Parameter '_newOwner' of Ownable._transferOwnership (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#93) is not in mixedCase
+Parameter '_pricingPlan' of NokuCustomToken. (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#129) is not in mixedCase
+Parameter '_serviceProvider' of NokuCustomToken. (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#129) is not in mixedCase
+Parameter '_pricingPlan' of NokuCustomToken.setPricingPlan (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#160) is not in mixedCase
+Parameter '_wallet' of NokuTokenBurner. (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#344) is not in mixedCase
+Parameter '_burningPercentage' of NokuTokenBurner.setBurningPercentage (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#352) is not in mixedCase
+Parameter '_token' of NokuTokenBurner.tokenReceived (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#368) is not in mixedCase
+Parameter '_amount' of NokuTokenBurner.tokenReceived (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#368) is not in mixedCase
+Parameter '_owner' of BasicToken.balanceOf (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#438) is not in mixedCase
+Parameter '_to' of BasicToken.transfer (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#417) is not in mixedCase
+Parameter '_value' of BasicToken.transfer (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#417-418) is not in mixedCase
+Parameter '_value' of BurnableToken.burn (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#451-452) is not in mixedCase
+Function 'BurnableToken._burn' (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#456-469) is not in mixedCase
+Parameter '_who' of BurnableToken._burn (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#456) is not in mixedCase
+Parameter '_value' of BurnableToken._burn (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#456) is not in mixedCase
+Parameter '_name' of DetailedERC20. (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#485) is not in mixedCase
+Parameter '_symbol' of DetailedERC20. (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#485) is not in mixedCase
+Parameter '_decimals' of DetailedERC20. (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#485) is not in mixedCase
+Parameter '_owner' of StandardToken.allowance (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#556) is not in mixedCase
+Parameter '_spender' of StandardToken.allowance (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#556) is not in mixedCase
+Parameter '_from' of StandardToken.transferFrom (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#516) is not in mixedCase
+Parameter '_to' of StandardToken.transferFrom (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#516) is not in mixedCase
+Parameter '_value' of StandardToken.transferFrom (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#516) is not in mixedCase
+Parameter '_spender' of StandardToken.approve (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#538-539) is not in mixedCase
+Parameter '_value' of StandardToken.approve (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#539-541) is not in mixedCase
+Parameter '_spender' of StandardToken.increaseApproval (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#577) is not in mixedCase
+Parameter '_addedValue' of StandardToken.increaseApproval (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#578) is not in mixedCase
+Parameter '_spender' of StandardToken.decreaseApproval (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#605) is not in mixedCase
+Parameter '_subtractedValue' of StandardToken.decreaseApproval (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#605) is not in mixedCase
+Parameter '_to' of MintableToken.mint (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#661) is not in mixedCase
+Parameter '_amount' of MintableToken.mint (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#662) is not in mixedCase
+Parameter '_token' of TokenTimelock. (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#736) is not in mixedCase
+Parameter '_beneficiary' of TokenTimelock. (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#737-738) is not in mixedCase
+Parameter '_releaseTime' of TokenTimelock. (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#740-746) is not in mixedCase
+Parameter '_beneficiary' of TokenVesting. (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#816) is not in mixedCase
+Parameter '_start' of TokenVesting. (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#816-817) is not in mixedCase
+Parameter '_cliff' of TokenVesting. (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#817) is not in mixedCase
+Parameter '_duration' of TokenVesting. (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#817) is not in mixedCase
+Parameter '_revocable' of TokenVesting. (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#817-818) is not in mixedCase
+Parameter '_to' of NokuCustomERC20.transfer (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#1070-1071) is not in mixedCase
+Parameter '_value' of NokuCustomERC20.transfer (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#1071) is not in mixedCase
+Parameter '_from' of NokuCustomERC20.transferFrom (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#1091) is not in mixedCase
+Parameter '_to' of NokuCustomERC20.transferFrom (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#1091-1092) is not in mixedCase
+Parameter '_value' of NokuCustomERC20.transferFrom (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#1092) is not in mixedCase
+Parameter '_to' of NokuCustomERC20.mint (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#1124) is not in mixedCase
+Parameter '_amount' of NokuCustomERC20.mint (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#1124) is not in mixedCase
+Parameter '_amount' of NokuCustomERC20.burn (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#1111-1112) is not in mixedCase
+Parameter '_name' of NokuCustomERC20. (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#958-961) is not in mixedCase
+Parameter '_symbol' of NokuCustomERC20. (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#961) is not in mixedCase
+Parameter '_decimals' of NokuCustomERC20. (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#961) is not in mixedCase
+Parameter '_transferableFromBlock' of NokuCustomERC20. (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#961) is not in mixedCase
+Parameter '_lockEndBlock' of NokuCustomERC20. (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#962) is not in mixedCase
+Parameter '_pricingPlan' of NokuCustomERC20. (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#962) is not in mixedCase
+Parameter '_serviceProvider' of NokuCustomERC20. (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#962) is not in mixedCase
+Parameter '_mintingFeeEnabled' of NokuCustomERC20.setMintingFeeEnabled (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#990) is not in mixedCase
+Parameter '_name' of NokuCustomERC20.setInformation (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#1006) is not in mixedCase
+Parameter '_symbol' of NokuCustomERC20.setInformation (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#1006) is not in mixedCase
+Parameter '_transferFeePercentage' of NokuCustomERC20.setTransferFeePercentage (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#1026-1027) is not in mixedCase
+Parameter '_to' of NokuCustomERC20.lockedBalanceOf (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#1038) is not in mixedCase
+Parameter '_value' of NokuCustomERC20.transferFee (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#1056-1059) is not in mixedCase
+Parameter '_to' of NokuCustomERC20.mintLocked (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#1141) is not in mixedCase
+Parameter '_amount' of NokuCustomERC20.mintLocked (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#1141-1142) is not in mixedCase
+Parameter '_to' of NokuCustomERC20.mintTimelocked (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#1152) is not in mixedCase
+Parameter '_amount' of NokuCustomERC20.mintTimelocked (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#1152-1154) is not in mixedCase
+Parameter '_releaseTime' of NokuCustomERC20.mintTimelocked (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#1154) is not in mixedCase
+Parameter '_to' of NokuCustomERC20.mintVested (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#1180) is not in mixedCase
+Parameter '_amount' of NokuCustomERC20.mintVested (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#1180-1183) is not in mixedCase
+Parameter '_startTime' of NokuCustomERC20.mintVested (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#1184) is not in mixedCase
+Parameter '_duration' of NokuCustomERC20.mintVested (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#1184) is not in mixedCase
+Parameter '_pricingPlan' of NokuCustomService. (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#1258) is not in mixedCase
+Parameter '_pricingPlan' of NokuCustomService.setPricingPlan (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#1264-1265) is not in mixedCase
+Parameter '_pricingPlan' of NokuCustomERC20Service. (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol#1294-1295) is not in mixedCase
+Parameter '_name' of NokuCustomERC20Service.createCustomToken (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol) is not in mixedCase
+Parameter '_symbol' of NokuCustomERC20Service.createCustomToken (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol) is not in mixedCase
+Parameter '' of NokuCustomERC20Service.createCustomToken (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol) is not in mixedCase
+Parameter '_name' of NokuCustomERC20Service.createCustomToken (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol) is not in mixedCase
+Parameter '_symbol' of NokuCustomERC20Service.createCustomToken (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol) is not in mixedCase
+Parameter '' of NokuCustomERC20Service.createCustomToken (/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x98af2e926206f1eb5af46aeddd144727267d0487.sol analyzed (21 contracts), 126 result(s) found

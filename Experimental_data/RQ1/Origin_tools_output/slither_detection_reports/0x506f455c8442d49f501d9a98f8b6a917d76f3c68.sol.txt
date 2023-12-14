@@ -1,0 +1,133 @@
+INFO:Detectors:[91m
+Reentrancy in PRDZstaking.unstake (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#495-542):
+	External calls:
+	- updateAccount(msg.sender) (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#499)
+	- require(bool,string)(Token(tokenAddress).transfer(owner,fee),Could not transfer withdraw fee.) (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#504-506)
+	- require(bool,string)(Token(tokenAddress).transfer(msg.sender,amountAfterFee),Could not transfer tokens.) (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#506-510)
+	External calls sending eth:
+	- msg.sender.transfer(eth) (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#532)
+	State variables written after the call(s):
+	- depositedTokens (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#534-535)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities[0m
+INFO:Detectors:[93m
+Reentrancy in PRDZstaking.OldStake (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#474-495):
+	External calls:
+	- require(bool,string)(Token(tokenAddress).transferFrom(_holder,address(this),amountToStake.mul(1e18)),Insufficient Token Allowance) (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#478-484)
+	- updateAccount(_holder) (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#484)
+	State variables written after the call(s):
+	- depositedTokens (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#491-492)
+Reentrancy in PRDZstaking.stake (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#457-471):
+	External calls:
+	- require(bool,string)(Token(tokenAddress).transferFrom(msg.sender,address(this),amountToStake),Insufficient Token Allowance) (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#460-465)
+	- updateAccount(msg.sender) (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#465-466)
+	State variables written after the call(s):
+	- depositedTokens (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#466-467)
+Reentrancy in PRDZstaking.updateAccount (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#367-388):
+	External calls:
+	- require(bool,string)(Token(tokenAddress).transfer(account,pendingDivs),Could not transfer tokens.) (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#372-377)
+	State variables written after the call(s):
+	- lastClaimedTime (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#387)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+EnumerableSet._remove (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#107-143) does not use the value returned by external calls:
+	-set._values.pop() (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#134-135)
+PRDZstaking.stake (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#457-471) does not use the value returned by external calls:
+	-holders.add(msg.sender) (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#470)
+PRDZstaking.OldStake (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#474-495) does not use the value returned by external calls:
+	-holders.add(_holder) (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#494)
+PRDZstaking.unstake (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#495-542) does not use the value returned by external calls:
+	-holders.remove(msg.sender) (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#540-541)
+PRDZstaking.transferAnyERC20Tokens (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol) does not use the value returned by external calls:
+	-Token(_tokenAddr).transfer(_to,_amount) (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in PRDZstaking.OldStake (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#474-495):
+	External calls:
+	- require(bool,string)(Token(tokenAddress).transferFrom(_holder,address(this),amountToStake.mul(1e18)),Insufficient Token Allowance) (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#478-484)
+	- updateAccount(_holder) (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#484)
+	State variables written after the call(s):
+	- lastScoreTime (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#484-485)
+	- stakingTime (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#494-495)
+	- totalStakedToken (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#486-491)
+Reentrancy in PRDZstaking.stake (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#457-471):
+	External calls:
+	- require(bool,string)(Token(tokenAddress).transferFrom(msg.sender,address(this),amountToStake),Insufficient Token Allowance) (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#460-465)
+	- updateAccount(msg.sender) (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#465-466)
+	State variables written after the call(s):
+	- lastScoreTime (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#466)
+	- stakingTime (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#471)
+	- totalStakedToken (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#467-468)
+Reentrancy in PRDZstaking.unstake (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#495-542):
+	External calls:
+	- updateAccount(msg.sender) (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#499)
+	- require(bool,string)(Token(tokenAddress).transfer(owner,fee),Could not transfer withdraw fee.) (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#504-506)
+	- require(bool,string)(Token(tokenAddress).transfer(msg.sender,amountAfterFee),Could not transfer tokens.) (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#506-510)
+	State variables written after the call(s):
+	- totalStakedToken (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#511-512)
+Reentrancy in PRDZstaking.unstake (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#495-542):
+	External calls:
+	- updateAccount(msg.sender) (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#499)
+	- require(bool,string)(Token(tokenAddress).transfer(owner,fee),Could not transfer withdraw fee.) (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#504-506)
+	- require(bool,string)(Token(tokenAddress).transfer(msg.sender,amountAfterFee),Could not transfer tokens.) (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#506-510)
+	External calls sending eth:
+	- msg.sender.transfer(eth) (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#532)
+	State variables written after the call(s):
+	- lastScoreTime (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#533-534)
+Reentrancy in PRDZstaking.updateAccount (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#367-388):
+	External calls:
+	- require(bool,string)(Token(tokenAddress).transfer(account,pendingDivs),Could not transfer tokens.) (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#372-377)
+	State variables written after the call(s):
+	- totalClaimedRewards (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#384-386)
+	- totalEarnedTokens (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#377-384)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#323-330) should be declared external
+PRDZstaking.getScoreEth (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#394-417) should be declared external
+PRDZstaking.getStakingScore (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#417-433) should be declared external
+PRDZstaking.getNumberOfHolders (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#451-456) should be declared external
+PRDZstaking.getTotalStaked (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#456-457) should be declared external
+PRDZstaking.stake (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#457-471) should be declared external
+PRDZstaking.OldStake (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#474-495) should be declared external
+PRDZstaking.unstake (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#495-542) should be declared external
+PRDZstaking.claimReward (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#542-544) should be declared external
+PRDZstaking.withdraw (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#544-548) should be declared external
+PRDZstaking.claimScoreEth (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#549-573) should be declared external
+PRDZstaking.deposit (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#579-581) should be declared external
+PRDZstaking.updateScoreEth (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#581-583) should be declared external
+PRDZstaking.transferAnyERC20Tokens (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol:
+	- pragma solidity0.6.12 (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#5-7): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'EnumerableSet._add' (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#89-103) is not in mixedCase
+Function 'EnumerableSet._remove' (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#107-143) is not in mixedCase
+Function 'EnumerableSet._contains' (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#148-150) is not in mixedCase
+Function 'EnumerableSet._length' (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#155-157) is not in mixedCase
+Function 'EnumerableSet._at' (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#166-178) is not in mixedCase
+Parameter '' of Token.transferFrom (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#332) is not in mixedCase
+Parameter '_scope_0' of Token.transferFrom (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#332-333) is not in mixedCase
+Parameter '_scope_1' of Token.transferFrom (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#333) is not in mixedCase
+Parameter '' of Token.transfer (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#333) is not in mixedCase
+Parameter '_scope_0' of Token.transfer (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#333) is not in mixedCase
+Parameter '_holder' of PRDZstaking.updateScore (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#390) is not in mixedCase
+Parameter '_holder' of PRDZstaking.getScoreEth (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#395) is not in mixedCase
+Parameter '_holder' of PRDZstaking.getStakingScore (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#417-418) is not in mixedCase
+Parameter '_holder' of PRDZstaking.getPendingDivs (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#434) is not in mixedCase
+Function 'PRDZstaking.OldStake' (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#474-495) is not in mixedCase
+Parameter '_holder' of PRDZstaking.OldStake (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#474) is not in mixedCase
+Parameter '_amount' of PRDZstaking.updateScoreEth (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol) is not in mixedCase
+Parameter '_tokenAddr' of PRDZstaking.transferAnyERC20Tokens (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol) is not in mixedCase
+Parameter '_to' of PRDZstaking.transferAnyERC20Tokens (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol) is not in mixedCase
+Parameter '_amount' of PRDZstaking.transferAnyERC20Tokens (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol) is not in mixedCase
+Constant 'PRDZstaking.tokenAddress' (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#342-345) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'PRDZstaking.rewardRate' (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#347-348) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'PRDZstaking.scoreRate' (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#348-350) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'PRDZstaking.rewardInterval' (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#350-351) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'PRDZstaking.scoreInterval' (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#351-353) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'PRDZstaking.unstakingFeeRate' (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#356-357) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'PRDZstaking.cliffTime' (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#358) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'PRDZstaking.stakingAndDaoTokens' (/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol#573-574) is not in UPPER_CASE_WITH_UNDERSCORES
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x506f455c8442d49f501d9a98f8b6a917d76f3c68.sol analyzed (5 contracts), 57 result(s) found

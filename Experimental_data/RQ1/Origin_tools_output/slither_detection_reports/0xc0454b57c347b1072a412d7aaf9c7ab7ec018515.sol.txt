@@ -1,0 +1,50 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xc0454b57c347b1072a412d7aaf9c7ab7ec018515.sol:
+/sb/0xc0454b57c347b1072a412d7aaf9c7ab7ec018515.sol:58:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function DSAuth() public {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xc0454b57c347b1072a412d7aaf9c7ab7ec018515.sol:105:9: Warning: Use of the "var" keyword is deprecated.
+        var src = bytes32(src_);
+        ^-----^
+/sb/0xc0454b57c347b1072a412d7aaf9c7ab7ec018515.sol:106:9: Warning: Use of the "var" keyword is deprecated.
+        var dst = bytes32(dst_);
+        ^-----^
+/sb/0xc0454b57c347b1072a412d7aaf9c7ab7ec018515.sol:60:9: Warning: Invoking events without "emit" prefix is deprecated.
+        LogSetOwner(msg.sender);
+        ^---------------------^
+/sb/0xc0454b57c347b1072a412d7aaf9c7ab7ec018515.sol:68:9: Warning: Invoking events without "emit" prefix is deprecated.
+        LogSetOwner(owner);
+        ^----------------^
+/sb/0xc0454b57c347b1072a412d7aaf9c7ab7ec018515.sol:76:9: Warning: Invoking events without "emit" prefix is deprecated.
+        LogSetAuthority(authority);
+        ^------------------------^
+/sb/0xc0454b57c347b1072a412d7aaf9c7ab7ec018515.sol:120:9: Warning: Invoking events without "emit" prefix is deprecated.
+        LogPermit(src, dst, sig);
+        ^----------------------^
+/sb/0xc0454b57c347b1072a412d7aaf9c7ab7ec018515.sol:125:9: Warning: Invoking events without "emit" prefix is deprecated.
+        LogForbid(src, dst, sig);
+        ^----------------------^
+
+INFO:Detectors:[92m
+Reentrancy in DSGuardFactory.newGuard (/sb/0xc0454b57c347b1072a412d7aaf9c7ab7ec018515.sol#143-145):
+	External calls:
+	- guard.setOwner(msg.sender) (/sb/0xc0454b57c347b1072a412d7aaf9c7ab7ec018515.sol)
+	State variables written after the call(s):
+	- isGuard (/sb/0xc0454b57c347b1072a412d7aaf9c7ab7ec018515.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+DSGuard.canCall (/sb/0xc0454b57c347b1072a412d7aaf9c7ab7ec018515.sol#105-120) should be declared external
+DSAuthority.canCall (/sb/0xc0454b57c347b1072a412d7aaf9c7ab7ec018515.sol#30-35) should be declared external
+DSAuth.setOwner (/sb/0xc0454b57c347b1072a412d7aaf9c7ab7ec018515.sol#66-73) should be declared external
+DSAuth.setAuthority (/sb/0xc0454b57c347b1072a412d7aaf9c7ab7ec018515.sol#73-81) should be declared external
+DSGuard.permit (/sb/0xc0454b57c347b1072a412d7aaf9c7ab7ec018515.sol#131-137) should be declared external
+DSGuard.forbid (/sb/0xc0454b57c347b1072a412d7aaf9c7ab7ec018515.sol#137-140) should be declared external
+DSGuardFactory.newGuard (/sb/0xc0454b57c347b1072a412d7aaf9c7ab7ec018515.sol#143-145) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xc0454b57c347b1072a412d7aaf9c7ab7ec018515.sol:
+	- pragma solidity^0.4.13 (/sb/0xc0454b57c347b1072a412d7aaf9c7ab7ec018515.sol#27-29): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'DSAuth.DSAuth' (/sb/0xc0454b57c347b1072a412d7aaf9c7ab7ec018515.sol#60-65) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xc0454b57c347b1072a412d7aaf9c7ab7ec018515.sol analyzed (6 contracts), 10 result(s) found

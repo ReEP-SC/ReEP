@@ -1,0 +1,67 @@
+INFO:Detectors:[93m
+SafeERC20.safeTransfer (/sb/0x8f3c8e59716427f3345f6d3b6ead596e99375227.sol#365-389) uses a dangerous strict equality:
+	- require(bool,string)(prevBalance - _value == _token.balanceOf(address(this)),Transfer failed)
+SafeERC20.safeTransfer (/sb/0x8f3c8e59716427f3345f6d3b6ead596e99375227.sol#365-389) uses a dangerous strict equality:
+	- require(bool,string)(prevBalance - _value == _token.balanceOf(address(this)),Transfer failed)
+SafeERC20.safeTransferFrom (/sb/0x8f3c8e59716427f3345f6d3b6ead596e99375227.sol#413-437) uses a dangerous strict equality:
+	- require(bool,string)(prevBalance - _value == _token.balanceOf(_from),Transfer failed)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+SafeERC20.safeTransfer (/sb/0x8f3c8e59716427f3345f6d3b6ead596e99375227.sol#365-389) does not use the value returned by external calls:
+	-_token.transfer(_to,_value) (/sb/0x8f3c8e59716427f3345f6d3b6ead596e99375227.sol#382-383)
+SafeERC20.safeTransferFrom (/sb/0x8f3c8e59716427f3345f6d3b6ead596e99375227.sol#413-437) does not use the value returned by external calls:
+	-_token.transferFrom(_from,_to,_value) (/sb/0x8f3c8e59716427f3345f6d3b6ead596e99375227.sol#435)
+KyberConverter.transferred (/sb/0x8f3c8e59716427f3345f6d3b6ead596e99375227.sol) does not use the value returned by external calls:
+	-_address.transfer(msg.sender,change) (/sb/0x8f3c8e59716427f3345f6d3b6ead596e99375227.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in KyberConverter.convert (/sb/0x8f3c8e59716427f3345f6d3b6ead596e99375227.sol#593-705):
+	External calls:
+	- prevSrcBalance = _srcToken.balanceOf(address(this)) (/sb/0x8f3c8e59716427f3345f6d3b6ead596e99375227.sol#611-613)
+	- amount = kyber.trade(_srcToken,_srcAmount,_destToken,address(this),_destAmount,0,walletId) (/sb/0x8f3c8e59716427f3345f6d3b6ead596e99375227.sol#653-661)
+	State variables written after the call(s):
+	- amount (/sb/0x8f3c8e59716427f3345f6d3b6ead596e99375227.sol#653-661)
+Reentrancy in KyberConverter.convert (/sb/0x8f3c8e59716427f3345f6d3b6ead596e99375227.sol#593-705):
+	External calls:
+	- prevSrcBalance = _srcToken.balanceOf(address(this)) (/sb/0x8f3c8e59716427f3345f6d3b6ead596e99375227.sol#611-613)
+	- amount = kyber.trade(_srcToken,_srcAmount,_destToken,address(this),_destAmount,0,walletId) (/sb/0x8f3c8e59716427f3345f6d3b6ead596e99375227.sol#653-661)
+	- change = _srcToken.balanceOf(address(this)).sub(prevSrcBalance) (/sb/0x8f3c8e59716427f3345f6d3b6ead596e99375227.sol#695-697)
+	State variables written after the call(s):
+	- change (/sb/0x8f3c8e59716427f3345f6d3b6ead596e99375227.sol#695-697)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+ITokenConverter.getExpectedRate (/sb/0x8f3c8e59716427f3345f6d3b6ead596e99375227.sol#289-299) should be declared external
+KyberConverter.getExpectedRate (/sb/0x8f3c8e59716427f3345f6d3b6ead596e99375227.sol) should be declared external
+IKyberNetwork.trade (/sb/0x8f3c8e59716427f3345f6d3b6ead596e99375227.sol#309-325) should be declared external
+IKyberNetwork.getExpectedRate (/sb/0x8f3c8e59716427f3345f6d3b6ead596e99375227.sol#325-331) should be declared external
+KyberConverter.transferred (/sb/0x8f3c8e59716427f3345f6d3b6ead596e99375227.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Low level call in SafeERC20.safeApprove (/sb/0x8f3c8e59716427f3345f6d3b6ead596e99375227.sol#483-509):
+	-success = address(_token).call(abi.encodeWithSelector(_token.approve.selector,_spender,_value)) /sb/0x8f3c8e59716427f3345f6d3b6ead596e99375227.sol#489-495
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Parameter '_token' of SafeERC20.safeTransfer (/sb/0x8f3c8e59716427f3345f6d3b6ead596e99375227.sol#369-371) is not in mixedCase
+Parameter '_to' of SafeERC20.safeTransfer (/sb/0x8f3c8e59716427f3345f6d3b6ead596e99375227.sol#371-375) is not in mixedCase
+Parameter '_value' of SafeERC20.safeTransfer (/sb/0x8f3c8e59716427f3345f6d3b6ead596e99375227.sol#376-377) is not in mixedCase
+Parameter '_token' of SafeERC20.safeTransferFrom (/sb/0x8f3c8e59716427f3345f6d3b6ead596e99375227.sol#413-417) is not in mixedCase
+Parameter '_from' of SafeERC20.safeTransferFrom (/sb/0x8f3c8e59716427f3345f6d3b6ead596e99375227.sol#417) is not in mixedCase
+Parameter '_to' of SafeERC20.safeTransferFrom (/sb/0x8f3c8e59716427f3345f6d3b6ead596e99375227.sol#417) is not in mixedCase
+Parameter '_value' of SafeERC20.safeTransferFrom (/sb/0x8f3c8e59716427f3345f6d3b6ead596e99375227.sol#417-419) is not in mixedCase
+Parameter '_token' of SafeERC20.safeApprove (/sb/0x8f3c8e59716427f3345f6d3b6ead596e99375227.sol#485-486) is not in mixedCase
+Parameter '_spender' of SafeERC20.safeApprove (/sb/0x8f3c8e59716427f3345f6d3b6ead596e99375227.sol#487) is not in mixedCase
+Parameter '_value' of SafeERC20.safeApprove (/sb/0x8f3c8e59716427f3345f6d3b6ead596e99375227.sol#487) is not in mixedCase
+Parameter '_token' of SafeERC20.clearApprove (/sb/0x8f3c8e59716427f3345f6d3b6ead596e99375227.sol#531) is not in mixedCase
+Parameter '_spender' of SafeERC20.clearApprove (/sb/0x8f3c8e59716427f3345f6d3b6ead596e99375227.sol#531-535) is not in mixedCase
+Parameter '_srcToken' of KyberConverter.convert (/sb/0x8f3c8e59716427f3345f6d3b6ead596e99375227.sol#595-599) is not in mixedCase
+Parameter '_destToken' of KyberConverter.convert (/sb/0x8f3c8e59716427f3345f6d3b6ead596e99375227.sol#599) is not in mixedCase
+Parameter '_srcAmount' of KyberConverter.convert (/sb/0x8f3c8e59716427f3345f6d3b6ead596e99375227.sol#599) is not in mixedCase
+Parameter '_destAmount' of KyberConverter.convert (/sb/0x8f3c8e59716427f3345f6d3b6ead596e99375227.sol#601-603) is not in mixedCase
+Parameter '_srcToken' of KyberConverter.getExpectedRate (/sb/0x8f3c8e59716427f3345f6d3b6ead596e99375227.sol) is not in mixedCase
+Parameter '_destToken' of KyberConverter.getExpectedRate (/sb/0x8f3c8e59716427f3345f6d3b6ead596e99375227.sol) is not in mixedCase
+Parameter '_srcAmount' of KyberConverter.getExpectedRate (/sb/0x8f3c8e59716427f3345f6d3b6ead596e99375227.sol) is not in mixedCase
+Parameter '_kyber' of KyberConverter. (/sb/0x8f3c8e59716427f3345f6d3b6ead596e99375227.sol#587-590) is not in mixedCase
+Parameter '_walletId' of KyberConverter. (/sb/0x8f3c8e59716427f3345f6d3b6ead596e99375227.sol#591) is not in mixedCase
+Parameter '_address' of KyberConverter.transferred (/sb/0x8f3c8e59716427f3345f6d3b6ead596e99375227.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x8f3c8e59716427f3345f6d3b6ead596e99375227.sol analyzed (6 contracts), 35 result(s) found

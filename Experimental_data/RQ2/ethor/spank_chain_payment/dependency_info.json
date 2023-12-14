@@ -1,0 +1,990 @@
+{
+    "spank_chain_payment.sol": [
+        {
+            "attack_type": "DAO",
+            "composed_functions": [
+                "createChannel",
+                "LCOpenTimeout"
+            ],
+            "from_function": "LCOpenTimeout",
+            "to_function": "createChannel",
+            "dependencies": [
+                {
+                    "path": [
+                        "\"BlockID: 182\nFunction: LCOpenTimeout\nNode: \nEXPRESSION require(bool)(now > Channels[_lcID].LCopenTimeout)\nIRS: \nTMP_136 = SOLIDITY_CALL require(bool)(TMP_135)\"",
+                        "\"BlockID: 174\nFunction: createChannel\nNode: \nEXPRESSION Channels[_lcID].LCopenTimeout = now + _confirmTime\nIRS: \nREF_86 := TMP_129\""
+                    ],
+                    "state_variable": "Channels.LCopenTimeout"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 183\nFunction: LCOpenTimeout\nNode: \nIF Channels[_lcID].initialDeposit[0] != 0\nIRS: \nCONDITION TMP_137\"",
+                        "\"BlockID: 175\nFunction: createChannel\nNode: \nEXPRESSION Channels[_lcID].initialDeposit = _balances\nIRS: \nREF_88 := _balances\""
+                    ],
+                    "state_variable": "Channels.initialDeposit"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 186\nFunction: LCOpenTimeout\nNode: \nIF Channels[_lcID].initialDeposit[1] != 0\nIRS: \nCONDITION TMP_139\"",
+                        "\"BlockID: 175\nFunction: createChannel\nNode: \nEXPRESSION Channels[_lcID].initialDeposit = _balances\nIRS: \nREF_88 := _balances\""
+                    ],
+                    "state_variable": "Channels.initialDeposit"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 187\nFunction: LCOpenTimeout\nNode: \nEXPRESSION require(bool,string)(Channels[_lcID].token.transfer(Channels[_lcID].partyAddresses[0],Channels[_lcID].erc20Balances[0]),CreateChannel: token transfer failure)\nIRS: \nTMP_140(bool) = HIGH_LEVEL_CALL, dest:REF_114(HumanStandardToken), function:transfer, arguments:['REF_118', 'REF_121']  \"",
+                        "\"BlockID: 178\nFunction: createChannel\nNode: \nEXPRESSION Channels[_lcID].erc20Balances[0] = _balances[1]\nIRS: \nREF_79 := REF_80\""
+                    ],
+                    "state_variable": "Channels.erc20Balances"
+                }
+            ]
+        },
+        {
+            "attack_type": "DAO",
+            "composed_functions": [
+                "createChannel",
+                "consensusCloseChannel"
+            ],
+            "from_function": "consensusCloseChannel",
+            "to_function": "createChannel",
+            "dependencies": [
+                {
+                    "path": [
+                        "\"BlockID: 233\nFunction: consensusCloseChannel\nNode: \nEXPRESSION require(bool)(totalEthDeposit == _balances[0] + _balances[1])\nIRS: \nTMP_180 = SOLIDITY_CALL require(bool)(TMP_179)\"",
+                        "\"BlockID: 175\nFunction: createChannel\nNode: \nEXPRESSION Channels[_lcID].initialDeposit = _balances\nIRS: \nREF_88 := _balances\""
+                    ],
+                    "state_variable": "Channels.initialDeposit"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 234\nFunction: consensusCloseChannel\nNode: \nEXPRESSION require(bool)(totalTokenDeposit == _balances[2] + _balances[3])\nIRS: \nTMP_183 = SOLIDITY_CALL require(bool)(TMP_182)\"",
+                        "\"BlockID: 175\nFunction: createChannel\nNode: \nEXPRESSION Channels[_lcID].initialDeposit = _balances\nIRS: \nREF_88 := _balances\""
+                    ],
+                    "state_variable": "Channels.initialDeposit"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 234\nFunction: consensusCloseChannel\nNode: \nEXPRESSION require(bool)(totalTokenDeposit == _balances[2] + _balances[3])\nIRS: \nTMP_183 = SOLIDITY_CALL require(bool)(TMP_182)\"",
+                        "\"BlockID: 178\nFunction: createChannel\nNode: \nEXPRESSION Channels[_lcID].erc20Balances[0] = _balances[1]\nIRS: \nREF_79 := REF_80\""
+                    ],
+                    "state_variable": "Channels.erc20Balances"
+                }
+            ]
+        },
+        {
+            "attack_type": "DAO",
+            "composed_functions": [
+                "createChannel",
+                "initVCstate"
+            ],
+            "from_function": "initVCstate",
+            "to_function": "createChannel",
+            "dependencies": [
+                {
+                    "path": [
+                        "\"BlockID: 416\nFunction: initVCstate\nNode: \nEXPRESSION virtualChannels[_vcID].updateVCtimeout = now + Channels[_lcID].confirmTime\nIRS: \nREF_374 := TMP_249\"",
+                        "\"BlockID: 173\nFunction: createChannel\nNode: \nEXPRESSION Channels[_lcID].confirmTime = _confirmTime\nIRS: \nREF_84 := _confirmTime\""
+                    ],
+                    "state_variable": "Channels.confirmTime"
+                }
+            ]
+        },
+        {
+            "attack_type": "DAO",
+            "composed_functions": [
+                "createChannel",
+                "settleVC"
+            ],
+            "from_function": "settleVC",
+            "to_function": "createChannel",
+            "dependencies": [
+                {
+                    "path": [
+                        "\"BlockID: 476\nFunction: settleVC\nNode: \nEXPRESSION virtualChannels[_vcID].updateVCtimeout = now + Channels[_lcID].confirmTime\nIRS: \nREF_442 := TMP_274\"",
+                        "\"BlockID: 173\nFunction: createChannel\nNode: \nEXPRESSION Channels[_lcID].confirmTime = _confirmTime\nIRS: \nREF_84 := _confirmTime\""
+                    ],
+                    "state_variable": "Channels.confirmTime"
+                }
+            ]
+        },
+        {
+            "attack_type": "DAO",
+            "composed_functions": [
+                "LCOpenTimeout",
+                "createChannel"
+            ],
+            "from_function": "createChannel",
+            "to_function": "LCOpenTimeout",
+            "dependencies": [
+                {
+                    "path": [
+                        "\"BlockID: 160\nFunction: createChannel\nNode: \nEXPRESSION require(bool,string)(Channels[_lcID].partyAddresses[0] == address(0),Channel has already been created.)\nIRS: \nTMP_115 = SOLIDITY_CALL require(bool,string)(TMP_114,Channel has already been created.)\"",
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \""
+                    ],
+                    "state_variable": "Channels"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 170\nFunction: createChannel\nNode: \nEXPRESSION require(bool,string)(Channels[_lcID].token.transferFrom(msg.sender,this,_balances[1]),CreateChannel: token transfer failure)\nIRS: \nTMP_127(bool) = HIGH_LEVEL_CALL, dest:REF_74(HumanStandardToken), function:transferFrom, arguments:['msg.sender', 'this', 'REF_76']  \"",
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \""
+                    ],
+                    "state_variable": "Channels"
+                }
+            ]
+        },
+        {
+            "attack_type": "DAO",
+            "composed_functions": [
+                "LCOpenTimeout",
+                "LCOpenTimeout"
+            ],
+            "from_function": "LCOpenTimeout",
+            "to_function": "LCOpenTimeout",
+            "dependencies": [
+                {
+                    "path": [
+                        "\"BlockID: 593\nFunction: LCOpenTimeout\nNode: \nEXPRESSION require(bool)(msg.sender == Channels[_lcID].partyAddresses[0] && Channels[_lcID].isOpen == false)\nIRS: \nTMP_134 = SOLIDITY_CALL require(bool)(TMP_133)\"",
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \""
+                    ],
+                    "state_variable": "Channels"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 594\nFunction: LCOpenTimeout\nNode: \nEXPRESSION require(bool)(now > Channels[_lcID].LCopenTimeout)\nIRS: \nTMP_136 = SOLIDITY_CALL require(bool)(TMP_135)\"",
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \""
+                    ],
+                    "state_variable": "Channels"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 595\nFunction: LCOpenTimeout\nNode: \nIF Channels[_lcID].initialDeposit[0] != 0\nIRS: \nCONDITION TMP_137\"",
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \""
+                    ],
+                    "state_variable": "Channels"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 596\nFunction: LCOpenTimeout\nNode: \nEXPRESSION Channels[_lcID].partyAddresses[0].transfer(Channels[_lcID].ethBalances[0])\nIRS: \nTransfer dest:REF_105 value:REF_109\"",
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \""
+                    ],
+                    "state_variable": "Channels"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 598\nFunction: LCOpenTimeout\nNode: \nIF Channels[_lcID].initialDeposit[1] != 0\nIRS: \nCONDITION TMP_139\"",
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \""
+                    ],
+                    "state_variable": "Channels"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 599\nFunction: LCOpenTimeout\nNode: \nEXPRESSION require(bool,string)(Channels[_lcID].token.transfer(Channels[_lcID].partyAddresses[0],Channels[_lcID].erc20Balances[0]),CreateChannel: token transfer failure)\nIRS: \nTMP_140(bool) = HIGH_LEVEL_CALL, dest:REF_114(HumanStandardToken), function:transfer, arguments:['REF_118', 'REF_121']  \"",
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \""
+                    ],
+                    "state_variable": "Channels"
+                }
+            ]
+        },
+        {
+            "attack_type": "DAO",
+            "composed_functions": [
+                "LCOpenTimeout",
+                "joinChannel"
+            ],
+            "from_function": "joinChannel",
+            "to_function": "LCOpenTimeout",
+            "dependencies": [
+                {
+                    "path": [
+                        "\"BlockID: 193\nFunction: joinChannel\nNode: \nEXPRESSION require(bool)(Channels[_lcID].isOpen == false)\nIRS: \nTMP_144 = SOLIDITY_CALL require(bool)(TMP_143)\"",
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \""
+                    ],
+                    "state_variable": "Channels"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 194\nFunction: joinChannel\nNode: \nEXPRESSION require(bool)(msg.sender == Channels[_lcID].partyAddresses[1])\nIRS: \nTMP_146 = SOLIDITY_CALL require(bool)(TMP_145)\"",
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \""
+                    ],
+                    "state_variable": "Channels"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 199\nFunction: joinChannel\nNode: \nEXPRESSION require(bool,string)(Channels[_lcID].token.transferFrom(msg.sender,this,_balances[1]),joinChannel: token transfer failure)\nIRS: \nTMP_151(bool) = HIGH_LEVEL_CALL, dest:REF_141(HumanStandardToken), function:transferFrom, arguments:['msg.sender', 'this', 'REF_143']  \"",
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \""
+                    ],
+                    "state_variable": "Channels"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 201\nFunction: joinChannel\nNode: \nEXPRESSION Channels[_lcID].initialDeposit[0] += _balances[0]\nIRS: \nREF_150 = REF_150 + REF_151\"",
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \""
+                    ],
+                    "state_variable": "Channels"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 202\nFunction: joinChannel\nNode: \nEXPRESSION Channels[_lcID].initialDeposit[1] += _balances[1]\nIRS: \nREF_154 = REF_154 + REF_155\"",
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \""
+                    ],
+                    "state_variable": "Channels"
+                }
+            ]
+        },
+        {
+            "attack_type": "DAO",
+            "composed_functions": [
+                "LCOpenTimeout",
+                "deposit"
+            ],
+            "from_function": "deposit",
+            "to_function": "LCOpenTimeout",
+            "dependencies": [
+                {
+                    "path": [
+                        "\"BlockID: 210\nFunction: deposit\nNode: \nEXPRESSION require(bool,string)(Channels[_lcID].isOpen == true,Tried adding funds to a closed channel)\nIRS: \nTMP_156 = SOLIDITY_CALL require(bool,string)(TMP_155,Tried adding funds to a closed channel)\"",
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \""
+                    ],
+                    "state_variable": "Channels"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 211\nFunction: deposit\nNode: \nEXPRESSION require(bool)(recipient == Channels[_lcID].partyAddresses[0] || recipient == Channels[_lcID].partyAddresses[1])\nIRS: \nTMP_160 = SOLIDITY_CALL require(bool)(TMP_159)\"",
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \""
+                    ],
+                    "state_variable": "Channels"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 212\nFunction: deposit\nNode: \nIF Channels[_lcID].partyAddresses[0] == recipient\nIRS: \nCONDITION TMP_161\"",
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \""
+                    ],
+                    "state_variable": "Channels"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 215\nFunction: deposit\nNode: \nIF Channels[_lcID].partyAddresses[1] == recipient\nIRS: \nCONDITION TMP_166\"",
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \""
+                    ],
+                    "state_variable": "Channels"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 219\nFunction: deposit\nNode: \nEXPRESSION require(bool,string)(Channels[_lcID].token.transferFrom(msg.sender,this,_balance),deposit: token transfer failure)\nIRS: \nTMP_167(bool) = HIGH_LEVEL_CALL, dest:REF_184(HumanStandardToken), function:transferFrom, arguments:['msg.sender', 'this', '_balance']  \"",
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \""
+                    ],
+                    "state_variable": "Channels"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 221\nFunction: deposit\nNode: \nEXPRESSION Channels[_lcID].ethBalances[3] += msg.value\nIRS: \nREF_191 = REF_191 + msg.value\"",
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \""
+                    ],
+                    "state_variable": "Channels"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 224\nFunction: deposit\nNode: \nEXPRESSION Channels[_lcID].erc20Balances[3] += _balance\nIRS: \nREF_188 = REF_188 + _balance\"",
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \""
+                    ],
+                    "state_variable": "Channels"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 225\nFunction: deposit\nNode: \nEXPRESSION require(bool,string)(Channels[_lcID].token.transferFrom(msg.sender,this,_balance),deposit: token transfer failure)\nIRS: \nTMP_162(bool) = HIGH_LEVEL_CALL, dest:REF_172(HumanStandardToken), function:transferFrom, arguments:['msg.sender', 'this', '_balance']  \"",
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \""
+                    ],
+                    "state_variable": "Channels"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 227\nFunction: deposit\nNode: \nEXPRESSION Channels[_lcID].ethBalances[2] += msg.value\nIRS: \nREF_179 = REF_179 + msg.value\"",
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \""
+                    ],
+                    "state_variable": "Channels"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 230\nFunction: deposit\nNode: \nEXPRESSION Channels[_lcID].erc20Balances[2] += _balance\nIRS: \nREF_176 = REF_176 + _balance\"",
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \""
+                    ],
+                    "state_variable": "Channels"
+                }
+            ]
+        },
+        {
+            "attack_type": "DAO",
+            "composed_functions": [
+                "LCOpenTimeout",
+                "consensusCloseChannel"
+            ],
+            "from_function": "consensusCloseChannel",
+            "to_function": "LCOpenTimeout",
+            "dependencies": [
+                {
+                    "path": [
+                        "\"BlockID: 232\nFunction: consensusCloseChannel\nNode: \nEXPRESSION require(bool)(Channels[_lcID].isOpen == true)\nIRS: \nTMP_173 = SOLIDITY_CALL require(bool)(TMP_172)\"",
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \""
+                    ],
+                    "state_variable": "Channels"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 233\nFunction: consensusCloseChannel\nNode: \nEXPRESSION require(bool)(totalEthDeposit == _balances[0] + _balances[1])\nIRS: \nTMP_180 = SOLIDITY_CALL require(bool)(TMP_179)\"",
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \""
+                    ],
+                    "state_variable": "Channels"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 234\nFunction: consensusCloseChannel\nNode: \nEXPRESSION require(bool)(totalTokenDeposit == _balances[2] + _balances[3])\nIRS: \nTMP_183 = SOLIDITY_CALL require(bool)(TMP_182)\"",
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \""
+                    ],
+                    "state_variable": "Channels"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 235\nFunction: consensusCloseChannel\nNode: \nEXPRESSION require(bool)(Channels[_lcID].partyAddresses[0] == ECTools.recoverSigner(_state,_sigA))\nIRS: \nTMP_190 = SOLIDITY_CALL require(bool)(TMP_189)\"",
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \""
+                    ],
+                    "state_variable": "Channels"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 236\nFunction: consensusCloseChannel\nNode: \nEXPRESSION require(bool)(Channels[_lcID].partyAddresses[1] == ECTools.recoverSigner(_state,_sigI))\nIRS: \nTMP_193 = SOLIDITY_CALL require(bool)(TMP_192)\"",
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \""
+                    ],
+                    "state_variable": "Channels"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 239\nFunction: consensusCloseChannel\nNode: \nEXPRESSION Channels[_lcID].partyAddresses[0].transfer(_balances[0])\nIRS: \nTransfer dest:REF_241 value:REF_243\"",
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \""
+                    ],
+                    "state_variable": "Channels"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 242\nFunction: consensusCloseChannel\nNode: \nEXPRESSION require(bool,string)(Channels[_lcID].token.transfer(Channels[_lcID].partyAddresses[0],_balances[2]),happyCloseChannel: token transfer failure)\nIRS: \nTMP_202(bool) = HIGH_LEVEL_CALL, dest:REF_252(HumanStandardToken), function:transfer, arguments:['REF_256', 'REF_257']  \"",
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \""
+                    ],
+                    "state_variable": "Channels"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 247\nFunction: consensusCloseChannel\nNode: \nEXPRESSION require(bool,string)(Channels[_lcID].token.transfer(Channels[_lcID].partyAddresses[1],_balances[3]),happyCloseChannel: token transfer failure)\nIRS: \nTMP_204(bool) = HIGH_LEVEL_CALL, dest:REF_259(HumanStandardToken), function:transfer, arguments:['REF_263', 'REF_264']  \"",
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \""
+                    ],
+                    "state_variable": "Channels"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 249\nFunction: consensusCloseChannel\nNode: \nEXPRESSION Channels[_lcID].partyAddresses[1].transfer(_balances[1])\nIRS: \nTransfer dest:REF_246 value:REF_248\"",
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \""
+                    ],
+                    "state_variable": "Channels"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 284\nFunction: consensusCloseChannel\nNode: \nNEW VARIABLE _state = keccak256()(abi.encodePacked(_lcID,true,_sequence,uint256(0),bytes32(0x0),Channels[_lcID].partyAddresses[0],Channels[_lcID].partyAddresses[1],_balances[0],_balances[1],_balances[2],_balances[3]))\nIRS: \nTMP_187 = SOLIDITY_CALL keccak256()(TMP_186)\"",
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \""
+                    ],
+                    "state_variable": "Channels"
+                }
+            ]
+        },
+        {
+            "attack_type": "DAO",
+            "composed_functions": [
+                "LCOpenTimeout",
+                "initVCstate"
+            ],
+            "from_function": "initVCstate",
+            "to_function": "LCOpenTimeout",
+            "dependencies": [
+                {
+                    "path": [
+                        "\"BlockID: 402\nFunction: initVCstate\nNode: \nEXPRESSION require(bool,string)(Channels[_lcID].isOpen,LC is closed.)\nIRS: \nTMP_232 = SOLIDITY_CALL require(bool,string)(REF_332,LC is closed.)\"",
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \""
+                    ],
+                    "state_variable": "Channels"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 404\nFunction: initVCstate\nNode: \nEXPRESSION require(bool,string)(Channels[_lcID].updateLCtimeout < now,LC timeout not over.)\nIRS: \nTMP_236 = SOLIDITY_CALL require(bool,string)(TMP_235,LC timeout not over.)\"",
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \""
+                    ],
+                    "state_variable": "Channels"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 407\nFunction: initVCstate\nNode: \nEXPRESSION require(bool)(_isContained(_initState,_proof,Channels[_lcID].VCrootHash) == true)\nIRS: \nTMP_247 = SOLIDITY_CALL require(bool)(TMP_246)\"",
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \""
+                    ],
+                    "state_variable": "Channels"
+                }
+            ]
+        },
+        {
+            "attack_type": "DAO",
+            "composed_functions": [
+                "LCOpenTimeout",
+                "settleVC"
+            ],
+            "from_function": "settleVC",
+            "to_function": "LCOpenTimeout",
+            "dependencies": [
+                {
+                    "path": [
+                        "\"BlockID: 463\nFunction: settleVC\nNode: \nEXPRESSION require(bool,string)(Channels[_lcID].isOpen,LC is closed.)\nIRS: \nTMP_252 = SOLIDITY_CALL require(bool,string)(REF_382,LC is closed.)\"",
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \""
+                    ],
+                    "state_variable": "Channels"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 468\nFunction: settleVC\nNode: \nEXPRESSION require(bool)(Channels[_lcID].updateLCtimeout < now)\nIRS: \nTMP_268 = SOLIDITY_CALL require(bool)(TMP_267)\"",
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \""
+                    ],
+                    "state_variable": "Channels"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 476\nFunction: settleVC\nNode: \nEXPRESSION virtualChannels[_vcID].updateVCtimeout = now + Channels[_lcID].confirmTime\nIRS: \nREF_442 := TMP_274\"",
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \""
+                    ],
+                    "state_variable": "Channels"
+                }
+            ]
+        },
+        {
+            "attack_type": "DAO",
+            "composed_functions": [
+                "LCOpenTimeout",
+                "closeVirtualChannel"
+            ],
+            "from_function": "closeVirtualChannel",
+            "to_function": "LCOpenTimeout",
+            "dependencies": [
+                {
+                    "path": [
+                        "\"BlockID: 515\nFunction: closeVirtualChannel\nNode: \nEXPRESSION require(bool,string)(Channels[_lcID].isOpen,LC is closed.)\nIRS: \nTMP_276 = SOLIDITY_CALL require(bool,string)(REF_450,LC is closed.)\"",
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \""
+                    ],
+                    "state_variable": "Channels"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 519\nFunction: closeVirtualChannel\nNode: \nEXPRESSION Channels[_lcID].numOpenVC --\nIRS: \nREF_458 = REF_458 - 1\"",
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \""
+                    ],
+                    "state_variable": "Channels"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 521\nFunction: closeVirtualChannel\nNode: \nIF virtualChannels[_vcID].partyA == Channels[_lcID].partyAddresses[0]\nIRS: \nCONDITION TMP_283\"",
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \""
+                    ],
+                    "state_variable": "Channels"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 522\nFunction: closeVirtualChannel\nNode: \nEXPRESSION Channels[_lcID].ethBalances[0] += virtualChannels[_vcID].ethBalances[0]\nIRS: \nREF_468 = REF_468 + REF_471\"",
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \""
+                    ],
+                    "state_variable": "Channels"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 523\nFunction: closeVirtualChannel\nNode: \nEXPRESSION Channels[_lcID].ethBalances[1] += virtualChannels[_vcID].ethBalances[1]\nIRS: \nREF_474 = REF_474 + REF_477\"",
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \""
+                    ],
+                    "state_variable": "Channels"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 524\nFunction: closeVirtualChannel\nNode: \nEXPRESSION Channels[_lcID].erc20Balances[0] += virtualChannels[_vcID].erc20Balances[0]\nIRS: \nREF_480 = REF_480 + REF_483\"",
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \""
+                    ],
+                    "state_variable": "Channels"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 525\nFunction: closeVirtualChannel\nNode: \nEXPRESSION Channels[_lcID].erc20Balances[1] += virtualChannels[_vcID].erc20Balances[1]\nIRS: \nREF_486 = REF_486 + REF_489\"",
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \""
+                    ],
+                    "state_variable": "Channels"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 526\nFunction: closeVirtualChannel\nNode: \nIF virtualChannels[_vcID].partyB == Channels[_lcID].partyAddresses[0]\nIRS: \nCONDITION TMP_284\"",
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \""
+                    ],
+                    "state_variable": "Channels"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 527\nFunction: closeVirtualChannel\nNode: \nEXPRESSION Channels[_lcID].ethBalances[0] += virtualChannels[_vcID].ethBalances[1]\nIRS: \nREF_497 = REF_497 + REF_500\"",
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \""
+                    ],
+                    "state_variable": "Channels"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 528\nFunction: closeVirtualChannel\nNode: \nEXPRESSION Channels[_lcID].ethBalances[1] += virtualChannels[_vcID].ethBalances[0]\nIRS: \nREF_503 = REF_503 + REF_506\"",
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \""
+                    ],
+                    "state_variable": "Channels"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 529\nFunction: closeVirtualChannel\nNode: \nEXPRESSION Channels[_lcID].erc20Balances[0] += virtualChannels[_vcID].erc20Balances[1]\nIRS: \nREF_509 = REF_509 + REF_512\"",
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \""
+                    ],
+                    "state_variable": "Channels"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 530\nFunction: closeVirtualChannel\nNode: \nEXPRESSION Channels[_lcID].erc20Balances[1] += virtualChannels[_vcID].erc20Balances[0]\nIRS: \nREF_515 = REF_515 + REF_518\"",
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \""
+                    ],
+                    "state_variable": "Channels"
+                }
+            ]
+        },
+        {
+            "attack_type": "DAO",
+            "composed_functions": [
+                "joinChannel",
+                "LCOpenTimeout"
+            ],
+            "from_function": "LCOpenTimeout",
+            "to_function": "joinChannel",
+            "dependencies": [
+                {
+                    "path": [
+                        "\"BlockID: 181\nFunction: LCOpenTimeout\nNode: \nEXPRESSION require(bool)(msg.sender == Channels[_lcID].partyAddresses[0] && Channels[_lcID].isOpen == false)\nIRS: \nTMP_134 = SOLIDITY_CALL require(bool)(TMP_133)\"",
+                        "\"BlockID: 203\nFunction: joinChannel\nNode: \nEXPRESSION Channels[_lcID].isOpen = true\nIRS: \nREF_157 := true\""
+                    ],
+                    "state_variable": "Channels.isOpen"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \"",
+                        "\"BlockID: 201\nFunction: joinChannel\nNode: \nEXPRESSION Channels[_lcID].initialDeposit[0] += _balances[0]\nIRS: \nREF_150 = REF_150 + REF_151\""
+                    ],
+                    "state_variable": "Channels"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \"",
+                        "\"BlockID: 202\nFunction: joinChannel\nNode: \nEXPRESSION Channels[_lcID].initialDeposit[1] += _balances[1]\nIRS: \nREF_154 = REF_154 + REF_155\""
+                    ],
+                    "state_variable": "Channels"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 183\nFunction: LCOpenTimeout\nNode: \nIF Channels[_lcID].initialDeposit[0] != 0\nIRS: \nCONDITION TMP_137\"",
+                        "\"BlockID: 201\nFunction: joinChannel\nNode: \nEXPRESSION Channels[_lcID].initialDeposit[0] += _balances[0]\nIRS: \nREF_150 = REF_150 + REF_151\""
+                    ],
+                    "state_variable": "Channels.initialDeposit"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 183\nFunction: LCOpenTimeout\nNode: \nIF Channels[_lcID].initialDeposit[0] != 0\nIRS: \nCONDITION TMP_137\"",
+                        "\"BlockID: 202\nFunction: joinChannel\nNode: \nEXPRESSION Channels[_lcID].initialDeposit[1] += _balances[1]\nIRS: \nREF_154 = REF_154 + REF_155\""
+                    ],
+                    "state_variable": "Channels.initialDeposit"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 186\nFunction: LCOpenTimeout\nNode: \nIF Channels[_lcID].initialDeposit[1] != 0\nIRS: \nCONDITION TMP_139\"",
+                        "\"BlockID: 201\nFunction: joinChannel\nNode: \nEXPRESSION Channels[_lcID].initialDeposit[0] += _balances[0]\nIRS: \nREF_150 = REF_150 + REF_151\""
+                    ],
+                    "state_variable": "Channels.initialDeposit"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 186\nFunction: LCOpenTimeout\nNode: \nIF Channels[_lcID].initialDeposit[1] != 0\nIRS: \nCONDITION TMP_139\"",
+                        "\"BlockID: 202\nFunction: joinChannel\nNode: \nEXPRESSION Channels[_lcID].initialDeposit[1] += _balances[1]\nIRS: \nREF_154 = REF_154 + REF_155\""
+                    ],
+                    "state_variable": "Channels.initialDeposit"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 187\nFunction: LCOpenTimeout\nNode: \nEXPRESSION require(bool,string)(Channels[_lcID].token.transfer(Channels[_lcID].partyAddresses[0],Channels[_lcID].erc20Balances[0]),CreateChannel: token transfer failure)\nIRS: \nTMP_140(bool) = HIGH_LEVEL_CALL, dest:REF_114(HumanStandardToken), function:transfer, arguments:['REF_118', 'REF_121']  \"",
+                        "\"BlockID: 207\nFunction: joinChannel\nNode: \nEXPRESSION Channels[_lcID].erc20Balances[1] = _balances[1]\nIRS: \nREF_146 := REF_147\""
+                    ],
+                    "state_variable": "Channels.erc20Balances"
+                }
+            ]
+        },
+        {
+            "attack_type": "DAO",
+            "composed_functions": [
+                "joinChannel",
+                "joinChannel"
+            ],
+            "from_function": "joinChannel",
+            "to_function": "joinChannel",
+            "dependencies": [
+                {
+                    "path": [
+                        "\"BlockID: 605\nFunction: joinChannel\nNode: \nEXPRESSION require(bool)(Channels[_lcID].isOpen == false)\nIRS: \nTMP_144 = SOLIDITY_CALL require(bool)(TMP_143)\"",
+                        "\"BlockID: 203\nFunction: joinChannel\nNode: \nEXPRESSION Channels[_lcID].isOpen = true\nIRS: \nREF_157 := true\""
+                    ],
+                    "state_variable": "Channels.isOpen"
+                }
+            ]
+        },
+        {
+            "attack_type": "DAO",
+            "composed_functions": [
+                "joinChannel",
+                "deposit"
+            ],
+            "from_function": "deposit",
+            "to_function": "joinChannel",
+            "dependencies": [
+                {
+                    "path": [
+                        "\"BlockID: 210\nFunction: deposit\nNode: \nEXPRESSION require(bool,string)(Channels[_lcID].isOpen == true,Tried adding funds to a closed channel)\nIRS: \nTMP_156 = SOLIDITY_CALL require(bool,string)(TMP_155,Tried adding funds to a closed channel)\"",
+                        "\"BlockID: 203\nFunction: joinChannel\nNode: \nEXPRESSION Channels[_lcID].isOpen = true\nIRS: \nREF_157 := true\""
+                    ],
+                    "state_variable": "Channels.isOpen"
+                }
+            ]
+        },
+        {
+            "attack_type": "DAO",
+            "composed_functions": [
+                "joinChannel",
+                "consensusCloseChannel"
+            ],
+            "from_function": "consensusCloseChannel",
+            "to_function": "joinChannel",
+            "dependencies": [
+                {
+                    "path": [
+                        "\"BlockID: 232\nFunction: consensusCloseChannel\nNode: \nEXPRESSION require(bool)(Channels[_lcID].isOpen == true)\nIRS: \nTMP_173 = SOLIDITY_CALL require(bool)(TMP_172)\"",
+                        "\"BlockID: 203\nFunction: joinChannel\nNode: \nEXPRESSION Channels[_lcID].isOpen = true\nIRS: \nREF_157 := true\""
+                    ],
+                    "state_variable": "Channels.isOpen"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 233\nFunction: consensusCloseChannel\nNode: \nEXPRESSION require(bool)(totalEthDeposit == _balances[0] + _balances[1])\nIRS: \nTMP_180 = SOLIDITY_CALL require(bool)(TMP_179)\"",
+                        "\"BlockID: 201\nFunction: joinChannel\nNode: \nEXPRESSION Channels[_lcID].initialDeposit[0] += _balances[0]\nIRS: \nREF_150 = REF_150 + REF_151\""
+                    ],
+                    "state_variable": "Channels.initialDeposit"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 233\nFunction: consensusCloseChannel\nNode: \nEXPRESSION require(bool)(totalEthDeposit == _balances[0] + _balances[1])\nIRS: \nTMP_180 = SOLIDITY_CALL require(bool)(TMP_179)\"",
+                        "\"BlockID: 202\nFunction: joinChannel\nNode: \nEXPRESSION Channels[_lcID].initialDeposit[1] += _balances[1]\nIRS: \nREF_154 = REF_154 + REF_155\""
+                    ],
+                    "state_variable": "Channels.initialDeposit"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 234\nFunction: consensusCloseChannel\nNode: \nEXPRESSION require(bool)(totalTokenDeposit == _balances[2] + _balances[3])\nIRS: \nTMP_183 = SOLIDITY_CALL require(bool)(TMP_182)\"",
+                        "\"BlockID: 201\nFunction: joinChannel\nNode: \nEXPRESSION Channels[_lcID].initialDeposit[0] += _balances[0]\nIRS: \nREF_150 = REF_150 + REF_151\""
+                    ],
+                    "state_variable": "Channels.initialDeposit"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 234\nFunction: consensusCloseChannel\nNode: \nEXPRESSION require(bool)(totalTokenDeposit == _balances[2] + _balances[3])\nIRS: \nTMP_183 = SOLIDITY_CALL require(bool)(TMP_182)\"",
+                        "\"BlockID: 202\nFunction: joinChannel\nNode: \nEXPRESSION Channels[_lcID].initialDeposit[1] += _balances[1]\nIRS: \nREF_154 = REF_154 + REF_155\""
+                    ],
+                    "state_variable": "Channels.initialDeposit"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 234\nFunction: consensusCloseChannel\nNode: \nEXPRESSION require(bool)(totalTokenDeposit == _balances[2] + _balances[3])\nIRS: \nTMP_183 = SOLIDITY_CALL require(bool)(TMP_182)\"",
+                        "\"BlockID: 207\nFunction: joinChannel\nNode: \nEXPRESSION Channels[_lcID].erc20Balances[1] = _balances[1]\nIRS: \nREF_146 := REF_147\""
+                    ],
+                    "state_variable": "Channels.erc20Balances"
+                }
+            ]
+        },
+        {
+            "attack_type": "DAO",
+            "composed_functions": [
+                "joinChannel",
+                "initVCstate"
+            ],
+            "from_function": "initVCstate",
+            "to_function": "joinChannel",
+            "dependencies": [
+                {
+                    "path": [
+                        "\"BlockID: 402\nFunction: initVCstate\nNode: \nEXPRESSION require(bool,string)(Channels[_lcID].isOpen,LC is closed.)\nIRS: \nTMP_232 = SOLIDITY_CALL require(bool,string)(REF_332,LC is closed.)\"",
+                        "\"BlockID: 203\nFunction: joinChannel\nNode: \nEXPRESSION Channels[_lcID].isOpen = true\nIRS: \nREF_157 := true\""
+                    ],
+                    "state_variable": "Channels.isOpen"
+                }
+            ]
+        },
+        {
+            "attack_type": "DAO",
+            "composed_functions": [
+                "joinChannel",
+                "settleVC"
+            ],
+            "from_function": "settleVC",
+            "to_function": "joinChannel",
+            "dependencies": [
+                {
+                    "path": [
+                        "\"BlockID: 463\nFunction: settleVC\nNode: \nEXPRESSION require(bool,string)(Channels[_lcID].isOpen,LC is closed.)\nIRS: \nTMP_252 = SOLIDITY_CALL require(bool,string)(REF_382,LC is closed.)\"",
+                        "\"BlockID: 203\nFunction: joinChannel\nNode: \nEXPRESSION Channels[_lcID].isOpen = true\nIRS: \nREF_157 := true\""
+                    ],
+                    "state_variable": "Channels.isOpen"
+                }
+            ]
+        },
+        {
+            "attack_type": "DAO",
+            "composed_functions": [
+                "joinChannel",
+                "closeVirtualChannel"
+            ],
+            "from_function": "closeVirtualChannel",
+            "to_function": "joinChannel",
+            "dependencies": [
+                {
+                    "path": [
+                        "\"BlockID: 515\nFunction: closeVirtualChannel\nNode: \nEXPRESSION require(bool,string)(Channels[_lcID].isOpen,LC is closed.)\nIRS: \nTMP_276 = SOLIDITY_CALL require(bool,string)(REF_450,LC is closed.)\"",
+                        "\"BlockID: 203\nFunction: joinChannel\nNode: \nEXPRESSION Channels[_lcID].isOpen = true\nIRS: \nREF_157 := true\""
+                    ],
+                    "state_variable": "Channels.isOpen"
+                }
+            ]
+        },
+        {
+            "attack_type": "DAO",
+            "composed_functions": [
+                "deposit",
+                "createChannel"
+            ],
+            "from_function": "createChannel",
+            "to_function": "deposit",
+            "dependencies": [
+                {
+                    "path": [
+                        "\"BlockID: 163\nFunction: createChannel\nNode: \nEXPRESSION Channels[_lcID].partyAddresses[0] = msg.sender\nIRS: \nREF_61 := msg.sender\"",
+                        "\"BlockID: 215\nFunction: deposit\nNode: \nIF Channels[_lcID].partyAddresses[1] == recipient\nIRS: \nCONDITION TMP_166\""
+                    ],
+                    "state_variable": "Channels.partyAddresses"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 164\nFunction: createChannel\nNode: \nEXPRESSION Channels[_lcID].partyAddresses[1] = _partyI\nIRS: \nREF_64 := _partyI\"",
+                        "\"BlockID: 215\nFunction: deposit\nNode: \nIF Channels[_lcID].partyAddresses[1] == recipient\nIRS: \nCONDITION TMP_166\""
+                    ],
+                    "state_variable": "Channels.partyAddresses"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 169\nFunction: createChannel\nNode: \nEXPRESSION Channels[_lcID].token = HumanStandardToken(_token)\nIRS: \nREF_72 := TMP_126\"",
+                        "\"BlockID: 219\nFunction: deposit\nNode: \nEXPRESSION require(bool,string)(Channels[_lcID].token.transferFrom(msg.sender,this,_balance),deposit: token transfer failure)\nIRS: \nTMP_167(bool) = HIGH_LEVEL_CALL, dest:REF_184(HumanStandardToken), function:transferFrom, arguments:['msg.sender', 'this', '_balance']  \""
+                    ],
+                    "state_variable": "Channels.token"
+                }
+            ]
+        },
+        {
+            "attack_type": "DAO",
+            "composed_functions": [
+                "deposit",
+                "LCOpenTimeout"
+            ],
+            "from_function": "LCOpenTimeout",
+            "to_function": "deposit",
+            "dependencies": [
+                {
+                    "path": [
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \"",
+                        "\"BlockID: 224\nFunction: deposit\nNode: \nEXPRESSION Channels[_lcID].erc20Balances[3] += _balance\nIRS: \nREF_188 = REF_188 + _balance\""
+                    ],
+                    "state_variable": "Channels"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 187\nFunction: LCOpenTimeout\nNode: \nEXPRESSION require(bool,string)(Channels[_lcID].token.transfer(Channels[_lcID].partyAddresses[0],Channels[_lcID].erc20Balances[0]),CreateChannel: token transfer failure)\nIRS: \nTMP_140(bool) = HIGH_LEVEL_CALL, dest:REF_114(HumanStandardToken), function:transfer, arguments:['REF_118', 'REF_121']  \"",
+                        "\"BlockID: 224\nFunction: deposit\nNode: \nEXPRESSION Channels[_lcID].erc20Balances[3] += _balance\nIRS: \nREF_188 = REF_188 + _balance\""
+                    ],
+                    "state_variable": "Channels.erc20Balances"
+                }
+            ]
+        },
+        {
+            "attack_type": "DAO",
+            "composed_functions": [
+                "deposit",
+                "LCOpenTimeout"
+            ],
+            "from_function": "LCOpenTimeout",
+            "to_function": "deposit",
+            "dependencies": [
+                {
+                    "path": [
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \"",
+                        "\"BlockID: 215\nFunction: deposit\nNode: \nIF Channels[_lcID].partyAddresses[1] == recipient\nIRS: \nCONDITION TMP_166\""
+                    ],
+                    "state_variable": "Channels"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \"",
+                        "\"BlockID: 219\nFunction: deposit\nNode: \nEXPRESSION require(bool,string)(Channels[_lcID].token.transferFrom(msg.sender,this,_balance),deposit: token transfer failure)\nIRS: \nTMP_167(bool) = HIGH_LEVEL_CALL, dest:REF_184(HumanStandardToken), function:transferFrom, arguments:['msg.sender', 'this', '_balance']  \""
+                    ],
+                    "state_variable": "Channels"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \"",
+                        "\"BlockID: 221\nFunction: deposit\nNode: \nEXPRESSION Channels[_lcID].ethBalances[3] += msg.value\nIRS: \nREF_191 = REF_191 + msg.value\""
+                    ],
+                    "state_variable": "Channels"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \"",
+                        "\"BlockID: 224\nFunction: deposit\nNode: \nEXPRESSION Channels[_lcID].erc20Balances[3] += _balance\nIRS: \nREF_188 = REF_188 + _balance\""
+                    ],
+                    "state_variable": "Channels"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \"",
+                        "\"BlockID: 230\nFunction: deposit\nNode: \nEXPRESSION Channels[_lcID].erc20Balances[2] += _balance\nIRS: \nREF_176 = REF_176 + _balance\""
+                    ],
+                    "state_variable": "Channels"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 184\nFunction: LCOpenTimeout\nNode: \nEXPRESSION Channels[_lcID].partyAddresses[0].transfer(Channels[_lcID].ethBalances[0])\nIRS: \nTransfer dest:REF_105 value:REF_109\"",
+                        "\"BlockID: 221\nFunction: deposit\nNode: \nEXPRESSION Channels[_lcID].ethBalances[3] += msg.value\nIRS: \nREF_191 = REF_191 + msg.value\""
+                    ],
+                    "state_variable": "Channels.ethBalances"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 187\nFunction: LCOpenTimeout\nNode: \nEXPRESSION require(bool,string)(Channels[_lcID].token.transfer(Channels[_lcID].partyAddresses[0],Channels[_lcID].erc20Balances[0]),CreateChannel: token transfer failure)\nIRS: \nTMP_140(bool) = HIGH_LEVEL_CALL, dest:REF_114(HumanStandardToken), function:transfer, arguments:['REF_118', 'REF_121']  \"",
+                        "\"BlockID: 224\nFunction: deposit\nNode: \nEXPRESSION Channels[_lcID].erc20Balances[3] += _balance\nIRS: \nREF_188 = REF_188 + _balance\""
+                    ],
+                    "state_variable": "Channels.erc20Balances"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 187\nFunction: LCOpenTimeout\nNode: \nEXPRESSION require(bool,string)(Channels[_lcID].token.transfer(Channels[_lcID].partyAddresses[0],Channels[_lcID].erc20Balances[0]),CreateChannel: token transfer failure)\nIRS: \nTMP_140(bool) = HIGH_LEVEL_CALL, dest:REF_114(HumanStandardToken), function:transfer, arguments:['REF_118', 'REF_121']  \"",
+                        "\"BlockID: 230\nFunction: deposit\nNode: \nEXPRESSION Channels[_lcID].erc20Balances[2] += _balance\nIRS: \nREF_176 = REF_176 + _balance\""
+                    ],
+                    "state_variable": "Channels.erc20Balances"
+                }
+            ]
+        },
+        {
+            "attack_type": "DAO",
+            "composed_functions": [
+                "deposit",
+                "consensusCloseChannel"
+            ],
+            "from_function": "consensusCloseChannel",
+            "to_function": "deposit",
+            "dependencies": [
+                {
+                    "path": [
+                        "\"BlockID: 234\nFunction: consensusCloseChannel\nNode: \nEXPRESSION require(bool)(totalTokenDeposit == _balances[2] + _balances[3])\nIRS: \nTMP_183 = SOLIDITY_CALL require(bool)(TMP_182)\"",
+                        "\"BlockID: 224\nFunction: deposit\nNode: \nEXPRESSION Channels[_lcID].erc20Balances[3] += _balance\nIRS: \nREF_188 = REF_188 + _balance\""
+                    ],
+                    "state_variable": "Channels.erc20Balances"
+                }
+            ]
+        },
+        {
+            "attack_type": "DAO",
+            "composed_functions": [
+                "deposit",
+                "consensusCloseChannel"
+            ],
+            "from_function": "consensusCloseChannel",
+            "to_function": "deposit",
+            "dependencies": [
+                {
+                    "path": [
+                        "\"BlockID: 233\nFunction: consensusCloseChannel\nNode: \nEXPRESSION require(bool)(totalEthDeposit == _balances[0] + _balances[1])\nIRS: \nTMP_180 = SOLIDITY_CALL require(bool)(TMP_179)\"",
+                        "\"BlockID: 221\nFunction: deposit\nNode: \nEXPRESSION Channels[_lcID].ethBalances[3] += msg.value\nIRS: \nREF_191 = REF_191 + msg.value\""
+                    ],
+                    "state_variable": "Channels.ethBalances"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 234\nFunction: consensusCloseChannel\nNode: \nEXPRESSION require(bool)(totalTokenDeposit == _balances[2] + _balances[3])\nIRS: \nTMP_183 = SOLIDITY_CALL require(bool)(TMP_182)\"",
+                        "\"BlockID: 224\nFunction: deposit\nNode: \nEXPRESSION Channels[_lcID].erc20Balances[3] += _balance\nIRS: \nREF_188 = REF_188 + _balance\""
+                    ],
+                    "state_variable": "Channels.erc20Balances"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 234\nFunction: consensusCloseChannel\nNode: \nEXPRESSION require(bool)(totalTokenDeposit == _balances[2] + _balances[3])\nIRS: \nTMP_183 = SOLIDITY_CALL require(bool)(TMP_182)\"",
+                        "\"BlockID: 230\nFunction: deposit\nNode: \nEXPRESSION Channels[_lcID].erc20Balances[2] += _balance\nIRS: \nREF_176 = REF_176 + _balance\""
+                    ],
+                    "state_variable": "Channels.erc20Balances"
+                }
+            ]
+        },
+        {
+            "attack_type": "DAO",
+            "composed_functions": [
+                "consensusCloseChannel",
+                "createChannel"
+            ],
+            "from_function": "createChannel",
+            "to_function": "consensusCloseChannel",
+            "dependencies": [
+                {
+                    "path": [
+                        "\"BlockID: 163\nFunction: createChannel\nNode: \nEXPRESSION Channels[_lcID].partyAddresses[0] = msg.sender\nIRS: \nREF_61 := msg.sender\"",
+                        "\"BlockID: 247\nFunction: consensusCloseChannel\nNode: \nEXPRESSION require(bool,string)(Channels[_lcID].token.transfer(Channels[_lcID].partyAddresses[1],_balances[3]),happyCloseChannel: token transfer failure)\nIRS: \nTMP_204(bool) = HIGH_LEVEL_CALL, dest:REF_259(HumanStandardToken), function:transfer, arguments:['REF_263', 'REF_264']  \""
+                    ],
+                    "state_variable": "Channels.partyAddresses"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 164\nFunction: createChannel\nNode: \nEXPRESSION Channels[_lcID].partyAddresses[1] = _partyI\nIRS: \nREF_64 := _partyI\"",
+                        "\"BlockID: 247\nFunction: consensusCloseChannel\nNode: \nEXPRESSION require(bool,string)(Channels[_lcID].token.transfer(Channels[_lcID].partyAddresses[1],_balances[3]),happyCloseChannel: token transfer failure)\nIRS: \nTMP_204(bool) = HIGH_LEVEL_CALL, dest:REF_259(HumanStandardToken), function:transfer, arguments:['REF_263', 'REF_264']  \""
+                    ],
+                    "state_variable": "Channels.partyAddresses"
+                },
+                {
+                    "path": [
+                        "\"BlockID: 169\nFunction: createChannel\nNode: \nEXPRESSION Channels[_lcID].token = HumanStandardToken(_token)\nIRS: \nREF_72 := TMP_126\"",
+                        "\"BlockID: 247\nFunction: consensusCloseChannel\nNode: \nEXPRESSION require(bool,string)(Channels[_lcID].token.transfer(Channels[_lcID].partyAddresses[1],_balances[3]),happyCloseChannel: token transfer failure)\nIRS: \nTMP_204(bool) = HIGH_LEVEL_CALL, dest:REF_259(HumanStandardToken), function:transfer, arguments:['REF_263', 'REF_264']  \""
+                    ],
+                    "state_variable": "Channels.token"
+                }
+            ]
+        },
+        {
+            "attack_type": "DAO",
+            "composed_functions": [
+                "consensusCloseChannel",
+                "LCOpenTimeout"
+            ],
+            "from_function": "LCOpenTimeout",
+            "to_function": "consensusCloseChannel",
+            "dependencies": [
+                {
+                    "path": [
+                        "\"BlockID: 190\nFunction: LCOpenTimeout\nNode: \nEXPRESSION delete Channels[_lcID]\nIRS: \nREF_128 = delete REF_128 \"",
+                        "\"BlockID: 247\nFunction: consensusCloseChannel\nNode: \nEXPRESSION require(bool,string)(Channels[_lcID].token.transfer(Channels[_lcID].partyAddresses[1],_balances[3]),happyCloseChannel: token transfer failure)\nIRS: \nTMP_204(bool) = HIGH_LEVEL_CALL, dest:REF_259(HumanStandardToken), function:transfer, arguments:['REF_263', 'REF_264']  \""
+                    ],
+                    "state_variable": "Channels"
+                }
+            ]
+        }
+    ]
+}

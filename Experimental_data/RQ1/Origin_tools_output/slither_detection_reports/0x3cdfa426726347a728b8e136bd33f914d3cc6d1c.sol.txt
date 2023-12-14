@@ -1,0 +1,133 @@
+INFO:Detectors:[93m
+Reentrancy in PromTokenVault.releaseCommunity (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#392-397):
+	External calls:
+	- require(bool,string)(token.balanceOf(address(this)) >= getCommunityAvailable(),Vault does not have enough tokens) (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#392-393)
+	- toSend = getCommunityAvailable() (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#394)
+	State variables written after the call(s):
+	- alreadyWithdrawn (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#395)
+Reentrancy in PromTokenVault.releaseCompany (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#380-386):
+	External calls:
+	- require(bool,string)(token.balanceOf(address(this)) >= getCompanyAvailable(),Vault does not have enough tokens) (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#380-381)
+	- toSend = getCompanyAvailable() (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#382)
+	State variables written after the call(s):
+	- alreadyWithdrawn (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#383)
+Reentrancy in PromTokenVault.releaseEcosystem (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#397-408):
+	External calls:
+	- require(bool,string)(token.balanceOf(address(this)) >= getEcosystemAvailable(),Vault does not have enough tokens) (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#398-401)
+	- toSend = getEcosystemAvailable() (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#401-403)
+	State variables written after the call(s):
+	- alreadyWithdrawn (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#403-404)
+Reentrancy in PromTokenVault.releaseLiqudity (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#367-374):
+	External calls:
+	- require(bool,string)(token.balanceOf(address(this)) >= getLiquidityAvailable(),Vault does not have enough tokens) (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#368-369)
+	- toSend = getLiquidityAvailable() (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#369-370)
+	State variables written after the call(s):
+	- alreadyWithdrawn (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#371)
+Reentrancy in PromTokenVault.releasePrivate (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#386-392):
+	External calls:
+	- require(bool,string)(token.balanceOf(address(this)) >= getPrivateAvailable(),Vault does not have enough tokens) (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#386-387)
+	- toSend = getPrivateAvailable() (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#388)
+	State variables written after the call(s):
+	- alreadyWithdrawn (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#389)
+Reentrancy in PromTokenVault.releaseTeam (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#374-380):
+	External calls:
+	- require(bool,string)(token.balanceOf(address(this)) >= getTeamAvailable(),Vault does not have enough tokens) (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#374-375)
+	- toSend = getTeamAvailable() (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#376)
+	State variables written after the call(s):
+	- alreadyWithdrawn (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#377)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+PromTokenVault.getPercentReleasable (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#280-284) uses timestamp for comparisons
+	Dangerous comparisons:
+	- _part >= _full (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#283-284)
+PromTokenVault.getLiquidityReleasable (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#292-296) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp >= TGE_timestamp (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#292-296)
+PromTokenVault.getTeamReleasable (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#297-308) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp >= unlockDate (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#300-308)
+PromTokenVault.getCompanyReleasable (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#311-320) uses timestamp for comparisons
+	Dangerous comparisons:
+	- now >= unlockDate (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#315-320)
+PromTokenVault.getPrivateReleasable (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#324-338) uses timestamp for comparisons
+	Dangerous comparisons:
+	- now >= unlockDate (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#332-336)
+PromTokenVault.getCommunityReleasable (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#342-347) uses timestamp for comparisons
+	Dangerous comparisons:
+	- now >= unfreezeTimestamp (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#345-347)
+PromTokenVault.getEcosystemReleasable (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#348-362) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp >= TGE_timestamp (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#350-361)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+ERC20Basic.totalSupply should be constant (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#83-84)
+PromTokenVault.MONTH should be constant (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#152-153)
+PromTokenVault.communityKey should be constant (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#159-160)
+PromTokenVault.companyKey should be constant (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#159)
+PromTokenVault.ecosystemKey should be constant (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#160-162)
+PromTokenVault.liquidityKey should be constant (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#156-157)
+PromTokenVault.privateKey should be constant (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#159)
+PromTokenVault.publicKey should be constant (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#156)
+PromTokenVault.teamKey should be constant (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#158-159)
+PromTokenVault.token_ should be constant (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#155)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#72-82) should be declared external
+ERC20Basic.balanceOf (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#84-85) should be declared external
+BasicToken.balanceOf (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#137-138) should be declared external
+ERC20Basic.transfer (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#85-88) should be declared external
+BasicToken.transfer (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#116-127) should be declared external
+ERC20.allowance (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#94-95) should be declared external
+ERC20.transferFrom (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#95-96) should be declared external
+ERC20.approve (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#96-100) should be declared external
+PromTokenVault.getLiqudityAddress (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#203-207) should be declared external
+PromTokenVault.getTeamAddress (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#207-211) should be declared external
+PromTokenVault.getCompanyAddress (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#211-215) should be declared external
+PromTokenVault.getPrivateAddress (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#215-219) should be declared external
+PromTokenVault.getCommunityAddress (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#220) should be declared external
+PromTokenVault.getEcosystemAddress (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#220-222) should be declared external
+PromTokenVault.setLiqudityAddress (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#230-234) should be declared external
+PromTokenVault.setTeamAddress (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#234-238) should be declared external
+PromTokenVault.setCompanyAddress (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#238-241) should be declared external
+PromTokenVault.setPrivateAddress (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#241-247) should be declared external
+PromTokenVault.setCommunityAddress (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#247) should be declared external
+PromTokenVault.setEcosystemAddress (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#248-250) should be declared external
+PromTokenVault.releaseLiqudity (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#367-374) should be declared external
+PromTokenVault.releaseTeam (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#374-380) should be declared external
+PromTokenVault.releaseCompany (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#380-386) should be declared external
+PromTokenVault.releasePrivate (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#386-392) should be declared external
+PromTokenVault.releaseCommunity (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#392-397) should be declared external
+PromTokenVault.releaseEcosystem (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#397-408) should be declared external
+PromTokenVault.getAlreadyWithdrawn (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#408-411) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_owner' of BasicToken.balanceOf (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#137) is not in mixedCase
+Parameter '_to' of BasicToken.transfer (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#116) is not in mixedCase
+Parameter '_value' of BasicToken.transfer (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#116-118) is not in mixedCase
+Parameter '_token' of PromTokenVault. (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#179) is not in mixedCase
+Parameter '_private' of PromTokenVault. (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#180) is not in mixedCase
+Parameter '_ecosystem' of PromTokenVault. (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#181-182) is not in mixedCase
+Parameter '_liquidity' of PromTokenVault. (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#182-183) is not in mixedCase
+Parameter '_team' of PromTokenVault. (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#184) is not in mixedCase
+Parameter '_company' of PromTokenVault. (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#185) is not in mixedCase
+Parameter '_community' of PromTokenVault. (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#186-187) is not in mixedCase
+Parameter '_liquidity' of PromTokenVault.setLiqudityAddress (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#230-231) is not in mixedCase
+Parameter '_team' of PromTokenVault.setTeamAddress (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#234-235) is not in mixedCase
+Parameter '_company' of PromTokenVault.setCompanyAddress (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#238) is not in mixedCase
+Parameter '_private' of PromTokenVault.setPrivateAddress (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#241) is not in mixedCase
+Parameter '_community' of PromTokenVault.setCommunityAddress (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#247) is not in mixedCase
+Parameter '_ecosystem' of PromTokenVault.setEcosystemAddress (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#249) is not in mixedCase
+Parameter '_part' of PromTokenVault.getPercentReleasable (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#280) is not in mixedCase
+Parameter '_full' of PromTokenVault.getPercentReleasable (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#280-281) is not in mixedCase
+Parameter '_since' of PromTokenVault.getMonthsPassed (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#285) is not in mixedCase
+Parameter '_key' of PromTokenVault.incrementReleased (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#362) is not in mixedCase
+Parameter '_amount' of PromTokenVault.incrementReleased (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#362) is not in mixedCase
+Parameter '_key' of PromTokenVault.getAlreadyWithdrawn (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#410) is not in mixedCase
+Variable 'PromTokenVault.MONTH' (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#152-153) is not in mixedCase
+Variable 'PromTokenVault.TGE_timestamp' (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#177) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+PromTokenVault.token_ (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#155) is never used in PromTokenVault
+PromTokenVault.publicKey (/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol#156) is never used in PromTokenVault
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0x3cdfa426726347a728b8e136bd33f914d3cc6d1c.sol analyzed (6 contracts), 66 result(s) found

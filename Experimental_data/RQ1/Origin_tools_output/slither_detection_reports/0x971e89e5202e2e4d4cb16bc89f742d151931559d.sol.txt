@@ -1,0 +1,405 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol:
+/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol:1664:20: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function onBuy(IERC20Token _reserveToken, uint256 _amount) internal {
+                   ^-----------------------^
+/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol:1664:47: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function onBuy(IERC20Token _reserveToken, uint256 _amount) internal {
+                                              ^-------------^
+/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol:1677:21: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function onSale(IERC20Token _reserveToken, uint256 _amount) internal {
+                    ^-----------------------^
+/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol:1677:48: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function onSale(IERC20Token _reserveToken, uint256 _amount) internal {
+                                               ^-------------^
+/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol:1664:5: Warning: Function state mutability can be restricted to pure
+    function onBuy(IERC20Token _reserveToken, uint256 _amount) internal {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol:1677:5: Warning: Function state mutability can be restricted to pure
+    function onSale(IERC20Token _reserveToken, uint256 _amount) internal {
+    ^ (Relevant source part starts here and spans across multiple lines).
+
+INFO:Detectors:[91m
+RAYBancorConverter.RAY_PORTFOLIO_MANAGER (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#2044-2045) shadows:
+	- ContractRegistryClient.RAY_PORTFOLIO_MANAGER (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#450-454)
+RAYBancorConverter.RAY_NAV_CALCULATOR (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#2045-2046) shadows:
+	- ContractRegistryClient.RAY_NAV_CALCULATOR (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#454-457)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variable-shadowing[0m
+INFO:Detectors:[93m
+INonStandardERC20 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#592-617) has incorrect ERC20 function interface(s):
+	-transfer (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#613-615)
+	-transferFrom (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#615-616)
+	-approve (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#616-617)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[93m
+Contract locking ether found in /sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol:
+	Contract IEtherToken has payable functions:
+	 - deposit (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#796-798)
+	 - depositTo (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#798-800)
+	But does not have a function to withdraw the ether
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#contracts-that-lock-ether[0m
+INFO:Detectors:[93m
+Reentrancy in RAYBancorConverter.onBuy (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#2250-2316):
+	External calls:
+	- rayContract = IRAYStorage(rayStorage).getContractAddress(RAY_PORTFOLIO_MANAGER) (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#2273-2274)
+	- require(bool,string)(IERC20(_reserveToken).approve(rayContract,_amount),#RAYBancorConverter onBuy(): Approval of ERC20 Token failed) (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#2293-2297)
+	- newRayTokenId = mintRAYToken(rayContract,rayPortfolioId,_amount) (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#2308-2310)
+	State variables written after the call(s):
+	- rayTokens (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#2311-2313)
+Reentrancy in ContractRegistryClient.updateRegistry (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#485-508):
+	External calls:
+	- newRegistry = addressOf(CONTRACT_REGISTRY) (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#489-491)
+	- require(bool)(IContractRegistry(newRegistry).addressOf(CONTRACT_REGISTRY) != address(0)) (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#499-504)
+	State variables written after the call(s):
+	- registry (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#508)
+Reentrancy in BancorConverter.upgrade (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1097-1106):
+	External calls:
+	- converterUpgrader = IBancorConverterUpgrader(addressOf(BANCOR_CONVERTER_UPGRADER)) (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1098-1100)
+	- converterUpgrader.upgrade(version) (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1102-1106)
+	State variables written after the call(s):
+	- owner (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1106)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+RAYBancorConverter.withdrawFromRAY (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol) does not use the value returned by external calls:
+	-IRAY(rayPortfolioManager).redeem(rayTokenId,_amount,this) (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+BancorConverter.completeXConversion2.bancorX (local variable @ /sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1531) shadows:
+	- SmartTokenController.bancorX (state variable @ /sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#697-698)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+Reentrancy in RAYBancorConverter._addRAYReserve (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#2128-2156):
+	External calls:
+	- require(bool,string)(IRAYStorage(rayStorage).getPrincipalAddress(_rayPortfolioId) == address(_token),#addRAYReserve modifier: This is not a valid RAY portfolio for this token) (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#2146-2156)
+	State variables written after the call(s):
+	- rayPortfolioIds (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#2156)
+Reentrancy in RAYBancorConverter.addRAYReserve (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#2106-2121):
+	External calls:
+	- super.addReserve(_token,_ratio) (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#2118-2119)
+	- _addRAYReserve(_token,_rayPortfolioId) (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#2119)
+	State variables written after the call(s):
+	- rayPortfolioIds (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#2119)
+Reentrancy in BancorConverter.constructor (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#913-939):
+	External calls:
+	- features = IContractFeatures(addressOf(CONTRACT_FEATURES)) (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#925-929)
+	- features.enableFeatures(FeatureIds.CONVERTER_CONVERSION_WHITELIST,true) (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#930-933)
+	State variables written after the call(s):
+	- maxConversionFee (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#935)
+Reentrancy in ContractRegistryClient.updateRegistry (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#485-508):
+	External calls:
+	- newRegistry = addressOf(CONTRACT_REGISTRY) (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#489-491)
+	- require(bool)(IContractRegistry(newRegistry).addressOf(CONTRACT_REGISTRY) != address(0)) (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#499-504)
+	State variables written after the call(s):
+	- prevRegistry (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#506)
+Reentrancy in BancorConverter.upgrade (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1097-1106):
+	External calls:
+	- converterUpgrader = IBancorConverterUpgrader(addressOf(BANCOR_CONVERTER_UPGRADER)) (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1098-1100)
+	State variables written after the call(s):
+	- newOwner (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1101-1102)
+Reentrancy in BancorConverter.upgrade (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1097-1106):
+	External calls:
+	- converterUpgrader = IBancorConverterUpgrader(addressOf(BANCOR_CONVERTER_UPGRADER)) (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1098-1100)
+	- converterUpgrader.upgrade(version) (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1102-1106)
+	State variables written after the call(s):
+	- newOwner (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1106)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+BancorConverter.conversionsEnabled should be constant (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#859)
+BancorConverter.version should be constant (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#833)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+IERC20Token.name (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#14-15) should be declared external
+IERC20Token.symbol (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#15-16) should be declared external
+IERC20Token.decimals (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#16-17) should be declared external
+IERC20Token.totalSupply (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#17-18) should be declared external
+IERC20Token.balanceOf (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#18-19) should be declared external
+IERC20Token.allowance (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#19-21) should be declared external
+IERC20Token.transfer (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#21-22) should be declared external
+IERC20Token.transferFrom (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#22-23) should be declared external
+IERC20Token.approve (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#23-26) should be declared external
+IWhitelist.isWhitelisted (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#34-37) should be declared external
+BancorConverter.getReturn (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1216-1229) should be declared external
+IBancorConverter.getReturn (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#47-48) should be declared external
+IBancorConverter.conversionWhitelist (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#50-51) should be declared external
+IBancorConverter.conversionFee (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#51-52) should be declared external
+IBancorConverter.reserves (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#52-53) should be declared external
+IBancorConverter.reserveTokens (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#54-57) should be declared external
+IBancorConverter.change (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#57-58) should be declared external
+BancorConverter.change (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1720-1727) should be declared external
+IBancorConverter.convert (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#58-59) should be declared external
+BancorConverter.convert (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1728-1734) should be declared external
+IBancorConverter.quickConvert (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#59-60) should be declared external
+BancorConverter.quickConvert (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1735-1745) should be declared external
+BancorConverter.connectors (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1774-1783) should be declared external
+IBancorConverter.connectors (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#60-61) should be declared external
+BancorConverter.getConnectorBalance (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1804-1806) should be declared external
+IBancorConverter.getConnectorBalance (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#61-62) should be declared external
+IBancorConverter.connectorTokens (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#62-63) should be declared external
+BancorConverter.connectorTokens (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1784-1785) should be declared external
+IBancorConverter.connectorTokenCount (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#64-66) should be declared external
+BancorConverter.connectorTokenCount (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1786-1789) should be declared external
+IBancorConverterUpgrader.upgrade (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#76-79) should be declared external
+IBancorConverterUpgrader.upgrade (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#79-81) should be declared external
+IBancorFormula.calculatePurchaseReturn (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#87-88) should be declared external
+IBancorFormula.calculateSaleReturn (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#88-89) should be declared external
+IBancorFormula.calculateCrossReserveReturn (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#89-90) should be declared external
+IBancorFormula.calculateFundCost (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#90-91) should be declared external
+IBancorFormula.calculateLiquidateReturn (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#91-93) should be declared external
+IBancorFormula.calculateCrossConnectorReturn (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#93-102) should be declared external
+IBancorNetwork.convert2 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#109-116) should be declared external
+IBancorNetwork.claimAndConvert2 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#117-125) should be declared external
+IBancorNetwork.convertFor2 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#125-134) should be declared external
+IBancorNetwork.claimAndConvertFor2 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#134-143) should be declared external
+IBancorNetwork.convert (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#145-150) should be declared external
+IBancorNetwork.claimAndConvert (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#153-157) should be declared external
+IBancorNetwork.convertFor (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#159-165) should be declared external
+IBancorNetwork.claimAndConvertFor (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#167-174) should be declared external
+IBancorNetwork.convertForPrioritized4 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#175-185) should be declared external
+IBancorNetwork.convertForPrioritized3 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#187-199) should be declared external
+IBancorNetwork.convertForPrioritized2 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#201-211) should be declared external
+IBancorNetwork.convertForPrioritized (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#214-226) should be declared external
+IOwned.owner (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#325-327) should be declared external
+IContractRegistry.addressOf (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#432-433) should be declared external
+IContractRegistry.getAddress (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#434-435) should be declared external
+ContractRegistryClient.updateRegistry (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#485-508) should be declared external
+ContractRegistryClient.restoreRegistry (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#510-514) should be declared external
+ContractRegistryClient.restrictRegistryUpdate (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#521-533) should be declared external
+IContractFeatures.isSupported (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#552-558) should be declared external
+IContractFeatures.enableFeatures (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#560-561) should be declared external
+ISmartToken.disableTransfers (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#568-574) should be declared external
+ISmartToken.issue (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#574-575) should be declared external
+ISmartToken.destroy (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#575-578) should be declared external
+ISmartTokenController.claimTokens (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#584-586) should be declared external
+SmartTokenController.claimTokens (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#761-772) should be declared external
+ISmartTokenController.token (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#586) should be declared external
+INonStandardERC20.name (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#596-598) should be declared external
+INonStandardERC20.symbol (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#599-601) should be declared external
+INonStandardERC20.decimals (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#601-609) should be declared external
+INonStandardERC20.totalSupply (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#609-610) should be declared external
+INonStandardERC20.balanceOf (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#610-612) should be declared external
+INonStandardERC20.allowance (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#612-613) should be declared external
+INonStandardERC20.transfer (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#613-615) should be declared external
+INonStandardERC20.transferFrom (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#615-616) should be declared external
+INonStandardERC20.approve (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#616-617) should be declared external
+SmartTokenController.withdrawFromToken (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#738-744) should be declared external
+SmartTokenController.setBancorX (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#776-794) should be declared external
+IEtherToken.deposit (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#796-798) should be declared external
+IEtherToken.withdraw (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#798) should be declared external
+IEtherToken.depositTo (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#798-800) should be declared external
+IEtherToken.withdrawTo (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#800) should be declared external
+IBancorX.xTransfer (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#802-804) should be declared external
+IBancorX.getXTransferAmount (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#804-805) should be declared external
+BancorConverter.setConversionWhitelist (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#988-996) should be declared external
+BancorConverter.setConversionFee (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1026-1032) should be declared external
+BancorConverter.depositTokens (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1059-1067) should be declared external
+BancorConverter.upgrade (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1097-1106) should be declared external
+RAYBancorConverter.upgrade (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#2164-2166) should be declared external
+BancorConverter.getReserveRatio (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1172-1180) should be declared external
+BancorConverter.fund (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1585-1616) should be declared external
+BancorConverter.liquidate (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1626-1664) should be declared external
+BancorConverter.quickConvertPrioritized2 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1748-1755) should be declared external
+BancorConverter.quickConvertPrioritized (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1756-1763) should be declared external
+BancorConverter.completeXConversion (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1767-1770) should be declared external
+BancorConverter.addConnector (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1790-1792) should be declared external
+BancorConverter.updateConnector (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1793-1803) should be declared external
+BancorConverter.getCrossConnectorReturn (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1808-1814) should be declared external
+IERC721Receiver.onERC721Received (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#2022-2026) should be declared external
+RAYBancorConverter.onERC721Received (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#2235-2243) should be declared external
+RAYBancorConverter.addRAYReserve (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#2106-2121) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol:
+	- pragma solidity0.4.26 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#7-10): it allows old versions
+	- pragma solidity0.4.26 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#30-31): it allows old versions
+	- pragma solidity0.4.26 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#44-45): it allows old versions
+	- pragma solidity0.4.26 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#72-74): it allows old versions
+	- pragma solidity0.4.26 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#86-87): it allows old versions
+	- pragma solidity0.4.26 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#105-106): it allows old versions
+	- pragma solidity0.4.26 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#228-229): it allows old versions
+	- pragma solidity0.4.26 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#244-245): it allows old versions
+	- pragma solidity0.4.26 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#313-314): it allows old versions
+	- pragma solidity0.4.26 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#333-335): it allows old versions
+	- pragma solidity0.4.26 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#393-394): it allows old versions
+	- pragma solidity0.4.26 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#429): it allows old versions
+	- pragma solidity0.4.26 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#436): it allows old versions
+	- pragma solidity0.4.26 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#549): it allows old versions
+	- pragma solidity0.4.26 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#562): it allows old versions
+	- pragma solidity0.4.26 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#580-583): it allows old versions
+	- pragma solidity0.4.26 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#587-588): it allows old versions
+	- pragma solidity0.4.26 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#591): it allows old versions
+	- pragma solidity0.4.26 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#619): it allows old versions
+	- pragma solidity0.4.26 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#664): it allows old versions
+	- pragma solidity0.4.26 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#796): it allows old versions
+	- pragma solidity0.4.26 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#802): it allows old versions
+	- pragma solidity0.4.26 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#806): it allows old versions
+	- pragma solidity0.4.26 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1838-1839): it allows old versions
+	- pragma solidity0.4.26 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1928): it allows old versions
+	- pragma solidity0.4.26 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1942): it allows old versions
+	- pragma solidity0.4.26 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#2002-2003): it allows old versions
+	- pragma solidity0.4.26 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#2027-2028): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_x' of SafeMath.add (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#258) is not in mixedCase
+Parameter '_y' of SafeMath.add (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#258) is not in mixedCase
+Parameter '_x' of SafeMath.sub (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#272) is not in mixedCase
+Parameter '_y' of SafeMath.sub (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#272) is not in mixedCase
+Parameter '_x' of SafeMath.mul (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#287) is not in mixedCase
+Parameter '_y' of SafeMath.mul (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#287) is not in mixedCase
+Parameter '_x' of SafeMath.div (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#310) is not in mixedCase
+Parameter '_y' of SafeMath.div (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#310) is not in mixedCase
+Parameter '_newOwner' of Owned.transferOwnership (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#369-370) is not in mixedCase
+Parameter '_registry' of ContractRegistryClient. (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#480) is not in mixedCase
+Parameter '_onlyOwnerCanUpdateRegistry' of ContractRegistryClient.restrictRegistryUpdate (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#522-525) is not in mixedCase
+Parameter '_contractName' of ContractRegistryClient.addressOf (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#544) is not in mixedCase
+Parameter '_token' of TokenHolder.withdrawTokens (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#658) is not in mixedCase
+Parameter '_to' of TokenHolder.withdrawTokens (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#658) is not in mixedCase
+Parameter '_amount' of TokenHolder.withdrawTokens (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#658) is not in mixedCase
+Parameter '_from' of SmartTokenController.claimTokens (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#761-762) is not in mixedCase
+Parameter '_amount' of SmartTokenController.claimTokens (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#762) is not in mixedCase
+Parameter '_token' of SmartTokenController. (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#703) is not in mixedCase
+Parameter '_newOwner' of SmartTokenController.transferTokenOwnership (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#723-724) is not in mixedCase
+Parameter '_token' of SmartTokenController.withdrawFromToken (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#739) is not in mixedCase
+Parameter '_to' of SmartTokenController.withdrawFromToken (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#739-740) is not in mixedCase
+Parameter '_amount' of SmartTokenController.withdrawFromToken (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#740) is not in mixedCase
+Parameter '_bancorX' of SmartTokenController.setBancorX (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#776) is not in mixedCase
+Parameter '_fromToken' of BancorConverter.getReturn (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1216-1218) is not in mixedCase
+Parameter '_toToken' of BancorConverter.getReturn (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1218) is not in mixedCase
+Parameter '_amount' of BancorConverter.getReturn (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1218-1219) is not in mixedCase
+Parameter '_fromToken' of BancorConverter.convert2 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1461) is not in mixedCase
+Parameter '_toToken' of BancorConverter.convert2 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1461) is not in mixedCase
+Parameter '_amount' of BancorConverter.convert2 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1461) is not in mixedCase
+Parameter '_minReturn' of BancorConverter.convert2 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1463) is not in mixedCase
+Parameter '_affiliateAccount' of BancorConverter.convert2 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1463) is not in mixedCase
+Parameter '_affiliateFee' of BancorConverter.convert2 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1463) is not in mixedCase
+Parameter '_path' of BancorConverter.quickConvert2 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1483) is not in mixedCase
+Parameter '_amount' of BancorConverter.quickConvert2 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1483) is not in mixedCase
+Parameter '_minReturn' of BancorConverter.quickConvert2 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1483) is not in mixedCase
+Parameter '_affiliateAccount' of BancorConverter.quickConvert2 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1483-1484) is not in mixedCase
+Parameter '_affiliateFee' of BancorConverter.quickConvert2 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1484) is not in mixedCase
+Parameter '_reserveToken' of BancorConverter.getReserveBalance (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1185-1187) is not in mixedCase
+Parameter '_fromToken' of BancorConverter.change (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1720-1723) is not in mixedCase
+Parameter '_toToken' of BancorConverter.change (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1723-1724) is not in mixedCase
+Parameter '_amount' of BancorConverter.change (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1724) is not in mixedCase
+Parameter '_minReturn' of BancorConverter.change (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1724-1725) is not in mixedCase
+Parameter '_fromToken' of BancorConverter.convert (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1728) is not in mixedCase
+Parameter '_toToken' of BancorConverter.convert (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1728) is not in mixedCase
+Parameter '_amount' of BancorConverter.convert (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1728) is not in mixedCase
+Parameter '_minReturn' of BancorConverter.convert (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1728) is not in mixedCase
+Parameter '_path' of BancorConverter.quickConvert (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1738-1739) is not in mixedCase
+Parameter '_amount' of BancorConverter.quickConvert (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1739) is not in mixedCase
+Parameter '_minReturn' of BancorConverter.quickConvert (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1739-1740) is not in mixedCase
+Parameter '_address' of BancorConverter.connectors (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1778) is not in mixedCase
+Parameter '_connectorToken' of BancorConverter.getConnectorBalance (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1805) is not in mixedCase
+Parameter '_index' of BancorConverter.connectorTokens (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1784) is not in mixedCase
+Parameter '_token' of BancorConverter.withdrawTokens (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1080) is not in mixedCase
+Parameter '_to' of BancorConverter.withdrawTokens (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1080) is not in mixedCase
+Parameter '_amount' of BancorConverter.withdrawTokens (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1080-1081) is not in mixedCase
+Parameter '_newOwner' of BancorConverter.transferTokenOwnership (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1007) is not in mixedCase
+Parameter '_maxConversionFee' of BancorConverter. (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#918) is not in mixedCase
+Parameter '_reserveToken' of BancorConverter. (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#918-919) is not in mixedCase
+Parameter '_reserveRatio' of BancorConverter. (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#919) is not in mixedCase
+Parameter '_whitelist' of BancorConverter.setConversionWhitelist (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#990) is not in mixedCase
+Parameter '_conversionFee' of BancorConverter.setConversionFee (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1026) is not in mixedCase
+Parameter '_amount' of BancorConverter.getFinalAmount (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1043-1044) is not in mixedCase
+Parameter '_magnitude' of BancorConverter.getFinalAmount (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1044-1047) is not in mixedCase
+Parameter '_reserveToken' of BancorConverter.depositTokens (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1060) is not in mixedCase
+Parameter '_depositAmount' of BancorConverter.depositTokens (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1060) is not in mixedCase
+Parameter '_token' of BancorConverter.addReserve (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1114) is not in mixedCase
+Parameter '_ratio' of BancorConverter.addReserve (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1114) is not in mixedCase
+Parameter '_reserveToken' of BancorConverter.updateReserveVirtualBalance (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1153-1154) is not in mixedCase
+Parameter '_virtualBalance' of BancorConverter.updateReserveVirtualBalance (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1154-1156) is not in mixedCase
+Parameter '_reserveToken' of BancorConverter.getReserveRatio (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1174) is not in mixedCase
+Function 'BancorConverter._getReserveBalance' (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1200-1204) is not in mixedCase
+Parameter '_reserveToken' of BancorConverter._getReserveBalance (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1201) is not in mixedCase
+Parameter '_reserveToken' of BancorConverter.getPurchaseReturn (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1237-1239) is not in mixedCase
+Parameter '_depositAmount' of BancorConverter.getPurchaseReturn (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1239-1241) is not in mixedCase
+Parameter '_reserveToken' of BancorConverter.getSaleReturn (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1263-1264) is not in mixedCase
+Parameter '_sellAmount' of BancorConverter.getSaleReturn (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1264) is not in mixedCase
+Parameter '_fromReserveToken' of BancorConverter.getCrossReserveReturn (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1297) is not in mixedCase
+Parameter '_toReserveToken' of BancorConverter.getCrossReserveReturn (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1297-1298) is not in mixedCase
+Parameter '_amount' of BancorConverter.getCrossReserveReturn (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1298) is not in mixedCase
+Parameter '_fromToken' of BancorConverter.convertInternal (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1333-1334) is not in mixedCase
+Parameter '_toToken' of BancorConverter.convertInternal (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1334-1335) is not in mixedCase
+Parameter '_amount' of BancorConverter.convertInternal (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1335) is not in mixedCase
+Parameter '_minReturn' of BancorConverter.convertInternal (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1335) is not in mixedCase
+Parameter '_reserveToken' of BancorConverter.buy (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1389) is not in mixedCase
+Parameter '_depositAmount' of BancorConverter.buy (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1389) is not in mixedCase
+Parameter '_minReturn' of BancorConverter.buy (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1389) is not in mixedCase
+Parameter '_reserveToken' of BancorConverter.sell (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1420) is not in mixedCase
+Parameter '_sellAmount' of BancorConverter.sell (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1420) is not in mixedCase
+Parameter '_minReturn' of BancorConverter.sell (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1420) is not in mixedCase
+Parameter '_path' of BancorConverter.completeXConversion2 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1529-1530) is not in mixedCase
+Parameter '_minReturn' of BancorConverter.completeXConversion2 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1530) is not in mixedCase
+Parameter '_conversionId' of BancorConverter.completeXConversion2 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1530) is not in mixedCase
+Parameter '_token' of BancorConverter.ensureTransferFrom (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1556) is not in mixedCase
+Parameter '_from' of BancorConverter.ensureTransferFrom (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1556) is not in mixedCase
+Parameter '_to' of BancorConverter.ensureTransferFrom (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1556) is not in mixedCase
+Parameter '_amount' of BancorConverter.ensureTransferFrom (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1556) is not in mixedCase
+Parameter '_amount' of BancorConverter.fund (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1585) is not in mixedCase
+Parameter '_amount' of BancorConverter.liquidate (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1626) is not in mixedCase
+Parameter '_fromToken' of BancorConverter.dispatchConversionEvent (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1681-1682) is not in mixedCase
+Parameter '_toToken' of BancorConverter.dispatchConversionEvent (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1682) is not in mixedCase
+Parameter '_amount' of BancorConverter.dispatchConversionEvent (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1682-1683) is not in mixedCase
+Parameter '_returnAmount' of BancorConverter.dispatchConversionEvent (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1684) is not in mixedCase
+Parameter '_feeAmount' of BancorConverter.dispatchConversionEvent (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1684) is not in mixedCase
+Parameter '_path' of BancorConverter.quickConvertPrioritized2 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1748) is not in mixedCase
+Parameter '_amount' of BancorConverter.quickConvertPrioritized2 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1748) is not in mixedCase
+Parameter '_minReturn' of BancorConverter.quickConvertPrioritized2 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1748-1749) is not in mixedCase
+Parameter '' of BancorConverter.quickConvertPrioritized2 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1749) is not in mixedCase
+Parameter '_affiliateAccount' of BancorConverter.quickConvertPrioritized2 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1749-1752) is not in mixedCase
+Parameter '_affiliateFee' of BancorConverter.quickConvertPrioritized2 (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1752-1753) is not in mixedCase
+Parameter '_path' of BancorConverter.quickConvertPrioritized (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1756-1759) is not in mixedCase
+Parameter '_amount' of BancorConverter.quickConvertPrioritized (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1759-1760) is not in mixedCase
+Parameter '_minReturn' of BancorConverter.quickConvertPrioritized (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1760) is not in mixedCase
+Parameter '' of BancorConverter.quickConvertPrioritized (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1760) is not in mixedCase
+Parameter '_scope_0' of BancorConverter.quickConvertPrioritized (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1760) is not in mixedCase
+Parameter '_scope_1' of BancorConverter.quickConvertPrioritized (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1761-1762) is not in mixedCase
+Parameter '_scope_2' of BancorConverter.quickConvertPrioritized (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1762) is not in mixedCase
+Parameter '_path' of BancorConverter.completeXConversion (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1769) is not in mixedCase
+Parameter '_minReturn' of BancorConverter.completeXConversion (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1769) is not in mixedCase
+Parameter '_conversionId' of BancorConverter.completeXConversion (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1769) is not in mixedCase
+Parameter '' of BancorConverter.completeXConversion (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1769) is not in mixedCase
+Parameter '_scope_0' of BancorConverter.completeXConversion (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1769) is not in mixedCase
+Parameter '_scope_1' of BancorConverter.completeXConversion (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1769) is not in mixedCase
+Parameter '_scope_2' of BancorConverter.completeXConversion (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1769) is not in mixedCase
+Parameter '_token' of BancorConverter.addConnector (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1790) is not in mixedCase
+Parameter '_weight' of BancorConverter.addConnector (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1791) is not in mixedCase
+Parameter '' of BancorConverter.addConnector (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1791) is not in mixedCase
+Parameter '_connectorToken' of BancorConverter.updateConnector (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1793) is not in mixedCase
+Parameter '' of BancorConverter.updateConnector (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1793) is not in mixedCase
+Parameter '_scope_0' of BancorConverter.updateConnector (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1796-1797) is not in mixedCase
+Parameter '_virtualBalance' of BancorConverter.updateConnector (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1799-1802) is not in mixedCase
+Parameter '_fromConnectorToken' of BancorConverter.getCrossConnectorReturn (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1808-1809) is not in mixedCase
+Parameter '_toConnectorToken' of BancorConverter.getCrossConnectorReturn (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1809) is not in mixedCase
+Parameter '_amount' of BancorConverter.getCrossConnectorReturn (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#1809) is not in mixedCase
+Parameter '_reserveToken' of RAYBancorConverter.getReserveBalance (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#2179-2182) is not in mixedCase
+Function 'RAYBancorConverter._getReserveBalance' (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#2202-2207) is not in mixedCase
+Parameter '_reserveToken' of RAYBancorConverter._getReserveBalance (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#2203-2204) is not in mixedCase
+Parameter '_reserveToken' of RAYBancorConverter.onBuy (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#2250-2251) is not in mixedCase
+Parameter '_amount' of RAYBancorConverter.onBuy (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#2251-2252) is not in mixedCase
+Parameter '_reserveToken' of RAYBancorConverter.onSale (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#2326) is not in mixedCase
+Parameter '_amount' of RAYBancorConverter.onSale (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#2326) is not in mixedCase
+Parameter '' of RAYBancorConverter.onERC721Received (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#2237) is not in mixedCase
+Parameter '_scope_0' of RAYBancorConverter.onERC721Received (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#2237) is not in mixedCase
+Parameter '_scope_1' of RAYBancorConverter.onERC721Received (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#2238) is not in mixedCase
+Parameter '_scope_2' of RAYBancorConverter.onERC721Received (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#2238) is not in mixedCase
+Parameter '_reserveToken' of RAYBancorConverter. (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#2076) is not in mixedCase
+Parameter '_rayStorage' of RAYBancorConverter. (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#2077) is not in mixedCase
+Parameter '_rayPortfolioId' of RAYBancorConverter. (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#2077-2078) is not in mixedCase
+Parameter '_token' of RAYBancorConverter.addRAYReserve (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#2107) is not in mixedCase
+Parameter '_ratio' of RAYBancorConverter.addRAYReserve (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#2107) is not in mixedCase
+Parameter '_rayPortfolioId' of RAYBancorConverter.addRAYReserve (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#2107) is not in mixedCase
+Function 'RAYBancorConverter._addRAYReserve' (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#2128-2156) is not in mixedCase
+Parameter '_token' of RAYBancorConverter._addRAYReserve (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#2128-2130) is not in mixedCase
+Parameter '_rayPortfolioId' of RAYBancorConverter._addRAYReserve (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#2130) is not in mixedCase
+Parameter '_reserveToken' of RAYBancorConverter.getReserveRAYBalance (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#2215) is not in mixedCase
+Parameter '_amount' of RAYBancorConverter.mintRAYToken (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol) is not in mixedCase
+Parameter '_amount' of RAYBancorConverter.depositToRAY (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol) is not in mixedCase
+Parameter '_amount' of RAYBancorConverter.withdrawFromRAY (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+ContractRegistryClient.BANCOR_CONVERTER_FACTORY (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#441-442) is never used in RAYBancorConverter
+ContractRegistryClient.BANCOR_CONVERTER_REGISTRY (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#445-446) is never used in RAYBancorConverter
+ContractRegistryClient.BANCOR_CONVERTER_REGISTRY_DATA (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#446-448) is never used in RAYBancorConverter
+ContractRegistryClient.BANCOR_X_UPGRADER (/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol#449-450) is never used in RAYBancorConverter
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0x971e89e5202e2e4d4cb16bc89f742d151931559d.sol analyzed (28 contracts), 273 result(s) found

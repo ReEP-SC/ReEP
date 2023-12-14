@@ -1,0 +1,82 @@
+INFO:Detectors:[93m
+Reentrancy in YfDAIstaking.deposit (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol#392-410):
+	External calls:
+	- require(bool,string)(Token(tokenAddress).transferFrom(msg.sender,address(this),amountToStake),Insufficient Token Allowance) (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol#394-397)
+	- updateAccount(msg.sender) (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol#397-398)
+	- require(bool,string)(Token(tokenAddress).transfer(owner,fee),Could not transfer deposit fee.) (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol#404)
+	State variables written after the call(s):
+	- depositedTokens (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol#406)
+Reentrancy in YfDAIstaking.updateAccount (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol#358-372):
+	External calls:
+	- require(bool,string)(Token(tokenAddress).transfer(account,pendingDivs),Could not transfer tokens.) (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol#361-365)
+	State variables written after the call(s):
+	- lastClaimedTime (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol#371-372)
+Reentrancy in YfDAIstaking.withdraw (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol#411-438):
+	External calls:
+	- updateAccount(msg.sender) (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol#416)
+	- require(bool,string)(Token(tokenAddress).transfer(owner,fee),Could not transfer withdraw fee.) (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol#419-424)
+	- require(bool,string)(Token(tokenAddress).transfer(msg.sender,amountAfterFee),Could not transfer tokens.) (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol#424-430)
+	State variables written after the call(s):
+	- depositedTokens (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol#430-431)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+EnumerableSet._remove (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol#103-139) does not use the value returned by external calls:
+	-set._values.pop() (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol#130-131)
+YfDAIstaking.deposit (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol#392-410) does not use the value returned by external calls:
+	-holders.add(msg.sender) (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol#408-410)
+YfDAIstaking.withdraw (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol#411-438) does not use the value returned by external calls:
+	-holders.remove(msg.sender) (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol#434-435)
+YfDAIstaking.transferAnyERC20Tokens (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol) does not use the value returned by external calls:
+	-Token(_tokenAddr).transfer(_to,_amount) (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in YfDAIstaking.deposit (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol#392-410):
+	External calls:
+	- require(bool,string)(Token(tokenAddress).transferFrom(msg.sender,address(this),amountToStake),Insufficient Token Allowance) (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol#394-397)
+	- updateAccount(msg.sender) (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol#397-398)
+	- require(bool,string)(Token(tokenAddress).transfer(owner,fee),Could not transfer deposit fee.) (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol#404)
+	State variables written after the call(s):
+	- stakingTime (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol#410)
+Reentrancy in YfDAIstaking.updateAccount (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol#358-372):
+	External calls:
+	- require(bool,string)(Token(tokenAddress).transfer(account,pendingDivs),Could not transfer tokens.) (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol#361-365)
+	State variables written after the call(s):
+	- totalClaimedRewards (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol#367-368)
+	- totalEarnedTokens (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol#365-366)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol#319-326) should be declared external
+YfDAIstaking.getNumberOfHolders (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol#389-392) should be declared external
+YfDAIstaking.deposit (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol#392-410) should be declared external
+YfDAIstaking.withdraw (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol#411-438) should be declared external
+YfDAIstaking.claimDivs (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol#438) should be declared external
+YfDAIstaking.transferAnyERC20Tokens (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol:
+	- pragma solidity0.6.12 (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol#1): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'EnumerableSet._add' (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol#85-99) is not in mixedCase
+Function 'EnumerableSet._remove' (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol#103-139) is not in mixedCase
+Function 'EnumerableSet._contains' (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol#144-146) is not in mixedCase
+Function 'EnumerableSet._length' (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol#151-153) is not in mixedCase
+Function 'EnumerableSet._at' (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol#161-174) is not in mixedCase
+Parameter '' of Token.transferFrom (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol#328) is not in mixedCase
+Parameter '_scope_0' of Token.transferFrom (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol#328) is not in mixedCase
+Parameter '_scope_1' of Token.transferFrom (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol#328-329) is not in mixedCase
+Parameter '' of Token.transfer (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol#329) is not in mixedCase
+Parameter '_scope_0' of Token.transfer (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol#329) is not in mixedCase
+Parameter '_holder' of YfDAIstaking.getPendingDivs (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol#373) is not in mixedCase
+Parameter '_tokenAddr' of YfDAIstaking.transferAnyERC20Tokens (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol) is not in mixedCase
+Parameter '_to' of YfDAIstaking.transferAnyERC20Tokens (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol) is not in mixedCase
+Parameter '_amount' of YfDAIstaking.transferAnyERC20Tokens (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol) is not in mixedCase
+Constant 'YfDAIstaking.tokenAddress' (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol#338-341) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'YfDAIstaking.rewardRate' (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol#342-344) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'YfDAIstaking.rewardInterval' (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol#344-346) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'YfDAIstaking.stakingFeeRate' (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol#348) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'YfDAIstaking.unstakingFeeRate' (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol#349-350) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'YfDAIstaking.cliffTime' (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol#351-353) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'YfDAIstaking.stakingAndDaoTokens' (/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol#439) is not in UPPER_CASE_WITH_UNDERSCORES
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xbeb955a0af41c6553221daec9c9beb9b7ec216d9.sol analyzed (5 contracts), 37 result(s) found

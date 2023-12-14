@@ -1,0 +1,367 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol:
+/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol:5295:3: Warning: Function state mutability can be restricted to view
+  function onUpgrade()
+  ^ (Relevant source part starts here and spans across multiple lines).
+
+INFO:Detectors:[91m
+Polls.upgradePolls (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#4347-4353) is never initialized. It is used in:
+	- hasVotedOnUpgradePoll (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#4659-4673)
+	- startUpgradePoll (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#4699-4735)
+	- castUpgradeVote (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#4829-4837)
+	- updateUpgradePoll (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#4963-5009)
+Polls.documentPolls (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#4441-4443) is never initialized. It is used in:
+	- hasVotedOnDocumentPoll (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#4681-4695)
+	- startDocumentPoll (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#4743-4781)
+	- castDocumentVote (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#4851-4869)
+	- updateDocumentPoll (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#5031-5073)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-state-variables[0m
+INFO:Detectors:[93m
+AddressUtils.isContract (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#925-945) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+ERC721Basic (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#567-749) has incorrect ERC20 function interface(s):
+	-approve (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#707)
+	-transferFrom (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#725-733)
+Ecliptic (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#5781-7655) has incorrect ERC20 function interface(s):
+	-approve (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#6089-6103)
+	-transferFrom (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#6067-6083)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[93m
+LinearStarRelease.startReleasing (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol) uses a dangerous strict equality:
+	- require(bool)(0 == start)
+LinearStarRelease.startReleasing (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol) uses a dangerous strict equality:
+	- require(bool)(0 == start)
+LinearStarRelease.withdrawLimit (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol) uses a dangerous strict equality:
+	- 0 == start
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Ecliptic.castDocumentVote (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#7444-7449) does not use the value returned by external calls:
+	-polls.castDocumentVote(_galaxy,_proposal,_vote) (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#7447-7449)
+Ecliptic.updateDocumentPoll (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#7517-7527) does not use the value returned by external calls:
+	-polls.updateDocumentPoll(_proposal) (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#7523-7527)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Azimuth.getOwner.owner (local variable @ /sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#2787) shadows:
+	- Ownable.owner (state variable @ /sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#49)
+Azimuth.setOwner.owner (local variable @ /sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#3493-3495) shadows:
+	- Ownable.owner (state variable @ /sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#49)
+Ecliptic.ownerOf.owner (local variable @ /sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#5969-5971) shadows:
+	- Ownable.owner (state variable @ /sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#49)
+Ecliptic.setTransferProxy.owner (local variable @ /sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#7287) shadows:
+	- Ownable.owner (state variable @ /sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#49)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+Polls.startPoll (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#4785-4821) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool)(block.timestamp > (_poll.start.add(_poll.duration.add(_poll.cooldown)))) (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#4797-4812)
+Polls.processVote (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#4873-4947) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool)(! _poll.voted[_as] && (block.timestamp < _poll.start.add(_poll.duration))) (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#4897-4923)
+	- assert(bool)(block.timestamp >= _poll.start) (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#4893-4897)
+Polls.checkPollMajority (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#5081-5137) uses timestamp for comparisons
+	Dangerous comparisons:
+	- ((_poll.yesVotes >= (totalVoters / 4)) && (_poll.yesVotes > _poll.noVotes) && ((block.timestamp > _poll.start.add(_poll.duration)) || (_poll.yesVotes > totalVoters.sub(_poll.yesVotes)))) (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#5091-5137)
+Ecliptic.spawn (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#6347-6481) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool)((azimuth.hasBeenLinked(prefix)) && (azimuth.getSpawnCount(prefix) < getSpawnLimit(prefix,block.timestamp))) (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#6415-6425)
+Ecliptic.getSpawnLimit (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#6955-7023) uses timestamp for comparisons
+	Dangerous comparisons:
+	- yearsSince2019 < 6 (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#6997-7011)
+LinearStarRelease.startReleasing (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool)(0 == start) (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol)
+LinearStarRelease.withdrawOverdue (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool)((0 < start) && (block.timestamp > start.add(escapeHatchTime))) (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol)
+LinearStarRelease.withdrawLimit (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol) uses timestamp for comparisons
+	Dangerous comparisons:
+	- allowed < 1 (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol)
+	- 0 == start (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol)
+	- allowed > batch.amount (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol)
+	- block.timestamp > realStart (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+AddressUtils.isContract uses assembly (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#925-945)
+	- /sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#943-945
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+Ownable.renounceOwnership (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#111-121) should be declared external
+Ownable.transferOwnership (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#135-137) should be declared external
+Ecliptic.balanceOf (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#5947-5955) should be declared external
+ERC721Basic.balanceOf (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#677-683) should be declared external
+Ecliptic.ownerOf (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#5959-5987) should be declared external
+ERC721Basic.ownerOf (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#683-689) should be declared external
+Ecliptic.exists (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#5993-6003) should be declared external
+ERC721Basic.exists (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#691-702) should be declared external
+ERC721Basic.approve (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#707) should be declared external
+Ecliptic.approve (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#6089-6103) should be declared external
+ERC721Basic.getApproved (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#707-709) should be declared external
+Ecliptic.getApproved (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#6133-6154) should be declared external
+Ecliptic.setApprovalForAll (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#6113-6125) should be declared external
+ERC721Basic.setApprovalForAll (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#713-715) should be declared external
+ERC721Basic.isApprovedForAll (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#715-721) should be declared external
+Ecliptic.isApprovedForAll (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#6165-6177) should be declared external
+Ecliptic.safeTransferFrom (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#6005-6015) should be declared external
+ERC721Basic.safeTransferFrom (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#733-743) should be declared external
+ERC721Enumerable.totalSupply (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#765-767) should be declared external
+ERC721Enumerable.tokenOfOwnerByIndex (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#767-777) should be declared external
+ERC721Enumerable.tokenByIndex (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#777-785) should be declared external
+Ecliptic.tokenURI (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#6203-6249) should be declared external
+ERC721Metadata.tokenURI (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#799-803) should be declared external
+ERC721Receiver.onERC721Received (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#887-893) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_newOwner' of Ownable.transferOwnership (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#135) is not in mixedCase
+Function 'Ownable._transferOwnership' (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#145-167) is not in mixedCase
+Parameter '_newOwner' of Ownable._transferOwnership (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#147-155) is not in mixedCase
+Parameter '_a' of SafeMath.mul (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#315-320) is not in mixedCase
+Parameter '_b' of SafeMath.mul (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#321) is not in mixedCase
+Parameter '_a' of SafeMath.div (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#353) is not in mixedCase
+Parameter '_b' of SafeMath.div (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#353) is not in mixedCase
+Parameter '_a' of SafeMath.sub (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#393-394) is not in mixedCase
+Parameter '_b' of SafeMath.sub (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#395) is not in mixedCase
+Parameter '_a' of SafeMath.add (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#407) is not in mixedCase
+Parameter '_b' of SafeMath.add (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#407) is not in mixedCase
+Parameter '_interfaceId' of SupportsInterfaceWithLookup.supportsInterface (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#539) is not in mixedCase
+Function 'SupportsInterfaceWithLookup._registerInterface' (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#553-561) is not in mixedCase
+Parameter '_interfaceId' of SupportsInterfaceWithLookup._registerInterface (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#555) is not in mixedCase
+Constant 'SupportsInterfaceWithLookup.InterfaceId_ERC165' (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#481-489) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'ERC721Basic.InterfaceId_ERC721' (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#567-569) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'ERC721Basic.InterfaceId_ERC721Exists' (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#611-613) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'ERC721Basic.InterfaceId_ERC721Enumerable' (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#625-631) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'ERC721Basic.InterfaceId_ERC721Metadata' (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#651-653) is not in UPPER_CASE_WITH_UNDERSCORES
+Parameter '_primary' of Azimuth.setDnsDomains (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#1635-1637) is not in mixedCase
+Parameter '_secondary' of Azimuth.setDnsDomains (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#1637-1641) is not in mixedCase
+Parameter '_tertiary' of Azimuth.setDnsDomains (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#1641) is not in mixedCase
+Parameter '_point' of Azimuth.isActive (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#1662-1667) is not in mixedCase
+Parameter '_point' of Azimuth.getKeys (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#1687) is not in mixedCase
+Parameter '_point' of Azimuth.getKeyRevisionNumber (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#1723-1725) is not in mixedCase
+Parameter '_point' of Azimuth.hasBeenLinked (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#1747) is not in mixedCase
+Parameter '_point' of Azimuth.isLive (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#1771) is not in mixedCase
+Parameter '_point' of Azimuth.getContinuityNumber (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#1803) is not in mixedCase
+Parameter '_point' of Azimuth.getSpawnCount (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#1819-1821) is not in mixedCase
+Parameter '_point' of Azimuth.getSpawned (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#1857) is not in mixedCase
+Parameter '_point' of Azimuth.hasSponsor (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#1877) is not in mixedCase
+Parameter '_point' of Azimuth.getSponsor (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#1893-1895) is not in mixedCase
+Parameter '_point' of Azimuth.isSponsor (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#1911-1913) is not in mixedCase
+Parameter '_sponsor' of Azimuth.isSponsor (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#1913-1915) is not in mixedCase
+Parameter '_sponsor' of Azimuth.getSponsoringCount (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#1939) is not in mixedCase
+Parameter '_sponsor' of Azimuth.getSponsoring (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#1967-1969) is not in mixedCase
+Parameter '_point' of Azimuth.isEscaping (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#1997) is not in mixedCase
+Parameter '_point' of Azimuth.getEscapeRequest (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#2017) is not in mixedCase
+Parameter '_point' of Azimuth.isRequestingEscapeTo (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#2037) is not in mixedCase
+Parameter '_sponsor' of Azimuth.isRequestingEscapeTo (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#2037-2039) is not in mixedCase
+Parameter '_sponsor' of Azimuth.getEscapeRequestsCount (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#2063-2064) is not in mixedCase
+Parameter '_sponsor' of Azimuth.getEscapeRequests (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#2091) is not in mixedCase
+Parameter '_point' of Azimuth.activatePoint (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#2113-2115) is not in mixedCase
+Parameter '_point' of Azimuth.setKeys (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#2161) is not in mixedCase
+Parameter '_encryptionKey' of Azimuth.setKeys (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#2161-2163) is not in mixedCase
+Parameter '_authenticationKey' of Azimuth.setKeys (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#2163-2169) is not in mixedCase
+Parameter '_cryptoSuiteVersion' of Azimuth.setKeys (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#2169) is not in mixedCase
+Parameter '_point' of Azimuth.incrementContinuityNumber (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#2237-2239) is not in mixedCase
+Parameter '_point' of Azimuth.registerSpawned (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#2263) is not in mixedCase
+Parameter '_point' of Azimuth.loseSponsor (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#2319) is not in mixedCase
+Parameter '_point' of Azimuth.setEscapeRequest (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#2340-2341) is not in mixedCase
+Parameter '_sponsor' of Azimuth.setEscapeRequest (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#2341) is not in mixedCase
+Parameter '_point' of Azimuth.cancelEscape (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#2363) is not in mixedCase
+Parameter '_point' of Azimuth.doEscape (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#2391) is not in mixedCase
+Parameter '_point' of Azimuth.getPrefix (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#2415) is not in mixedCase
+Parameter '_point' of Azimuth.getPointSize (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#2439-2443) is not in mixedCase
+Parameter '_point' of Azimuth.registerSponsor (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#2464-2465) is not in mixedCase
+Parameter '_hasSponsor' of Azimuth.registerSponsor (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#2465) is not in mixedCase
+Parameter '_sponsor' of Azimuth.registerSponsor (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#2465) is not in mixedCase
+Parameter '_point' of Azimuth.registerEscapeRequest (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#2615-2617) is not in mixedCase
+Parameter '_isEscaping' of Azimuth.registerEscapeRequest (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#2621) is not in mixedCase
+Parameter '_sponsor' of Azimuth.registerEscapeRequest (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#2621) is not in mixedCase
+Parameter '_point' of Azimuth.getOwner (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#2783) is not in mixedCase
+Parameter '_point' of Azimuth.isOwner (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#2794-2797) is not in mixedCase
+Parameter '_address' of Azimuth.isOwner (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#2797-2799) is not in mixedCase
+Parameter '_whose' of Azimuth.getOwnedPointCount (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#2823-2825) is not in mixedCase
+Parameter '_whose' of Azimuth.getOwnedPoints (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#2853) is not in mixedCase
+Parameter '_whose' of Azimuth.getOwnedPointAtIndex (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#2879) is not in mixedCase
+Parameter '_index' of Azimuth.getOwnedPointAtIndex (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#2879) is not in mixedCase
+Parameter '_point' of Azimuth.getManagementProxy (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#2905) is not in mixedCase
+Parameter '_point' of Azimuth.isManagementProxy (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#2931) is not in mixedCase
+Parameter '_proxy' of Azimuth.isManagementProxy (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#2931) is not in mixedCase
+Parameter '_point' of Azimuth.canManage (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#2951-2953) is not in mixedCase
+Parameter '_who' of Azimuth.canManage (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#2953-2955) is not in mixedCase
+Parameter '_proxy' of Azimuth.getManagerForCount (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#2983) is not in mixedCase
+Parameter '_proxy' of Azimuth.getManagerFor (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#3009-3010) is not in mixedCase
+Parameter '_point' of Azimuth.getSpawnProxy (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#3029) is not in mixedCase
+Parameter '_point' of Azimuth.isSpawnProxy (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#3053) is not in mixedCase
+Parameter '_proxy' of Azimuth.isSpawnProxy (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#3053) is not in mixedCase
+Parameter '_point' of Azimuth.canSpawnAs (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#3073) is not in mixedCase
+Parameter '_who' of Azimuth.canSpawnAs (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#3073-3075) is not in mixedCase
+Parameter '_proxy' of Azimuth.getSpawningForCount (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#3105) is not in mixedCase
+Parameter '_proxy' of Azimuth.getSpawningFor (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#3127-3129) is not in mixedCase
+Parameter '_point' of Azimuth.getVotingProxy (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#3147) is not in mixedCase
+Parameter '_point' of Azimuth.isVotingProxy (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#3167) is not in mixedCase
+Parameter '_proxy' of Azimuth.isVotingProxy (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#3167-3169) is not in mixedCase
+Parameter '_point' of Azimuth.canVoteAs (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#3197-3199) is not in mixedCase
+Parameter '_who' of Azimuth.canVoteAs (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#3200-3201) is not in mixedCase
+Parameter '_proxy' of Azimuth.getVotingForCount (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#3225) is not in mixedCase
+Parameter '_proxy' of Azimuth.getVotingFor (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#3251) is not in mixedCase
+Parameter '_point' of Azimuth.getTransferProxy (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#3269-3271) is not in mixedCase
+Parameter '_point' of Azimuth.isTransferProxy (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#3285) is not in mixedCase
+Parameter '_proxy' of Azimuth.isTransferProxy (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#3287) is not in mixedCase
+Parameter '_point' of Azimuth.canTransfer (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#3313) is not in mixedCase
+Parameter '_who' of Azimuth.canTransfer (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#3313) is not in mixedCase
+Parameter '_proxy' of Azimuth.getTransferringForCount (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#3345-3347) is not in mixedCase
+Parameter '_proxy' of Azimuth.getTransferringFor (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#3367) is not in mixedCase
+Parameter '_owner' of Azimuth.isOperator (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#3387) is not in mixedCase
+Parameter '_operator' of Azimuth.isOperator (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#3387) is not in mixedCase
+Parameter '_point' of Azimuth.setOwner (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#3421) is not in mixedCase
+Parameter '_owner' of Azimuth.setOwner (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#3421-3423) is not in mixedCase
+Parameter '_point' of Azimuth.setManagementProxy (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#3549) is not in mixedCase
+Parameter '_proxy' of Azimuth.setManagementProxy (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#3549) is not in mixedCase
+Parameter '_point' of Azimuth.setSpawnProxy (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#3669) is not in mixedCase
+Parameter '_proxy' of Azimuth.setSpawnProxy (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#3669) is not in mixedCase
+Parameter '_point' of Azimuth.setVotingProxy (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#3777) is not in mixedCase
+Parameter '_proxy' of Azimuth.setVotingProxy (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#3777-3779) is not in mixedCase
+Parameter '_point' of Azimuth.setTransferProxy (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#3905) is not in mixedCase
+Parameter '_proxy' of Azimuth.setTransferProxy (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#3905) is not in mixedCase
+Parameter '_owner' of Azimuth.setOperator (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#4025-4028) is not in mixedCase
+Parameter '_operator' of Azimuth.setOperator (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#4029) is not in mixedCase
+Parameter '_approved' of Azimuth.setOperator (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#4029) is not in mixedCase
+Parameter '_azimuth' of ReadsAzimuth. (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#4069-4073) is not in mixedCase
+Parameter '_pollDuration' of Polls. (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#4485) is not in mixedCase
+Parameter '_pollCooldown' of Polls. (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#4485-4487) is not in mixedCase
+Parameter '_pollDuration' of Polls.reconfigure (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#4495-4497) is not in mixedCase
+Parameter '_pollCooldown' of Polls.reconfigure (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#4497) is not in mixedCase
+Parameter '_galaxy' of Polls.hasVotedOnUpgradePoll (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#4659-4663) is not in mixedCase
+Parameter '_proposal' of Polls.hasVotedOnUpgradePoll (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#4663) is not in mixedCase
+Parameter '_galaxy' of Polls.hasVotedOnDocumentPoll (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#4683) is not in mixedCase
+Parameter '_proposal' of Polls.hasVotedOnDocumentPoll (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#4683-4687) is not in mixedCase
+Parameter '_proposal' of Polls.startUpgradePoll (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#4699-4701) is not in mixedCase
+Parameter '_proposal' of Polls.startDocumentPoll (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#4747-4748) is not in mixedCase
+Parameter '_poll' of Polls.startPoll (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#4787-4789) is not in mixedCase
+Parameter '_as' of Polls.castUpgradeVote (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#4831) is not in mixedCase
+Parameter '_proposal' of Polls.castUpgradeVote (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#4831) is not in mixedCase
+Parameter '_vote' of Polls.castUpgradeVote (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#4831) is not in mixedCase
+Parameter '_as' of Polls.castDocumentVote (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#4853) is not in mixedCase
+Parameter '_proposal' of Polls.castDocumentVote (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#4853-4855) is not in mixedCase
+Parameter '_vote' of Polls.castDocumentVote (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#4855) is not in mixedCase
+Parameter '_poll' of Polls.processVote (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#4877) is not in mixedCase
+Parameter '_as' of Polls.processVote (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#4877-4881) is not in mixedCase
+Parameter '_vote' of Polls.processVote (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#4881) is not in mixedCase
+Parameter '_proposal' of Polls.updateUpgradePoll (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#4963-4967) is not in mixedCase
+Parameter '_proposal' of Polls.updateDocumentPoll (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#5033-5037) is not in mixedCase
+Parameter '_poll' of Polls.checkPollMajority (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#5085) is not in mixedCase
+Parameter '_point' of Claims.addClaim (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#5277-5279) is not in mixedCase
+Parameter '_protocol' of Claims.addClaim (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#5283) is not in mixedCase
+Parameter '_claim' of Claims.addClaim (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#5283-5287) is not in mixedCase
+Parameter '_dossier' of Claims.addClaim (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#5287) is not in mixedCase
+Parameter '_point' of Claims.removeClaim (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#5339) is not in mixedCase
+Parameter '_protocol' of Claims.removeClaim (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#5341) is not in mixedCase
+Parameter '_claim' of Claims.removeClaim (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#5341) is not in mixedCase
+Parameter '_point' of Claims.clearClaims (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#5385) is not in mixedCase
+Parameter '_whose' of Claims.findClaim (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#5412-5413) is not in mixedCase
+Parameter '_protocol' of Claims.findClaim (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#5413-5417) is not in mixedCase
+Parameter '_claim' of Claims.findClaim (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#5417) is not in mixedCase
+Parameter '_whose' of Claims.findEmptySlot (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#5447) is not in mixedCase
+Constant 'Claims.maxClaims' (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#5225-5227) is not in UPPER_CASE_WITH_UNDERSCORES
+Parameter '_previous' of EclipticBase. (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#5515-5519) is not in mixedCase
+Parameter '_polls' of EclipticBase. (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#5519) is not in mixedCase
+Parameter '_new' of EclipticBase.upgrade (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#5603) is not in mixedCase
+Parameter '_owner' of Ecliptic.balanceOf (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#5947) is not in mixedCase
+Parameter '_tokenId' of Ecliptic.ownerOf (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#5959-5961) is not in mixedCase
+Parameter '_tokenId' of Ecliptic.exists (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#5993) is not in mixedCase
+Parameter '_approved' of Ecliptic.approve (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#6089-6091) is not in mixedCase
+Parameter '_tokenId' of Ecliptic.approve (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#6091-6093) is not in mixedCase
+Parameter '_tokenId' of Ecliptic.getApproved (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#6133-6135) is not in mixedCase
+Parameter '_operator' of Ecliptic.setApprovalForAll (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#6115-6121) is not in mixedCase
+Parameter '_approved' of Ecliptic.setApprovalForAll (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#6121) is not in mixedCase
+Parameter '_owner' of Ecliptic.isApprovedForAll (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#6167) is not in mixedCase
+Parameter '_operator' of Ecliptic.isApprovedForAll (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#6167-6171) is not in mixedCase
+Parameter '_from' of Ecliptic.transferFrom (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#6067) is not in mixedCase
+Parameter '_to' of Ecliptic.transferFrom (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#6067-6069) is not in mixedCase
+Parameter '_tokenId' of Ecliptic.transferFrom (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#6069) is not in mixedCase
+Parameter '_from' of Ecliptic.safeTransferFrom (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#6007) is not in mixedCase
+Parameter '_to' of Ecliptic.safeTransferFrom (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#6007) is not in mixedCase
+Parameter '_tokenId' of Ecliptic.safeTransferFrom (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#6007) is not in mixedCase
+Parameter '_from' of Ecliptic.safeTransferFrom (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#6027-6029) is not in mixedCase
+Parameter '_to' of Ecliptic.safeTransferFrom (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#6029-6031) is not in mixedCase
+Parameter '_tokenId' of Ecliptic.safeTransferFrom (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#6031) is not in mixedCase
+Parameter '_data' of Ecliptic.safeTransferFrom (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#6035) is not in mixedCase
+Parameter '_tokenId' of Ecliptic.tokenURI (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#6203-6207) is not in mixedCase
+Parameter '_claims' of Ecliptic. (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#5921) is not in mixedCase
+Parameter '_point' of Ecliptic.configureKeys (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#6273) is not in mixedCase
+Parameter '_encryptionKey' of Ecliptic.configureKeys (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#6273-6277) is not in mixedCase
+Parameter '_authenticationKey' of Ecliptic.configureKeys (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#6277) is not in mixedCase
+Parameter '_cryptoSuiteVersion' of Ecliptic.configureKeys (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#6279) is not in mixedCase
+Parameter '_discontinuous' of Ecliptic.configureKeys (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#6281-6283) is not in mixedCase
+Parameter '_point' of Ecliptic.spawn (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#6347) is not in mixedCase
+Parameter '_target' of Ecliptic.spawn (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#6347-6350) is not in mixedCase
+Parameter '_point' of Ecliptic.doSpawn (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#6505) is not in mixedCase
+Parameter '_target' of Ecliptic.doSpawn (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#6507) is not in mixedCase
+Parameter '_direct' of Ecliptic.doSpawn (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#6507) is not in mixedCase
+Parameter '_holder' of Ecliptic.doSpawn (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#6509) is not in mixedCase
+Parameter '_point' of Ecliptic.transferPoint (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#6659) is not in mixedCase
+Parameter '_target' of Ecliptic.transferPoint (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#6659-6660) is not in mixedCase
+Parameter '_reset' of Ecliptic.transferPoint (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#6661-6663) is not in mixedCase
+Parameter '_point' of Ecliptic.escape (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#6809-6811) is not in mixedCase
+Parameter '_sponsor' of Ecliptic.escape (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#6813-6815) is not in mixedCase
+Parameter '_point' of Ecliptic.cancelEscape (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#6827-6829) is not in mixedCase
+Parameter '_point' of Ecliptic.adopt (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#6853) is not in mixedCase
+Parameter '_point' of Ecliptic.reject (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#6893-6895) is not in mixedCase
+Parameter '_point' of Ecliptic.detach (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#6929) is not in mixedCase
+Parameter '_point' of Ecliptic.getSpawnLimit (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#6957-6959) is not in mixedCase
+Parameter '_time' of Ecliptic.getSpawnLimit (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#6959) is not in mixedCase
+Parameter '_point' of Ecliptic.canEscapeTo (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#7027) is not in mixedCase
+Parameter '_sponsor' of Ecliptic.canEscapeTo (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#7027-7031) is not in mixedCase
+Parameter '_point' of Ecliptic.setManagementProxy (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#7207) is not in mixedCase
+Parameter '_manager' of Ecliptic.setManagementProxy (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#7207-7211) is not in mixedCase
+Parameter '_prefix' of Ecliptic.setSpawnProxy (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#7233) is not in mixedCase
+Parameter '_spawnProxy' of Ecliptic.setSpawnProxy (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#7233-7235) is not in mixedCase
+Parameter '_galaxy' of Ecliptic.setVotingProxy (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#7255) is not in mixedCase
+Parameter '_voter' of Ecliptic.setVotingProxy (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#7255-7257) is not in mixedCase
+Parameter '_point' of Ecliptic.setTransferProxy (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#7282-7283) is not in mixedCase
+Parameter '_transferProxy' of Ecliptic.setTransferProxy (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#7283) is not in mixedCase
+Parameter '_proposal' of Ecliptic.startUpgradePoll (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#7340-7343) is not in mixedCase
+Parameter '_proposal' of Ecliptic.startDocumentPoll (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#7383-7387) is not in mixedCase
+Parameter '_galaxy' of Ecliptic.castUpgradeVote (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#7403) is not in mixedCase
+Parameter '_proposal' of Ecliptic.castUpgradeVote (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#7403-7405) is not in mixedCase
+Parameter '_vote' of Ecliptic.castUpgradeVote (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#7405) is not in mixedCase
+Parameter '_galaxy' of Ecliptic.castDocumentVote (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#7445) is not in mixedCase
+Parameter '_proposal' of Ecliptic.castDocumentVote (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#7445) is not in mixedCase
+Parameter '_vote' of Ecliptic.castDocumentVote (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#7445) is not in mixedCase
+Parameter '_proposal' of Ecliptic.updateUpgradePoll (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#7467) is not in mixedCase
+Parameter '_proposal' of Ecliptic.updateDocumentPoll (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#7517-7523) is not in mixedCase
+Parameter '_galaxy' of Ecliptic.createGalaxy (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#7553-7557) is not in mixedCase
+Parameter '_target' of Ecliptic.createGalaxy (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#7557) is not in mixedCase
+Parameter '_primary' of Ecliptic.setDnsDomains (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#7603-7607) is not in mixedCase
+Parameter '_secondary' of Ecliptic.setDnsDomains (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#7607) is not in mixedCase
+Parameter '_tertiary' of Ecliptic.setDnsDomains (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#7607-7609) is not in mixedCase
+Constant 'Ecliptic.erc721Received' (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#5905-5907) is not in UPPER_CASE_WITH_UNDERSCORES
+Parameter '_point' of TakesPoints.takePoint (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#7691) is not in mixedCase
+Parameter '_clean' of TakesPoints.takePoint (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#7692-7693) is not in mixedCase
+Parameter '_point' of TakesPoints.givePoint (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#7813-7817) is not in mixedCase
+Parameter '_to' of TakesPoints.givePoint (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#7817) is not in mixedCase
+Parameter '_reset' of TakesPoints.givePoint (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#7817-7819) is not in mixedCase
+Parameter '_participant' of LinearStarRelease.register (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol) is not in mixedCase
+Parameter '_windup' of LinearStarRelease.register (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol) is not in mixedCase
+Parameter '_amount' of LinearStarRelease.register (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol) is not in mixedCase
+Parameter '_rate' of LinearStarRelease.register (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol) is not in mixedCase
+Parameter '_rateUnit' of LinearStarRelease.register (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol) is not in mixedCase
+Parameter '_participant' of LinearStarRelease.deposit (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol) is not in mixedCase
+Parameter '_star' of LinearStarRelease.deposit (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol) is not in mixedCase
+Parameter '_participant' of LinearStarRelease.withdrawOverdue (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol) is not in mixedCase
+Parameter '_to' of LinearStarRelease.withdrawOverdue (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol) is not in mixedCase
+Parameter '_to' of LinearStarRelease.approveBatchTransfer (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol) is not in mixedCase
+Parameter '_from' of LinearStarRelease.transferBatch (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol) is not in mixedCase
+Parameter '_to' of LinearStarRelease.withdraw (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol) is not in mixedCase
+Parameter '_batch' of LinearStarRelease.performWithdraw (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol) is not in mixedCase
+Parameter '_to' of LinearStarRelease.performWithdraw (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol) is not in mixedCase
+Parameter '_reset' of LinearStarRelease.performWithdraw (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol) is not in mixedCase
+Parameter '_participant' of LinearStarRelease.withdrawLimit (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol) is not in mixedCase
+Parameter '_participant' of LinearStarRelease.verifyBalance (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol) is not in mixedCase
+Parameter '_participant' of LinearStarRelease.getRemainingStars (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol) is not in mixedCase
+Constant 'LinearStarRelease.escapeHatchTime' (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#7950-7951) is not in UPPER_CASE_WITH_UNDERSCORES
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+ERC721Basic.InterfaceId_ERC721 (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#567-569) is never used in Ecliptic
+ERC721Basic.InterfaceId_ERC721Exists (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#611-613) is never used in Ecliptic
+ERC721Basic.InterfaceId_ERC721Enumerable (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#625-631) is never used in Ecliptic
+ERC721Basic.InterfaceId_ERC721Metadata (/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol#651-653) is never used in Ecliptic
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0x86cd9cd0992f04231751e3761de45cecea5d1801.sol analyzed (20 contracts), 293 result(s) found

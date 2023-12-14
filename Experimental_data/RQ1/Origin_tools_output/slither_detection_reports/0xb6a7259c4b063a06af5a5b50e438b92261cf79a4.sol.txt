@@ -1,0 +1,136 @@
+INFO:Detectors:[91m
+BalancerRemoveLiquidity._token2Eth (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#732-755) sends eth to arbitrary user
+	Dangerous calls:
+	- _toWhomToIssue.transfer(tokens2Trade) (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#740)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[93m
+Address.isContract (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#65-75) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+maxEth in BalancerRemoveLiquidity._getBestDeal (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#662) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[93m
+BalancerRemoveLiquidity._directRemoveLiquidity (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#631-645) does not use the value returned by external calls:
+	-IERC20(_ToTokenContractAddress).transfer(_toWhomToIssue,returnedTokens) (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#644-645)
+BalancerRemoveLiquidity._token2Eth (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#732-755) does not use the value returned by external calls:
+	-IERC20(_FromTokenContractAddress).approve(address(uniswapRouter),tokens2Trade) (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#741-744)
+BalancerRemoveLiquidity.inCaseTokengetsStuck (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol) does not use the value returned by external calls:
+	-_TokenAddress.transfer(owner(),qty) (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+BalancerRemoveLiquidity._getBestDeal has external calls inside a loop:
+	- UniSwapV2FactoryAddress.getPair(tokens[index],wethTokenAddress) == address(0) (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#669-675)
+BalancerRemoveLiquidity._getBestDeal has external calls inside a loop:
+	- ethReturned = uniswapRouter.getAmountsOut(tokensForBPT,path)[1] (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#676-677)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Address.isContract uses assembly (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#65-75)
+	- /sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#72-75
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+Ownable.renounceOwnership (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#185-189) should be declared external
+Ownable.transferOwnership (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#189-191) should be declared external
+BalancerRemoveLiquidity.RemoveLiquidity (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#546-567) should be declared external
+BalancerRemoveLiquidity.setNewGoodwill (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#755-760) should be declared external
+BalancerRemoveLiquidity.setNewGoodwillAddress (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol) should be declared external
+BalancerRemoveLiquidity.inCaseTokengetsStuck (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol) should be declared external
+BalancerRemoveLiquidity.toggleContractActive (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol) should be declared external
+BalancerRemoveLiquidity.withdraw (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol:
+	- pragma solidity^0.5.12 (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#7-9): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Low level call in Address.sendValue (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#80-89):
+	-(success) = recipient.call.value(amount)() /sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#83
+Low level call in SafeERC20.callOptionalReturn (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#115-132):
+	-(success,returndata) = address(token).call(data) /sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#118-121
+Low level call in TransferHelper.safeApprove (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#473-478):
+	-(success,data) = token.call(abi.encodeWithSelector(0x095ea7b3,to,value)) /sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#474-477
+Low level call in TransferHelper.safeTransfer (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#478-485):
+	-(success,data) = token.call(abi.encodeWithSelector(0xa9059cbb,to,value)) /sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#479-483
+Low level call in TransferHelper.safeTransferFrom (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#485-488):
+	-(success,data) = token.call(abi.encodeWithSelector(0x23b872dd,from,to,value)) /sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#486-487
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Function 'Context._msgSender' (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#150-157) is not in mixedCase
+Function 'Context._msgData' (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#157-159) is not in mixedCase
+Function 'Ownable._transferOwnership' (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#191-201) is not in mixedCase
+Variable 'Ownable._owner' (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#162) is not in mixedCase
+Parameter '' of IWETH.withdraw (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#223) is not in mixedCase
+Function 'IUniswapV2Router02.WETH' (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#393) is not in mixedCase
+Parameter 'tokens_sold' of Iuniswap.tokenToTokenTransferInput (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#412-413) is not in mixedCase
+Parameter 'min_tokens_bought' of Iuniswap.tokenToTokenTransferInput (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#413-415) is not in mixedCase
+Parameter 'min_eth_bought' of Iuniswap.tokenToTokenTransferInput (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#415) is not in mixedCase
+Parameter 'token_addr' of Iuniswap.tokenToTokenTransferInput (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#415-416) is not in mixedCase
+Parameter 'tokens_sold' of Iuniswap.tokenToTokenSwapInput (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#416) is not in mixedCase
+Parameter 'min_tokens_bought' of Iuniswap.tokenToTokenSwapInput (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#416-417) is not in mixedCase
+Parameter 'min_eth_bought' of Iuniswap.tokenToTokenSwapInput (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#417) is not in mixedCase
+Parameter 'token_addr' of Iuniswap.tokenToTokenSwapInput (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#417) is not in mixedCase
+Parameter 'tokens_sold' of Iuniswap.getTokenToEthInputPrice (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#418) is not in mixedCase
+Parameter 'tokens_sold' of Iuniswap.tokenToEthTransferInput (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#419) is not in mixedCase
+Parameter 'min_eth' of Iuniswap.tokenToEthTransferInput (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#419-420) is not in mixedCase
+Parameter 'min_tokens' of Iuniswap.ethToTokenSwapInput (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#421) is not in mixedCase
+Parameter 'min_tokens' of Iuniswap.ethToTokenTransferInput (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#425) is not in mixedCase
+Contract 'IBPool_Balancer_RemoveLiquidity_V1_1' (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#452-473) is not in CapWords
+Contract 'yERC20' (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#504-505) is not in CapWords
+Function 'ICurveSwap.underlying_coins' (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#510-512) is not in mixedCase
+Function 'ICurveSwap.add_liquidity' (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#514-517) is not in mixedCase
+Parameter 'min_mint_amount' of ICurveSwap.add_liquidity (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#515-517) is not in mixedCase
+Function 'ICurveSwap.add_liquidity' (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#517-518) is not in mixedCase
+Parameter 'min_mint_amount' of ICurveSwap.add_liquidity (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#517-518) is not in mixedCase
+Function 'ICurveSwap.add_liquidity' (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#518-519) is not in mixedCase
+Parameter 'min_mint_amount' of ICurveSwap.add_liquidity (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#518-519) is not in mixedCase
+Function 'ICurveSwap.remove_liquidity_one_coin' (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#519-521) is not in mixedCase
+Parameter '_token_amount' of ICurveSwap.remove_liquidity_one_coin (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#519) is not in mixedCase
+Parameter 'min_amount' of ICurveSwap.remove_liquidity_one_coin (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#519-521) is not in mixedCase
+Parameter '_goodwill' of BalancerRemoveLiquidity. (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#541) is not in mixedCase
+Parameter '_goodwillAddress' of BalancerRemoveLiquidity. (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#541) is not in mixedCase
+Function 'BalancerRemoveLiquidity.RemoveLiquidity' (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#546-567) is not in mixedCase
+Parameter '_ToTokenContractAddress' of BalancerRemoveLiquidity.RemoveLiquidity (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#546) is not in mixedCase
+Parameter '_FromBalancerPoolAddress' of BalancerRemoveLiquidity.RemoveLiquidity (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#546) is not in mixedCase
+Parameter '_IncomingBPT' of BalancerRemoveLiquidity.RemoveLiquidity (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#546-547) is not in mixedCase
+Parameter '_minTokensRec' of BalancerRemoveLiquidity.RemoveLiquidity (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#547) is not in mixedCase
+Function 'BalancerRemoveLiquidity._performRemoveLiquidity' (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#567-631) is not in mixedCase
+Parameter '_toWhomToIssue' of BalancerRemoveLiquidity._performRemoveLiquidity (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#567) is not in mixedCase
+Parameter '_ToTokenContractAddress' of BalancerRemoveLiquidity._performRemoveLiquidity (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#568-569) is not in mixedCase
+Parameter '_FromBalancerPoolAddress' of BalancerRemoveLiquidity._performRemoveLiquidity (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#569-570) is not in mixedCase
+Parameter '_IncomingBPT' of BalancerRemoveLiquidity._performRemoveLiquidity (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#570-571) is not in mixedCase
+Parameter '_IntermediateToken' of BalancerRemoveLiquidity._performRemoveLiquidity (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#571) is not in mixedCase
+Parameter '_minTokensRec' of BalancerRemoveLiquidity._performRemoveLiquidity (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#572) is not in mixedCase
+Function 'BalancerRemoveLiquidity._directRemoveLiquidity' (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#631-645) is not in mixedCase
+Parameter '_FromBalancerPoolAddress' of BalancerRemoveLiquidity._directRemoveLiquidity (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#634) is not in mixedCase
+Parameter '_ToTokenContractAddress' of BalancerRemoveLiquidity._directRemoveLiquidity (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#634) is not in mixedCase
+Parameter '_toWhomToIssue' of BalancerRemoveLiquidity._directRemoveLiquidity (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#634-635) is not in mixedCase
+Parameter '_minTokensRec' of BalancerRemoveLiquidity._directRemoveLiquidity (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#636-639) is not in mixedCase
+Function 'BalancerRemoveLiquidity._transferGoodwill' (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#645-657) is not in mixedCase
+Parameter '_tokenContractAddress' of BalancerRemoveLiquidity._transferGoodwill (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#645-647) is not in mixedCase
+Function 'BalancerRemoveLiquidity._getBestDeal' (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#657-680) is not in mixedCase
+Parameter '_FromBalancerPoolAddress' of BalancerRemoveLiquidity._getBestDeal (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#657-658) is not in mixedCase
+Parameter '_IncomingBPT' of BalancerRemoveLiquidity._getBestDeal (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#658) is not in mixedCase
+Function 'BalancerRemoveLiquidity._getBPT2Token' (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#680-697) is not in mixedCase
+Parameter '_FromBalancerPoolAddress' of BalancerRemoveLiquidity._getBPT2Token (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#680-681) is not in mixedCase
+Parameter '_IncomingBPT' of BalancerRemoveLiquidity._getBPT2Token (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#681) is not in mixedCase
+Parameter '_toToken' of BalancerRemoveLiquidity._getBPT2Token (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#681) is not in mixedCase
+Function 'BalancerRemoveLiquidity._exitBalancer' (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#699-709) is not in mixedCase
+Parameter '_FromBalancerPoolAddress' of BalancerRemoveLiquidity._exitBalancer (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#699) is not in mixedCase
+Parameter '_ToTokenContractAddress' of BalancerRemoveLiquidity._exitBalancer (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#699) is not in mixedCase
+Parameter '_amount' of BalancerRemoveLiquidity._exitBalancer (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#699) is not in mixedCase
+Function 'BalancerRemoveLiquidity._token2Token' (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#709-732) is not in mixedCase
+Parameter '_FromTokenContractAddress' of BalancerRemoveLiquidity._token2Token (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#709-710) is not in mixedCase
+Parameter '_ToWhomToIssue' of BalancerRemoveLiquidity._token2Token (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#710-711) is not in mixedCase
+Parameter '_ToTokenContractAddress' of BalancerRemoveLiquidity._token2Token (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#711) is not in mixedCase
+Function 'BalancerRemoveLiquidity._token2Eth' (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#732-755) is not in mixedCase
+Parameter '_FromTokenContractAddress' of BalancerRemoveLiquidity._token2Eth (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#732-733) is not in mixedCase
+Parameter '_toWhomToIssue' of BalancerRemoveLiquidity._token2Eth (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#735) is not in mixedCase
+Parameter '_new_goodwill' of BalancerRemoveLiquidity.setNewGoodwill (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#755-756) is not in mixedCase
+Parameter '_newGoodwillAddress' of BalancerRemoveLiquidity.setNewGoodwillAddress (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol) is not in mixedCase
+Parameter '_TokenAddress' of BalancerRemoveLiquidity.inCaseTokengetsStuck (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol) is not in mixedCase
+Constant 'BalancerRemoveLiquidity.wethTokenAddress' (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#523-525) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'BalancerRemoveLiquidity.deadline' (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#525) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'BalancerRemoveLiquidity.UniSwapV2FactoryAddress' (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#527-529) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'BalancerRemoveLiquidity.uniswapRouter' (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#529-534) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'BalancerRemoveLiquidity.BalancerFactory' (/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol#535-540) is not in UPPER_CASE_WITH_UNDERSCORES
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xb6a7259c4b063a06af5a5b50e438b92261cf79a4.sol analyzed (21 contracts), 101 result(s) found

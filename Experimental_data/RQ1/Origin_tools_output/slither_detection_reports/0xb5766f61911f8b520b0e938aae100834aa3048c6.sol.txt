@@ -1,0 +1,49 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xb5766f61911f8b520b0e938aae100834aa3048c6.sol:
+/sb/0xb5766f61911f8b520b0e938aae100834aa3048c6.sol:9:43: Warning: "throw" is deprecated in favour of "revert()", "require()" and "assert()".
+    if (this.balance < totalBountyAmount) throw;
+                                          ^---^
+/sb/0xb5766f61911f8b520b0e938aae100834aa3048c6.sol:9:9: Warning: Using contract member "balance" inherited from the address type is deprecated. Convert the contract to "address" type to access the member, for example use "address(contract).balance" instead.
+    if (this.balance < totalBountyAmount) throw;
+        ^----------^
+/sb/0xb5766f61911f8b520b0e938aae100834aa3048c6.sol:12:3: Warning: No visibility specified. Defaulting to "public". 
+  function grantBounty(address beneficiary, uint amount) payable preventTheft {
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xb5766f61911f8b520b0e938aae100834aa3048c6.sol:17:3: Warning: No visibility specified. Defaulting to "public". 
+  function claimBounty() preventTheft {
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xb5766f61911f8b520b0e938aae100834aa3048c6.sol:25:3: Warning: No visibility specified. Defaulting to "public". 
+  function transferBounty(address to, uint value) preventTheft {
+  ^ (Relevant source part starts here and spans across multiple lines).
+
+INFO:Detectors:[91m
+Reentrancy in BountyHunt.claimBounty (/sb/0xb5766f61911f8b520b0e938aae100834aa3048c6.sol#17-25):
+	External calls:
+	- msg.sender.call.value(balance)() (/sb/0xb5766f61911f8b520b0e938aae100834aa3048c6.sol#19-25)
+	State variables written after the call(s):
+	- bountyAmount (/sb/0xb5766f61911f8b520b0e938aae100834aa3048c6.sol#21-25)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities[0m
+INFO:Detectors:[92m
+Reentrancy in BountyHunt.claimBounty (/sb/0xb5766f61911f8b520b0e938aae100834aa3048c6.sol#17-25):
+	External calls:
+	- msg.sender.call.value(balance)() (/sb/0xb5766f61911f8b520b0e938aae100834aa3048c6.sol#19-25)
+	State variables written after the call(s):
+	- totalBountyAmount (/sb/0xb5766f61911f8b520b0e938aae100834aa3048c6.sol#20-21)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Deprecated standard detected @ /sb/0xb5766f61911f8b520b0e938aae100834aa3048c6.sol#10-12:
+	- Usage of "throw" should be replaced with "revert()"
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#deprecated-standards[0m
+INFO:Detectors:[92m
+BountyHunt.grantBounty (/sb/0xb5766f61911f8b520b0e938aae100834aa3048c6.sol#12-17) should be declared external
+BountyHunt.claimBounty (/sb/0xb5766f61911f8b520b0e938aae100834aa3048c6.sol#17-25) should be declared external
+BountyHunt.transferBounty (/sb/0xb5766f61911f8b520b0e938aae100834aa3048c6.sol#25-31) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xb5766f61911f8b520b0e938aae100834aa3048c6.sol:
+	- pragma solidity^0.4.4 (/sb/0xb5766f61911f8b520b0e938aae100834aa3048c6.sol#1): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Low level call in BountyHunt.claimBounty (/sb/0xb5766f61911f8b520b0e938aae100834aa3048c6.sol#17-25):
+	-msg.sender.call.value(balance)() /sb/0xb5766f61911f8b520b0e938aae100834aa3048c6.sol#19-25
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Slither:/sb/0xb5766f61911f8b520b0e938aae100834aa3048c6.sol analyzed (1 contracts), 8 result(s) found

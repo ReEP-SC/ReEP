@@ -1,0 +1,59 @@
+INFO:Detectors:[93m
+Initializable.isConstructor (/sb/0x8cad8fc4ff9f6478a0011cc369b098bea857cdec.sol#52-64) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+LidTeamLock.startRelease (/sb/0x8cad8fc4ff9f6478a0011cc369b098bea857cdec.sol#352-364) uses a dangerous strict equality:
+	- require(bool,string)(releaseStart == 0,Has already started.)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Reentrancy in LidTeamLock.claimLid (/sb/0x8cad8fc4ff9f6478a0011cc369b098bea857cdec.sol#329-341):
+	External calls:
+	- lidToken.balanceOf(address(this)) < toClaim (/sb/0x8cad8fc4ff9f6478a0011cc369b098bea857cdec.sol#337-338)
+	- toClaim = lidToken.balanceOf(address(this)) (/sb/0x8cad8fc4ff9f6478a0011cc369b098bea857cdec.sol#337-338)
+	State variables written after the call(s):
+	- teamMemberClaimedLid (/sb/0x8cad8fc4ff9f6478a0011cc369b098bea857cdec.sol#338-340)
+Reentrancy in LidTeamLock.startRelease (/sb/0x8cad8fc4ff9f6478a0011cc369b098bea857cdec.sol#352-364):
+	External calls:
+	- require(bool,string)(lidToken.balanceOf(address(this)) != 0,Must have some lid deposited.) (/sb/0x8cad8fc4ff9f6478a0011cc369b098bea857cdec.sol#358-360)
+	- startingLid = lidToken.balanceOf(address(this)) (/sb/0x8cad8fc4ff9f6478a0011cc369b098bea857cdec.sol#360-362)
+	State variables written after the call(s):
+	- releaseStart (/sb/0x8cad8fc4ff9f6478a0011cc369b098bea857cdec.sol#363)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+i in LidTeamLock.checkIfTeamMember (/sb/0x8cad8fc4ff9f6478a0011cc369b098bea857cdec.sol) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[93m
+LidTeamLock.claimLid (/sb/0x8cad8fc4ff9f6478a0011cc369b098bea857cdec.sol#329-341) does not use the value returned by external calls:
+	-lidToken.transfer(msg.sender,toClaim) (/sb/0x8cad8fc4ff9f6478a0011cc369b098bea857cdec.sol#340)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in LidTeamLock.startRelease (/sb/0x8cad8fc4ff9f6478a0011cc369b098bea857cdec.sol#352-364):
+	External calls:
+	- require(bool,string)(lidToken.balanceOf(address(this)) != 0,Must have some lid deposited.) (/sb/0x8cad8fc4ff9f6478a0011cc369b098bea857cdec.sol#358-360)
+	- startingLid = lidToken.balanceOf(address(this)) (/sb/0x8cad8fc4ff9f6478a0011cc369b098bea857cdec.sol#360-362)
+	State variables written after the call(s):
+	- startingEth (/sb/0x8cad8fc4ff9f6478a0011cc369b098bea857cdec.sol#362-363)
+	- startingLid (/sb/0x8cad8fc4ff9f6478a0011cc369b098bea857cdec.sol#360-362)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Initializable.isConstructor uses assembly (/sb/0x8cad8fc4ff9f6478a0011cc369b098bea857cdec.sol#52-64)
+	- /sb/0x8cad8fc4ff9f6478a0011cc369b098bea857cdec.sol#62-64
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x8cad8fc4ff9f6478a0011cc369b098bea857cdec.sol:
+	- pragma solidity0.5.16 (/sb/0x8cad8fc4ff9f6478a0011cc369b098bea857cdec.sol#5-8): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Variable 'Initializable.______gap' (/sb/0x8cad8fc4ff9f6478a0011cc369b098bea857cdec.sol#70) is not in mixedCase
+Parameter '_releaseInterval' of LidTeamLock.initialize (/sb/0x8cad8fc4ff9f6478a0011cc369b098bea857cdec.sol#306) is not in mixedCase
+Parameter '_releaseBP' of LidTeamLock.initialize (/sb/0x8cad8fc4ff9f6478a0011cc369b098bea857cdec.sol#308) is not in mixedCase
+Parameter '_teamMemberAddresses' of LidTeamLock.initialize (/sb/0x8cad8fc4ff9f6478a0011cc369b098bea857cdec.sol#308-310) is not in mixedCase
+Parameter '_teamMemberBPs' of LidTeamLock.initialize (/sb/0x8cad8fc4ff9f6478a0011cc369b098bea857cdec.sol#310-312) is not in mixedCase
+Parameter '_lidToken' of LidTeamLock.initialize (/sb/0x8cad8fc4ff9f6478a0011cc369b098bea857cdec.sol#312) is not in mixedCase
+Parameter '_teamMemberAddresses' of LidTeamLock.resetTeam (/sb/0x8cad8fc4ff9f6478a0011cc369b098bea857cdec.sol#364-367) is not in mixedCase
+Parameter '_teamMemberBPs' of LidTeamLock.resetTeam (/sb/0x8cad8fc4ff9f6478a0011cc369b098bea857cdec.sol#367-368) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+Initializable.______gap (/sb/0x8cad8fc4ff9f6478a0011cc369b098bea857cdec.sol#70) is never used in LidTeamLock
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0x8cad8fc4ff9f6478a0011cc369b098bea857cdec.sol analyzed (5 contracts), 18 result(s) found

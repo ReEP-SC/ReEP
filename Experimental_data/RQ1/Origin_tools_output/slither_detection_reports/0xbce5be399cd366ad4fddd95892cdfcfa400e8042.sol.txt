@@ -1,0 +1,130 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol:
+/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol:68:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function Ownable() public {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol:151:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function DappleAirdrops() public {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol:94:9: Warning: Invoking events without "emit" prefix is deprecated.
+        OwnershipTransferred(owner, _newOwner);
+        ^------------------------------------^
+/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol:202:9: Warning: Invoking events without "emit" prefix is deprecated.
+        RateChanged(rate, _newRate);
+        ^-------------------------^
+/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol:236:9: Warning: Invoking events without "emit" prefix is deprecated.
+        MaxDropsChanged(maxDropsPerTx, _maxDrops);
+        ^---------------------------------------^
+/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol:250:9: Warning: Invoking events without "emit" prefix is deprecated.
+        BonustChanged(bonus, _newBonus);
+        ^-----------------------------^
+/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol:271:9: Warning: Invoking events without "emit" prefix is deprecated.
+        BonusCreditGranted(_addr, _bonusDrops);
+        ^------------------------------------^
+/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol:292:9: Warning: Invoking events without "emit" prefix is deprecated.
+        BonusCreditRevoked(_addr, _bonusDrops);
+        ^------------------------------------^
+/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol:365:9: Warning: Invoking events without "emit" prefix is deprecated.
+        TokenBanned(_tokenAddr);
+        ^---------------------^
+/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol:382:9: Warning: Invoking events without "emit" prefix is deprecated.
+        TokenUnbanned(_tokenAddr);
+        ^-----------------------^
+/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol:414:9: Warning: Invoking events without "emit" prefix is deprecated.
+        CreditPurchased(msg.sender, msg.value, msg.value.mul(rate));
+        ^---------------------------------------------------------^
+/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol:435:9: Warning: Invoking events without "emit" prefix is deprecated.
+        EthWithdrawn(msg.sender, toTransfer);
+        ^----------------------------------^
+/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol:450:17: Warning: Invoking events without "emit" prefix is deprecated.
+                RefundIssued(_addrs[i], toRefund);
+                ^-------------------------------^
+/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol:487:9: Warning: Invoking events without "emit" prefix is deprecated.
+        AirdropInvoked(msg.sender, _recipients.length);
+        ^--------------------------------------------^
+/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol:524:9: Warning: Invoking events without "emit" prefix is deprecated.
+        AirdropInvoked(msg.sender, _recipients.length);
+        ^--------------------------------------------^
+/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol:572:9: Warning: Invoking events without "emit" prefix is deprecated.
+        ERC20TokensWithdrawn(_addressOfToken, _recipient, _value);
+        ^-------------------------------------------------------^
+
+INFO:Detectors:[93m
+ERCInterface (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#107-118) has incorrect ERC20 function interface(s):
+	-transferFrom (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#107-108)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[93m
+DappleAirdrops.withdrawERC20Tokens (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol) does not use the value returned by external calls:
+	-token.transfer(_recipient,_value) (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+DappleAirdrops.issueRefunds has external calls inside a loop:
+	- _addrs[i].transfer(toRefund) (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#461-462)
+DappleAirdrops.singleValueAirdrop has external calls inside a loop:
+	- token.transferFrom(msg.sender,_recipients[i],_value) (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#493-494)
+DappleAirdrops.multiValueAirdrop has external calls inside a loop:
+	- token.transferFrom(msg.sender,_recipients[i],_values[i]) (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#531)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#91-102) should be declared external
+ERCInterface.transferFrom (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#107-108) should be declared external
+ERCInterface.balanceOf (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#108-109) should be declared external
+ERCInterface.allowance (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#109-114) should be declared external
+ERCInterface.transfer (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#114-118) should be declared external
+DappleAirdrops.getRemainingTrialDrops (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#184-192) should be declared external
+DappleAirdrops.setRate (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#203-217) should be declared external
+DappleAirdrops.getRate (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#217-218) should be declared external
+DappleAirdrops.getMaxDropsPerTx (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#229-230) should be declared external
+DappleAirdrops.setMaxDrops (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#241-244) should be declared external
+DappleAirdrops.setBonus (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#256-258) should be declared external
+DappleAirdrops.grantBonusDrops (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#271-279) should be declared external
+DappleAirdrops.revokeBonusCreditOf (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#292-302) should be declared external
+DappleAirdrops.getEthBalanceOf (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#356-358) should be declared external
+DappleAirdrops.banToken (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#372-375) should be declared external
+DappleAirdrops.unbanToken (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#390-392) should be declared external
+DappleAirdrops.getTokenAllowance (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#413-419) should be declared external
+DappleAirdrops.fallback (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#421-425) should be declared external
+DappleAirdrops.withdrawEth (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#440-446) should be declared external
+DappleAirdrops.issueRefunds (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#450-463) should be declared external
+DappleAirdrops.singleValueAirdrop (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#477-499) should be declared external
+DappleAirdrops.multiValueAirdrop (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#513-537) should be declared external
+DappleAirdrops.withdrawERC20Tokens (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol:
+	- pragma solidity^0.4.19 (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#5-7): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'Ownable.Ownable' (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#73-74) is not in mixedCase
+Parameter '_newOwner' of Ownable.transferOwnership (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#91-92) is not in mixedCase
+Function 'DappleAirdrops.DappleAirdrops' (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#156-162) is not in mixedCase
+Parameter '_addressOfToken' of DappleAirdrops.tokenHasFreeTrial (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#176) is not in mixedCase
+Parameter '_addressOfToken' of DappleAirdrops.getRemainingTrialDrops (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#185-187) is not in mixedCase
+Parameter '_newRate' of DappleAirdrops.setRate (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#203-204) is not in mixedCase
+Parameter '_maxDrops' of DappleAirdrops.setMaxDrops (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#242) is not in mixedCase
+Parameter '_newBonus' of DappleAirdrops.setBonus (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#256) is not in mixedCase
+Parameter '_addr' of DappleAirdrops.grantBonusDrops (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#271-272) is not in mixedCase
+Parameter '_bonusDrops' of DappleAirdrops.grantBonusDrops (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#272-273) is not in mixedCase
+Parameter '_addr' of DappleAirdrops.revokeBonusCreditOf (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#292-293) is not in mixedCase
+Parameter '_bonusDrops' of DappleAirdrops.revokeBonusCreditOf (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#293-294) is not in mixedCase
+Parameter '_addr' of DappleAirdrops.getDropsOf (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#313) is not in mixedCase
+Parameter '_addr' of DappleAirdrops.getBonusDropsOf (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#328) is not in mixedCase
+Parameter '_addr' of DappleAirdrops.getTotalDropsOf (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#342) is not in mixedCase
+Parameter '_addr' of DappleAirdrops.getEthBalanceOf (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#356-357) is not in mixedCase
+Parameter '_tokenAddr' of DappleAirdrops.banToken (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#372) is not in mixedCase
+Parameter '_tokenAddr' of DappleAirdrops.unbanToken (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#390) is not in mixedCase
+Parameter '_addr' of DappleAirdrops.getTokenAllowance (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#413) is not in mixedCase
+Parameter '_addressOfToken' of DappleAirdrops.getTokenAllowance (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#413-414) is not in mixedCase
+Parameter '_eth' of DappleAirdrops.withdrawEth (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#440) is not in mixedCase
+Parameter '_addrs' of DappleAirdrops.issueRefunds (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#452-454) is not in mixedCase
+Parameter '_addressOfToken' of DappleAirdrops.singleValueAirdrop (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#477-478) is not in mixedCase
+Parameter '_recipients' of DappleAirdrops.singleValueAirdrop (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#478) is not in mixedCase
+Parameter '_value' of DappleAirdrops.singleValueAirdrop (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#478-479) is not in mixedCase
+Parameter '_addressOfToken' of DappleAirdrops.multiValueAirdrop (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#514) is not in mixedCase
+Parameter '_recipients' of DappleAirdrops.multiValueAirdrop (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#514-515) is not in mixedCase
+Parameter '_values' of DappleAirdrops.multiValueAirdrop (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#515) is not in mixedCase
+Parameter '_drops' of DappleAirdrops.updateMsgSenderBonusDrops (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol#544) is not in mixedCase
+Parameter '_addressOfToken' of DappleAirdrops.withdrawERC20Tokens (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol) is not in mixedCase
+Parameter '_recipient' of DappleAirdrops.withdrawERC20Tokens (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol) is not in mixedCase
+Parameter '_value' of DappleAirdrops.withdrawERC20Tokens (/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xbce5be399cd366ad4fddd95892cdfcfa400e8042.sol analyzed (4 contracts), 61 result(s) found

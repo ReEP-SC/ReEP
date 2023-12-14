@@ -1,0 +1,110 @@
+INFO:Detectors:[93m
+Address.isContract (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#68-75) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+StrategyETHConvex.constructor (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#213-226) does not use the value returned by external calls:
+	-IERC20(CRV).approve(sushirouter,uint256(- 1)) (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#223-224)
+	-IERC20(CVX).approve(sushirouter,uint256(- 1)) (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#224-225)
+	-IERC20(weth).approve(sushirouter,uint256(- 1)) (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#225-226)
+StrategyETHConvex.deposit (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#227-248) does not use the value returned by external calls:
+	-Booster(booster).depositAll(pid,true) (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#247)
+StrategyETHConvex._withdrawSome (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#277-297) does not use the value returned by external calls:
+	-BaseRewardPool(baserewardpool).withdrawAndUnwrap(_eCRV,false) (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#286-289)
+StrategyETHConvex.harvest (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#342-344) does not use the value returned by external calls:
+	-BaseRewardPool(baserewardpool).getReward(address(this),true) (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#343-344)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in StrategyETHConvex.deposit (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#227-248):
+	External calls:
+	- _want = IERC20(want).balanceOf(address(this)) (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#228)
+	- WETH(address(weth)).withdraw(_want) (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#229-230)
+	- v = _want.mul(1e18).div(ICurveFi(eCRVPool).get_virtual_price()) (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#230-231)
+	- beforeCRV = IERC20(eCRVToken).balanceOf(address(this)) (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#231-232)
+	- ICurveFi(eCRVPool).add_liquidity.value(_want)(amounts,v.mul(DENOMINATOR.sub(slip)).div(DENOMINATOR)) (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#232-236)
+	- _eCRV = IERC20(eCRVToken).balanceOf(address(this)) (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#236-238)
+	External calls sending eth:
+	- ICurveFi(eCRVPool).add_liquidity.value(_want)(amounts,v.mul(DENOMINATOR.sub(slip)).div(DENOMINATOR)) (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#232-236)
+	State variables written after the call(s):
+	- depositLastPrice (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#238-243)
+Reentrancy in StrategyETHConvex.harvest (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#342-344):
+	External calls:
+	- BaseRewardPool(baserewardpool).getReward(address(this),true) (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#343-344)
+	- redelivery() (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#344)
+	External calls sending eth:
+	- redelivery() (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#344)
+	State variables written after the call(s):
+	- depositLastPrice (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#344)
+Reentrancy in StrategyETHConvex.redelivery (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#344-371):
+	External calls:
+	- reward = IERC20(CRV).balanceOf(address(this)) (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#345-346)
+	- _crvAmount = IERC20(CRV).balanceOf(address(this)) (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#348)
+	- UniswapRouter(sushirouter).swapExactTokensForTokens(_crvAmount,0,swapCRV2ETHRouting,address(this),now.add(1800)) (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#348-352)
+	- _cvxAmount = IERC20(CVX).balanceOf(address(this)) (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#352-353)
+	- UniswapRouter(sushirouter).swapExactTokensForTokens(_cvxAmount,0,swapCVX2ETHRouting,address(this),now.add(1800)) (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#353-360)
+	- wethAmount = IERC20(weth).balanceOf(address(this)) (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#362-363)
+	- UniswapRouter(unirouter).swapExactTokensForTokens(_2bt,0,swap2BTRouting,Controller(controller).rewards(),now.add(1800)) (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#366-371)
+	- deposit() (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#371)
+	External calls sending eth:
+	- deposit() (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#371)
+	State variables written after the call(s):
+	- depositLastPrice (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#371)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Address.isContract uses assembly (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#68-75)
+	- /sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#73-75
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+StrategyETHConvex.pid should be constant (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#169)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+StrategyETHConvex.getPending (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#334-339) should be declared external
+StrategyETHConvex.getCRV (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#339-342) should be declared external
+StrategyETHConvex.harvest (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#342-344) should be declared external
+StrategyETHConvex.setredeliverynum (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#371-377) should be declared external
+StrategyETHConvex.setGovernance (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#377-381) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x87e079dda242e5c02709603afd582296761e67dd.sol:
+	- pragma solidity^0.5.17 (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#7-9): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Low level call in Address.sendValue (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#79-89):
+	-(success) = recipient.call.value(amount)() /sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#83
+Low level call in SafeERC20.callOptionalReturn (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#106-121):
+	-(success,returndata) = address(token).call(data) /sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#110-112
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Parameter '' of Controller.vaults (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#125) is not in mixedCase
+Parameter '' of UniswapRouter.swapExactTokensForTokens (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#131) is not in mixedCase
+Parameter '_scope_0' of UniswapRouter.swapExactTokensForTokens (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#131) is not in mixedCase
+Parameter '_scope_1' of UniswapRouter.swapExactTokensForTokens (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#131) is not in mixedCase
+Parameter '_scope_2' of UniswapRouter.swapExactTokensForTokens (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#131-132) is not in mixedCase
+Parameter '_scope_3' of UniswapRouter.swapExactTokensForTokens (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#132) is not in mixedCase
+Function 'ICurveFi.add_liquidity' (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#141-146) is not in mixedCase
+Parameter 'min_mint_amount' of ICurveFi.add_liquidity (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#144) is not in mixedCase
+Function 'ICurveFi.remove_liquidity_one_coin' (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#146-150) is not in mixedCase
+Parameter '_token_amount' of ICurveFi.remove_liquidity_one_coin (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#146-149) is not in mixedCase
+Parameter 'min_amount' of ICurveFi.remove_liquidity_one_coin (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#150) is not in mixedCase
+Function 'ICurveFi.get_virtual_price' (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#150-151) is not in mixedCase
+Parameter '_amount' of StrategyETHConvex.withdraw (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#250-253) is not in mixedCase
+Function 'StrategyETHConvex._withdraw' (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#257-277) is not in mixedCase
+Parameter '_amount' of StrategyETHConvex._withdraw (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#258) is not in mixedCase
+Function 'StrategyETHConvex._withdrawSome' (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#277-297) is not in mixedCase
+Parameter '_amount' of StrategyETHConvex._withdrawSome (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#277-278) is not in mixedCase
+Parameter '_asset' of StrategyETHConvex.withdrawAsset (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#302-303) is not in mixedCase
+Parameter '_to' of StrategyETHConvex.withdrawAsset (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#303) is not in mixedCase
+Parameter '_governance' of StrategyETHConvex.setGovernance (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#377) is not in mixedCase
+Parameter '_controller' of StrategyETHConvex.setController (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#381-382) is not in mixedCase
+Parameter '_slip' of StrategyETHConvex.setSlip (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol) is not in mixedCase
+Parameter '_check' of StrategyETHConvex.setWithdrawSlipCheck (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol) is not in mixedCase
+Constant 'StrategyETHConvex.unirouter' (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#169-170) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'StrategyETHConvex.sushirouter' (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#170-171) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'StrategyETHConvex.weth' (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#173) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'StrategyETHConvex.bt' (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#173-175) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'StrategyETHConvex.want' (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#175-176) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'StrategyETHConvex.eCRVPool' (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#176-178) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'StrategyETHConvex.eCRVToken' (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#178-179) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'StrategyETHConvex.booster' (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#179-181) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'StrategyETHConvex.baserewardpool' (/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol#181-184) is not in UPPER_CASE_WITH_UNDERSCORES
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x87e079dda242e5c02709603afd582296761e67dd.sol analyzed (11 contracts), 50 result(s) found

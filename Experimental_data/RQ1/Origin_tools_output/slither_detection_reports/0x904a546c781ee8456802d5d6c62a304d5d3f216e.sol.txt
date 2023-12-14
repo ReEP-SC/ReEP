@@ -1,0 +1,151 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol:
+/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol:6:1: Warning: Experimental features are turned on. Do not use experimental features on live deployments.
+pragma experimental ABIEncoderV2;
+^-------------------------------^
+/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol:195:5: Warning: Function state mutability can be restricted to view
+    function getItemByOwner(uint _code) public returns (address iOwner, string memory _key,
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol:207:5: Warning: Function state mutability can be restricted to view
+    function getItemsByCreator() public returns (uint[] memory _code, uint[] memory _iId) {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol:210:5: Warning: Function state mutability can be restricted to view
+    function getItemsByTokenOwner(address _game, uint _iId) public returns (uint[] memory _codes) {
+    ^ (Relevant source part starts here and spans across multiple lines).
+
+INFO:Detectors:[91m
+Reentrancy in DepositBlockchainCard.cancel (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#255-272):
+	External calls:
+	- erc20.transfer(items[_code].creator,items[_code].bonusTokenAmount) (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#264-265)
+	- erc721.transferFrom(address(this),items[_code].creator,items[_code].item) (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#269-270)
+	External calls sending eth:
+	- items[_code].creator.transfer(items[_code].bonusTokenAmount) (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#266)
+	State variables written after the call(s):
+	- items (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#270)
+Reentrancy in DepositBlockchainCard.deposit (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#223-249):
+	External calls:
+	- erc20.transferFrom(msg.sender,address(this),_bonusTokenAmount) (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#235-237)
+	- erc721.transferFrom(msg.sender,address(this),_iId) (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#240-241)
+	External calls sending eth:
+	- _iOwner.transfer(_feeAmount) (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#238)
+	State variables written after the call(s):
+	- items (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#241-245)
+	- items (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#245)
+Reentrancy in DepositBlockchainCard.withdraw (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#272-288):
+	External calls:
+	- erc20.transfer(_to,items[_code].bonusTokenAmount) (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#282-283)
+	- erc721.transferFrom(address(this),_to,items[_code].item) (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol)
+	External calls sending eth:
+	- _to.transfer(items[_code].bonusTokenAmount) (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#284)
+	State variables written after the call(s):
+	- items (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities[0m
+INFO:Detectors:[93m
+IERC721 (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#102-130) has incorrect ERC20 function interface(s):
+	-approve (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#112-114)
+	-transfer (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#120-122)
+	-transferFrom (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#122-124)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[93m
+existed in DepositBlockchainCard.addCode (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#252) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[93m
+DepositBlockchainCard.deposit (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#223-249) does not use the value returned by external calls:
+	-erc20.transferFrom(msg.sender,address(this),_bonusTokenAmount) (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#235-237)
+DepositBlockchainCard.cancel (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#255-272) does not use the value returned by external calls:
+	-erc20.transfer(items[_code].creator,items[_code].bonusTokenAmount) (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#264-265)
+DepositBlockchainCard.withdraw (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#272-288) does not use the value returned by external calls:
+	-erc20.transfer(_to,items[_code].bonusTokenAmount) (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#282-283)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in DepositBlockchainCard.deposit (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#223-249):
+	External calls:
+	- erc20.transferFrom(msg.sender,address(this),_bonusTokenAmount) (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#235-237)
+	- erc721.transferFrom(msg.sender,address(this),_iId) (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#240-241)
+	External calls sending eth:
+	- _iOwner.transfer(_feeAmount) (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#238)
+	State variables written after the call(s):
+	- codes (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#245-246)
+	- itemsByCreators (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#246-247)
+	- itemsByCreators (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#247-248)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+ERC20.decimals should be constant (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#147)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Different versions of Solidity is used in /sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol:
+	- Version used: ['0.5.15', 'ABIEncoderV2']
+	- /sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#5-6 declares pragma solidity0.5.15
+	- /sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#6-8 declares pragma experimentalABIEncoderV2
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#different-pragma-directives-are-used[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#35-45) should be declared external
+IERC721.balanceOf (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#108-110) should be declared external
+IERC721.ownerOf (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#110-112) should be declared external
+IERC721.approve (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#112-114) should be declared external
+IERC721.getApproved (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#114-116) should be declared external
+IERC721.setApprovalForAll (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#116-118) should be declared external
+IERC721.isApprovedForAll (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#118-120) should be declared external
+IERC721.transfer (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#120-122) should be declared external
+IERC721.transferFrom (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#122-124) should be declared external
+IERC721.safeTransferFrom (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#124-127) should be declared external
+IERC721.safeTransferFrom (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#128-129) should be declared external
+ERC20.totalSupply (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#136) should be declared external
+ERC20.balanceOf (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#136-138) should be declared external
+ERC20.transfer (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#138-140) should be declared external
+ERC20.transferFrom (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#140-145) should be declared external
+DepositBlockchainCard.setParners (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#185-189) should be declared external
+DepositBlockchainCard.setSys (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#189-193) should be declared external
+DepositBlockchainCard.getItem (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#193-200) should be declared external
+DepositBlockchainCard.getItemByOwner (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#200-210) should be declared external
+DepositBlockchainCard.getItemsByCreator (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#210-213) should be declared external
+DepositBlockchainCard.getItemsByTokenOwner (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#213-219) should be declared external
+DepositBlockchainCard.changePass (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#219-222) should be declared external
+DepositBlockchainCard.checkPass (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#222-223) should be declared external
+DepositBlockchainCard.deposit (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#223-249) should be declared external
+DepositBlockchainCard.cancel (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#255-272) should be declared external
+DepositBlockchainCard.withdraw (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#272-288) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol:
+	- pragma solidity0.5.15 (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#5-6): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Struct 'DepositBlockchainCard.item' (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#160-174) is not in CapWords
+Struct 'DepositBlockchainCard.itemsByCreator' (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#174-176) is not in CapWords
+Struct 'DepositBlockchainCard.game2code' (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#176-177) is not in CapWords
+Event 'DepositBlockchainCard._deposit' (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#181-182) is not in CapWords
+Event 'DepositBlockchainCard._withdraw' (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#183-184) is not in CapWords
+Parameter '_partner' of DepositBlockchainCard.setParners (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#185-186) is not in mixedCase
+Parameter '_fee' of DepositBlockchainCard.setParners (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#186) is not in mixedCase
+Parameter '_sys' of DepositBlockchainCard.setSys (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#189-190) is not in mixedCase
+Parameter '_fee' of DepositBlockchainCard.setSys (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#190) is not in mixedCase
+Parameter '_code' of DepositBlockchainCard.getItem (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#193) is not in mixedCase
+Parameter '_code' of DepositBlockchainCard.getItemByOwner (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#201-202) is not in mixedCase
+Parameter '_game' of DepositBlockchainCard.getItemsByTokenOwner (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#215) is not in mixedCase
+Parameter '_iId' of DepositBlockchainCard.getItemsByTokenOwner (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#215) is not in mixedCase
+Parameter '_code' of DepositBlockchainCard.changePass (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#220) is not in mixedCase
+Parameter '_pass' of DepositBlockchainCard.changePass (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#220) is not in mixedCase
+Parameter '_code' of DepositBlockchainCard.checkPass (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#223) is not in mixedCase
+Parameter '_pass' of DepositBlockchainCard.checkPass (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#223) is not in mixedCase
+Parameter '_code' of DepositBlockchainCard.deposit (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#224) is not in mixedCase
+Parameter '_iOwner' of DepositBlockchainCard.deposit (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#224) is not in mixedCase
+Parameter '_key' of DepositBlockchainCard.deposit (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#225) is not in mixedCase
+Parameter '_feeAmount' of DepositBlockchainCard.deposit (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#225) is not in mixedCase
+Parameter '_game' of DepositBlockchainCard.deposit (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#226) is not in mixedCase
+Parameter '_iId' of DepositBlockchainCard.deposit (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#226) is not in mixedCase
+Parameter '_bonusToken' of DepositBlockchainCard.deposit (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#226) is not in mixedCase
+Parameter '_bonusTokenAmount' of DepositBlockchainCard.deposit (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#226-227) is not in mixedCase
+Parameter '_pass' of DepositBlockchainCard.deposit (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#227) is not in mixedCase
+Parameter '_buyer' of DepositBlockchainCard.deposit (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#227) is not in mixedCase
+Parameter '_game' of DepositBlockchainCard.addCode (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#250) is not in mixedCase
+Parameter '_iId' of DepositBlockchainCard.addCode (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#250) is not in mixedCase
+Parameter '_code' of DepositBlockchainCard.addCode (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#250-251) is not in mixedCase
+Parameter '_code' of DepositBlockchainCard.cancel (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#255) is not in mixedCase
+Parameter '_pass' of DepositBlockchainCard.cancel (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#255) is not in mixedCase
+Parameter '_code' of DepositBlockchainCard.withdraw (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#272) is not in mixedCase
+Parameter '_to' of DepositBlockchainCard.withdraw (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#272) is not in mixedCase
+Parameter '_pass' of DepositBlockchainCard.withdraw (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#272) is not in mixedCase
+Variable 'DepositBlockchainCard.SYS_ADDRESS' (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#149-150) is not in mixedCase
+Variable 'DepositBlockchainCard.PARTNER_ADDRESS' (/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol#151-154) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x904a546c781ee8456802d5d6c62a304d5d3f216e.sol analyzed (5 contracts), 75 result(s) found

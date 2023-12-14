@@ -1,0 +1,154 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol:
+/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol:123:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Deposit(msg.sender, msg.value);
+        ^----------------------------^
+/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol:137:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Withdrawal(msg.sender, wad);
+        ^-------------------------^
+/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol:145:16: Warning: Using contract member "balance" inherited from the address type is deprecated. Convert the contract to "address" type to access the member, for example use "address(contract).balance" instead.
+        return this.balance;
+               ^----------^
+/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol:155:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Approval(msg.sender, guy, wad);
+        ^----------------------------^
+/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol:199:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Transfer(src, dst, wad);
+        ^---------------------^
+/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol:657:23: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+        return bytes4(keccak256(s));
+                      ^----------^
+/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol:657:23: Warning: The provided argument of type string memory is not implicitly convertible to expected type bytes memory.
+        return bytes4(keccak256(s));
+                      ^----------^
+
+INFO:Detectors:[91m
+Account.transferByUser (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1261-1373) sends eth to arbitrary user
+	Dangerous calls:
+	- _to.transfer(_value) (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1359-1361)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[93m
+ECRecovery.recover (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#993-1041) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+Account.transferBySystem (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1235-1261) does not use the value returned by external calls:
+	-ERC20(_token).transfer(_to,_value) (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1257-1259)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in Account.init (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1197-1217):
+	External calls:
+	- weth9 = config.weth9() (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1215)
+	State variables written after the call(s):
+	- isInitialized (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1217)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+ECRecovery.recover uses assembly (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#993-1041)
+	- /sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1019-1031
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+WETH9.decimals should be constant (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#95-97)
+WETH9.name should be constant (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#91-95)
+WETH9.symbol should be constant (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#95)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+WETH9.fallback (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#121-123) should be declared external
+WETH9.withdraw (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#135-151) should be declared external
+WETH9.totalSupply (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#151-155) should be declared external
+WETH9.approve (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#157-171) should be declared external
+WETH9.transfer (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#171-183) should be declared external
+DSAuthority.canCall (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#261-265) should be declared external
+DSAuth.setOwner (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#305-315) should be declared external
+DSAuth.setAuthority (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#317-327) should be declared external
+MasterCopy.changeMasterCopy (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#575-583) should be declared external
+Config.setWETH9 (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#787-807) should be declared external
+Config.setAccountHandler (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#807-839) should be declared external
+Config.toggleAdminsControl (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#839-855) should be declared external
+Config.isAdminValid (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#857-871) should be declared external
+Config.getAllAdmins (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#875-883) should be declared external
+Account.init (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1197-1217) should be declared external
+Account.getAllUsers (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1217-1225) should be declared external
+Account.balanceFor (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1225-1233) should be declared external
+Escrow.transfer (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1761-1785) should be declared external
+Escrow.transferFromAccount (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1785-1817) should be declared external
+ExchangeConnector.tradeWithInputFixed (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1843-1865) should be declared external
+KyberConnector.tradeWithInputFixed (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1959-1975) should be declared external
+KyberConnector.isTradeFeasible (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol) should be declared external
+ExchangeConnector.isTradeFeasible (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1907-1911) should be declared external
+KyberConnector.setKyber (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1927-1931) should be declared external
+KyberConnector.setFeeWallet (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1932-1937) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_masterCopy' of MasterCopy.changeMasterCopy (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#577) is not in mixedCase
+Function 'DSThing.S' (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#703-715) is not in mixedCase
+Parameter '_weth9' of Config.setWETH9 (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#789) is not in mixedCase
+Parameter '_accountHandler' of Config.setAccountHandler (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#813-817) is not in mixedCase
+Parameter '_isAccountHandler' of Config.setAccountHandler (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#820-821) is not in mixedCase
+Parameter '_admin' of Config.isAdminValid (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#859-861) is not in mixedCase
+Parameter '_admin' of Config.addAdmin (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#883-885) is not in mixedCase
+Parameter '_admin' of Config.removeAdmin (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#927) is not in mixedCase
+Parameter '_hash' of ECRecovery.recover (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#997) is not in mixedCase
+Parameter '_sig' of ECRecovery.recover (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#997) is not in mixedCase
+Parameter '_hash' of ECRecovery.toEthSignedMessageHash (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1041-1043) is not in mixedCase
+Function 'Utils2._recoverSigner' (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1053-1073) is not in mixedCase
+Parameter '_hash' of Utils2._recoverSigner (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1056-1061) is not in mixedCase
+Parameter '_signature' of Utils2._recoverSigner (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1061) is not in mixedCase
+Parameter '_user' of Account.init (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1199-1201) is not in mixedCase
+Parameter '_config' of Account.init (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1201) is not in mixedCase
+Parameter '_token' of Account.balanceFor (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1227) is not in mixedCase
+Parameter '_token' of Account.transferBySystem (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1235-1239) is not in mixedCase
+Parameter '_to' of Account.transferBySystem (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1239-1241) is not in mixedCase
+Parameter '_value' of Account.transferBySystem (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1241) is not in mixedCase
+Parameter '_token' of Account.transferByUser (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1267) is not in mixedCase
+Parameter '_to' of Account.transferByUser (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1267) is not in mixedCase
+Parameter '_value' of Account.transferByUser (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1269-1273) is not in mixedCase
+Parameter '_salt' of Account.transferByUser (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1273-1275) is not in mixedCase
+Parameter '_signature' of Account.transferByUser (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1277-1279) is not in mixedCase
+Parameter '_user' of Account.addUser (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1375-1379) is not in mixedCase
+Parameter '_salt' of Account.addUser (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1381) is not in mixedCase
+Parameter '_signature' of Account.addUser (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1381) is not in mixedCase
+Parameter '_user' of Account.removeUser (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1442-1443) is not in mixedCase
+Parameter '_salt' of Account.removeUser (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1445) is not in mixedCase
+Parameter '_signature' of Account.removeUser (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1447-1449) is not in mixedCase
+Function 'Account._getTransferActionHash' (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1563-1595) is not in mixedCase
+Parameter '_token' of Account._getTransferActionHash (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1567) is not in mixedCase
+Parameter '_to' of Account._getTransferActionHash (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1567) is not in mixedCase
+Parameter '_value' of Account._getTransferActionHash (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1567-1569) is not in mixedCase
+Parameter '_salt' of Account._getTransferActionHash (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1569-1571) is not in mixedCase
+Function 'Account._getUserActionHash' (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1595-1629) is not in mixedCase
+Parameter '_user' of Account._getUserActionHash (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1599) is not in mixedCase
+Parameter '_action' of Account._getUserActionHash (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1601-1611) is not in mixedCase
+Parameter '_salt' of Account._getUserActionHash (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1611) is not in mixedCase
+Parameter '_to' of Account.changeImpl (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1661-1663) is not in mixedCase
+Parameter '_salt' of Account.changeImpl (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1665-1667) is not in mixedCase
+Parameter '_signature' of Account.changeImpl (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1669-1671) is not in mixedCase
+Parameter '_token' of Escrow.transfer (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1761) is not in mixedCase
+Parameter '_to' of Escrow.transfer (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1761-1763) is not in mixedCase
+Parameter '_value' of Escrow.transfer (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1763-1765) is not in mixedCase
+Parameter '_account' of Escrow.transferFromAccount (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1785-1787) is not in mixedCase
+Parameter '_token' of Escrow.transferFromAccount (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1787-1789) is not in mixedCase
+Parameter '_to' of Escrow.transferFromAccount (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1789-1790) is not in mixedCase
+Parameter '_value' of Escrow.transferFromAccount (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1795) is not in mixedCase
+Parameter '_escrow' of KyberConnector.tradeWithInputFixed (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1963) is not in mixedCase
+Parameter '_srcToken' of KyberConnector.tradeWithInputFixed (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1963) is not in mixedCase
+Parameter '_destToken' of KyberConnector.tradeWithInputFixed (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1963) is not in mixedCase
+Parameter '_srcTokenValue' of KyberConnector.tradeWithInputFixed (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1963-1967) is not in mixedCase
+Parameter '_escrow' of KyberConnector.tradeWithOutputFixed (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1975-1977) is not in mixedCase
+Parameter '_srcToken' of KyberConnector.tradeWithOutputFixed (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1981) is not in mixedCase
+Parameter '_destToken' of KyberConnector.tradeWithOutputFixed (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1981) is not in mixedCase
+Parameter '_srcTokenValue' of KyberConnector.tradeWithOutputFixed (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1981) is not in mixedCase
+Parameter '_maxDestTokenValue' of KyberConnector.tradeWithOutputFixed (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1983-1987) is not in mixedCase
+Parameter '_srcToken' of KyberConnector.getExpectedRate (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol) is not in mixedCase
+Parameter '_destToken' of KyberConnector.getExpectedRate (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol) is not in mixedCase
+Parameter '_srcTokenValue' of KyberConnector.getExpectedRate (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol) is not in mixedCase
+Parameter '_srcToken' of KyberConnector.isTradeFeasible (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol) is not in mixedCase
+Parameter '_destToken' of KyberConnector.isTradeFeasible (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol) is not in mixedCase
+Parameter '_srcTokenValue' of KyberConnector.isTradeFeasible (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol) is not in mixedCase
+Parameter '_kyber' of KyberConnector. (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1925) is not in mixedCase
+Parameter '_feeWallet' of KyberConnector. (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1925) is not in mixedCase
+Parameter '_kyber' of KyberConnector.setKyber (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1927) is not in mixedCase
+Parameter '_feeWallet' of KyberConnector.setFeeWallet (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol#1933) is not in mixedCase
+Function 'KyberConnector._transfer' (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol) is not in mixedCase
+Parameter '_token' of KyberConnector._transfer (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol) is not in mixedCase
+Parameter '_to' of KyberConnector._transfer (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol) is not in mixedCase
+Parameter '_value' of KyberConnector._transfer (/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x521550e569bc80f1b4957c4f3fd3d677d9ca31f1.sol analyzed (22 contracts), 104 result(s) found

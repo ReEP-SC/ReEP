@@ -1,0 +1,35 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x9daf9a376a545520688950ca85d84f0da12f0dd0.sol:
+/sb/0x9daf9a376a545520688950ca85d84f0da12f0dd0.sol:267:17: Warning: "msg.value" used in non-payable function. Do you want to add the "payable" modifier to this function?
+        require(msg.value == 0);
+                ^-------^
+
+INFO:Detectors:[91m
+TimeLockPool.withdraw (/sb/0x9daf9a376a545520688950ca85d84f0da12f0dd0.sol#345-411) sends eth to arbitrary user
+	Dangerous calls:
+	- ! account.send(release_amount) (/sb/0x9daf9a376a545520688950ca85d84f0da12f0dd0.sol#385-395)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[92m
+Reentrancy in TimeLockPool.depositERC20 (/sb/0x9daf9a376a545520688950ca85d84f0da12f0dd0.sol#267-297):
+	External calls:
+	- require(bool)(ERC20Interface(tokenAddr).transferFrom(msg.sender,this,amount)) (/sb/0x9daf9a376a545520688950ca85d84f0da12f0dd0.sol#287-289)
+	State variables written after the call(s):
+	- lockedBalances (/sb/0x9daf9a376a545520688950ca85d84f0da12f0dd0.sol#289-291)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+TimeLockPool.withdraw (/sb/0x9daf9a376a545520688950ca85d84f0da12f0dd0.sol#345-411) uses timestamp for comparisons
+	Dangerous comparisons:
+	- lockedBalances[account][tokenAddr][i].balance > 0 && lockedBalances[account][tokenAddr][i].releaseTime <= block.timestamp (/sb/0x9daf9a376a545520688950ca85d84f0da12f0dd0.sol#359-379)
+TimeLockPool.getAvailableBalanceOf (/sb/0x9daf9a376a545520688950ca85d84f0da12f0dd0.sol#423-457) uses timestamp for comparisons
+	Dangerous comparisons:
+	- lockedBalances[account][tokenAddr][i].releaseTime <= block.timestamp (/sb/0x9daf9a376a545520688950ca85d84f0da12f0dd0.sol#441-453)
+TimeLockPool.getLockedBalanceOf (/sb/0x9daf9a376a545520688950ca85d84f0da12f0dd0.sol#463-499) uses timestamp for comparisons
+	Dangerous comparisons:
+	- lockedBalances[account][tokenAddr][i].releaseTime > block.timestamp (/sb/0x9daf9a376a545520688950ca85d84f0da12f0dd0.sol#483-497)
+TimeLockPool.getNextReleaseTimeOf (/sb/0x9daf9a376a545520688950ca85d84f0da12f0dd0.sol#507-527) uses timestamp for comparisons
+	Dangerous comparisons:
+	- lockedBalances[account][tokenAddr][i].releaseTime > block.timestamp && lockedBalances[account][tokenAddr][i].releaseTime < nextRelease (/sb/0x9daf9a376a545520688950ca85d84f0da12f0dd0.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+Parameter 'max_count' of TimeLockPool.withdraw (/sb/0x9daf9a376a545520688950ca85d84f0da12f0dd0.sol#347) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x9daf9a376a545520688950ca85d84f0da12f0dd0.sol analyzed (3 contracts), 7 result(s) found

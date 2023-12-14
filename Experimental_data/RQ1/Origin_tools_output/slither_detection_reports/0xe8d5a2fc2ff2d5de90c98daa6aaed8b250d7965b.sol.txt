@@ -1,0 +1,84 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xe8d5a2fc2ff2d5de90c98daa6aaed8b250d7965b.sol:
+/sb/0xe8d5a2fc2ff2d5de90c98daa6aaed8b250d7965b.sol:6:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function owned() public {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xe8d5a2fc2ff2d5de90c98daa6aaed8b250d7965b.sol:47:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function TokenERC20(
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xe8d5a2fc2ff2d5de90c98daa6aaed8b250d7965b.sol:20:28: Warning: Functions in interfaces should be declared external.
+interface tokenRecipient { function receiveApproval(address _from, uint256 _value, address _token, bytes _extraData) public; }
+                           ^-----------------------------------------------------------------------------------------------^
+/sb/0xe8d5a2fc2ff2d5de90c98daa6aaed8b250d7965b.sol:71:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Transfer(_from, _to, _value);
+        ^--------------------------^
+/sb/0xe8d5a2fc2ff2d5de90c98daa6aaed8b250d7965b.sol:148:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Burn(msg.sender, _value);
+        ^----------------------^
+/sb/0xe8d5a2fc2ff2d5de90c98daa6aaed8b250d7965b.sol:166:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Burn(_from, _value);
+        ^-----------------^
+/sb/0xe8d5a2fc2ff2d5de90c98daa6aaed8b250d7965b.sol:197:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Transfer(_from, _to, _value);
+        ^--------------------------^
+/sb/0xe8d5a2fc2ff2d5de90c98daa6aaed8b250d7965b.sol:206:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Transfer(0, this, mintedAmount);
+        ^-----------------------------^
+/sb/0xe8d5a2fc2ff2d5de90c98daa6aaed8b250d7965b.sol:207:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Transfer(this, target, mintedAmount);
+        ^----------------------------------^
+/sb/0xe8d5a2fc2ff2d5de90c98daa6aaed8b250d7965b.sol:215:9: Warning: Invoking events without "emit" prefix is deprecated.
+        FrozenFunds(target, freeze);
+        ^-------------------------^
+/sb/0xe8d5a2fc2ff2d5de90c98daa6aaed8b250d7965b.sol:235:17: Warning: Using contract member "balance" inherited from the address type is deprecated. Convert the contract to "address" type to access the member, for example use "address(contract).balance" instead.
+        require(this.balance >= amount * sellPrice);      // checks if the contract has enough ether to buy
+                ^----------^
+
+INFO:Detectors:[93m
+TokenERC20 (/sb/0xe8d5a2fc2ff2d5de90c98daa6aaed8b250d7965b.sol#22-175) has incorrect ERC20 function interface(s):
+	-transfer (/sb/0xe8d5a2fc2ff2d5de90c98daa6aaed8b250d7965b.sol#85-91)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[92m
+owned.transferOwnership (/sb/0xe8d5a2fc2ff2d5de90c98daa6aaed8b250d7965b.sol#15-20) should be declared external
+tokenRecipient.receiveApproval (/sb/0xe8d5a2fc2ff2d5de90c98daa6aaed8b250d7965b.sol#20-22) should be declared external
+TokenERC20.transfer (/sb/0xe8d5a2fc2ff2d5de90c98daa6aaed8b250d7965b.sol#85-91) should be declared external
+TokenERC20.transferFrom (/sb/0xe8d5a2fc2ff2d5de90c98daa6aaed8b250d7965b.sol#97-107) should be declared external
+TokenERC20.approveAndCall (/sb/0xe8d5a2fc2ff2d5de90c98daa6aaed8b250d7965b.sol#130-142) should be declared external
+TokenERC20.burn (/sb/0xe8d5a2fc2ff2d5de90c98daa6aaed8b250d7965b.sol#145-157) should be declared external
+TokenERC20.burnFrom (/sb/0xe8d5a2fc2ff2d5de90c98daa6aaed8b250d7965b.sol#161-175) should be declared external
+MyAdvancedToken.mintToken (/sb/0xe8d5a2fc2ff2d5de90c98daa6aaed8b250d7965b.sol#207-213) should be declared external
+MyAdvancedToken.freezeAccount (/sb/0xe8d5a2fc2ff2d5de90c98daa6aaed8b250d7965b.sol#218-220) should be declared external
+MyAdvancedToken.setPrices (/sb/0xe8d5a2fc2ff2d5de90c98daa6aaed8b250d7965b.sol#227-229) should be declared external
+MyAdvancedToken.buy (/sb/0xe8d5a2fc2ff2d5de90c98daa6aaed8b250d7965b.sol#232-235) should be declared external
+MyAdvancedToken.sell (/sb/0xe8d5a2fc2ff2d5de90c98daa6aaed8b250d7965b.sol#237-239) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xe8d5a2fc2ff2d5de90c98daa6aaed8b250d7965b.sol:
+	- pragma solidity^0.4.16 (/sb/0xe8d5a2fc2ff2d5de90c98daa6aaed8b250d7965b.sol#1): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Contract 'owned' (/sb/0xe8d5a2fc2ff2d5de90c98daa6aaed8b250d7965b.sol#3-20) is not in CapWords
+Contract 'tokenRecipient' (/sb/0xe8d5a2fc2ff2d5de90c98daa6aaed8b250d7965b.sol#20-22) is not in CapWords
+Function 'TokenERC20.TokenERC20' (/sb/0xe8d5a2fc2ff2d5de90c98daa6aaed8b250d7965b.sol#49-56) is not in mixedCase
+Function 'TokenERC20._transfer' (/sb/0xe8d5a2fc2ff2d5de90c98daa6aaed8b250d7965b.sol#58-79) is not in mixedCase
+Parameter '_from' of TokenERC20._transfer (/sb/0xe8d5a2fc2ff2d5de90c98daa6aaed8b250d7965b.sol#59) is not in mixedCase
+Parameter '_to' of TokenERC20._transfer (/sb/0xe8d5a2fc2ff2d5de90c98daa6aaed8b250d7965b.sol#59) is not in mixedCase
+Parameter '_value' of TokenERC20._transfer (/sb/0xe8d5a2fc2ff2d5de90c98daa6aaed8b250d7965b.sol#59) is not in mixedCase
+Parameter '_to' of TokenERC20.transfer (/sb/0xe8d5a2fc2ff2d5de90c98daa6aaed8b250d7965b.sol#86-88) is not in mixedCase
+Parameter '_value' of TokenERC20.transfer (/sb/0xe8d5a2fc2ff2d5de90c98daa6aaed8b250d7965b.sol#88-89) is not in mixedCase
+Parameter '_from' of TokenERC20.transferFrom (/sb/0xe8d5a2fc2ff2d5de90c98daa6aaed8b250d7965b.sol#98) is not in mixedCase
+Parameter '_to' of TokenERC20.transferFrom (/sb/0xe8d5a2fc2ff2d5de90c98daa6aaed8b250d7965b.sol#98) is not in mixedCase
+Parameter '_value' of TokenERC20.transferFrom (/sb/0xe8d5a2fc2ff2d5de90c98daa6aaed8b250d7965b.sol#98) is not in mixedCase
+Parameter '_spender' of TokenERC20.approve (/sb/0xe8d5a2fc2ff2d5de90c98daa6aaed8b250d7965b.sol#114-115) is not in mixedCase
+Parameter '_value' of TokenERC20.approve (/sb/0xe8d5a2fc2ff2d5de90c98daa6aaed8b250d7965b.sol#115) is not in mixedCase
+Parameter '_spender' of TokenERC20.approveAndCall (/sb/0xe8d5a2fc2ff2d5de90c98daa6aaed8b250d7965b.sol#130) is not in mixedCase
+Parameter '_value' of TokenERC20.approveAndCall (/sb/0xe8d5a2fc2ff2d5de90c98daa6aaed8b250d7965b.sol#130) is not in mixedCase
+Parameter '_extraData' of TokenERC20.approveAndCall (/sb/0xe8d5a2fc2ff2d5de90c98daa6aaed8b250d7965b.sol#131) is not in mixedCase
+Parameter '_value' of TokenERC20.burn (/sb/0xe8d5a2fc2ff2d5de90c98daa6aaed8b250d7965b.sol#146) is not in mixedCase
+Parameter '_from' of TokenERC20.burnFrom (/sb/0xe8d5a2fc2ff2d5de90c98daa6aaed8b250d7965b.sol#161-162) is not in mixedCase
+Parameter '_value' of TokenERC20.burnFrom (/sb/0xe8d5a2fc2ff2d5de90c98daa6aaed8b250d7965b.sol#162) is not in mixedCase
+Function 'MyAdvancedToken._transfer' (/sb/0xe8d5a2fc2ff2d5de90c98daa6aaed8b250d7965b.sol#191-203) is not in mixedCase
+Parameter '_from' of MyAdvancedToken._transfer (/sb/0xe8d5a2fc2ff2d5de90c98daa6aaed8b250d7965b.sol#191) is not in mixedCase
+Parameter '_to' of MyAdvancedToken._transfer (/sb/0xe8d5a2fc2ff2d5de90c98daa6aaed8b250d7965b.sol#191) is not in mixedCase
+Parameter '_value' of MyAdvancedToken._transfer (/sb/0xe8d5a2fc2ff2d5de90c98daa6aaed8b250d7965b.sol#191) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xe8d5a2fc2ff2d5de90c98daa6aaed8b250d7965b.sol analyzed (4 contracts), 38 result(s) found

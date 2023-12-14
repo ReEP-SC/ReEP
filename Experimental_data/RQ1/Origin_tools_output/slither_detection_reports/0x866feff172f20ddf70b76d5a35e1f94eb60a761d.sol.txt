@@ -1,0 +1,89 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol:
+/sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol:63:5: Warning: No visibility specified. Defaulting to "public". 
+    function transfer(address _to, uint256 _value) returns(bool ok);
+    ^--------------------------------------------------------------^
+/sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol:163:5: Warning: No visibility specified. Defaulting to "public". 
+    function ETH(uint _id) constant returns (uint256);
+    ^------------------------------------------------^
+/sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol:165:5: Warning: No visibility specified. Defaulting to "public". 
+    function USD(uint _id) constant returns (uint256);
+    ^------------------------------------------------^
+/sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol:257:28: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function tokenFallback(address _from, uint _value, bytes _data) public {
+                           ^-----------^
+/sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol:257:43: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function tokenFallback(address _from, uint _value, bytes _data) public {
+                                          ^---------^
+/sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol:257:56: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function tokenFallback(address _from, uint _value, bytes _data) public {
+                                                       ^---------^
+/sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol:301:5: Warning: No visibility specified. Defaulting to "public". 
+    function getPrice(uint256 _usd) constant returns(uint256) {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol:147:5: Warning: Function state mutability can be restricted to view
+    function isOwner(address _address) public returns(bool){
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol:257:5: Warning: Function state mutability can be restricted to pure
+    function tokenFallback(address _from, uint _value, bytes _data) public {
+    ^ (Relevant source part starts here and spans across multiple lines).
+
+INFO:Detectors:[91m
+BSAFECrowdsale.withdraw (/sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol#461-471) sends eth to arbitrary user
+	Dangerous calls:
+	- _to.transfer(_amount) (/sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[93m
+BSAFECrowdsale.buy (/sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol#389-419) does not use the value returned by external calls:
+	-token.transfer(msg.sender,tokensAmount.mul(10 ** 8)) (/sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol#413-415)
+BSAFECrowdsale.withdrawBSAFE (/sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol) does not use the value returned by external calls:
+	-token.transfer(_to,_amount) (/sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+BSAFECrowdsale.price should be constant (/sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol#247-249)
+BSAFECrowdsale.saleSupply should be constant (/sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol#233-237)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Token.transfer (/sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol#63-71) should be declared external
+WhiteList.checkAddress (/sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol#71-81) should be declared external
+MultiOwnable.addOwner (/sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol#125-137) should be declared external
+MultiOwnable.removeOwner (/sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol#139-161) should be declared external
+MultiOwnable.isOwner (/sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol#163-165) should be declared external
+FiatContract.ETH (/sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol#175-179) should be declared external
+FiatContract.USD (/sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol#179-183) should be declared external
+BSAFECrowdsale.tokenFallback (/sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol#273-275) should be declared external
+BSAFECrowdsale.startPreSTOSale (/sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol#329-347) should be declared external
+BSAFECrowdsale.startSTO (/sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol#347-363) should be declared external
+BSAFECrowdsale.finishSale (/sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol#377-381) should be declared external
+BSAFECrowdsale.pause (/sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol#381-383) should be declared external
+BSAFECrowdsale.unpause (/sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol#385-387) should be declared external
+BSAFECrowdsale.setTokenContract (/sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol#437-449) should be declared external
+BSAFECrowdsale.setWallet (/sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol#449-461) should be declared external
+BSAFECrowdsale.withdraw (/sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol#461-471) should be declared external
+BSAFECrowdsale.withdrawBSAFE (/sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol) should be declared external
+BSAFECrowdsale.updateSTOPrice (/sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_address' of MultiOwnable.isOwner (/sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol#163) is not in mixedCase
+Function 'FiatContract.ETH' (/sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol#175-179) is not in mixedCase
+Function 'FiatContract.USD' (/sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol#179-183) is not in mixedCase
+Parameter '_token' of BSAFECrowdsale. (/sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol#289-291) is not in mixedCase
+Parameter '_wallet' of BSAFECrowdsale. (/sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol#291) is not in mixedCase
+Parameter '_whitelist' of BSAFECrowdsale. (/sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol#291-293) is not in mixedCase
+Parameter '_fiatcontract' of BSAFECrowdsale. (/sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol#293-295) is not in mixedCase
+Parameter '_usd' of BSAFECrowdsale.getPrice (/sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol#321-325) is not in mixedCase
+Parameter '_wei' of BSAFECrowdsale.buy (/sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol#389) is not in mixedCase
+Parameter '_amount' of BSAFECrowdsale.calcTokens (/sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol#427-428) is not in mixedCase
+Parameter '_address' of BSAFECrowdsale.setTokenContract (/sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol#437-439) is not in mixedCase
+Parameter '_address' of BSAFECrowdsale.setWallet (/sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol#451) is not in mixedCase
+Parameter '_to' of BSAFECrowdsale.withdraw (/sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol#463) is not in mixedCase
+Parameter '_amount' of BSAFECrowdsale.withdraw (/sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol#463-465) is not in mixedCase
+Parameter '_to' of BSAFECrowdsale.withdrawBSAFE (/sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol) is not in mixedCase
+Parameter '_amount' of BSAFECrowdsale.withdrawBSAFE (/sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol) is not in mixedCase
+Parameter '_newprice' of BSAFECrowdsale.updateSTOPrice (/sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol) is not in mixedCase
+Variable 'BSAFECrowdsale.presto_min' (/sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol#257) is not in mixedCase
+Variable 'BSAFECrowdsale.sto_min' (/sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol#257) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+BSAFECrowdsale.price (/sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol#247-249) is never used in BSAFECrowdsale
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0x866feff172f20ddf70b76d5a35e1f94eb60a761d.sol analyzed (6 contracts), 42 result(s) found

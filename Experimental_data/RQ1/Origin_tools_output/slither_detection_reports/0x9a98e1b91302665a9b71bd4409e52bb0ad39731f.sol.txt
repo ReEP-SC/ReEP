@@ -1,0 +1,144 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol:
+/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol:161:58: Warning: This looks like an address but has an invalid checksum. If this is not used as an address, please prepend '00'. Correct checksummed address: '0x8942a5995bd168f347F7Ec58F25a54A9a064F882'. For more information please see https://solidity.readthedocs.io/en/develop/types.html#address-literals
+     HDX20Interface private HDXcontract = HDX20Interface(0x8942a5995bd168f347f7ec58f25a54a9a064f882);
+                                                         ^----------------------------------------^
+
+INFO:Detectors:[91m
+Reentrancy in TorpedoLaunchGame.AddJackpotTreasure (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1051-1167):
+	External calls:
+	- HDXcontract.buyTokenFromGame.value(_dev)(owner,address(0)) (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1112-1121)
+	State variables written after the call(s):
+	- GameRoundData (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1151-1155)
+	- GameRoundData (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1163-1167)
+Reentrancy in TorpedoLaunchGame.CoreBuyTorpedo (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1703-1843):
+	External calls:
+	- coreValidTorpedoScore(_player_address,gamevar) (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1745)
+	State variables written after the call(s):
+	- PlayerData (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1755-1757)
+	- PlayerData (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1759-1781)
+	- PlayerData (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1781-1793)
+	- PlayerData (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1805-1811)
+Reentrancy in TorpedoLaunchGame.coreValidTorpedoScore (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1253-1557):
+	External calls:
+	- AddJackpotTreasure(_PlayerData.lockedCredit - _winning) (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1491-1495)
+	State variables written after the call(s):
+	- GameRoundData (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1535)
+	- PlayerData (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1541-1545)
+	- PlayerData (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1547-1549)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities[0m
+INFO:Detectors:[93m
+gamevar in TorpedoLaunchGame.ValidTorpedoScore (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1187-1197) is a local variable never initialiazed
+gamevar in TorpedoLaunchGame.BuyTorpedo (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1671) is a local variable never initialiazed
+gamevar in TorpedoLaunchGame.BuyTorpedoWithDividends (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1581) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[93m
+TorpedoLaunchGame.AddJackpotTreasure (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1051-1167) does not use the value returned by external calls:
+	-HDXcontract.buyTokenFromGame.value(_dev)(owner,address(0)) (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1112-1121)
+TorpedoLaunchGame.BuyName (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1617-1651) does not use the value returned by external calls:
+	-HDXcontract.buyTokenFromGame.value(eth)(owner,address(0)) (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1635-1639)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in TorpedoLaunchGame.BuyName (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1617-1651):
+	External calls:
+	- HDXcontract.buyTokenFromGame.value(eth)(owner,address(0)) (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1635-1639)
+	- HDXcontract.appreciateTokenPrice.value(eth)() (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1639-1646)
+	State variables written after the call(s):
+	- registeredNames (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1647)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+TorpedoLaunchGame.changeOwner (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#533-555) should be declared external
+TorpedoLaunchGame.changeSigner (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#555-581) should be declared external
+TorpedoLaunchGame.changeHDXcontract (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#581-609) should be declared external
+TorpedoLaunchGame.changeBlockTimeAverage (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#613-629) should be declared external
+TorpedoLaunchGame.changeAverageScore (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#639-649) should be declared external
+TorpedoLaunchGame.changeJackpotCycle (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#659-681) should be declared external
+TorpedoLaunchGame.changeMaximumScore (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#691-705) should be declared external
+TorpedoLaunchGame.changeTimeOut (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#711-735) should be declared external
+TorpedoLaunchGame.changePercentageTreasure (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#761-789) should be declared external
+TorpedoLaunchGame.enableMaintenance (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#791-807) should be declared external
+TorpedoLaunchGame.disableMaintenance (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#809-829) should be declared external
+TorpedoLaunchGame.changeMinimumPrice (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#829-849) should be declared external
+TorpedoLaunchGame.fallback (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1013-1021) should be declared external
+TorpedoLaunchGame.ChargeJackpot (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1021-1037) should be declared external
+TorpedoLaunchGame.ChargeTreasure (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1037-1051) should be declared external
+TorpedoLaunchGame.ValidTorpedoScore (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1169-1209) should be declared external
+TorpedoLaunchGame.BuyTorpedoWithDividends (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1557-1617) should be declared external
+TorpedoLaunchGame.BuyName (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1617-1651) should be declared external
+TorpedoLaunchGame.BuyTorpedo (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1653-1693) should be declared external
+TorpedoLaunchGame.WithdrawGains (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1867-1903) should be declared external
+TorpedoLaunchGame.view_get_Treasure (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1919-1933) should be declared external
+TorpedoLaunchGame.view_get_Jackpot (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1933-1951) should be declared external
+TorpedoLaunchGame.view_get_gameData (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1953-2053) should be declared external
+TorpedoLaunchGame.view_get_Gains (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#2059-2119) should be declared external
+TorpedoLaunchGame.view_get_gameStates (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#2127-2219) should be declared external
+TorpedoLaunchGame.view_get_pendingHDX20Appreciation (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#2223-2242) should be declared external
+TorpedoLaunchGame.view_get_pendingDevAppreciation (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#2243-2267) should be declared external
+TorpedoLaunchGame.totalEthereumBalance (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol) should be declared external
+TorpedoLaunchGame.view_get_maintenanceMode (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol) should be declared external
+TorpedoLaunchGame.view_get_blockNumbers (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_referrer_address' of HDX20Interface.buyTokenFromGame (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#127) is not in mixedCase
+Parameter '_player_address' of HDX20Interface.payWithToken (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#135) is not in mixedCase
+Struct 'TorpedoLaunchGame.PlayerData_s' (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#853-865) is not in CapWords
+Struct 'TorpedoLaunchGame.GameRoundData_s' (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#865-927) is not in CapWords
+Struct 'TorpedoLaunchGame.GameVar_s' (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1209-1219) is not in CapWords
+Event 'TorpedoLaunchGame.onJackpotWin' (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#227-241) is not in CapWords
+Event 'TorpedoLaunchGame.onChangeAverageScore' (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#243-251) is not in CapWords
+Event 'TorpedoLaunchGame.onChangeJackpotCycle' (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#255-261) is not in CapWords
+Event 'TorpedoLaunchGame.onChangeMaximumScore' (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#267-273) is not in CapWords
+Event 'TorpedoLaunchGame.onChangeTimeout' (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#273-281) is not in CapWords
+Event 'TorpedoLaunchGame.onChangePercentageTreasure' (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#283-287) is not in CapWords
+Event 'TorpedoLaunchGame.onWithdrawGains' (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#289-299) is not in CapWords
+Event 'TorpedoLaunchGame.onNewScore' (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#301-317) is not in CapWords
+Event 'TorpedoLaunchGame.onBuyTorpedo' (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#318-347) is not in CapWords
+Event 'TorpedoLaunchGame.onMaintenance' (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#349-359) is not in CapWords
+Event 'TorpedoLaunchGame.onChangeBlockTimeAverage' (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#361-371) is not in CapWords
+Event 'TorpedoLaunchGame.onChangeMinimumPrice' (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#371-379) is not in CapWords
+Event 'TorpedoLaunchGame.onNewName' (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#384-399) is not in CapWords
+Parameter '_nextOwner' of TorpedoLaunchGame.changeOwner (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#539) is not in mixedCase
+Parameter '_nextSigner' of TorpedoLaunchGame.changeSigner (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#557-565) is not in mixedCase
+Parameter '_next' of TorpedoLaunchGame.changeHDXcontract (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#581) is not in mixedCase
+Function 'TorpedoLaunchGame.ChargeJackpot' (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1021-1037) is not in mixedCase
+Function 'TorpedoLaunchGame.ChargeTreasure' (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1037-1051) is not in mixedCase
+Function 'TorpedoLaunchGame.AddJackpotTreasure' (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1051-1167) is not in mixedCase
+Parameter '_val' of TorpedoLaunchGame.AddJackpotTreasure (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1055) is not in mixedCase
+Function 'TorpedoLaunchGame.ValidTorpedoScore' (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1169-1209) is not in mixedCase
+Parameter '_player_address' of TorpedoLaunchGame.coreValidTorpedoScore (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1257-1259) is not in mixedCase
+Function 'TorpedoLaunchGame.BuyTorpedoWithDividends' (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1557-1617) is not in mixedCase
+Parameter '_referrer_address' of TorpedoLaunchGame.BuyTorpedoWithDividends (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1567) is not in mixedCase
+Function 'TorpedoLaunchGame.BuyName' (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1617-1651) is not in mixedCase
+Function 'TorpedoLaunchGame.BuyTorpedo' (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1653-1693) is not in mixedCase
+Parameter '_referrer_address' of TorpedoLaunchGame.BuyTorpedo (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1653) is not in mixedCase
+Function 'TorpedoLaunchGame.CoreBuyTorpedo' (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1703-1843) is not in mixedCase
+Parameter '_player_address' of TorpedoLaunchGame.CoreBuyTorpedo (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1705-1707) is not in mixedCase
+Parameter '_referrer_address' of TorpedoLaunchGame.CoreBuyTorpedo (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1707) is not in mixedCase
+Function 'TorpedoLaunchGame.get_Gains' (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1845-1867) is not in mixedCase
+Parameter '_player_address' of TorpedoLaunchGame.get_Gains (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1845-1847) is not in mixedCase
+Function 'TorpedoLaunchGame.WithdrawGains' (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1867-1903) is not in mixedCase
+Function 'TorpedoLaunchGame.view_get_Treasure' (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1919-1933) is not in mixedCase
+Function 'TorpedoLaunchGame.view_get_Jackpot' (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1933-1951) is not in mixedCase
+Function 'TorpedoLaunchGame.view_get_gameData' (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#1953-2053) is not in mixedCase
+Function 'TorpedoLaunchGame.view_get_Gains' (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#2059-2119) is not in mixedCase
+Function 'TorpedoLaunchGame.view_get_gameStates' (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#2127-2219) is not in mixedCase
+Function 'TorpedoLaunchGame.view_get_pendingHDX20Appreciation' (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#2223-2242) is not in mixedCase
+Function 'TorpedoLaunchGame.view_get_pendingDevAppreciation' (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#2243-2267) is not in mixedCase
+Function 'TorpedoLaunchGame.view_get_maintenanceMode' (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol) is not in mixedCase
+Function 'TorpedoLaunchGame.view_get_blockNumbers' (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol) is not in mixedCase
+Function 'TorpedoLaunchGame.view_get_registeredNames' (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol) is not in mixedCase
+Parameter '_player' of TorpedoLaunchGame.view_get_registeredNames (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol) is not in mixedCase
+Variable 'TorpedoLaunchGame.HDXcontract' (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#167-173) is not in mixedCase
+Variable 'TorpedoLaunchGame.PlayerData' (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#931) is not in mixedCase
+Variable 'TorpedoLaunchGame.GameRoundData' (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#931-935) is not in mixedCase
+Constant 'TorpedoLaunchGame.HDX20BuyFees' (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#957-961) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'TorpedoLaunchGame.DevFees' (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#965) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'TorpedoLaunchGame.AppreciationFees' (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#965-971) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'TorpedoLaunchGame.JackpotAppreciation' (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#973-977) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'TorpedoLaunchGame.TreasureAppreciation' (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#977-983) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'TorpedoLaunchGame.magnitude' (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#983-985) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'TorpedoLaunchGame.thresholdForAppreciation' (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#997) is not in UPPER_CASE_WITH_UNDERSCORES
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+TorpedoLaunchGame.magnitude (/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol#983-985) is never used in TorpedoLaunchGame
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0x9a98e1b91302665a9b71bd4409e52bb0ad39731f.sol analyzed (4 contracts), 99 result(s) found

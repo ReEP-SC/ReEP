@@ -1,0 +1,68 @@
+INFO:Detectors:[93m
+Reentrancy in Crowdsale.buyTokens (/sb/0x3d63da14a12a559ad081f291ae3a6f34d69be159.sol#385-511):
+	External calls:
+	- require(bool)(tokensForSale >= (token.totalSupply() + _tokenAmount)) (/sb/0x3d63da14a12a559ad081f291ae3a6f34d69be159.sol#479-483)
+	State variables written after the call(s):
+	- weiRaised (/sb/0x3d63da14a12a559ad081f291ae3a6f34d69be159.sol#491-495)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+_stage in Crowdsale.setCrowdsaleStage (/sb/0x3d63da14a12a559ad081f291ae3a6f34d69be159.sol#531-537) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[93m
+Crowdsale.buyTokens (/sb/0x3d63da14a12a559ad081f291ae3a6f34d69be159.sol#385-511) does not use the value returned by external calls:
+	-token.mint(_beneficiary,_tokenAmount) (/sb/0x3d63da14a12a559ad081f291ae3a6f34d69be159.sol#495-497)
+Crowdsale.finish (/sb/0x3d63da14a12a559ad081f291ae3a6f34d69be159.sol#667-707) does not use the value returned by external calls:
+	-token.mint(_bountyFund,tokensForBounty) (/sb/0x3d63da14a12a559ad081f291ae3a6f34d69be159.sol)
+	-token.mint(_advisorsFund,tokensForAdvisors) (/sb/0x3d63da14a12a559ad081f291ae3a6f34d69be159.sol)
+	-token.mint(_ecosystemFund,tokensForEcosystem) (/sb/0x3d63da14a12a559ad081f291ae3a6f34d69be159.sol)
+	-token.mint(_teamFund,tokensForTeam) (/sb/0x3d63da14a12a559ad081f291ae3a6f34d69be159.sol)
+	-token.finishMinting() (/sb/0x3d63da14a12a559ad081f291ae3a6f34d69be159.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in Crowdsale.finish (/sb/0x3d63da14a12a559ad081f291ae3a6f34d69be159.sol#667-707):
+	External calls:
+	- unsoldTokens = tokensForSale - token.totalSupply() (/sb/0x3d63da14a12a559ad081f291ae3a6f34d69be159.sol#689-691)
+	State variables written after the call(s):
+	- tokensForEcosystem (/sb/0x3d63da14a12a559ad081f291ae3a6f34d69be159.sol#697-703)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Crowdsale.endTime should be constant (/sb/0x3d63da14a12a559ad081f291ae3a6f34d69be159.sol#236-239)
+Crowdsale.startTime should be constant (/sb/0x3d63da14a12a559ad081f291ae3a6f34d69be159.sol#229-233)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0x3d63da14a12a559ad081f291ae3a6f34d69be159.sol#163-179) should be declared external
+Crowdsale.setCrowdsaleStage (/sb/0x3d63da14a12a559ad081f291ae3a6f34d69be159.sol#524-555) should be declared external
+Crowdsale.setNewRate (/sb/0x3d63da14a12a559ad081f291ae3a6f34d69be159.sol#561-575) should be declared external
+Crowdsale.setHardCap (/sb/0x3d63da14a12a559ad081f291ae3a6f34d69be159.sol#579-587) should be declared external
+Crowdsale.changeWallet (/sb/0x3d63da14a12a559ad081f291ae3a6f34d69be159.sol#591-595) should be declared external
+Crowdsale.updateWhitelist (/sb/0x3d63da14a12a559ad081f291ae3a6f34d69be159.sol#599-627) should be declared external
+Crowdsale.mint (/sb/0x3d63da14a12a559ad081f291ae3a6f34d69be159.sol#649-655) should be declared external
+Crowdsale.returnOwnership (/sb/0x3d63da14a12a559ad081f291ae3a6f34d69be159.sol#657-663) should be declared external
+Crowdsale.finish (/sb/0x3d63da14a12a559ad081f291ae3a6f34d69be159.sol#667-707) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x3d63da14a12a559ad081f291ae3a6f34d69be159.sol:
+	- pragma solidity^0.4.21 (/sb/0x3d63da14a12a559ad081f291ae3a6f34d69be159.sol#1): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_cap' of Crowdsale. (/sb/0x3d63da14a12a559ad081f291ae3a6f34d69be159.sol#327-331) is not in mixedCase
+Parameter '_rate' of Crowdsale. (/sb/0x3d63da14a12a559ad081f291ae3a6f34d69be159.sol#331) is not in mixedCase
+Parameter '_wallet' of Crowdsale. (/sb/0x3d63da14a12a559ad081f291ae3a6f34d69be159.sol#331-333) is not in mixedCase
+Parameter '_token' of Crowdsale. (/sb/0x3d63da14a12a559ad081f291ae3a6f34d69be159.sol#333-335) is not in mixedCase
+Parameter '_beneficiary' of Crowdsale.buyTokens (/sb/0x3d63da14a12a559ad081f291ae3a6f34d69be159.sol#387) is not in mixedCase
+Parameter '_newRate' of Crowdsale.setNewRate (/sb/0x3d63da14a12a559ad081f291ae3a6f34d69be159.sol#561-563) is not in mixedCase
+Parameter '_newCap' of Crowdsale.setHardCap (/sb/0x3d63da14a12a559ad081f291ae3a6f34d69be159.sol#579-583) is not in mixedCase
+Parameter '_newWallet' of Crowdsale.changeWallet (/sb/0x3d63da14a12a559ad081f291ae3a6f34d69be159.sol#591-593) is not in mixedCase
+Parameter '_to' of Crowdsale.mint (/sb/0x3d63da14a12a559ad081f291ae3a6f34d69be159.sol#651) is not in mixedCase
+Parameter '_amount' of Crowdsale.mint (/sb/0x3d63da14a12a559ad081f291ae3a6f34d69be159.sol#651-653) is not in mixedCase
+Parameter '_bountyFund' of Crowdsale.finish (/sb/0x3d63da14a12a559ad081f291ae3a6f34d69be159.sol#671) is not in mixedCase
+Parameter '_advisorsFund' of Crowdsale.finish (/sb/0x3d63da14a12a559ad081f291ae3a6f34d69be159.sol#671) is not in mixedCase
+Parameter '_ecosystemFund' of Crowdsale.finish (/sb/0x3d63da14a12a559ad081f291ae3a6f34d69be159.sol#671) is not in mixedCase
+Parameter '_teamFund' of Crowdsale.finish (/sb/0x3d63da14a12a559ad081f291ae3a6f34d69be159.sol#671-673) is not in mixedCase
+Constant 'Crowdsale.maxTokens' (/sb/0x3d63da14a12a559ad081f291ae3a6f34d69be159.sol#213-215) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'Crowdsale.tokensForSale' (/sb/0x3d63da14a12a559ad081f291ae3a6f34d69be159.sol#215-217) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'Crowdsale.tokensForBounty' (/sb/0x3d63da14a12a559ad081f291ae3a6f34d69be159.sol#217-219) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'Crowdsale.tokensForAdvisors' (/sb/0x3d63da14a12a559ad081f291ae3a6f34d69be159.sol#219-221) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'Crowdsale.tokensForTeam' (/sb/0x3d63da14a12a559ad081f291ae3a6f34d69be159.sol#221-225) is not in UPPER_CASE_WITH_UNDERSCORES
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x3d63da14a12a559ad081f291ae3a6f34d69be159.sol analyzed (4 contracts), 35 result(s) found

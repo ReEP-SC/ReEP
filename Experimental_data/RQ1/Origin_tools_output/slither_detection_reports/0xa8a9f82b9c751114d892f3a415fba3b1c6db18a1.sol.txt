@@ -1,0 +1,111 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol:
+/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol:23:1: Warning: Experimental features are turned on. Do not use experimental features on live deployments.
+pragma experimental ABIEncoderV2;
+^-------------------------------^
+
+INFO:Detectors:[91m
+GovernorBravoDelegate.execute (/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol#350-362) sends eth to arbitrary user
+	Dangerous calls:
+	- timelock.executeTransaction.value(proposal.values[i])(proposal.targets[i],proposal.values[i],proposal.signatures[i],proposal.calldatas[i],proposal.eta) (/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol#357-360)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[93m
+GovernorBravoDelegate.getChainIdInternal (/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+Reentrancy in GovernorBravoDelegate._initiate (/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol#537-544):
+	External calls:
+	- proposalCount = GovernorAlpha(governorAlpha).proposalCount() (/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol#541-542)
+	State variables written after the call(s):
+	- initialProposalId (/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol#542-544)
+Reentrancy in GovernorBravoDelegate.cancel (/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol#363-379):
+	External calls:
+	- require(bool,string)(state(proposalId) != ProposalState.Executed,GovernorBravo::cancel: cannot cancel executed proposal) (/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol#365-367)
+	- require(bool,string)(msg.sender == proposal.proposer || comp.getPriorVotes(proposal.proposer,sub256(block.number,1)) < proposalThreshold,GovernorBravo::cancel: proposer above threshold) (/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol#367-375)
+	State variables written after the call(s):
+	- proposals (/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol#375-376)
+Reentrancy in GovernorBravoDelegate.castVoteInternal (/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol#464-490):
+	External calls:
+	- require(bool,string)(state(proposalId) == ProposalState.Active,GovernorBravo::castVoteInternal: voting is closed) (/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol#466-469)
+	- votes = comp.getPriorVotes(voter,proposal.startBlock) (/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol#477-483)
+	State variables written after the call(s):
+	- proposals (/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol#484-486)
+	- proposals (/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol#486-487)
+	- proposals (/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol#488)
+Reentrancy in GovernorBravoDelegate.execute (/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol#350-362):
+	External calls:
+	- require(bool,string)(state(proposalId) == ProposalState.Queued,GovernorBravo::execute: proposal can only be executed if it is queued) (/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol#350-352)
+	State variables written after the call(s):
+	- proposals (/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol#356)
+Reentrancy in GovernorBravoDelegate.propose (/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol#281-327):
+	External calls:
+	- require(bool,string)(comp.getPriorVotes(msg.sender,sub256(block.number,1)) > proposalThreshold,GovernorBravo::propose: proposer votes below proposal threshold) (/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol#282-284)
+	- proposersLatestProposalState = state(latestProposalId) (/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol#290)
+	State variables written after the call(s):
+	- latestProposalIds (/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol#323-325)
+	- proposalCount (/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol#306)
+	- proposals (/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol#322-323)
+Reentrancy in GovernorBravoDelegate.queue (/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol#329-338):
+	External calls:
+	- require(bool,string)(state(proposalId) == ProposalState.Succeeded,GovernorBravo::queue: proposal can only be queued if it is succeeded) (/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol#330-332)
+	- eta = add256(block.timestamp,timelock.delay()) (/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol#336)
+	State variables written after the call(s):
+	- proposals (/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol#337)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+GovernorBravoDelegate.queueOrRevertInternal (/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol#338-347) does not use the value returned by external calls:
+	-timelock.queueTransaction(target,value,signature,data,eta) (/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol#346-347)
+GovernorBravoDelegate.execute (/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol#350-362) does not use the value returned by external calls:
+	-timelock.executeTransaction.value(proposal.values[i])(proposal.targets[i],proposal.values[i],proposal.signatures[i],proposal.calldatas[i],proposal.eta) (/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol#357-360)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+GovernorBravoDelegate.execute has external calls inside a loop:
+	- timelock.executeTransaction.value(proposal.values[i])(proposal.targets[i],proposal.values[i],proposal.signatures[i],proposal.calldatas[i],proposal.eta) (/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol#357-360)
+GovernorBravoDelegate.cancel has external calls inside a loop:
+	- timelock.cancelTransaction(proposal.targets[i],proposal.values[i],proposal.signatures[i],proposal.calldatas[i],proposal.eta) (/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol#378)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+GovernorBravoDelegate.queueOrRevertInternal (/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol#338-347) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(! timelock.queuedTransactions(keccak256(bytes)(abi.encode(target,value,signature,data,eta))),GovernorBravo::queueOrRevertInternal: identical proposal action already queued at eta) (/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol#343-346)
+GovernorBravoDelegate.state (/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol#404-430) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp >= add256(proposal.eta,timelock.GRACE_PERIOD()) (/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol#425-430)
+GovernorBravoDelegate.add256 (/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(c >= a,addition overflow) (/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+GovernorBravoDelegate.getChainIdInternal uses assembly (/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol)
+	- /sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+GovernorBravoDelegatorStorage.implementation should be constant (/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol#80)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Different versions of Solidity is used in /sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol:
+	- Version used: ['ABIEncoderV2', '^0.5.16']
+	- /sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol#23-26 declares pragma solidity^0.5.16
+	- /sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol#26-27 declares pragma experimentalABIEncoderV2
+	- /sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol#216 declares pragma solidity^0.5.16
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#different-pragma-directives-are-used[0m
+INFO:Detectors:[92m
+GovernorBravoDelegate.initialize (/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol#256-274) should be declared external
+GovernorBravoDelegate.propose (/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol#281-327) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol:
+	- pragma solidity^0.5.16 (/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol#23-26): it allows old versions
+	- pragma solidity^0.5.16 (/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol#216): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'TimelockInterface.GRACE_PERIOD' (/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol#191) is not in mixedCase
+Function 'GovernorBravoDelegate._setVotingDelay' (/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol#497-503) is not in mixedCase
+Function 'GovernorBravoDelegate._setVotingPeriod' (/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol#509-515) is not in mixedCase
+Function 'GovernorBravoDelegate._setProposalThreshold' (/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol#522-530) is not in mixedCase
+Function 'GovernorBravoDelegate._initiate' (/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol#537-544) is not in mixedCase
+Function 'GovernorBravoDelegate._setPendingAdmin' (/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol#555-566) is not in mixedCase
+Function 'GovernorBravoDelegate._acceptAdmin' (/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol#573-592) is not in mixedCase
+Constant 'GovernorBravoDelegate.quorumVotes' (/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol#240-241) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'GovernorBravoDelegate.proposalMaxOperations' (/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol#243) is not in UPPER_CASE_WITH_UNDERSCORES
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xa8a9f82b9c751114d892f3a415fba3b1c6db18a1.sol analyzed (7 contracts), 30 result(s) found

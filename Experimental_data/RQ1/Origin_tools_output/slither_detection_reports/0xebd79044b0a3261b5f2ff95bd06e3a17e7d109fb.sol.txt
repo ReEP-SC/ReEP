@@ -1,0 +1,137 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol:
+/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol:55:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function GuidedByRoles(IRightAndRoles _rightAndRoles) public {
+
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol:450:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function Token(ICreator _creator) GuidedByRoles(_creator.rightAndRoles()) public {}
+
+    ^---------------------------------------------------------------------------------^
+
+INFO:Detectors:[92m
+Reentrancy in BurnableToken.burn (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#427-461):
+	External calls:
+	- require(bool)(rightAndRoles.onlyRoles(msg.sender,1)) (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#429)
+	State variables written after the call(s):
+	- balances (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#441-449)
+	- totalSupply_ (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#449-451)
+Reentrancy in FreezingToken.freezeTokens (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#835-843):
+	External calls:
+	- require(bool)(rightAndRoles.onlyRoles(msg.sender,1)) (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#837)
+	State variables written after the call(s):
+	- freezedTokens (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#839-841)
+	- freezedTokens (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#841-843)
+Reentrancy in FreezingToken.masFreezedTokens (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#843-875):
+	External calls:
+	- onlyAdmin() (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#853-855)
+	State variables written after the call(s):
+	- freezedTokens (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#865-869)
+	- freezedTokens (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#870-875)
+Reentrancy in MintableToken.mint (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#719-731):
+	External calls:
+	- require(bool)(rightAndRoles.onlyRoles(msg.sender,1)) (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#721-723)
+	State variables written after the call(s):
+	- balances (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#725-727)
+	- totalSupply_ (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#723-725)
+Reentrancy in MigratableToken.setMigrationAgent (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#339-355):
+	External calls:
+	- require(bool)(rightAndRoles.onlyRoles(msg.sender,1)) (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#347-349)
+	State variables written after the call(s):
+	- migrationAgent (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#353-355)
+Reentrancy in Pausable.setPause (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#183-213):
+	External calls:
+	- require(bool)(rightAndRoles.onlyRoles(msg.sender,1)) (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#187-191)
+	State variables written after the call(s):
+	- paused (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#195)
+	- paused (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#211)
+Reentrancy in Pausable.setUnpausedWallet (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#167-179):
+	External calls:
+	- onlyAdmin() (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#177)
+	State variables written after the call(s):
+	- unpausedWallet (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#177)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+IFinancialStrategy.freeCash (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#41-43) should be declared external
+MigrationAgent.migrateFrom (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#99-107) should be declared external
+Pausable.setUnpausedWallet (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#167-179) should be declared external
+Pausable.setPause (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#183-213) should be declared external
+ERC20Basic.totalSupply (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#213-215) should be declared external
+BasicToken.totalSupply (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#267-271) should be declared external
+StandardToken.allowance (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#607-611) should be declared external
+ERC20.allowance (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#227-229) should be declared external
+ERC20.approve (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#231-237) should be declared external
+StandardToken.approve (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#583-589) should be declared external
+MigratableToken.setMigrationAgent (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#339-355) should be declared external
+MigratableToken.migrateAll (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#379-405) should be declared external
+MigratableToken.migrate (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#409-417) should be declared external
+BurnableToken.burn (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#427-461) should be declared external
+StandardToken.increaseApproval (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#635-645) should be declared external
+StandardToken.decreaseApproval (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#663-695) should be declared external
+MintableToken.mint (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#719-731) should be declared external
+IToken.setUnpausedWallet (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#733-735) should be declared external
+IToken.mint (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#735) should be declared external
+IToken.totalSupply (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#735-737) should be declared external
+IToken.setPause (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#737-739) should be declared external
+IToken.setMigrationAgent (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#739) should be declared external
+IToken.migrateAll (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#739-747) should be declared external
+IToken.burn (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#747) should be declared external
+IToken.defrostDate (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#757) should be declared external
+FreezingToken.defrostDate (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#821-833) should be declared external
+FreezingToken.freezeTokens (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#835-843) should be declared external
+IToken.freezeTokens (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#757-765) should be declared external
+FreezingToken.masFreezedTokens (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#843-875) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol:
+	- pragma solidity^0.4.21 (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#1): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'GuidedByRoles.GuidedByRoles' (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#109-123) is not in mixedCase
+Parameter '_rightAndRoles' of GuidedByRoles.GuidedByRoles (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#111-113) is not in mixedCase
+Parameter '_wallet' of Pausable.setUnpausedWallet (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#169) is not in mixedCase
+Parameter '_owner' of BasicToken.balanceOf (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#319-323) is not in mixedCase
+Parameter '_to' of BasicToken.transfer (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#279-283) is not in mixedCase
+Parameter '_value' of BasicToken.transfer (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#283) is not in mixedCase
+Parameter '_migrationAgent' of MigratableToken.setMigrationAgent (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#339-347) is not in mixedCase
+Parameter '_holder' of MigratableToken.migrateInternal (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#359) is not in mixedCase
+Parameter '_holders' of MigratableToken.migrateAll (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#381-387) is not in mixedCase
+Parameter '_beneficiary' of BurnableToken.burn (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#427) is not in mixedCase
+Parameter '_value' of BurnableToken.burn (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#427-429) is not in mixedCase
+Parameter '_owner' of StandardToken.allowance (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#609) is not in mixedCase
+Parameter '_spender' of StandardToken.allowance (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#609) is not in mixedCase
+Parameter '_from' of StandardToken.transferFrom (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#535-537) is not in mixedCase
+Parameter '_to' of StandardToken.transferFrom (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#537) is not in mixedCase
+Parameter '_value' of StandardToken.transferFrom (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#537) is not in mixedCase
+Parameter '_spender' of StandardToken.approve (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#583-585) is not in mixedCase
+Parameter '_value' of StandardToken.approve (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#585) is not in mixedCase
+Parameter '_spender' of StandardToken.increaseApproval (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#635) is not in mixedCase
+Parameter '_addedValue' of StandardToken.increaseApproval (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#635) is not in mixedCase
+Parameter '_spender' of StandardToken.decreaseApproval (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#667) is not in mixedCase
+Parameter '_subtractedValue' of StandardToken.decreaseApproval (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#667) is not in mixedCase
+Parameter '_to' of MintableToken.mint (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#719-721) is not in mixedCase
+Parameter '_amount' of MintableToken.mint (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#721) is not in mixedCase
+Parameter '_to' of PausableToken.transfer (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#779) is not in mixedCase
+Parameter '_value' of PausableToken.transfer (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#779-781) is not in mixedCase
+Parameter '_from' of PausableToken.transferFrom (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#793) is not in mixedCase
+Parameter '_to' of PausableToken.transferFrom (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#793) is not in mixedCase
+Parameter '_value' of PausableToken.transferFrom (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#795) is not in mixedCase
+Struct 'FreezingToken.freeze' (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#805-807) is not in CapWords
+Parameter '_to' of FreezingToken.transfer (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#897) is not in mixedCase
+Parameter '_value' of FreezingToken.transfer (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#897) is not in mixedCase
+Parameter '_from' of FreezingToken.transferFrom (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#903) is not in mixedCase
+Parameter '_to' of FreezingToken.transferFrom (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#903) is not in mixedCase
+Parameter '_value' of FreezingToken.transferFrom (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#903-905) is not in mixedCase
+Parameter '_beneficiary' of FreezingToken.freezedTokenOf (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#810-811) is not in mixedCase
+Parameter '_beneficiary' of FreezingToken.defrostDate (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#821-823) is not in mixedCase
+Parameter '_beneficiary' of FreezingToken.freezeTokens (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#835) is not in mixedCase
+Parameter '_amount' of FreezingToken.freezeTokens (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#835) is not in mixedCase
+Parameter '_when' of FreezingToken.freezeTokens (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#835) is not in mixedCase
+Parameter '_beneficiary' of FreezingToken.masFreezedTokens (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#850-853) is not in mixedCase
+Parameter '_amount' of FreezingToken.masFreezedTokens (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#853) is not in mixedCase
+Parameter '_when' of FreezingToken.masFreezedTokens (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#853) is not in mixedCase
+Parameter '_to' of FreezingToken.transferAndFreeze (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#875-877) is not in mixedCase
+Parameter '_value' of FreezingToken.transferAndFreeze (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#877) is not in mixedCase
+Parameter '_when' of FreezingToken.transferAndFreeze (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol#877) is not in mixedCase
+Function 'Token.Token' (/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xebd79044b0a3261b5f2ff95bd06e3a17e7d109fb.sol analyzed (19 contracts), 84 result(s) found

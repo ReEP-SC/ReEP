@@ -1,0 +1,140 @@
+INFO:Detectors:[91m
+__unstable__TokenVault.transferFunds (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#1137-1146) sends eth to arbitrary user
+	Dangerous calls:
+	- to.transfer(amount) (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#1144-1146)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[93m
+Address.isContract (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#185-198) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+Crowdsale._deliverTokens (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#931-936) does not use the value returned by external calls:
+	-_token.transfer(beneficiary,tokenAmount) (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#935-936)
+__unstable__TokenVault.transferToken (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#1134-1137) does not use the value returned by external calls:
+	-token.transfer(to,amount) (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#1136-1137)
+MoonSale._forwardFundsToken (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol) does not use the value returned by external calls:
+	-erc20Token.transferFrom(_msgSender(),address(_vault),_value) (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol)
+MoonSale.supplyVault (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#1244-1253) does not use the value returned by external calls:
+	-token().transferFrom(_msgSender(),address(_vault),amount) (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#1246-1251)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Crowdsale.constructor.token (local variable @ /sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#828-830) shadows:
+	- Crowdsale.token (function @ /sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#865-866)
+Crowdsale.isTokenAccepted.token (local variable @ /sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#849) shadows:
+	- Crowdsale.token (function @ /sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#865-866)
+Crowdsale.updateTokenRate.token (local variable @ /sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#855-856) shadows:
+	- Crowdsale.token (function @ /sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#865-866)
+Crowdsale.rate.token (local variable @ /sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#860) shadows:
+	- Crowdsale.token (function @ /sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#865-866)
+TimedCrowdsale.constructor.openingTime (local variable @ /sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#1007) shadows:
+	- TimedCrowdsale.openingTime (function @ /sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#1022-1024)
+TimedCrowdsale.constructor.closingTime (local variable @ /sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#1007) shadows:
+	- TimedCrowdsale.closingTime (function @ /sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#1026-1030)
+MoonSale.constructor.token (local variable @ /sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#1160) shadows:
+	- Crowdsale.token (function @ /sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#865-866)
+MoonSale.extendTime.openingTime (local variable @ /sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#1171) shadows:
+	- TimedCrowdsale.openingTime (function @ /sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#1022-1024)
+MoonSale.extendTime.closingTime (local variable @ /sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#1171) shadows:
+	- TimedCrowdsale.closingTime (function @ /sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#1026-1030)
+MoonSale.getReservedByAddress.token (local variable @ /sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#1235) shadows:
+	- Crowdsale.token (function @ /sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#865-866)
+MoonSale.depriveToken.token (local variable @ /sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#1258) shadows:
+	- Crowdsale.token (function @ /sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#865-866)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+Reentrancy in Crowdsale.buyTokensWithTokens (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#876-890):
+	External calls:
+	- require(bool,string)(sentTokens <= erc20Token.allowance(beneficiary,address(this)),Insufficient Funds) (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#884-886)
+	State variables written after the call(s):
+	- _sold (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#887)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+TimedCrowdsale.constructor (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#1007-1020) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(openingTime >= block.timestamp,TimedCrowdsale: opening time is before current time) (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#1011-1014)
+TimedCrowdsale.isOpen (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#1032-1036) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp >= _openingTime && block.timestamp <= _closingTime (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#1035-1036)
+TimedCrowdsale.hasClosed (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#1043-1050) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp > _closingTime (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#1048-1050)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+Address.isContract uses assembly (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#185-198)
+	- /sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#195-196
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+ManagerRole.addManager (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#381-386) should be declared external
+ManagerRole.renounceManager (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#386-389) should be declared external
+SupporterRole.addSupporter (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#421-427) should be declared external
+SupporterRole.renounceSupporter (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#427-430) should be declared external
+PauserRole.addPauser (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#467-468) should be declared external
+PauserRole.renouncePauser (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#468-470) should be declared external
+Pausable.paused (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#520-522) should be declared external
+Pausable.pause (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#542-543) should be declared external
+Pausable.unpause (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#547-552) should be declared external
+Ownable.renounceOwnership (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#606-613) should be declared external
+Ownable.transferOwnership (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#615-617) should be declared external
+Crowdsale.updateTokenRate (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#855-859) should be declared external
+Crowdsale.rate (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#860-865) should be declared external
+Crowdsale.sold (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#868-870) should be declared external
+Crowdsale.buyTokensWithTokens (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#876-890) should be declared external
+Crowdsale.checkRate (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#890-892) should be declared external
+TimedCrowdsale.openingTime (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#1022-1024) should be declared external
+TimedCrowdsale.closingTime (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#1026-1030) should be declared external
+Secondary.primary (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#1100-1106) should be declared external
+Secondary.transferPrimary (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#1110-1122) should be declared external
+__unstable__TokenVault.transferToken (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#1134-1137) should be declared external
+__unstable__TokenVault.transferFunds (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#1137-1146) should be declared external
+MoonSale.extendTime (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#1170-1174) should be declared external
+MoonSale.delegateSetSponsor (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#1176-1188) should be declared external
+MoonSale.setSponsor (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#1192-1203) should be declared external
+MoonSale.withdraw (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#1205-1222) should be declared external
+MoonSale.getReserved (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#1225-1233) should be declared external
+MoonSale.getReservedByAddress (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#1235-1239) should be declared external
+MoonSale.supplyVault (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#1244-1253) should be declared external
+MoonSale.depriveToken (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#1258-1262) should be declared external
+MoonSale.depriveFunds (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#1265-1270) should be declared external
+MoonSale.personalStats (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#1272-1284) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol:
+	- pragma solidity^0.5.5 (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#5-7): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Low level call in Address.sendValue (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#226-242):
+	-(success) = recipient.call.value(amount)() /sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#233-237
+Low level call in SafeERC20.callOptionalReturn (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#669-704):
+	-(success,returndata) = address(token).call(data) /sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#690-693
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Function 'Context._msgSender' (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#346-349) is not in mixedCase
+Function 'Context._msgData' (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#349-359) is not in mixedCase
+Function 'ManagerRole._addManager' (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#389-394) is not in mixedCase
+Function 'ManagerRole._removeManager' (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#395-399) is not in mixedCase
+Function 'SupporterRole._addSupporter' (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#430-438) is not in mixedCase
+Function 'SupporterRole._removeSupporter' (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#438-443) is not in mixedCase
+Function 'PauserRole._addPauser' (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#470-472) is not in mixedCase
+Function 'PauserRole._removePauser' (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#472-475) is not in mixedCase
+Function 'Ownable._transferOwnership' (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#619-625) is not in mixedCase
+Parameter '_rate' of Crowdsale.updateTokenRate (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#856) is not in mixedCase
+Parameter '_adapter' of Crowdsale.updateTokenRate (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#856) is not in mixedCase
+Parameter '_erc20Token' of Crowdsale.buyTokensWithTokens (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#877) is not in mixedCase
+Function 'Crowdsale._preValidatePurchase' (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#906-915) is not in mixedCase
+Function 'Crowdsale._forwardFundsToken' (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#921-925) is not in mixedCase
+Function 'Crowdsale._deliverTokens' (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#931-936) is not in mixedCase
+Function 'Crowdsale._processPurchase' (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#940-948) is not in mixedCase
+Function 'Crowdsale._updatePurchasingState' (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#959-963) is not in mixedCase
+Function 'Crowdsale._getTokenAmount' (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#974-979) is not in mixedCase
+Parameter '_erc20Token' of Crowdsale._getTokenAmount (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#975) is not in mixedCase
+Function 'TimedCrowdsale._preValidatePurchase' (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#1058-1064) is not in mixedCase
+Function 'TimedCrowdsale._extendTime' (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#1072-1080) is not in mixedCase
+Contract '__unstable__TokenVault' (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#1132-1146) is not in CapWords
+Function 'MoonSale._preValidatePurchase' (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol) is not in mixedCase
+Parameter '_value' of MoonSale._preValidatePurchase (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol) is not in mixedCase
+Function 'MoonSale._forwardFundsToken' (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol) is not in mixedCase
+Parameter '_value' of MoonSale._forwardFundsToken (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol) is not in mixedCase
+Function 'MoonSale._processPurchase' (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#1295-1298) is not in mixedCase
+Function 'MoonSale._updatePurchasingState' (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol) is not in mixedCase
+Variable 'MoonSale._users' (/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol#1153-1157) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xb2740f16197c4a6b28769ff262adf634dad9b8c4.sol analyzed (17 contracts), 86 result(s) found

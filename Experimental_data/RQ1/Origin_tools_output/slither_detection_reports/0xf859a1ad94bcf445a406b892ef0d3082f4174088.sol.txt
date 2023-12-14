@@ -1,0 +1,181 @@
+INFO:Detectors:[91m
+Maximillion.repayBehalfExplicit (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol) sends eth to arbitrary user
+	Dangerous calls:
+	- cEther_.repayBorrowBehalf.value(borrows)(borrower) (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[93m
+EIP20NonStandardInterface (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#696-760) has incorrect ERC20 function interface(s):
+	-transfer (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#719)
+	-transferFrom (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#728-729)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[93m
+CEther.getCashPrior (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#2567-2573) uses a dangerous strict equality:
+	- require(bool)(err == MathError.NO_ERROR)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Reentrancy in CToken._reduceReserves (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#2280-2293):
+	External calls:
+	- error = accrueInterest() (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#2281)
+	State variables written after the call(s):
+	- totalReserves (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#2291-2293)
+Reentrancy in CToken._setComptroller (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#2208-2228):
+	External calls:
+	- require(bool,string)(newComptroller.isComptroller(),marker method returned false) (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#2216-2219)
+	State variables written after the call(s):
+	- comptroller (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#2220)
+Reentrancy in CToken._setInterestRateModel (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#2352-2365):
+	External calls:
+	- error = accrueInterest() (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#2353-2354)
+	- _setInterestRateModelFresh(newInterestRateModel) (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#2362-2365)
+	State variables written after the call(s):
+	- interestRateModel (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#2362-2365)
+Reentrancy in CToken._setInterestRateModelFresh (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#2369-2403):
+	External calls:
+	- require(bool,string)(newInterestRateModel.isInterestRateModel(),marker method returned false) (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#2394-2395)
+	State variables written after the call(s):
+	- interestRateModel (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#2397)
+Reentrancy in CToken._setReserveFactor (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#2233-2245):
+	External calls:
+	- error = accrueInterest() (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#2235)
+	State variables written after the call(s):
+	- reserveFactorMantissa (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#2244-2245)
+Reentrancy in CToken.accrueInterest (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1425-1498):
+	External calls:
+	- (vars.opaqueErr,vars.borrowRateMantissa) = interestRateModel.getBorrowRate(getCashPrior(),totalBorrows,totalReserves) (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1428-1429)
+	State variables written after the call(s):
+	- totalBorrows (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1495)
+	- totalReserves (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1495-1496)
+Reentrancy in CToken.borrowInternal (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1769-1781):
+	External calls:
+	- error = accrueInterest() (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1775)
+	- borrowFresh(msg.sender,borrowAmount) (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1781)
+	State variables written after the call(s):
+	- totalBorrows (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1781)
+Reentrancy in CToken.liquidateBorrowInternal (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1987-2011):
+	External calls:
+	- error = accrueInterest() (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1992)
+	- error = cTokenCollateral.accrueInterest() (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1997)
+	- liquidateBorrowFresh(msg.sender,borrower,repayAmount,cTokenCollateral) (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#2008-2011)
+	State variables written after the call(s):
+	- totalBorrows (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#2008-2011)
+Reentrancy in CToken.redeemFresh (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1660-1764):
+	External calls:
+	- allowed = comptroller.redeemAllowed(address(this),redeemer,vars.redeemTokens) (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1704-1705)
+	State variables written after the call(s):
+	- totalSupply (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1755)
+Reentrancy in CToken.repayBorrowBehalfInternal (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1882-1894):
+	External calls:
+	- error = accrueInterest() (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1885)
+	- repayBorrowFresh(msg.sender,borrower,repayAmount) (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1893)
+	State variables written after the call(s):
+	- totalBorrows (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1893)
+Reentrancy in CToken.repayBorrowInternal (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1866-1874):
+	External calls:
+	- error = accrueInterest() (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1868)
+	- repayBorrowFresh(msg.sender,msg.sender,repayAmount) (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1874)
+	State variables written after the call(s):
+	- totalBorrows (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1874)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+vars in CToken.repayBorrowFresh (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1922-1923) is a local variable never initialiazed
+vars in CToken.mintFresh (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1544) is a local variable never initialiazed
+vars in CToken.borrowFresh (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1808) is a local variable never initialiazed
+vars in CToken.redeemFresh (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1665-1668) is a local variable never initialiazed
+vars in CToken.accrueInterest (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1427) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[92m
+Reentrancy in CToken.accrueInterest (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1425-1498):
+	External calls:
+	- (vars.opaqueErr,vars.borrowRateMantissa) = interestRateModel.getBorrowRate(getCashPrior(),totalBorrows,totalReserves) (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1428-1429)
+	State variables written after the call(s):
+	- accrualBlockNumber (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1494)
+	- borrowIndex (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1494-1495)
+Reentrancy in CToken.borrowFresh (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1790-1860):
+	External calls:
+	- allowed = comptroller.borrowAllowed(address(this),borrower,borrowAmount) (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1791-1795)
+	State variables written after the call(s):
+	- accountBorrows (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1847)
+	- accountBorrows (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1847-1849)
+	- totalBorrows (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1849)
+Reentrancy in CToken.constructor (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1030-1059):
+	External calls:
+	- err = _setComptroller(comptroller_) (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1045-1046)
+	State variables written after the call(s):
+	- accrualBlockNumber (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1049)
+	- borrowIndex (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1050-1051)
+Reentrancy in CToken.constructor (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1030-1059):
+	External calls:
+	- err = _setComptroller(comptroller_) (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1045-1046)
+	- err = _setInterestRateModelFresh(interestRateModel_) (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1051-1054)
+	State variables written after the call(s):
+	- decimals (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1059)
+	- name (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1056)
+	- symbol (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1057-1059)
+Reentrancy in CToken.mintFresh (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1531-1605):
+	External calls:
+	- allowed = comptroller.mintAllowed(address(this),minter,mintAmount) (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1535-1536)
+	State variables written after the call(s):
+	- accountTokens (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1599-1601)
+	- totalSupply (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1599)
+Reentrancy in CToken.redeemFresh (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1660-1764):
+	External calls:
+	- allowed = comptroller.redeemAllowed(address(this),redeemer,vars.redeemTokens) (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1704-1705)
+	State variables written after the call(s):
+	- accountTokens (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1755-1757)
+Reentrancy in CToken.repayBorrowFresh (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1910-1981):
+	External calls:
+	- allowed = comptroller.repayBorrowAllowed(address(this),payer,borrower,repayAmount) (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1913)
+	State variables written after the call(s):
+	- accountBorrows (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1974-1975)
+	- accountBorrows (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1975-1976)
+	- totalBorrows (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1976-1977)
+Reentrancy in CToken.seize (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#2099-2153):
+	External calls:
+	- allowed = comptroller.seizeAllowed(address(this),msg.sender,liquidator,borrower,seizeTokens) (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#2106-2107)
+	State variables written after the call(s):
+	- accountTokens (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#2140-2142)
+	- accountTokens (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#2142-2144)
+Reentrancy in CToken.transferTokens (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1073-1133):
+	External calls:
+	- allowed = comptroller.transferAllowed(address(this),src,dst,tokens) (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1078-1079)
+	State variables written after the call(s):
+	- accountTokens (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1122)
+	- accountTokens (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1122-1123)
+	- transferAllowances (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#1126)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+CToken._setInterestRateModel (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#2352-2365) should be declared external
+Maximillion.repayBehalf (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol:
+	- pragma solidity^0.5.8 (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#11-13): it allows old versions
+	- pragma solidity^0.5.8 (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#93-94): it allows old versions
+	- pragma solidity^0.5.8 (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#307): it allows old versions
+	- pragma solidity^0.5.8 (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#394-395): it allows old versions
+	- pragma solidity^0.5.8 (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#627): it allows old versions
+	- pragma solidity^0.5.8 (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#687): it allows old versions
+	- pragma solidity^0.5.8 (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#760-761): it allows old versions
+	- pragma solidity^0.5.8 (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#791): it allows old versions
+	- pragma solidity^0.5.8 (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#848): it allows old versions
+	- pragma solidity^0.5.8 (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#2440): it allows old versions
+	- pragma solidity^0.5.8 (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Constant 'Exponential.expScale' (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#408) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'Exponential.halfExpScale' (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#408-409) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'Exponential.mantissaOne' (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#409) is not in UPPER_CASE_WITH_UNDERSCORES
+Function 'CToken._setPendingAdmin' (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#2169-2185) is not in mixedCase
+Function 'CToken._acceptAdmin' (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#2190-2202) is not in mixedCase
+Function 'CToken._setComptroller' (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#2208-2228) is not in mixedCase
+Function 'CToken._setReserveFactor' (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#2233-2245) is not in mixedCase
+Function 'CToken._setReserveFactorFresh' (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#2250-2272) is not in mixedCase
+Function 'CToken._reduceReserves' (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#2280-2293) is not in mixedCase
+Function 'CToken._reduceReservesFresh' (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#2299-2340) is not in mixedCase
+Function 'CToken._setInterestRateModel' (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#2352-2365) is not in mixedCase
+Function 'CToken._setInterestRateModelFresh' (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#2369-2403) is not in mixedCase
+Constant 'CToken.isCToken' (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#863) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'CToken.borrowRateMaxMantissa' (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#878) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'CToken.reserveFactorMaxMantissa' (/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol#883-885) is not in UPPER_CASE_WITH_UNDERSCORES
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xf859a1ad94bcf445a406b892ef0d3082f4174088.sol analyzed (12 contracts), 46 result(s) found

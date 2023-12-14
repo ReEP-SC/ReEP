@@ -1,0 +1,138 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol:
+/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol:6:1: Warning: Experimental features are turned on. Do not use experimental features on live deployments.
+pragma experimental ABIEncoderV2;
+^-------------------------------^
+/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol:185:5: Warning: Function state mutability can be restricted to pure
+    function quorumVotes() public view returns (uint256) { return 100000 * 10**24; } // 4% of YAM
+    ^------------------------------------------------------------------------------^
+/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol:188:5: Warning: Function state mutability can be restricted to pure
+    function proposalThreshold() public view returns (uint256) { return 25000 * 10**24; } // 1% of YAM
+    ^-----------------------------------------------------------------------------------^
+/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol:349:5: Warning: Function state mutability can be restricted to view
+    function getPriorVotes(address account, uint256 blockNumber)
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol:364:5: Warning: Function state mutability can be restricted to view
+    function getCurrentVotes(address account)
+    ^ (Relevant source part starts here and spans across multiple lines).
+
+INFO:Detectors:[91m
+DualGovernorAlpha.execute (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#488-503) sends eth to arbitrary user
+	Dangerous calls:
+	- timelock.executeTransaction.value(proposal.values[i])(proposal.targets[i],proposal.values[i],proposal.signatures[i],proposal.calldatas[i],proposal.eta) (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#499-500)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[93m
+DualGovernorAlpha.getChainId (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#667-668) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+Reentrancy in DualGovernorAlpha._castVote (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#618-649):
+	External calls:
+	- require(bool,string)(state(proposalId) == ProposalState.Active,GovernorAlpha::_castVote: voting is closed) (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#623-626)
+	- votes = getPriorVotes(voter,proposal.startBlock) (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#636-639)
+	State variables written after the call(s):
+	- proposals (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#639-640)
+	- proposals (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#643)
+Reentrancy in DualGovernorAlpha.cancel (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#503-529):
+	External calls:
+	- state = state(proposalId) (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#504)
+	- require(bool,string)(msg.sender == guardian || getPriorVotes(proposal.proposer,sub256(block.number,1)) < proposalThreshold(),GovernorAlpha::cancel: proposer above threshold) (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#510-516)
+	State variables written after the call(s):
+	- proposals (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#517)
+Reentrancy in DualGovernorAlpha.execute (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#488-503):
+	External calls:
+	- require(bool,string)(state(proposalId) == ProposalState.Queued,GovernorAlpha::execute: proposal can only be executed if it is queued) (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#490-496)
+	State variables written after the call(s):
+	- proposals (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#497)
+Reentrancy in DualGovernorAlpha.propose (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#386-443):
+	External calls:
+	- require(bool,string)(getPriorVotes(msg.sender,sub256(block.number,1)) >= proposalThreshold(),GovernorAlpha::propose: proposer votes below proposal threshold) (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#388-389)
+	- proposersLatestProposalState = state(latestProposalId) (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#395-398)
+	State variables written after the call(s):
+	- latestProposalIds (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#438)
+	- proposalCount (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#413-414)
+	- proposals (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#435-437)
+Reentrancy in DualGovernorAlpha.queue (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#443-471):
+	External calls:
+	- require(bool,string)(state(proposalId) == ProposalState.Succeeded,GovernorAlpha::queue: proposal can only be queued if it is succeeded) (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#445-450)
+	- eta = add256(block.timestamp,timelock.delay()) (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#454-456)
+	State variables written after the call(s):
+	- proposals (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#468-469)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+DualGovernorAlpha.addIncentivizer (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#332-346) does not use the value returned by external calls:
+	-Incentivizer(incentivizer).getPriorVotes(guardian,block.number - 1) (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#339-342)
+DualGovernorAlpha._queueOrRevert (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#472-488) does not use the value returned by external calls:
+	-timelock.queueTransaction(target,value,signature,data,eta) (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#488)
+DualGovernorAlpha.execute (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#488-503) does not use the value returned by external calls:
+	-timelock.executeTransaction.value(proposal.values[i])(proposal.targets[i],proposal.values[i],proposal.signatures[i],proposal.calldatas[i],proposal.eta) (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#499-500)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+DualGovernorAlpha.cancel.state (local variable @ /sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#504) shadows:
+	- DualGovernorAlpha.state (function @ /sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#544-582)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+DualGovernorAlpha.getPriorVotes has external calls inside a loop:
+	- votes = SafeMath.add(votes,Incentivizer(incentivizers[i]).getPriorVotes(account,blockNumber)) (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#370-371)
+DualGovernorAlpha.getCurrentVotes has external calls inside a loop:
+	- votes = SafeMath.add(votes,Incentivizer(incentivizers[i]).getCurrentVotes(account)) (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#386)
+DualGovernorAlpha.execute has external calls inside a loop:
+	- timelock.executeTransaction.value(proposal.values[i])(proposal.targets[i],proposal.values[i],proposal.signatures[i],proposal.calldatas[i],proposal.eta) (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#499-500)
+DualGovernorAlpha.cancel has external calls inside a loop:
+	- timelock.cancelTransaction(proposal.targets[i],proposal.values[i],proposal.signatures[i],proposal.calldatas[i],proposal.eta) (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#521-525)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in DualGovernorAlpha.addIncentivizer (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#332-346):
+	External calls:
+	- Incentivizer(incentivizer).getPriorVotes(guardian,block.number - 1) (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#339-342)
+	State variables written after the call(s):
+	- incentivizers (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#343-344)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+DualGovernorAlpha._queueOrRevert (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#472-488) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(! timelock.queuedTransactions(keccak256(bytes)(abi.encode(target,value,signature,data,eta))),GovernorAlpha::_queueOrRevert: proposal action already queued at eta) (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#480-488)
+DualGovernorAlpha.state (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#544-582) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp >= add256(proposal.eta,timelock.GRACE_PERIOD()) (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#574-582)
+DualGovernorAlpha.add256 (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#664-666) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(c >= a,addition overflow) (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#666)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+DualGovernorAlpha.getChainId uses assembly (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#667-668)
+	- /sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#668
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+Different versions of Solidity is used in /sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol:
+	- Version used: ['ABIEncoderV2', '^0.5.15']
+	- /sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#5-6 declares pragma solidity^0.5.15
+	- /sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#6-8 declares pragma experimentalABIEncoderV2
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#different-pragma-directives-are-used[0m
+INFO:Detectors:[92m
+DualGovernorAlpha.getIncentivizers (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#328-332) should be declared external
+DualGovernorAlpha.addIncentivizer (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#332-346) should be declared external
+DualGovernorAlpha.removeIncentivizer (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#346-357) should be declared external
+DualGovernorAlpha.getCurrentVotes (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#371-386) should be declared external
+DualGovernorAlpha.propose (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#386-443) should be declared external
+DualGovernorAlpha.queue (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#443-471) should be declared external
+DualGovernorAlpha.execute (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#488-503) should be declared external
+DualGovernorAlpha.cancel (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#503-529) should be declared external
+DualGovernorAlpha.getActions (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#529-540) should be declared external
+DualGovernorAlpha.getReceipt (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#540-544) should be declared external
+DualGovernorAlpha.castVote (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#582-588) should be declared external
+DualGovernorAlpha.castVoteBySig (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#590-617) should be declared external
+DualGovernorAlpha.__acceptAdmin (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#650-656) should be declared external
+DualGovernorAlpha.__abdicate (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#656-664) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol:
+	- pragma solidity^0.5.15 (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#5-6): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'DualGovernorAlpha._queueOrRevert' (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#472-488) is not in mixedCase
+Function 'DualGovernorAlpha._castVote' (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#618-649) is not in mixedCase
+Function 'DualGovernorAlpha.__acceptAdmin' (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#650-656) is not in mixedCase
+Function 'DualGovernorAlpha.__abdicate' (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#656-664) is not in mixedCase
+Function 'TimelockInterface.GRACE_PERIOD' (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol#672) is not in mixedCase
+Function 'YAMInterface._acceptGov' (/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x0da45604e91948197556920f2bb0db2e6f8a9a92.sol analyzed (5 contracts), 42 result(s) found

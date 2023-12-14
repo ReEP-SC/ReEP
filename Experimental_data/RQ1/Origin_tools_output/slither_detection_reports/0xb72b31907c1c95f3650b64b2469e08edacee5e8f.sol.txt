@@ -1,0 +1,139 @@
+INFO:Detectors:[91m
+CheckpointingToken.balancesHistory_ (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#277-281) is never initialized. It is used in:
+	- balanceOfAt (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#308-320)
+	- initialize (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#484-516)
+	- burn (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#531-560)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-state-variables[0m
+INFO:Detectors:[93m
+Reentrancy in BZRXVestingToken._claim (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#664-678):
+	External calls:
+	- BZRX.transfer(_owner,vested) (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#672-673)
+	State variables written after the call(s):
+	- lastClaimTime_ (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#677)
+Reentrancy in BZRXVestingToken.initialize (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#484-516):
+	External calls:
+	- BZRX.transferFrom(msg.sender,address(this),startingBalance_) (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#507-514)
+	State variables written after the call(s):
+	- isInitialized_ (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#516)
+Reentrancy in BZRXVestingToken.transferFrom (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#516-526):
+	External calls:
+	- _claim(_from) (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#520)
+	- _claim(_to) (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#524)
+	State variables written after the call(s):
+	- lastClaimTime_ (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#524)
+	- totalClaimed (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#524)
+	- userTotalClaimed_ (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#524)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+BZRXVestingToken.name (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#447) shadows:
+	- IERC20.name (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#14-15)
+BZRXVestingToken.decimals (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#448) shadows:
+	- IERC20.decimals (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#15-16)
+BZRXVestingToken.symbol (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#447-448) shadows:
+	- IERC20.symbol (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#16-17)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variable-shadowing-from-abstract-contracts[0m
+INFO:Detectors:[93m
+BZRXVestingToken.initialize (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#484-516) does not use the value returned by external calls:
+	-BZRX.transferFrom(msg.sender,address(this),startingBalance_) (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#507-514)
+BZRXVestingToken.rescue (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#565-575) does not use the value returned by external calls:
+	-BZRX.transfer(_receiver,_amount) (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#572-575)
+BZRXVestingToken._claim (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#664-678) does not use the value returned by external calls:
+	-BZRX.transfer(_owner,vested) (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#672-673)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+BZRXVestingToken.vestedBalanceOf._owner (local variable @ /sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#593) shadows:
+	- Ownable._owner (state variable @ /sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#65)
+BZRXVestingToken.vestingBalanceOf._owner (local variable @ /sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#608) shadows:
+	- Ownable._owner (state variable @ /sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#65)
+BZRXVestingToken.claimedBalanceOf._owner (local variable @ /sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#639) shadows:
+	- Ownable._owner (state variable @ /sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#65)
+BZRXVestingToken._claim._owner (local variable @ /sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#665-666) shadows:
+	- Ownable._owner (state variable @ /sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#65)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+Reentrancy in BZRXVestingToken.transferFrom (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#516-526):
+	External calls:
+	- _claim(_from) (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#520)
+	- _claim(_to) (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#524)
+	State variables written after the call(s):
+	- allowances_ (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#524-526)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+IERC20.decimals should be constant (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#15-16)
+IERC20.name should be constant (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#14-15)
+IERC20.symbol should be constant (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#16-17)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+IERC20.totalSupply (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#17-18) should be declared external
+CheckpointingToken.totalSupply (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#295-300) should be declared external
+BZRXVestingToken.totalSupply (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#575-579) should be declared external
+CheckpointingToken.balanceOf (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#300-308) should be declared external
+IERC20.balanceOf (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#18-19) should be declared external
+IERC20.allowance (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#19-20) should be declared external
+CheckpointingToken.allowance (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#321-328) should be declared external
+CheckpointingToken.approve (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#329-343) should be declared external
+IERC20.approve (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#20-21) should be declared external
+IERC20.transfer (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#21-22) should be declared external
+CheckpointingToken.transfer (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#344-349) should be declared external
+Ownable.owner (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#82-85) should be declared external
+Ownable.transferOwnership (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#103-109) should be declared external
+BZRXVestingToken.claim (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#527) should be declared external
+BZRXVestingToken.vestingBalanceOf (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#606-632) should be declared external
+BZRXVestingToken.claimedBalanceOf (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#637-643) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol:
+	- pragma solidity0.5.17 (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#10-13): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'Context._msgSender' (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#43-47) is not in mixedCase
+Function 'Context._msgData' (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#47-54) is not in mixedCase
+Function 'Ownable._transferOwnership' (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#110-119) is not in mixedCase
+Parameter '_self' of Checkpointing.addCheckpoint (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#157-158) is not in mixedCase
+Parameter '_time' of Checkpointing.addCheckpoint (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#158) is not in mixedCase
+Parameter '_value' of Checkpointing.addCheckpoint (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#158) is not in mixedCase
+Parameter '_self' of Checkpointing.getValueAt (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#183-184) is not in mixedCase
+Parameter '_time' of Checkpointing.getValueAt (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#184-185) is not in mixedCase
+Parameter '_self' of Checkpointing.lastUpdated (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#191) is not in mixedCase
+Parameter '_self' of Checkpointing.latestValue (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#203-204) is not in mixedCase
+Function 'Checkpointing._getValueAt' (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#216-268) is not in mixedCase
+Parameter '_self' of Checkpointing._getValueAt (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#216-217) is not in mixedCase
+Parameter '_time' of Checkpointing._getValueAt (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#217) is not in mixedCase
+Parameter '_owner' of CheckpointingToken.balanceOf (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#302) is not in mixedCase
+Parameter '_owner' of CheckpointingToken.allowance (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#321) is not in mixedCase
+Parameter '_spender' of CheckpointingToken.allowance (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#322) is not in mixedCase
+Parameter '_spender' of CheckpointingToken.approve (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#330-332) is not in mixedCase
+Parameter '_value' of CheckpointingToken.approve (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#332) is not in mixedCase
+Parameter '_to' of CheckpointingToken.transfer (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#345-346) is not in mixedCase
+Parameter '_value' of CheckpointingToken.transfer (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#346) is not in mixedCase
+Parameter '_from' of CheckpointingToken.transferFrom (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#350) is not in mixedCase
+Parameter '_to' of CheckpointingToken.transferFrom (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#350) is not in mixedCase
+Parameter '_value' of CheckpointingToken.transferFrom (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#350) is not in mixedCase
+Parameter '_owner' of CheckpointingToken.balanceOfAt (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#310-311) is not in mixedCase
+Parameter '_blockNumber' of CheckpointingToken.balanceOfAt (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#312) is not in mixedCase
+Function 'CheckpointingToken._getBlockNumber' (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#393-400) is not in mixedCase
+Function 'CheckpointingToken._getTimestamp' (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#400-407) is not in mixedCase
+Parameter '_from' of BZRXVestingToken.transferFrom (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#516) is not in mixedCase
+Parameter '_to' of BZRXVestingToken.transferFrom (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#517) is not in mixedCase
+Parameter '_value' of BZRXVestingToken.transferFrom (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#518-520) is not in mixedCase
+Parameter '_receiver' of BZRXVestingToken.rescue (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#565) is not in mixedCase
+Parameter '_amount' of BZRXVestingToken.rescue (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#565-568) is not in mixedCase
+Parameter '_blockNumber' of BZRXVestingToken.totalSupplyAt (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#581-584) is not in mixedCase
+Parameter '_owner' of BZRXVestingToken.vestedBalanceOf (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#593) is not in mixedCase
+Parameter '_owner' of BZRXVestingToken.vestingBalanceOf (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#608) is not in mixedCase
+Parameter '_owner' of BZRXVestingToken.claimedBalanceOf (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#639) is not in mixedCase
+Function 'BZRXVestingToken._claim' (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#664-678) is not in mixedCase
+Parameter '_owner' of BZRXVestingToken._claim (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#665-666) is not in mixedCase
+Function 'BZRXVestingToken._totalVested' (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#678-689) is not in mixedCase
+Parameter '_proportionalSupply' of BZRXVestingToken._totalVested (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#678-679) is not in mixedCase
+Parameter '_lastClaimTime' of BZRXVestingToken._totalVested (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#679-680) is not in mixedCase
+Constant 'BZRXVestingToken.cliffDuration' (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#448-449) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'BZRXVestingToken.vestingDuration' (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#449-450) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'BZRXVestingToken.vestingDurationAfterCliff_' (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#450-452) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'BZRXVestingToken.vestingStartTimestamp' (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#454) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'BZRXVestingToken.vestingCliffTimestamp' (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#456-458) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'BZRXVestingToken.vestingEndTimestamp' (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#458-461) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'BZRXVestingToken.vestingLastClaimTimestamp' (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#461-465) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'BZRXVestingToken.startingBalance_' (/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol#472) is not in UPPER_CASE_WITH_UNDERSCORES
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xb72b31907c1c95f3650b64b2469e08edacee5e8f.sol analyzed (6 contracts), 82 result(s) found

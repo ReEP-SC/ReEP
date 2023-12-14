@@ -1,0 +1,102 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol:
+/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol:63:3: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+  function Ownable() public {
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol:83:7: Warning: Invoking events without "emit" prefix is deprecated.
+      OwnershipTransferred(owner, newOwner);
+      ^-----------------------------------^
+/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol:228:5: Warning: Return value of low-level calls not used.
+    con_fund.call.value(eth_ex.mul(4).div(10))();
+    ^------------------------------------------^
+/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol:229:5: Warning: Return value of low-level calls not used.
+    luc_fund.call.value(eth_ex.mul(4).div(10))();
+    ^------------------------------------------^
+/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol:231:5: Warning: Invoking events without "emit" prefix is deprecated.
+    newInvest(msg.sender, shareByAmount(amount));
+    ^------------------------------------------^
+/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol:235:18: Warning: Using contract member "balance" inherited from the address type is deprecated. Convert the contract to "address" type to access the member, for example use "address(contract).balance" instead.
+    if (amount > this.balance){
+                 ^----------^
+/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol:236:16: Warning: Using contract member "balance" inherited from the address type is deprecated. Convert the contract to "address" type to access the member, for example use "address(contract).balance" instead.
+      amount = this.balance;
+               ^----------^
+/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol:238:5: Warning: Failure condition of 'send' ignored. Consider using 'transfer' instead.
+    to.send(amount);
+    ^-------------^
+/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol:242:5: Warning: Failure condition of 'send' ignored. Consider using 'transfer' instead.
+    msg.sender.send(interest_payable[msg.sender].mul(fee).div(100));
+    ^-------------------------------------------------------------^
+/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol:267:7: Warning: Invoking events without "emit" prefix is deprecated.
+      Closeout(positions[i], ETHinvest[positions[i]]);
+      ^---------------------------------------------^
+/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol:285:5: Warning: Failure condition of 'send' ignored. Consider using 'transfer' instead.
+    to.send(amount);
+    ^-------------^
+
+INFO:Detectors:[91m
+Reentrancy in ETFplayhouse.fallback (/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol#178-241):
+	External calls:
+	- ETFcoin.transfer(msg.sender,eth_ex.mul(eth2etf)) (/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol#230-231)
+	- con_fund.call.value(eth_ex.mul(4).div(10))() (/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol#234)
+	- luc_fund.call.value(eth_ex.mul(4).div(10))() (/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol#235-236)
+	External calls sending eth:
+	- msg.sender.transfer(msg.value.sub(amount)) (/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol#189-190)
+	- eco_fund.transfer(eth_ex.mul(2).div(10)) (/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol#231-234)
+	- con_fund.call.value(eth_ex.mul(4).div(10))() (/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol#234)
+	- luc_fund.call.value(eth_ex.mul(4).div(10))() (/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol#235-236)
+	State variables written after the call(s):
+	- ETHinvest (/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol#236-240)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities[0m
+INFO:Detectors:[93m
+ETFplayhouse.fallback (/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol#178-241) does not use the value returned by external calls:
+	-ETFcoin.transfer(msg.sender,eth_ex.mul(eth2etf)) (/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol#230-231)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+ETFplayhouse.fee should be constant (/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol#159-160)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol#82-90) should be declared external
+StandardToken.transferFrom (/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol#91-92) should be declared external
+StandardToken.allowance (/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol#92-93) should be declared external
+StandardToken.balanceOf (/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol#93-97) should be declared external
+StandardToken.transfer (/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol#97-99) should be declared external
+ETFplayhouse.vip (/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol#125-127) should be declared external
+ETFplayhouse.share (/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol#142-146) should be declared external
+ETFplayhouse.setAddress (/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol#149-159) should be declared external
+ETFplayhouse.fallback (/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol#178-241) should be declared external
+ETFplayhouse.getETH (/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol#241-246) should be declared external
+ETFplayhouse.getInterest (/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol#247-250) should be declared external
+ETFplayhouse.proceed (/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol#283-288) should be declared external
+ETFplayhouse.setTroll (/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol) should be declared external
+ETFplayhouse.hteteg (/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol:
+	- pragma solidity^0.4.18 (/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol#5-9): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Low level call in ETFplayhouse.fallback (/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol#178-241):
+	-con_fund.call.value(eth_ex.mul(4).div(10))() /sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol#234
+	-luc_fund.call.value(eth_ex.mul(4).div(10))() /sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol#235-236
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Function 'Ownable.Ownable' (/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol#68-69) is not in mixedCase
+Event 'ETFplayhouse.newInvest' (/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol#161-164) is not in CapWords
+Parameter '_etf' of ETFplayhouse.setAddress (/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol#150) is not in mixedCase
+Parameter '_eco' of ETFplayhouse.setAddress (/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol#150-151) is not in mixedCase
+Parameter '_contrib' of ETFplayhouse.setAddress (/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol#151-152) is not in mixedCase
+Parameter '_luck' of ETFplayhouse.setAddress (/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol#152) is not in mixedCase
+Parameter '_servant' of ETFplayhouse.setAddress (/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol#152-155) is not in mixedCase
+Function 'ETFplayhouse.close_position' (/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol#272-283) is not in mixedCase
+Parameter '_troll' of ETFplayhouse.setTroll (/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol) is not in mixedCase
+Variable 'ETFplayhouse.ETHinvest' (/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol#101) is not in mixedCase
+Variable 'ETFplayhouse.ETFex_bps' (/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol#103-106) is not in mixedCase
+Variable 'ETFplayhouse.profit_bps' (/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol#106-108) is not in mixedCase
+Variable 'ETFplayhouse.ETFaddress' (/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol#147) is not in mixedCase
+Variable 'ETFplayhouse.eco_fund' (/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol#147) is not in mixedCase
+Variable 'ETFplayhouse.con_fund' (/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol#147) is not in mixedCase
+Variable 'ETFplayhouse.luc_fund' (/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol#147) is not in mixedCase
+Variable 'ETFplayhouse.create_time' (/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol#160-161) is not in mixedCase
+Variable 'ETFplayhouse.interest_payable' (/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol#246-247) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x02b02759c94496a6103c7112606d1b70c055cc58.sol analyzed (4 contracts), 37 result(s) found

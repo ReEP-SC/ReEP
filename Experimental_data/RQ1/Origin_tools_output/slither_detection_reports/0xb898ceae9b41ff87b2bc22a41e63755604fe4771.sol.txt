@@ -1,0 +1,87 @@
+INFO:Detectors:[91m
+CryptoLott.finishGame (/sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol#218-278) sends eth to arbitrary user
+	Dangerous calls:
+	- (success,_) = charityAddress.call.value(charityFund).gas(20317)() (/sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol#258-261)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[91m
+Reentrancy in CryptoLott.finishGame (/sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol#218-278):
+	External calls:
+	- (success,_) = charityAddress.call.value(charityFund).gas(20317)() (/sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol#258-261)
+	- (success,_) = owner.call.value(totalFund - winnerFunds - charityFund).gas(20317)() (/sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol#262-263)
+	State variables written after the call(s):
+	- luckyNumberRandomPadding (/sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol#272)
+	- totalFund (/sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol#264)
+Reentrancy in CryptoLott.playerRegister (/sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol#137-169):
+	External calls:
+	- finishGame() (/sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol#164)
+	State variables written after the call(s):
+	- hasWinner (/sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol#168)
+	- playerInSession (/sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol#168)
+	- playerList (/sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol#168)
+	- startRound (/sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol#168)
+	- state (/sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol#168)
+	- totalFund (/sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol#168)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities[0m
+INFO:Detectors:[93m
+CryptoLott.toBytes (/sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol#278-281) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+player in CryptoLott.getPlayerInfo (/sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol#208) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[92m
+CryptoLott.finishGame has external calls inside a loop:
+	- (success,_) = winnerAddressList[i_scope_0].call.value(winnerFund).gas(20317)() (/sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol#242-245)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in CryptoLott.finishGame (/sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol#218-278):
+	External calls:
+	- (success,_) = charityAddress.call.value(charityFund).gas(20317)() (/sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol#258-261)
+	- (success,_) = owner.call.value(totalFund - winnerFunds - charityFund).gas(20317)() (/sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol#262-263)
+	State variables written after the call(s):
+	- endRound (/sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol#265)
+	- maxPlayerRandom (/sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol#273-274)
+	- playerRandomPadding (/sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol#269)
+	- playerRandomPadding (/sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol#277)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+CryptoLott.toBytes uses assembly (/sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol#278-281)
+	- /sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol#280
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+Owned.transferOwnership (/sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol#25-29) should be declared external
+Owned.acceptOwnership (/sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol#29-37) should be declared external
+CryptoLott.enableContract (/sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol#96-104) should be declared external
+CryptoLott.upCharityAddress (/sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol#104-108) should be declared external
+CryptoLott.config (/sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol#108-125) should be declared external
+CryptoLott.playerRegister (/sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol#137-169) should be declared external
+CryptoLott.getMinPrice (/sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol#169-173) should be declared external
+CryptoLott.getCountPlayer (/sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol#173-177) should be declared external
+CryptoLott.getMaxPlayer (/sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol#177-180) should be declared external
+CryptoLott.getMaxLuckyRandomNumber (/sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol#181-185) should be declared external
+CryptoLott.getLastTotalFund (/sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol#185-189) should be declared external
+CryptoLott.getLastLuckyNumber (/sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol#189-193) should be declared external
+CryptoLott.getCurrentFund (/sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol#193-197) should be declared external
+CryptoLott.getCharityAddress (/sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol#198-200) should be declared external
+CryptoLott.getOwnerAddress (/sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol#200-202) should be declared external
+CryptoLott.getPlayerInfo (/sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol#202-217) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol:
+	- pragma solidity>=0.5.0<0.7.0 (/sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol#5-7): is has a complex pragma
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Low level call in CryptoLott.finishGame (/sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol#218-278):
+	-(success,_) = winnerAddressList[i_scope_0].call.value(winnerFund).gas(20317)() /sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol#242-245
+	-(success,_) = charityAddress.call.value(charityFund).gas(20317)() /sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol#258-261
+	-(success,_) = owner.call.value(totalFund - winnerFunds - charityFund).gas(20317)() /sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol#262-263
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Parameter '_newOwner' of Owned.transferOwnership (/sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol#25-26) is not in mixedCase
+Parameter '_charityAddress' of CryptoLott.upCharityAddress (/sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol#107) is not in mixedCase
+Parameter '_minPrice' of CryptoLott.config (/sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol#108) is not in mixedCase
+Parameter '_maxPlayerRandom' of CryptoLott.config (/sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol#108-109) is not in mixedCase
+Parameter '_maxLuckyNumberRandom' of CryptoLott.config (/sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol#109) is not in mixedCase
+Parameter '_charityRate' of CryptoLott.config (/sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol#109) is not in mixedCase
+Parameter '_winnerRate' of CryptoLott.config (/sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol#109-110) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xb898ceae9b41ff87b2bc22a41e63755604fe4771.sol analyzed (2 contracts), 33 result(s) found

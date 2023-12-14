@@ -1,0 +1,134 @@
+INFO:Detectors:[93m
+CSportsCoreInterface (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#587-661) has incorrect ERC20 function interface(s):
+	-approve (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#623-627)
+	-transferFrom (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#657-661)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[93m
+Reentrancy in CSportsTeamGeneric.updateTeam (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#893-967):
+	External calls:
+	- coreContract.batchEscrowToTeamContract(_owner,_tokenIds) (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#929-931)
+	- coreContract.approve(_owner,_oldTokenId) (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#953)
+	- coreContract.transferFrom(address(this),_owner,_oldTokenId) (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#955-957)
+	State variables written after the call(s):
+	- teamIdToTeam (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#959-965)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+_tokenIds in CSportsTeamGeneric.tokenIdsForTeam (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#1187) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[92m
+CSportsTeamGeneric.updateTeam has external calls inside a loop:
+	- coreContract.approve(_owner,_oldTokenId) (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#953)
+CSportsTeamGeneric.updateTeam has external calls inside a loop:
+	- coreContract.transferFrom(address(this),_owner,_oldTokenId) (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#955-957)
+CSportsTeamGeneric.releaseTeam has external calls inside a loop:
+	- coreContract.approve(_team.owner,_tokenId) (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#1009-1011)
+CSportsTeamGeneric.releaseTeam has external calls inside a loop:
+	- coreContract.transferFrom(address(this),_team.owner,_tokenId) (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#1013)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in CSportsTeamGeneric.createTeam (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#849-873):
+	External calls:
+	- coreContract.batchEscrowToTeamContract(_owner,_tokenIds) (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#861-865)
+	State variables written after the call(s):
+	- teamIdToTeam (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#865-867)
+	- uniqueTeamId (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#865-867)
+Reentrancy in CSportsTeamGeneric.setCoreContractAddress (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#773-779):
+	External calls:
+	- require(bool)(candidateContract.isCoreContract()) (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#775-777)
+	State variables written after the call(s):
+	- coreContract (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#777-779)
+Reentrancy in CSportsTeamGeneric.setLeagueRosterAndCoreAndContestContractAddress (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#799-807):
+	External calls:
+	- setLeagueRosterContractAddress(_league) (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#805)
+	- setCoreContractAddress(_core) (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#805-807)
+	State variables written after the call(s):
+	- contestContractAddress (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#807)
+	- coreContract (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#805-807)
+Reentrancy in CSportsTeamGeneric.setLeagueRosterContractAddress (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#789-797):
+	External calls:
+	- require(bool)(candidateContract.isLeagueRosterContract()) (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#793-795)
+	State variables written after the call(s):
+	- leagueRosterContract (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#797)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+CSportsConstants.COMMISSIONER_AUCTION_DURATION should be constant (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#101-103)
+CSportsConstants.COMMISSIONER_AUCTION_FLOOR_PRICE should be constant (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#91-95)
+CSportsConstants.MAX_MARKETING_TOKENS should be constant (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#85-87)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+CSportsAuth.setProduction (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#303-313) should be declared external
+CSportsAuth.setCEO (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#317-329) should be declared external
+CSportsAuth.setCFO (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#333-345) should be declared external
+CSportsAuth.setCOO (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#349-357) should be declared external
+CSportsAuth.setCommissioner (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#369-375) should be declared external
+CSportsAuth.setCLevelAddresses (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#387-413) should be declared external
+CSportsAuth.pause (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#461-465) should be declared external
+CSportsAuth.unpause (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#481-483) should be declared external
+CSportsTeam.createTeam (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#507-509) should be declared external
+CSportsTeamGeneric.createTeam (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#849-873) should be declared external
+CSportsTeamGeneric.updateTeam (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#893-967) should be declared external
+CSportsTeam.updateTeam (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#509-513) should be declared external
+CSportsTeam.releaseTeam (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#513) should be declared external
+CSportsTeamGeneric.releaseTeam (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#987-1021) should be declared external
+CSportsTeamGeneric.getTeamOwner (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#1145-1161) should be declared external
+CSportsTeam.getTeamOwner (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#513-517) should be declared external
+CSportsTeam.scoreTeams (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#517-523) should be declared external
+CSportsTeamGeneric.scoreTeams (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#1061-1089) should be declared external
+CSportsTeam.getScore (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#524-531) should be declared external
+CSportsTeamGeneric.getScore (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#1093-1105) should be declared external
+CSportsTeamGeneric.getPlace (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#1111-1117) should be declared external
+CSportsTeam.getPlace (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#531-533) should be declared external
+CSportsTeamGeneric.ownsPlayerTokens (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#1129-1143) should be declared external
+CSportsTeam.ownsPlayerTokens (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#533-535) should be declared external
+CSportsTeamGeneric.refunded (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#1029-1045) should be declared external
+CSportsTeam.refunded (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#537-541) should be declared external
+CSportsTeam.tokenIdsForTeam (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#541-545) should be declared external
+CSportsTeamGeneric.tokenIdsForTeam (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#1183-1205) should be declared external
+CSportsTeamGeneric.getTeam (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#1215-1243) should be declared external
+CSportsTeam.getTeam (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#545-549) should be declared external
+CSportsTeamGeneric.setLeagueRosterAndCoreAndContestContractAddress (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#799-807) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Variable 'CSportsConstants.MAX_MARKETING_TOKENS' (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#85-87) is not in mixedCase
+Variable 'CSportsConstants.COMMISSIONER_AUCTION_FLOOR_PRICE' (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#91-95) is not in mixedCase
+Variable 'CSportsConstants.COMMISSIONER_AUCTION_DURATION' (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#101-103) is not in mixedCase
+Parameter '_newCEO' of CSportsAuth.setCEO (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#317-319) is not in mixedCase
+Parameter '_newCFO' of CSportsAuth.setCFO (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#335) is not in mixedCase
+Parameter '_newCOO' of CSportsAuth.setCOO (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#349) is not in mixedCase
+Parameter '_newCommissioner' of CSportsAuth.setCommissioner (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#371) is not in mixedCase
+Parameter '_ceo' of CSportsAuth.setCLevelAddresses (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#393) is not in mixedCase
+Parameter '_cfo' of CSportsAuth.setCLevelAddresses (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#393) is not in mixedCase
+Parameter '_coo' of CSportsAuth.setCLevelAddresses (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#393) is not in mixedCase
+Parameter '_commish' of CSportsAuth.setCLevelAddresses (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#393) is not in mixedCase
+Parameter '_address' of CSportsTeamGeneric.setCoreContractAddress (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#773) is not in mixedCase
+Parameter '_address' of CSportsTeamGeneric.setLeagueRosterContractAddress (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#789) is not in mixedCase
+Parameter '_address' of CSportsTeamGeneric.setContestContractAddress (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#763) is not in mixedCase
+Parameter '_owner' of CSportsTeamGeneric.createTeam (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#851) is not in mixedCase
+Parameter '_tokenIds' of CSportsTeamGeneric.createTeam (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#851) is not in mixedCase
+Parameter '_owner' of CSportsTeamGeneric.updateTeam (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#893-897) is not in mixedCase
+Parameter '_teamId' of CSportsTeamGeneric.updateTeam (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#897) is not in mixedCase
+Parameter '_indices' of CSportsTeamGeneric.updateTeam (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#897) is not in mixedCase
+Parameter '_tokenIds' of CSportsTeamGeneric.updateTeam (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#897) is not in mixedCase
+Parameter '_teamId' of CSportsTeamGeneric.releaseTeam (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#987-989) is not in mixedCase
+Parameter '_teamId' of CSportsTeamGeneric.getTeamOwner (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#1147) is not in mixedCase
+Parameter '_teamIds' of CSportsTeamGeneric.scoreTeams (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#1063) is not in mixedCase
+Parameter '_scores' of CSportsTeamGeneric.scoreTeams (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#1063-1065) is not in mixedCase
+Parameter '_places' of CSportsTeamGeneric.scoreTeams (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#1065-1067) is not in mixedCase
+Parameter '_teamId' of CSportsTeamGeneric.getScore (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#1093-1095) is not in mixedCase
+Parameter '_teamId' of CSportsTeamGeneric.getPlace (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#1111) is not in mixedCase
+Parameter '_teamId' of CSportsTeamGeneric.ownsPlayerTokens (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#1129) is not in mixedCase
+Parameter '_teamId' of CSportsTeamGeneric.refunded (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#1030-1033) is not in mixedCase
+Parameter '_teamId' of CSportsTeamGeneric.tokenIdsForTeam (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#1183) is not in mixedCase
+Parameter '_teamId' of CSportsTeamGeneric.getTeam (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#1219) is not in mixedCase
+Parameter '_playersPerTeam' of CSportsTeamGeneric. (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#731-733) is not in mixedCase
+Parameter '_league' of CSportsTeamGeneric.setLeagueRosterAndCoreAndContestContractAddress (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#801) is not in mixedCase
+Parameter '_core' of CSportsTeamGeneric.setLeagueRosterAndCoreAndContestContractAddress (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#801-803) is not in mixedCase
+Parameter '_contest' of CSportsTeamGeneric.setLeagueRosterAndCoreAndContestContractAddress (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#803) is not in mixedCase
+Function 'CSportsTeamGeneric._createTeam' (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol) is not in mixedCase
+Parameter '_owner' of CSportsTeamGeneric._createTeam (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol) is not in mixedCase
+Parameter '_playerTokenIds' of CSportsTeamGeneric._createTeam (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+CSportsConstants.WEEK_SECS (/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol#111) is never used in CSportsTeamGeneric
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0x98fded9a72c0f72f1a76bfc28cb2d2bcd8ce11ab.sol analyzed (7 contracts), 82 result(s) found

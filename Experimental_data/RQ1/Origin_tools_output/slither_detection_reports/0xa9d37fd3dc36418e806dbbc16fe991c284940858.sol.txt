@@ -1,0 +1,143 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol:
+/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol:11:1: Warning: Experimental features are turned on. Do not use experimental features on live deployments.
+pragma experimental ABIEncoderV2;
+^-------------------------------^
+/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol:315:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function ContractRegistryInterface(
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol:883:2: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+	function LTVDecisionEngine(address _contractRegistry) public {
+ ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol:1113:8: Warning: Use of the "var" keyword is deprecated.
+		var (principalTokenIndex, principalAmount, interestRate, amortizationUnitType, termLengthInAmortizationUnits) =
+		     ^-----------------^
+/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol:1113:29: Warning: Use of the "var" keyword is deprecated.
+		var (principalTokenIndex, principalAmount, interestRate, amortizationUnitType, termLengthInAmortizationUnits) =
+		                          ^-------------^
+/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol:1113:46: Warning: Use of the "var" keyword is deprecated.
+		var (principalTokenIndex, principalAmount, interestRate, amortizationUnitType, termLengthInAmortizationUnits) =
+		                                           ^----------^
+/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol:1113:60: Warning: Use of the "var" keyword is deprecated.
+		var (principalTokenIndex, principalAmount, interestRate, amortizationUnitType, termLengthInAmortizationUnits) =
+		                                                         ^------------------^
+/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol:1113:82: Warning: Use of the "var" keyword is deprecated.
+		var (principalTokenIndex, principalAmount, interestRate, amortizationUnitType, termLengthInAmortizationUnits) =
+		                                                                               ^---------------------------^
+/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol:1151:8: Warning: Use of the "var" keyword is deprecated.
+		var (collateralTokenIndex, collateralAmount, gracePeriodInDays) =
+		     ^------------------^
+/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol:1151:30: Warning: Use of the "var" keyword is deprecated.
+		var (collateralTokenIndex, collateralAmount, gracePeriodInDays) =
+		                           ^--------------^
+/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol:1151:48: Warning: Use of the "var" keyword is deprecated.
+		var (collateralTokenIndex, collateralAmount, gracePeriodInDays) =
+		                                             ^---------------^
+/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol:1603:2: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+	function LTVCreditorProxy(address _contractRegistry) LTVDecisionEngine(_contractRegistry)
+ ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol:497:26: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+		bytes32 prefixedHash = keccak256(PREFIX, hash);
+		                       ^---------------------^
+/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol:1013:10: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+		return keccak256(
+         ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol:1071:10: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+		return keccak256(
+         ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol:1199:32: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+		bytes32 principalPriceHash = keccak256(
+                               ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol:1211:33: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+		bytes32 collateralPriceHash = keccak256(
+                                ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol:1259:2: Warning: Function state mutability can be restricted to pure
+	function computeLTV(
+ ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol:1553:10: Warning: Function declared as view, but this expression (potentially) modifies the state and thus requires non-payable (the default) or payable.
+		return ERC20(token).allowance.gas(EXTERNAL_QUERY_GAS_LIMIT)(
+		       ^--------------------------------------------------^
+
+INFO:Detectors:[93m
+DebtTokenInterface (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol#281-305) has incorrect ERC20 function interface(s):
+	-transfer (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol#285)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[93m
+Reentrancy in LTVCreditorProxy.fillDebtOffer (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol#1703-1873):
+	External calls:
+	- creditorCommitmentHash = hashCreditorCommitmentForOrder(commitmentValues,order) (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol#1721-1734)
+	- tokenTransferAllowance = getAllowance(principalToken,address(this),contractRegistry.tokenTransferProxy()) (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol#1805-1809)
+	- require(bool)(setTokenTransferAllowance(principalToken,totalCreditorPayment)) (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol#1823-1825)
+	- require(bool)(transferTokensFrom(principalToken,order.creditor,address(this),totalCreditorPayment)) (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol#1833-1849)
+	- agreementId = sendOrderToKernel(order) (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol#1849-1853)
+	State variables written after the call(s):
+	- debtOfferFilled (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol#1863-1865)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+Reentrancy in LTVCreditorProxy.cancelDebtOffer (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol):
+	External calls:
+	- creditorCommitmentHash = hashCreditorCommitmentForOrder(commitmentValues,order) (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol)
+	State variables written after the call(s):
+	- debtOfferCancelled (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+LTVDecisionEngine.verifyPrices (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol#1265-1343) uses timestamp for comparisons
+	Dangerous comparisons:
+	- principalPrice.timestamp < minPriceTimestamp || collateralPrice.timestamp < minPriceTimestamp (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol#1284-1293)
+LTVDecisionEngine.isExpired (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol#1371-1383) uses timestamp for comparisons
+	Dangerous comparisons:
+	- expirationTimestampInSec < block.timestamp (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol#1381-1383)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+DebtKernelInterface.TOKEN_TRANSFER_PROXY should be constant (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol#104-105)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Different versions of Solidity is used in /sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol:
+	- Version used: ['0.4.24', 'ABIEncoderV2']
+	- /sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol#9-11 declares pragma solidity0.4.24
+	- /sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol#11-13 declares pragma experimentalABIEncoderV2
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#different-pragma-directives-are-used[0m
+INFO:Detectors:[92m
+CollateralizerInterface.unpackCollateralParametersFromBytes (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol#27-39) should be declared external
+DebtKernelInterface.fillDebtOrder (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol#235-266) should be declared external
+DebtTokenInterface.transfer (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol#285) should be declared external
+DebtTokenInterface.exists (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol#286-305) should be declared external
+TermsContractInterface.registerTermStart (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol#791-805) should be declared external
+TermsContractInterface.registerRepayment (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol#805-819) should be declared external
+TermsContractInterface.getExpectedRepaymentValue (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol#819-837) should be declared external
+TermsContractInterface.getValueRepaidToDate (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol#837-863) should be declared external
+TermsContractInterface.getTermEndTimestamp (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol#863-871) should be declared external
+SimpleInterestTermsContractInterface.unpackParametersFromBytes (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol#885-903) should be declared external
+ERC20Basic.totalSupply (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol#1399-1407) should be declared external
+ERC20Basic.balanceOf (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol#1407-1410) should be declared external
+ERC20Basic.transfer (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol#1415-1421) should be declared external
+ERC20.allowance (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol#1443-1457) should be declared external
+ERC20.transferFrom (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol#1457-1461) should be declared external
+ERC20.approve (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol#1461-1477) should be declared external
+LTVCreditorProxy.fillDebtOffer (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol#1703-1873) should be declared external
+LTVCreditorProxy.cancelDebtOffer (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Variable 'DebtKernelInterface.TOKEN_TRANSFER_PROXY' (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol#104-105) is not in mixedCase
+Function 'ContractRegistryInterface.ContractRegistryInterface' (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol#333-371) is not in mixedCase
+Parameter '_collateralizer' of ContractRegistryInterface.ContractRegistryInterface (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol#335-337) is not in mixedCase
+Parameter '_debtKernel' of ContractRegistryInterface.ContractRegistryInterface (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol#337) is not in mixedCase
+Parameter '_debtToken' of ContractRegistryInterface.ContractRegistryInterface (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol#337) is not in mixedCase
+Parameter '_tokenTransferProxy' of ContractRegistryInterface.ContractRegistryInterface (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol#340-347) is not in mixedCase
+Parameter '_a' of SafeMath.mul (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol#389-391) is not in mixedCase
+Parameter '_b' of SafeMath.mul (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol#393-397) is not in mixedCase
+Parameter '_a' of SafeMath.div (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol#421) is not in mixedCase
+Parameter '_b' of SafeMath.div (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol#421) is not in mixedCase
+Parameter '_a' of SafeMath.sub (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol#463) is not in mixedCase
+Parameter '_b' of SafeMath.sub (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol#463) is not in mixedCase
+Parameter '_a' of SafeMath.add (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol#484-485) is not in mixedCase
+Parameter '_b' of SafeMath.add (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol#485) is not in mixedCase
+Function 'LTVDecisionEngine.LTVDecisionEngine' (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol#939-945) is not in mixedCase
+Parameter '_contractRegistry' of LTVDecisionEngine.LTVDecisionEngine (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol#939-941) is not in mixedCase
+Parameter '_token' of CreditorProxyCore.transferTokensFrom (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol#1631-1633) is not in mixedCase
+Parameter '_from' of CreditorProxyCore.transferTokensFrom (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol#1633) is not in mixedCase
+Parameter '_to' of CreditorProxyCore.transferTokensFrom (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol#1633) is not in mixedCase
+Parameter '_amount' of CreditorProxyCore.transferTokensFrom (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol#1633) is not in mixedCase
+Function 'LTVCreditorProxy.LTVCreditorProxy' (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol#1697-1703) is not in mixedCase
+Parameter '_contractRegistry' of LTVCreditorProxy.LTVCreditorProxy (/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol#1697) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xa9d37fd3dc36418e806dbbc16fe991c284940858.sol analyzed (19 contracts), 47 result(s) found

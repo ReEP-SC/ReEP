@@ -1,0 +1,56 @@
+INFO:Detectors:[93m
+Reentrancy in KyberStaking.handleWithdrawal (/sb/0x9f349eb72c3e07f6e840978c65a8bf3b9c74c4f8.sol#790-843):
+	External calls:
+	- (success) = address(kyberDao).call(abi.encodeWithSignature(handleWithdrawal(address,uint256),representative,reduceAmount)) (/sb/0x9f349eb72c3e07f6e840978c65a8bf3b9c74c4f8.sol#820-828)
+	State variables written after the call(s):
+	- hasInited (/sb/0x9f349eb72c3e07f6e840978c65a8bf3b9c74c4f8.sol#834)
+	- stakerLatestData (/sb/0x9f349eb72c3e07f6e840978c65a8bf3b9c74c4f8.sol#834)
+	- stakerLatestData (/sb/0x9f349eb72c3e07f6e840978c65a8bf3b9c74c4f8.sol#841-843)
+	- stakerPerEpochData (/sb/0x9f349eb72c3e07f6e840978c65a8bf3b9c74c4f8.sol#834)
+	- stakerPerEpochData (/sb/0x9f349eb72c3e07f6e840978c65a8bf3b9c74c4f8.sol#835-839)
+Reentrancy in KyberStaking.withdraw (/sb/0x9f349eb72c3e07f6e840978c65a8bf3b9c74c4f8.sol#567-599):
+	External calls:
+	- (success) = address(this).call(abi.encodeWithSignature(handleWithdrawal(address,uint256,uint256),staker,amount,curEpoch)) (/sb/0x9f349eb72c3e07f6e840978c65a8bf3b9c74c4f8.sol#579-585)
+	State variables written after the call(s):
+	- stakerLatestData (/sb/0x9f349eb72c3e07f6e840978c65a8bf3b9c74c4f8.sol#589-593)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+Reentrancy in KyberStaking.deposit (/sb/0x9f349eb72c3e07f6e840978c65a8bf3b9c74c4f8.sol#531-563):
+	External calls:
+	- require(bool,string)(kncToken.transferFrom(staker,address(this),amount),deposit: can not get token) (/sb/0x9f349eb72c3e07f6e840978c65a8bf3b9c74c4f8.sol#536-538)
+	State variables written after the call(s):
+	- hasInited (/sb/0x9f349eb72c3e07f6e840978c65a8bf3b9c74c4f8.sol#538-539)
+	- hasInited (/sb/0x9f349eb72c3e07f6e840978c65a8bf3b9c74c4f8.sol#549-550)
+	- stakerLatestData (/sb/0x9f349eb72c3e07f6e840978c65a8bf3b9c74c4f8.sol#538-539)
+	- stakerLatestData (/sb/0x9f349eb72c3e07f6e840978c65a8bf3b9c74c4f8.sol#540-542)
+	- stakerLatestData (/sb/0x9f349eb72c3e07f6e840978c65a8bf3b9c74c4f8.sol#549-550)
+	- stakerLatestData (/sb/0x9f349eb72c3e07f6e840978c65a8bf3b9c74c4f8.sol#555-560)
+	- stakerPerEpochData (/sb/0x9f349eb72c3e07f6e840978c65a8bf3b9c74c4f8.sol#538-539)
+	- stakerPerEpochData (/sb/0x9f349eb72c3e07f6e840978c65a8bf3b9c74c4f8.sol#539-540)
+	- stakerPerEpochData (/sb/0x9f349eb72c3e07f6e840978c65a8bf3b9c74c4f8.sol#549-550)
+	- stakerPerEpochData (/sb/0x9f349eb72c3e07f6e840978c65a8bf3b9c74c4f8.sol#552-555)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x9f349eb72c3e07f6e840978c65a8bf3b9c74c4f8.sol:
+	- pragma solidity0.6.6 (/sb/0x9f349eb72c3e07f6e840978c65a8bf3b9c74c4f8.sol#7-10): it allows old versions
+	- pragma solidity0.6.6 (/sb/0x9f349eb72c3e07f6e840978c65a8bf3b9c74c4f8.sol#43): it allows old versions
+	- pragma solidity0.6.6 (/sb/0x9f349eb72c3e07f6e840978c65a8bf3b9c74c4f8.sol#98): it allows old versions
+	- pragma solidity0.6.6 (/sb/0x9f349eb72c3e07f6e840978c65a8bf3b9c74c4f8.sol#115-116): it allows old versions
+	- pragma solidity0.6.6 (/sb/0x9f349eb72c3e07f6e840978c65a8bf3b9c74c4f8.sol#184): it allows old versions
+	- pragma solidity0.6.6 (/sb/0x9f349eb72c3e07f6e840978c65a8bf3b9c74c4f8.sol#238): it allows old versions
+	- pragma solidity0.6.6 (/sb/0x9f349eb72c3e07f6e840978c65a8bf3b9c74c4f8.sol#405-406): it allows old versions
+	- pragma solidity0.6.6 (/sb/0x9f349eb72c3e07f6e840978c65a8bf3b9c74c4f8.sol#432-433): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Low level call in KyberStaking.withdraw (/sb/0x9f349eb72c3e07f6e840978c65a8bf3b9c74c4f8.sol#567-599):
+	-(success) = address(this).call(abi.encodeWithSignature(handleWithdrawal(address,uint256,uint256),staker,amount,curEpoch)) /sb/0x9f349eb72c3e07f6e840978c65a8bf3b9c74c4f8.sol#579-585
+Low level call in KyberStaking.handleWithdrawal (/sb/0x9f349eb72c3e07f6e840978c65a8bf3b9c74c4f8.sol#790-843):
+	-(success) = address(kyberDao).call(abi.encodeWithSignature(handleWithdrawal(address,uint256),representative,reduceAmount)) /sb/0x9f349eb72c3e07f6e840978c65a8bf3b9c74c4f8.sol#820-828
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Parameter '_kncToken' of KyberStaking. (/sb/0x9f349eb72c3e07f6e840978c65a8bf3b9c74c4f8.sol#462) is not in mixedCase
+Parameter '_epochPeriod' of KyberStaking. (/sb/0x9f349eb72c3e07f6e840978c65a8bf3b9c74c4f8.sol#463) is not in mixedCase
+Parameter '_startTimestamp' of KyberStaking. (/sb/0x9f349eb72c3e07f6e840978c65a8bf3b9c74c4f8.sol#464) is not in mixedCase
+Parameter '_kyberDao' of KyberStaking. (/sb/0x9f349eb72c3e07f6e840978c65a8bf3b9c74c4f8.sol#465-468) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x9f349eb72c3e07f6e840978c65a8bf3b9c74c4f8.sol analyzed (9 contracts), 10 result(s) found

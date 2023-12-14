@@ -1,0 +1,136 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol:
+/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol:321:5: Warning: Functions in interfaces should be declared external.
+    function getProvider(uint256 id) public view returns (address);
+    ^-------------------------------------------------------------^
+/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol:323:5: Warning: Functions in interfaces should be declared external.
+    function getSubscriber(uint256 id) public view returns (address);
+    ^---------------------------------------------------------------^
+/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol:325:5: Warning: Functions in interfaces should be declared external.
+    function getEndpoint(uint256 id) public view returns (bytes32);
+    ^-------------------------------------------------------------^
+/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol:327:5: Warning: Functions in interfaces should be declared external.
+    function getStatus(uint256 id) public view returns (uint256);
+    ^-----------------------------------------------------------^
+/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol:329:5: Warning: Functions in interfaces should be declared external.
+    function getCancel(uint256 id) public view returns (uint256);
+    ^-----------------------------------------------------------^
+/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol:331:5: Warning: Functions in interfaces should be declared external.
+    function getUserQuery(uint256 id) public view returns (string);
+    ^-------------------------------------------------------------^
+/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol:333:5: Warning: Functions in interfaces should be declared external.
+    function getSubscriberOnchain(uint256 id) public view returns (bool);
+    ^-------------------------------------------------------------------^
+
+INFO:Detectors:[93m
+Dispatch.isContract (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#1275-1279) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+Dispatch.fulfillQuery (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#739-811) uses a dangerous strict equality:
+	- require(bool,string)(block.number == canceled,Error: Cancel ignored)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Dispatch.query (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#667-727) does not use the value returned by external calls:
+	-bondage.escrowDots(msg.sender,provider,endpoint,1) (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#693-697)
+Dispatch.cancelQuery (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#817-865) does not use the value returned by external calls:
+	-bondage.returnDots(subscriber,provider,endpoint,1) (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#849-851)
+Dispatch.fulfillQuery (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#739-811) does not use the value returned by external calls:
+	-bondage.escrowDots(subscriber,provider,endpoint,1) (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#787)
+	-bondage.releaseDots(subscriber,provider,endpoint,1) (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#799-805)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in Dispatch._updateDependencies (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#647-663):
+	External calls:
+	- databaseAddress = coordinator.getContract(DATABASE) (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#651-657)
+	State variables written after the call(s):
+	- db (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#657)
+Reentrancy in Dispatch._updateDependencies (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#647-663):
+	External calls:
+	- databaseAddress = coordinator.getContract(DATABASE) (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#651-657)
+	- bondageAddress = coordinator.getContract(BONDAGE) (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#659)
+	State variables written after the call(s):
+	- bondage (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#661)
+	- bondageAddress (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#659)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Dispatch.isContract uses assembly (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#1275-1279)
+	- /sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#1279
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#47-61) should be declared external
+ZapCoordinatorInterface.getContractName (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#73) should be declared external
+ZapCoordinatorInterface.getContract (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#73-81) should be declared external
+Destructible.selfDestruct (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#153-155) should be declared external
+BondageInterface.currentCostOfDot (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#291-293) should be declared external
+BondageInterface.getDotsIssued (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#293-299) should be declared external
+BondageInterface.getBoundDots (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#299-305) should be declared external
+BondageInterface.getZapBound (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#305-307) should be declared external
+BondageInterface.dotLimit (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#307-309) should be declared external
+Dispatch.getUserQuery (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#1187-1189) should be declared external
+DispatchInterface.getUserQuery (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#347-349) should be declared external
+DatabaseInterface.setStorageContract (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#357-361) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Function 'Upgradable._updateDependencies' (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#123) is not in mixedCase
+Parameter '' of BondageInterface.bond (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#277) is not in mixedCase
+Parameter '_scope_0' of BondageInterface.bond (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#277) is not in mixedCase
+Parameter '_scope_1' of BondageInterface.bond (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#277) is not in mixedCase
+Parameter '' of BondageInterface.unbond (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#279) is not in mixedCase
+Parameter '_scope_0' of BondageInterface.unbond (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#279) is not in mixedCase
+Parameter '_scope_1' of BondageInterface.unbond (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#279) is not in mixedCase
+Parameter '' of BondageInterface.delegateBond (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#281) is not in mixedCase
+Parameter '_scope_0' of BondageInterface.delegateBond (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#281) is not in mixedCase
+Parameter '_scope_1' of BondageInterface.delegateBond (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#281) is not in mixedCase
+Parameter '_scope_2' of BondageInterface.delegateBond (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#281) is not in mixedCase
+Parameter '' of BondageInterface.escrowDots (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#283) is not in mixedCase
+Parameter '_scope_0' of BondageInterface.escrowDots (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#283) is not in mixedCase
+Parameter '_scope_1' of BondageInterface.escrowDots (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#283) is not in mixedCase
+Parameter '_scope_2' of BondageInterface.escrowDots (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#283) is not in mixedCase
+Parameter '' of BondageInterface.releaseDots (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#285) is not in mixedCase
+Parameter '_scope_0' of BondageInterface.releaseDots (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#285) is not in mixedCase
+Parameter '_scope_1' of BondageInterface.releaseDots (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#285) is not in mixedCase
+Parameter '_scope_2' of BondageInterface.releaseDots (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#285) is not in mixedCase
+Parameter '' of BondageInterface.returnDots (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#287) is not in mixedCase
+Parameter '_scope_0' of BondageInterface.returnDots (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#287) is not in mixedCase
+Parameter '_scope_1' of BondageInterface.returnDots (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#287) is not in mixedCase
+Parameter '_scope_2' of BondageInterface.returnDots (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#287) is not in mixedCase
+Parameter '' of BondageInterface.calcZapForDots (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#289) is not in mixedCase
+Parameter '_scope_0' of BondageInterface.calcZapForDots (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#289) is not in mixedCase
+Parameter '_scope_1' of BondageInterface.calcZapForDots (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#289) is not in mixedCase
+Parameter '' of BondageInterface.currentCostOfDot (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#291) is not in mixedCase
+Parameter '_scope_0' of BondageInterface.currentCostOfDot (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#291-293) is not in mixedCase
+Parameter '_scope_1' of BondageInterface.currentCostOfDot (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#293) is not in mixedCase
+Parameter '' of BondageInterface.getDotsIssued (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#297-299) is not in mixedCase
+Parameter '_scope_0' of BondageInterface.getDotsIssued (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#299) is not in mixedCase
+Parameter '' of BondageInterface.getBoundDots (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#303) is not in mixedCase
+Parameter '_scope_0' of BondageInterface.getBoundDots (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#303-304) is not in mixedCase
+Parameter '_scope_1' of BondageInterface.getBoundDots (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#305) is not in mixedCase
+Parameter '' of BondageInterface.getZapBound (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#305) is not in mixedCase
+Parameter '_scope_0' of BondageInterface.getZapBound (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#305-307) is not in mixedCase
+Parameter '' of BondageInterface.dotLimit (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#307-309) is not in mixedCase
+Parameter '_scope_0' of BondageInterface.dotLimit (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#309) is not in mixedCase
+Parameter '' of DispatchInterface.query (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#313) is not in mixedCase
+Parameter '_scope_0' of DispatchInterface.query (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#313) is not in mixedCase
+Parameter '_scope_1' of DispatchInterface.query (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#313) is not in mixedCase
+Parameter '_scope_2' of DispatchInterface.query (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#313) is not in mixedCase
+Parameter '' of DispatchInterface.respond1 (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#315) is not in mixedCase
+Parameter '_scope_0' of DispatchInterface.respond1 (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#315) is not in mixedCase
+Parameter '' of DispatchInterface.respond2 (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#317) is not in mixedCase
+Parameter '_scope_0' of DispatchInterface.respond2 (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#317) is not in mixedCase
+Parameter '_scope_1' of DispatchInterface.respond2 (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#317) is not in mixedCase
+Parameter '' of DispatchInterface.respond3 (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#319) is not in mixedCase
+Parameter '_scope_0' of DispatchInterface.respond3 (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#319) is not in mixedCase
+Parameter '_scope_1' of DispatchInterface.respond3 (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#319) is not in mixedCase
+Parameter '_scope_2' of DispatchInterface.respond3 (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#319) is not in mixedCase
+Parameter '' of DispatchInterface.respond4 (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#321) is not in mixedCase
+Parameter '_scope_0' of DispatchInterface.respond4 (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#321) is not in mixedCase
+Parameter '_scope_1' of DispatchInterface.respond4 (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#321-323) is not in mixedCase
+Parameter '_scope_2' of DispatchInterface.respond4 (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#323) is not in mixedCase
+Parameter '_scope_3' of DispatchInterface.respond4 (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#323) is not in mixedCase
+Parameter '' of DispatchInterface.respondBytes32Array (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#325) is not in mixedCase
+Parameter '_scope_0' of DispatchInterface.respondBytes32Array (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#325) is not in mixedCase
+Parameter '' of DispatchInterface.respondIntArray (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#327) is not in mixedCase
+Parameter '_scope_0' of DispatchInterface.respondIntArray (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#327) is not in mixedCase
+Parameter '' of DispatchInterface.cancelQuery (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#329) is not in mixedCase
+Function 'Dispatch._updateDependencies' (/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol#647-663) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xac0f9620c5940085eb5f3a07210d890aa4ceee11.sol analyzed (15 contracts), 82 result(s) found

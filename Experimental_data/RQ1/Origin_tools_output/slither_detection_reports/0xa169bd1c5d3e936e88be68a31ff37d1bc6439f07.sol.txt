@@ -1,0 +1,102 @@
+INFO:Detectors:[93m
+Reentrancy in eMarketDex.preSignWithdraw (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#493-503):
+	External calls:
+	- require(bool)(ERC865Essential(token).withdrawPreSigned(address(this),_to,amount,fee,_nonce,v,r,s)) (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#498-499)
+	State variables written after the call(s):
+	- tokens (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#499-503)
+Reentrancy in eMarketDex.transferFromPreSigned (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#391-416):
+	External calls:
+	- require(bool,string)(ERC20Essential(token).transferFrom(_from,_to,_value),transferfrom fail) (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#408-413)
+	- require(bool,string)(ERC20Essential(token).transferFrom(spender,msg.sender,_fee),transfer from fee fail) (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#413-415)
+	State variables written after the call(s):
+	- transactionHashes (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#415-416)
+Reentrancy in eMarketDex.transferPreSigned (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#416-444):
+	External calls:
+	- require(bool,string)(ERC20Essential(token).transfer(_to,_value.sub(_fee)),transferfrom fail) (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#437-438)
+	- require(bool,string)(ERC20Essential(token).transfer(msg.sender,_fee),transfer from fee fail) (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#438-441)
+	State variables written after the call(s):
+	- transactionHashes (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#441-442)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+eMarketDex.withdrawToken (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#279-287) does not use the value returned by external calls:
+	-ERC20Essential(token).transfer(msg.sender,amount) (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#285)
+eMarketDex.manualWithdrawTokens (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#464-466) does not use the value returned by external calls:
+	-ERC20Essential(token).transfer(msg.sender,tokenAmount) (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#464-466)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in eMarketDex.depositToken (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#273-279):
+	External calls:
+	- require(bool)(ERC20Essential(token).transferFrom(msg.sender,address(this),amount)) (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#276-277)
+	State variables written after the call(s):
+	- tokens (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#277-279)
+Reentrancy in eMarketDex.preSignDeposit (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#487-493):
+	External calls:
+	- require(bool)(ERC865Essential(token).transferPreSigned(_from,address(this),amount,_fee,_nonce,v,r,s)) (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#489-490)
+	State variables written after the call(s):
+	- tokens (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#491-492)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+eMarketDex.admin should be constant (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#187-188)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+owned.onlyOwnerTransferOwnership (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#177-180) should be declared external
+owned.acceptOwnership (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#180-181) should be declared external
+eMarketDex.changeFeeAccount (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#246-249) should be declared external
+eMarketDex.changetradingFee (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#249-250) should be declared external
+eMarketDex.withdrawTradingFeeOwner (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#253-261) should be declared external
+eMarketDex.deposit (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#261-266) should be declared external
+eMarketDex.withdraw (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#266-273) should be declared external
+eMarketDex.depositToken (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#273-279) should be declared external
+eMarketDex.withdrawToken (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#279-287) should be declared external
+eMarketDex.balanceOf (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#288-290) should be declared external
+eMarketDex.order (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#290-296) should be declared external
+eMarketDex.trade (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#297-311) should be declared external
+eMarketDex.testTrade (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#332-338) should be declared external
+eMarketDex.amountFilled (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#359-367) should be declared external
+eMarketDex.cancelOrder (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#367-382) should be declared external
+eMarketDex.transferFromPreSigned (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#391-416) should be declared external
+eMarketDex.transferPreSigned (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#416-444) should be declared external
+eMarketDex.testSender (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#445-454) should be declared external
+eMarketDex.manualWithdrawEther (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#459-461) should be declared external
+eMarketDex.manualWithdrawTokens (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#464-466) should be declared external
+eMarketDex.changeSafeguardStatus (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#469-473) should be declared external
+eMarketDex.preSignDeposit (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#487-493) should be declared external
+eMarketDex.preSignWithdraw (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#493-503) should be declared external
+eMarketDex.presigntrade (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#503-517) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol:
+	- pragma solidity0.5.17 (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#5): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Contract 'owned' (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#170-181) is not in CapWords
+Parameter '_newOwner' of owned.onlyOwnerTransferOwnership (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#177-178) is not in mixedCase
+Contract 'eMarketDex' (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#186-517) is not in CapWords
+Parameter 'PercentOf' of eMarketDex.calculatePercentage (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#238) is not in mixedCase
+Parameter '_from' of eMarketDex.transferFromPreSigned (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#392) is not in mixedCase
+Parameter '_to' of eMarketDex.transferFromPreSigned (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#392) is not in mixedCase
+Parameter '_value' of eMarketDex.transferFromPreSigned (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#392) is not in mixedCase
+Parameter '_fee' of eMarketDex.transferFromPreSigned (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#393) is not in mixedCase
+Parameter '_nonce' of eMarketDex.transferFromPreSigned (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#393) is not in mixedCase
+Parameter '_from' of eMarketDex.transferPreSigned (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#419) is not in mixedCase
+Parameter '_to' of eMarketDex.transferPreSigned (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#420) is not in mixedCase
+Parameter '_value' of eMarketDex.transferPreSigned (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#420-421) is not in mixedCase
+Parameter '_fee' of eMarketDex.transferPreSigned (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#421) is not in mixedCase
+Parameter '_nonce' of eMarketDex.transferPreSigned (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#421-423) is not in mixedCase
+Parameter '_to' of eMarketDex.testSender (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#446-448) is not in mixedCase
+Parameter '_value' of eMarketDex.testSender (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#449) is not in mixedCase
+Parameter '_fee' of eMarketDex.testSender (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#449) is not in mixedCase
+Parameter '_nonce' of eMarketDex.testSender (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#449) is not in mixedCase
+Parameter '_from' of eMarketDex.preSignDeposit (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#488) is not in mixedCase
+Parameter '_fee' of eMarketDex.preSignDeposit (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#488) is not in mixedCase
+Parameter '_nonce' of eMarketDex.preSignDeposit (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#488) is not in mixedCase
+Parameter '_to' of eMarketDex.preSignWithdraw (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#494-496) is not in mixedCase
+Parameter '_nonce' of eMarketDex.preSignWithdraw (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#496) is not in mixedCase
+Parameter '_from' of eMarketDex.presigntrade (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#503) is not in mixedCase
+Parameter '_fee' of eMarketDex.presigntrade (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol#507) is not in mixedCase
+Parameter '_from' of eMarketDex.splitPresignTrade (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol) is not in mixedCase
+Parameter '_fee' of eMarketDex.splitPresignTrade (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol) is not in mixedCase
+Parameter '_from' of eMarketDex.presigntradeBalances (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol) is not in mixedCase
+Parameter '_fee' of eMarketDex.presigntradeBalances (/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xa169bd1c5d3e936e88be68a31ff37d1bc6439f07.sol analyzed (5 contracts), 62 result(s) found

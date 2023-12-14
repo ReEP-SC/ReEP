@@ -1,0 +1,118 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol:
+/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol:325:14: Warning: This declaration shadows an existing declaration.
+        for (uint256 i = 0; i <= 1000; i++)
+             ^-------^
+/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol:259:5: The shadowed declaration is here:
+    uint256 public i = 1000000;
+    ^------------------------^
+
+/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol:270:22: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function deposit(address _fomo3daddress)
+                     ^--------------------^
+/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol:289:23: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function deposit2(address _fomo3daddress)
+                      ^--------------------^
+
+INFO:Detectors:[93m
+Contract locking ether found in /sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol:
+	Contract Bank has payable functions:
+	 - deposit (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#277-294)
+	 - deposit2 (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#296-309)
+	 - deposit3 (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#316-326)
+	 - deposit4 (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#332-340)
+	But does not have a function to withdraw the ether
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#contracts-that-lock-ether[0m
+INFO:Detectors:[92m
+Bank.deposit4.i (local variable @ /sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#339-340) shadows:
+	- Bank.i (state variable @ /sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#266)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+Reentrancy in Forwarder.deposit (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#170-190):
+	External calls:
+	- currentCorpBank_.deposit.value(msg.value)(msg.sender) == true (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#173-190)
+	State variables written after the call(s):
+	- depositSuccessful_ (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#176-177)
+	- gasAfter_ (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#179-182)
+	- successfulTransactions_ (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#177-178)
+Reentrancy in Forwarder.deposit2 (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#190-210):
+	External calls:
+	- currentCorpBank_.deposit2.value(msg.value)(msg.sender) == true (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#194-210)
+	State variables written after the call(s):
+	- depositSuccessful_ (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#197)
+	- gasAfter_ (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#202-203)
+	- successfulTransactions_ (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#198-199)
+Reentrancy in Forwarder.deposit3 (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#210-230):
+	External calls:
+	- currentCorpBank_.deposit3.value(msg.value)(msg.sender) == true (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#214-230)
+	State variables written after the call(s):
+	- depositSuccessful_ (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#217-218)
+	- gasAfter_ (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#222-224)
+	- successfulTransactions_ (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#219-222)
+Reentrancy in Forwarder.deposit4 (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#230-253):
+	External calls:
+	- currentCorpBank_.deposit4.value(msg.value)(msg.sender) == true (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#235-253)
+	State variables written after the call(s):
+	- depositSuccessful_ (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#238-239)
+	- gasAfter_ (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#242)
+	- successfulTransactions_ (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#242)
+Reentrancy in Fomo3d.someFunction (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#42-61):
+	External calls:
+	- ! address(Jekyll_Island_Inc).call.value(msg.value)(bytes4(keccak256()(deposit()))) (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#48-61)
+	State variables written after the call(s):
+	- depositSuccessful_ (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#56-57)
+	- gasAfter_ (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#61)
+	- successfulTransactions_ (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#57-60)
+Reentrancy in Fomo3d.someFunction2 (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#65-84):
+	External calls:
+	- ! address(Jekyll_Island_Inc).call.value(msg.value)(bytes4(keccak256()(deposit2()))) (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#70-84)
+	State variables written after the call(s):
+	- depositSuccessful_ (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#79-80)
+	- gasAfter_ (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#83-84)
+	- successfulTransactions_ (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#81-83)
+Reentrancy in Fomo3d.someFunction3 (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#88-107):
+	External calls:
+	- ! address(Jekyll_Island_Inc).call.value(msg.value)(bytes4(keccak256()(deposit3()))) (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#93-107)
+	State variables written after the call(s):
+	- depositSuccessful_ (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#101-105)
+	- gasAfter_ (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#106)
+	- successfulTransactions_ (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#105)
+Reentrancy in Fomo3d.someFunction4 (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#111-129):
+	External calls:
+	- ! address(Jekyll_Island_Inc).call.value(msg.value)(bytes4(keccak256()(deposit4()))) (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#116-129)
+	State variables written after the call(s):
+	- depositSuccessful_ (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#126-127)
+	- gasAfter_ (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#128)
+	- successfulTransactions_ (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#127)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Fomo3d.someFunction (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#42-61) should be declared external
+Fomo3d.someFunction2 (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#65-84) should be declared external
+Fomo3d.someFunction3 (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#88-107) should be declared external
+Fomo3d.someFunction4 (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#111-129) should be declared external
+Fomo3d.checkBalance (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#134-140) should be declared external
+Forwarder.deposit (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#170-190) should be declared external
+Forwarder.deposit2 (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#190-210) should be declared external
+Forwarder.deposit3 (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#210-230) should be declared external
+Forwarder.deposit4 (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#230-253) should be declared external
+Forwarder.checkBalance (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#254-258) should be declared external
+Bank.deposit4 (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#332-340) should be declared external
+Bank.checkBalance (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Low level call in Fomo3d.someFunction (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#42-61):
+	-! address(Jekyll_Island_Inc).call.value(msg.value)(bytes4(keccak256()(deposit()))) /sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#48-61
+Low level call in Fomo3d.someFunction2 (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#65-84):
+	-! address(Jekyll_Island_Inc).call.value(msg.value)(bytes4(keccak256()(deposit2()))) /sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#70-84
+Low level call in Fomo3d.someFunction3 (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#88-107):
+	-! address(Jekyll_Island_Inc).call.value(msg.value)(bytes4(keccak256()(deposit3()))) /sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#93-107
+Low level call in Fomo3d.someFunction4 (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#111-129):
+	-! address(Jekyll_Island_Inc).call.value(msg.value)(bytes4(keccak256()(deposit4()))) /sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#116-129
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Parameter '_addr' of Fomo3d. (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#34-35) is not in mixedCase
+Variable 'Fomo3d.Jekyll_Island_Inc' (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#29-31) is not in mixedCase
+Parameter '_addr' of Forwarder. (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#162) is not in mixedCase
+Parameter '_fomo3daddress' of Bank.deposit3 (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#317) is not in mixedCase
+Parameter '_fomo3daddress' of Bank.deposit4 (/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol#332) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x8f59323d8400cc0dee71ee91f92961989d508160.sol analyzed (3 contracts), 31 result(s) found

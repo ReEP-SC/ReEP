@@ -1,0 +1,300 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol:
+/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol:48:3: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+  function Ownable() internal {
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol:121:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function KYCBase(address [] kycSigners) internal {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol:187:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function RC(address _tokenSaleContract, uint256 _oneTokenInFiatWei, uint256 _remainingTokens, uint256 _etherMinimum, uint256 _startTime , uint256 _endTime, address [] kycSigner, uint256[] _tokenThreshold, uint256[] _bonusThreshold ) public KYCBase(kycSigner) {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol:380:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function RCpro(address _tokenSaleContract, uint256[] _oneTokenInFiatWei, uint256[] _sendThreshold, uint256 _remainingTokens, uint256 _etherMinimum, uint256 _startTime , uint256 _endTime, address [] kycSigner, uint256[] _tokenThreshold, uint256[] _bonusThreshold ) public KYCBase(kycSigner) {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol:581:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function TokenSale(address _tokenAddress, address _rateAddress, uint256 _startTime, uint256 _endTime) public {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol:154:24: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+        bytes32 hash = sha256("Eidoo icoengine authorization", address(0), buyerAddress, buyerId, maxAmount); //replaced this with address(0);
+                       ^-----------------------------------------------------------------------------------^
+
+INFO:Detectors:[91m
+Reentrancy in RC.giveToken (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#321-333):
+	External calls:
+	- tokenSaleContract.claim(_buyer,pendingTokenUser[_buyer]) (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#328-330)
+	- tokenSaleContract.wallet().transfer(etherUser[_buyer]) (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#332-333)
+	External calls sending eth:
+	- tokenSaleContract.wallet().transfer(etherUser[_buyer]) (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#332-333)
+	State variables written after the call(s):
+	- etherUser (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#333)
+Reentrancy in RCpro.giveToken (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#533-545):
+	External calls:
+	- tokenSaleContract.claim(_buyer,pendingTokenUser[_buyer]) (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#537-540)
+	- tokenSaleContract.wallet().transfer(etherUser[_buyer]) (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#542-545)
+	External calls sending eth:
+	- tokenSaleContract.wallet().transfer(etherUser[_buyer]) (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#542-545)
+	State variables written after the call(s):
+	- etherUser (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#545)
+Reentrancy in RC.releaseTokensTo (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#243-250):
+	External calls:
+	- takeEther(buyer) (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#246-247)
+	- giveToken(buyer) (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#247)
+	State variables written after the call(s):
+	- etherUser (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#247)
+	- pendingTokenUser (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#247)
+Reentrancy in RCpro.releaseTokensTo (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#445-453):
+	External calls:
+	- takeEther(buyer) (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#449)
+	- giveToken(buyer) (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#450-451)
+	State variables written after the call(s):
+	- etherUser (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#450-451)
+	- pendingTokenUser (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#450-451)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities[0m
+INFO:Detectors:[93m
+Reentrancy in RC.giveToken (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#321-333):
+	External calls:
+	- tokenSaleContract.claim(_buyer,pendingTokenUser[_buyer]) (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#328-330)
+	State variables written after the call(s):
+	- pendingTokenUser (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#331-332)
+Reentrancy in RCpro.giveToken (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#533-545):
+	External calls:
+	- tokenSaleContract.claim(_buyer,pendingTokenUser[_buyer]) (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#537-540)
+	State variables written after the call(s):
+	- pendingTokenUser (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#542)
+Reentrancy in RC.takeEther (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#290-321):
+	External calls:
+	- oneToken = 10 ** uint256(tokenSaleContract.decimals()) (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#293-294)
+	- tokenValue = tokenSaleContract.tokenValueInEther(oneTokenInFiatWei) (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#294-295)
+	- unboughtTokens = tokenInterface(tokenSaleContract.tokenContract()).balanceOf(tokenSaleContract) (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#299-301)
+	State variables written after the call(s):
+	- remainingTokens (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#309)
+	- remainingTokens (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#311-314)
+Reentrancy in RCpro.takeEther (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#489-533):
+	External calls:
+	- oneToken = 10 ** uint256(tokenSaleContract.decimals()) (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#497)
+	- tokenValue = tokenSaleContract.tokenValueInEther(tknPriceApplied) (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#504-505)
+	- unboughtTokens = tokenInterface(tokenSaleContract.tokenContract()).balanceOf(tokenSaleContract) (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#507-509)
+	State variables written after the call(s):
+	- remainingTokens (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#519)
+	- remainingTokens (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#521-523)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+TokenSale.addMeByRC uses tx.origin for authorization:
+	- require(bool)(tx.origin == owner) (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#673)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-usage-of-txorigin[0m
+INFO:Detectors:[93m
+RC.giveToken (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#321-333) does not use the value returned by external calls:
+	-tokenSaleContract.claim(_buyer,pendingTokenUser[_buyer]) (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#328-330)
+RC.claimTokenBonus (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#334-355) does not use the value returned by external calls:
+	-tokenSaleContract.claim(_buyer,addTokenAmount) (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#351-355)
+RCpro.giveToken (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#533-545) does not use the value returned by external calls:
+	-tokenSaleContract.claim(_buyer,pendingTokenUser[_buyer]) (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#537-540)
+RCpro.claimTokenBonus (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#546-565) does not use the value returned by external calls:
+	-tokenSaleContract.claim(_buyer,addTokenAmount) (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#560-564)
+TokenSale.buyFromRC (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#626-661) does not use the value returned by external calls:
+	-tokenContract.transfer(_buyer,tokenAmount) (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#659)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in RC.RC (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#187-213):
+	External calls:
+	- tokenSaleContract.addMeByRC() (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#205-206)
+	State variables written after the call(s):
+	- etherMinimum (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#211)
+	- oneTokenInFiatWei (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#209-210)
+	- remainingTokens (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#209)
+	- soldTokens (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#207-209)
+Reentrancy in RC.RC (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#187-213):
+	External calls:
+	- tokenSaleContract.addMeByRC() (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#205-206)
+	- setTimeRC(_startTime,_endTime) (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#211-213)
+	State variables written after the call(s):
+	- endTime (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#211-213)
+	- startTime (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#211-213)
+Reentrancy in RCpro.RCpro (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#382-417):
+	External calls:
+	- tokenSaleContract.addMeByRC() (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#405-406)
+	State variables written after the call(s):
+	- etherMinimum (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#412-413)
+	- oneTokenInFiatWei (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#409-411)
+	- remainingTokens (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#407-408)
+	- sendThreshold (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#411)
+	- soldTokens (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#406)
+Reentrancy in RCpro.RCpro (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#382-417):
+	External calls:
+	- tokenSaleContract.addMeByRC() (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#405-406)
+	- setTimeRC(_startTime,_endTime) (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#414-417)
+	State variables written after the call(s):
+	- endTime (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#414-417)
+	- startTime (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#414-417)
+Reentrancy in RC.giveToken (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#321-333):
+	External calls:
+	- tokenSaleContract.claim(_buyer,pendingTokenUser[_buyer]) (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#328-330)
+	State variables written after the call(s):
+	- soldTokens (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#330-331)
+Reentrancy in RCpro.giveToken (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#533-545):
+	External calls:
+	- tokenSaleContract.claim(_buyer,pendingTokenUser[_buyer]) (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#537-540)
+	State variables written after the call(s):
+	- soldTokens (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#540-542)
+Reentrancy in RC.setTimeRC (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#213-228):
+	External calls:
+	- startTime = tokenSaleContract.startTime() (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#218-220)
+	- endTime = tokenSaleContract.endTime() (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#225-227)
+	State variables written after the call(s):
+	- endTime (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#225-227)
+Reentrancy in RC.setTimeRC (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#213-228):
+	External calls:
+	- startTime = tokenSaleContract.startTime() (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#218-220)
+	State variables written after the call(s):
+	- endTime (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#227)
+Reentrancy in RCpro.setTimeRC (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#417-428):
+	External calls:
+	- startTime = tokenSaleContract.startTime() (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#422)
+	- endTime = tokenSaleContract.endTime() (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#424-427)
+	State variables written after the call(s):
+	- endTime (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#424-427)
+Reentrancy in RCpro.setTimeRC (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#417-428):
+	External calls:
+	- startTime = tokenSaleContract.startTime() (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#422)
+	State variables written after the call(s):
+	- endTime (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#427)
+Reentrancy in RC.takeEther (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#290-321):
+	External calls:
+	- oneToken = 10 ** uint256(tokenSaleContract.decimals()) (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#293-294)
+	- tokenValue = tokenSaleContract.tokenValueInEther(oneTokenInFiatWei) (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#294-295)
+	- unboughtTokens = tokenInterface(tokenSaleContract.tokenContract()).balanceOf(tokenSaleContract) (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#299-301)
+	External calls sending eth:
+	- _buyer.transfer(refund) (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#309-311)
+	State variables written after the call(s):
+	- etherUser (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#315-317)
+	- pendingTokenUser (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#317-319)
+Reentrancy in RCpro.takeEther (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#489-533):
+	External calls:
+	- oneToken = 10 ** uint256(tokenSaleContract.decimals()) (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#497)
+	- tokenValue = tokenSaleContract.tokenValueInEther(tknPriceApplied) (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#504-505)
+	- unboughtTokens = tokenInterface(tokenSaleContract.tokenContract()).balanceOf(tokenSaleContract) (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#507-509)
+	External calls sending eth:
+	- _buyer.transfer(refund) (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#521)
+	State variables written after the call(s):
+	- etherUser (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#524-527)
+	- pendingTokenUser (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#527-531)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#64-72) should be declared external
+tokenInterface.balanceOf (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#72-73) should be declared external
+tokenInterface.transfer (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#75-77) should be declared external
+rateInterface.readRate (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#77-82) should be declared external
+RC.started (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#250-254) should be declared external
+RCpro.started (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#453-457) should be declared external
+ICOEngineInterface.started (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#85) should be declared external
+RCpro.ended (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#457-461) should be declared external
+ICOEngineInterface.ended (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#88) should be declared external
+RC.ended (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#254-259) should be declared external
+RC.startTime (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#259-262) should be declared external
+RCpro.startTime (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#462-463) should be declared external
+ICOEngineInterface.startTime (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#91) should be declared external
+ICOEngineInterface.endTime (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#94-95) should be declared external
+RCpro.endTime (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#463-467) should be declared external
+RC.endTime (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#262-266) should be declared external
+RC.totalTokens (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#266-268) should be declared external
+RCpro.totalTokens (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#467-471) should be declared external
+ICOEngineInterface.totalTokens (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#105) should be declared external
+ICOEngineInterface.remainingTokens (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#109-110) should be declared external
+RCpro.remainingTokens (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#471-476) should be declared external
+RC.remainingTokens (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#268-273) should be declared external
+ICOEngineInterface.price (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#116-117) should be declared external
+RCpro.price (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#476-482) should be declared external
+RC.price (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#273-281) should be declared external
+KYCBase.buyTokensFor (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#138-147) should be declared external
+KYCBase.buyTokens (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#147-151) should be declared external
+RC.setTime (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#232-237) should be declared external
+RC.changeMinimum (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#237-243) should be declared external
+RC.fallback (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#281-287) should be declared external
+RC.refundEther (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#355-360) should be declared external
+RC.withdraw (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#360-364) should be declared external
+RC.userBalance (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#364-371) should be declared external
+RCpro.setTime (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#432-439) should be declared external
+RCpro.changeMinimum (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#441-445) should be declared external
+RCpro.fallback (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#482-488) should be declared external
+RCpro.refundEther (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#565-571) should be declared external
+RCpro.withdraw (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#571-575) should be declared external
+RCpro.userBalance (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#575-581) should be declared external
+TokenSale.buyFromRC (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#626-661) should be declared external
+TokenSale.addMeByRC (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#672-677) should be declared external
+TokenSale.withdraw (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#684-688) should be declared external
+TokenSale.withdrawTokens (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#688-692) should be declared external
+TokenSale.setTokenContract (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#693-699) should be declared external
+TokenSale.setWalletAddress (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol) should be declared external
+TokenSale.setAdvisorAddress (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol) should be declared external
+TokenSale.setAdvisorFee (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol) should be declared external
+TokenSale.setRateContract (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol) should be declared external
+TokenSale.claim (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol) should be declared external
+TokenSale.fallback (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol:
+	- pragma solidity^0.4.19 (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#1): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'Ownable.Ownable' (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#49-53) is not in mixedCase
+Contract 'tokenInterface' (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#72-77) is not in CapWords
+Contract 'rateInterface' (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#77-82) is not in CapWords
+Function 'KYCBase.KYCBase' (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#123-127) is not in mixedCase
+Function 'RC.RC' (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#187-213) is not in mixedCase
+Parameter '_tokenSaleContract' of RC.RC (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#187) is not in mixedCase
+Parameter '_oneTokenInFiatWei' of RC.RC (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#187) is not in mixedCase
+Parameter '_remainingTokens' of RC.RC (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#187-188) is not in mixedCase
+Parameter '_etherMinimum' of RC.RC (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#188) is not in mixedCase
+Parameter '_startTime' of RC.RC (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#188-189) is not in mixedCase
+Parameter '_endTime' of RC.RC (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#189) is not in mixedCase
+Parameter '_tokenThreshold' of RC.RC (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#190) is not in mixedCase
+Parameter '_bonusThreshold' of RC.RC (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#190-191) is not in mixedCase
+Parameter '_startTime' of RC.setTimeRC (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#215) is not in mixedCase
+Parameter '_endTime' of RC.setTimeRC (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#215-216) is not in mixedCase
+Parameter '_newStart' of RC.setTime (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#232) is not in mixedCase
+Parameter '_newEnd' of RC.setTime (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#232-233) is not in mixedCase
+Parameter '_newEtherMinimum' of RC.changeMinimum (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#238-239) is not in mixedCase
+Parameter '_buyer' of RC.takeEther (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#290) is not in mixedCase
+Parameter '_buyer' of RC.giveToken (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#323) is not in mixedCase
+Parameter '_buyer' of RC.claimTokenBonus (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#336) is not in mixedCase
+Parameter '_user' of RC.userBalance (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#364-366) is not in mixedCase
+Function 'RCpro.RCpro' (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#382-417) is not in mixedCase
+Parameter '_tokenSaleContract' of RCpro.RCpro (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#383) is not in mixedCase
+Parameter '_oneTokenInFiatWei' of RCpro.RCpro (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#383) is not in mixedCase
+Parameter '_sendThreshold' of RCpro.RCpro (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#383-384) is not in mixedCase
+Parameter '_remainingTokens' of RCpro.RCpro (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#384-385) is not in mixedCase
+Parameter '_etherMinimum' of RCpro.RCpro (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#385) is not in mixedCase
+Parameter '_startTime' of RCpro.RCpro (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#385) is not in mixedCase
+Parameter '_endTime' of RCpro.RCpro (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#386) is not in mixedCase
+Parameter '_tokenThreshold' of RCpro.RCpro (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#386) is not in mixedCase
+Parameter '_bonusThreshold' of RCpro.RCpro (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#386-387) is not in mixedCase
+Parameter '_startTime' of RCpro.setTimeRC (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#418) is not in mixedCase
+Parameter '_endTime' of RCpro.setTimeRC (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#418) is not in mixedCase
+Parameter '_newStart' of RCpro.setTime (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#432-433) is not in mixedCase
+Parameter '_newEnd' of RCpro.setTime (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#433-434) is not in mixedCase
+Parameter '_newEtherMinimum' of RCpro.changeMinimum (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#441-442) is not in mixedCase
+Parameter '_buyer' of RCpro.takeEther (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#492) is not in mixedCase
+Parameter '_buyer' of RCpro.giveToken (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#533-534) is not in mixedCase
+Parameter '_buyer' of RCpro.claimTokenBonus (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#546-549) is not in mixedCase
+Parameter '_user' of RCpro.userBalance (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#576) is not in mixedCase
+Function 'TokenSale.TokenSale' (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#592-602) is not in mixedCase
+Parameter '_tokenAddress' of TokenSale.TokenSale (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#592-593) is not in mixedCase
+Parameter '_rateAddress' of TokenSale.TokenSale (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#593-595) is not in mixedCase
+Parameter '_startTime' of TokenSale.TokenSale (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#595-596) is not in mixedCase
+Parameter '_endTime' of TokenSale.TokenSale (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#596-597) is not in mixedCase
+Parameter '_oneTokenInFiatWei' of TokenSale.tokenValueInEther (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#605-606) is not in mixedCase
+Parameter '_buyer' of TokenSale.buyFromRC (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#626) is not in mixedCase
+Parameter '_rcTokenValue' of TokenSale.buyFromRC (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#626) is not in mixedCase
+Parameter '_remainingTokens' of TokenSale.buyFromRC (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#626) is not in mixedCase
+Parameter '_amount' of TokenSale.forward (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#664) is not in mixedCase
+Parameter '_newStart' of TokenSale.setTime (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#680) is not in mixedCase
+Parameter '_newEnd' of TokenSale.setTime (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#680) is not in mixedCase
+Parameter '_tokenContract' of TokenSale.setTokenContract (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol#693) is not in mixedCase
+Parameter '_wallet' of TokenSale.setWalletAddress (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol) is not in mixedCase
+Parameter '_advisor' of TokenSale.setAdvisorAddress (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol) is not in mixedCase
+Parameter '_advisorFee' of TokenSale.setAdvisorFee (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol) is not in mixedCase
+Parameter '_rateAddress' of TokenSale.setRateContract (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol) is not in mixedCase
+Parameter '_buyer' of TokenSale.claim (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol) is not in mixedCase
+Parameter '_amount' of TokenSale.claim (/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x86b784aef0e9c9a581550ba07fb85b64c780c320.sol analyzed (9 contracts), 137 result(s) found

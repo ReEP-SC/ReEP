@@ -1,0 +1,105 @@
+INFO:Detectors:[93m
+Contract locking ether found in /sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol:
+	Contract MusicContract has payable functions:
+	 - fallback (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#303)
+	But does not have a function to withdraw the ether
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#contracts-that-lock-ether[0m
+INFO:Detectors:[93m
+Reentrancy in MusicContract.DoMusicPayout (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#611-653):
+	External calls:
+	- require(bool)(token.balanceOf(wallet) >= musicList[musId].amountToBePaid) (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#625-633)
+	- DoSponsorPayout(musicList[musId]) (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#641)
+	State variables written after the call(s):
+	- musicList (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#641-645)
+Reentrancy in MusicContract.DoMusicPayout (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#611-653):
+	External calls:
+	- require(bool)(token.balanceOf(wallet) >= musicList[musId].amountToBePaid) (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#625-633)
+	- DoVoterPayout(musicList[musId]) (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#649)
+	State variables written after the call(s):
+	- musicList (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#651)
+Reentrancy in MusicContract.DoSponsorPayout (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#387-533):
+	External calls:
+	- token.mint(wallet,sponsors[counter].publicKey,amtToSend) (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#455-463)
+	State variables written after the call(s):
+	- counter (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#447)
+	- sponsors (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#465-469)
+Reentrancy in MusicContract.DoSponsorPayout (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#387-533):
+	External calls:
+	- token.mint(wallet,voters[counter].publicKey,perVoterPayout) (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#481-489)
+	State variables written after the call(s):
+	- counter (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#481)
+	- voters (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#491-495)
+Reentrancy in MusicContract.DoVoterPayout (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#533-611):
+	External calls:
+	- token.mint(wallet,voters[j].publicKey,perVoterPayout) (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#581-582)
+	State variables written after the call(s):
+	- voters (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#583-585)
+Reentrancy in MusicContract.DownloadMusic (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#359-387):
+	External calls:
+	- token.mint(senderId,wallet,tokenAmount * 10 ** 18) (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#369)
+	State variables written after the call(s):
+	- musicList (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#371-377)
+	- musicList (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#381-387)
+Reentrancy in MusicContract.SponsorMusic (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#653-707):
+	External calls:
+	- require(bool)(token.balanceOf(sponsorAddress) > sponsorAmount) (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#659-663)
+	- token.mint(sponsorAddress,wallet,sponsorAmount) (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#671-673)
+	State variables written after the call(s):
+	- musicList (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#675-681)
+	- musicList (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#681-685)
+	- musicList (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#703-705)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+MusicContract.DoSponsorPayout has external calls inside a loop:
+	- token.mint(wallet,voters[counter].publicKey,perVoterPayout) (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#481-489)
+MusicContract.DoSponsorPayout has external calls inside a loop:
+	- token.mint(wallet,sponsors[counter].publicKey,amtToSend) (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#455-463)
+MusicContract.DoVoterPayout has external calls inside a loop:
+	- token.mint(wallet,voters[j].publicKey,perVoterPayout) (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#581-582)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in MusicContract.SponsorMusic (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#653-707):
+	External calls:
+	- require(bool)(token.balanceOf(sponsorAddress) > sponsorAmount) (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#659-663)
+	- token.mint(sponsorAddress,wallet,sponsorAmount) (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#671-673)
+	State variables written after the call(s):
+	- musicSponsorList (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#699-701)
+	- sponsor (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#687-697)
+Reentrancy in MusicContract.UploadMusic (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#315-359):
+	External calls:
+	- token.mint(muPublicKey,wallet,uploadTokenAmount * 10 ** 18) (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#321-325)
+	State variables written after the call(s):
+	- music (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#335-357)
+	- musicList (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#357-359)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#109-129) should be declared external
+ERC20Interface.totalSupply (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#139) should be declared external
+ERC20Interface.balanceOf (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#139-141) should be declared external
+ERC20Interface.allowance (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#141-143) should be declared external
+ERC20Interface.transfer (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#143-145) should be declared external
+ERC20Interface.approve (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#145-147) should be declared external
+ERC20Interface.transferFrom (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#147-151) should be declared external
+ERC20Interface.mint (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#151) should be declared external
+MusicContract.fallback (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#303) should be declared external
+MusicContract.UploadMusic (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#315-359) should be declared external
+MusicContract.DownloadMusic (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#359-387) should be declared external
+MusicContract.DoMusicPayout (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#611-653) should be declared external
+MusicContract.SponsorMusic (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#653-707) should be declared external
+MusicContract.VoteMusic (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#707-731) should be declared external
+MusicContract.unlockVoterMusic (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#731-741) should be declared external
+MusicContract.getTokenBalance (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol) should be declared external
+MusicContract.changeWalletAddress (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_wallet' of MusicContract. (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#287-291) is not in mixedCase
+Parameter '_tokenAddress' of MusicContract. (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#291) is not in mixedCase
+Function 'MusicContract.UploadMusic' (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#315-359) is not in mixedCase
+Function 'MusicContract.DownloadMusic' (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#359-387) is not in mixedCase
+Function 'MusicContract.DoSponsorPayout' (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#387-533) is not in mixedCase
+Function 'MusicContract.DoVoterPayout' (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#533-611) is not in mixedCase
+Function 'MusicContract.DoMusicPayout' (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#611-653) is not in mixedCase
+Function 'MusicContract.SponsorMusic' (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#653-707) is not in mixedCase
+Function 'MusicContract.VoteMusic' (/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol#707-731) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xc8a7a65ae5ebfa183588b45f7eb6841fcc8e34a3.sol analyzed (4 contracts), 39 result(s) found

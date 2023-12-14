@@ -1,0 +1,74 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x992e215020d537952cc762e8ec3c771359e88940.sol:
+/sb/0x992e215020d537952cc762e8ec3c771359e88940.sol:93:57: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+        return (_admin == owner || hasAttribute(_admin, keccak256(WRITE_PERMISSION ^ _attribute)));
+                                                        ^--------------------------------------^
+/sb/0x992e215020d537952cc762e8ec3c771359e88940.sol:93:57: Warning: The provided argument of type bytes32 is not implicitly convertible to expected type bytes memory.
+        return (_admin == owner || hasAttribute(_admin, keccak256(WRITE_PERMISSION ^ _attribute)));
+                                                        ^--------------------------------------^
+
+INFO:Detectors:[93m
+Registry.reclaimToken (/sb/0x992e215020d537952cc762e8ec3c771359e88940.sol#183-190) does not use the value returned by external calls:
+	-token.transfer(_to,balance) (/sb/0x992e215020d537952cc762e8ec3c771359e88940.sol#186-188)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Registry.setAttribute has external calls inside a loop:
+	- targets[index].syncAttributeValue(_who,_attribute,_value) (/sb/0x992e215020d537952cc762e8ec3c771359e88940.sol#109)
+Registry.setAttributeValue has external calls inside a loop:
+	- targets[index].syncAttributeValue(_who,_attribute,_value) (/sb/0x992e215020d537952cc762e8ec3c771359e88940.sol#137-138)
+Registry.syncAttribute has external calls inside a loop:
+	- target.syncAttributeValue(who,_attribute,attributes[who][_attribute].value) (/sb/0x992e215020d537952cc762e8ec3c771359e88940.sol#173-177)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+ERC20Basic.totalSupply (/sb/0x992e215020d537952cc762e8ec3c771359e88940.sol#15-16) should be declared external
+ERC20Basic.balanceOf (/sb/0x992e215020d537952cc762e8ec3c771359e88940.sol#16-17) should be declared external
+ERC20Basic.transfer (/sb/0x992e215020d537952cc762e8ec3c771359e88940.sol#17-18) should be declared external
+ERC20.allowance (/sb/0x992e215020d537952cc762e8ec3c771359e88940.sol#28-29) should be declared external
+ERC20.transferFrom (/sb/0x992e215020d537952cc762e8ec3c771359e88940.sol#29-30) should be declared external
+ERC20.approve (/sb/0x992e215020d537952cc762e8ec3c771359e88940.sol#30-31) should be declared external
+Registry.initialize (/sb/0x992e215020d537952cc762e8ec3c771359e88940.sol#63-68) should be declared external
+Registry.setAttribute (/sb/0x992e215020d537952cc762e8ec3c771359e88940.sol#97-110) should be declared external
+Registry.subscriberCount (/sb/0x992e215020d537952cc762e8ec3c771359e88940.sol#123-127) should be declared external
+Registry.setAttributeValue (/sb/0x992e215020d537952cc762e8ec3c771359e88940.sol#127-138) should be declared external
+Registry.getAttribute (/sb/0x992e215020d537952cc762e8ec3c771359e88940.sol#145-150) should be declared external
+Registry.getAttributeValue (/sb/0x992e215020d537952cc762e8ec3c771359e88940.sol#151-154) should be declared external
+Registry.getAttributeAdminAddr (/sb/0x992e215020d537952cc762e8ec3c771359e88940.sol#155-158) should be declared external
+Registry.getAttributeTimestamp (/sb/0x992e215020d537952cc762e8ec3c771359e88940.sol#159-162) should be declared external
+Registry.transferOwnership (/sb/0x992e215020d537952cc762e8ec3c771359e88940.sol#209-211) should be declared external
+Registry.claimOwnership (/sb/0x992e215020d537952cc762e8ec3c771359e88940.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x992e215020d537952cc762e8ec3c771359e88940.sol:
+	- pragma solidity^0.4.23 (/sb/0x992e215020d537952cc762e8ec3c771359e88940.sol#5-7): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_attribute' of Registry.confirmWrite (/sb/0x992e215020d537952cc762e8ec3c771359e88940.sol#93) is not in mixedCase
+Parameter '_admin' of Registry.confirmWrite (/sb/0x992e215020d537952cc762e8ec3c771359e88940.sol#93) is not in mixedCase
+Parameter '_who' of Registry.setAttribute (/sb/0x992e215020d537952cc762e8ec3c771359e88940.sol#98) is not in mixedCase
+Parameter '_attribute' of Registry.setAttribute (/sb/0x992e215020d537952cc762e8ec3c771359e88940.sol#98) is not in mixedCase
+Parameter '_value' of Registry.setAttribute (/sb/0x992e215020d537952cc762e8ec3c771359e88940.sol#99) is not in mixedCase
+Parameter '_notes' of Registry.setAttribute (/sb/0x992e215020d537952cc762e8ec3c771359e88940.sol#99) is not in mixedCase
+Parameter '_attribute' of Registry.subscribe (/sb/0x992e215020d537952cc762e8ec3c771359e88940.sol#110-111) is not in mixedCase
+Parameter '_syncer' of Registry.subscribe (/sb/0x992e215020d537952cc762e8ec3c771359e88940.sol#111) is not in mixedCase
+Parameter '_attribute' of Registry.unsubscribe (/sb/0x992e215020d537952cc762e8ec3c771359e88940.sol#115-116) is not in mixedCase
+Parameter '_index' of Registry.unsubscribe (/sb/0x992e215020d537952cc762e8ec3c771359e88940.sol#116) is not in mixedCase
+Parameter '_attribute' of Registry.subscriberCount (/sb/0x992e215020d537952cc762e8ec3c771359e88940.sol#126) is not in mixedCase
+Parameter '_who' of Registry.setAttributeValue (/sb/0x992e215020d537952cc762e8ec3c771359e88940.sol#128) is not in mixedCase
+Parameter '_attribute' of Registry.setAttributeValue (/sb/0x992e215020d537952cc762e8ec3c771359e88940.sol#128) is not in mixedCase
+Parameter '_value' of Registry.setAttributeValue (/sb/0x992e215020d537952cc762e8ec3c771359e88940.sol#128) is not in mixedCase
+Parameter '_who' of Registry.hasAttribute (/sb/0x992e215020d537952cc762e8ec3c771359e88940.sol#143) is not in mixedCase
+Parameter '_attribute' of Registry.hasAttribute (/sb/0x992e215020d537952cc762e8ec3c771359e88940.sol#143) is not in mixedCase
+Parameter '_who' of Registry.getAttribute (/sb/0x992e215020d537952cc762e8ec3c771359e88940.sol#145) is not in mixedCase
+Parameter '_attribute' of Registry.getAttribute (/sb/0x992e215020d537952cc762e8ec3c771359e88940.sol#145-146) is not in mixedCase
+Parameter '_who' of Registry.getAttributeValue (/sb/0x992e215020d537952cc762e8ec3c771359e88940.sol#153) is not in mixedCase
+Parameter '_attribute' of Registry.getAttributeValue (/sb/0x992e215020d537952cc762e8ec3c771359e88940.sol#153) is not in mixedCase
+Parameter '_who' of Registry.getAttributeAdminAddr (/sb/0x992e215020d537952cc762e8ec3c771359e88940.sol#157) is not in mixedCase
+Parameter '_attribute' of Registry.getAttributeAdminAddr (/sb/0x992e215020d537952cc762e8ec3c771359e88940.sol#157) is not in mixedCase
+Parameter '_who' of Registry.getAttributeTimestamp (/sb/0x992e215020d537952cc762e8ec3c771359e88940.sol#161) is not in mixedCase
+Parameter '_attribute' of Registry.getAttributeTimestamp (/sb/0x992e215020d537952cc762e8ec3c771359e88940.sol#161) is not in mixedCase
+Parameter '_attribute' of Registry.syncAttribute (/sb/0x992e215020d537952cc762e8ec3c771359e88940.sol#163) is not in mixedCase
+Parameter '_startIndex' of Registry.syncAttribute (/sb/0x992e215020d537952cc762e8ec3c771359e88940.sol#163-164) is not in mixedCase
+Parameter '_addresses' of Registry.syncAttribute (/sb/0x992e215020d537952cc762e8ec3c771359e88940.sol#164-165) is not in mixedCase
+Parameter '_to' of Registry.reclaimEther (/sb/0x992e215020d537952cc762e8ec3c771359e88940.sol#178) is not in mixedCase
+Parameter '_to' of Registry.reclaimToken (/sb/0x992e215020d537952cc762e8ec3c771359e88940.sol#183) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x992e215020d537952cc762e8ec3c771359e88940.sol analyzed (4 contracts), 50 result(s) found

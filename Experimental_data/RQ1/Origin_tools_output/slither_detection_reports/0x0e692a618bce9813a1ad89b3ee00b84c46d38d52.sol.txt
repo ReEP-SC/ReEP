@@ -1,0 +1,77 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x0e692a618bce9813a1ad89b3ee00b84c46d38d52.sol:
+/sb/0x0e692a618bce9813a1ad89b3ee00b84c46d38d52.sol:111:3: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+  function Ownable() {
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x0e692a618bce9813a1ad89b3ee00b84c46d38d52.sol:131:7: Warning: "throw" is deprecated in favour of "revert()", "require()" and "assert()".
+      throw;
+      ^---^
+/sb/0x0e692a618bce9813a1ad89b3ee00b84c46d38d52.sol:249:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function MintHelper(address mToken, address pWallet, address mWallet)
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x0e692a618bce9813a1ad89b3ee00b84c46d38d52.sol:467:29: Warning: Using contract member "balance" inherited from the address type is deprecated. Convert the contract to "address" type to access the member, for example use "address(contract).balance" instead.
+        msg.sender.transfer(this.balance);
+                            ^----------^
+/sb/0x0e692a618bce9813a1ad89b3ee00b84c46d38d52.sol:111:3: Warning: No visibility specified. Defaulting to "public". 
+  function Ownable() {
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x0e692a618bce9813a1ad89b3ee00b84c46d38d52.sol:151:3: Warning: No visibility specified. Defaulting to "public". 
+  function transferOwnership(address newOwner) onlyOwner {
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x0e692a618bce9813a1ad89b3ee00b84c46d38d52.sol:249:5: Warning: No visibility specified. Defaulting to "public". 
+    function MintHelper(address mToken, address pWallet, address mWallet)
+    ^ (Relevant source part starts here and spans across multiple lines).
+
+INFO:Detectors:[92m
+MintHelper.proxyMergeMint has external calls inside a loop:
+	- ERC918Interface(mergedToken).merge() (/sb/0x0e692a618bce9813a1ad89b3ee00b84c46d38d52.sol#433-495)
+MintHelper.proxyMergeMint has external calls inside a loop:
+	- merge_totalReward = ERC918Interface(mergedToken).lastRewardAmount() (/sb/0x0e692a618bce9813a1ad89b3ee00b84c46d38d52.sol#433-435)
+MintHelper.proxyMergeMint has external calls inside a loop:
+	- require(bool)(ERC20Interface(mergedToken).transfer(minterWallet,merge_minterReward)) (/sb/0x0e692a618bce9813a1ad89b3ee00b84c46d38d52.sol#475-479)
+MintHelper.proxyMergeMint has external calls inside a loop:
+	- require(bool)(ERC20Interface(mergedToken).transfer(payoutsWallet,merge_payoutReward)) (/sb/0x0e692a618bce9813a1ad89b3ee00b84c46d38d52.sol#483-495)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+ERC918Interface.lastRewardAmount should be constant (/sb/0x0e692a618bce9813a1ad89b3ee00b84c46d38d52.sol#215-224)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Deprecated standard detected @ /sb/0x0e692a618bce9813a1ad89b3ee00b84c46d38d52.sol#147:
+	- Usage of "throw" should be replaced with "revert()"
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#deprecated-standards[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0x0e692a618bce9813a1ad89b3ee00b84c46d38d52.sol#169-173) should be declared external
+ERC20Interface.totalSupply (/sb/0x0e692a618bce9813a1ad89b3ee00b84c46d38d52.sol#175) should be declared external
+ERC20Interface.balanceOf (/sb/0x0e692a618bce9813a1ad89b3ee00b84c46d38d52.sol#175-177) should be declared external
+ERC20Interface.allowance (/sb/0x0e692a618bce9813a1ad89b3ee00b84c46d38d52.sol#177-181) should be declared external
+ERC20Interface.transfer (/sb/0x0e692a618bce9813a1ad89b3ee00b84c46d38d52.sol#181) should be declared external
+ERC20Interface.approve (/sb/0x0e692a618bce9813a1ad89b3ee00b84c46d38d52.sol#185-187) should be declared external
+ERC20Interface.transferFrom (/sb/0x0e692a618bce9813a1ad89b3ee00b84c46d38d52.sol#187-193) should be declared external
+ERC918Interface.totalSupply (/sb/0x0e692a618bce9813a1ad89b3ee00b84c46d38d52.sol#201-203) should be declared external
+ERC918Interface.getMiningDifficulty (/sb/0x0e692a618bce9813a1ad89b3ee00b84c46d38d52.sol#203) should be declared external
+ERC918Interface.getMiningTarget (/sb/0x0e692a618bce9813a1ad89b3ee00b84c46d38d52.sol#203-207) should be declared external
+ERC918Interface.getMiningReward (/sb/0x0e692a618bce9813a1ad89b3ee00b84c46d38d52.sol#207-211) should be declared external
+ERC918Interface.balanceOf (/sb/0x0e692a618bce9813a1ad89b3ee00b84c46d38d52.sol#211-215) should be declared external
+ERC918Interface.merge (/sb/0x0e692a618bce9813a1ad89b3ee00b84c46d38d52.sol#215) should be declared external
+ERC918Interface.mint (/sb/0x0e692a618bce9813a1ad89b3ee00b84c46d38d52.sol#225-233) should be declared external
+MintHelper.setMintableToken (/sb/0x0e692a618bce9813a1ad89b3ee00b84c46d38d52.sol#289-305) should be declared external
+MintHelper.setPayoutsWallet (/sb/0x0e692a618bce9813a1ad89b3ee00b84c46d38d52.sol#306-322) should be declared external
+MintHelper.setMinterWallet (/sb/0x0e692a618bce9813a1ad89b3ee00b84c46d38d52.sol#323-340) should be declared external
+MintHelper.setMinterFeePercent (/sb/0x0e692a618bce9813a1ad89b3ee00b84c46d38d52.sol#343-349) should be declared external
+MintHelper.proxyMint (/sb/0x0e692a618bce9813a1ad89b3ee00b84c46d38d52.sol#351-395) should be declared external
+MintHelper.proxyMergeMint (/sb/0x0e692a618bce9813a1ad89b3ee00b84c46d38d52.sol#395-495) should be declared external
+MintHelper.withdraw (/sb/0x0e692a618bce9813a1ad89b3ee00b84c46d38d52.sol) should be declared external
+MintHelper.send (/sb/0x0e692a618bce9813a1ad89b3ee00b84c46d38d52.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x0e692a618bce9813a1ad89b3ee00b84c46d38d52.sol:
+	- pragma solidity^0.4.18 (/sb/0x0e692a618bce9813a1ad89b3ee00b84c46d38d52.sol#9-17): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'Ownable.Ownable' (/sb/0x0e692a618bce9813a1ad89b3ee00b84c46d38d52.sol#123-129) is not in mixedCase
+Parameter 'challenge_digest' of ERC918Interface.mint (/sb/0x0e692a618bce9813a1ad89b3ee00b84c46d38d52.sol#229-230) is not in mixedCase
+Function 'MintHelper.MintHelper' (/sb/0x0e692a618bce9813a1ad89b3ee00b84c46d38d52.sol#265-289) is not in mixedCase
+Parameter 'challenge_digest' of MintHelper.proxyMint (/sb/0x0e692a618bce9813a1ad89b3ee00b84c46d38d52.sol#351-355) is not in mixedCase
+Parameter 'challenge_digest' of MintHelper.proxyMergeMint (/sb/0x0e692a618bce9813a1ad89b3ee00b84c46d38d52.sol#399) is not in mixedCase
+Parameter '_tokenAddr' of MintHelper.send (/sb/0x0e692a618bce9813a1ad89b3ee00b84c46d38d52.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x0e692a618bce9813a1ad89b3ee00b84c46d38d52.sol analyzed (5 contracts), 35 result(s) found

@@ -1,0 +1,64 @@
+INFO:Detectors:[91m
+Reentrancy in IronHands.payout (/sb/0xa5629861c9c345f50221996ef852fd9665eb1c05.sol#206-265):
+	External calls:
+	- tokens = weak_hands.buy.value(investment).gas(1000000)(msg.sender) (/sb/0xa5629861c9c345f50221996ef852fd9665eb1c05.sol#217-218)
+	- participants[payoutOrder].etherAddress.call.value(payoutToSend).gas(1000000)() (/sb/0xa5629861c9c345f50221996ef852fd9665eb1c05.sol#234-248)
+	State variables written after the call(s):
+	- payoutOrder (/sb/0xa5629861c9c345f50221996ef852fd9665eb1c05.sol#256-258)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities[0m
+INFO:Detectors:[92m
+IronHands.payout has external calls inside a loop:
+	- participants[payoutOrder].etherAddress.call.value(payoutToSend).gas(1000000)() (/sb/0xa5629861c9c345f50221996ef852fd9665eb1c05.sol#234-248)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in IronHands.payout (/sb/0xa5629861c9c345f50221996ef852fd9665eb1c05.sol#206-265):
+	External calls:
+	- tokens = weak_hands.buy.value(investment).gas(1000000)(msg.sender) (/sb/0xa5629861c9c345f50221996ef852fd9665eb1c05.sol#217-218)
+	State variables written after the call(s):
+	- backlog (/sb/0xa5629861c9c345f50221996ef852fd9665eb1c05.sol#228-229)
+	- backlog (/sb/0xa5629861c9c345f50221996ef852fd9665eb1c05.sol#243)
+	- creditRemaining (/sb/0xa5629861c9c345f50221996ef852fd9665eb1c05.sol#230)
+	- creditRemaining (/sb/0xa5629861c9c345f50221996ef852fd9665eb1c05.sol#244-246)
+	- participants (/sb/0xa5629861c9c345f50221996ef852fd9665eb1c05.sol#231-232)
+	- participants (/sb/0xa5629861c9c345f50221996ef852fd9665eb1c05.sol#246-248)
+Reentrancy in IronHands.withdraw (/sb/0xa5629861c9c345f50221996ef852fd9665eb1c05.sol#288-298):
+	External calls:
+	- weak_hands.withdraw.gas(1000000)() (/sb/0xa5629861c9c345f50221996ef852fd9665eb1c05.sol#291-292)
+	State variables written after the call(s):
+	- dividends (/sb/0xa5629861c9c345f50221996ef852fd9665eb1c05.sol#296)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+ERC20Interface.transfer (/sb/0xa5629861c9c345f50221996ef852fd9665eb1c05.sol#52-57) should be declared external
+REV.buy (/sb/0xa5629861c9c345f50221996ef852fd9665eb1c05.sol#58-59) should be declared external
+REV.withdraw (/sb/0xa5629861c9c345f50221996ef852fd9665eb1c05.sol#59-60) should be declared external
+REV.myTokens (/sb/0xa5629861c9c345f50221996ef852fd9665eb1c05.sol#60) should be declared external
+REV.myDividends (/sb/0xa5629861c9c345f50221996ef852fd9665eb1c05.sol#62-65) should be declared external
+Owned.changeOwner (/sb/0xa5629861c9c345f50221996ef852fd9665eb1c05.sol#77-81) should be declared external
+Owned.acceptOwnership (/sb/0xa5629861c9c345f50221996ef852fd9665eb1c05.sol#81-92) should be declared external
+IronHands.fallback (/sb/0xa5629861c9c345f50221996ef852fd9665eb1c05.sol#172) should be declared external
+IronHands.deposit (/sb/0xa5629861c9c345f50221996ef852fd9665eb1c05.sol#179-201) should be declared external
+IronHands.myTokens (/sb/0xa5629861c9c345f50221996ef852fd9665eb1c05.sol#266-272) should be declared external
+IronHands.totalDividends (/sb/0xa5629861c9c345f50221996ef852fd9665eb1c05.sol#282-283) should be declared external
+IronHands.backlogLength (/sb/0xa5629861c9c345f50221996ef852fd9665eb1c05.sol#302-305) should be declared external
+IronHands.backlogAmount (/sb/0xa5629861c9c345f50221996ef852fd9665eb1c05.sol#310-312) should be declared external
+IronHands.totalParticipants (/sb/0xa5629861c9c345f50221996ef852fd9665eb1c05.sol#317-319) should be declared external
+IronHands.totalSpent (/sb/0xa5629861c9c345f50221996ef852fd9665eb1c05.sol#324-326) should be declared external
+IronHands.amountIAmOwed (/sb/0xa5629861c9c345f50221996ef852fd9665eb1c05.sol#333-334) should be declared external
+IronHands.transferAnyERC20Token (/sb/0xa5629861c9c345f50221996ef852fd9665eb1c05.sol#338-341) should be declared external
+IronHands.changeLimit (/sb/0xa5629861c9c345f50221996ef852fd9665eb1c05.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xa5629861c9c345f50221996ef852fd9665eb1c05.sol:
+	- pragma solidity^0.4.21 (/sb/0xa5629861c9c345f50221996ef852fd9665eb1c05.sol#1): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Low level call in IronHands.payout (/sb/0xa5629861c9c345f50221996ef852fd9665eb1c05.sol#206-265):
+	-participants[payoutOrder].etherAddress.call.value(payoutToSend).gas(1000000)() /sb/0xa5629861c9c345f50221996ef852fd9665eb1c05.sol#234-248
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Parameter '' of REV.buy (/sb/0xa5629861c9c345f50221996ef852fd9665eb1c05.sol#58) is not in mixedCase
+Parameter '' of REV.myDividends (/sb/0xa5629861c9c345f50221996ef852fd9665eb1c05.sol#64) is not in mixedCase
+Parameter '_newOwner' of Owned.changeOwner (/sb/0xa5629861c9c345f50221996ef852fd9665eb1c05.sol#78-80) is not in mixedCase
+Variable 'IronHands.weak_hands' (/sb/0xa5629861c9c345f50221996ef852fd9665eb1c05.sol#153-155) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xa5629861c9c345f50221996ef852fd9665eb1c05.sol analyzed (4 contracts), 28 result(s) found

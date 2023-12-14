@@ -1,0 +1,77 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xc1759d97e0f1ca05fbfa4af0bbf55535c8a192dd.sol:
+/sb/0xc1759d97e0f1ca05fbfa4af0bbf55535c8a192dd.sol:473:17: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+        require(keccak256(msg.sender) == keccak256(tokenAddress), "Only for token");
+                ^-------------------^
+/sb/0xc1759d97e0f1ca05fbfa4af0bbf55535c8a192dd.sol:473:17: Warning: The provided argument of type address is not implicitly convertible to expected type bytes memory.
+        require(keccak256(msg.sender) == keccak256(tokenAddress), "Only for token");
+                ^-------------------^
+/sb/0xc1759d97e0f1ca05fbfa4af0bbf55535c8a192dd.sol:473:42: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+        require(keccak256(msg.sender) == keccak256(tokenAddress), "Only for token");
+                                         ^---------------------^
+/sb/0xc1759d97e0f1ca05fbfa4af0bbf55535c8a192dd.sol:473:42: Warning: The provided argument of type address is not implicitly convertible to expected type bytes memory.
+        require(keccak256(msg.sender) == keccak256(tokenAddress), "Only for token");
+                                         ^---------------------^
+
+INFO:Detectors:[91m
+Trade.contractBuyTokens (/sb/0xc1759d97e0f1ca05fbfa4af0bbf55535c8a192dd.sol#459-483) sends eth to arbitrary user
+	Dangerous calls:
+	- msg.sender.transfer(valueETH) (/sb/0xc1759d97e0f1ca05fbfa4af0bbf55535c8a192dd.sol#481)
+Trade.contractBuyTokensFrom (/sb/0xc1759d97e0f1ca05fbfa4af0bbf55535c8a192dd.sol#483-523) sends eth to arbitrary user
+	Dangerous calls:
+	- from.transfer(valueETH) (/sb/0xc1759d97e0f1ca05fbfa4af0bbf55535c8a192dd.sol#515-519)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[93m
+Trade.contractSellTokens (/sb/0xc1759d97e0f1ca05fbfa4af0bbf55535c8a192dd.sol#436-455) does not use the value returned by external calls:
+	-IERC20(tokenAddress).transfer(msg.sender,amount) (/sb/0xc1759d97e0f1ca05fbfa4af0bbf55535c8a192dd.sol#449-453)
+Trade.contractBuyTokens (/sb/0xc1759d97e0f1ca05fbfa4af0bbf55535c8a192dd.sol#459-483) does not use the value returned by external calls:
+	-IERC20(tokenAddress).transferTrade(msg.sender,this,amount) (/sb/0xc1759d97e0f1ca05fbfa4af0bbf55535c8a192dd.sol#477-481)
+Trade.contractBuyTokensFrom (/sb/0xc1759d97e0f1ca05fbfa4af0bbf55535c8a192dd.sol#483-523) does not use the value returned by external calls:
+	-IERC20(tokenAddress).transferTrade(from,this,amount) (/sb/0xc1759d97e0f1ca05fbfa4af0bbf55535c8a192dd.sol#515)
+Trade.withdrawTokens (/sb/0xc1759d97e0f1ca05fbfa4af0bbf55535c8a192dd.sol#539-551) does not use the value returned by external calls:
+	-IERC20(tokenAddress).transferTrade(this,to,value) (/sb/0xc1759d97e0f1ca05fbfa4af0bbf55535c8a192dd.sol)
+Trade.depositToken (/sb/0xc1759d97e0f1ca05fbfa4af0bbf55535c8a192dd.sol) does not use the value returned by external calls:
+	-IERC20(tokenAddress).transferTrade(msg.sender,this,_value) (/sb/0xc1759d97e0f1ca05fbfa4af0bbf55535c8a192dd.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Trade.DEC should be constant (/sb/0xc1759d97e0f1ca05fbfa4af0bbf55535c8a192dd.sol#263-265)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Ownable.addOwner (/sb/0xc1759d97e0f1ca05fbfa4af0bbf55535c8a192dd.sol#201-217) should be declared external
+Ownable.removeOwner (/sb/0xc1759d97e0f1ca05fbfa4af0bbf55535c8a192dd.sol#217-249) should be declared external
+Trade.updateCursETHtoUSD (/sb/0xc1759d97e0f1ca05fbfa4af0bbf55535c8a192dd.sol#321-335) should be declared external
+Trade.contractSalesAtUsd (/sb/0xc1759d97e0f1ca05fbfa4af0bbf55535c8a192dd.sol#335-345) should be declared external
+Trade.contractBuysAtUsd (/sb/0xc1759d97e0f1ca05fbfa4af0bbf55535c8a192dd.sol#345-355) should be declared external
+Trade.contractSalesAtEth (/sb/0xc1759d97e0f1ca05fbfa4af0bbf55535c8a192dd.sol#355-371) should be declared external
+Trade.contractBuysAtEth (/sb/0xc1759d97e0f1ca05fbfa4af0bbf55535c8a192dd.sol#371-387) should be declared external
+Trade.closeClientBuy (/sb/0xc1759d97e0f1ca05fbfa4af0bbf55535c8a192dd.sol#393-395) should be declared external
+Trade.openClientBuy (/sb/0xc1759d97e0f1ca05fbfa4af0bbf55535c8a192dd.sol#395-403) should be declared external
+Trade.closeClientSell (/sb/0xc1759d97e0f1ca05fbfa4af0bbf55535c8a192dd.sol#403-407) should be declared external
+Trade.openClientSell (/sb/0xc1759d97e0f1ca05fbfa4af0bbf55535c8a192dd.sol#407-413) should be declared external
+Trade.setClientBuyingTime (/sb/0xc1759d97e0f1ca05fbfa4af0bbf55535c8a192dd.sol#415-423) should be declared external
+Trade.setClientSellingTime (/sb/0xc1759d97e0f1ca05fbfa4af0bbf55535c8a192dd.sol#423-431) should be declared external
+Trade.contractBuyTokens (/sb/0xc1759d97e0f1ca05fbfa4af0bbf55535c8a192dd.sol#459-483) should be declared external
+Trade.contractBuyTokensFrom (/sb/0xc1759d97e0f1ca05fbfa4af0bbf55535c8a192dd.sol#483-523) should be declared external
+Trade.withdrawEth (/sb/0xc1759d97e0f1ca05fbfa4af0bbf55535c8a192dd.sol#523-539) should be declared external
+Trade.withdrawTokens (/sb/0xc1759d97e0f1ca05fbfa4af0bbf55535c8a192dd.sol#539-551) should be declared external
+Trade.depositEther (/sb/0xc1759d97e0f1ca05fbfa4af0bbf55535c8a192dd.sol) should be declared external
+Trade.depositToken (/sb/0xc1759d97e0f1ca05fbfa4af0bbf55535c8a192dd.sol) should be declared external
+Trade.changeTokenAddress (/sb/0xc1759d97e0f1ca05fbfa4af0bbf55535c8a192dd.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_owner' of Ownable.addOwner (/sb/0xc1759d97e0f1ca05fbfa4af0bbf55535c8a192dd.sol#205-207) is not in mixedCase
+Parameter '_owner' of Ownable.removeOwner (/sb/0xc1759d97e0f1ca05fbfa4af0bbf55535c8a192dd.sol#217-219) is not in mixedCase
+Event 'Trade.clientBuy' (/sb/0xc1759d97e0f1ca05fbfa4af0bbf55535c8a192dd.sol#279-285) is not in CapWords
+Event 'Trade.clientSell' (/sb/0xc1759d97e0f1ca05fbfa4af0bbf55535c8a192dd.sol#285-287) is not in CapWords
+Parameter '_value' of Trade.updateCursETHtoUSD (/sb/0xc1759d97e0f1ca05fbfa4af0bbf55535c8a192dd.sol#323) is not in mixedCase
+Parameter '_value' of Trade.contractSalesAtUsd (/sb/0xc1759d97e0f1ca05fbfa4af0bbf55535c8a192dd.sol#335-337) is not in mixedCase
+Parameter '_value' of Trade.contractBuysAtUsd (/sb/0xc1759d97e0f1ca05fbfa4af0bbf55535c8a192dd.sol#347-351) is not in mixedCase
+Parameter '_value' of Trade.contractSalesAtEth (/sb/0xc1759d97e0f1ca05fbfa4af0bbf55535c8a192dd.sol#361) is not in mixedCase
+Parameter '_value' of Trade.contractBuysAtEth (/sb/0xc1759d97e0f1ca05fbfa4af0bbf55535c8a192dd.sol#377) is not in mixedCase
+Parameter '_from' of Trade.setClientBuyingTime (/sb/0xc1759d97e0f1ca05fbfa4af0bbf55535c8a192dd.sol#415) is not in mixedCase
+Parameter '_time' of Trade.setClientBuyingTime (/sb/0xc1759d97e0f1ca05fbfa4af0bbf55535c8a192dd.sol#415) is not in mixedCase
+Parameter '_from' of Trade.setClientSellingTime (/sb/0xc1759d97e0f1ca05fbfa4af0bbf55535c8a192dd.sol#423) is not in mixedCase
+Parameter '_time' of Trade.setClientSellingTime (/sb/0xc1759d97e0f1ca05fbfa4af0bbf55535c8a192dd.sol#423-427) is not in mixedCase
+Parameter '_value' of Trade.depositToken (/sb/0xc1759d97e0f1ca05fbfa4af0bbf55535c8a192dd.sol) is not in mixedCase
+Variable 'Trade.DEC' (/sb/0xc1759d97e0f1ca05fbfa4af0bbf55535c8a192dd.sol#263-265) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xc1759d97e0f1ca05fbfa4af0bbf55535c8a192dd.sol analyzed (4 contracts), 43 result(s) found

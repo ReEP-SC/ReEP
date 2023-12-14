@@ -1,0 +1,67 @@
+INFO:Detectors:[91m
+MonarchyGame.sendPrize (/sb/0xea5d9e993e1133d0419a9e3fdde3654a08be7eed.sol#239-290) sends eth to arbitrary user
+	Dangerous calls:
+	- _paySuccessful = _winner.call.value(_prize)() (/sb/0xea5d9e993e1133d0419a9e3fdde3654a08be7eed.sol#261-262)
+	- _paySuccessful = _winner.call.value(_prize).gas(_gasLimit)() (/sb/0xea5d9e993e1133d0419a9e3fdde3654a08be7eed.sol#263-265)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[91m
+Reentrancy in MonarchyGame.sendPrize (/sb/0xea5d9e993e1133d0419a9e3fdde3654a08be7eed.sol#239-290):
+	External calls:
+	- _paySuccessful = _winner.call.value(_prize)() (/sb/0xea5d9e993e1133d0419a9e3fdde3654a08be7eed.sol#261-262)
+	- _paySuccessful = _winner.call.value(_prize).gas(_gasLimit)() (/sb/0xea5d9e993e1133d0419a9e3fdde3654a08be7eed.sol#263-265)
+	State variables written after the call(s):
+	- vars (/sb/0xea5d9e993e1133d0419a9e3fdde3654a08be7eed.sol#278-279)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities[0m
+INFO:Detectors:[93m
+MonarchyGame.overthrow (/sb/0xea5d9e993e1133d0419a9e3fdde3654a08be7eed.sol#162-223) uses a dangerous strict equality:
+	- msg.sender == vars.monarch
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+_wasRefundSuccess in MonarchyGame.overthrow (/sb/0xea5d9e993e1133d0419a9e3fdde3654a08be7eed.sol#185-186) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[92m
+MonarchyGame.fallback (/sb/0xea5d9e993e1133d0419a9e3fdde3654a08be7eed.sol#160-162) should be declared external
+MonarchyGame.sendPrize (/sb/0xea5d9e993e1133d0419a9e3fdde3654a08be7eed.sol#239-290) should be declared external
+MonarchyGame.sendFees (/sb/0xea5d9e993e1133d0419a9e3fdde3654a08be7eed.sol#295-300) should be declared external
+MonarchyGame.monarch (/sb/0xea5d9e993e1133d0419a9e3fdde3654a08be7eed.sol#309-312) should be declared external
+MonarchyGame.numOverthrows (/sb/0xea5d9e993e1133d0419a9e3fdde3654a08be7eed.sol#315-318) should be declared external
+MonarchyGame.blockEnded (/sb/0xea5d9e993e1133d0419a9e3fdde3654a08be7eed.sol#318-321) should be declared external
+MonarchyGame.prevBlock (/sb/0xea5d9e993e1133d0419a9e3fdde3654a08be7eed.sol#321-324) should be declared external
+MonarchyGame.isPaid (/sb/0xea5d9e993e1133d0419a9e3fdde3654a08be7eed.sol#324-326) should be declared external
+MonarchyGame.decree (/sb/0xea5d9e993e1133d0419a9e3fdde3654a08be7eed.sol#327-328) should be declared external
+MonarchyGame.collector (/sb/0xea5d9e993e1133d0419a9e3fdde3654a08be7eed.sol#333-336) should be declared external
+MonarchyGame.initialPrize (/sb/0xea5d9e993e1133d0419a9e3fdde3654a08be7eed.sol#336-339) should be declared external
+MonarchyGame.prizeIncr (/sb/0xea5d9e993e1133d0419a9e3fdde3654a08be7eed.sol#341-345) should be declared external
+MonarchyGame.reignBlocks (/sb/0xea5d9e993e1133d0419a9e3fdde3654a08be7eed.sol#345-347) should be declared external
+MonarchyGame.getBlocksRemaining (/sb/0xea5d9e993e1133d0419a9e3fdde3654a08be7eed.sol#353-355) should be declared external
+MonarchyGame.totalFees (/sb/0xea5d9e993e1133d0419a9e3fdde3654a08be7eed.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xea5d9e993e1133d0419a9e3fdde3654a08be7eed.sol:
+	- pragma solidity^0.4.23 (/sb/0xea5d9e993e1133d0419a9e3fdde3654a08be7eed.sol#1): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Low level call in MonarchyGame.errorAndRefund (/sb/0xea5d9e993e1133d0419a9e3fdde3654a08be7eed.sol#228-232):
+	-require(bool)(msg.sender.call.value(msg.value)()) /sb/0xea5d9e993e1133d0419a9e3fdde3654a08be7eed.sol#229
+Low level call in MonarchyGame.sendPrize (/sb/0xea5d9e993e1133d0419a9e3fdde3654a08be7eed.sol#239-290):
+	-_paySuccessful = _winner.call.value(_prize)() /sb/0xea5d9e993e1133d0419a9e3fdde3654a08be7eed.sol#261-262
+	-_paySuccessful = _winner.call.value(_prize).gas(_gasLimit)() /sb/0xea5d9e993e1133d0419a9e3fdde3654a08be7eed.sol#263-265
+Low level call in MonarchyGame.sendFees (/sb/0xea5d9e993e1133d0419a9e3fdde3654a08be7eed.sol#295-300):
+	-require(bool)(settings.collector.call.value(_feesSent)()) /sb/0xea5d9e993e1133d0419a9e3fdde3654a08be7eed.sol#297-299
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Parameter '_collector' of MonarchyGame. (/sb/0xea5d9e993e1133d0419a9e3fdde3654a08be7eed.sol#78-79) is not in mixedCase
+Parameter '_initialPrize' of MonarchyGame. (/sb/0xea5d9e993e1133d0419a9e3fdde3654a08be7eed.sol#79-80) is not in mixedCase
+Parameter '_fee' of MonarchyGame. (/sb/0xea5d9e993e1133d0419a9e3fdde3654a08be7eed.sol#80) is not in mixedCase
+Parameter '_prizeIncr' of MonarchyGame. (/sb/0xea5d9e993e1133d0419a9e3fdde3654a08be7eed.sol#82) is not in mixedCase
+Parameter '_reignBlocks' of MonarchyGame. (/sb/0xea5d9e993e1133d0419a9e3fdde3654a08be7eed.sol#83-85) is not in mixedCase
+Parameter '_initialBlocks' of MonarchyGame. (/sb/0xea5d9e993e1133d0419a9e3fdde3654a08be7eed.sol#85) is not in mixedCase
+Parameter '_decree' of MonarchyGame.overthrow (/sb/0xea5d9e993e1133d0419a9e3fdde3654a08be7eed.sol#163) is not in mixedCase
+Parameter '_msg' of MonarchyGame.errorAndRefund (/sb/0xea5d9e993e1133d0419a9e3fdde3654a08be7eed.sol#228) is not in mixedCase
+Parameter '_gasLimit' of MonarchyGame.sendPrize (/sb/0xea5d9e993e1133d0419a9e3fdde3654a08be7eed.sol#240) is not in mixedCase
+Constant 'MonarchyGame.version' (/sb/0xea5d9e993e1133d0419a9e3fdde3654a08be7eed.sol#65-66) is not in UPPER_CASE_WITH_UNDERSCORES
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+MonarchyGame.version (/sb/0xea5d9e993e1133d0419a9e3fdde3654a08be7eed.sol#65-66) is never used in MonarchyGame
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0xea5d9e993e1133d0419a9e3fdde3654a08be7eed.sol analyzed (1 contracts), 34 result(s) found

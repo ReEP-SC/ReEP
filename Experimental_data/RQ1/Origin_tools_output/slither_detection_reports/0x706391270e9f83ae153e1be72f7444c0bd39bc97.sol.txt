@@ -1,0 +1,79 @@
+INFO:Detectors:[93m
+Address.isContract (/sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol#68-75) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+StrategyalUSD3CRV.doApprove (/sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol#219-226) does not use the value returned by external calls:
+	-IERC20(ALCX).approve(unirouter,uint256(- 1)) (/sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol#222-223)
+	-IERC20(CVX).approve(unirouter,uint256(- 1)) (/sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol#223)
+	-IERC20(CRV).approve(unirouter,uint256(- 1)) (/sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol#224-225)
+	-IERC20(weth).approve(unirouter,uint256(- 1)) (/sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol#225-226)
+StrategyalUSD3CRV.deposit (/sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol#226-237) does not use the value returned by external calls:
+	-Booster(booster).depositAll(poolId,true) (/sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol#237)
+StrategyalUSD3CRV._withdraw (/sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol#247-265) does not use the value returned by external calls:
+	-BaseRewardPool(baserewardpool).withdrawAndUnwrap(amount,false) (/sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol#260-261)
+StrategyalUSD3CRV.harvest (/sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol#306-307) does not use the value returned by external calls:
+	-BaseRewardPool(baserewardpool).getReward(address(this),true) (/sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol#306)
+StrategyalUSD3CRV.redelivery (/sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol#307-337) does not use the value returned by external calls:
+	-UniswapRouter(unirouter).swapExactTokensForTokens(IERC20(ALCX).balanceOf(address(this)),0,swapALCX2ETHRouting,address(this),now.add(1800)) (/sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol#308-310)
+	-UniswapRouter(unirouter).swapExactTokensForTokens(IERC20(CRV).balanceOf(address(this)),0,swapCRV2ETHRouting,address(this),now.add(1800)) (/sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol#310-312)
+	-UniswapRouter(unirouter).swapExactTokensForTokens(IERC20(CVX).balanceOf(address(this)),0,swapCVX2ETHRouting,address(this),now.add(1800)) (/sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol#312-313)
+	-UniswapRouter(unirouter).swapExactTokensForTokens(_2token,0,swap2TokenRouting,address(this),now.add(1800)) (/sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol#316-319)
+	-UniswapRouter(unirouter).swapExactTokensForTokens(_2bt,0,swap2BTRouting,Controller(controller).rewards(),now.add(1800)) (/sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol#319-320)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in StrategyalUSD3CRV.constructor (/sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol#209-219):
+	External calls:
+	- doApprove() (/sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol#215)
+	State variables written after the call(s):
+	- swap2BTRouting (/sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol#217-218)
+	- swap2TokenRouting (/sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol#218-219)
+	- swapALCX2ETHRouting (/sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol#215-216)
+	- swapCRV2ETHRouting (/sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol#217)
+	- swapCVX2ETHRouting (/sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol#216-217)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Address.isContract uses assembly (/sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol#68-75)
+	- /sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol#73-75
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+StrategyalUSD3CRV.poolId should be constant (/sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol#167)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+StrategyalUSD3CRV.getALCXToken (/sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol#299-303) should be declared external
+StrategyalUSD3CRV.getPending (/sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol#303-306) should be declared external
+StrategyalUSD3CRV.harvest (/sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol#306-307) should be declared external
+StrategyalUSD3CRV.setredeliverynum (/sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol#337-341) should be declared external
+StrategyalUSD3CRV.setGovernance (/sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol:
+	- pragma solidity^0.5.15 (/sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol#7-9): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Low level call in Address.sendValue (/sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol#79-89):
+	-(success) = recipient.call.value(amount)() /sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol#83
+Low level call in SafeERC20.callOptionalReturn (/sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol#106-121):
+	-(success,returndata) = address(token).call(data) /sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol#110-112
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Parameter '' of Controller.vaults (/sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol#124-125) is not in mixedCase
+Function 'ICurveFi.add_liquidity' (/sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol#141-149) is not in mixedCase
+Parameter 'min_mint_amount' of ICurveFi.add_liquidity (/sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol#147-148) is not in mixedCase
+Parameter '_amount' of StrategyalUSD3CRV.withdraw (/sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol#239-241) is not in mixedCase
+Function 'StrategyalUSD3CRV._withdraw' (/sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol#247-265) is not in mixedCase
+Parameter '_amount' of StrategyalUSD3CRV._withdraw (/sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol#247-248) is not in mixedCase
+Parameter '_asset' of StrategyalUSD3CRV.withdrawAsset (/sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol#273) is not in mixedCase
+Parameter '_to' of StrategyalUSD3CRV.withdrawAsset (/sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol#273) is not in mixedCase
+Parameter '_governance' of StrategyalUSD3CRV.setGovernance (/sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol) is not in mixedCase
+Parameter '_controller' of StrategyalUSD3CRV.setController (/sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol) is not in mixedCase
+Constant 'StrategyalUSD3CRV.unirouter' (/sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol#167-168) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'StrategyalUSD3CRV.weth' (/sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol#168-169) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'StrategyalUSD3CRV.bt' (/sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol#169-171) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'StrategyalUSD3CRV.usdt' (/sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol#171-173) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'StrategyalUSD3CRV.want' (/sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol#173-174) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'StrategyalUSD3CRV.booster' (/sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol#174-176) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'StrategyalUSD3CRV.baserewardpool' (/sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol#176-177) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'StrategyalUSD3CRV.alUSD3CRV' (/sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol#181-186) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'StrategyalUSD3CRV.alUSDPool' (/sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol#186-189) is not in UPPER_CASE_WITH_UNDERSCORES
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x706391270e9f83ae153e1be72f7444c0bd39bc97.sol analyzed (11 contracts), 36 result(s) found

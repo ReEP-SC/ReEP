@@ -1,0 +1,152 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol:
+/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol:11:1: Warning: Experimental features are turned on. Do not use experimental features on live deployments.
+pragma experimental ABIEncoderV2;
+^-------------------------------^
+
+INFO:Detectors:[93m
+Reentrancy in ERC20tokensHodl.HodlTokens (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#307-353):
+	External calls:
+	- require(bool)(token.transferFrom(msg.sender,address(this),amount)) (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#317-321)
+	- _safes[_currentIndex] = Safe(_currentIndex,amount,now + hodlingTime,msg.sender,tokenAddress,token.symbol()) (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#327-337)
+	State variables written after the call(s):
+	- _currentIndex (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#343)
+Reentrancy in ERC20tokensHodl.RetireHodl (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#381-457):
+	External calls:
+	- PayToken(s.user,s.tokenAddress,s.amount) (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#411-415)
+	- PayToken(s.user,s.tokenAddress,realAmount) (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#439-443)
+	State variables written after the call(s):
+	- _safes (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#451-453)
+Reentrancy in ERC20tokensHodl.ReturnAllTokens (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#929-971):
+	External calls:
+	- PayToken(s.user,s.tokenAddress,s.amount) (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#957)
+	State variables written after the call(s):
+	- _safes (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#959)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+returned in ERC20tokensHodl.ReturnAllTokens (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#937) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[93m
+ERC20tokensHodl.PayToken (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#505-519) does not use the value returned by external calls:
+	-token.transfer(user,amount) (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#517-519)
+ERC20tokensHodl.WithdrawTokenFees (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#747-775) does not use the value returned by external calls:
+	-token.transfer(msg.sender,amount) (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#773-775)
+ERC20tokensHodl.WithdrawAllFees (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#783-835) does not use the value returned by external calls:
+	-token.transfer(msg.sender,x) (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#829-831)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+ERC20tokensHodl.WithdrawAllFees has external calls inside a loop:
+	- token.transfer(msg.sender,x) (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#829-831)
+ERC20tokensHodl.GetTokensAddressesWithFees has external calls inside a loop:
+	- tokenSymbol[i] = token.symbol() (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#901-903)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in ERC20tokensHodl.HodlTokens (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#307-353):
+	External calls:
+	- require(bool)(token.transferFrom(msg.sender,address(this),amount)) (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#317-321)
+	State variables written after the call(s):
+	- _userSafes (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#323-327)
+Reentrancy in ERC20tokensHodl.HodlTokens (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#307-353):
+	External calls:
+	- require(bool)(token.transferFrom(msg.sender,address(this),amount)) (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#317-321)
+	- _safes[_currentIndex] = Safe(_currentIndex,amount,now + hodlingTime,msg.sender,tokenAddress,token.symbol()) (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#327-337)
+	State variables written after the call(s):
+	- _countSafes (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#343-345)
+	- _safes (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#327-337)
+	- _totalSaved (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#339-341)
+Reentrancy in ERC20tokensHodl.RetireHodl (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#381-457):
+	External calls:
+	- PayToken(s.user,s.tokenAddress,realAmount) (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#439-443)
+	State variables written after the call(s):
+	- _listedReserves (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#443-447)
+	- _systemReserves (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#443-447)
+Reentrancy in ERC20tokensHodl.RetireHodl (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#381-457):
+	External calls:
+	- PayToken(s.user,s.tokenAddress,s.amount) (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#411-415)
+	- PayToken(s.user,s.tokenAddress,realAmount) (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#439-443)
+	State variables written after the call(s):
+	- _countSafes (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#453)
+	- _totalSaved (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#451-453)
+	- _userSafes (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#451-453)
+Reentrancy in ERC20tokensHodl.ReturnAllTokens (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#929-971):
+	External calls:
+	- PayToken(s.user,s.tokenAddress,s.amount) (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#957)
+	State variables written after the call(s):
+	- _countSafes (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#967)
+	- _totalSaved (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#959)
+	- _userSafes (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#959)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+ERC20Interface.decimals should be constant (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#1071-1075)
+ERC20Interface.totalSupply should be constant (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#1071)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Different versions of Solidity is used in /sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol:
+	- Version used: ['ABIEncoderV2', '^0.4.25']
+	- /sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#9-11 declares pragma solidity^0.4.25
+	- /sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#11-16 declares pragma experimentalABIEncoderV2
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#different-pragma-directives-are-used[0m
+INFO:Detectors:[92m
+OwnableContract.viewSuperOwner (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#61-69) should be declared external
+OwnableContract.changeOwner (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#71-91) should be declared external
+BlockableContract.doBlockContract (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#123-135) should be declared external
+BlockableContract.unBlockContract (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#135-153) should be declared external
+ERC20tokensHodl.fallback (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#277-286) should be declared external
+ERC20tokensHodl.storeProfileHashed (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#295-303) should be declared external
+ERC20tokensHodl.HodlTokens (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#307-353) should be declared external
+ERC20tokensHodl.ClaimTokens (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#359-377) should be declared external
+ERC20tokensHodl.GetHodlTokensBalance (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#565-595) should be declared external
+ERC20tokensHodl.GetUserSafesLength (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#599-609) should be declared external
+ERC20tokensHodl.GetSafe (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#613-635) should be declared external
+ERC20tokensHodl.GetContractBalance (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#659-671) should be declared external
+ERC20tokensHodl.OwnerRetireHodl (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#673-689) should be declared external
+ERC20tokensHodl.ChangeHodlingTime (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#695-709) should be declared external
+ERC20tokensHodl.ChangeAllTimeHighPrice (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#713-724) should be declared external
+ERC20tokensHodl.ChangeComission (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#733-745) should be declared external
+ERC20tokensHodl.WithdrawTokenFees (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#747-775) should be declared external
+ERC20tokensHodl.WithdrawAllFees (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#783-835) should be declared external
+ERC20tokensHodl.WithdrawEth (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#843-855) should be declared external
+ERC20tokensHodl.GetTokensAddressesWithFees (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#863-923) should be declared external
+ERC20tokensHodl.ReturnAllTokens (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#929-971) should be declared external
+ERC20Interface.symbol (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#1075-1077) should be declared external
+ERC20Interface.balanceOf (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#1079-1083) should be declared external
+ERC20Interface.transfer (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#1091-1093) should be declared external
+ERC20Interface.transferFrom (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol) should be declared external
+ERC20Interface.approve (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol) should be declared external
+ERC20Interface.allowance (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Event 'OwnableContract.onTransferOwnership' (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#35-41) is not in CapWords
+Event 'BlockableContract.onBlockHODLs' (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#99-101) is not in CapWords
+Event 'ERC20tokensHodl.onStoreProfileHash' (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#155-157) is not in CapWords
+Event 'ERC20tokensHodl.onHodlTokens' (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#157-159) is not in CapWords
+Event 'ERC20tokensHodl.onClaimTokens' (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#159-171) is not in CapWords
+Event 'ERC20tokensHodl.onReturnAll' (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#171-173) is not in CapWords
+Parameter '_profileHashed' of ERC20tokensHodl.storeProfileHashed (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#295) is not in mixedCase
+Function 'ERC20tokensHodl.HodlTokens' (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#307-353) is not in mixedCase
+Function 'ERC20tokensHodl.ClaimTokens' (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#359-377) is not in mixedCase
+Function 'ERC20tokensHodl.RetireHodl' (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#381-457) is not in mixedCase
+Function 'ERC20tokensHodl.StoreComission' (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#465-503) is not in mixedCase
+Function 'ERC20tokensHodl.PayToken' (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#505-519) is not in mixedCase
+Function 'ERC20tokensHodl.DeleteSafe' (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#531-565) is not in mixedCase
+Function 'ERC20tokensHodl.GetHodlTokensBalance' (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#565-595) is not in mixedCase
+Function 'ERC20tokensHodl.GetUserSafesLength' (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#599-609) is not in mixedCase
+Function 'ERC20tokensHodl.GetSafe' (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#613-635) is not in mixedCase
+Parameter '_id' of ERC20tokensHodl.GetSafe (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#613-615) is not in mixedCase
+Function 'ERC20tokensHodl.GetTokenFees' (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#643-655) is not in mixedCase
+Function 'ERC20tokensHodl.GetContractBalance' (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#659-671) is not in mixedCase
+Function 'ERC20tokensHodl.OwnerRetireHodl' (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#673-689) is not in mixedCase
+Function 'ERC20tokensHodl.ChangeHodlingTime' (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#695-709) is not in mixedCase
+Function 'ERC20tokensHodl.ChangeAllTimeHighPrice' (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#713-724) is not in mixedCase
+Function 'ERC20tokensHodl.ChangeComission' (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#733-745) is not in mixedCase
+Function 'ERC20tokensHodl.WithdrawTokenFees' (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#747-775) is not in mixedCase
+Function 'ERC20tokensHodl.WithdrawAllFees' (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#783-835) is not in mixedCase
+Function 'ERC20tokensHodl.WithdrawEth' (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#843-855) is not in mixedCase
+Function 'ERC20tokensHodl.GetTokensAddressesWithFees' (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#863-923) is not in mixedCase
+Function 'ERC20tokensHodl.ReturnAllTokens' (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#929-971) is not in mixedCase
+Variable 'ERC20tokensHodl.AXPRtoken' (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#179-182) is not in mixedCase
+Variable 'ERC20tokensHodl._userSafes' (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#211-217) is not in mixedCase
+Variable 'ERC20tokensHodl._countSafes' (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#223-225) is not in mixedCase
+Variable 'ERC20tokensHodl._totalSaved' (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#225-231) is not in mixedCase
+Variable 'ERC20tokensHodl._listedReserves' (/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol#245-247) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x78750ec32b4e46fd9512336abd3cb2e4127c29f3.sol analyzed (4 contracts), 76 result(s) found

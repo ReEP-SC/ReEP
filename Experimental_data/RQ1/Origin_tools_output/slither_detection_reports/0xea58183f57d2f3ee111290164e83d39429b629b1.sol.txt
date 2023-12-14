@@ -1,0 +1,191 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol:
+/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol:60:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function MNY() {
+
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol:381:5: Warning: Variable is shadowed in inline assembly by an instruction of the same name
+    function add(uint a, uint b) internal pure returns (uint) {
+
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol:369:5: Warning: Variable is shadowed in inline assembly by an instruction of the same name
+    function div(uint a, uint b) internal pure returns (uint) {
+
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol:363:5: Warning: Variable is shadowed in inline assembly by an instruction of the same name
+    function mul(uint a, uint b) internal pure returns (uint) {
+
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol:376:5: Warning: Variable is shadowed in inline assembly by an instruction of the same name
+    function sub(uint a, uint b) internal pure returns (uint) {
+
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol:151:17: Warning: Invoking events without "emit" prefix is deprecated.
+                Transfer(msg.sender, _to, _value);
+
+                ^-------------------------------^
+/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol:167:13: Warning: Invoking events without "emit" prefix is deprecated.
+            Transfer(msg.sender, _to, _value);
+
+            ^-------------------------------^
+/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol:198:13: Warning: Invoking events without "emit" prefix is deprecated.
+            Transfer(this, _recipient, _tokenCount);
+
+            ^-------------------------------------^
+/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol:205:9: Warning: Invoking events without "emit" prefix is deprecated.
+        TokensExchanged(_recipient, _source, _sentTokens);
+
+        ^-----------------------------------------------^
+/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol:283:9: Warning: Invoking events without "emit" prefix is deprecated.
+        TokensExchanged(_recipient, _source, _originalTokenAmount);
+
+        ^--------------------------------------------------------^
+/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol:333:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Transfer(this, _recipient, _tokens);
+
+        ^---------------------------------^
+/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol:393:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Transfer(_from, _to, _tokens);
+
+        ^---------------------------^
+/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol:399:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Approval(msg.sender, _spender, _tokens);
+
+        ^-------------------------------------^
+/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol:4:5: Warning: No visibility specified. Defaulting to "public". 
+    function exchangeTokensFromOtherContract(address _source, address _recipient, uint256 _RequestedTokens);
+
+    ^------------------------------------------------------------------------------------------------------^
+/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol:8:5: Warning: No visibility specified. Defaulting to "public". 
+    function transfer(address _to, uint _value);
+
+    ^------------------------------------------^
+/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol:60:5: Warning: No visibility specified. Defaulting to "public". 
+    function MNY() {
+
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol:135:52: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function transfer(address _to, uint256 _value, bytes _data) public {
+
+                                                   ^---------^
+/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol:202:5: Warning: No visibility specified. Defaulting to "public". 
+    function exchangeTokensFromOtherContract(address _source, address _recipient, uint256 _sentTokens) {
+
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol:342:5: Warning: No visibility specified. Defaulting to "public". 
+    function distributeOwnedTokensFromOtherContracts(address _contract, address _recipient, uint256 _tokens) {
+
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol:352:5: Warning: Function state mutability can be restricted to view
+    function existingContract(address _contract) internal returns (bool) {
+
+    ^ (Relevant source part starts here and spans across multiple lines).
+
+INFO:Detectors:[93m
+Target (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#13-21) has incorrect ERC20 function interface(s):
+	-transfer (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#15-21)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[93m
+Reentrancy in MNY.distributeOwnedTokensFromOtherContracts (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#697-719):
+	External calls:
+	- t.transfer(_recipient,_tokens) (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#716-717)
+	State variables written after the call(s):
+	- tokenBalances (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#717-719)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+MNY.shareStoredTokens has external calls inside a loop:
+	- t.transfer(_recipient,share) (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#659)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in MNY.shareStoredTokens (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#645-664):
+	External calls:
+	- t.transfer(_recipient,share) (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#659)
+	State variables written after the call(s):
+	- tokenBalances (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#661-663)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+MNY.addExchangePartnerAddressAndRate uses assembly (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#425-455)
+	- /sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#439-443
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+MNY.decimals should be constant (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#27-29)
+MNY.name should be constant (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#25-27)
+MNY.symbol should be constant (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#29-33)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Partner.exchangeTokensFromOtherContract (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#7-9) should be declared external
+Target.transfer (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#15-21) should be declared external
+MNY.populateTierTokens (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#131-199) should be declared external
+MNY.populateTierRates (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#199-271) should be declared external
+MNY.transfer (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#273-347) should be declared external
+MNY.exchangeTokensFromOtherContract (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#405-423) should be declared external
+MNY.addExchangePartnerAddressAndRate (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#425-455) should be declared external
+MNY.addTierRateAndTokens (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#455-485) should be declared external
+MNY.closeTierAddition (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#485-493) should be declared external
+MNY.getTotalSupply (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#499-507) should be declared external
+MNY.getMineableTokens (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#507-515) should be declared external
+MNY.getCirculatingSupply (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#515-523) should be declared external
+MNY.balanceInTier (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#531-533) should be declared external
+MNY.balanceInSpecificTier (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#538-547) should be declared external
+MNY.rateInSpecificTier (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#547-549) should be declared external
+MNY.currentTier (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#549-551) should be declared external
+MNY.convertTransferredTokensToMny (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#553-591) should be declared external
+MNY.changeOwner (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#591-593) should be declared external
+MNY.changeExchangeAdmin (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#593-601) should be declared external
+MNY.getTokenBalance (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#613-622) should be declared external
+MNY.tokenShare (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#639-645) should be declared external
+MNY.distributeMnyAfterSwap (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#669-683) should be declared external
+MNY.distributeOwnedTokensFromOtherContracts (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#697-719) should be declared external
+MNY.contractExchangeRate (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#738-743) should be declared external
+MNY.transferFrom (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#787-811) should be declared external
+MNY.approve (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol) should be declared external
+MNY.allowance (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol:
+	- pragma solidity^0.4.21 (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#1): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'MNY.MNY' (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#127-129) is not in mixedCase
+Parameter '_to' of MNY.transfer (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#273) is not in mixedCase
+Parameter '_value' of MNY.transfer (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#273-277) is not in mixedCase
+Parameter '_submitted' of MNY.allocateTokens (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#349) is not in mixedCase
+Parameter '_tokenCount' of MNY.allocateTokens (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#349) is not in mixedCase
+Parameter '_recipient' of MNY.allocateTokens (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#349-351) is not in mixedCase
+Parameter '_source' of MNY.exchangeTokensFromOtherContract (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#407) is not in mixedCase
+Parameter '_recipient' of MNY.exchangeTokensFromOtherContract (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#407) is not in mixedCase
+Parameter '_sentTokens' of MNY.exchangeTokensFromOtherContract (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#407-409) is not in mixedCase
+Parameter '_partner' of MNY.addExchangePartnerAddressAndRate (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#427) is not in mixedCase
+Parameter '_rate' of MNY.addExchangePartnerAddressAndRate (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#427-429) is not in mixedCase
+Parameter '_level' of MNY.addTierRateAndTokens (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#457-459) is not in mixedCase
+Parameter '_tokens' of MNY.addTierRateAndTokens (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#459) is not in mixedCase
+Parameter '_rate' of MNY.addTierRateAndTokens (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#460-461) is not in mixedCase
+Parameter '_receiver' of MNY.balanceOf (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#523) is not in mixedCase
+Parameter '_tier' of MNY.balanceInSpecificTier (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#539) is not in mixedCase
+Parameter '_tier' of MNY.rateInSpecificTier (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#547) is not in mixedCase
+Parameter '_value' of MNY.convertTransferredTokensToMny (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#553) is not in mixedCase
+Parameter '_recipient' of MNY.convertTransferredTokensToMny (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#553) is not in mixedCase
+Parameter '_source' of MNY.convertTransferredTokensToMny (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#553-555) is not in mixedCase
+Parameter '_originalTokenAmount' of MNY.convertTransferredTokensToMny (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#555) is not in mixedCase
+Parameter '_newOwner' of MNY.changeOwner (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#591) is not in mixedCase
+Parameter '_newAdmin' of MNY.changeExchangeAdmin (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#595-599) is not in mixedCase
+Parameter '_contract' of MNY.maintainExternalContractTokenBalance (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#607) is not in mixedCase
+Parameter '_tokens' of MNY.maintainExternalContractTokenBalance (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#607-609) is not in mixedCase
+Parameter '_contract' of MNY.getTokenBalance (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#613) is not in mixedCase
+Parameter '_contract' of MNY.tokenShare (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#639) is not in mixedCase
+Parameter '_recipient' of MNY.shareStoredTokens (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#647) is not in mixedCase
+Parameter '_recipient' of MNY.distributeMnyAfterSwap (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#669) is not in mixedCase
+Parameter '_tokens' of MNY.distributeMnyAfterSwap (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#669-672) is not in mixedCase
+Parameter '_contract' of MNY.distributeOwnedTokensFromOtherContracts (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#697-703) is not in mixedCase
+Parameter '_recipient' of MNY.distributeOwnedTokensFromOtherContracts (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#703) is not in mixedCase
+Parameter '_tokens' of MNY.distributeOwnedTokensFromOtherContracts (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#703) is not in mixedCase
+Parameter '_contract' of MNY.existingContract (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#725) is not in mixedCase
+Parameter '_contract' of MNY.contractExchangeRate (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#739) is not in mixedCase
+Parameter '_from' of MNY.transferFrom (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#793) is not in mixedCase
+Parameter '_to' of MNY.transferFrom (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#793) is not in mixedCase
+Parameter '_tokens' of MNY.transferFrom (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol#793) is not in mixedCase
+Parameter '_spender' of MNY.approve (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol) is not in mixedCase
+Parameter '_tokens' of MNY.approve (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol) is not in mixedCase
+Parameter '_tokenOwner' of MNY.allowance (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol) is not in mixedCase
+Parameter '_spender' of MNY.allowance (/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xea58183f57d2f3ee111290164e83d39429b629b1.sol analyzed (3 contracts), 76 result(s) found

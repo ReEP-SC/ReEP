@@ -1,0 +1,100 @@
+INFO:Detectors:[93m
+AINStake.calcUserStakeAndInterest (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#285-317) uses a dangerous strict equality:
+	- monthsPassed == currentMonthsPassed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Reentrancy in AINStake._unstake (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#426-439):
+	External calls:
+	- require(bool,string)(token.transfer(user,amount),transfer failed) (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#439)
+	State variables written after the call(s):
+	- reEntrancyMutex (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol)
+Reentrancy in AINStake.closeContract (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#201-217):
+	External calls:
+	- balance = token.balanceOf(address(this)) (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#208-210)
+	- require(bool,string)(token.transfer(owner,balance),token transfer to owner failed) (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#214-216)
+	State variables written after the call(s):
+	- contractClosed (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#217)
+Reentrancy in AINStake.stake (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#397-425):
+	External calls:
+	- require(bool,string)(token.transferFrom(msg.sender,address(this),amount),transferFrom failed) (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#412-416)
+	State variables written after the call(s):
+	- contractSingleStakeSum (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#423)
+	- reEntrancyMutex (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#423)
+	- singleStakeSum (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#421-422)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+Reentrancy in AINStake.closeContract (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#201-217):
+	External calls:
+	- balance = token.balanceOf(address(this)) (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#208-210)
+	- require(bool,string)(token.transfer(owner,balance),token transfer to owner failed) (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#214-216)
+	State variables written after the call(s):
+	- stakingClosed (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#216)
+Reentrancy in AINStake.multiStake (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#372-395):
+	External calls:
+	- require(bool,string)(token.transferFrom(msg.sender,address(this),amountTotal),transferFrom failed) (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#388-390)
+	State variables written after the call(s):
+	- userStakeMap (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#392-393)
+Reentrancy in AINStake.stake (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#397-425):
+	External calls:
+	- require(bool,string)(token.transferFrom(msg.sender,address(this),amount),transferFrom failed) (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#412-416)
+	State variables written after the call(s):
+	- userList (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#419-420)
+	- userStakeMap (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#419-420)
+	- userStakeMap (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#420-421)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+AINStake.extendContract (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#247-266) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(block.timestamp >= closingTime,cannot extend contract before the current closingTime) (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#250-252)
+AINStake.min (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#280-281) uses timestamp for comparisons
+	Dangerous comparisons:
+	- a < b (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#281)
+AINStake.calcUserStakeAndInterest (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#285-317) uses timestamp for comparisons
+	Dangerous comparisons:
+	- currentMonthsPassed < monthsPassed (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#306-312)
+	- startTime > endTime (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#295-314)
+	- monthsPassed == currentMonthsPassed (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#299-314)
+AINStake.stake (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#397-425) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(block.timestamp < closingTime,past closing time) (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#402-403)
+AINStake._unstake (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#426-439) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(token.transfer(user,amount),transfer failed) (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#439)
+	- require(bool,string)(amount > 0 && amount <= maxUnstakingAmountPerUser,invalid unstaking amount) (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#434-436)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+AINStake.divider should be constant (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#137)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+ERC20Basic.totalSupply (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#15-16) should be declared external
+ERC20Basic.balanceOf (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#16-17) should be declared external
+ERC20Basic.transfer (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#17-18) should be declared external
+ERC20.allowance (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#26-27) should be declared external
+ERC20.transferFrom (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#27-28) should be declared external
+ERC20.approve (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#28-29) should be declared external
+Ownable.transferOwnership (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#66-72) should be declared external
+Ownable.renounceOwnership (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#75-82) should be declared external
+AINStake.getUserListLength (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#178-183) should be declared external
+AINStake.getUserStake (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#189-197) should be declared external
+AINStake.closeContract (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#201-217) should be declared external
+AINStake.openStaking (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#220-227) should be declared external
+AINStake.closeStaking (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#232-237) should be declared external
+AINStake.setMaxStakingAmountPerUser (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#238-241) should be declared external
+AINStake.setMaxUnstakingAmountPerUser (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#241-245) should be declared external
+AINStake.setMaxStakingAmountPerContract (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#245-247) should be declared external
+AINStake.extendContract (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#247-266) should be declared external
+AINStake.getUserTotalStakeSum (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#269-280) should be declared external
+AINStake.calcContractStakeAndInterest (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#322-331) should be declared external
+AINStake.addMultiStakeWhitelist (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#357-362) should be declared external
+AINStake.multiStake (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#372-395) should be declared external
+AINStake.stake (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#397-425) should be declared external
+AINStake.unstake (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_token' of AINStake. (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#170) is not in mixedCase
+Parameter '_closingTime' of AINStake. (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#170-171) is not in mixedCase
+Parameter '_endTime' of AINStake.calcUserStakeAndInterest (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#286) is not in mixedCase
+Function 'AINStake._stake' (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#362-365) is not in mixedCase
+Function 'AINStake._unstake' (/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol#426-439) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xfe568f255ba531986038e540458337b5cfda2193.sol analyzed (5 contracts), 41 result(s) found

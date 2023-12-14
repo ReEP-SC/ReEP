@@ -1,0 +1,78 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x91ed8fbf68653c734a6bdda57f0db76df6b197e9.sol:
+/sb/0x91ed8fbf68653c734a6bdda57f0db76df6b197e9.sol:79:9: Warning: Return value of low-level calls not used.
+        contr[_sender].call.value(0)();
+        ^----------------------------^
+/sb/0x91ed8fbf68653c734a6bdda57f0db76df6b197e9.sol:89:9: Warning: Return value of low-level calls not used.
+        contr[_sender].call.value(0)();
+        ^----------------------------^
+
+INFO:Detectors:[93m
+Reentrancy in fathercontract.fallback (/sb/0x91ed8fbf68653c734a6bdda57f0db76df6b197e9.sol#95-127):
+	External calls:
+	- ERC20(NEO).transfer(sender,amount - a) (/sb/0x91ed8fbf68653c734a6bdda57f0db76df6b197e9.sol#105-109)
+	- ERC20(NEO).transfer(owner,a) (/sb/0x91ed8fbf68653c734a6bdda57f0db76df6b197e9.sol#109-111)
+	State variables written after the call(s):
+	- value (/sb/0x91ed8fbf68653c734a6bdda57f0db76df6b197e9.sol#119)
+Reentrancy in getfreetoken.trans (/sb/0x91ed8fbf68653c734a6bdda57f0db76df6b197e9.sol#157-169):
+	External calls:
+	- A = ERC20(NEO).balanceOf(this) (/sb/0x91ed8fbf68653c734a6bdda57f0db76df6b197e9.sol#161-163)
+	- ERC20(NEO).transfer(fatherr,ERC20(NEO).balanceOf(this)) (/sb/0x91ed8fbf68653c734a6bdda57f0db76df6b197e9.sol#165-169)
+	- father(fatherr).fallback(num,sender,A) (/sb/0x91ed8fbf68653c734a6bdda57f0db76df6b197e9.sol)
+	State variables written after the call(s):
+	- num (/sb/0x91ed8fbf68653c734a6bdda57f0db76df6b197e9.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+fathercontract.use (/sb/0x91ed8fbf68653c734a6bdda57f0db76df6b197e9.sol#57-77) does not use the value returned by external calls:
+	-ERC20(NEO).transferFrom(msg.sender,this,value[msg.sender]) (/sb/0x91ed8fbf68653c734a6bdda57f0db76df6b197e9.sol#59-63)
+fathercontract.getsometokenn (/sb/0x91ed8fbf68653c734a6bdda57f0db76df6b197e9.sol#77-85) does not use the value returned by external calls:
+	-ERC20(NEO).transfer(contr[_sender],_value) (/sb/0x91ed8fbf68653c734a6bdda57f0db76df6b197e9.sol#79-83)
+fathercontract.getsometoken (/sb/0x91ed8fbf68653c734a6bdda57f0db76df6b197e9.sol#85-95) does not use the value returned by external calls:
+	-ERC20(NEO).transfer(contr[_sender],_value) (/sb/0x91ed8fbf68653c734a6bdda57f0db76df6b197e9.sol#91-93)
+fathercontract.fallback (/sb/0x91ed8fbf68653c734a6bdda57f0db76df6b197e9.sol#95-127) does not use the value returned by external calls:
+	-ERC20(NEO).transfer(sender,amount - a) (/sb/0x91ed8fbf68653c734a6bdda57f0db76df6b197e9.sol#105-109)
+	-ERC20(NEO).transfer(owner,a) (/sb/0x91ed8fbf68653c734a6bdda57f0db76df6b197e9.sol#109-111)
+getfreetoken.trans (/sb/0x91ed8fbf68653c734a6bdda57f0db76df6b197e9.sol#157-169) does not use the value returned by external calls:
+	-ERC20(NEO).transfer(fatherr,ERC20(NEO).balanceOf(this)) (/sb/0x91ed8fbf68653c734a6bdda57f0db76df6b197e9.sol#165-169)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in getfreetoken.trans (/sb/0x91ed8fbf68653c734a6bdda57f0db76df6b197e9.sol#157-169):
+	External calls:
+	- A = ERC20(NEO).balanceOf(this) (/sb/0x91ed8fbf68653c734a6bdda57f0db76df6b197e9.sol#161-163)
+	- ERC20(NEO).transfer(fatherr,ERC20(NEO).balanceOf(this)) (/sb/0x91ed8fbf68653c734a6bdda57f0db76df6b197e9.sol#165-169)
+	State variables written after the call(s):
+	- num (/sb/0x91ed8fbf68653c734a6bdda57f0db76df6b197e9.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+fathercontract.NEO should be constant (/sb/0x91ed8fbf68653c734a6bdda57f0db76df6b197e9.sol#37-41)
+getfreetoken.NEO should be constant (/sb/0x91ed8fbf68653c734a6bdda57f0db76df6b197e9.sol#135-139)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+ERC20.transferFrom (/sb/0x91ed8fbf68653c734a6bdda57f0db76df6b197e9.sol#15-17) should be declared external
+ERC20.balanceOf (/sb/0x91ed8fbf68653c734a6bdda57f0db76df6b197e9.sol#17-19) should be declared external
+ERC20.transfer (/sb/0x91ed8fbf68653c734a6bdda57f0db76df6b197e9.sol#19-23) should be declared external
+father.fallback (/sb/0x91ed8fbf68653c734a6bdda57f0db76df6b197e9.sol#25-31) should be declared external
+fathercontract.use (/sb/0x91ed8fbf68653c734a6bdda57f0db76df6b197e9.sol#57-77) should be declared external
+fathercontract.fallback (/sb/0x91ed8fbf68653c734a6bdda57f0db76df6b197e9.sol#95-127) should be declared external
+getfreetoken.fallback (/sb/0x91ed8fbf68653c734a6bdda57f0db76df6b197e9.sol#155-157) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Low level call in fathercontract.getsometokenn (/sb/0x91ed8fbf68653c734a6bdda57f0db76df6b197e9.sol#77-85):
+	-contr[_sender].call.value(0)() /sb/0x91ed8fbf68653c734a6bdda57f0db76df6b197e9.sol#83-85
+Low level call in fathercontract.getsometoken (/sb/0x91ed8fbf68653c734a6bdda57f0db76df6b197e9.sol#85-95):
+	-contr[_sender].call.value(0)() /sb/0x91ed8fbf68653c734a6bdda57f0db76df6b197e9.sol#93-95
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Contract 'father' (/sb/0x91ed8fbf68653c734a6bdda57f0db76df6b197e9.sol#25-31) is not in CapWords
+Contract 'fathercontract' (/sb/0x91ed8fbf68653c734a6bdda57f0db76df6b197e9.sol#33-127) is not in CapWords
+Parameter '_value' of fathercontract.use (/sb/0x91ed8fbf68653c734a6bdda57f0db76df6b197e9.sol#57) is not in mixedCase
+Parameter '_sender' of fathercontract.getsometokenn (/sb/0x91ed8fbf68653c734a6bdda57f0db76df6b197e9.sol#77) is not in mixedCase
+Parameter '_value' of fathercontract.getsometokenn (/sb/0x91ed8fbf68653c734a6bdda57f0db76df6b197e9.sol#77-79) is not in mixedCase
+Parameter '_sender' of fathercontract.getsometoken (/sb/0x91ed8fbf68653c734a6bdda57f0db76df6b197e9.sol#85) is not in mixedCase
+Parameter '_value' of fathercontract.getsometoken (/sb/0x91ed8fbf68653c734a6bdda57f0db76df6b197e9.sol#85-87) is not in mixedCase
+Variable 'fathercontract.NEO' (/sb/0x91ed8fbf68653c734a6bdda57f0db76df6b197e9.sol#37-41) is not in mixedCase
+Contract 'getfreetoken' (/sb/0x91ed8fbf68653c734a6bdda57f0db76df6b197e9.sol#127-169) is not in CapWords
+Parameter '_father' of getfreetoken. (/sb/0x91ed8fbf68653c734a6bdda57f0db76df6b197e9.sol#145-147) is not in mixedCase
+Parameter '_sender' of getfreetoken. (/sb/0x91ed8fbf68653c734a6bdda57f0db76df6b197e9.sol#147-149) is not in mixedCase
+Variable 'getfreetoken.NEO' (/sb/0x91ed8fbf68653c734a6bdda57f0db76df6b197e9.sol#135-139) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x91ed8fbf68653c734a6bdda57f0db76df6b197e9.sol analyzed (4 contracts), 30 result(s) found

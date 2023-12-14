@@ -1,0 +1,277 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol:
+/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol:1377:59: Warning: The "returndatasize" instruction is only available after the Metropolis hard fork. Before that it acts as an invalid instruction.
+                mstore(0x40, add(_returndataMemoryOffset, returndatasize))
+                                                          ^------------^
+/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol:1379:62: Warning: The "returndatasize" instruction is only available after the Metropolis hard fork. Before that it acts as an invalid instruction.
+                returndatacopy(_returndataMemoryOffset, 0x0, returndatasize)
+                                                             ^------------^
+/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol:1379:17: Warning: The "returndatacopy" instruction is only available after the Metropolis hard fork. Before that it acts as an invalid instruction.
+                returndatacopy(_returndataMemoryOffset, 0x0, returndatasize)
+                ^----------------------------------------------------------^
+/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol:1381:49: Warning: The "returndatasize" instruction is only available after the Metropolis hard fork. Before that it acts as an invalid instruction.
+                return(_returndataMemoryOffset, returndatasize)
+                                                ^------------^
+
+INFO:Detectors:[93m
+Order.getOrderId (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#911-935) uses a dangerous strict equality:
+	- require(bool)(_orderData.orders.getAmount(_orderId) == 0)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Contract locking ether found in /sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol:
+	Contract Delegator has payable functions:
+	 - fallback (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1369-1389)
+	But does not have a function to withdraw the ether
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#contracts-that-lock-ether[0m
+INFO:Detectors:[93m
+Order.escrowFundsForBid (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#985-1055) does not use the value returned by external calls:
+	-_orderData.market.getShareToken(_i).trustedOrderTransfer(_orderData.creator,_orderData.market,_orderData.sharesEscrowed) (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1033-1037)
+Order.escrowFundsForAsk (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1055-1087) does not use the value returned by external calls:
+	-_shareToken.trustedOrderTransfer(_orderData.creator,_orderData.market,_orderData.sharesEscrowed) (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1083)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Order.escrowFundsForBid has external calls inside a loop:
+	- _orderData.market.getShareToken(_i).trustedOrderTransfer(_orderData.creator,_orderData.market,_orderData.sharesEscrowed) (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1033-1037)
+Order.escrowFundsForBid has external calls inside a loop:
+	- _creatorShareTokenBalance = _orderData.market.getShareToken(_i).balanceOf(_orderData.creator) (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1005-1007)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Delegator.fallback uses assembly (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1369-1389)
+	- /sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1377-1389
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+ITyped.getTypeName (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#19-25) should be declared external
+ERC20Basic.balanceOf (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#45-47) should be declared external
+ERC20Basic.transfer (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#47-49) should be declared external
+ERC20Basic.totalSupply (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#49-55) should be declared external
+ERC20.allowance (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#73-75) should be declared external
+ERC20.transferFrom (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#75-77) should be declared external
+ERC20.approve (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#79-87) should be declared external
+IReputationToken.initialize (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#91) should be declared external
+IReputationToken.migrateOut (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#91-95) should be declared external
+IReputationToken.migrateIn (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#95) should be declared external
+IReputationToken.trustedReportingParticipantTransfer (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#95-97) should be declared external
+IReputationToken.trustedMarketTransfer (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#97-99) should be declared external
+IReputationToken.trustedFeeWindowTransfer (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#99-101) should be declared external
+IReputationToken.trustedUniverseTransfer (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#101-105) should be declared external
+IReputationToken.getUniverse (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#105-107) should be declared external
+IReputationToken.getTotalMigrated (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#107-109) should be declared external
+IReputationToken.getTotalTheoreticalSupply (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#109-115) should be declared external
+IReputationToken.mintForReportingParticipant (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#115-121) should be declared external
+IOwnable.getOwner (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#123-133) should be declared external
+IOwnable.transferOwnership (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#133-135) should be declared external
+IShareToken.trustedOrderTransfer (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#167-169) should be declared external
+IShareToken.trustedFillOrderTransfer (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#169-175) should be declared external
+IShareToken.trustedCancelOrderTransfer (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#175-183) should be declared external
+IReportingParticipant.getStake (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#187) should be declared external
+IReportingParticipant.getPayoutDistributionHash (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#187-191) should be declared external
+IReportingParticipant.liquidateLosing (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#191-193) should be declared external
+IReportingParticipant.redeem (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#193-195) should be declared external
+IReportingParticipant.isInvalid (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#195-197) should be declared external
+IReportingParticipant.isDisavowed (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#197-199) should be declared external
+IReportingParticipant.migrate (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#199) should be declared external
+IReportingParticipant.getPayoutNumerator (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#204-211) should be declared external
+IReportingParticipant.getMarket (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#211) should be declared external
+IReportingParticipant.getSize (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#211-213) should be declared external
+IMailbox.initialize (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#223-233) should be declared external
+IMailbox.depositEther (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#233-239) should be declared external
+IMarket.initialize (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#247-253) should be declared external
+IMarket.derivePayoutDistributionHash (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#253-255) should be declared external
+IMarket.getUniverse (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#257) should be declared external
+IMarket.getFeeWindow (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#258-259) should be declared external
+IMarket.getNumberOfOutcomes (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#259-261) should be declared external
+IMarket.getNumTicks (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#261-263) should be declared external
+IMarket.getDenominationToken (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#263-265) should be declared external
+IMarket.getShareToken (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#265-267) should be declared external
+IMarket.getMarketCreatorSettlementFeeDivisor (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#267-269) should be declared external
+IMarket.getForkingMarket (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#269-271) should be declared external
+IMarket.getEndTime (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#271-273) should be declared external
+IMarket.getMarketCreatorMailbox (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#273-275) should be declared external
+IMarket.getWinningPayoutDistributionHash (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#275-277) should be declared external
+IMarket.getWinningPayoutNumerator (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#277-279) should be declared external
+IMarket.getReputationToken (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#279-281) should be declared external
+IMarket.getFinalizationTime (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#281-283) should be declared external
+IMarket.getInitialReporterAddress (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#283) should be declared external
+IMarket.deriveMarketCreatorFeeAmount (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#283-287) should be declared external
+IMarket.isContainerForShareToken (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#287-289) should be declared external
+IMarket.isContainerForReportingParticipant (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#289-293) should be declared external
+IMarket.isInvalid (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#293-295) should be declared external
+IMarket.finalize (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#295-297) should be declared external
+IMarket.designatedReporterWasCorrect (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#297-303) should be declared external
+IMarket.designatedReporterShowed (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#307-312) should be declared external
+IMarket.isFinalized (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#313-315) should be declared external
+IMarket.finalizeFork (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#317-323) should be declared external
+IMarket.assertBalances (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#325-333) should be declared external
+Initializable.getInitialized (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#363-365) should be declared external
+IFeeToken.initialize (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#371-377) should be declared external
+IFeeToken.getFeeWindow (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#377) should be declared external
+IFeeToken.feeWindowBurn (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#378-381) should be declared external
+IFeeToken.mintForReportingParticipant (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#381-383) should be declared external
+IFeeWindow.initialize (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#387-389) should be declared external
+IFeeWindow.getUniverse (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#390-391) should be declared external
+IFeeWindow.getReputationToken (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#391-393) should be declared external
+IFeeWindow.getStartTime (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#393-395) should be declared external
+IFeeWindow.getEndTime (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#395-397) should be declared external
+IFeeWindow.getNumMarkets (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#397-399) should be declared external
+IFeeWindow.getNumInvalidMarkets (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#399-403) should be declared external
+IFeeWindow.getNumIncorrectDesignatedReportMarkets (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#403-405) should be declared external
+IFeeWindow.getNumDesignatedReportNoShows (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#405-407) should be declared external
+IFeeWindow.getFeeToken (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#407-409) should be declared external
+IFeeWindow.isActive (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#409-411) should be declared external
+IFeeWindow.isOver (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#411) should be declared external
+IFeeWindow.onMarketFinalized (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#411-417) should be declared external
+IFeeWindow.buy (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#421-423) should be declared external
+IFeeWindow.redeem (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#423) should be declared external
+IFeeWindow.redeemForReportingParticipant (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#423-427) should be declared external
+IFeeWindow.mintFeeTokens (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#427-429) should be declared external
+IFeeWindow.trustedUniverseBuy (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#429) should be declared external
+IUniverse.fork (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#435-437) should be declared external
+IUniverse.getParentUniverse (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#437-439) should be declared external
+IUniverse.createChildUniverse (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#439-441) should be declared external
+IUniverse.getChildUniverse (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#441-444) should be declared external
+IUniverse.getReputationToken (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#445) should be declared external
+IUniverse.getForkingMarket (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#445-447) should be declared external
+IUniverse.getForkEndTime (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#447-449) should be declared external
+IUniverse.getForkReputationGoal (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#449-451) should be declared external
+IUniverse.getParentPayoutDistributionHash (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#451-453) should be declared external
+IUniverse.getDisputeRoundDurationInSeconds (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#453-455) should be declared external
+IUniverse.getOrCreateFeeWindowByTimestamp (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#455-459) should be declared external
+IUniverse.getOrCreateCurrentFeeWindow (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#459-461) should be declared external
+IUniverse.getOrCreateNextFeeWindow (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#461-463) should be declared external
+IUniverse.getOpenInterestInAttoEth (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#463-465) should be declared external
+IUniverse.getRepMarketCapInAttoeth (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#465-467) should be declared external
+IUniverse.getTargetRepMarketCapInAttoeth (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#467-469) should be declared external
+IUniverse.getOrCacheValidityBond (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#469) should be declared external
+IUniverse.getOrCacheDesignatedReportStake (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#469) should be declared external
+IUniverse.getOrCacheDesignatedReportNoShowBond (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#469-471) should be declared external
+IUniverse.getOrCacheReportingFeeDivisor (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#471-473) should be declared external
+IUniverse.getDisputeThresholdForFork (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#473-475) should be declared external
+IUniverse.getInitialReportMinValue (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#475-477) should be declared external
+IUniverse.calculateFloatingValue (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#477-481) should be declared external
+IUniverse.getOrCacheMarketCreationCost (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#481-483) should be declared external
+IUniverse.getCurrentFeeWindow (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#483-485) should be declared external
+IUniverse.getOrCreateFeeWindowBefore (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#485) should be declared external
+IUniverse.isParentOf (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#485-487) should be declared external
+IUniverse.updateTentativeWinningChildUniverse (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#487-489) should be declared external
+IUniverse.isContainerForFeeWindow (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#491-493) should be declared external
+IUniverse.isContainerForMarket (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#493-495) should be declared external
+IUniverse.isContainerForReportingParticipant (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#497-499) should be declared external
+IUniverse.isContainerForShareToken (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#499-501) should be declared external
+IUniverse.isContainerForFeeToken (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#501-503) should be declared external
+IUniverse.addMarketTo (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#503-505) should be declared external
+IUniverse.removeMarketFrom (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#505-511) should be declared external
+IUniverse.decrementOpenInterest (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#511-515) should be declared external
+IUniverse.decrementOpenInterestFromMarket (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#515-517) should be declared external
+IUniverse.incrementOpenInterest (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#517-519) should be declared external
+IUniverse.incrementOpenInterestFromMarket (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#519) should be declared external
+IUniverse.getWinningChildUniverse (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#525-531) should be declared external
+IUniverse.isForking (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#531-533) should be declared external
+IDisputeCrowdsourcer.initialize (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#541-551) should be declared external
+IDisputeCrowdsourcer.contribute (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#551-553) should be declared external
+IOrders.saveOrder (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#681-687) should be declared external
+IOrders.removeOrder (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#687-689) should be declared external
+IOrders.getMarket (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#689-691) should be declared external
+IOrders.getOrderType (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#691-693) should be declared external
+IOrders.getOutcome (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#693-695) should be declared external
+IOrders.getAmount (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#695) should be declared external
+IOrders.getPrice (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#695-697) should be declared external
+IOrders.getOrderCreator (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#697-699) should be declared external
+IOrders.getOrderSharesEscrowed (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#699) should be declared external
+IOrders.getOrderMoneyEscrowed (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#699) should be declared external
+IOrders.getBetterOrderId (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#699-701) should be declared external
+IOrders.getWorseOrderId (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#701-703) should be declared external
+IOrders.getBestOrderId (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#703-705) should be declared external
+IOrders.getWorstOrderId (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#705-707) should be declared external
+IOrders.getLastOutcomePrice (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#707-709) should be declared external
+IOrders.getOrderId (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#709-713) should be declared external
+IOrders.getTotalEscrowed (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#713-715) should be declared external
+IOrders.isBetterPrice (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#715-717) should be declared external
+IOrders.isWorsePrice (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#717-727) should be declared external
+IOrders.assertIsNotBetterPrice (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#727-733) should be declared external
+IOrders.assertIsNotWorsePrice (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#733-735) should be declared external
+IOrders.recordFillOrder (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#735-737) should be declared external
+IAugur.createChildUniverse (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1089) should be declared external
+IAugur.isKnownUniverse (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1089-1091) should be declared external
+IAugur.trustedTransfer (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1091) should be declared external
+IAugur.logMarketCreated (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1091-1095) should be declared external
+IAugur.logMarketCreated (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1095-1097) should be declared external
+IAugur.logInitialReportSubmitted (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1097-1099) should be declared external
+IAugur.disputeCrowdsourcerCreated (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1099-1103) should be declared external
+IAugur.logDisputeCrowdsourcerContribution (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1103-1107) should be declared external
+IAugur.logDisputeCrowdsourcerCompleted (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1107-1109) should be declared external
+IAugur.logInitialReporterRedeemed (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1109-1111) should be declared external
+IAugur.logDisputeCrowdsourcerRedeemed (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1111-1113) should be declared external
+IAugur.logFeeWindowRedeemed (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1113) should be declared external
+IAugur.logMarketFinalized (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1113-1115) should be declared external
+IAugur.logMarketMigrated (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1115) should be declared external
+IAugur.logReportingParticipantDisavowed (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1115-1117) should be declared external
+IAugur.logMarketParticipantsDisavowed (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1117-1119) should be declared external
+IAugur.logOrderCanceled (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1119-1121) should be declared external
+IAugur.logOrderCreated (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1121-1125) should be declared external
+IAugur.logOrderFilled (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1125-1131) should be declared external
+IAugur.logCompleteSetsPurchased (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1131-1133) should be declared external
+IAugur.logCompleteSetsSold (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1133-1135) should be declared external
+IAugur.logTradingProceedsClaimed (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1135-1139) should be declared external
+IAugur.logUniverseForked (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1139-1141) should be declared external
+IAugur.logFeeWindowTransferred (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1141-1143) should be declared external
+IAugur.logReputationTokensTransferred (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1143-1145) should be declared external
+IAugur.logDisputeCrowdsourcerTokensTransferred (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1145-1147) should be declared external
+IAugur.logShareTokensTransferred (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1147-1149) should be declared external
+IAugur.logReputationTokenBurned (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1149-1151) should be declared external
+IAugur.logReputationTokenMinted (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1151-1153) should be declared external
+IAugur.logShareTokenBurned (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1155-1157) should be declared external
+IAugur.logShareTokenMinted (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1157-1159) should be declared external
+IAugur.logFeeWindowBurned (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1159-1161) should be declared external
+IAugur.logFeeWindowMinted (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1161-1162) should be declared external
+IAugur.logDisputeCrowdsourcerTokensBurned (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1163-1173) should be declared external
+IAugur.logDisputeCrowdsourcerTokensMinted (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1173-1177) should be declared external
+IAugur.logFeeWindowCreated (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1177-1181) should be declared external
+IAugur.logFeeTokenTransferred (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1181-1185) should be declared external
+IAugur.logFeeTokenBurned (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1185-1197) should be declared external
+IAugur.logFeeTokenMinted (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1197-1199) should be declared external
+IAugur.logTimestampSet (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1199-1209) should be declared external
+IAugur.logInitialReporterTransferred (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1209-1217) should be declared external
+IAugur.logMarketTransferred (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1217-1227) should be declared external
+IAugur.logMarketMailboxTransferred (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1227-1237) should be declared external
+IAugur.logEscapeHatchChanged (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1237-1247) should be declared external
+IController.assertIsWhitelisted (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1255-1260) should be declared external
+IController.lookup (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1263-1267) should be declared external
+IController.stopInEmergency (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1267-1273) should be declared external
+IController.onlyInEmergency (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1273-1275) should be declared external
+IController.getAugur (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1277-1281) should be declared external
+IController.getTimestamp (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1281-1283) should be declared external
+IControlled.getController (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1293-1297) should be declared external
+Controlled.getController (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1345-1349) should be declared external
+Controlled.setController (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1349-1351) should be declared external
+IControlled.setController (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1297-1305) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol:
+	- pragma solidity0.4.20 (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#9-13): it allows old versions
+	- pragma solidity0.4.20 (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#811-813): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '' of IShareToken.destroyShares (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#163) is not in mixedCase
+Parameter '_controller' of Order.create (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#867-869) is not in mixedCase
+Parameter '_creator' of Order.create (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#869) is not in mixedCase
+Parameter '_outcome' of Order.create (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#869-871) is not in mixedCase
+Parameter '_type' of Order.create (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#871-877) is not in mixedCase
+Parameter '_attoshares' of Order.create (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#879) is not in mixedCase
+Parameter '_price' of Order.create (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#879-883) is not in mixedCase
+Parameter '_market' of Order.create (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#885) is not in mixedCase
+Parameter '_betterOrderId' of Order.create (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#885) is not in mixedCase
+Parameter '_worseOrderId' of Order.create (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#885) is not in mixedCase
+Parameter '_orderData' of Order.getOrderId (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#913) is not in mixedCase
+Parameter '_creatorDirection' of Order.getOrderTradingTypeFromMakerDirection (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#937) is not in mixedCase
+Parameter '_fillerDirection' of Order.getOrderTradingTypeFromFillerDirection (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#945-951) is not in mixedCase
+Parameter '_orderData' of Order.escrowFunds (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#957) is not in mixedCase
+Parameter '_orderData' of Order.saveOrder (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#969) is not in mixedCase
+Parameter '_tradeGroupId' of Order.saveOrder (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#969-971) is not in mixedCase
+Parameter '_orderData' of Order.escrowFundsForBid (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#985) is not in mixedCase
+Parameter '_orderData' of Order.escrowFundsForAsk (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1055) is not in mixedCase
+Parameter '_controller' of Controlled.setController (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1349) is not in mixedCase
+Function 'Controlled.Controlled' (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1345) is not in mixedCase
+Function 'Delegator.Delegator' (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1359-1368) is not in mixedCase
+Parameter '_controller' of Delegator.Delegator (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1359) is not in mixedCase
+Parameter '_controllerLookupName' of Delegator.Delegator (/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol#1359-1361) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x1985365e9f78359a9b6ad760e32412f4a445e862.sol analyzed (24 contracts), 235 result(s) found

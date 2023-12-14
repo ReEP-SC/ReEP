@@ -1,0 +1,152 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol:
+/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol:69:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function Authorization()
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol:148:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function StandardToken() public payable {}
+    ^----------------------------------------^
+/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol:220:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function XPAAssetToken(
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol:59:22: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+      bytes32 hash = keccak256(block.number, msg.sender, salt);
+                     ^---------------------------------------^
+/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol:303:16: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+        return keccak256(symbol);
+               ^---------------^
+/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol:303:16: Warning: The provided argument of type string storage ref is not implicitly convertible to expected type bytes memory.
+        return keccak256(symbol);
+               ^---------------^
+/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol:394:61: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+            if(XPAAssetToken(assetTokens[i]).getSymbol() == keccak256(symbol_)){
+                                                            ^----------------^
+/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol:394:61: Warning: The provided argument of type string memory is not implicitly convertible to expected type bytes memory.
+            if(XPAAssetToken(assetTokens[i]).getSymbol() == keccak256(symbol_)){
+                                                            ^----------------^
+
+INFO:Detectors:[93m
+Contract locking ether found in /sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol:
+	Contract TokenFactory has payable functions:
+	 - Authorization (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#73-79)
+	But does not have a function to withdraw the ether
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#contracts-that-lock-ether[0m
+INFO:Detectors:[93m
+Reentrancy in TokenFactory.createToken (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#394-426):
+	External calls:
+	- XPAAssetToken(assetTokens[i]).getSymbol() == keccak256()(symbol_) (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#403-407)
+	- XPAAssetToken(newAsset).assignOperator(XPAAssets) (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#412-414)
+	- XPAAssetToken(newAsset).assignOperator(ETHAssets) (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#414-417)
+	- XPAAssetToken(newAsset).assignBurner(fundAccounts[j]) (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#422-424)
+	State variables written after the call(s):
+	- assetTokens (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#425-426)
+Reentrancy in TokenFactory.setETHAssets (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#518-560):
+	External calls:
+	- dismissTokenOperator(ETHAssets) (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#553-554)
+	- assignTokenOperator(candidateETHAssets) (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#554-555)
+	State variables written after the call(s):
+	- ETHAssets (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#556-557)
+	- candidateETHAssets (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#557-560)
+Reentrancy in TokenFactory.setXPAAssets (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#473-518):
+	External calls:
+	- dismissTokenOperator(XPAAssets) (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#512)
+	- assignTokenOperator(candidateXPAAssets) (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#513)
+	State variables written after the call(s):
+	- XPAAssets (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#514-515)
+	- candidateXPAAssets (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#516)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+newAsset in TokenFactory.createToken (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#402) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[92m
+TokenFactory.createToken has external calls inside a loop:
+	- XPAAssetToken(newAsset).assignBurner(fundAccounts[j]) (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#422-424)
+TokenFactory.createToken has external calls inside a loop:
+	- XPAAssetToken(assetTokens[i]).getSymbol() == keccak256()(symbol_) (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#403-407)
+TokenFactory.addFundAccount has external calls inside a loop:
+	- XPAAssetToken(assetTokens[i]).assignBurner(account_) (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#572-574)
+TokenFactory.removeFundAccount has external calls inside a loop:
+	- XPAAssetToken(assetTokens[i]).dismissBunner(account_) (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#595-598)
+TokenFactory.assignTokenOperator has external calls inside a loop:
+	- XPAAssetToken(assetTokens[i]).assignOperator(user_) (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol)
+TokenFactory.dismissTokenOperator has external calls inside a loop:
+	- XPAAssetToken(assetTokens[i]).dismissOperator(user_) (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+TokenFactory.setExchange (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#429-473) uses timestamp for comparisons
+	Dangerous comparisons:
+	- exchange_ == candidateExchange && candidateTillExchange < block.timestamp (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#460-473)
+	- exchange_ != candidateExchange && candidateTillExchange + 86400 * 7 < block.timestamp (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#447-473)
+TokenFactory.setXPAAssets (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#473-518) uses timestamp for comparisons
+	Dangerous comparisons:
+	- XPAAssets_ != candidateXPAAssets && candidateTillXPAAssets + 86400 * 7 < block.timestamp (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#490-517)
+	- XPAAssets_ == candidateXPAAssets && candidateTillXPAAssets < block.timestamp (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#502-517)
+TokenFactory.setETHAssets (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#518-560) uses timestamp for comparisons
+	Dangerous comparisons:
+	- ETHAssets_ == candidateETHAssets && candidateTillETHAssets < block.timestamp (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#547-560)
+	- ETHAssets_ != candidateETHAssets && candidateTillETHAssets + 86400 * 7 < block.timestamp (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#533-560)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+TokenFactory.ETH should be constant (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#394)
+TokenFactory.XPA should be constant (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#393-394)
+TokenFactory.version should be constant (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#363)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Authorization.powerSwitch (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#97-103) should be declared external
+Authorization.transferOwnership (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#103-110) should be declared external
+XPAAssetToken.transferOwnership (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#247-250) should be declared external
+Authorization.dismissOperator (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#121-134) should be declared external
+StandardToken.transfer (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#157-172) should be declared external
+StandardToken.transferFrom (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#173-193) should be declared external
+StandardToken.balanceOf (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#193-199) should be declared external
+StandardToken.approve (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#201-211) should be declared external
+StandardToken.allowance (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#211-217) should be declared external
+XPAAssetToken.create (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#251-265) should be declared external
+XPAAssetToken.burn (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#265-281) should be declared external
+XPAAssetToken.burnFrom (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#281-306) should be declared external
+XPAAssetToken.getDefaultExchangeRate (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#307-313) should be declared external
+XPAAssetToken.getSymbol (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#313-318) should be declared external
+XPAAssetToken.assignBurner (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#318-331) should be declared external
+XPAAssetToken.dismissBunner (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#331-350) should be declared external
+TokenFactory.createToken (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#394-426) should be declared external
+TokenFactory.setExchange (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#429-473) should be declared external
+TokenFactory.setXPAAssets (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#473-518) should be declared external
+TokenFactory.setETHAssets (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#518-560) should be declared external
+TokenFactory.addFundAccount (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#560-576) should be declared external
+TokenFactory.removeFundAccount (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#576-607) should be declared external
+TokenFactory.getPrice (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#607-620) should be declared external
+TokenFactory.getAssetLength (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#620-625) should be declared external
+TokenFactory.getAssetToken (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#625-629) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol:
+	- pragma solidity^0.4.21 (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#1): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter 'N' of SafeMath.random (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#58) is not in mixedCase
+Function 'Authorization.Authorization' (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#73-79) is not in mixedCase
+Function 'StandardToken.StandardToken' (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#155-157) is not in mixedCase
+Parameter '_owner' of StandardToken.balanceOf (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#193-194) is not in mixedCase
+Parameter '_spender' of StandardToken.approve (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#201-202) is not in mixedCase
+Parameter '_value' of StandardToken.approve (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#202) is not in mixedCase
+Parameter '_owner' of StandardToken.allowance (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#213) is not in mixedCase
+Parameter '_spender' of StandardToken.allowance (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#213-214) is not in mixedCase
+Function 'XPAAssetToken.XPAAssetToken' (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#230-247) is not in mixedCase
+Event 'TokenFactory.eNominatingExchange' (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#364) is not in CapWords
+Event 'TokenFactory.eNominatingXPAAssets' (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#365-366) is not in CapWords
+Event 'TokenFactory.eNominatingETHAssets' (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#366-368) is not in CapWords
+Event 'TokenFactory.eCancelNominatingExchange' (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#368-369) is not in CapWords
+Event 'TokenFactory.eCancelNominatingXPAAssets' (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#369-370) is not in CapWords
+Event 'TokenFactory.eCancelNominatingETHAssets' (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#370-371) is not in CapWords
+Event 'TokenFactory.eChangeExchange' (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#371) is not in CapWords
+Event 'TokenFactory.eChangeXPAAssets' (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#371-372) is not in CapWords
+Event 'TokenFactory.eChangeETHAssets' (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#372-373) is not in CapWords
+Event 'TokenFactory.eAddFundAccount' (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#373-374) is not in CapWords
+Event 'TokenFactory.eRemoveFundAccount' (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#374) is not in CapWords
+Parameter 'XPAAssets_' of TokenFactory.setXPAAssets (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#474-475) is not in mixedCase
+Parameter 'ETHAssets_' of TokenFactory.setETHAssets (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#519) is not in mixedCase
+Variable 'TokenFactory.XPAAssets' (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#379-380) is not in mixedCase
+Variable 'TokenFactory.ETHAssets' (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#380-381) is not in mixedCase
+Variable 'TokenFactory.XPA' (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#393-394) is not in mixedCase
+Variable 'TokenFactory.ETH' (/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol#394) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x36b86289ccce0984251ccca62871b589b0f52d68.sol analyzed (7 contracts), 67 result(s) found

@@ -1,0 +1,89 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol:
+/sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol:11:3: Warning: Variable covers a large part of storage and thus makes collisions likely. Either use mappings or dynamic arrays and allow their size to be increased only in small quantities per transaction.
+  uint256[2**160] _compound_lookup;
+  ^------------------------------^
+/sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol:40:25: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+  function enterMarkets(address[] calldata cTokens) external  {
+                        ^------------------------^
+
+INFO:Detectors:[91m
+MarginSwap._parent_address (/sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#8-9) is never initialized. It is used in:
+	- trade (/sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#398-517)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-state-variables[0m
+INFO:Detectors:[93m
+MarginSwap.lookupUnderlying (/sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#33-40) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+Contract locking ether found in /sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol:
+	Contract MarginSwap has payable functions:
+	 - fallback (/sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#31-33)
+	 - depositEth (/sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#130-134)
+	 - deposit (/sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#134-165)
+	 - trade (/sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#398-517)
+	But does not have a function to withdraw the ether
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#contracts-that-lock-ether[0m
+INFO:Detectors:[92m
+MarginSwap.constructor uses assembly (/sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#21-31)
+	- /sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#23-31
+MarginSwap.lookupUnderlying uses assembly (/sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#33-40)
+	- /sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#36-40
+MarginSwap.enterMarkets uses assembly (/sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#40-130)
+	- /sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#42-130
+MarginSwap.deposit uses assembly (/sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#134-165)
+	- /sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#140-162
+MarginSwap.depositToCompound uses assembly (/sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#165-270)
+	- /sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#170-269
+MarginSwap.withdraw uses assembly (/sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#270-278)
+	- /sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#272-276
+MarginSwap._withdraw uses assembly (/sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#278-362)
+	- /sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#283-362
+MarginSwap.transferOut uses assembly (/sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#363-396)
+	- /sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#365-396
+MarginSwap.trade uses assembly (/sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#398-517)
+	- /sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#411-512
+	- /sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#514-517
+	- /sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+MarginSwap._cEther_address should be constant (/sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#10-11)
+MarginSwap._comptroller_address should be constant (/sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#9-10)
+MarginSwap._owner should be constant (/sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#7-8)
+MarginSwap._parent_address should be constant (/sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#8-9)
+MarginSwap._trade_running should be constant (/sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#397-398)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+MarginSwap.lookupUnderlying (/sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#33-40) should be declared external
+MarginSwap.trade (/sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#398-517) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol:
+	- pragma solidity^0.5.7 (/sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#5-6): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter 'parent_address' of MarginSwap. (/sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#21) is not in mixedCase
+Parameter 'comptroller_address' of MarginSwap. (/sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#21) is not in mixedCase
+Parameter 'cEther_address' of MarginSwap. (/sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#21-22) is not in mixedCase
+Parameter 'asset_address' of MarginSwap.deposit (/sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#135-136) is not in mixedCase
+Parameter 'asset_address' of MarginSwap.depositToCompound (/sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#166) is not in mixedCase
+Function 'MarginSwap._withdraw' (/sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#278-362) is not in mixedCase
+Parameter 'input_asset' of MarginSwap.trade (/sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#398-399) is not in mixedCase
+Parameter 'input_amount' of MarginSwap.trade (/sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#400-401) is not in mixedCase
+Parameter 'output_asset' of MarginSwap.trade (/sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#403) is not in mixedCase
+Parameter 'min_output_amount' of MarginSwap.trade (/sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#404-405) is not in mixedCase
+Parameter 'trade_contract' of MarginSwap.trade (/sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#405-407) is not in mixedCase
+Parameter 'trade_data' of MarginSwap.trade (/sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#407-409) is not in mixedCase
+Variable 'MarginSwap._owner' (/sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#7-8) is not in mixedCase
+Variable 'MarginSwap._parent_address' (/sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#8-9) is not in mixedCase
+Variable 'MarginSwap._comptroller_address' (/sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#9-10) is not in mixedCase
+Variable 'MarginSwap._cEther_address' (/sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#10-11) is not in mixedCase
+Variable 'MarginSwap._compound_lookup' (/sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#11-12) is not in mixedCase
+Variable 'MarginSwap._trade_running' (/sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#397-398) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+MarginSwap._owner (/sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#7-8) is never used in MarginSwap
+MarginSwap._comptroller_address (/sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#9-10) is never used in MarginSwap
+MarginSwap._cEther_address (/sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#10-11) is never used in MarginSwap
+MarginSwap._compound_lookup (/sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#11-12) is never used in MarginSwap
+MarginSwap._trade_running (/sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol#397-398) is never used in MarginSwap
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0x9d0b44481515d6d4ad1463ca0e144052412572fb.sol analyzed (1 contracts), 35 result(s) found

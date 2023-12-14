@@ -1,0 +1,59 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x85027a8167ca68f1c5e4e36b98ee9bc7be17b67f.sol:
+/sb/0x85027a8167ca68f1c5e4e36b98ee9bc7be17b67f.sol:37:3: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+  function Ownable() public {
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x85027a8167ca68f1c5e4e36b98ee9bc7be17b67f.sol:219:3: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+  function ICOStartSale(address _wallet, ERC20 _token, address _tokenWallet) public {
+  ^ (Relevant source part starts here and spans across multiple lines).
+
+INFO:Detectors:[93m
+ICOStartSale.fallback (/sb/0x85027a8167ca68f1c5e4e36b98ee9bc7be17b67f.sol#238-255) does not use the value returned by external calls:
+	-token.transferFrom(tokenWallet,msg.sender,tokenAmount) (/sb/0x85027a8167ca68f1c5e4e36b98ee9bc7be17b67f.sol#252-253)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+ICOStartSale._getCurrentPeriod (/sb/0x85027a8167ca68f1c5e4e36b98ee9bc7be17b67f.sol) uses timestamp for comparisons
+	Dangerous comparisons:
+	- (periods[i].startTimestamp <= block.timestamp) && (periods[i].endTimestamp >= block.timestamp) (/sb/0x85027a8167ca68f1c5e4e36b98ee9bc7be17b67f.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0x85027a8167ca68f1c5e4e36b98ee9bc7be17b67f.sol#53-61) should be declared external
+Pausable.pause (/sb/0x85027a8167ca68f1c5e4e36b98ee9bc7be17b67f.sol#98-101) should be declared external
+Pausable.unpause (/sb/0x85027a8167ca68f1c5e4e36b98ee9bc7be17b67f.sol#107-111) should be declared external
+ERC20Basic.totalSupply (/sb/0x85027a8167ca68f1c5e4e36b98ee9bc7be17b67f.sol#165-166) should be declared external
+ERC20Basic.balanceOf (/sb/0x85027a8167ca68f1c5e4e36b98ee9bc7be17b67f.sol#166-169) should be declared external
+ERC20Basic.transfer (/sb/0x85027a8167ca68f1c5e4e36b98ee9bc7be17b67f.sol#169-172) should be declared external
+ERC20.allowance (/sb/0x85027a8167ca68f1c5e4e36b98ee9bc7be17b67f.sol#178-179) should be declared external
+ERC20.transferFrom (/sb/0x85027a8167ca68f1c5e4e36b98ee9bc7be17b67f.sol#179-182) should be declared external
+ERC20.approve (/sb/0x85027a8167ca68f1c5e4e36b98ee9bc7be17b67f.sol#182-185) should be declared external
+ICOStartSale.addPeriod (/sb/0x85027a8167ca68f1c5e4e36b98ee9bc7be17b67f.sol#260-272) should be declared external
+ICOStartSale.clearPeriods (/sb/0x85027a8167ca68f1c5e4e36b98ee9bc7be17b67f.sol#273-275) should be declared external
+ICOStartSale.addAddressesToWhitelist (/sb/0x85027a8167ca68f1c5e4e36b98ee9bc7be17b67f.sol#308-313) should be declared external
+ICOStartSale.removeAddressesFromWhitelist (/sb/0x85027a8167ca68f1c5e4e36b98ee9bc7be17b67f.sol#341-350) should be declared external
+ICOStartSale.remainingTokens (/sb/0x85027a8167ca68f1c5e4e36b98ee9bc7be17b67f.sol#397-398) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x85027a8167ca68f1c5e4e36b98ee9bc7be17b67f.sol:
+	- pragma solidity^0.4.21 (/sb/0x85027a8167ca68f1c5e4e36b98ee9bc7be17b67f.sol#17-19): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'Ownable.Ownable' (/sb/0x85027a8167ca68f1c5e4e36b98ee9bc7be17b67f.sol#38-42) is not in mixedCase
+Function 'ICOStartSale.ICOStartSale' (/sb/0x85027a8167ca68f1c5e4e36b98ee9bc7be17b67f.sol#224-237) is not in mixedCase
+Parameter '_wallet' of ICOStartSale.ICOStartSale (/sb/0x85027a8167ca68f1c5e4e36b98ee9bc7be17b67f.sol#226) is not in mixedCase
+Parameter '_token' of ICOStartSale.ICOStartSale (/sb/0x85027a8167ca68f1c5e4e36b98ee9bc7be17b67f.sol#226) is not in mixedCase
+Parameter '_tokenWallet' of ICOStartSale.ICOStartSale (/sb/0x85027a8167ca68f1c5e4e36b98ee9bc7be17b67f.sol#227-230) is not in mixedCase
+Parameter '_startTimestamp' of ICOStartSale.addPeriod (/sb/0x85027a8167ca68f1c5e4e36b98ee9bc7be17b67f.sol#260-261) is not in mixedCase
+Parameter '_endTimestamp' of ICOStartSale.addPeriod (/sb/0x85027a8167ca68f1c5e4e36b98ee9bc7be17b67f.sol#261-265) is not in mixedCase
+Parameter '_rate' of ICOStartSale.addPeriod (/sb/0x85027a8167ca68f1c5e4e36b98ee9bc7be17b67f.sol#265) is not in mixedCase
+Parameter '_address' of ICOStartSale.addAddressToWhitelist (/sb/0x85027a8167ca68f1c5e4e36b98ee9bc7be17b67f.sol#287) is not in mixedCase
+Parameter '_rate' of ICOStartSale.addAddressToWhitelist (/sb/0x85027a8167ca68f1c5e4e36b98ee9bc7be17b67f.sol#287) is not in mixedCase
+Parameter '_addresses' of ICOStartSale.addAddressesToWhitelist (/sb/0x85027a8167ca68f1c5e4e36b98ee9bc7be17b67f.sol#308-309) is not in mixedCase
+Parameter '_rate' of ICOStartSale.addAddressesToWhitelist (/sb/0x85027a8167ca68f1c5e4e36b98ee9bc7be17b67f.sol#309) is not in mixedCase
+Parameter '_address' of ICOStartSale.removeAddressFromWhitelist (/sb/0x85027a8167ca68f1c5e4e36b98ee9bc7be17b67f.sol#321-325) is not in mixedCase
+Parameter '_addresses' of ICOStartSale.removeAddressesFromWhitelist (/sb/0x85027a8167ca68f1c5e4e36b98ee9bc7be17b67f.sol#343) is not in mixedCase
+Parameter '_address' of ICOStartSale.isAddressInWhitelist (/sb/0x85027a8167ca68f1c5e4e36b98ee9bc7be17b67f.sol#355) is not in mixedCase
+Parameter '_purchaser' of ICOStartSale.getCurrentRate (/sb/0x85027a8167ca68f1c5e4e36b98ee9bc7be17b67f.sol#370-371) is not in mixedCase
+Parameter '_purchaser' of ICOStartSale.getTokenAmount (/sb/0x85027a8167ca68f1c5e4e36b98ee9bc7be17b67f.sol#388) is not in mixedCase
+Parameter '_weiAmount' of ICOStartSale.getTokenAmount (/sb/0x85027a8167ca68f1c5e4e36b98ee9bc7be17b67f.sol#388-392) is not in mixedCase
+Function 'ICOStartSale._getCurrentPeriod' (/sb/0x85027a8167ca68f1c5e4e36b98ee9bc7be17b67f.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x85027a8167ca68f1c5e4e36b98ee9bc7be17b67f.sol analyzed (6 contracts), 36 result(s) found

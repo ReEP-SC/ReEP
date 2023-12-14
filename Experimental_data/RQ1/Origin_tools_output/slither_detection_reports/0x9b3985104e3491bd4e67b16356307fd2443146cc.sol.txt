@@ -1,0 +1,40 @@
+INFO:Detectors:[93m
+Contract locking ether found in /sb/0x9b3985104e3491bd4e67b16356307fd2443146cc.sol:
+	Contract OpetEscrow has payable functions:
+	 - fallback (/sb/0x9b3985104e3491bd4e67b16356307fd2443146cc.sol#319-321)
+	But does not have a function to withdraw the ether
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#contracts-that-lock-ether[0m
+INFO:Detectors:[93m
+Reentrancy in OpetEscrow.initiateDeposit (/sb/0x9b3985104e3491bd4e67b16356307fd2443146cc.sol#333-367):
+	External calls:
+	- require(bool)(opetToken.allowance(opetWallet,this) == opetInitital) (/sb/0x9b3985104e3491bd4e67b16356307fd2443146cc.sol#349-351)
+	- require(bool)(pecunioToken.allowance(pecunioWallet,this) == pecunioInitital) (/sb/0x9b3985104e3491bd4e67b16356307fd2443146cc.sol#351-357)
+	State variables written after the call(s):
+	- depositCount (/sb/0x9b3985104e3491bd4e67b16356307fd2443146cc.sol#367)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+OpetEscrow.releaseTokens (/sb/0x9b3985104e3491bd4e67b16356307fd2443146cc.sol) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool)(block.timestamp > 1561852800) (/sb/0x9b3985104e3491bd4e67b16356307fd2443146cc.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+ERC20Basic.totalSupply (/sb/0x9b3985104e3491bd4e67b16356307fd2443146cc.sol#25-27) should be declared external
+ERC20Basic.balanceOf (/sb/0x9b3985104e3491bd4e67b16356307fd2443146cc.sol#27-29) should be declared external
+ERC20Basic.transfer (/sb/0x9b3985104e3491bd4e67b16356307fd2443146cc.sol#29-31) should be declared external
+ERC20.allowance (/sb/0x9b3985104e3491bd4e67b16356307fd2443146cc.sol#47-53) should be declared external
+ERC20.transferFrom (/sb/0x9b3985104e3491bd4e67b16356307fd2443146cc.sol#53-59) should be declared external
+ERC20.approve (/sb/0x9b3985104e3491bd4e67b16356307fd2443146cc.sol#59-65) should be declared external
+OpetEscrow.fallback (/sb/0x9b3985104e3491bd4e67b16356307fd2443146cc.sol#319-321) should be declared external
+OpetEscrow.opetTokenBalance (/sb/0x9b3985104e3491bd4e67b16356307fd2443146cc.sol#321-327) should be declared external
+OpetEscrow.pecunioTokenBalance (/sb/0x9b3985104e3491bd4e67b16356307fd2443146cc.sol#327-333) should be declared external
+OpetEscrow.initiateDeposit (/sb/0x9b3985104e3491bd4e67b16356307fd2443146cc.sol#333-367) should be declared external
+OpetEscrow.refundTokens (/sb/0x9b3985104e3491bd4e67b16356307fd2443146cc.sol#369-383) should be declared external
+OpetEscrow.releaseTokens (/sb/0x9b3985104e3491bd4e67b16356307fd2443146cc.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_opetToken' of OpetEscrow. (/sb/0x9b3985104e3491bd4e67b16356307fd2443146cc.sol#281) is not in mixedCase
+Parameter '_opetWallet' of OpetEscrow. (/sb/0x9b3985104e3491bd4e67b16356307fd2443146cc.sol#283) is not in mixedCase
+Parameter '_pecunioToken' of OpetEscrow. (/sb/0x9b3985104e3491bd4e67b16356307fd2443146cc.sol#283-285) is not in mixedCase
+Parameter '_pecunioWallet' of OpetEscrow. (/sb/0x9b3985104e3491bd4e67b16356307fd2443146cc.sol#285) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x9b3985104e3491bd4e67b16356307fd2443146cc.sol analyzed (5 contracts), 19 result(s) found

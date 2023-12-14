@@ -1,0 +1,288 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol:
+/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol:2056:42: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function isRegisteredInPreviousEpoch(address _darknodeID)
+                                         ^-----------------^
+/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol:2056:5: Warning: Function state mutability can be restricted to pure
+    function isRegisteredInPreviousEpoch(address _darknodeID)
+    ^ (Relevant source part starts here and spans across multiple lines).
+
+INFO:Detectors:[91m
+CanReclaimTokens.recoverTokens (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1049-1066) sends eth to arbitrary user
+	Dangerous calls:
+	- msg.sender.transfer(address(this).balance) (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1056-1057)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[91m
+UpgradeabilityProxy.constructor (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#179-187) uses delegatecall to a input-controlled function id
+	(success) = _logic.delegatecall(_data) (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#183-184)
+BaseAdminUpgradeabilityProxy.upgradeToAndCall (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#229-235) uses delegatecall to a input-controlled function id
+	(success) = newImplementation.delegatecall(data) (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#231-232)
+InitializableUpgradeabilityProxy.initialize (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#261-270) uses delegatecall to a input-controlled function id
+	(success) = _logic.delegatecall(_data) (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#266-267)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#controlled-delegatecall[0m
+INFO:Detectors:[91m
+Ownable.______gap (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#385-387) shadows:
+	- Initializable.______gap (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#321-323)
+ERC20Detailed.______gap (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#441-443) shadows:
+	- Initializable.______gap (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#321-323)
+ERC20.______gap (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#542-544) shadows:
+	- Initializable.______gap (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#321-323)
+PauserRole.______gap (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#610-612) shadows:
+	- Initializable.______gap (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#321-323)
+Pausable.______gap (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#658-660) shadows:
+	- PauserRole.______gap (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#610-612)
+	- Initializable.______gap (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#321-323)
+ERC20Pausable.______gap (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#686-688) shadows:
+	- Pausable.______gap (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#658-660)
+	- PauserRole.______gap (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#610-612)
+	- ERC20.______gap (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#542-544)
+	- Initializable.______gap (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#321-323)
+ERC20Burnable.______gap (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#700-702) shadows:
+	- ERC20.______gap (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#542-544)
+	- Initializable.______gap (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#321-323)
+RenToken._name (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#704-705) shadows:
+	- ERC20Detailed._name (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#415-416)
+RenToken._symbol (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#705-706) shadows:
+	- ERC20Detailed._symbol (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#416-417)
+RenToken._decimals (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#706-708) shadows:
+	- ERC20Detailed._decimals (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#417-419)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variable-shadowing[0m
+INFO:Detectors:[93m
+OpenZeppelinUpgradesAddress.isContract (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#130-144) is declared view but contains assembly code
+BaseUpgradeabilityProxy._implementation (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#152-159) is declared view but contains assembly code
+BaseAdminUpgradeabilityProxy._admin (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#236-243) is declared view but contains assembly code
+Initializable.isConstructor (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#308-320) is declared view but contains assembly code
+Address.isContract (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#948-963) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+DarknodeRegistryLogicV1.epoch (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1533-1588) does not use the value returned by external calls:
+	-darknodePayment.changeCycle() (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1581-1582)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+InitializableAdminUpgradeabilityProxy.initialize._admin (local variable @ /sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#274) shadows:
+	- BaseAdminUpgradeabilityProxy._admin (function @ /sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#236-243)
+ERC20Detailed.initialize.name (local variable @ /sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#420) shadows:
+	- ERC20Detailed.name (function @ /sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#427-431)
+ERC20Detailed.initialize.symbol (local variable @ /sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#420) shadows:
+	- ERC20Detailed.symbol (function @ /sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#432-436)
+ERC20Detailed.initialize.decimals (local variable @ /sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#420) shadows:
+	- ERC20Detailed.decimals (function @ /sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#437-441)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+DarknodeRegistryLogicV1.getDarknodesFromEpochs has external calls inside a loop:
+	- next = store.next(next) (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1959-1960)
+DarknodeRegistryLogicV1.getDarknodesFromEpochs has external calls inside a loop:
+	- next = store.next(next) (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1963-1964)
+DarknodeRegistryLogicV1.getDarknodeCountFromEpochs has external calls inside a loop:
+	- next = store.next(next) (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#2022-2023)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in DarknodeRegistryLogicV1.claimStoreOwnership (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1602-1614):
+	External calls:
+	- store.claimOwnership() (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1603-1605)
+	- (numDarknodesPreviousEpoch,numDarknodes,numDarknodesNextEpoch) = getDarknodeCountFromEpochs() (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1608-1612)
+	State variables written after the call(s):
+	- numDarknodes (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1608-1612)
+	- numDarknodesNextEpoch (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1608-1612)
+	- numDarknodesPreviousEpoch (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1608-1612)
+Reentrancy in DarknodeRegistryLogicV1.deregisterDarknode (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1970-1984):
+	External calls:
+	- darknodeOperator = store.darknodeOperator(_darknodeID) (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1971-1973)
+	- store.updateDarknodeDeregisteredAt(_darknodeID,currentEpoch.blocktime.add(minimumEpochInterval)) (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1974-1978)
+	State variables written after the call(s):
+	- numDarknodesNextEpoch (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1978-1980)
+Reentrancy in DarknodeRegistryLogicV1.register (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1486-1517):
+	External calls:
+	- require(bool,string)(ren.transferFrom(msg.sender,address(store),minimumBond),DarknodeRegistry: bond transfer failed) (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1496-1501)
+	- store.appendDarknode(_darknodeID,msg.sender,minimumBond,_publicKey,currentEpoch.blocktime.add(minimumEpochInterval),0) (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1502-1511)
+	State variables written after the call(s):
+	- numDarknodesNextEpoch (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1511-1513)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+DarknodeRegistryLogicV1.epoch (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1533-1588) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(block.timestamp >= currentEpoch.blocktime.add(minimumEpochInterval),DarknodeRegistry: epoch interval has not passed) (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1543-1547)
+DarknodeRegistryLogicV1.isPendingRegistration (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1817-1826) uses timestamp for comparisons
+	Dangerous comparisons:
+	- registeredAt != 0 && registeredAt > currentEpoch.blocktime (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1823-1824)
+DarknodeRegistryLogicV1.isPendingDeregistration (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1828-1837) uses timestamp for comparisons
+	Dangerous comparisons:
+	- deregisteredAt != 0 && deregisteredAt > currentEpoch.blocktime (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1834-1835)
+DarknodeRegistryLogicV1.isDeregistered (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1838-1843) uses timestamp for comparisons
+	Dangerous comparisons:
+	- deregisteredAt != 0 && deregisteredAt <= currentEpoch.blocktime (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1840-1841)
+DarknodeRegistryLogicV1.isRegisteredInEpoch (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1907-1922) uses timestamp for comparisons
+	Dangerous comparisons:
+	- notDeregistered = deregisteredAt == 0 || deregisteredAt > _epoch.blocktime (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1915-1917)
+	- registered = registeredAt != 0 && registeredAt <= _epoch.blocktime (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1914-1915)
+	- registered && notDeregistered (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1919-1920)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+Proxy._delegate uses assembly (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#96-117)
+	- /sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#97-115
+OpenZeppelinUpgradesAddress.isContract uses assembly (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#130-144)
+	- /sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#139-140
+BaseUpgradeabilityProxy._implementation uses assembly (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#152-159)
+	- /sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#154-157
+BaseUpgradeabilityProxy._setImplementation uses assembly (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#166-177)
+	- /sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#171-174
+BaseAdminUpgradeabilityProxy._admin uses assembly (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#236-243)
+	- /sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#238-241
+BaseAdminUpgradeabilityProxy._setAdmin uses assembly (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#244-252)
+	- /sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#247-250
+Initializable.isConstructor uses assembly (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#308-320)
+	- /sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#316-317
+Address.isContract uses assembly (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#948-963)
+	- /sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#959-960
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+InitializableAdminUpgradeabilityProxy.initialize (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#274-282) should be declared external
+Ownable.renounceOwnership (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#368-373) should be declared external
+Ownable.transferOwnership (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#374-378) should be declared external
+Claimable.transferOwnership (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#750-758) should be declared external
+ERC20Detailed.name (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#427-431) should be declared external
+ERC20Detailed.symbol (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#432-436) should be declared external
+ERC20Detailed.decimals (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#437-441) should be declared external
+IERC20.totalSupply (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#390-392) should be declared external
+ERC20.totalSupply (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#454-458) should be declared external
+ERC20.balanceOf (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#459-463) should be declared external
+IERC20.balanceOf (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#393-395) should be declared external
+ERC20.allowance (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#470-474) should be declared external
+IERC20.allowance (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#399-401) should be declared external
+PauserRole.addPauser (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#592-596) should be declared external
+PauserRole.renouncePauser (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#596-600) should be declared external
+Pausable.paused (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#630-634) should be declared external
+Pausable.pause (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#647-652) should be declared external
+Pausable.unpause (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#653-658) should be declared external
+ERC20Burnable.burn (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#691-695) should be declared external
+ERC20Burnable.burnFrom (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#696-700) should be declared external
+RenToken.transferTokens (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#719-735) should be declared external
+Claimable.claimOwnership (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#758-764) should be declared external
+DarknodeRegistryLogicV1.initialize (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1442-1476) should be declared external
+DarknodeRegistryForwarder.isRegistered (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#2040-2044) should be declared external
+DarknodeRegistryForwarder.currentEpoch (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#2044-2048) should be declared external
+DarknodeRegistryForwarder.getDarknodeOperator (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#2048-2056) should be declared external
+DarknodeRegistryForwarder.isRegisteredInPreviousEpoch (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#2056-2065) should be declared external
+DarknodeRegistryForwarder.numDarknodesPreviousEpoch (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#2065-2068) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol:
+	- pragma solidity0.5.17 (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#19-22): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Low level call in UpgradeabilityProxy.constructor (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#179-187):
+	-(success) = _logic.delegatecall(_data) /sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#183-184
+Low level call in BaseAdminUpgradeabilityProxy.upgradeToAndCall (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#229-235):
+	-(success) = newImplementation.delegatecall(data) /sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#231-232
+Low level call in InitializableUpgradeabilityProxy.initialize (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#261-270):
+	-(success) = _logic.delegatecall(_data) /sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#266-267
+Low level call in Address.sendValue (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#969-978):
+	-(success) = recipient.call.value(amount)() /sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#973-974
+Low level call in SafeERC20.callOptionalReturn (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1012-1034):
+	-(success,returndata) = address(token).call(data) /sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1024-1025
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Function 'Proxy._implementation' (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#93-95) is not in mixedCase
+Function 'Proxy._delegate' (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#96-117) is not in mixedCase
+Function 'Proxy._willFallback' (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#118-121) is not in mixedCase
+Function 'Proxy._fallback' (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#122-128) is not in mixedCase
+Function 'BaseUpgradeabilityProxy._implementation' (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#152-159) is not in mixedCase
+Function 'BaseUpgradeabilityProxy._upgradeTo' (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#160-165) is not in mixedCase
+Function 'BaseUpgradeabilityProxy._setImplementation' (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#166-177) is not in mixedCase
+Parameter '_logic' of UpgradeabilityProxy. (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#179) is not in mixedCase
+Parameter '_data' of UpgradeabilityProxy. (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#179) is not in mixedCase
+Function 'BaseAdminUpgradeabilityProxy._willFallback' (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#253-259) is not in mixedCase
+Function 'BaseAdminUpgradeabilityProxy._admin' (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#236-243) is not in mixedCase
+Function 'BaseAdminUpgradeabilityProxy._setAdmin' (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#244-252) is not in mixedCase
+Parameter '_logic' of InitializableUpgradeabilityProxy.initialize (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#261) is not in mixedCase
+Parameter '_data' of InitializableUpgradeabilityProxy.initialize (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#261) is not in mixedCase
+Parameter '_logic' of InitializableAdminUpgradeabilityProxy.initialize (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#274) is not in mixedCase
+Parameter '_admin' of InitializableAdminUpgradeabilityProxy.initialize (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#274) is not in mixedCase
+Parameter '_data' of InitializableAdminUpgradeabilityProxy.initialize (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#274) is not in mixedCase
+Variable 'Initializable.______gap' (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#321-323) is not in mixedCase
+Function 'Context._msgSender' (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#330-334) is not in mixedCase
+Function 'Context._msgData' (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#334-340) is not in mixedCase
+Function 'Ownable._transferOwnership' (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#379-385) is not in mixedCase
+Variable 'Ownable.______gap' (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#385-387) is not in mixedCase
+Variable 'ERC20Detailed.______gap' (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#441-443) is not in mixedCase
+Function 'ERC20._transfer' (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#500-509) is not in mixedCase
+Function 'ERC20._mint' (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#510-518) is not in mixedCase
+Function 'ERC20._burn' (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#519-527) is not in mixedCase
+Function 'ERC20._approve' (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#528-536) is not in mixedCase
+Function 'ERC20._burnFrom' (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#537-542) is not in mixedCase
+Variable 'ERC20.______gap' (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#542-544) is not in mixedCase
+Function 'PauserRole._addPauser' (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#600-605) is not in mixedCase
+Function 'PauserRole._removePauser' (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#605-610) is not in mixedCase
+Variable 'PauserRole.______gap' (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#610-612) is not in mixedCase
+Variable 'Pausable.______gap' (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#658-660) is not in mixedCase
+Variable 'ERC20Pausable.______gap' (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#686-688) is not in mixedCase
+Variable 'ERC20Burnable.______gap' (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#700-702) is not in mixedCase
+Constant 'RenToken._name' (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#704-705) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'RenToken._symbol' (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#705-706) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'RenToken._decimals' (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#706-708) is not in UPPER_CASE_WITH_UNDERSCORES
+Parameter '_nextOwner' of Claimable.initialize (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#738) is not in mixedCase
+Parameter '_start' of LinkedList.elements (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#917-918) is not in mixedCase
+Parameter '_count' of LinkedList.elements (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#918-919) is not in mixedCase
+Parameter '_nextOwner' of CanReclaimTokens.initialize (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1039) is not in mixedCase
+Parameter '_token' of CanReclaimTokens.blacklistRecoverableToken (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1043) is not in mixedCase
+Parameter '_token' of CanReclaimTokens.recoverTokens (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1049) is not in mixedCase
+Parameter '_VERSION' of DarknodeRegistryStore. (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1108) is not in mixedCase
+Parameter '_ren' of DarknodeRegistryStore. (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1108) is not in mixedCase
+Parameter '_darknodeID' of DarknodeRegistryStore.appendDarknode (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1126-1127) is not in mixedCase
+Parameter '_darknodeOperator' of DarknodeRegistryStore.appendDarknode (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1127-1128) is not in mixedCase
+Parameter '_bond' of DarknodeRegistryStore.appendDarknode (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1128-1129) is not in mixedCase
+Parameter '_publicKey' of DarknodeRegistryStore.appendDarknode (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1129-1130) is not in mixedCase
+Parameter '_registeredAt' of DarknodeRegistryStore.appendDarknode (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1130-1131) is not in mixedCase
+Parameter '_deregisteredAt' of DarknodeRegistryStore.appendDarknode (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1131-1132) is not in mixedCase
+Variable 'DarknodeRegistryStore.VERSION' (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1069-1071) is not in mixedCase
+Variable 'DarknodeRegistryStateV1.VERSION' (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1263-1265) is not in mixedCase
+Parameter '_VERSION' of DarknodeRegistryLogicV1.initialize (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1443-1444) is not in mixedCase
+Parameter '_renAddress' of DarknodeRegistryLogicV1.initialize (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1444-1445) is not in mixedCase
+Parameter '_storeAddress' of DarknodeRegistryLogicV1.initialize (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1445-1446) is not in mixedCase
+Parameter '_minimumBond' of DarknodeRegistryLogicV1.initialize (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1446-1447) is not in mixedCase
+Parameter '_minimumPodSize' of DarknodeRegistryLogicV1.initialize (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1447-1448) is not in mixedCase
+Parameter '_minimumEpochIntervalSeconds' of DarknodeRegistryLogicV1.initialize (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1448-1449) is not in mixedCase
+Parameter '_deregistrationIntervalSeconds' of DarknodeRegistryLogicV1.initialize (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1449-1450) is not in mixedCase
+Parameter '_darknodeID' of DarknodeRegistryLogicV1.register (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1486) is not in mixedCase
+Parameter '_publicKey' of DarknodeRegistryLogicV1.register (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1486-1487) is not in mixedCase
+Parameter '_darknodeID' of DarknodeRegistryLogicV1.deregister (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1522-1523) is not in mixedCase
+Parameter '_newOwner' of DarknodeRegistryLogicV1.transferStoreOwnership (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1591-1592) is not in mixedCase
+Parameter '_darknodePayment' of DarknodeRegistryLogicV1.updateDarknodePayment (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1618-1619) is not in mixedCase
+Parameter '_nextMinimumBond' of DarknodeRegistryLogicV1.updateMinimumBond (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1637) is not in mixedCase
+Parameter '_nextMinimumPodSize' of DarknodeRegistryLogicV1.updateMinimumPodSize (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1644-1645) is not in mixedCase
+Parameter '_nextMinimumEpochInterval' of DarknodeRegistryLogicV1.updateMinimumEpochInterval (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1654-1655) is not in mixedCase
+Parameter '_slasher' of DarknodeRegistryLogicV1.updateSlasher (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1665) is not in mixedCase
+Parameter '_guilty' of DarknodeRegistryLogicV1.slash (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1679-1680) is not in mixedCase
+Parameter '_challenger' of DarknodeRegistryLogicV1.slash (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1680-1681) is not in mixedCase
+Parameter '_percentage' of DarknodeRegistryLogicV1.slash (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1681-1682) is not in mixedCase
+Parameter '_darknodeID' of DarknodeRegistryLogicV1.refund (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1729) is not in mixedCase
+Parameter '_darknodeID' of DarknodeRegistryLogicV1.getDarknodeOperator (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1750-1751) is not in mixedCase
+Parameter '_darknodeID' of DarknodeRegistryLogicV1.getDarknodeBond (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1760-1761) is not in mixedCase
+Parameter '_darknodeID' of DarknodeRegistryLogicV1.getDarknodePublicKey (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1770-1771) is not in mixedCase
+Parameter '_start' of DarknodeRegistryLogicV1.getDarknodes (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1788) is not in mixedCase
+Parameter '_count' of DarknodeRegistryLogicV1.getDarknodes (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1788-1789) is not in mixedCase
+Parameter '_start' of DarknodeRegistryLogicV1.getPreviousDarknodes (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1802) is not in mixedCase
+Parameter '_count' of DarknodeRegistryLogicV1.getPreviousDarknodes (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1802-1803) is not in mixedCase
+Parameter '_darknodeID' of DarknodeRegistryLogicV1.isPendingRegistration (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1817-1818) is not in mixedCase
+Parameter '_darknodeID' of DarknodeRegistryLogicV1.isPendingDeregistration (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1828-1829) is not in mixedCase
+Parameter '_darknodeID' of DarknodeRegistryLogicV1.isDeregistered (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1838) is not in mixedCase
+Parameter '_darknodeID' of DarknodeRegistryLogicV1.isDeregisterable (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1846) is not in mixedCase
+Parameter '_darknodeID' of DarknodeRegistryLogicV1.isRefunded (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1856) is not in mixedCase
+Parameter '_darknodeID' of DarknodeRegistryLogicV1.isRefundable (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1864) is not in mixedCase
+Parameter '_darknodeID' of DarknodeRegistryLogicV1.isRegistered (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1890) is not in mixedCase
+Parameter '_darknodeID' of DarknodeRegistryLogicV1.isRegisteredInPreviousEpoch (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1895-1896) is not in mixedCase
+Parameter '_darknodeID' of DarknodeRegistryLogicV1.isRegisteredInEpoch (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1907) is not in mixedCase
+Parameter '_epoch' of DarknodeRegistryLogicV1.isRegisteredInEpoch (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1907-1908) is not in mixedCase
+Parameter '_start' of DarknodeRegistryLogicV1.getDarknodesFromEpochs (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1928-1929) is not in mixedCase
+Parameter '_count' of DarknodeRegistryLogicV1.getDarknodesFromEpochs (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1929-1930) is not in mixedCase
+Parameter '_usePreviousEpoch' of DarknodeRegistryLogicV1.getDarknodesFromEpochs (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1930-1931) is not in mixedCase
+Parameter '_darknodeID' of DarknodeRegistryLogicV1.deregisterDarknode (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#1970) is not in mixedCase
+Parameter '_dnr' of DarknodeRegistryForwarder. (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#2035) is not in mixedCase
+Parameter '_darknodeID' of DarknodeRegistryForwarder.isRegistered (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#2040) is not in mixedCase
+Parameter '_darknodeID' of DarknodeRegistryForwarder.getDarknodeOperator (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#2048-2049) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+ERC20Burnable.______gap (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#700-702) is never used in RenToken
+Ownable.______gap (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#385-387) is never used in DarknodeRegistryStore
+Ownable.______gap (/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol#385-387) is never used in DarknodeRegistryLogicV1
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0xb032012073765a74f8f8fe2e6685ad70253058fa.sol analyzed (33 contracts), 178 result(s) found

@@ -1,0 +1,76 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol:
+/sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol:509:3: Warning: Function state mutability can be restricted to pure
+  function finalization() internal {
+  ^ (Relevant source part starts here and spans across multiple lines).
+
+INFO:Detectors:[93m
+TokenSaleForAlreadyDeployedERC20Tokens.hasEnded (/sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol) uses a dangerous strict equality:
+	- tokenOnSale.balanceOf(address(this)) == uint256(0) && (starRaised > 0 || weiRaised > 0)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+TokenSaleForAlreadyDeployedERC20Tokens.finalization (/sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol) does not use the value returned by external calls:
+	-tokenOnSale.transfer(wallet,remainingTokens) (/sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol)
+TokenSaleForAlreadyDeployedERC20Tokens.buyTokens (/sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol#981-1079) does not use the value returned by external calls:
+	-tokenOnSale.transfer(beneficiary,tokens) (/sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol#1061)
+	-starToken.transferFrom(beneficiary,wallet,starAllocationToTokenSale) (/sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol#1071-1079)
+TokenSaleForAlreadyDeployedERC20Tokens.buyTokensWithWei (/sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol#1085-1139) does not use the value returned by external calls:
+	-tokenOnSale.transfer(beneficiary,tokens) (/sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol#1129)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in TokenSaleForAlreadyDeployedERC20Tokens.buyTokens (/sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol#981-1079):
+	External calls:
+	- require(bool)(validPurchase() && tokenOnSale.balanceOf(address(this)) > 0) (/sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol#997-999)
+	- buyTokensWithWei(beneficiary) (/sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol#1005)
+	- starAllocationToTokenSale = starToken.allowance(beneficiary,address(this)) (/sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol#1017-1021)
+	- tokens > tokenOnSale.balanceOf(address(this)) (/sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol#1039-1049)
+	- tokens = tokenOnSale.balanceOf(address(this)) (/sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol#1041-1043)
+	External calls sending eth:
+	- buyTokensWithWei(beneficiary) (/sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol#1005)
+	State variables written after the call(s):
+	- starRaised (/sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol#1055-1057)
+Reentrancy in TokenSaleForAlreadyDeployedERC20Tokens.buyTokensWithWei (/sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol#1085-1139):
+	External calls:
+	- tokens > tokenOnSale.balanceOf(address(this)) (/sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol#1107-1123)
+	- tokens = tokenOnSale.balanceOf(address(this)) (/sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol#1109-1117)
+	State variables written after the call(s):
+	- weiRaised (/sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol#1125)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Ownable.renounceOwnership (/sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol#93-101) should be declared external
+Ownable.transferOwnership (/sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol#112-119) should be declared external
+Pausable.pause (/sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol#217-229) should be declared external
+Pausable.unpause (/sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol#237-248) should be declared external
+FinalizableCrowdsale.finalize (/sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol#523-533) should be declared external
+ERC20.allowance (/sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol#545-547) should be declared external
+ERC20.transferFrom (/sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol#552-559) should be declared external
+ERC20.approve (/sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol#560-565) should be declared external
+ERC20.totalSupply (/sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol#565-567) should be declared external
+ERC20.balanceOf (/sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol#567-571) should be declared external
+ERC20.transfer (/sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol#571-577) should be declared external
+Whitelist.removeManyFromWhitelist (/sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol#667-691) should be declared external
+TokenSaleForAlreadyDeployedERC20Tokens.buyTokens (/sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol#981-1079) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_newOwner' of Ownable.transferOwnership (/sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol#117) is not in mixedCase
+Function 'Ownable._transferOwnership' (/sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol#127-145) is not in mixedCase
+Parameter '_newOwner' of Ownable._transferOwnership (/sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol#129) is not in mixedCase
+Parameter '_startTime' of Crowdsale.initCrowdsale (/sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol#401) is not in mixedCase
+Parameter '_endTime' of Crowdsale.initCrowdsale (/sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol#401) is not in mixedCase
+Parameter '_rate' of Crowdsale.initCrowdsale (/sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol#401-403) is not in mixedCase
+Parameter '_wallet' of Crowdsale.initCrowdsale (/sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol#403) is not in mixedCase
+Parameter '_address' of Whitelist.addToWhitelist (/sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol#617-619) is not in mixedCase
+Parameter '_addresses' of Whitelist.addManyToWhitelist (/sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol#629-631) is not in mixedCase
+Parameter '_addresses' of Whitelist.removeManyFromWhitelist (/sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol#671) is not in mixedCase
+Parameter '_startTime' of TokenSaleForAlreadyDeployedERC20Tokens.init (/sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol#809-811) is not in mixedCase
+Parameter '_endTime' of TokenSaleForAlreadyDeployedERC20Tokens.init (/sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol#811) is not in mixedCase
+Parameter '_whitelist' of TokenSaleForAlreadyDeployedERC20Tokens.init (/sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol#813) is not in mixedCase
+Parameter '_starToken' of TokenSaleForAlreadyDeployedERC20Tokens.init (/sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol#815) is not in mixedCase
+Parameter '_tokenOnSale' of TokenSaleForAlreadyDeployedERC20Tokens.init (/sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol#815-817) is not in mixedCase
+Parameter '_rate' of TokenSaleForAlreadyDeployedERC20Tokens.init (/sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol#821) is not in mixedCase
+Parameter '_starRate' of TokenSaleForAlreadyDeployedERC20Tokens.init (/sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol#821) is not in mixedCase
+Parameter '_wallet' of TokenSaleForAlreadyDeployedERC20Tokens.init (/sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol#822-823) is not in mixedCase
+Parameter '_crowdsaleCap' of TokenSaleForAlreadyDeployedERC20Tokens.init (/sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol#823-825) is not in mixedCase
+Parameter '_isWeiAccepted' of TokenSaleForAlreadyDeployedERC20Tokens.init (/sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol#825) is not in mixedCase
+Parameter '_isWeiAccepted' of TokenSaleForAlreadyDeployedERC20Tokens.setIsWeiAccepted (/sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol#967-969) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x98f08eece9eb1c8928c823b240388bb446d892f6.sol analyzed (9 contracts), 40 result(s) found

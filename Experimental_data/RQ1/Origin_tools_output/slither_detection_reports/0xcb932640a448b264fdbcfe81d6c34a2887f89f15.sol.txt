@@ -1,0 +1,124 @@
+INFO:Detectors:[93m
+Reentrancy in Dice.completeSession (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#1267-1443):
+	External calls:
+	- bankroll.credit(session.player,session.payout) (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#1381-1385)
+	- bankroll.houseProfit(session.wager) (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#1420-1425)
+	- setMaxProfit() (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#1435-1439)
+	State variables written after the call(s):
+	- sessions (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#1441)
+Reentrancy in Dice.processSessions (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#1149-1177):
+	External calls:
+	- sessions[session].complete || completeSession(session) (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#1163-1177)
+	State variables written after the call(s):
+	- first (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#1169-1171)
+	- queue (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#1169-1171)
+Reentrancy in Dice.rollDice (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#981-1125):
+	External calls:
+	- processSessions() (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#989-993)
+	- require(bool,string)(completeSession(msg.sender),Only one roll can be played at a time) (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#1015)
+	State variables written after the call(s):
+	- maxPendingPayouts (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#1015)
+	- maxPendingPayouts (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#1069-1071)
+	- seed (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#1015)
+	- sessions (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#1015)
+	- sessions (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#1055-1057)
+	- stats (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#1015)
+	- totalWon (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#1015)
+Reentrancy in Dice.rollDice (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#981-1125):
+	External calls:
+	- processSessions() (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#989-993)
+	- require(bool,string)(completeSession(msg.sender),Only one roll can be played at a time) (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#1015)
+	- require(bool,string)(maxPendingPayouts < contractBalance(),Reached maximum wagers supported) (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#1077-1081)
+	State variables written after the call(s):
+	- last (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#1095-1097)
+	- queue (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#1095-1097)
+	- stats (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#1109)
+	- stats (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#1109-1113)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+Dice.playWithVault (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#953-973) does not use the value returned by external calls:
+	-bankroll.debit(msg.sender,wager) (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#967-969)
+Dice.completeSession (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#1267-1443) does not use the value returned by external calls:
+	-bankroll.credit(session.player,session.payout) (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#1381-1385)
+Dice.withdraw (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#1489-1503) does not use the value returned by external calls:
+	-bankroll.withdraw(msg.sender) (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#1501-1503)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in Dice.completeSession (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#1267-1443):
+	External calls:
+	- bankroll.houseProfit(session.wager) (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#1420-1425)
+	State variables written after the call(s):
+	- stats (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#1431)
+Reentrancy in Dice.completeSession (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#1267-1443):
+	External calls:
+	- bankroll.credit(session.player,session.payout) (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#1381-1385)
+	- bankroll.houseProfit(session.wager) (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#1420-1425)
+	- setMaxProfit() (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#1435-1439)
+	State variables written after the call(s):
+	- maxProfit (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#1435-1439)
+Reentrancy in Dice.constructor (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#869-897):
+	External calls:
+	- ownerSetMaxProfitAsPercentOfHouse(10000) (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#889-895)
+	State variables written after the call(s):
+	- minBet (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#896-897)
+Reentrancy in Dice.rollDice (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#981-1125):
+	External calls:
+	- processSessions() (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#989-993)
+	- require(bool,string)(completeSession(msg.sender),Only one roll can be played at a time) (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#1015)
+	State variables written after the call(s):
+	- maxProfit (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#1015)
+	- totalSessions (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#1021-1025)
+Reentrancy in Dice.rollDice (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#981-1125):
+	External calls:
+	- processSessions() (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#989-993)
+	- require(bool,string)(completeSession(msg.sender),Only one roll can be played at a time) (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#1015)
+	- require(bool,string)(maxPendingPayouts < contractBalance(),Reached maximum wagers supported) (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#1077-1081)
+	State variables written after the call(s):
+	- totalBets (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#1083-1086)
+	- totalWagered (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#1087-1089)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Dice.payoutsPaused should be constant (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#795)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#377-385) should be declared external
+Whitelist.addAddressesToWhitelist (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#473-489) should be declared external
+Whitelist.removeAddressesFromWhitelist (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#541-571) should be declared external
+Dice.updateBankrollAddress (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#899-916) should be declared external
+Dice.play (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#929-947) should be declared external
+Dice.playWithVault (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#953-973) should be declared external
+Dice.isMining (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#1459-1479) should be declared external
+Dice.withdraw (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#1489-1503) should be declared external
+Dice.balanceOf (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#1509-1511) should be declared external
+Dice.statsOf (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#1513-1535) should be declared external
+Dice.lastSession (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#1537-1559) should be declared external
+Dice.ownerSetProcessingCap (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol) should be declared external
+Dice.ownerPauseGame (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol:
+	- pragma solidity^0.4.21 (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#9-13): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Event 'Dice.onSessionOpen' (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#667-689) is not in CapWords
+Event 'Dice.onSessionClose' (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#691-731) is not in CapWords
+Event 'Dice.onCredit' (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#731-733) is not in CapWords
+Event 'Dice.onWithdraw' (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#733-735) is not in CapWords
+Parameter '_customer' of Dice.completeSession (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#1267-1269) is not in mixedCase
+Constant 'Dice.maxProfitDivisor' (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#779-783) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'Dice.houseEdgeDivisor' (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#783-785) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'Dice.maxNumber' (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#785-787) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'Dice.minNumber' (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#787-789) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'Dice.futureDelta' (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#789-791) is not in UPPER_CASE_WITH_UNDERSCORES
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+Dice.playerBetId (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#837) is never used in Dice
+Dice.playerBetValue (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#837-839) is never used in Dice
+Dice.playerTempBetValue (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#839-841) is never used in Dice
+Dice.playerDieResult (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#843-847) is never used in Dice
+Dice.playerNumber (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#847-849) is never used in Dice
+Dice.playerPendingWithdrawals (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#849-859) is never used in Dice
+Dice.playerProfit (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#859-865) is never used in Dice
+Dice.playerTempReward (/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol#865-869) is never used in Dice
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0xcb932640a448b264fdbcfe81d6c34a2887f89f15.sol analyzed (6 contracts), 38 result(s) found

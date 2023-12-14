@@ -1,0 +1,79 @@
+INFO:Detectors:[91m
+Reentrancy in EtherDEX.migrateFunds (/sb/0x8af4dfc5c55ef2d3bce511e4c14d631253533540.sol#195-210):
+	External calls:
+	- newExchange = findNewExchangeContract() (/sb/0x8af4dfc5c55ef2d3bce511e4c14d631253533540.sol#203-206)
+	- migrateEther(newExchange) (/sb/0x8af4dfc5c55ef2d3bce511e4c14d631253533540.sol#206-207)
+	- migrateTokens(newExchange,tokens_) (/sb/0x8af4dfc5c55ef2d3bce511e4c14d631253533540.sol#208-209)
+	External calls sending eth:
+	- migrateEther(newExchange) (/sb/0x8af4dfc5c55ef2d3bce511e4c14d631253533540.sol#206-207)
+	State variables written after the call(s):
+	- tokens (/sb/0x8af4dfc5c55ef2d3bce511e4c14d631253533540.sol#208-209)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities[0m
+INFO:Detectors:[93m
+Reentrancy in EtherDEX.migrateTokens (/sb/0x8af4dfc5c55ef2d3bce511e4c14d631253533540.sol#267-278):
+	External calls:
+	- ! ERC20(token).approve(newExchange,tokenAmount) (/sb/0x8af4dfc5c55ef2d3bce511e4c14d631253533540.sol)
+	State variables written after the call(s):
+	- tokens (/sb/0x8af4dfc5c55ef2d3bce511e4c14d631253533540.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+EtherDEX.findNewExchangeContract has external calls inside a loop:
+	- nextContract_ = newExchange.nextContract() (/sb/0x8af4dfc5c55ef2d3bce511e4c14d631253533540.sol#247-249)
+EtherDEX.migrateTokens has external calls inside a loop:
+	- ! ERC20(token).approve(newExchange,tokenAmount) (/sb/0x8af4dfc5c55ef2d3bce511e4c14d631253533540.sol)
+EtherDEX.migrateTokens has external calls inside a loop:
+	- newExchange.depositTokenForUser(token,tokenAmount,msg.sender) (/sb/0x8af4dfc5c55ef2d3bce511e4c14d631253533540.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in EtherDEX.depositEtherForUser (/sb/0x8af4dfc5c55ef2d3bce511e4c14d631253533540.sol#210-219):
+	External calls:
+	- require(bool)(caller.contractVersion() > 0) (/sb/0x8af4dfc5c55ef2d3bce511e4c14d631253533540.sol#215-216)
+	State variables written after the call(s):
+	- tokens (/sb/0x8af4dfc5c55ef2d3bce511e4c14d631253533540.sol#217-218)
+Reentrancy in EtherDEX.depositToken (/sb/0x8af4dfc5c55ef2d3bce511e4c14d631253533540.sol#129-137):
+	External calls:
+	- ! ERC20(token).transferFrom(msg.sender,this,amount) (/sb/0x8af4dfc5c55ef2d3bce511e4c14d631253533540.sol#132-133)
+	State variables written after the call(s):
+	- tokens (/sb/0x8af4dfc5c55ef2d3bce511e4c14d631253533540.sol#133-136)
+Reentrancy in EtherDEX.depositTokenForUser (/sb/0x8af4dfc5c55ef2d3bce511e4c14d631253533540.sol#219-230):
+	External calls:
+	- require(bool)(caller.contractVersion() > 0) (/sb/0x8af4dfc5c55ef2d3bce511e4c14d631253533540.sol#225-228)
+	- ! ERC20(_token).transferFrom(msg.sender,this,_amount) (/sb/0x8af4dfc5c55ef2d3bce511e4c14d631253533540.sol#228-229)
+	State variables written after the call(s):
+	- tokens (/sb/0x8af4dfc5c55ef2d3bce511e4c14d631253533540.sol#229-230)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+ERC20.totalSupply (/sb/0x8af4dfc5c55ef2d3bce511e4c14d631253533540.sol#27-29) should be declared external
+ERC20.balanceOf (/sb/0x8af4dfc5c55ef2d3bce511e4c14d631253533540.sol#29-31) should be declared external
+ERC20.allowance (/sb/0x8af4dfc5c55ef2d3bce511e4c14d631253533540.sol#31-33) should be declared external
+ERC20.transfer (/sb/0x8af4dfc5c55ef2d3bce511e4c14d631253533540.sol#33-35) should be declared external
+ERC20.approve (/sb/0x8af4dfc5c55ef2d3bce511e4c14d631253533540.sol#35-37) should be declared external
+ERC20.transferFrom (/sb/0x8af4dfc5c55ef2d3bce511e4c14d631253533540.sol#37-39) should be declared external
+EtherDEX.fallback (/sb/0x8af4dfc5c55ef2d3bce511e4c14d631253533540.sol#88-93) should be declared external
+EtherDEX.changeAdmin (/sb/0x8af4dfc5c55ef2d3bce511e4c14d631253533540.sol#95-96) should be declared external
+EtherDEX.changeFeeAccount (/sb/0x8af4dfc5c55ef2d3bce511e4c14d631253533540.sol#96-101) should be declared external
+EtherDEX.changeFeeMake (/sb/0x8af4dfc5c55ef2d3bce511e4c14d631253533540.sol#101-106) should be declared external
+EtherDEX.changeFeeTake (/sb/0x8af4dfc5c55ef2d3bce511e4c14d631253533540.sol#106-111) should be declared external
+EtherDEX.deprecate (/sb/0x8af4dfc5c55ef2d3bce511e4c14d631253533540.sol#111-116) should be declared external
+EtherDEX.deposit (/sb/0x8af4dfc5c55ef2d3bce511e4c14d631253533540.sol#116-121) should be declared external
+EtherDEX.withdraw (/sb/0x8af4dfc5c55ef2d3bce511e4c14d631253533540.sol#121-129) should be declared external
+EtherDEX.depositToken (/sb/0x8af4dfc5c55ef2d3bce511e4c14d631253533540.sol#129-137) should be declared external
+EtherDEX.withdrawToken (/sb/0x8af4dfc5c55ef2d3bce511e4c14d631253533540.sol#137-148) should be declared external
+EtherDEX.balanceOf (/sb/0x8af4dfc5c55ef2d3bce511e4c14d631253533540.sol#148-149) should be declared external
+EtherDEX.order (/sb/0x8af4dfc5c55ef2d3bce511e4c14d631253533540.sol#149-154) should be declared external
+EtherDEX.trade (/sb/0x8af4dfc5c55ef2d3bce511e4c14d631253533540.sol#154-167) should be declared external
+EtherDEX.testTrade (/sb/0x8af4dfc5c55ef2d3bce511e4c14d631253533540.sol#167-171) should be declared external
+EtherDEX.amountFilled (/sb/0x8af4dfc5c55ef2d3bce511e4c14d631253533540.sol#181-186) should be declared external
+EtherDEX.cancelOrder (/sb/0x8af4dfc5c55ef2d3bce511e4c14d631253533540.sol#186-195) should be declared external
+EtherDEX.migrateFunds (/sb/0x8af4dfc5c55ef2d3bce511e4c14d631253533540.sol#195-210) should be declared external
+EtherDEX.depositEtherForUser (/sb/0x8af4dfc5c55ef2d3bce511e4c14d631253533540.sol#210-219) should be declared external
+EtherDEX.depositTokenForUser (/sb/0x8af4dfc5c55ef2d3bce511e4c14d631253533540.sol#219-230) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_previousContract' of EtherDEX. (/sb/0x8af4dfc5c55ef2d3bce511e4c14d631253533540.sol#73-74) is not in mixedCase
+Parameter '_user' of EtherDEX.depositEtherForUser (/sb/0x8af4dfc5c55ef2d3bce511e4c14d631253533540.sol#211) is not in mixedCase
+Parameter '_token' of EtherDEX.depositTokenForUser (/sb/0x8af4dfc5c55ef2d3bce511e4c14d631253533540.sol#220) is not in mixedCase
+Parameter '_amount' of EtherDEX.depositTokenForUser (/sb/0x8af4dfc5c55ef2d3bce511e4c14d631253533540.sol#220) is not in mixedCase
+Parameter '_user' of EtherDEX.depositTokenForUser (/sb/0x8af4dfc5c55ef2d3bce511e4c14d631253533540.sol#220-221) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x8af4dfc5c55ef2d3bce511e4c14d631253533540.sol analyzed (3 contracts), 38 result(s) found

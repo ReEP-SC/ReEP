@@ -1,0 +1,94 @@
+INFO:Detectors:[93m
+Reentrancy in VAPEPOOL1.farm (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#458-478):
+	External calls:
+	- require(bool,string)(Token(VAPEAddress).transferFrom(msg.sender,address(this),amountToFarm),Insufficient Token Allowance) (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#461-465)
+	- updateAccount(msg.sender) (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#465-466)
+	- require(bool,string)(Token(VAPEAddress).transfer(admin,fee),Could not transfer deposit fee.) (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#471-473)
+	State variables written after the call(s):
+	- depositedTokens (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#473-474)
+Reentrancy in VAPEPOOL1.unfarm (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#478-503):
+	External calls:
+	- updateAccount(msg.sender) (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#484-485)
+	- require(bool,string)(Token(VAPEAddress).transfer(admin,fee),Could not transfer withdraw fee.) (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#491-494)
+	- require(bool,string)(Token(VAPEAddress).transfer(msg.sender,amountAfterFee),Could not transfer tokens.) (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#494-498)
+	State variables written after the call(s):
+	- depositedTokens (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#498-501)
+Reentrancy in VAPEPOOL1.updateAccount (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#423-439):
+	External calls:
+	- require(bool,string)(Token(VAPEAddress).transfer(account,unclaimedDivs),Could not transfer tokens.) (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#428-430)
+	State variables written after the call(s):
+	- lastClaimedTime (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#438-439)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+EnumerableSet._remove (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#108-144) does not use the value returned by external calls:
+	-set._values.pop() (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#135-136)
+VAPEPOOL1.transferAnyERC20Tokens (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#417-422) does not use the value returned by external calls:
+	-Token(_tokenAddr).transfer(_to,_amount) (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#422)
+VAPEPOOL1.farm (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#458-478) does not use the value returned by external calls:
+	-holders.add(msg.sender) (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#477)
+VAPEPOOL1.unfarm (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#478-503) does not use the value returned by external calls:
+	-holders.remove(msg.sender) (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in VAPEPOOL1.farm (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#458-478):
+	External calls:
+	- require(bool,string)(Token(VAPEAddress).transferFrom(msg.sender,address(this),amountToFarm),Insufficient Token Allowance) (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#461-465)
+	- updateAccount(msg.sender) (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#465-466)
+	- require(bool,string)(Token(VAPEAddress).transfer(admin,fee),Could not transfer deposit fee.) (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#471-473)
+	State variables written after the call(s):
+	- farmingTime (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#477-478)
+Reentrancy in VAPEPOOL1.updateAccount (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#423-439):
+	External calls:
+	- require(bool,string)(Token(VAPEAddress).transfer(account,unclaimedDivs),Could not transfer tokens.) (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#428-430)
+	State variables written after the call(s):
+	- totalClaimedRewards (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#433-435)
+	- totalEarnedTokens (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#431-433)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#324-331) should be declared external
+VAPEPOOL1.setTokenAddresses (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#372-382) should be declared external
+VAPEPOOL1.farmingFeeRateSet (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#382-388) should be declared external
+VAPEPOOL1.rewardRateSet (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#390-394) should be declared external
+VAPEPOOL1.StakingReturnsAmountSet (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#394-401) should be declared external
+VAPEPOOL1.possibleUnfarmTimeSet (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#401-406) should be declared external
+VAPEPOOL1.rewardIntervalSet (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#406-408) should be declared external
+VAPEPOOL1.allowFarming (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#408-417) should be declared external
+VAPEPOOL1.transferAnyERC20Tokens (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#417-422) should be declared external
+VAPEPOOL1.getNumberOfHolders (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#455-458) should be declared external
+VAPEPOOL1.farm (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#458-478) should be declared external
+VAPEPOOL1.unfarm (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#478-503) should be declared external
+VAPEPOOL1.claimRewards (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol:
+	- pragma solidity0.6.12 (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#5-7): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'EnumerableSet._add' (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#90-104) is not in mixedCase
+Function 'EnumerableSet._remove' (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#108-144) is not in mixedCase
+Function 'EnumerableSet._contains' (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#149-151) is not in mixedCase
+Function 'EnumerableSet._length' (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#156-158) is not in mixedCase
+Function 'EnumerableSet._at' (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#167-179) is not in mixedCase
+Parameter '' of Token.transferFrom (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#333-334) is not in mixedCase
+Parameter '_scope_0' of Token.transferFrom (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#334) is not in mixedCase
+Parameter '_scope_1' of Token.transferFrom (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#334) is not in mixedCase
+Parameter '' of Token.transfer (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#336-337) is not in mixedCase
+Parameter '_scope_0' of Token.transfer (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#337) is not in mixedCase
+Parameter '_tokenAddr' of VAPEPOOL1.setTokenAddresses (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#373) is not in mixedCase
+Parameter '_farmingFeeRate' of VAPEPOOL1.farmingFeeRateSet (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#382) is not in mixedCase
+Parameter '_unfarmingFeeRate' of VAPEPOOL1.farmingFeeRateSet (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#382-383) is not in mixedCase
+Parameter '_rewardRate' of VAPEPOOL1.rewardRateSet (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#390) is not in mixedCase
+Function 'VAPEPOOL1.StakingReturnsAmountSet' (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#394-401) is not in mixedCase
+Parameter '_poolreward' of VAPEPOOL1.StakingReturnsAmountSet (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#396) is not in mixedCase
+Parameter '_possibleUnfarmTime' of VAPEPOOL1.possibleUnfarmTimeSet (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#402) is not in mixedCase
+Parameter '_rewardInterval' of VAPEPOOL1.rewardIntervalSet (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#406) is not in mixedCase
+Parameter '_status' of VAPEPOOL1.allowFarming (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#409-410) is not in mixedCase
+Parameter '_tokenAddr' of VAPEPOOL1.transferAnyERC20Tokens (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#418) is not in mixedCase
+Parameter '_to' of VAPEPOOL1.transferAnyERC20Tokens (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#418) is not in mixedCase
+Parameter '_amount' of VAPEPOOL1.transferAnyERC20Tokens (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#418-419) is not in mixedCase
+Parameter '_holder' of VAPEPOOL1.getUnclaimedDivs (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#440) is not in mixedCase
+Variable 'VAPEPOOL1.VAPEAddress' (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#347) is not in mixedCase
+Variable 'VAPEPOOL1.PossibleUnfarmTime' (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#359-360) is not in mixedCase
+Variable 'VAPEPOOL1.ToBeFarmedTokens' (/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol#360-362) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xb2f3d70aa89f4463aa684a41a46b6ada93a613b0.sol analyzed (5 contracts), 49 result(s) found

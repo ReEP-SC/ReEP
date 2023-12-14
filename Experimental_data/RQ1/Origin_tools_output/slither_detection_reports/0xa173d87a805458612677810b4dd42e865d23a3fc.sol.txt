@@ -1,0 +1,74 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xa173d87a805458612677810b4dd42e865d23a3fc.sol:
+/sb/0xa173d87a805458612677810b4dd42e865d23a3fc.sol:60:5: Warning: No visibility specified. Defaulting to "public". 
+    function balanceOf(address _owner) view returns (uint);
+
+    ^-----------------------------------------------------^
+/sb/0xa173d87a805458612677810b4dd42e865d23a3fc.sol:61:5: Warning: No visibility specified. Defaulting to "public". 
+    function transfer(address _to, uint _value) returns (bool);
+
+    ^---------------------------------------------------------^
+/sb/0xa173d87a805458612677810b4dd42e865d23a3fc.sol:62:5: Warning: No visibility specified. Defaulting to "public". 
+    function transferFrom(address _from, address _to, uint _value) returns (bool);
+
+    ^----------------------------------------------------------------------------^
+/sb/0xa173d87a805458612677810b4dd42e865d23a3fc.sol:63:5: Warning: No visibility specified. Defaulting to "public". 
+    function approve(address _spender, uint _value) returns (bool);
+
+    ^-------------------------------------------------------------^
+/sb/0xa173d87a805458612677810b4dd42e865d23a3fc.sol:64:5: Warning: No visibility specified. Defaulting to "public". 
+    function allowance(address _owner, address _spender) view returns (uint);
+
+    ^-----------------------------------------------------------------------^
+
+INFO:Detectors:[93m
+Reentrancy in TokenVestingWithConstantPercent.release (/sb/0xa173d87a805458612677810b4dd42e865d23a3fc.sol#305-327):
+	External calls:
+	- unreleased = releasableAmount() (/sb/0xa173d87a805458612677810b4dd42e865d23a3fc.sol#307)
+	- require(bool,string)(token.transfer(beneficiary,unreleased),revert on transfer failure) (/sb/0xa173d87a805458612677810b4dd42e865d23a3fc.sol#311-319)
+	State variables written after the call(s):
+	- released (/sb/0xa173d87a805458612677810b4dd42e865d23a3fc.sol#321)
+Reentrancy in TokenVestingWithFloatingPercent.release (/sb/0xa173d87a805458612677810b4dd42e865d23a3fc.sol#419-441):
+	External calls:
+	- unreleased = releasableAmount() (/sb/0xa173d87a805458612677810b4dd42e865d23a3fc.sol#421-423)
+	- require(bool,string)(token.transfer(beneficiary,unreleased),revert on transfer failure) (/sb/0xa173d87a805458612677810b4dd42e865d23a3fc.sol#431-433)
+	State variables written after the call(s):
+	- released (/sb/0xa173d87a805458612677810b4dd42e865d23a3fc.sol#439)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+ERC20.totalSupply should be constant (/sb/0xa173d87a805458612677810b4dd42e865d23a3fc.sol#113-115)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+ERC20.balanceOf (/sb/0xa173d87a805458612677810b4dd42e865d23a3fc.sol#121) should be declared external
+ERC20.transfer (/sb/0xa173d87a805458612677810b4dd42e865d23a3fc.sol#123) should be declared external
+ERC20.transferFrom (/sb/0xa173d87a805458612677810b4dd42e865d23a3fc.sol#123-125) should be declared external
+ERC20.approve (/sb/0xa173d87a805458612677810b4dd42e865d23a3fc.sol#125-127) should be declared external
+ERC20.allowance (/sb/0xa173d87a805458612677810b4dd42e865d23a3fc.sol#127-131) should be declared external
+BaseTokenVesting.startVesting (/sb/0xa173d87a805458612677810b4dd42e865d23a3fc.sol#233-241) should be declared external
+BaseTokenVesting.sendTokens (/sb/0xa173d87a805458612677810b4dd42e865d23a3fc.sol#241-257) should be declared external
+TokenVestingWithConstantPercent.release (/sb/0xa173d87a805458612677810b4dd42e865d23a3fc.sol#305-327) should be declared external
+TokenVestingWithFloatingPercent.release (/sb/0xa173d87a805458612677810b4dd42e865d23a3fc.sol#419-441) should be declared external
+BaseTokenVesting.release (/sb/0xa173d87a805458612677810b4dd42e865d23a3fc.sol#257) should be declared external
+TokenVestingFactory.createVestingContractWithConstantPercent (/sb/0xa173d87a805458612677810b4dd42e865d23a3fc.sol#519-563) should be declared external
+TokenVestingFactory.createVestingContractWithFloatingPercent (/sb/0xa173d87a805458612677810b4dd42e865d23a3fc.sol#567-587) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_benificiary' of BaseTokenVesting. (/sb/0xa173d87a805458612677810b4dd42e865d23a3fc.sol#211) is not in mixedCase
+Parameter '_cliff' of BaseTokenVesting. (/sb/0xa173d87a805458612677810b4dd42e865d23a3fc.sol#211) is not in mixedCase
+Parameter '_vestingPeriod' of BaseTokenVesting. (/sb/0xa173d87a805458612677810b4dd42e865d23a3fc.sol#211) is not in mixedCase
+Parameter '_token' of BaseTokenVesting. (/sb/0xa173d87a805458612677810b4dd42e865d23a3fc.sol#211-215) is not in mixedCase
+Parameter '_to' of BaseTokenVesting.sendTokens (/sb/0xa173d87a805458612677810b4dd42e865d23a3fc.sol#241) is not in mixedCase
+Parameter '_amount' of BaseTokenVesting.sendTokens (/sb/0xa173d87a805458612677810b4dd42e865d23a3fc.sol#241-243) is not in mixedCase
+Parameter '_periodPercent' of TokenVestingWithConstantPercent. (/sb/0xa173d87a805458612677810b4dd42e865d23a3fc.sol#291) is not in mixedCase
+Parameter '_periodPercents' of TokenVestingWithFloatingPercent. (/sb/0xa173d87a805458612677810b4dd42e865d23a3fc.sol#395) is not in mixedCase
+Parameter '_benificiary' of TokenVestingFactory.createVestingContractWithConstantPercent (/sb/0xa173d87a805458612677810b4dd42e865d23a3fc.sol#523-525) is not in mixedCase
+Parameter '_cliff' of TokenVestingFactory.createVestingContractWithConstantPercent (/sb/0xa173d87a805458612677810b4dd42e865d23a3fc.sol#525-527) is not in mixedCase
+Parameter '_vestingPeriod' of TokenVestingFactory.createVestingContractWithConstantPercent (/sb/0xa173d87a805458612677810b4dd42e865d23a3fc.sol#529-531) is not in mixedCase
+Parameter '_tokenAddress' of TokenVestingFactory.createVestingContractWithConstantPercent (/sb/0xa173d87a805458612677810b4dd42e865d23a3fc.sol#532-535) is not in mixedCase
+Parameter '_periodPercent' of TokenVestingFactory.createVestingContractWithConstantPercent (/sb/0xa173d87a805458612677810b4dd42e865d23a3fc.sol#537) is not in mixedCase
+Parameter '_benificiary' of TokenVestingFactory.createVestingContractWithFloatingPercent (/sb/0xa173d87a805458612677810b4dd42e865d23a3fc.sol#569) is not in mixedCase
+Parameter '_cliff' of TokenVestingFactory.createVestingContractWithFloatingPercent (/sb/0xa173d87a805458612677810b4dd42e865d23a3fc.sol#571) is not in mixedCase
+Parameter '_vestingPeriod' of TokenVestingFactory.createVestingContractWithFloatingPercent (/sb/0xa173d87a805458612677810b4dd42e865d23a3fc.sol#573) is not in mixedCase
+Parameter '_tokenAddress' of TokenVestingFactory.createVestingContractWithFloatingPercent (/sb/0xa173d87a805458612677810b4dd42e865d23a3fc.sol#575-577) is not in mixedCase
+Parameter '_periodPercents' of TokenVestingFactory.createVestingContractWithFloatingPercent (/sb/0xa173d87a805458612677810b4dd42e865d23a3fc.sol#577-579) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xa173d87a805458612677810b4dd42e865d23a3fc.sol analyzed (7 contracts), 33 result(s) found

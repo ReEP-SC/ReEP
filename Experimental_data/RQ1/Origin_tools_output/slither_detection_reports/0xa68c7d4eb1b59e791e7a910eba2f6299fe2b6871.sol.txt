@@ -1,0 +1,86 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xa68c7d4eb1b59e791e7a910eba2f6299fe2b6871.sol:
+/sb/0xa68c7d4eb1b59e791e7a910eba2f6299fe2b6871.sol:397:25: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function initialize(address router, address factory, address _rptContract) public {
+                        ^------------^
+/sb/0xa68c7d4eb1b59e791e7a910eba2f6299fe2b6871.sol:397:41: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function initialize(address router, address factory, address _rptContract) public {
+                                        ^-------------^
+/sb/0xa68c7d4eb1b59e791e7a910eba2f6299fe2b6871.sol:397:58: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function initialize(address router, address factory, address _rptContract) public {
+                                                         ^------------------^
+
+INFO:Detectors:[93m
+Address.isContract (/sb/0xa68c7d4eb1b59e791e7a910eba2f6299fe2b6871.sol#30-42) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+Reentrancy in RugProofMaster.endTokenSale (/sb/0xa68c7d4eb1b59e791e7a910eba2f6299fe2b6871.sol#480-533):
+	External calls:
+	- require(bool,string)(IERC20(tokenSaleInfo.contractAddress).balanceOf(address(this)) >= tokenSaleInfo.tokenAmount,endTokenSale: contract does not have enough tokens) (/sb/0xa68c7d4eb1b59e791e7a910eba2f6299fe2b6871.sol#491-492)
+	State variables written after the call(s):
+	- tokenSales (/sb/0xa68c7d4eb1b59e791e7a910eba2f6299fe2b6871.sol#495)
+	- tokenSales (/sb/0xa68c7d4eb1b59e791e7a910eba2f6299fe2b6871.sol#497-498)
+	- tokenSales (/sb/0xa68c7d4eb1b59e791e7a910eba2f6299fe2b6871.sol#527-528)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+RugProofMaster.createNewTokenSale (/sb/0xa68c7d4eb1b59e791e7a910eba2f6299fe2b6871.sol#441-470) does not use the value returned by external calls:
+	-IERC20(_contractAddress).transferFrom(address(msg.sender),address(this),_tokenAmount) (/sb/0xa68c7d4eb1b59e791e7a910eba2f6299fe2b6871.sol#460-464)
+RugProofMaster.endTokenSale (/sb/0xa68c7d4eb1b59e791e7a910eba2f6299fe2b6871.sol#480-533) does not use the value returned by external calls:
+	-IERC20(tokenSaleInfo.contractAddress).transfer(address(burnPool),tokenAmountToBurn) (/sb/0xa68c7d4eb1b59e791e7a910eba2f6299fe2b6871.sol#519-525)
+	-IERC20(tokenSaleInfo.contractAddress).transfer(tokenSaleInfo.receiveAddress,tokenSaleInfo.tokenAmount) (/sb/0xa68c7d4eb1b59e791e7a910eba2f6299fe2b6871.sol#530-533)
+RugProofMaster.claimTokens (/sb/0xa68c7d4eb1b59e791e7a910eba2f6299fe2b6871.sol#582-603) does not use the value returned by external calls:
+	-IERC20(tokenSaleInfo.contractAddress).transfer(address(msg.sender),tokenAmountToSend) (/sb/0xa68c7d4eb1b59e791e7a910eba2f6299fe2b6871.sol#602-603)
+RugProofMaster.addLiquidity (/sb/0xa68c7d4eb1b59e791e7a910eba2f6299fe2b6871.sol) does not use the value returned by external calls:
+	-IERC20(contractAddress).approve(address(uniswapRouterV2),tokenAmount) (/sb/0xa68c7d4eb1b59e791e7a910eba2f6299fe2b6871.sol)
+	-uniswapRouterV2.addLiquidityETH.value(ethAmount)(contractAddress,tokenAmount,0,0,address(burnPool),block.timestamp) (/sb/0xa68c7d4eb1b59e791e7a910eba2f6299fe2b6871.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in RugProofMaster.createNewTokenSale (/sb/0xa68c7d4eb1b59e791e7a910eba2f6299fe2b6871.sol#441-470):
+	External calls:
+	- tokenBalanceBeforeTransfer = IERC20(_contractAddress).balanceOf(address(this)) (/sb/0xa68c7d4eb1b59e791e7a910eba2f6299fe2b6871.sol#457-460)
+	- IERC20(_contractAddress).transferFrom(address(msg.sender),address(this),_tokenAmount) (/sb/0xa68c7d4eb1b59e791e7a910eba2f6299fe2b6871.sol#460-464)
+	- tokensReceived = IERC20(_contractAddress).balanceOf(address(this)).sub(tokenBalanceBeforeTransfer) (/sb/0xa68c7d4eb1b59e791e7a910eba2f6299fe2b6871.sol#464-465)
+	State variables written after the call(s):
+	- tokenSales (/sb/0xa68c7d4eb1b59e791e7a910eba2f6299fe2b6871.sol#470)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+RugProofMaster.endTokenSale (/sb/0xa68c7d4eb1b59e791e7a910eba2f6299fe2b6871.sol#480-533) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(block.timestamp > tokenSaleInfo.timestampEndSec || hardcapETH <= tokenSaleInfo.totalEth,endTokenSale: token sale is not over yet) (/sb/0xa68c7d4eb1b59e791e7a910eba2f6299fe2b6871.sol#487-491)
+RugProofMaster.buyTokens (/sb/0xa68c7d4eb1b59e791e7a910eba2f6299fe2b6871.sol#545-578) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(tokenSaleInfo.timestampEndSec > block.timestamp && tokenSaleInfo.isEnded == false,buyTokens: Token sale is over) (/sb/0xa68c7d4eb1b59e791e7a910eba2f6299fe2b6871.sol#561-567)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+Address.isContract uses assembly (/sb/0xa68c7d4eb1b59e791e7a910eba2f6299fe2b6871.sol#30-42)
+	- /sb/0xa68c7d4eb1b59e791e7a910eba2f6299fe2b6871.sol#37-38
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+TokenPool.balance (/sb/0xa68c7d4eb1b59e791e7a910eba2f6299fe2b6871.sol#262-264) should be declared external
+RugProofMaster.initialize (/sb/0xa68c7d4eb1b59e791e7a910eba2f6299fe2b6871.sol#400-427) should be declared external
+RugProofMaster.setTax (/sb/0xa68c7d4eb1b59e791e7a910eba2f6299fe2b6871.sol#428-430) should be declared external
+RugProofMaster.getTokenSalesOne (/sb/0xa68c7d4eb1b59e791e7a910eba2f6299fe2b6871.sol#625-642) should be declared external
+RugProofMaster.getTokenSalesTwo (/sb/0xa68c7d4eb1b59e791e7a910eba2f6299fe2b6871.sol#642-660) should be declared external
+RugProofMaster.getTokenSalesThree (/sb/0xa68c7d4eb1b59e791e7a910eba2f6299fe2b6871.sol#660-683) should be declared external
+RugProofMaster.getContribution (/sb/0xa68c7d4eb1b59e791e7a910eba2f6299fe2b6871.sol#683-690) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xa68c7d4eb1b59e791e7a910eba2f6299fe2b6871.sol:
+	- pragma solidity0.5.17 (/sb/0xa68c7d4eb1b59e791e7a910eba2f6299fe2b6871.sol#7-10): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Low level call in Address.sendValue (/sb/0xa68c7d4eb1b59e791e7a910eba2f6299fe2b6871.sol#69-82):
+	-(success) = recipient.call.value(amount)() /sb/0xa68c7d4eb1b59e791e7a910eba2f6299fe2b6871.sol#74
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Function 'IUniswapV2Router02.WETH' (/sb/0xa68c7d4eb1b59e791e7a910eba2f6299fe2b6871.sol#303-304) is not in mixedCase
+Parameter '_rptTax' of RugProofMaster.setTax (/sb/0xa68c7d4eb1b59e791e7a910eba2f6299fe2b6871.sol#428) is not in mixedCase
+Parameter '_contractAddress' of RugProofMaster.createNewTokenSale (/sb/0xa68c7d4eb1b59e791e7a910eba2f6299fe2b6871.sol#441-442) is not in mixedCase
+Parameter '_tokenAmount' of RugProofMaster.createNewTokenSale (/sb/0xa68c7d4eb1b59e791e7a910eba2f6299fe2b6871.sol#442) is not in mixedCase
+Parameter '_tokenRatio' of RugProofMaster.createNewTokenSale (/sb/0xa68c7d4eb1b59e791e7a910eba2f6299fe2b6871.sol#442) is not in mixedCase
+Parameter '_timestampEndSec' of RugProofMaster.createNewTokenSale (/sb/0xa68c7d4eb1b59e791e7a910eba2f6299fe2b6871.sol#442-443) is not in mixedCase
+Parameter '_liquidityLockPercent' of RugProofMaster.createNewTokenSale (/sb/0xa68c7d4eb1b59e791e7a910eba2f6299fe2b6871.sol#443) is not in mixedCase
+Parameter '_softcap' of RugProofMaster.createNewTokenSale (/sb/0xa68c7d4eb1b59e791e7a910eba2f6299fe2b6871.sol#443) is not in mixedCase
+Parameter '_contractAddress' of RugProofMaster.createUniswapPairMainnet (/sb/0xa68c7d4eb1b59e791e7a910eba2f6299fe2b6871.sol#693) is not in mixedCase
+Variable 'RugProofMaster._weiRaised' (/sb/0xa68c7d4eb1b59e791e7a910eba2f6299fe2b6871.sol#384) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xa68c7d4eb1b59e791e7a910eba2f6299fe2b6871.sol analyzed (7 contracts), 29 result(s) found

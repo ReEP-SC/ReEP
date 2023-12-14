@@ -1,0 +1,70 @@
+INFO:Detectors:[91m
+EnglishAuction.end (/sb/0xbd32fd83d1b93129ea0d4175bdaa933d12e63e7f.sol#112-130) sends eth to arbitrary user
+	Dangerous calls:
+	- haus.transfer(hausFee) (/sb/0xbd32fd83d1b93129ea0d4175bdaa933d12e63e7f.sol#125-128)
+	- seller.transfer(address(this).balance) (/sb/0xbd32fd83d1b93129ea0d4175bdaa933d12e63e7f.sol#128-129)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[91m
+Reentrancy in EnglishAuction.end (/sb/0xbd32fd83d1b93129ea0d4175bdaa933d12e63e7f.sol#112-130):
+	External calls:
+	- IERC1155(token).safeTransferFrom(address(this),winning,id,1,new bytes(0x0)) (/sb/0xbd32fd83d1b93129ea0d4175bdaa933d12e63e7f.sol#118-120)
+	External calls sending eth:
+	- haus.transfer(hausFee) (/sb/0xbd32fd83d1b93129ea0d4175bdaa933d12e63e7f.sol#125-128)
+	- seller.transfer(address(this).balance) (/sb/0xbd32fd83d1b93129ea0d4175bdaa933d12e63e7f.sol#128-129)
+	State variables written after the call(s):
+	- ended (/sb/0xbd32fd83d1b93129ea0d4175bdaa933d12e63e7f.sol#129-130)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities[0m
+INFO:Detectors:[93m
+EnglishAuction.pull (/sb/0xbd32fd83d1b93129ea0d4175bdaa933d12e63e7f.sol#131-140) uses a dangerous strict equality:
+	- require(bool,string)(lastBidTime == 0,There were bids)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Reentrancy in EnglishAuction.pull (/sb/0xbd32fd83d1b93129ea0d4175bdaa933d12e63e7f.sol#131-140):
+	External calls:
+	- IERC1155(token).safeTransferFrom(address(this),seller,id,1,new bytes(0x0)) (/sb/0xbd32fd83d1b93129ea0d4175bdaa933d12e63e7f.sol#139-140)
+	State variables written after the call(s):
+	- ended (/sb/0xbd32fd83d1b93129ea0d4175bdaa933d12e63e7f.sol#140)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+EnglishAuction.bid (/sb/0xbd32fd83d1b93129ea0d4175bdaa933d12e63e7f.sol#93-112) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(block.timestamp < lastBidTime.add(bidLength),Auction ended) (/sb/0xbd32fd83d1b93129ea0d4175bdaa933d12e63e7f.sol#100-104)
+	- lastBidTime != 0 (/sb/0xbd32fd83d1b93129ea0d4175bdaa933d12e63e7f.sol#99-106)
+	- require(bool,string)(block.timestamp < startBidTime.add(auctionLength),Auction ended) (/sb/0xbd32fd83d1b93129ea0d4175bdaa933d12e63e7f.sol#95-97)
+	- require(bool,string)(block.timestamp >= startBidTime,Auction not started) (/sb/0xbd32fd83d1b93129ea0d4175bdaa933d12e63e7f.sol#94-95)
+EnglishAuction.end (/sb/0xbd32fd83d1b93129ea0d4175bdaa933d12e63e7f.sol#112-130) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(lastBidTime != 0,no bids) (/sb/0xbd32fd83d1b93129ea0d4175bdaa933d12e63e7f.sol#113)
+	- require(bool,string)(block.timestamp >= lastBidTime.add(bidLength) || block.timestamp >= startBidTime.add(auctionLength),Auction live) (/sb/0xbd32fd83d1b93129ea0d4175bdaa933d12e63e7f.sol#113-116)
+EnglishAuction.pull (/sb/0xbd32fd83d1b93129ea0d4175bdaa933d12e63e7f.sol#131-140) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(block.timestamp >= startBidTime.add(auctionLength),Auction live) (/sb/0xbd32fd83d1b93129ea0d4175bdaa933d12e63e7f.sol#134-136)
+	- require(bool,string)(lastBidTime == 0,There were bids) (/sb/0xbd32fd83d1b93129ea0d4175bdaa933d12e63e7f.sol#131-134)
+EnglishAuction.live (/sb/0xbd32fd83d1b93129ea0d4175bdaa933d12e63e7f.sol#140-147) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp < lastBidTime.add(bidLength) && block.timestamp < startBidTime.add(auctionLength) (/sb/0xbd32fd83d1b93129ea0d4175bdaa933d12e63e7f.sol#142-146)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+EnglishAuction.auctionLength should be constant (/sb/0xbd32fd83d1b93129ea0d4175bdaa933d12e63e7f.sol#75-76)
+EnglishAuction.bidLength should be constant (/sb/0xbd32fd83d1b93129ea0d4175bdaa933d12e63e7f.sol#72-74)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+EnglishAuction.bid (/sb/0xbd32fd83d1b93129ea0d4175bdaa933d12e63e7f.sol#93-112) should be declared external
+EnglishAuction.end (/sb/0xbd32fd83d1b93129ea0d4175bdaa933d12e63e7f.sol#112-130) should be declared external
+EnglishAuction.pull (/sb/0xbd32fd83d1b93129ea0d4175bdaa933d12e63e7f.sol#131-140) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xbd32fd83d1b93129ea0d4175bdaa933d12e63e7f.sol:
+	- pragma solidity^0.6.7 (/sb/0xbd32fd83d1b93129ea0d4175bdaa933d12e63e7f.sol#6-8): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_start' of EnglishAuction. (/sb/0xbd32fd83d1b93129ea0d4175bdaa933d12e63e7f.sol#83) is not in mixedCase
+Parameter '_seller' of EnglishAuction. (/sb/0xbd32fd83d1b93129ea0d4175bdaa933d12e63e7f.sol#83) is not in mixedCase
+Parameter '_haus' of EnglishAuction. (/sb/0xbd32fd83d1b93129ea0d4175bdaa933d12e63e7f.sol#83-84) is not in mixedCase
+Parameter '' of EnglishAuction.onERC1155Received (/sb/0xbd32fd83d1b93129ea0d4175bdaa933d12e63e7f.sol#147) is not in mixedCase
+Parameter '_scope_0' of EnglishAuction.onERC1155Received (/sb/0xbd32fd83d1b93129ea0d4175bdaa933d12e63e7f.sol#147) is not in mixedCase
+Parameter '_scope_1' of EnglishAuction.onERC1155Received (/sb/0xbd32fd83d1b93129ea0d4175bdaa933d12e63e7f.sol#147) is not in mixedCase
+Parameter '_scope_2' of EnglishAuction.onERC1155Received (/sb/0xbd32fd83d1b93129ea0d4175bdaa933d12e63e7f.sol#147-148) is not in mixedCase
+Parameter '_scope_3' of EnglishAuction.onERC1155Received (/sb/0xbd32fd83d1b93129ea0d4175bdaa933d12e63e7f.sol#148-150) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xbd32fd83d1b93129ea0d4175bdaa933d12e63e7f.sol analyzed (3 contracts), 21 result(s) found

@@ -1,0 +1,120 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol:
+/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol:845:5: Warning: Function state mutability can be restricted to view
+    function recencyCheck()
+    ^ (Relevant source part starts here and spans across multiple lines).
+
+INFO:Detectors:[93m
+Address.isContract (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#265-276) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+Reentrancy in OTC.reset_twap (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#996-1022):
+	External calls:
+	- UniswapPair(uniswap1).token0() == sell_token (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#1011-1018)
+	- UniswapPair(uniswap2).token0() == purchase_token (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#1019-1022)
+	- update_twap() (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol)
+	State variables written after the call(s):
+	- twap_counter (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol)
+Reentrancy in OTC.trade (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#825-865):
+	External calls:
+	- require(bool,string)(withinBounds(amount_in,sell_amount),Sale price not within bounds of TWAP) (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#833-835)
+	- require(bool,string)(withinBounds(purchase_amount,amount_out),Purchase price not within bounds of TWAP) (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#857-858)
+	State variables written after the call(s):
+	- complete (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#865)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+z in FixedPoint.mul (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#567) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[92m
+Reentrancy in OTC.reset_twap (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#996-1022):
+	External calls:
+	- UniswapPair(uniswap1).token0() == sell_token (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#1011-1018)
+	State variables written after the call(s):
+	- purchaseTokenIs0 (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol)
+	- saleTokenIs0 (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#1013-1015)
+Reentrancy in OTC.reset_twap (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#996-1022):
+	External calls:
+	- UniswapPair(uniswap1).token0() == sell_token (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#1011-1018)
+	- UniswapPair(uniswap2).token0() == purchase_token (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#1019-1022)
+	State variables written after the call(s):
+	- purchaseTokenIs0 (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol)
+Reentrancy in OTC.reset_twap (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#996-1022):
+	External calls:
+	- UniswapPair(uniswap1).token0() == sell_token (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#1011-1018)
+	- UniswapPair(uniswap2).token0() == purchase_token (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#1019-1022)
+	- update_twap() (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol)
+	State variables written after the call(s):
+	- priceAverageBuy (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol)
+	- priceAverageSell (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+OTC.recencyCheck (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#868-871) uses timestamp for comparisons
+	Dangerous comparisons:
+	- (block.timestamp - blockTimestampLast < GRACE) && (twap_counter > 0) (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#870-871)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+Address.isContract uses assembly (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#265-276)
+	- /sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#275
+Address._functionCallWithValue uses assembly (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#357-384)
+	- /sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#381-383
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+OTC._setPendingGov (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#761-771) should be declared external
+OTC.acceptGov (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#771-775) should be declared external
+OTC.setup_sale (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#775-802) should be declared external
+OTC.setup_purchase (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#802-825) should be declared external
+OTC.trade (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#825-865) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol:
+	- pragma solidity0.5.15 (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#5-7): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Low level call in Address.sendValue (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#291-301):
+	-(success) = recipient.call.value(amount)() /sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#297-300
+Low level call in Address._functionCallWithValue (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#357-384):
+	-(success,returndata) = target.call.value(weiValue)(data) /sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#365-366
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Function 'Address._functionCallWithValue' (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#357-384) is not in mixedCase
+Function 'SafeERC20._callOptionalReturn' (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#438-455) is not in mixedCase
+Function 'UniswapPair.DOMAIN_SEPARATOR' (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#469-472) is not in mixedCase
+Function 'UniswapPair.PERMIT_TYPEHASH' (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#472-474) is not in mixedCase
+Function 'UniswapPair.MINIMUM_LIQUIDITY' (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#487-489) is not in mixedCase
+Parameter '' of UniswapPair.initialize (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#512) is not in mixedCase
+Parameter '_scope_0' of UniswapPair.initialize (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#513-514) is not in mixedCase
+Struct 'FixedPoint.uq112x112' (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#542) is not in CapWords
+Struct 'FixedPoint.uq144x112' (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#543-546) is not in CapWords
+Function 'OTC._setPendingGov' (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#761-771) is not in mixedCase
+Function 'OTC.setup_sale' (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#775-802) is not in mixedCase
+Parameter 'sell_token' of OTC.setup_sale (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#778-779) is not in mixedCase
+Parameter 'purchase_token' of OTC.setup_sale (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#779-780) is not in mixedCase
+Parameter 'sell_amount_' of OTC.setup_sale (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#780-781) is not in mixedCase
+Parameter 'twap_period' of OTC.setup_sale (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#781-782) is not in mixedCase
+Parameter 'twap_bounds_' of OTC.setup_sale (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#782-783) is not in mixedCase
+Function 'OTC.setup_purchase' (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#802-825) is not in mixedCase
+Parameter 'sell_token' of OTC.setup_purchase (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#806) is not in mixedCase
+Parameter 'purchase_token' of OTC.setup_purchase (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#807-808) is not in mixedCase
+Parameter 'purchase_amount_' of OTC.setup_purchase (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#809-811) is not in mixedCase
+Parameter 'twap_period' of OTC.setup_purchase (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#811) is not in mixedCase
+Parameter 'twap_bounds_' of OTC.setup_purchase (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#812) is not in mixedCase
+Parameter 'amount_in' of OTC.trade (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#825) is not in mixedCase
+Parameter 'amount_out' of OTC.trade (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#825-826) is not in mixedCase
+Function 'OTC.update_twap' (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#871-907) is not in mixedCase
+Function 'OTC.reset_twap' (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#996-1022) is not in mixedCase
+Parameter 'sell_token' of OTC.reset_twap (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#997-998) is not in mixedCase
+Parameter 'purchase_token' of OTC.reset_twap (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#998) is not in mixedCase
+Variable 'OTC.approved_trader' (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#662) is not in mixedCase
+Variable 'OTC.reserves_sell_token' (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#665) is not in mixedCase
+Variable 'OTC.reserves_purchase_token' (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#668) is not in mixedCase
+Variable 'OTC.sell_amount' (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#671) is not in mixedCase
+Variable 'OTC.purchase_amount' (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#674-675) is not in mixedCase
+Variable 'OTC.uniswap_pair1' (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#681) is not in mixedCase
+Variable 'OTC.uniswap_pair2' (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#686) is not in mixedCase
+Constant 'OTC.uniFact' (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#717-718) is not in UPPER_CASE_WITH_UNDERSCORES
+Variable 'OTC.twap_bounds' (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#723-726) is not in mixedCase
+Variable 'OTC.twap_counter' (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#730) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+FixedPoint.Q112 (/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol#547) is never used in FixedPoint
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0x92ab5cce7af1605da2681458ae52a0bec4ecb74c.sol analyzed (10 contracts), 57 result(s) found

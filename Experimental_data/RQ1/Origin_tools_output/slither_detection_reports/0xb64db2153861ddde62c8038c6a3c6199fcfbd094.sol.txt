@@ -1,0 +1,201 @@
+INFO:Detectors:[91m
+Reentrancy in Marketplace.buy (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#585-639):
+	External calls:
+	- require(bool,string)(item.proxy == tub.lad(_cup),The owner must stay the same) (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#593-597)
+	- (cdpPrice,feeAmount) = getCdpPrice(_cup) (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#601-609)
+	- DSProxyInterface(item.proxy).execute(marketplaceProxy,abi.encodeWithSignature(give(bytes32,address),_cup,_newOwner)) (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#617-627)
+	External calls sending eth:
+	- item.owner.transfer(sub(cdpPrice,feeAmount)) (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#627-629)
+	State variables written after the call(s):
+	- items (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#637-639)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities[0m
+INFO:Detectors:[93m
+TokenInterface (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#155-185) has incorrect ERC20 function interface(s):
+	-approve (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#159-161)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[93m
+Reentrancy in Marketplace.buy (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#585-639):
+	External calls:
+	- require(bool,string)(item.proxy == tub.lad(_cup),The owner must stay the same) (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#593-597)
+	- (cdpPrice,feeAmount) = getCdpPrice(_cup) (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#601-609)
+	State variables written after the call(s):
+	- items (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#613-615)
+Reentrancy in Marketplace.putOnSale (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#519-577):
+	External calls:
+	- require(bool,string)(isOwner(msg.sender,_cup),msg.sender must be proxy which owns the cup) (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#525-531)
+	- require(bool,string)(tub.ink(_cup) > 0 && tub.tab(_cup) > 0,must have collateral and debt to put on sale) (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#543-549)
+	- owner = address(uint160(DSProxyInterface(msg.sender).owner())) (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#553-555)
+	State variables written after the call(s):
+	- items (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#555-563)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+Marketplace.buy (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#585-639) does not use the value returned by external calls:
+	-DSProxyInterface(item.proxy).execute(marketplaceProxy,abi.encodeWithSignature(give(bytes32,address),_cup,_newOwner)) (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#617-627)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Marketplace.putOnSale.owner (local variable @ /sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#553-555) shadows:
+	- DSAuth.owner (state variable @ /sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#345-347)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+Marketplace.getItemsOnSale has external calls inside a loop:
+	- tub.lad(itemsArr[i]) != address(0) (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#751-757)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in Marketplace.buy (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#585-639):
+	External calls:
+	- require(bool,string)(item.proxy == tub.lad(_cup),The owner must stay the same) (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#593-597)
+	- (cdpPrice,feeAmount) = getCdpPrice(_cup) (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#601-609)
+	- DSProxyInterface(item.proxy).execute(marketplaceProxy,abi.encodeWithSignature(give(bytes32,address),_cup,_newOwner)) (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#617-627)
+	External calls sending eth:
+	- item.owner.transfer(sub(cdpPrice,feeAmount)) (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#627-629)
+	State variables written after the call(s):
+	- itemPos (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#637-639)
+	- itemsArr (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#637-639)
+Reentrancy in Marketplace.cancel (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#641-651):
+	External calls:
+	- require(bool,string)(isOwner(msg.sender,_cup),msg.sender must proxy which owns the cup) (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#643-649)
+	State variables written after the call(s):
+	- itemPos (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#651)
+	- items (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#651)
+	- itemsArr (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#651)
+Reentrancy in Marketplace.putOnSale (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#519-577):
+	External calls:
+	- require(bool,string)(isOwner(msg.sender,_cup),msg.sender must be proxy which owns the cup) (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#525-531)
+	- require(bool,string)(tub.ink(_cup) > 0 && tub.tab(_cup) > 0,must have collateral and debt to put on sale) (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#543-549)
+	- owner = address(uint160(DSProxyInterface(msg.sender).owner())) (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#553-555)
+	State variables written after the call(s):
+	- itemPos (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#566-569)
+	- itemsArr (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#563)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Marketplace.fee should be constant (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#477)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+TokenInterface.allowance (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#155-157) should be declared external
+TokenInterface.balanceOf (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#157-159) should be declared external
+TokenInterface.approve (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#159-161) should be declared external
+TokenInterface.transfer (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#161-167) should be declared external
+TokenInterface.transferFrom (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#169-174) should be declared external
+TokenInterface.deposit (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#177-179) should be declared external
+TokenInterface.withdraw (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#179-181) should be declared external
+PipInterface.read (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#187-193) should be declared external
+PepInterface.peek (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#195-199) should be declared external
+VoxInterface.par (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#201-203) should be declared external
+TubInterface.open (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#209-211) should be declared external
+TubInterface.join (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#211) should be declared external
+TubInterface.exit (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#213) should be declared external
+TubInterface.lock (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#213-215) should be declared external
+TubInterface.free (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#217-219) should be declared external
+TubInterface.draw (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#219) should be declared external
+TubInterface.wipe (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#219-221) should be declared external
+TubInterface.give (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#221-223) should be declared external
+TubInterface.shut (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#223) should be declared external
+TubInterface.bite (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#225) should be declared external
+TubInterface.cups (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#225-229) should be declared external
+TubInterface.gem (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#229-231) should be declared external
+TubInterface.gov (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#231-233) should be declared external
+TubInterface.skr (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#233-235) should be declared external
+TubInterface.sai (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#235-237) should be declared external
+TubInterface.vox (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#237-239) should be declared external
+TubInterface.ask (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#241) should be declared external
+TubInterface.mat (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#243) should be declared external
+TubInterface.chi (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#245) should be declared external
+TubInterface.ink (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#245-247) should be declared external
+TubInterface.tab (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#247-249) should be declared external
+TubInterface.rap (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#251-253) should be declared external
+TubInterface.per (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#253-258) should be declared external
+TubInterface.pip (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#259-261) should be declared external
+TubInterface.pep (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#261) should be declared external
+TubInterface.tag (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#265) should be declared external
+TubInterface.drip (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#265-267) should be declared external
+TubInterface.lad (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#267) should be declared external
+DSGuard.canCall (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#271-273) should be declared external
+DSGuard.permit (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#273-283) should be declared external
+DSGuard.forbid (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#283-291) should be declared external
+DSGuard.permit (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#291-293) should be declared external
+DSGuard.forbid (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#293-301) should be declared external
+DSGuardFactory.newGuard (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#303-311) should be declared external
+DSAuthority.canCall (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#323-337) should be declared external
+DSAuth.setOwner (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#361-371) should be declared external
+DSAuth.setAuthority (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#371-381) should be declared external
+DSProxyInterface.execute (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#421-425) should be declared external
+DSProxyInterface.execute (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#429-435) should be declared external
+DSProxyInterface.setCache (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#437-441) should be declared external
+DSProxyInterface.owner (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#447) should be declared external
+ProxyRegistryInterface.proxies (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#451-459) should be declared external
+ProxyRegistryInterface.build (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#459) should be declared external
+Marketplace.putOnSale (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#519-577) should be declared external
+Marketplace.buy (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#585-639) should be declared external
+Marketplace.cancel (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#641-651) should be declared external
+Marketplace.withdraw (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#653-657) should be declared external
+Marketplace.getItemsOnSale (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#733-767) should be declared external
+MarketplaceProxy.give (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#825-831) should be declared external
+MarketplaceProxy.createAuthorizeAndSell (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#841-857) should be declared external
+MarketplaceProxy.authorizeAndSell (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#873-881) should be declared external
+MarketplaceProxy.sell (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol) should be declared external
+MarketplaceProxy.cancel (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol:
+	- pragma solidity^0.5.0 (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#9-13): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '' of TokenInterface.allowance (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#157) is not in mixedCase
+Parameter '_scope_0' of TokenInterface.allowance (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#157) is not in mixedCase
+Parameter '' of TokenInterface.balanceOf (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#159) is not in mixedCase
+Parameter '' of TokenInterface.approve (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#159-161) is not in mixedCase
+Parameter '_scope_0' of TokenInterface.approve (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#161) is not in mixedCase
+Parameter '' of TokenInterface.transfer (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#163) is not in mixedCase
+Parameter '_scope_0' of TokenInterface.transfer (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#163) is not in mixedCase
+Parameter '' of TokenInterface.transferFrom (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#171) is not in mixedCase
+Parameter '_scope_0' of TokenInterface.transferFrom (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#171) is not in mixedCase
+Parameter '_scope_1' of TokenInterface.transferFrom (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#171) is not in mixedCase
+Parameter '' of TokenInterface.withdraw (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#179) is not in mixedCase
+Parameter '' of TubInterface.join (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#211) is not in mixedCase
+Parameter '' of TubInterface.exit (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#213) is not in mixedCase
+Parameter '' of TubInterface.lock (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#215) is not in mixedCase
+Parameter '_scope_0' of TubInterface.lock (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#215) is not in mixedCase
+Parameter '' of TubInterface.free (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#217) is not in mixedCase
+Parameter '_scope_0' of TubInterface.free (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#217) is not in mixedCase
+Parameter '' of TubInterface.draw (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#219) is not in mixedCase
+Parameter '_scope_0' of TubInterface.draw (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#219) is not in mixedCase
+Parameter '' of TubInterface.wipe (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#219-221) is not in mixedCase
+Parameter '_scope_0' of TubInterface.wipe (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#221) is not in mixedCase
+Parameter '' of TubInterface.give (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#221) is not in mixedCase
+Parameter '_scope_0' of TubInterface.give (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#221-223) is not in mixedCase
+Parameter '' of TubInterface.shut (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#223) is not in mixedCase
+Parameter '' of TubInterface.bite (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#225) is not in mixedCase
+Parameter '' of TubInterface.cups (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#227) is not in mixedCase
+Parameter '' of TubInterface.ask (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#241) is not in mixedCase
+Parameter '' of TubInterface.ink (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#247) is not in mixedCase
+Parameter '' of TubInterface.tab (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#249) is not in mixedCase
+Parameter '' of TubInterface.rap (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#251) is not in mixedCase
+Parameter '' of ProxyRegistryInterface.build (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#459) is not in mixedCase
+Parameter '_marketplaceProxy' of Marketplace. (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#509) is not in mixedCase
+Parameter '_cup' of Marketplace.putOnSale (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#523) is not in mixedCase
+Parameter '_discount' of Marketplace.putOnSale (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#523) is not in mixedCase
+Parameter '_cup' of Marketplace.buy (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#587) is not in mixedCase
+Parameter '_newOwner' of Marketplace.buy (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#587) is not in mixedCase
+Parameter '_cup' of Marketplace.cancel (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#643) is not in mixedCase
+Parameter '_cup' of Marketplace.getCdpPrice (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#673-674) is not in mixedCase
+Parameter '_cup' of Marketplace.isOnSale (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#773) is not in mixedCase
+Parameter '_cup' of Marketplace.removeItem (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#775) is not in mixedCase
+Parameter '_owner' of Marketplace.isOwner (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#787) is not in mixedCase
+Parameter '_cup' of Marketplace.isOwner (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#787-788) is not in mixedCase
+Parameter '_cup' of MarketplaceProxy.give (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#825) is not in mixedCase
+Parameter '_newOwner' of MarketplaceProxy.give (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#825) is not in mixedCase
+Parameter '_cup' of MarketplaceProxy.createAuthorizeAndSell (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#841) is not in mixedCase
+Parameter '_discount' of MarketplaceProxy.createAuthorizeAndSell (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#841) is not in mixedCase
+Parameter '_marketplace' of MarketplaceProxy.createAuthorizeAndSell (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#841-843) is not in mixedCase
+Parameter '_proxy' of MarketplaceProxy.createAuthorizeAndSell (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#843) is not in mixedCase
+Parameter '_cup' of MarketplaceProxy.authorizeAndSell (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#873) is not in mixedCase
+Parameter '_discount' of MarketplaceProxy.authorizeAndSell (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#874-875) is not in mixedCase
+Parameter '_marketplace' of MarketplaceProxy.authorizeAndSell (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#875) is not in mixedCase
+Parameter '_proxy' of MarketplaceProxy.authorizeAndSell (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol#875) is not in mixedCase
+Parameter '_cup' of MarketplaceProxy.sell (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol) is not in mixedCase
+Parameter '_discount' of MarketplaceProxy.sell (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol) is not in mixedCase
+Parameter '_marketplace' of MarketplaceProxy.sell (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol) is not in mixedCase
+Parameter '_cup' of MarketplaceProxy.cancel (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol) is not in mixedCase
+Parameter '_marketplace' of MarketplaceProxy.cancel (/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xb64db2153861ddde62c8038c6a3c6199fcfbd094.sol analyzed (15 contracts), 132 result(s) found

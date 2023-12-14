@@ -1,0 +1,93 @@
+INFO:Detectors:[91m
+BancorKillerContract.transferETHFromContract (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#229-245) sends eth to arbitrary user
+	Dangerous calls:
+	- _to.transfer(_amount) (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#245)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[91m
+Reentrancy in BancorKillerContract.complete_sell_exchange (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#505-541):
+	External calls:
+	- transferTokensThroughProxyToContract(msg.sender,this,_amount_give) (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#525-533)
+	External calls sending eth:
+	- transferETHFromContract(msg.sender,amount_get_minus_commission_) (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#533-537)
+	- transferETHFromContract(admin,admin_commission) (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#537-540)
+	State variables written after the call(s):
+	- eth_balance (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#537-540)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities[0m
+INFO:Detectors:[93m
+Reentrancy in BancorKillerContract.complete_buy_exchange (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#541-585):
+	External calls:
+	- transferTokensFromContract(msg.sender,amount_get_minus_commission_) (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#569-577)
+	- transferTokensFromContract(admin,admin_commission) (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#577-585)
+	State variables written after the call(s):
+	- traded_token_balance (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#577-585)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+Token.transferFrom (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#65-69) should be declared external
+Token.transfer (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#69-77) should be declared external
+BancorKillerContract.withdraw_token (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#277-289) should be declared external
+BancorKillerContract.withdraw_eth (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#289-301) should be declared external
+BancorKillerContract.seed_traded_token (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#325-348) should be declared external
+BancorKillerContract.seed_eth (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#349-373) should be declared external
+BancorKillerContract.seed_additional_token (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#373-389) should be declared external
+BancorKillerContract.seed_additional_eth (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#389-405) should be declared external
+BancorKillerContract.deactivate_trading (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#421-433) should be declared external
+BancorKillerContract.reactivate_trading (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#433-445) should be declared external
+BancorKillerContract.sell_tokens (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#589-607) should be declared external
+BancorKillerContract.fallback (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol:
+	- pragma solidity^0.4.23 (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#1): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_traded_token' of BancorKillerContract. (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#153) is not in mixedCase
+Parameter '_eth_seed_amount' of BancorKillerContract. (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#153-155) is not in mixedCase
+Parameter '_traded_token_seed_amount' of BancorKillerContract. (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#155-159) is not in mixedCase
+Parameter '_commission_ratio' of BancorKillerContract. (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#160-161) is not in mixedCase
+Parameter '_from' of BancorKillerContract.transferTokensThroughProxyToContract (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#185) is not in mixedCase
+Parameter '_to' of BancorKillerContract.transferTokensThroughProxyToContract (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#185) is not in mixedCase
+Parameter '_amount' of BancorKillerContract.transferTokensThroughProxyToContract (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#185-189) is not in mixedCase
+Parameter '_to' of BancorKillerContract.transferTokensFromContract (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#201-205) is not in mixedCase
+Parameter '_amount' of BancorKillerContract.transferTokensFromContract (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#205) is not in mixedCase
+Parameter '_to' of BancorKillerContract.transferETHFromContract (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#233-234) is not in mixedCase
+Parameter '_amount' of BancorKillerContract.transferETHFromContract (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#235-240) is not in mixedCase
+Function 'BancorKillerContract.deposit_token' (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#245-265) is not in mixedCase
+Parameter '_amount' of BancorKillerContract.deposit_token (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#253) is not in mixedCase
+Function 'BancorKillerContract.deposit_eth' (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#265-273) is not in mixedCase
+Function 'BancorKillerContract.withdraw_token' (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#277-289) is not in mixedCase
+Parameter '_amount' of BancorKillerContract.withdraw_token (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#277) is not in mixedCase
+Function 'BancorKillerContract.withdraw_eth' (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#289-301) is not in mixedCase
+Parameter '_amount' of BancorKillerContract.withdraw_eth (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#289) is not in mixedCase
+Function 'BancorKillerContract.set_traded_token_as_seeded' (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#305-317) is not in mixedCase
+Function 'BancorKillerContract.set_eth_as_seeded' (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#317-325) is not in mixedCase
+Function 'BancorKillerContract.seed_traded_token' (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#325-348) is not in mixedCase
+Function 'BancorKillerContract.seed_eth' (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#349-373) is not in mixedCase
+Function 'BancorKillerContract.seed_additional_token' (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#373-389) is not in mixedCase
+Parameter '_amount' of BancorKillerContract.seed_additional_token (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#377) is not in mixedCase
+Function 'BancorKillerContract.seed_additional_eth' (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#389-405) is not in mixedCase
+Function 'BancorKillerContract.market_is_open' (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#405-419) is not in mixedCase
+Function 'BancorKillerContract.deactivate_trading' (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#421-433) is not in mixedCase
+Function 'BancorKillerContract.reactivate_trading' (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#433-445) is not in mixedCase
+Function 'BancorKillerContract.get_amount_sell' (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#445-469) is not in mixedCase
+Parameter '_amount' of BancorKillerContract.get_amount_sell (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#445) is not in mixedCase
+Function 'BancorKillerContract.get_amount_buy' (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#469-493) is not in mixedCase
+Parameter '_amount' of BancorKillerContract.get_amount_buy (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#473) is not in mixedCase
+Function 'BancorKillerContract.get_amount_minus_commission' (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#496-505) is not in mixedCase
+Parameter '_amount' of BancorKillerContract.get_amount_minus_commission (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#497) is not in mixedCase
+Function 'BancorKillerContract.complete_sell_exchange' (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#505-541) is not in mixedCase
+Parameter '_amount_give' of BancorKillerContract.complete_sell_exchange (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#505-509) is not in mixedCase
+Function 'BancorKillerContract.complete_buy_exchange' (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#541-585) is not in mixedCase
+Function 'BancorKillerContract.sell_tokens' (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#589-607) is not in mixedCase
+Parameter '_amount_give' of BancorKillerContract.sell_tokens (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#595-598) is not in mixedCase
+Function 'BancorKillerContract.buy_tokens' (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol) is not in mixedCase
+Variable 'BancorKillerContract.traded_token' (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#97-100) is not in mixedCase
+Variable 'BancorKillerContract.eth_seed_amount' (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#101-102) is not in mixedCase
+Variable 'BancorKillerContract.traded_token_seed_amount' (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#105-109) is not in mixedCase
+Variable 'BancorKillerContract.commission_ratio' (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#109-113) is not in mixedCase
+Variable 'BancorKillerContract.eth_balance' (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#113-119) is not in mixedCase
+Variable 'BancorKillerContract.traded_token_balance' (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#119-123) is not in mixedCase
+Variable 'BancorKillerContract.eth_is_seeded' (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#123-127) is not in mixedCase
+Variable 'BancorKillerContract.traded_token_is_seeded' (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#127-133) is not in mixedCase
+Variable 'BancorKillerContract.trading_deactivated' (/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol#133-135) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x72e3fbb4c770870898a9bab58e4fb9c969182b37.sol analyzed (3 contracts), 65 result(s) found

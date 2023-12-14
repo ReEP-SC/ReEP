@@ -1,0 +1,53 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x9e1769e34aee54bc91163ae373930dea2f29e174.sol:
+/sb/0x9e1769e34aee54bc91163ae373930dea2f29e174.sol:109:87: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function receiveApproval(address _sender, uint256 _value, address _tokenContract, bytes memory _extraData) public {
+                                                                                      ^---------------------^
+
+INFO:Detectors:[93m
+Reentrancy in LockMyBSOV.withdraw (/sb/0x9e1769e34aee54bc91163ae373930dea2f29e174.sol#85-97):
+	External calls:
+	- require(bool,string)(ERC20Interface(tokenContract).transfer(msg.sender,_amount),Could not withdraw BSoV!) (/sb/0x9e1769e34aee54bc91163ae373930dea2f29e174.sol#89-93)
+	State variables written after the call(s):
+	- balance (/sb/0x9e1769e34aee54bc91163ae373930dea2f29e174.sol#93)
+	- lastWithdrawal (/sb/0x9e1769e34aee54bc91163ae373930dea2f29e174.sol#94-96)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+Reentrancy in LockMyBSOV.receiveApproval (/sb/0x9e1769e34aee54bc91163ae373930dea2f29e174.sol#109-118):
+	External calls:
+	- require(bool,string)(ERC20Interface(tokenContract).transferFrom(_sender,address(this),_value),Could not transfer BSoV to Time Lock contract address.) (/sb/0x9e1769e34aee54bc91163ae373930dea2f29e174.sol#112-116)
+	State variables written after the call(s):
+	- balance (/sb/0x9e1769e34aee54bc91163ae373930dea2f29e174.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+ERC20Interface.totalSupply (/sb/0x9e1769e34aee54bc91163ae373930dea2f29e174.sol#43-44) should be declared external
+ERC20Interface.balanceOf (/sb/0x9e1769e34aee54bc91163ae373930dea2f29e174.sol#44-45) should be declared external
+ERC20Interface.allowance (/sb/0x9e1769e34aee54bc91163ae373930dea2f29e174.sol#45-46) should be declared external
+ERC20Interface.transfer (/sb/0x9e1769e34aee54bc91163ae373930dea2f29e174.sol#46-47) should be declared external
+ERC20Interface.approve (/sb/0x9e1769e34aee54bc91163ae373930dea2f29e174.sol#47-48) should be declared external
+ERC20Interface.transferFrom (/sb/0x9e1769e34aee54bc91163ae373930dea2f29e174.sol#48-49) should be declared external
+LockMyBSOV.withdraw (/sb/0x9e1769e34aee54bc91163ae373930dea2f29e174.sol#85-97) should be declared external
+LockMyBSOV.getBalance (/sb/0x9e1769e34aee54bc91163ae373930dea2f29e174.sol#97-100) should be declared external
+LockMyBSOV.getLastWithdrawal (/sb/0x9e1769e34aee54bc91163ae373930dea2f29e174.sol#101-105) should be declared external
+LockMyBSOV.getTimeLeft (/sb/0x9e1769e34aee54bc91163ae373930dea2f29e174.sol#105-109) should be declared external
+LockMyBSOV.receiveApproval (/sb/0x9e1769e34aee54bc91163ae373930dea2f29e174.sol#109-118) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x9e1769e34aee54bc91163ae373930dea2f29e174.sol:
+	- pragma solidity^0.5.10 (/sb/0x9e1769e34aee54bc91163ae373930dea2f29e174.sol#5-7): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_amount' of LockMyBSOV.withdraw (/sb/0x9e1769e34aee54bc91163ae373930dea2f29e174.sol#85) is not in mixedCase
+Parameter '_addr' of LockMyBSOV.getBalance (/sb/0x9e1769e34aee54bc91163ae373930dea2f29e174.sol#99-100) is not in mixedCase
+Parameter '_addr' of LockMyBSOV.getLastWithdrawal (/sb/0x9e1769e34aee54bc91163ae373930dea2f29e174.sol#101-104) is not in mixedCase
+Parameter '_sender' of LockMyBSOV.receiveApproval (/sb/0x9e1769e34aee54bc91163ae373930dea2f29e174.sol#110) is not in mixedCase
+Parameter '_value' of LockMyBSOV.receiveApproval (/sb/0x9e1769e34aee54bc91163ae373930dea2f29e174.sol#110) is not in mixedCase
+Parameter '_tokenContract' of LockMyBSOV.receiveApproval (/sb/0x9e1769e34aee54bc91163ae373930dea2f29e174.sol#110) is not in mixedCase
+Constant 'LockMyBSOV.tokenContract' (/sb/0x9e1769e34aee54bc91163ae373930dea2f29e174.sol#57-60) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'LockMyBSOV.timeUntilUnlocked' (/sb/0x9e1769e34aee54bc91163ae373930dea2f29e174.sol#60) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'LockMyBSOV.maxWithdrawalAmount' (/sb/0x9e1769e34aee54bc91163ae373930dea2f29e174.sol#61) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'LockMyBSOV.timeBetweenWithdrawals' (/sb/0x9e1769e34aee54bc91163ae373930dea2f29e174.sol#63-65) is not in UPPER_CASE_WITH_UNDERSCORES
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+LockMyBSOV.PRECISION (/sb/0x9e1769e34aee54bc91163ae373930dea2f29e174.sol#60) is never used in LockMyBSOV
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0x9e1769e34aee54bc91163ae373930dea2f29e174.sol analyzed (3 contracts), 25 result(s) found

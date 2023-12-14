@@ -1,0 +1,33 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x98278eb74b388efd4d6fc81dd3f95b642ce53f2b.sol:
+/sb/0x98278eb74b388efd4d6fc81dd3f95b642ce53f2b.sol:33:38: Warning: This looks like an address but has an invalid checksum. If this is not used as an address, please prepend '00'. Correct checksummed address: '0xDF0960778C6E6597f197Ed9a25F12F5d971da86c'. For more information please see https://solidity.readthedocs.io/en/develop/types.html#address-literals
+    GooToken constant goo = GooToken(0xdf0960778c6e6597f197ed9a25f12f5d971da86c);
+                                     ^----------------------------------------^
+
+INFO:Detectors:[93m
+Reentrancy in Army.changeTotalArmyPower (/sb/0x98278eb74b388efd4d6fc81dd3f95b642ce53f2b.sol#317-341):
+	External calls:
+	- clans.increaseClanPower(player,newTotal - totalArmyPower) (/sb/0x98278eb74b388efd4d6fc81dd3f95b642ce53f2b.sol#331-333)
+	- clans.decreaseClanPower(player,totalArmyPower - newTotal) (/sb/0x98278eb74b388efd4d6fc81dd3f95b642ce53f2b.sol#335-339)
+	State variables written after the call(s):
+	- totalArmyPower (/sb/0x98278eb74b388efd4d6fc81dd3f95b642ce53f2b.sol#341)
+Reentrancy in Army.snapshotDailyWarFunding (/sb/0x98278eb74b388efd4d6fc81dd3f95b642ce53f2b.sol#343-397):
+	External calls:
+	- numClans = clans.totalSupply() (/sb/0x98278eb74b388efd4d6fc81dd3f95b642ce53f2b.sol#363-369)
+	State variables written after the call(s):
+	- nextSnapshotTime (/sb/0x98278eb74b388efd4d6fc81dd3f95b642ce53f2b.sol#397)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+Army.snapshotDailyWarFunding has external calls inside a loop:
+	- clans.depositGoo((allocatedClanWarFund * clanArmyPower[i - 1]) / todaysTotalClanPower,i) (/sb/0x98278eb74b388efd4d6fc81dd3f95b642ce53f2b.sol#391-397)
+Army.snapshotDailyWarFunding has external calls inside a loop:
+	- clanArmyPower[i - 1] = clans.clanTotalArmyPower(i) (/sb/0x98278eb74b388efd4d6fc81dd3f95b642ce53f2b.sol#379-385)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Army.increasePlayersArmyPowerTrio (/sb/0x98278eb74b388efd4d6fc81dd3f95b642ce53f2b.sol#173-213) should be declared external
+Army.decreasePlayersArmyPowerTrio (/sb/0x98278eb74b388efd4d6fc81dd3f95b642ce53f2b.sol#213-265) should be declared external
+Army.changePlayersArmyPowerTrio (/sb/0x98278eb74b388efd4d6fc81dd3f95b642ce53f2b.sol#265-315) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Constant 'Army.goo' (/sb/0x98278eb74b388efd4d6fc81dd3f95b642ce53f2b.sol#33-35) is not in UPPER_CASE_WITH_UNDERSCORES
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x98278eb74b388efd4d6fc81dd3f95b642ce53f2b.sol analyzed (6 contracts), 8 result(s) found

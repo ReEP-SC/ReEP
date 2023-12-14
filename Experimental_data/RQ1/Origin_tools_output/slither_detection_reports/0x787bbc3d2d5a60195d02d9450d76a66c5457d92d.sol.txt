@@ -1,0 +1,89 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol:
+Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing "SPDX-License-Identifier: <SPDX-License>" to each source file. Use "SPDX-License-Identifier: UNLICENSED" for non-open-source code. Please see https://spdx.org for more information.
+--> /sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol
+
+
+INFO:Detectors:[93m
+Reentrancy in B26Staking_Vault2.deposit (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol#255-272):
+	External calls:
+	- require(bool,string)(Token(tokenAddress).transferFrom(msg.sender,address(this),amountToStake),Insufficient Token Allowance) (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol#258-259)
+	- updateAccount(msg.sender) (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol#260-261)
+	- require(bool,string)(Token(tokenAddress).transfer(owner,fee),Could not transfer deposit fee.) (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol#264-269)
+	State variables written after the call(s):
+	- depositedTokens (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol#269-270)
+Reentrancy in B26Staking_Vault2.updateAccount (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol#222-234):
+	External calls:
+	- require(bool,string)(Token(tokenAddress).transfer(account,pendingDivs),Could not transfer tokens.) (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol#224-226)
+	State variables written after the call(s):
+	- lastClaimedTime (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol#234)
+Reentrancy in B26Staking_Vault2.withdraw (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol#272-298):
+	External calls:
+	- updateAccount(msg.sender) (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol#280)
+	- require(bool,string)(Token(tokenAddress).transfer(owner,fee),Could not transfer withdraw fee.) (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol#282-284)
+	- require(bool,string)(Token(tokenAddress).transfer(msg.sender,amountAfterFee),Could not transfer tokens.) (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol#284-289)
+	State variables written after the call(s):
+	- depositedTokens (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol#290-294)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+EnumerableSet._remove (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol#52-84) does not use the value returned by external calls:
+	-set._values.pop() (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol#72-73)
+B26Staking_Vault2.deposit (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol#255-272) does not use the value returned by external calls:
+	-holders.add(msg.sender) (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol#272)
+B26Staking_Vault2.withdraw (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol#272-298) does not use the value returned by external calls:
+	-holders.remove(msg.sender) (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol#297)
+B26Staking_Vault2.transferAnyERC20Tokens (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol) does not use the value returned by external calls:
+	-Token(_tokenAddr).transfer(_to,_amount) (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in B26Staking_Vault2.deposit (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol#255-272):
+	External calls:
+	- require(bool,string)(Token(tokenAddress).transferFrom(msg.sender,address(this),amountToStake),Insufficient Token Allowance) (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol#258-259)
+	- updateAccount(msg.sender) (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol#260-261)
+	- require(bool,string)(Token(tokenAddress).transfer(owner,fee),Could not transfer deposit fee.) (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol#264-269)
+	State variables written after the call(s):
+	- stakingTime (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol#272)
+Reentrancy in B26Staking_Vault2.updateAccount (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol#222-234):
+	External calls:
+	- require(bool,string)(Token(tokenAddress).transfer(account,pendingDivs),Could not transfer tokens.) (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol#224-226)
+	State variables written after the call(s):
+	- totalClaimedRewards (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol#230-231)
+	- totalEarnedTokens (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol#227-230)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol#179-188) should be declared external
+B26Staking_Vault2.getNumberOfHolders (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol#253) should be declared external
+B26Staking_Vault2.deposit (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol#255-272) should be declared external
+B26Staking_Vault2.withdraw (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol#272-298) should be declared external
+B26Staking_Vault2.claimDivs (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol#298-300) should be declared external
+B26Staking_Vault2.getStakingAndDaoAmount (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol#304-307) should be declared external
+B26Staking_Vault2.transferAnyERC20Tokens (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol:
+	- pragma solidity0.6.12 (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol#5-7): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'EnumerableSet._add' (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol#41-52) is not in mixedCase
+Function 'EnumerableSet._remove' (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol#52-84) is not in mixedCase
+Function 'EnumerableSet._contains' (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol#85-89) is not in mixedCase
+Function 'EnumerableSet._length' (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol#89-93) is not in mixedCase
+Function 'EnumerableSet._at' (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol#93-103) is not in mixedCase
+Parameter '' of Token.transferFrom (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol#190) is not in mixedCase
+Parameter '_scope_0' of Token.transferFrom (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol#190) is not in mixedCase
+Parameter '_scope_1' of Token.transferFrom (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol#190) is not in mixedCase
+Parameter '' of Token.transfer (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol#192) is not in mixedCase
+Parameter '_scope_0' of Token.transfer (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol#192) is not in mixedCase
+Contract 'B26Staking_Vault2' (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol#193-309) is not in CapWords
+Parameter '_holder' of B26Staking_Vault2.getPendingDivs (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol#235) is not in mixedCase
+Parameter '_tokenAddr' of B26Staking_Vault2.transferAnyERC20Tokens (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol) is not in mixedCase
+Parameter '_to' of B26Staking_Vault2.transferAnyERC20Tokens (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol) is not in mixedCase
+Parameter '_amount' of B26Staking_Vault2.transferAnyERC20Tokens (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol) is not in mixedCase
+Constant 'B26Staking_Vault2.tokenAddress' (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol#199-202) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'B26Staking_Vault2.rewardRate' (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol#204-205) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'B26Staking_Vault2.rewardInterval' (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol#205-207) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'B26Staking_Vault2.stakingFeeRate' (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol#208-210) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'B26Staking_Vault2.unstakingFeeRate' (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol#212-214) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'B26Staking_Vault2.cliffTime' (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol#215) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'B26Staking_Vault2.stakingAndDaoTokens' (/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol#301-304) is not in UPPER_CASE_WITH_UNDERSCORES
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x787bbc3d2d5a60195d02d9450d76a66c5457d92d.sol analyzed (5 contracts), 39 result(s) found

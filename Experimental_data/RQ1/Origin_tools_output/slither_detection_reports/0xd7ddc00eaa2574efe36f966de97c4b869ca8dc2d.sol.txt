@@ -1,0 +1,260 @@
+INFO:Detectors:[93m
+AOPurchaseReceipt.senderIsBuyer (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#2217-2223) uses a dangerous strict equality:
+	- (_purchaseReceipt.buyer == _sender)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Reentrancy in AOPurchaseReceipt.buyContent (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1995-2137):
+	External calls:
+	- _buyerNameId = _nameFactory.ethAddressToNameId(msg.sender) (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#2003-2007)
+	- require(bool)(_canBuy(_buyerNameId,_contentHostId,_publicKey,_publicAddress)) (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#2011-2015)
+	- (_stakedContentId,_contentId) = _aoContentHost.getById(_contentHostId) (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#2015-2021)
+	- _aoContent.isAOContentUsageType(_contentId) (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#2025-2041)
+	- require(bool)(_canBuyAOContent(_aoContentHost.contentHostPrice(_contentHostId),_networkIntegerAmount,_networkFractionAmount,_denomination)) (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#2027-2041)
+	- _purchaseReceipt.price = _aoContentHost.contentHostPrice(_contentHostId) (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#2071-2077)
+	- _purchaseReceipt.amountPaidByAO = _aoContentHost.contentHostPaidByAO(_contentHostId) (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#2077-2083)
+	State variables written after the call(s):
+	- buyerPurchaseReceipts (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#2105-2107)
+	- purchaseReceipts (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#2077-2083)
+	- purchaseReceipts (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#2083-2089)
+	- purchaseReceipts (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#2089-2091)
+	- purchaseReceipts (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#2091-2093)
+	- purchaseReceipts (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#2095-2103)
+Reentrancy in AOPurchaseReceipt.constructor (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1767-1799):
+	External calls:
+	- setAOContentAddress(_aoContentAddress) (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1783)
+	- setAOStakedContentAddress(_aoStakedContentAddress) (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1785-1787)
+	- setAOTreasuryAddress(_aoTreasuryAddress) (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1787)
+	- setAOEarningAddress(_aoEarningAddress) (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1789)
+	- setNameFactoryAddress(_nameFactoryAddress) (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1789-1797)
+	- setNameTAOPositionAddress(_nameTAOPositionAddress) (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1797-1799)
+	State variables written after the call(s):
+	- nameTAOPositionAddress (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1797-1799)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+TAO.transferERC20 (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#821-833) does not use the value returned by external calls:
+	-_erc20.transfer(_recipient,_amount) (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#829-831)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in AOPurchaseReceipt.buyContent (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1995-2137):
+	External calls:
+	- _buyerNameId = _nameFactory.ethAddressToNameId(msg.sender) (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#2003-2007)
+	- require(bool)(_canBuy(_buyerNameId,_contentHostId,_publicKey,_publicAddress)) (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#2011-2015)
+	- (_stakedContentId,_contentId) = _aoContentHost.getById(_contentHostId) (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#2015-2021)
+	- _aoContent.isAOContentUsageType(_contentId) (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#2025-2041)
+	- require(bool)(_canBuyAOContent(_aoContentHost.contentHostPrice(_contentHostId),_networkIntegerAmount,_networkFractionAmount,_denomination)) (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#2027-2041)
+	State variables written after the call(s):
+	- purchaseReceipts (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#2065)
+	- purchaseReceipts (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#2065)
+	- purchaseReceipts (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#2065-2067)
+	- purchaseReceipts (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#2067-2069)
+	- purchaseReceipts (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#2069-2071)
+	- totalPurchaseReceipts (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#2043-2045)
+Reentrancy in AOPurchaseReceipt.buyContent (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1995-2137):
+	External calls:
+	- _buyerNameId = _nameFactory.ethAddressToNameId(msg.sender) (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#2003-2007)
+	- require(bool)(_canBuy(_buyerNameId,_contentHostId,_publicKey,_publicAddress)) (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#2011-2015)
+	- (_stakedContentId,_contentId) = _aoContentHost.getById(_contentHostId) (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#2015-2021)
+	- _aoContent.isAOContentUsageType(_contentId) (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#2025-2041)
+	- require(bool)(_canBuyAOContent(_aoContentHost.contentHostPrice(_contentHostId),_networkIntegerAmount,_networkFractionAmount,_denomination)) (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#2027-2041)
+	- _purchaseReceipt.price = _aoContentHost.contentHostPrice(_contentHostId) (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#2071-2077)
+	- _purchaseReceipt.amountPaidByAO = _aoContentHost.contentHostPaidByAO(_contentHostId) (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#2077-2083)
+	State variables written after the call(s):
+	- purchaseReceiptIndex (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#2103-2105)
+Reentrancy in AOPurchaseReceipt.constructor (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1767-1799):
+	External calls:
+	- setAOContentAddress(_aoContentAddress) (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1783)
+	- setAOStakedContentAddress(_aoStakedContentAddress) (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1785-1787)
+	State variables written after the call(s):
+	- _aoStakedContent (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1785-1787)
+	- aoStakedContentAddress (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1785-1787)
+Reentrancy in AOPurchaseReceipt.constructor (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1767-1799):
+	External calls:
+	- setAOContentAddress(_aoContentAddress) (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1783)
+	- setAOStakedContentAddress(_aoStakedContentAddress) (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1785-1787)
+	- setAOTreasuryAddress(_aoTreasuryAddress) (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1787)
+	State variables written after the call(s):
+	- _aoTreasury (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1787)
+	- aoTreasuryAddress (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1787)
+Reentrancy in AOPurchaseReceipt.constructor (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1767-1799):
+	External calls:
+	- setAOContentAddress(_aoContentAddress) (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1783)
+	- setAOStakedContentAddress(_aoStakedContentAddress) (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1785-1787)
+	- setAOTreasuryAddress(_aoTreasuryAddress) (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1787)
+	- setAOEarningAddress(_aoEarningAddress) (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1789)
+	State variables written after the call(s):
+	- _aoEarning (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1789)
+	- aoEarningAddress (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1789)
+Reentrancy in AOPurchaseReceipt.constructor (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1767-1799):
+	External calls:
+	- setAOContentAddress(_aoContentAddress) (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1783)
+	- setAOStakedContentAddress(_aoStakedContentAddress) (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1785-1787)
+	- setAOTreasuryAddress(_aoTreasuryAddress) (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1787)
+	- setAOEarningAddress(_aoEarningAddress) (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1789)
+	- setNameFactoryAddress(_nameFactoryAddress) (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1789-1797)
+	State variables written after the call(s):
+	- _nameFactory (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1789-1797)
+	- nameFactoryAddress (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1789-1797)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+TokenERC20.decimals should be constant (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#325)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+TokenERC20.transfer (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#453-457) should be declared external
+TokenERC20.transferFrom (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#477-497) should be declared external
+TokenERC20.approveAndCall (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#543-561) should be declared external
+TokenERC20.burn (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#571-581) should be declared external
+TokenERC20.burnFrom (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#598-655) should be declared external
+TAO.transferEth (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#781-789) should be declared external
+TAO.transferERC20 (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#821-833) should be declared external
+AOLibrary.isValidERC20TokenAddress (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#913-935) should be declared external
+AOLibrary.isTheAO (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#955-975) should be declared external
+AOLibrary.PERCENTAGE_DIVISOR (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#989-995) should be declared external
+AOLibrary.MULTIPLIER_DIVISOR (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1009-1013) should be declared external
+AOLibrary.deployTAO (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1037-1049) should be declared external
+AOLibrary.deployName (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1061-1067) should be declared external
+AOLibrary.calculateWeightedMultiplier (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1101-1121) should be declared external
+AOLibrary.calculatePrimordialMultiplier (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1145-1211) should be declared external
+AOLibrary.calculateNetworkBonusAmount (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1317-1351) should be declared external
+AOLibrary.calculateMaximumBurnAmount (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1375-1385) should be declared external
+AOLibrary.calculateMultiplierAfterBurn (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1417-1444) should be declared external
+AOLibrary.calculateMultiplierAfterConversion (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1491-1511) should be declared external
+AOLibrary.numDigits (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1539-1549) should be declared external
+AOPurchaseReceipt.transferOwnership (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1823-1829) should be declared external
+TheAO.transferOwnership (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1587-1594) should be declared external
+AOPurchaseReceipt.setWhitelist (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1843-1856) should be declared external
+TheAO.setWhitelist (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1603-1611) should be declared external
+AOPurchaseReceipt.setAOContentHostAddress (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1901-1907) should be declared external
+AOPurchaseReceipt.buyContent (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1995-2137) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol:
+	- pragma solidity>=0.5.4<0.6.0 (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#9-13): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Contract 'tokenRecipient' (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#13-21) is not in CapWords
+Function 'TokenERC20._transfer' (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#389-441) is not in mixedCase
+Parameter '_from' of TokenERC20._transfer (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#389) is not in mixedCase
+Parameter '_to' of TokenERC20._transfer (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#389) is not in mixedCase
+Parameter '_value' of TokenERC20._transfer (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#389-391) is not in mixedCase
+Parameter '_to' of TokenERC20.transfer (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#453) is not in mixedCase
+Parameter '_value' of TokenERC20.transfer (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#453) is not in mixedCase
+Parameter '_from' of TokenERC20.transferFrom (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#479) is not in mixedCase
+Parameter '_to' of TokenERC20.transferFrom (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#479) is not in mixedCase
+Parameter '_value' of TokenERC20.transferFrom (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#479-483) is not in mixedCase
+Parameter '_spender' of TokenERC20.approve (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#509) is not in mixedCase
+Parameter '_value' of TokenERC20.approve (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#509) is not in mixedCase
+Parameter '_spender' of TokenERC20.approveAndCall (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#545) is not in mixedCase
+Parameter '_value' of TokenERC20.approveAndCall (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#545) is not in mixedCase
+Parameter '_extraData' of TokenERC20.approveAndCall (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#545) is not in mixedCase
+Parameter '_value' of TokenERC20.burn (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#571-573) is not in mixedCase
+Parameter '_from' of TokenERC20.burnFrom (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#601-605) is not in mixedCase
+Parameter '_value' of TokenERC20.burnFrom (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#605-607) is not in mixedCase
+Parameter '_name' of TAO. (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#721) is not in mixedCase
+Parameter '_originId' of TAO. (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#721) is not in mixedCase
+Parameter '_datHash' of TAO. (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#721-723) is not in mixedCase
+Parameter '_database' of TAO. (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#723) is not in mixedCase
+Parameter '_keyValue' of TAO. (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#723-725) is not in mixedCase
+Parameter '_contentId' of TAO. (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#725) is not in mixedCase
+Parameter '_vaultAddress' of TAO. (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#727) is not in mixedCase
+Parameter '_recipient' of TAO.transferEth (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#785-789) is not in mixedCase
+Parameter '_amount' of TAO.transferEth (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#789) is not in mixedCase
+Parameter '_erc20TokenAddress' of TAO.transferERC20 (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#821) is not in mixedCase
+Parameter '_recipient' of TAO.transferERC20 (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#821-823) is not in mixedCase
+Parameter '_amount' of TAO.transferERC20 (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#823) is not in mixedCase
+Parameter '_taoId' of AOLibrary.isTAO (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#871) is not in mixedCase
+Parameter '_nameId' of AOLibrary.isName (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#893-895) is not in mixedCase
+Parameter '_tokenAddress' of AOLibrary.isValidERC20TokenAddress (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#915) is not in mixedCase
+Parameter '_sender' of AOLibrary.isTheAO (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#961-963) is not in mixedCase
+Parameter '_theAO' of AOLibrary.isTheAO (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#963-965) is not in mixedCase
+Parameter '_nameTAOPositionAddress' of AOLibrary.isTheAO (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#965) is not in mixedCase
+Function 'AOLibrary.PERCENTAGE_DIVISOR' (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#989-995) is not in mixedCase
+Function 'AOLibrary.MULTIPLIER_DIVISOR' (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1009-1013) is not in mixedCase
+Parameter '_name' of AOLibrary.deployTAO (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1037-1039) is not in mixedCase
+Parameter '_originId' of AOLibrary.deployTAO (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1039) is not in mixedCase
+Parameter '_datHash' of AOLibrary.deployTAO (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1039) is not in mixedCase
+Parameter '_database' of AOLibrary.deployTAO (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1039) is not in mixedCase
+Parameter '_keyValue' of AOLibrary.deployTAO (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1040-1047) is not in mixedCase
+Parameter '_contentId' of AOLibrary.deployTAO (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1047) is not in mixedCase
+Parameter '_nameTAOVaultAddress' of AOLibrary.deployTAO (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1047) is not in mixedCase
+Parameter '_name' of AOLibrary.deployName (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1061) is not in mixedCase
+Parameter '_originId' of AOLibrary.deployName (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1061) is not in mixedCase
+Parameter '_datHash' of AOLibrary.deployName (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1061) is not in mixedCase
+Parameter '_database' of AOLibrary.deployName (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1061) is not in mixedCase
+Parameter '_keyValue' of AOLibrary.deployName (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1063) is not in mixedCase
+Parameter '_contentId' of AOLibrary.deployName (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1063-1065) is not in mixedCase
+Parameter '_nameTAOVaultAddress' of AOLibrary.deployName (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1065) is not in mixedCase
+Parameter '_currentWeightedMultiplier' of AOLibrary.calculateWeightedMultiplier (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1103) is not in mixedCase
+Parameter '_currentPrimordialBalance' of AOLibrary.calculateWeightedMultiplier (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1104-1105) is not in mixedCase
+Parameter '_additionalWeightedMultiplier' of AOLibrary.calculateWeightedMultiplier (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1105-1107) is not in mixedCase
+Parameter '_additionalPrimordialAmount' of AOLibrary.calculateWeightedMultiplier (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1107) is not in mixedCase
+Parameter '_purchaseAmount' of AOLibrary.calculatePrimordialMultiplier (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1145) is not in mixedCase
+Parameter '_totalPrimordialMintable' of AOLibrary.calculatePrimordialMultiplier (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1145) is not in mixedCase
+Parameter '_totalPrimordialMinted' of AOLibrary.calculatePrimordialMultiplier (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1145-1147) is not in mixedCase
+Parameter '_startingMultiplier' of AOLibrary.calculatePrimordialMultiplier (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1147-1149) is not in mixedCase
+Parameter '_endingMultiplier' of AOLibrary.calculatePrimordialMultiplier (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1149) is not in mixedCase
+Parameter '_purchaseAmount' of AOLibrary.calculateNetworkBonusPercentage (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1235) is not in mixedCase
+Parameter '_totalPrimordialMintable' of AOLibrary.calculateNetworkBonusPercentage (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1235) is not in mixedCase
+Parameter '_totalPrimordialMinted' of AOLibrary.calculateNetworkBonusPercentage (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1235) is not in mixedCase
+Parameter '_startingMultiplier' of AOLibrary.calculateNetworkBonusPercentage (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1235) is not in mixedCase
+Parameter '_endingMultiplier' of AOLibrary.calculateNetworkBonusPercentage (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1235) is not in mixedCase
+Parameter '_purchaseAmount' of AOLibrary.calculateNetworkBonusAmount (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1317-1319) is not in mixedCase
+Parameter '_totalPrimordialMintable' of AOLibrary.calculateNetworkBonusAmount (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1319) is not in mixedCase
+Parameter '_totalPrimordialMinted' of AOLibrary.calculateNetworkBonusAmount (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1319) is not in mixedCase
+Parameter '_startingMultiplier' of AOLibrary.calculateNetworkBonusAmount (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1319) is not in mixedCase
+Parameter '_endingMultiplier' of AOLibrary.calculateNetworkBonusAmount (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1319) is not in mixedCase
+Parameter '_primordialBalance' of AOLibrary.calculateMaximumBurnAmount (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1377) is not in mixedCase
+Parameter '_currentWeightedMultiplier' of AOLibrary.calculateMaximumBurnAmount (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1377) is not in mixedCase
+Parameter '_maximumMultiplier' of AOLibrary.calculateMaximumBurnAmount (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1377-1379) is not in mixedCase
+Parameter '_primordialBalance' of AOLibrary.calculateMultiplierAfterBurn (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1429-1431) is not in mixedCase
+Parameter '_currentWeightedMultiplier' of AOLibrary.calculateMultiplierAfterBurn (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1431-1435) is not in mixedCase
+Parameter '_amountToBurn' of AOLibrary.calculateMultiplierAfterBurn (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1435) is not in mixedCase
+Parameter '_primordialBalance' of AOLibrary.calculateMultiplierAfterConversion (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1493) is not in mixedCase
+Parameter '_currentWeightedMultiplier' of AOLibrary.calculateMultiplierAfterConversion (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1493-1497) is not in mixedCase
+Parameter '_amountToConvert' of AOLibrary.calculateMultiplierAfterConversion (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1497) is not in mixedCase
+Parameter '_theAO' of TheAO.transferOwnership (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1587) is not in mixedCase
+Parameter '_account' of TheAO.setWhitelist (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1605) is not in mixedCase
+Parameter '_whitelist' of TheAO.setWhitelist (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1605) is not in mixedCase
+Parameter '_theAO' of AOPurchaseReceipt.transferOwnership (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1825) is not in mixedCase
+Parameter '_account' of AOPurchaseReceipt.setWhitelist (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1845) is not in mixedCase
+Parameter '_whitelist' of AOPurchaseReceipt.setWhitelist (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1845) is not in mixedCase
+Parameter '_purchaseReceiptId' of AOPurchaseReceipt.senderIsBuyer (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#2217) is not in mixedCase
+Parameter '_sender' of AOPurchaseReceipt.senderIsBuyer (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#2217) is not in mixedCase
+Parameter '_purchaseReceiptId' of AOPurchaseReceipt.getById (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#2167-2169) is not in mixedCase
+Parameter '_purchaseReceiptId' of AOPurchaseReceipt.isExist (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol) is not in mixedCase
+Parameter '_aoContentAddress' of AOPurchaseReceipt. (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1769) is not in mixedCase
+Parameter '_aoStakedContentAddress' of AOPurchaseReceipt. (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1769-1777) is not in mixedCase
+Parameter '_aoTreasuryAddress' of AOPurchaseReceipt. (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1777) is not in mixedCase
+Parameter '_aoEarningAddress' of AOPurchaseReceipt. (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1779) is not in mixedCase
+Parameter '_nameFactoryAddress' of AOPurchaseReceipt. (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1779) is not in mixedCase
+Parameter '_nameTAOPositionAddress' of AOPurchaseReceipt. (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1781-1783) is not in mixedCase
+Parameter '_aoContentAddress' of AOPurchaseReceipt.setAOContentAddress (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1863) is not in mixedCase
+Parameter '_aoStakedContentAddress' of AOPurchaseReceipt.setAOStakedContentAddress (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1883) is not in mixedCase
+Parameter '_aoContentHostAddress' of AOPurchaseReceipt.setAOContentHostAddress (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1901-1903) is not in mixedCase
+Parameter '_aoTreasuryAddress' of AOPurchaseReceipt.setAOTreasuryAddress (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1915-1917) is not in mixedCase
+Parameter '_aoEarningAddress' of AOPurchaseReceipt.setAOEarningAddress (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1935) is not in mixedCase
+Parameter '_nameFactoryAddress' of AOPurchaseReceipt.setNameFactoryAddress (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1949) is not in mixedCase
+Parameter '_nameTAOPositionAddress' of AOPurchaseReceipt.setNameTAOPositionAddress (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1965-1969) is not in mixedCase
+Parameter '_contentHostId' of AOPurchaseReceipt.buyContent (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1995-1996) is not in mixedCase
+Parameter '_networkIntegerAmount' of AOPurchaseReceipt.buyContent (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1997) is not in mixedCase
+Parameter '_networkFractionAmount' of AOPurchaseReceipt.buyContent (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1997) is not in mixedCase
+Parameter '_denomination' of AOPurchaseReceipt.buyContent (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#2001) is not in mixedCase
+Parameter '_publicKey' of AOPurchaseReceipt.buyContent (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#2001) is not in mixedCase
+Parameter '_publicAddress' of AOPurchaseReceipt.buyContent (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#2001) is not in mixedCase
+Function 'AOPurchaseReceipt._canBuy' (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol) is not in mixedCase
+Parameter '_buyer' of AOPurchaseReceipt._canBuy (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol) is not in mixedCase
+Parameter '_contentHostId' of AOPurchaseReceipt._canBuy (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol) is not in mixedCase
+Parameter '_publicKey' of AOPurchaseReceipt._canBuy (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol) is not in mixedCase
+Parameter '_publicAddress' of AOPurchaseReceipt._canBuy (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol) is not in mixedCase
+Function 'AOPurchaseReceipt._canBuyAOContent' (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol) is not in mixedCase
+Parameter '_price' of AOPurchaseReceipt._canBuyAOContent (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol) is not in mixedCase
+Parameter '_networkIntegerAmount' of AOPurchaseReceipt._canBuyAOContent (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol) is not in mixedCase
+Parameter '_networkFractionAmount' of AOPurchaseReceipt._canBuyAOContent (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol) is not in mixedCase
+Parameter '_denomination' of AOPurchaseReceipt._canBuyAOContent (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol) is not in mixedCase
+Variable 'AOPurchaseReceipt._aoContent' (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1641-1643) is not in mixedCase
+Variable 'AOPurchaseReceipt._aoStakedContent' (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1647-1651) is not in mixedCase
+Variable 'AOPurchaseReceipt._aoContentHost' (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1651) is not in mixedCase
+Variable 'AOPurchaseReceipt._aoTreasury' (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1653) is not in mixedCase
+Variable 'AOPurchaseReceipt._aoEarning' (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1653-1655) is not in mixedCase
+Variable 'AOPurchaseReceipt._nameFactory' (/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol#1655) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xd7ddc00eaa2574efe36f966de97c4b869ca8dc2d.sol analyzed (16 contracts), 163 result(s) found

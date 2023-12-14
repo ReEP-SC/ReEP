@@ -1,0 +1,78 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol:
+/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol:1043:3: Warning: Functions in interfaces should be declared external.
+  function play(bytes32 luckyblockId) public payable;
+  ^-------------------------------------------------^
+
+INFO:Detectors:[91m
+RBAC.roles (/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol#529) is never initialized. It is used in:
+	- checkRole (/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol#553-561)
+	- hasRole (/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol#569-577)
+	- addRole (/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol#595-605)
+	- removeRole (/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol#613-627)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-state-variables[0m
+INFO:Detectors:[93m
+Luckyblock.play (/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol#1559-1649) does not use the value returned by external calls:
+	-ERC20Interface(_luckyblockSpend.spendTokenAddresses[i]).transferFrom(msg.sender,address(this),_luckyblockSpend.spendTokenCount[i]) (/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol#1631-1645)
+	-ERC20Interface(_luckyblockEarn.earnTokenAddresses[k]).transfer(msg.sender,_luckyblockEarn.earnTokenCount[k]) (/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol)
+Luckyblock.withdrawToken (/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol) does not use the value returned by external calls:
+	-erc20.transfer(to,erc20.balanceOf(address(this))) (/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol)
+	-erc20.transfer(to,balance) (/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Luckyblock.play has external calls inside a loop:
+	- ERC20Interface(_luckyblockEarn.earnTokenAddresses[k]).transfer(msg.sender,_luckyblockEarn.earnTokenCount[k]) (/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol)
+Luckyblock.play has external calls inside a loop:
+	- require(bool)(ERC20Interface(_luckyblockEarn.earnTokenAddresses[j]).balanceOf(address(this)) >= earnTokenCount) (/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol)
+Luckyblock.play has external calls inside a loop:
+	- require(bool)(ERC20Interface(_luckyblockSpend.spendTokenAddresses[i]).balanceOf(address(msg.sender)) >= _luckyblockSpend.spendTokenCount[i]) (/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol#1607-1615)
+Luckyblock.play has external calls inside a loop:
+	- require(bool)(ERC20Interface(_luckyblockSpend.spendTokenAddresses[i]).allowance(address(msg.sender),address(this)) >= _luckyblockSpend.spendTokenCount[i]) (/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol#1615-1629)
+Luckyblock.play has external calls inside a loop:
+	- ERC20Interface(_luckyblockSpend.spendTokenAddresses[i]).transferFrom(msg.sender,address(this),_luckyblockSpend.spendTokenCount[i]) (/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol#1631-1645)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Ownable.renounceOwnership (/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol#213-223) should be declared external
+Superuser.transferOwnership (/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol#847-863) should be declared external
+Ownable.transferOwnership (/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol#245-249) should be declared external
+Pausable.pause (/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol#363-369) should be declared external
+Pausable.unpause (/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol#381-393) should be declared external
+Superuser.transferSuperuser (/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol#801-827) should be declared external
+ILuckyblock.play (/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol#1209-1210) should be declared external
+Luckyblock.play (/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol#1559-1649) should be declared external
+ERC20Interface.transfer (/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol#1253-1259) should be declared external
+ERC20Interface.transferFrom (/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol#1259-1264) should be declared external
+ERC20Interface.balanceOf (/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol#1267-1273) should be declared external
+ERC20Interface.allowance (/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol#1273-1283) should be declared external
+Luckyblock.fallback (/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol#1365) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_newOwner' of Ownable.transferOwnership (/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol#245) is not in mixedCase
+Function 'Ownable._transferOwnership' (/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol#265-285) is not in mixedCase
+Parameter '_newOwner' of Ownable._transferOwnership (/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol#265-267) is not in mixedCase
+Parameter '_role' of Roles.add (/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol#411) is not in mixedCase
+Parameter '_addr' of Roles.add (/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol#411-415) is not in mixedCase
+Parameter '_role' of Roles.remove (/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol#421-427) is not in mixedCase
+Parameter '_addr' of Roles.remove (/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol#427) is not in mixedCase
+Parameter '_role' of Roles.check (/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol#439-441) is not in mixedCase
+Parameter '_addr' of Roles.check (/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol#441-445) is not in mixedCase
+Parameter '_role' of Roles.has (/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol#463) is not in mixedCase
+Parameter '_addr' of Roles.has (/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol#463) is not in mixedCase
+Parameter '_operator' of RBAC.checkRole (/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol#555-559) is not in mixedCase
+Parameter '_role' of RBAC.checkRole (/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol#559) is not in mixedCase
+Parameter '_operator' of RBAC.hasRole (/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol#569-571) is not in mixedCase
+Parameter '_role' of RBAC.hasRole (/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol#571) is not in mixedCase
+Parameter '_operator' of RBAC.addRole (/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol#599-601) is not in mixedCase
+Parameter '_role' of RBAC.addRole (/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol#601-603) is not in mixedCase
+Parameter '_operator' of RBAC.removeRole (/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol#613) is not in mixedCase
+Parameter '_role' of RBAC.removeRole (/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol#613-615) is not in mixedCase
+Parameter '_newOwner' of Superuser.transferOwnership (/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol#851) is not in mixedCase
+Parameter '_addr' of Superuser.isSuperuser (/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol#777) is not in mixedCase
+Parameter '_newSuperuser' of Superuser.transferSuperuser (/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol#805-807) is not in mixedCase
+Parameter '_randomContract' of Luckyblock.setRandomContract (/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol#1367-1369) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+Luckyblock.contractAddressToLuckyblockId (/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol#1337-1343) is never used in Luckyblock
+Luckyblock.luckyblockIdToUserAddress (/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol#1355-1357) is never used in Luckyblock
+Luckyblock.contractAddressToLuckyblockCount (/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol#1357-1363) is never used in Luckyblock
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0x8a6ca6633d31135d9340e04698854225e3b898f7.sol analyzed (10 contracts), 45 result(s) found

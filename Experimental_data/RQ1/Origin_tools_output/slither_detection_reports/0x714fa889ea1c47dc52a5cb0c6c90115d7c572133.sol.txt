@@ -1,0 +1,52 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x714fa889ea1c47dc52a5cb0c6c90115d7c572133.sol:
+/sb/0x714fa889ea1c47dc52a5cb0c6c90115d7c572133.sol:49:9: Warning: Variable is declared as a storage pointer. Use an explicit "storage" keyword to silence this warning.
+        address[] newOwner;
+        ^----------------^
+/sb/0x714fa889ea1c47dc52a5cb0c6c90115d7c572133.sol:49:9: Warning: Uninitialized storage pointer. Did you mean '<type> memory newOwner'?
+        address[] newOwner;
+        ^----------------^
+/sb/0x714fa889ea1c47dc52a5cb0c6c90115d7c572133.sol:85:13: Warning: Using contract member "balance" inherited from the address type is deprecated. Convert the contract to "address" type to access the member, for example use "address(contract).balance" instead.
+        if (wallet.balance < amt || amt == 0)
+            ^------------^
+/sb/0x714fa889ea1c47dc52a5cb0c6c90115d7c572133.sol:87:19: Warning: Using contract member "balance" inherited from the address type is deprecated. Convert the contract to "address" type to access the member, for example use "address(contract).balance" instead.
+            amt = wallet.balance;
+                  ^------------^
+/sb/0x714fa889ea1c47dc52a5cb0c6c90115d7c572133.sol:25:3: Warning: No visibility specified. Defaulting to "public". 
+  function kill(address _to);
+  ^-------------------------^
+/sb/0x714fa889ea1c47dc52a5cb0c6c90115d7c572133.sol:27:3: Warning: No visibility specified. Defaulting to "public". 
+  function Wallet(address[] _owners, uint _required, uint _daylimit);
+  ^-----------------------------------------------------------------^
+/sb/0x714fa889ea1c47dc52a5cb0c6c90115d7c572133.sol:29:3: Warning: No visibility specified. Defaulting to "public". 
+  function execute(address _to, uint _value, bytes _data) returns (bytes32 o_hash);
+  ^-------------------------------------------------------------------------------^
+
+INFO:Detectors:[91m
+newOwner in ExploitLibrary.takeOwnership (/sb/0x714fa889ea1c47dc52a5cb0c6c90115d7c572133.sol#51-53) is a storage variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-storage-variables[0m
+INFO:Detectors:[93m
+ExploitLibrary.transferMultisig (/sb/0x714fa889ea1c47dc52a5cb0c6c90115d7c572133.sol#77-95) does not use the value returned by external calls:
+	-wallet.execute(_to,amt,) (/sb/0x714fa889ea1c47dc52a5cb0c6c90115d7c572133.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+WalletAbi.kill (/sb/0x714fa889ea1c47dc52a5cb0c6c90115d7c572133.sol#25-27) should be declared external
+WalletAbi.Wallet (/sb/0x714fa889ea1c47dc52a5cb0c6c90115d7c572133.sol#27-29) should be declared external
+WalletAbi.execute (/sb/0x714fa889ea1c47dc52a5cb0c6c90115d7c572133.sol#29-37) should be declared external
+ExploitLibrary.killMultisig (/sb/0x714fa889ea1c47dc52a5cb0c6c90115d7c572133.sol#63-75) should be declared external
+ExploitLibrary.transferMultisig (/sb/0x714fa889ea1c47dc52a5cb0c6c90115d7c572133.sol#77-95) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x714fa889ea1c47dc52a5cb0c6c90115d7c572133.sol:
+	- pragma solidity^0.4.13 (/sb/0x714fa889ea1c47dc52a5cb0c6c90115d7c572133.sol#15-19): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'WalletAbi.Wallet' (/sb/0x714fa889ea1c47dc52a5cb0c6c90115d7c572133.sol#27-29) is not in mixedCase
+Parameter '_contract' of ExploitLibrary.takeOwnership (/sb/0x714fa889ea1c47dc52a5cb0c6c90115d7c572133.sol#47) is not in mixedCase
+Parameter '_to' of ExploitLibrary.takeOwnership (/sb/0x714fa889ea1c47dc52a5cb0c6c90115d7c572133.sol#47) is not in mixedCase
+Parameter '_contract' of ExploitLibrary.killMultisig (/sb/0x714fa889ea1c47dc52a5cb0c6c90115d7c572133.sol#65) is not in mixedCase
+Parameter '_to' of ExploitLibrary.killMultisig (/sb/0x714fa889ea1c47dc52a5cb0c6c90115d7c572133.sol#66-67) is not in mixedCase
+Parameter '_contract' of ExploitLibrary.transferMultisig (/sb/0x714fa889ea1c47dc52a5cb0c6c90115d7c572133.sol#79) is not in mixedCase
+Parameter '_to' of ExploitLibrary.transferMultisig (/sb/0x714fa889ea1c47dc52a5cb0c6c90115d7c572133.sol#80-81) is not in mixedCase
+Parameter '_amount' of ExploitLibrary.transferMultisig (/sb/0x714fa889ea1c47dc52a5cb0c6c90115d7c572133.sol#81) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x714fa889ea1c47dc52a5cb0c6c90115d7c572133.sol analyzed (2 contracts), 16 result(s) found

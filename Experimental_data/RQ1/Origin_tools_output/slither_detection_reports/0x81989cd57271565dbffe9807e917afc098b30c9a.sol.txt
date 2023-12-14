@@ -1,0 +1,176 @@
+INFO:Detectors:[91m
+ERC721BridgeV2.registry (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#697) is never initialized. It is used in:
+	- swapOut721 (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#712-736)
+	- swapOut1155 (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#736-762)
+	- ownerOfMirror (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#770-783)
+	- originOwnershipAddress (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#783-787)
+	- swapIn1155 (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#790-805)
+	- swapIn721 (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#806-846)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-state-variables[0m
+INFO:Detectors:[93m
+IERC721 (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#431-513) has incorrect ERC20 function interface(s):
+	-approve (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#491-493)
+	-transferFrom (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#507-511)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[93m
+Reentrancy in ERC721BridgeV2.swapIn721 (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#806-846):
+	External calls:
+	- IERC721(_originNftAddress).transferFrom(_owner,address(this),_originTokenId) (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#810-814)
+	- mirrorTokenId = INFTAdaptor(adaptor).toMirrorTokenId(_originTokenId) (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#822-825)
+	- objectOwnership = registry.addressOf(SettingIds.CONTRACT_OBJECT_OWNERSHIP) (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#826-831)
+	- INFTAdaptor(adaptor).cacheMirrorTokenId(_originTokenId,mirrorTokenId) (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#835-838)
+	State variables written after the call(s):
+	- mirrorId2OriginId (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#838-841)
+Reentrancy in ERC721BridgeV2.swapOut1155 (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#736-762):
+	External calls:
+	- interstellarEncoder = IInterstellarEncoderV3(registry.addressOf(SettingIds.CONTRACT_INTERSTELLAR_ENCODER)) (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#737-739)
+	- nftContract = interstellarEncoder.getOriginAddress(_mirrorTokenId) (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#739-740)
+	- objectOwnership = registry.addressOf(SettingIds.CONTRACT_OBJECT_OWNERSHIP) (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#743-746)
+	- require(bool,string)(IERC721(objectOwnership).ownerOf(_mirrorTokenId) == msg.sender,you have no right to swap it out!) (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#746-748)
+	- petBase = registry.addressOf(SettingIds.CONTRACT_PET_BASE) (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#750-751)
+	- (apostleTokenId) = IPetBase(petBase).pet2TiedStatus(_mirrorTokenId) (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#751-752)
+	- IBurnableERC20(objectOwnership).burn(msg.sender,_mirrorTokenId) (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#757-758)
+	- IERC1155(nftContract).safeTransferFrom(address(this),msg.sender,originTokenId,1,) (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#758-759)
+	State variables written after the call(s):
+	- mirrorId2OriginId1155 (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#759-760)
+Reentrancy in ERC721BridgeV2.swapOut721 (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#712-736):
+	External calls:
+	- interstellarEncoder = IInterstellarEncoderV3(registry.addressOf(SettingIds.CONTRACT_INTERSTELLAR_ENCODER)) (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#713-715)
+	- nftContract = interstellarEncoder.getOriginAddress(_mirrorTokenId) (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#715-716)
+	- require(bool,string)(ownerOfMirror(_mirrorTokenId) == msg.sender,you have no right to swap it out!) (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#719-721)
+	- petBase = registry.addressOf(SettingIds.CONTRACT_PET_BASE) (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#721-722)
+	- (apostleTokenId) = IPetBase(petBase).pet2TiedStatus(_mirrorTokenId) (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#722-723)
+	- objectOwnership = registry.addressOf(SettingIds.CONTRACT_OBJECT_OWNERSHIP) (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#728)
+	- owner = IERC721(objectOwnership).ownerOf(_mirrorTokenId) (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#728-729)
+	- IERC721(nftContract).approve(address(this),originTokenId) (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#730-731)
+	- IERC721(nftContract).transferFrom(address(this),msg.sender,originTokenId) (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#731-733)
+	- IBurnableERC20(objectOwnership).burn(owner,_mirrorTokenId) (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#733)
+	State variables written after the call(s):
+	- mirrorId2OriginId (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#734)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+ERC721BridgeV2.swapOut721.owner (local variable @ /sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#728-729) shadows:
+	- DSAuth.owner (state variable @ /sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#37-38)
+ERC721BridgeV2.ownerOfMirror.owner (local variable @ /sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#776-779) shadows:
+	- DSAuth.owner (state variable @ /sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#37-38)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+ERC721BridgeV2.swapIn1155 has external calls inside a loop:
+	- mirrorTokenId = INFTAdaptor(adaptor).toMirrorTokenIdAndIncrease(_originTokenId) (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#800-801)
+ERC721BridgeV2.swapIn1155 has external calls inside a loop:
+	- IMintableERC20(objectOwnership).mint(_from,mirrorTokenId) (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#801)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in ERC721BridgeV2.swapIn1155 (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#790-805):
+	External calls:
+	- IERC1155(_originNftAddress).safeTransferFrom(_from,address(this),_originTokenId,_value,) (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#792-795)
+	- objectOwnership = registry.addressOf(SettingIds.CONTRACT_OBJECT_OWNERSHIP) (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#797-799)
+	- mirrorTokenId = INFTAdaptor(adaptor).toMirrorTokenIdAndIncrease(_originTokenId) (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#800-801)
+	- IMintableERC20(objectOwnership).mint(_from,mirrorTokenId) (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#801)
+	State variables written after the call(s):
+	- mirrorId2OriginId1155 (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#802-803)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+ERC721BridgeV2.singletonLock should be constant (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#696-697)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+IAuthority.canCall (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#13-18) should be declared external
+DSAuth.setOwner (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#43-50) should be declared external
+DSAuth.setAuthority (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#51-59) should be declared external
+PausableDSAuth.pause (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#121-123) should be declared external
+PausableDSAuth.unpause (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#129-134) should be declared external
+IBurnableERC20.burn (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#230-232) should be declared external
+IERC721.balanceOf (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#484-487) should be declared external
+IERC721.ownerOf (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#487-488) should be declared external
+IERC721.exists (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#488-489) should be declared external
+IERC721.approve (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#491-493) should be declared external
+IERC721.getApproved (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#493-500) should be declared external
+IERC721.setApprovalForAll (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#500-505) should be declared external
+IERC721.isApprovedForAll (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#505-506) should be declared external
+IERC721.transferFrom (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#507-511) should be declared external
+IERC721.safeTransferFrom (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#511-512) should be declared external
+IERC721.safeTransferFrom (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#512-513) should be declared external
+ERC721BridgeV2.onERC721Received (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol) should be declared external
+IERC721Receiver.onERC721Received (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#548-554) should be declared external
+IInterstellarEncoderV3.registerNewObjectClass (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#565-567) should be declared external
+IInterstellarEncoderV3.encodeTokenId (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#567-571) should be declared external
+IInterstellarEncoderV3.encodeTokenIdForObjectContract (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#571-575) should be declared external
+IInterstellarEncoderV3.encodeTokenIdForOuterObjectContract (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#575-584) should be declared external
+IInterstellarEncoderV3.getContractAddress (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#584-589) should be declared external
+IInterstellarEncoderV3.getObjectId (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#589-593) should be declared external
+IInterstellarEncoderV3.getObjectClass (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#593-594) should be declared external
+IInterstellarEncoderV3.getObjectAddress (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#594-596) should be declared external
+IInterstellarEncoderV3.getProducerId (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#596-598) should be declared external
+IInterstellarEncoderV3.getOriginAddress (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#598-600) should be declared external
+IMintableERC20.mint (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#604) should be declared external
+INFTAdaptor.toMirrorTokenId (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#610-611) should be declared external
+INFTAdaptor.toMirrorTokenIdAndIncrease (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#611-615) should be declared external
+INFTAdaptor.toOriginTokenId (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#615-618) should be declared external
+INFTAdaptor.approveOriginToken (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#618-620) should be declared external
+INFTAdaptor.ownerInOrigin (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#620-622) should be declared external
+INFTAdaptor.cacheMirrorTokenId (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#622-624) should be declared external
+IPetBase.pet2TiedStatus (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#628-630) should be declared external
+ISettingsRegistry.uintOf (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#636-638) should be declared external
+ISettingsRegistry.stringOf (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#638-640) should be declared external
+ISettingsRegistry.addressOf (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#640-642) should be declared external
+ISettingsRegistry.bytesOf (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#642-644) should be declared external
+ISettingsRegistry.boolOf (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#644) should be declared external
+ISettingsRegistry.intOf (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#646) should be declared external
+ISettingsRegistry.setUintProperty (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#649-652) should be declared external
+ISettingsRegistry.setStringProperty (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#652-653) should be declared external
+ISettingsRegistry.setAddressProperty (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#654-655) should be declared external
+ISettingsRegistry.setBytesProperty (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#655-657) should be declared external
+ISettingsRegistry.setBoolProperty (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#657-658) should be declared external
+ISettingsRegistry.setIntProperty (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#659-660) should be declared external
+ISettingsRegistry.getValueTypeOf (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#660-662) should be declared external
+ERC721BridgeV2.registerAdaptor (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#709-712) should be declared external
+ERC721BridgeV2.swapOut721 (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#712-736) should be declared external
+ERC721BridgeV2.swapOut1155 (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#736-762) should be declared external
+ERC721BridgeV2.ownerOf (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#762-765) should be declared external
+ERC721BridgeV2.mirrorOfOrigin (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#765-770) should be declared external
+ERC721BridgeV2.swapIn1155 (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#790-805) should be declared external
+ERC721BridgeV2.swapIn721 (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#806-846) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol:
+	- pragma solidity>=0.4.23<0.5.0>=0.4.24<0.5.0 (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#7-9): is has a complex pragma
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Constant 'IERC721.InterfaceId_ERC721' (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#432) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'IERC721.InterfaceId_ERC721Exists' (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#451-454) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'IERC721.InterfaceId_ERC721Enumerable' (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#456-460) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'IERC721.InterfaceId_ERC721Metadata' (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#469-471) is not in UPPER_CASE_WITH_UNDERSCORES
+Parameter '' of ERC721BridgeV2.onERC721Received (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol) is not in mixedCase
+Parameter '_scope_0' of ERC721BridgeV2.onERC721Received (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol) is not in mixedCase
+Parameter '_scope_1' of ERC721BridgeV2.onERC721Received (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol) is not in mixedCase
+Parameter '_scope_2' of ERC721BridgeV2.onERC721Received (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol) is not in mixedCase
+Parameter '' of ERC721BridgeV2.onERC1155Received (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol) is not in mixedCase
+Parameter '_scope_0' of ERC721BridgeV2.onERC1155Received (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol) is not in mixedCase
+Parameter '_scope_1' of ERC721BridgeV2.onERC1155Received (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol) is not in mixedCase
+Parameter '_scope_2' of ERC721BridgeV2.onERC1155Received (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol) is not in mixedCase
+Parameter '_scope_3' of ERC721BridgeV2.onERC1155Received (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol) is not in mixedCase
+Parameter '' of ERC721BridgeV2.onERC1155BatchReceived (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol) is not in mixedCase
+Parameter '_scope_0' of ERC721BridgeV2.onERC1155BatchReceived (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol) is not in mixedCase
+Parameter '_scope_1' of ERC721BridgeV2.onERC1155BatchReceived (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol) is not in mixedCase
+Parameter '_scope_2' of ERC721BridgeV2.onERC1155BatchReceived (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol) is not in mixedCase
+Parameter '_scope_3' of ERC721BridgeV2.onERC1155BatchReceived (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol) is not in mixedCase
+Parameter '_originNftAddress' of ERC721BridgeV2.registerAdaptor (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#709-711) is not in mixedCase
+Parameter '_erc721Adaptor' of ERC721BridgeV2.registerAdaptor (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#711) is not in mixedCase
+Parameter '_mirrorTokenId' of ERC721BridgeV2.swapOut721 (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#712-713) is not in mixedCase
+Parameter '_mirrorTokenId' of ERC721BridgeV2.swapOut1155 (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#736-737) is not in mixedCase
+Parameter '_mirrorTokenId' of ERC721BridgeV2.ownerOf (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#763-764) is not in mixedCase
+Parameter '_originNFT' of ERC721BridgeV2.mirrorOfOrigin (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#765) is not in mixedCase
+Parameter '_originTokenId' of ERC721BridgeV2.mirrorOfOrigin (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#766-769) is not in mixedCase
+Parameter '_mirrorTokenId' of ERC721BridgeV2.ownerOfMirror (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#772) is not in mixedCase
+Parameter '_mirrorTokenId' of ERC721BridgeV2.originOwnershipAddress (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#784) is not in mixedCase
+Parameter '_mirrorTokenId' of ERC721BridgeV2.isBridged (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#788) is not in mixedCase
+Parameter '_originNftAddress' of ERC721BridgeV2.swapIn1155 (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#790) is not in mixedCase
+Parameter '_originTokenId' of ERC721BridgeV2.swapIn1155 (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#790) is not in mixedCase
+Parameter '_value' of ERC721BridgeV2.swapIn1155 (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#791) is not in mixedCase
+Parameter '_originNftAddress' of ERC721BridgeV2.swapIn721 (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#806) is not in mixedCase
+Parameter '_originTokenId' of ERC721BridgeV2.swapIn721 (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#806) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+ERC721BridgeV2.singletonLock (/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol#696-697) is never used in ERC721BridgeV2
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0x81989cd57271565dbffe9807e917afc098b30c9a.sol analyzed (17 contracts), 102 result(s) found

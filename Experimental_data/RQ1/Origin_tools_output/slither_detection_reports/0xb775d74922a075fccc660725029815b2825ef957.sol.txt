@@ -1,0 +1,101 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xb775d74922a075fccc660725029815b2825ef957.sol:
+/sb/0xb775d74922a075fccc660725029815b2825ef957.sol:115:5: Warning: Functions in interfaces should be declared external.
+    function isValidator(address _validator) public view returns(bool);
+    ^-----------------------------------------------------------------^
+/sb/0xb775d74922a075fccc660725029815b2825ef957.sol:117:5: Warning: Functions in interfaces should be declared external.
+    function requiredSignatures() public view returns(uint256);
+    ^---------------------------------------------------------^
+/sb/0xb775d74922a075fccc660725029815b2825ef957.sol:119:5: Warning: Functions in interfaces should be declared external.
+    function owner() public view returns(address);
+    ^--------------------------------------------^
+/sb/0xb775d74922a075fccc660725029815b2825ef957.sol:721:5: Warning: Function state mutability can be restricted to pure
+    function onExecuteMessage(address, uint256) internal returns(bool){
+    ^ (Relevant source part starts here and spans across multiple lines).
+
+INFO:Detectors:[93m
+Message.parseMessage (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#233-265) is declared view but contains assembly code
+Message.recoverAddressFromSignedMessage (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#275-301) is declared view but contains assembly code
+BasicBridge.isContract (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#695-705) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[92m
+Message.hasEnoughValidSignatures has external calls inside a loop:
+	- require(bool)(_validatorContract.isValidator(recoveredAddress)) (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#359-361)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Message.parseMessage uses assembly (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#233-265)
+	- /sb/0xb775d74922a075fccc660725029815b2825ef957.sol#241-265
+Message.recoverAddressFromSignedMessage uses assembly (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#275-301)
+	- /sb/0xb775d74922a075fccc660725029815b2825ef957.sol#293-301
+BasicBridge.isContract uses assembly (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#695-705)
+	- /sb/0xb775d74922a075fccc660725029815b2825ef957.sol#703-705
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+IBridgeValidators.isValidator (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#117-119) should be declared external
+IBridgeValidators.requiredSignatures (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#123-129) should be declared external
+IBridgeValidators.owner (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#131) should be declared external
+Validatable.requiredSignatures (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#451-453) should be declared external
+ERC20Basic.totalSupply (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#471-473) should be declared external
+ERC20Basic.balanceOf (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#473-475) should be declared external
+ERC20Basic.transfer (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#475-479) should be declared external
+BasicBridge.getBridgeInterfacesVersion (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#501-509) should be declared external
+BasicBridge.setGasPrice (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#509-519) should be declared external
+BasicBridge.gasPrice (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#519-527) should be declared external
+BasicBridge.setRequiredBlockConfirmations (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#527-543) should be declared external
+BasicBridge.requiredBlockConfirmations (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#543-551) should be declared external
+BasicBridge.deployedAtBlock (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#551-559) should be declared external
+BasicBridge.setDailyLimit (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#619-629) should be declared external
+BasicBridge.withinLimit (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#659-681) should be declared external
+ERC20.allowance (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#813-817) should be declared external
+ERC20.transferFrom (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#817-829) should be declared external
+ERC20.approve (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#829) should be declared external
+IBurnableMintableERC677Token.mint (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#859) should be declared external
+IBurnableMintableERC677Token.burn (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#859-861) should be declared external
+IBurnableMintableERC677Token.claimTokens (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#861-863) should be declared external
+ForeignBridgeErcToNative.initialize (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#877-925) should be declared external
+ForeignBridgeErcToNative.getBridgeMode (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_msg' of Message.isMessageValid (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#265) is not in mixedCase
+Parameter '_message' of Message.hasEnoughValidSignatures (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#323) is not in mixedCase
+Parameter '_vs' of Message.hasEnoughValidSignatures (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#325) is not in mixedCase
+Parameter '_rs' of Message.hasEnoughValidSignatures (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#325-327) is not in mixedCase
+Parameter '_ss' of Message.hasEnoughValidSignatures (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#327) is not in mixedCase
+Parameter '_validatorContract' of Message.hasEnoughValidSignatures (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#327) is not in mixedCase
+Parameter '_gasPrice' of BasicBridge.setGasPrice (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#511) is not in mixedCase
+Parameter '_blockConfirmations' of BasicBridge.setRequiredBlockConfirmations (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#528-529) is not in mixedCase
+Parameter '_day' of BasicBridge.setTotalSpentPerDay (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#561) is not in mixedCase
+Parameter '_value' of BasicBridge.setTotalSpentPerDay (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#561) is not in mixedCase
+Parameter '_day' of BasicBridge.totalSpentPerDay (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#571-575) is not in mixedCase
+Parameter '_status' of BasicBridge.setInitialize (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#601) is not in mixedCase
+Parameter '_dailyLimit' of BasicBridge.setDailyLimit (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#621) is not in mixedCase
+Parameter '_maxPerTx' of BasicBridge.setMaxPerTx (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#633) is not in mixedCase
+Parameter '_minPerTx' of BasicBridge.setMinPerTx (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#645) is not in mixedCase
+Parameter '_amount' of BasicBridge.withinLimit (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#665) is not in mixedCase
+Parameter '_token' of BasicBridge.claimTokens (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#685) is not in mixedCase
+Parameter '_to' of BasicBridge.claimTokens (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#685) is not in mixedCase
+Parameter '' of BasicForeignBridge.onExecuteMessage (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#767) is not in mixedCase
+Parameter '_scope_0' of BasicForeignBridge.onExecuteMessage (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#767) is not in mixedCase
+Parameter '_txHash' of BasicForeignBridge.setRelayedMessages (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#773) is not in mixedCase
+Parameter '_status' of BasicForeignBridge.setRelayedMessages (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#773) is not in mixedCase
+Parameter '_txHash' of BasicForeignBridge.relayedMessages (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#791-793) is not in mixedCase
+Parameter '' of ERC677.transferAndCall (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#847) is not in mixedCase
+Parameter '_scope_0' of ERC677.transferAndCall (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#849) is not in mixedCase
+Parameter '_scope_1' of ERC677.transferAndCall (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#849) is not in mixedCase
+Parameter '' of IBurnableMintableERC677Token.mint (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#859) is not in mixedCase
+Parameter '_scope_0' of IBurnableMintableERC677Token.mint (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#859) is not in mixedCase
+Parameter '_token' of ForeignBridgeErcToNative.claimTokens (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol) is not in mixedCase
+Parameter '_to' of ForeignBridgeErcToNative.claimTokens (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol) is not in mixedCase
+Parameter '_recipient' of ForeignBridgeErcToNative.onExecuteMessage (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol) is not in mixedCase
+Parameter '_amount' of ForeignBridgeErcToNative.onExecuteMessage (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol) is not in mixedCase
+Parameter '_validatorContract' of ForeignBridgeErcToNative.initialize (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#883) is not in mixedCase
+Parameter '_erc20token' of ForeignBridgeErcToNative.initialize (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#883) is not in mixedCase
+Parameter '_requiredBlockConfirmations' of ForeignBridgeErcToNative.initialize (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#885) is not in mixedCase
+Parameter '_gasPrice' of ForeignBridgeErcToNative.initialize (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#885) is not in mixedCase
+Parameter '_token' of ForeignBridgeErcToNative.setErc20token (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+EternalStorage.stringStorage (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#391-393) is never used in ForeignBridgeErcToNative
+EternalStorage.bytesStorage (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#395) is never used in ForeignBridgeErcToNative
+EternalStorage.intStorage (/sb/0xb775d74922a075fccc660725029815b2825ef957.sol#403) is never used in ForeignBridgeErcToNative
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0xb775d74922a075fccc660725029815b2825ef957.sol analyzed (13 contracts), 68 result(s) found

@@ -1,0 +1,145 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x99d202b98fea061243b708ece53a3319a685df92.sol:
+/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol:434:27: Warning: Function declared as view, but this expression (potentially) modifies the state and thus requires non-payable (the default) or payable.
+            let result := call(gas, tokenAddress, 0x0, add(callData, 0x20), mload(callData), 0, 0)
+                          ^----------------------------------------------------------------------^
+
+INFO:Detectors:[91m
+Claimable.claimNativeCoins (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#96-103) sends eth to arbitrary user
+	Dangerous calls:
+	- ! _to.send(value) (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#102-103)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[93m
+Bytes.bytesToBytes32 (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#161-169) is declared view but contains assembly code
+AddressUtils.isContract (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#252-273) is declared view but contains assembly code
+BasicMediator.getMetadata (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#435-456) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+ERC721 (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#326-358) has incorrect ERC20 function interface(s):
+	-approve (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#332-335)
+	-transfer (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#335-336)
+	-transferFrom (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#336-337)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[93m
+Reentrancy in BasicMediator.initialize (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#391-409):
+	External calls:
+	- _setRequestGasLimit(_requestGasLimit) (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#404-405)
+	State variables written after the call(s):
+	- addressStorage (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#405)
+	- boolStorage (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#408)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+Reentrancy in AMBMediator._setRequestGasLimit (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#311-319):
+	External calls:
+	- require(bool)(_requestGasLimit <= bridgeContract().maxGasPerTx()) (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#317-318)
+	State variables written after the call(s):
+	- uintStorage (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#318-319)
+Reentrancy in ForeignMediator.fixFailedMessage (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol):
+	External calls:
+	- require(bool)(bridgeContract().messageSender() == mediatorContractOnOtherSide()) (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol)
+	State variables written after the call(s):
+	- boolStorage (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol)
+Reentrancy in BasicMediator.initialize (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#391-409):
+	External calls:
+	- _setRequestGasLimit(_requestGasLimit) (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#404-405)
+	State variables written after the call(s):
+	- bytesStorage (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#405-408)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Claimable.safeTransfer uses assembly (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#109-134)
+	- /sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#114-130
+Bytes.bytesToBytes32 uses assembly (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#161-169)
+	- /sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#168-169
+AddressUtils.isContract uses assembly (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#252-273)
+	- /sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#272-273
+BasicMediator.getMetadata uses assembly (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#435-456)
+	- /sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#448-456
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+Different versions of Solidity is used in /sb/0x99d202b98fea061243b708ece53a3319a685df92.sol:
+	- Version used: ['0.4.24', '^0.4.24']
+	- /sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#7-10 declares pragma solidity0.4.24
+	- /sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#26-28 declares pragma solidity0.4.24
+	- /sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#51-52 declares pragma solidity^0.4.24
+	- /sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#67 declares pragma solidity0.4.24
+	- /sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#79 declares pragma solidity0.4.24
+	- /sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#135-138 declares pragma solidity0.4.24
+	- /sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#144-145 declares pragma solidity0.4.24
+	- /sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#159 declares pragma solidity0.4.24
+	- /sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#171 declares pragma solidity0.4.24
+	- /sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#190 declares pragma solidity0.4.24
+	- /sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#243 declares pragma solidity^0.4.24
+	- /sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#273-274 declares pragma solidity0.4.24
+	- /sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#324 declares pragma solidity0.4.24
+	- /sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#359 declares pragma solidity0.4.24
+	- /sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#378-380 declares pragma solidity0.4.24
+	- /sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#515 declares pragma solidity0.4.24
+	- /sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#519-520 declares pragma solidity0.4.24
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#different-pragma-directives-are-used[0m
+INFO:Detectors:[92m
+ERC20Basic.totalSupply (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#57) should be declared external
+ERC20Basic.balanceOf (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#57-58) should be declared external
+ERC20Basic.transfer (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#58-59) should be declared external
+ERC721.totalSupply (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#327-328) should be declared external
+ERC721.balanceOf (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#328-331) should be declared external
+BasicMediator.claimTokens (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#501-510) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_recipient' of Sacrifice. (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#68-72) is not in mixedCase
+Parameter '_token' of Claimable.claimValues (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#89) is not in mixedCase
+Parameter '_to' of Claimable.claimValues (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#89-90) is not in mixedCase
+Parameter '_to' of Claimable.claimNativeCoins (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#97-98) is not in mixedCase
+Parameter '_token' of Claimable.claimErc20Tokens (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#104) is not in mixedCase
+Parameter '_to' of Claimable.claimErc20Tokens (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#104) is not in mixedCase
+Parameter '_to' of Claimable.safeTransfer (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#111) is not in mixedCase
+Parameter '_value' of Claimable.safeTransfer (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#111) is not in mixedCase
+Parameter '_bridgeContract' of AMBMediator.setBridgeContract (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#282-285) is not in mixedCase
+Function 'AMBMediator._setBridgeContract' (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#286-293) is not in mixedCase
+Parameter '_bridgeContract' of AMBMediator._setBridgeContract (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#287-289) is not in mixedCase
+Parameter '_mediatorContract' of AMBMediator.setMediatorContractOnOtherSide (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#297) is not in mixedCase
+Function 'AMBMediator._setMediatorContractOnOtherSide' (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#301-305) is not in mixedCase
+Parameter '_mediatorContract' of AMBMediator._setMediatorContractOnOtherSide (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#301) is not in mixedCase
+Parameter '_requestGasLimit' of AMBMediator.setRequestGasLimit (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#308-310) is not in mixedCase
+Function 'AMBMediator._setRequestGasLimit' (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#311-319) is not in mixedCase
+Parameter '_requestGasLimit' of AMBMediator._setRequestGasLimit (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#315-317) is not in mixedCase
+Parameter '_token' of ERC721Bridge.setErc721token (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#375) is not in mixedCase
+Parameter '_bridgeContract' of BasicMediator.initialize (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#392) is not in mixedCase
+Parameter '_mediatorContract' of BasicMediator.initialize (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#393-394) is not in mixedCase
+Parameter '_erc721token' of BasicMediator.initialize (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#394) is not in mixedCase
+Parameter '_requestGasLimit' of BasicMediator.initialize (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#394-395) is not in mixedCase
+Parameter '_owner' of BasicMediator.initialize (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#395-397) is not in mixedCase
+Parameter '_from' of BasicMediator.transferToken (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#422) is not in mixedCase
+Parameter '_tokenId' of BasicMediator.transferToken (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#422) is not in mixedCase
+Parameter '_tokenId' of BasicMediator.getMetadata (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#437-438) is not in mixedCase
+Parameter '_hash' of BasicMediator.setNonce (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#460) is not in mixedCase
+Parameter '_hash' of BasicMediator.setMessageHashTokenId (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#461) is not in mixedCase
+Parameter '_tokenId' of BasicMediator.setMessageHashTokenId (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#461) is not in mixedCase
+Parameter '_hash' of BasicMediator.messageHashTokenId (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#465) is not in mixedCase
+Parameter '_hash' of BasicMediator.setMessageHashRecipient (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#469) is not in mixedCase
+Parameter '_recipient' of BasicMediator.setMessageHashRecipient (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#470-472) is not in mixedCase
+Parameter '_hash' of BasicMediator.messageHashRecipient (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#476) is not in mixedCase
+Parameter '_hash' of BasicMediator.setMessageHashFixed (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#478) is not in mixedCase
+Parameter '_hash' of BasicMediator.messageHashFixed (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#480) is not in mixedCase
+Parameter '_txHash' of BasicMediator.requestFailedMessageFix (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#483-484) is not in mixedCase
+Parameter '_token' of BasicMediator.claimTokens (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#501-504) is not in mixedCase
+Parameter '_to' of BasicMediator.claimTokens (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#504) is not in mixedCase
+Parameter '_dataHash' of ForeignMediator.fixFailedMessage (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol) is not in mixedCase
+Parameter '_from' of ForeignMediator.bridgeSpecificActionsOnTokenTransfer (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#548) is not in mixedCase
+Parameter '_tokenId' of ForeignMediator.bridgeSpecificActionsOnTokenTransfer (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#548-550) is not in mixedCase
+Parameter '_from' of ForeignMediator.passMessage (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#522) is not in mixedCase
+Parameter '_tokenId' of ForeignMediator.passMessage (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#522) is not in mixedCase
+Parameter '_recipient' of ForeignMediator.handleBridgedTokens (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#540) is not in mixedCase
+Parameter '_tokenId' of ForeignMediator.handleBridgedTokens (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#541) is not in mixedCase
+Parameter '' of ForeignMediator.handleBridgedTokens (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#541) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+ERC721 (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#326-358) does not mark important ERC20 parameters as 'indexed':
+	-Transfer (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#337-338) does not index parameter 'from'
+	-Transfer (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#337-338) does not index parameter 'to'
+	-Approval (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#338) does not index parameter 'owner'
+	-Approval (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#338) does not index parameter 'approved'
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unindexed-erc20-event-parameters[0m
+INFO:Detectors:[92m
+EternalStorage.stringStorage (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#15-16) is never used in ForeignMediator
+EternalStorage.intStorage (/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol#19-23) is never used in ForeignMediator
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0x99d202b98fea061243b708ece53a3319a685df92.sol analyzed (17 contracts), 68 result(s) found

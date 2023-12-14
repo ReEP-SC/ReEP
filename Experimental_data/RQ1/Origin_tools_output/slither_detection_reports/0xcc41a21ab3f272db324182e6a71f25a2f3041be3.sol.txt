@@ -1,0 +1,71 @@
+INFO:Detectors:[93m
+Address.isContract (/sb/0xcc41a21ab3f272db324182e6a71f25a2f3041be3.sol#285-291) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[92m
+Reentrancy in MintingPool.mintPositionTokens (/sb/0xcc41a21ab3f272db324182e6a71f25a2f3041be3.sol#458-509):
+	External calls:
+	- neededCollateral = calculateTotalCollateral(marketContract,qtyToMint) (/sb/0xcc41a21ab3f272db324182e6a71f25a2f3041be3.sol#467-469)
+	- IERC20(marketContract.COLLATERAL_TOKEN_ADDRESS()).safeTransferFrom(msg.sender,address(this),neededCollateral) (/sb/0xcc41a21ab3f272db324182e6a71f25a2f3041be3.sol#469-472)
+	- hasEnoughPositionBalance(marketContractAddress,qtyToMint) (/sb/0xcc41a21ab3f272db324182e6a71f25a2f3041be3.sol#473-500)
+	State variables written after the call(s):
+	- sent (/sb/0xcc41a21ab3f272db324182e6a71f25a2f3041be3.sol#475-476)
+Reentrancy in MintingPool.mintPositionTokens (/sb/0xcc41a21ab3f272db324182e6a71f25a2f3041be3.sol#458-509):
+	External calls:
+	- neededCollateral = calculateTotalCollateral(marketContract,qtyToMint) (/sb/0xcc41a21ab3f272db324182e6a71f25a2f3041be3.sol#467-469)
+	- IERC20(marketContract.COLLATERAL_TOKEN_ADDRESS()).safeTransferFrom(msg.sender,address(this),neededCollateral) (/sb/0xcc41a21ab3f272db324182e6a71f25a2f3041be3.sol#469-472)
+	- neededMakretToken = calculateMarketTokenFee(marketContract,qtyToMint) (/sb/0xcc41a21ab3f272db324182e6a71f25a2f3041be3.sol#476-478)
+	- marketContractPool = IMarketContractPool(marketContract.COLLATERAL_POOL_ADDRESS()) (/sb/0xcc41a21ab3f272db324182e6a71f25a2f3041be3.sol#478-482)
+	- useMarketToken = hasEnoughBalance(marketContractPool.mktToken(),neededMakretToken) (/sb/0xcc41a21ab3f272db324182e6a71f25a2f3041be3.sol#482-490)
+	- marketContractPool.mintPositionTokens(marketContractAddress,qtyToMint,useMarketToken) (/sb/0xcc41a21ab3f272db324182e6a71f25a2f3041be3.sol#493-495)
+	State variables written after the call(s):
+	- minted (/sb/0xcc41a21ab3f272db324182e6a71f25a2f3041be3.sol#496-500)
+Reentrancy in MintingPool.redeemPositionTokens (/sb/0xcc41a21ab3f272db324182e6a71f25a2f3041be3.sol#509-557):
+	External calls:
+	- IERC20(marketContract.LONG_POSITION_TOKEN()).safeTransferFrom(msg.sender,address(this),qtyToRedeem) (/sb/0xcc41a21ab3f272db324182e6a71f25a2f3041be3.sol#518-520)
+	- IERC20(marketContract.SHORT_POSITION_TOKEN()).safeTransferFrom(msg.sender,address(this),qtyToRedeem) (/sb/0xcc41a21ab3f272db324182e6a71f25a2f3041be3.sol#520-523)
+	- collateralToReturn = calculateCollateralToReturn(marketContract,qtyToRedeem) (/sb/0xcc41a21ab3f272db324182e6a71f25a2f3041be3.sol#523-525)
+	- hasEnoughBalance(marketContract.COLLATERAL_TOKEN_ADDRESS(),collateralToReturn) (/sb/0xcc41a21ab3f272db324182e6a71f25a2f3041be3.sol#525-551)
+	State variables written after the call(s):
+	- received (/sb/0xcc41a21ab3f272db324182e6a71f25a2f3041be3.sol#528-532)
+Reentrancy in MintingPool.redeemPositionTokens (/sb/0xcc41a21ab3f272db324182e6a71f25a2f3041be3.sol#509-557):
+	External calls:
+	- IERC20(marketContract.LONG_POSITION_TOKEN()).safeTransferFrom(msg.sender,address(this),qtyToRedeem) (/sb/0xcc41a21ab3f272db324182e6a71f25a2f3041be3.sol#518-520)
+	- IERC20(marketContract.SHORT_POSITION_TOKEN()).safeTransferFrom(msg.sender,address(this),qtyToRedeem) (/sb/0xcc41a21ab3f272db324182e6a71f25a2f3041be3.sol#520-523)
+	- collateralToReturn = calculateCollateralToReturn(marketContract,qtyToRedeem) (/sb/0xcc41a21ab3f272db324182e6a71f25a2f3041be3.sol#523-525)
+	- marketContractPool = IMarketContractPool(marketContract.COLLATERAL_POOL_ADDRESS()) (/sb/0xcc41a21ab3f272db324182e6a71f25a2f3041be3.sol#532-541)
+	- marketContractPool.redeemPositionTokens(marketContractAddress,qtyToRedeem) (/sb/0xcc41a21ab3f272db324182e6a71f25a2f3041be3.sol#542-544)
+	State variables written after the call(s):
+	- redeemed (/sb/0xcc41a21ab3f272db324182e6a71f25a2f3041be3.sol#544-551)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Address.isContract uses assembly (/sb/0xcc41a21ab3f272db324182e6a71f25a2f3041be3.sol#285-291)
+	- /sb/0xcc41a21ab3f272db324182e6a71f25a2f3041be3.sol#288
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+LibOwnable.owner (/sb/0xcc41a21ab3f272db324182e6a71f25a2f3041be3.sol#23-28) should be declared external
+LibOwnable.renounceOwnership (/sb/0xcc41a21ab3f272db324182e6a71f25a2f3041be3.sol#42-49) should be declared external
+LibOwnable.transferOwnership (/sb/0xcc41a21ab3f272db324182e6a71f25a2f3041be3.sol#49-57) should be declared external
+MintingPool.approveERC20 (/sb/0xcc41a21ab3f272db324182e6a71f25a2f3041be3.sol#395-401) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Low level call in SafeERC20.callOptionalReturn (/sb/0xcc41a21ab3f272db324182e6a71f25a2f3041be3.sol#330-350):
+	-(success,returndata) = address(token).call(data) /sb/0xcc41a21ab3f272db324182e6a71f25a2f3041be3.sol#339-342
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Function 'IMarketContract.CONTRACT_NAME' (/sb/0xcc41a21ab3f272db324182e6a71f25a2f3041be3.sol#116-120) is not in mixedCase
+Function 'IMarketContract.COLLATERAL_TOKEN_ADDRESS' (/sb/0xcc41a21ab3f272db324182e6a71f25a2f3041be3.sol#120-124) is not in mixedCase
+Function 'IMarketContract.COLLATERAL_POOL_ADDRESS' (/sb/0xcc41a21ab3f272db324182e6a71f25a2f3041be3.sol#125-129) is not in mixedCase
+Function 'IMarketContract.PRICE_CAP' (/sb/0xcc41a21ab3f272db324182e6a71f25a2f3041be3.sol#130-133) is not in mixedCase
+Function 'IMarketContract.PRICE_FLOOR' (/sb/0xcc41a21ab3f272db324182e6a71f25a2f3041be3.sol#133-137) is not in mixedCase
+Function 'IMarketContract.PRICE_DECIMAL_PLACES' (/sb/0xcc41a21ab3f272db324182e6a71f25a2f3041be3.sol#137-141) is not in mixedCase
+Function 'IMarketContract.QTY_MULTIPLIER' (/sb/0xcc41a21ab3f272db324182e6a71f25a2f3041be3.sol#142-145) is not in mixedCase
+Function 'IMarketContract.COLLATERAL_PER_UNIT' (/sb/0xcc41a21ab3f272db324182e6a71f25a2f3041be3.sol#145-149) is not in mixedCase
+Function 'IMarketContract.COLLATERAL_TOKEN_FEE_PER_UNIT' (/sb/0xcc41a21ab3f272db324182e6a71f25a2f3041be3.sol#149-154) is not in mixedCase
+Function 'IMarketContract.MKT_TOKEN_FEE_PER_UNIT' (/sb/0xcc41a21ab3f272db324182e6a71f25a2f3041be3.sol#155-159) is not in mixedCase
+Function 'IMarketContract.EXPIRATION' (/sb/0xcc41a21ab3f272db324182e6a71f25a2f3041be3.sol#159-163) is not in mixedCase
+Function 'IMarketContract.SETTLEMENT_DELAY' (/sb/0xcc41a21ab3f272db324182e6a71f25a2f3041be3.sol#163-166) is not in mixedCase
+Function 'IMarketContract.LONG_POSITION_TOKEN' (/sb/0xcc41a21ab3f272db324182e6a71f25a2f3041be3.sol#167-173) is not in mixedCase
+Function 'IMarketContract.SHORT_POSITION_TOKEN' (/sb/0xcc41a21ab3f272db324182e6a71f25a2f3041be3.sol#173-177) is not in mixedCase
+Parameter '' of MintingPool.mintPositionTokens (/sb/0xcc41a21ab3f272db324182e6a71f25a2f3041be3.sol#462) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xcc41a21ab3f272db324182e6a71f25a2f3041be3.sol analyzed (9 contracts), 26 result(s) found

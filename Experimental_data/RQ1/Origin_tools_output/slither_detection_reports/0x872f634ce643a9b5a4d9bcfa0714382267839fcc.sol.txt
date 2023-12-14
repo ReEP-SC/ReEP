@@ -1,0 +1,270 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol:
+/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol:98:29: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+        bytes32 ifaceHash = keccak256(ifaceLabel);
+                            ^-------------------^
+/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol:98:29: Warning: The provided argument of type string memory is not implicitly convertible to expected type bytes memory.
+        bytes32 ifaceHash = keccak256(ifaceLabel);
+                            ^-------------------^
+/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol:103:29: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+        bytes32 ifaceHash = keccak256(ifaceLabel);
+                            ^-------------------^
+/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol:103:29: Warning: The provided argument of type string memory is not implicitly convertible to expected type bytes memory.
+        bytes32 ifaceHash = keccak256(ifaceLabel);
+                            ^-------------------^
+/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol:169:42: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+        bytes32 hash = keccak256(prefix, keccak256(_to, _amount, _userData, _nonce));
+                                         ^----------------------------------------^
+/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol:169:24: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+        bytes32 hash = keccak256(prefix, keccak256(_to, _amount, _userData, _nonce));
+                       ^-----------------------------------------------------------^
+/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol:622:42: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+        bytes32 hash = keccak256(prefix, keccak256(_timeStamp, _bonus));
+                                         ^---------------------------^
+/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol:622:24: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+        bytes32 hash = keccak256(prefix, keccak256(_timeStamp, _bonus));
+                       ^----------------------------------------------^
+
+INFO:Detectors:[93m
+JaroCoinToken.isRegularAddress (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#232-239) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+PersonalTime (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#494-565) has incorrect ERC20 function interface(s):
+	-transfer (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#546-553)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[93m
+Contract locking ether found in /sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol:
+	Contract JaroSleep has payable functions:
+	 - fallback (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#471-477)
+	But does not have a function to withdraw the ether
+Contract locking ether found in /sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol:
+	Contract PersonalTime has payable functions:
+	 - fallback (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#523-524)
+	But does not have a function to withdraw the ether
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#contracts-that-lock-ether[0m
+INFO:Detectors:[93m
+Reentrancy in JaroCoinCrowdsale.appendContribution (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#675-687):
+	External calls:
+	- mint(_beneficiary,tokensToMint) (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#679-680)
+	State variables written after the call(s):
+	- tokensToMint (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#680)
+Reentrancy in JaroCoinToken.burn (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#436-450):
+	External calls:
+	- callSender(msg.sender,msg.sender,0x0,_amount,_userData,) (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#444)
+	State variables written after the call(s):
+	- balanceOf (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#445-448)
+Reentrancy in JaroSleep.burnTokens (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#477-488):
+	External calls:
+	- token.burn(tokensToBurn,) (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#484)
+	State variables written after the call(s):
+	- lastBurn (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#484-488)
+Reentrancy in PersonalTime.burnTokens (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#524-546):
+	External calls:
+	- token.burn(tokensToBurn.sub(protect),) (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#544-545)
+	State variables written after the call(s):
+	- lastBurn (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#545)
+	- protect (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#545)
+Reentrancy in JaroCoinCrowdsale.initialize (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#605-625):
+	External calls:
+	- familyContract.transferOwnership(_familyOwner) (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#620)
+	- personalContract.transferOwnership(_personalOwner) (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#621)
+	State variables written after the call(s):
+	- initialized (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#624-625)
+Reentrancy in JaroCoinCrowdsale.startSale (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#690-728):
+	External calls:
+	- sleepContract.burnTokens() (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#694-696)
+	- sleepTokens = token.balanceOf(address(sleepContract)) (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#696-697)
+	- familyContract.burnTokens() (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#697-698)
+	- familyTokens = token.balanceOf(familyContract).add(familyContract.debt()) (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#698-700)
+	- personalContract.burnTokens() (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#700-701)
+	- personalTokens = token.balanceOf(personalContract).add(personalContract.debt()) (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#701-706)
+	- mint(address(sleepContract),missingSleep) (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#718-721)
+	- mint(address(familyContract),missingFamily) (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#721-722)
+	- mint(address(personalContract),missingPersonal) (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#722)
+	- tokensToMint = MAX_AMOUNT.sub(token.totalSupply()) (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#723-724)
+	State variables written after the call(s):
+	- isActive (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#725-726)
+	- saleStartTime (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#724-725)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+PersonalTime.transfer (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#546-553) does not use the value returned by external calls:
+	-token.transfer(_to,_amount) (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#550-553)
+JaroCoinCrowdsale.startSale (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#690-728) does not use the value returned by external calls:
+	-sleepContract.burnTokens() (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#694-696)
+	-familyContract.burnTokens() (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#697-698)
+	-personalContract.burnTokens() (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#700-701)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in JaroCoinCrowdsale._buyTokens (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#645-675):
+	External calls:
+	- excess = appendContribution(_beneficiary,tokens) (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#659-660)
+	State variables written after the call(s):
+	- satoshiRaised (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#663)
+Reentrancy in JaroCoinCrowdsale.appendContribution (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#675-687):
+	External calls:
+	- mint(_beneficiary,tokensToMint) (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#679-680)
+	State variables written after the call(s):
+	- isActive (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#680)
+Reentrancy in JaroCoinToken.burn (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#436-450):
+	External calls:
+	- callSender(msg.sender,msg.sender,0x0,_amount,_userData,) (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#444)
+	State variables written after the call(s):
+	- totalSupply (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#445)
+Reentrancy in JaroSleep.constructor (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#464-470):
+	External calls:
+	- setInterfaceImplementation(ERC777TokensRecipient,this) (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#466-468)
+	State variables written after the call(s):
+	- dailyTime (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#470)
+	- lastBurn (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#469)
+	- token (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#468-469)
+Reentrancy in PersonalTime.constructor (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#515-521):
+	External calls:
+	- setInterfaceImplementation(ERC777TokensRecipient,this) (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#517-518)
+	State variables written after the call(s):
+	- dailyTime (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#521)
+	- lastBurn (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#520)
+	- token (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#518-520)
+Reentrancy in JaroCoinToken.doSend (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#318-340):
+	External calls:
+	- callSender(_operator,_from,_to,_amount,_userData,_operatorData) (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#324-326)
+	State variables written after the call(s):
+	- balanceOf (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#329-332)
+	- balanceOf (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#334-335)
+Reentrancy in JaroCoinCrowdsale.initialize (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#605-625):
+	External calls:
+	- familyContract.transferOwnership(_familyOwner) (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#620)
+	- personalContract.transferOwnership(_personalOwner) (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#621)
+	State variables written after the call(s):
+	- conversionRate (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#622)
+	- owner (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#624)
+	- rate (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#622)
+	- satoshiRaised (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#622-624)
+Reentrancy in JaroCoinCrowdsale.startSale (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#690-728):
+	External calls:
+	- sleepContract.burnTokens() (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#694-696)
+	- sleepTokens = token.balanceOf(address(sleepContract)) (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#696-697)
+	- familyContract.burnTokens() (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#697-698)
+	- familyTokens = token.balanceOf(familyContract).add(familyContract.debt()) (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#698-700)
+	- personalContract.burnTokens() (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#700-701)
+	- personalTokens = token.balanceOf(personalContract).add(personalContract.debt()) (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#701-706)
+	- mint(address(sleepContract),missingSleep) (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#718-721)
+	- mint(address(familyContract),missingFamily) (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#721-722)
+	- mint(address(personalContract),missingPersonal) (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#722)
+	- tokensToMint = MAX_AMOUNT.sub(token.totalSupply()) (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#723-724)
+	State variables written after the call(s):
+	- tokensToMint (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#723-724)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+JaroCoinToken.isRegularAddress uses assembly (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#232-239)
+	- /sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#237-239
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#81-88) should be declared external
+ERC820Registry.getManager (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#89-90) should be declared external
+ERC820Registry.setManager (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#90) should be declared external
+ERC820Registry.getInterfaceImplementer (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#90-91) should be declared external
+ERC820Registry.setInterfaceImplementer (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#91-95) should be declared external
+JaroCoinToken.send (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#157-160) should be declared external
+JaroCoinToken.sendByCheque (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#165-185) should be declared external
+JaroCoinToken.authorizeOperator (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#188-195) should be declared external
+JaroCoinToken.revokeOperator (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#198-204) should be declared external
+JaroCoinToken.operatorSend (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#211-219) should be declared external
+JaroCoinToken.transfer (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#346-348) should be declared external
+JaroCoinToken.transferFrom (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#359-363) should be declared external
+JaroCoinToken.allowance (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#377-379) should be declared external
+JaroCoinToken.approve (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#392-409) should be declared external
+JaroCoinToken.mint (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#417-431) should be declared external
+JaroCoinToken.burn (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#436-450) should be declared external
+JaroSleep.burnTokens (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#477-488) should be declared external
+PersonalTime.burnTokens (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#524-546) should be declared external
+PersonalTime.transfer (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#546-553) should be declared external
+JaroCoinCrowdsale.initialize (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#605-625) should be declared external
+JaroCoinCrowdsale.buyTokens (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#643-645) should be declared external
+JaroCoinCrowdsale.startSale (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#690-728) should be declared external
+JaroCoinCrowdsale.closeSale (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#734-735) should be declared external
+JaroCoinCrowdsale.setExchangeRateOracle (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#735-739) should be declared external
+JaroCoinCrowdsale.setExchangeRate (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#739-747) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_to' of JaroCoinToken.send (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#158) is not in mixedCase
+Parameter '_amount' of JaroCoinToken.send (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#158) is not in mixedCase
+Parameter '_userData' of JaroCoinToken.send (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#158) is not in mixedCase
+Parameter '_to' of JaroCoinToken.sendByCheque (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#167) is not in mixedCase
+Parameter '_amount' of JaroCoinToken.sendByCheque (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#167) is not in mixedCase
+Parameter '_userData' of JaroCoinToken.sendByCheque (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#167) is not in mixedCase
+Parameter '_nonce' of JaroCoinToken.sendByCheque (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#167) is not in mixedCase
+Parameter '_operator' of JaroCoinToken.authorizeOperator (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#189-192) is not in mixedCase
+Parameter '_operator' of JaroCoinToken.revokeOperator (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#202) is not in mixedCase
+Parameter '_from' of JaroCoinToken.operatorSend (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#211) is not in mixedCase
+Parameter '_to' of JaroCoinToken.operatorSend (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#211-214) is not in mixedCase
+Parameter '_amount' of JaroCoinToken.operatorSend (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#214) is not in mixedCase
+Parameter '_userData' of JaroCoinToken.operatorSend (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#214-215) is not in mixedCase
+Parameter '_operatorData' of JaroCoinToken.operatorSend (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#215-216) is not in mixedCase
+Parameter '_amount' of JaroCoinToken.requireMultiple (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#225) is not in mixedCase
+Parameter '_addr' of JaroCoinToken.isRegularAddress (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#233-235) is not in mixedCase
+Parameter '_operator' of JaroCoinToken.callSender (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#256) is not in mixedCase
+Parameter '_from' of JaroCoinToken.callSender (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#256-257) is not in mixedCase
+Parameter '_to' of JaroCoinToken.callSender (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#257) is not in mixedCase
+Parameter '_amount' of JaroCoinToken.callSender (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#257) is not in mixedCase
+Parameter '_userData' of JaroCoinToken.callSender (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#257-258) is not in mixedCase
+Parameter '_operatorData' of JaroCoinToken.callSender (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#258) is not in mixedCase
+Parameter '_operator' of JaroCoinToken.callRecipient (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#285) is not in mixedCase
+Parameter '_from' of JaroCoinToken.callRecipient (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#285) is not in mixedCase
+Parameter '_to' of JaroCoinToken.callRecipient (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#286) is not in mixedCase
+Parameter '_amount' of JaroCoinToken.callRecipient (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#286) is not in mixedCase
+Parameter '_userData' of JaroCoinToken.callRecipient (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#286) is not in mixedCase
+Parameter '_operatorData' of JaroCoinToken.callRecipient (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#287) is not in mixedCase
+Parameter '_preventLocking' of JaroCoinToken.callRecipient (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#287) is not in mixedCase
+Parameter '_from' of JaroCoinToken.doSend (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#318-320) is not in mixedCase
+Parameter '_to' of JaroCoinToken.doSend (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#320) is not in mixedCase
+Parameter '_amount' of JaroCoinToken.doSend (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#320) is not in mixedCase
+Parameter '_userData' of JaroCoinToken.doSend (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#320) is not in mixedCase
+Parameter '_operator' of JaroCoinToken.doSend (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#321) is not in mixedCase
+Parameter '_operatorData' of JaroCoinToken.doSend (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#321) is not in mixedCase
+Parameter '_preventLocking' of JaroCoinToken.doSend (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#321-323) is not in mixedCase
+Parameter '_to' of JaroCoinToken.transfer (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#346) is not in mixedCase
+Parameter '_value' of JaroCoinToken.transfer (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#346-347) is not in mixedCase
+Parameter '_from' of JaroCoinToken.transferFrom (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#359) is not in mixedCase
+Parameter '_to' of JaroCoinToken.transferFrom (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#359-360) is not in mixedCase
+Parameter '_value' of JaroCoinToken.transferFrom (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#360-361) is not in mixedCase
+Parameter '_owner' of JaroCoinToken.allowance (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#377) is not in mixedCase
+Parameter '_spender' of JaroCoinToken.allowance (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#377) is not in mixedCase
+Parameter '_spender' of JaroCoinToken.approve (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#392-393) is not in mixedCase
+Parameter '_value' of JaroCoinToken.approve (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#393) is not in mixedCase
+Parameter '_to' of JaroCoinToken.mint (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#418) is not in mixedCase
+Parameter '_amount' of JaroCoinToken.mint (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#418) is not in mixedCase
+Parameter '_operatorData' of JaroCoinToken.mint (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#418-421) is not in mixedCase
+Parameter '_amount' of JaroCoinToken.burn (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#437) is not in mixedCase
+Parameter '_userData' of JaroCoinToken.burn (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#437) is not in mixedCase
+Constant 'JaroCoinToken.granularity' (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#129-130) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'JaroCoinToken.maxSupply' (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#148) is not in UPPER_CASE_WITH_UNDERSCORES
+Parameter '_token' of JaroSleep. (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#464-466) is not in mixedCase
+Parameter '_dailyTime' of JaroSleep. (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#466) is not in mixedCase
+Parameter '_token' of PersonalTime. (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#515) is not in mixedCase
+Parameter '_dailyTime' of PersonalTime. (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#515-516) is not in mixedCase
+Parameter '_to' of PersonalTime.transfer (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#547) is not in mixedCase
+Parameter '_amount' of PersonalTime.transfer (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#547) is not in mixedCase
+Parameter '_owner' of JaroCoinCrowdsale.initialize (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#605-606) is not in mixedCase
+Parameter '_token' of JaroCoinCrowdsale.initialize (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#606-608) is not in mixedCase
+Parameter '_familyOwner' of JaroCoinCrowdsale.initialize (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#608) is not in mixedCase
+Parameter '_personalOwner' of JaroCoinCrowdsale.initialize (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#608-609) is not in mixedCase
+Parameter '_timeStamp' of JaroCoinCrowdsale.coupon (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#631-633) is not in mixedCase
+Parameter '_bonus' of JaroCoinCrowdsale.coupon (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#634) is not in mixedCase
+Parameter '_beneficiary' of JaroCoinCrowdsale.buyTokens (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#644) is not in mixedCase
+Function 'JaroCoinCrowdsale._buyTokens' (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#645-675) is not in mixedCase
+Parameter '_beneficiary' of JaroCoinCrowdsale._buyTokens (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#645-646) is not in mixedCase
+Parameter '_value' of JaroCoinCrowdsale._buyTokens (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#646) is not in mixedCase
+Parameter '_bonus' of JaroCoinCrowdsale._buyTokens (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#646) is not in mixedCase
+Parameter '_beneficiary' of JaroCoinCrowdsale.appendContribution (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#677) is not in mixedCase
+Parameter '_tokens' of JaroCoinCrowdsale.appendContribution (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#677) is not in mixedCase
+Parameter '_startTime' of JaroCoinCrowdsale.startSale (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#692) is not in mixedCase
+Function 'JaroCoinCrowdsale._closeSale' (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#728-734) is not in mixedCase
+Parameter '_exchangeRateOracle' of JaroCoinCrowdsale.setExchangeRateOracle (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#735-736) is not in mixedCase
+Parameter '_exchangeRate' of JaroCoinCrowdsale.setExchangeRate (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol#740) is not in mixedCase
+Parameter '_beneficiary' of JaroCoinCrowdsale.mint (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol) is not in mixedCase
+Parameter '_amount' of JaroCoinCrowdsale.mint (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol) is not in mixedCase
+Parameter '_token' of JaroCoinCrowdsale.createJaroSleep (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol) is not in mixedCase
+Parameter '_dailyTime' of JaroCoinCrowdsale.createJaroSleep (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol) is not in mixedCase
+Parameter '_token' of JaroCoinCrowdsale.createPersonalTime (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol) is not in mixedCase
+Parameter '_dailyTime' of JaroCoinCrowdsale.createPersonalTime (/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x872f634ce643a9b5a4d9bcfa0714382267839fcc.sol analyzed (10 contracts), 127 result(s) found

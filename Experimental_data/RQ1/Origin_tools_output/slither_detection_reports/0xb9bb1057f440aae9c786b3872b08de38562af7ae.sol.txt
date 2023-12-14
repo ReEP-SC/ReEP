@@ -1,0 +1,210 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol:
+/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol:849:28: Warning: This declaration shadows an existing declaration.
+    function getAuthorizer(uint authorizerIndex) external view returns(address) {
+                           ^------------------^
+/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol:801:5: The shadowed declaration is here:
+    mapping(address => uint) authorizerIndex;
+    ^--------------------------------------^
+
+/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol:1901:9: Warning: This declaration shadows an existing declaration.
+        ERC20 token = ERC20(_token);
+        ^---------^
+/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol:1651:5: The shadowed declaration is here:
+    CBCToken public token = new CBCToken();
+    ^------------------------------------^
+
+
+INFO:Detectors:[93m
+ERC20Basic (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1221-1233) has incorrect ERC20 function interface(s):
+	-transfer (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1229)
+ERC20 (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1243-1271) has incorrect ERC20 function interface(s):
+	-transferFrom (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1247-1249)
+	-approve (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1251)
+BasicToken (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1277-1331) has incorrect ERC20 function interface(s):
+	-transfer (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1301-1311)
+StandardToken (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1343-1469) has incorrect ERC20 function interface(s):
+	-transferFrom (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1357-1393)
+	-approve (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1400-1439)
+CBCToken (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1633) has incorrect ERC20 function interface(s):
+	-transfer (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1633)
+	-transferFrom (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1633)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[93m
+Bank.getWinners (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#489-553) uses a dangerous strict equality:
+	- randomNumber == 0
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Reentrancy in Bank.calculateProbability (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#389-487):
+	External calls:
+	- totalCBCSupplyOfBulls = CBCTokenContract.balanceOf(address(BullsContract)) (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#397-405)
+	- totalCBCSupplyOfBears = CBCTokenContract.balanceOf(address(BearsContract)) (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#405-407)
+	- totalCBCSupplyOfBulls = CBCTokenContract.balanceOf(address(BullsContract)) (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#479-481)
+	- totalCBCSupplyOfBears = CBCTokenContract.balanceOf(address(BearsContract)) (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#483-485)
+	State variables written after the call(s):
+	- totalCBCSupplyOfBears (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#483-485)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+MintableToken.totalSupply (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1501-1505) shadows:
+	- ERC20Basic.totalSupply (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1223-1225)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variable-shadowing-from-abstract-contracts[0m
+INFO:Detectors:[93m
+MainSale.createTokens (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1801-1829) does not use the value returned by external calls:
+	-token.mint(recipient,tokens) (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1817)
+MainSale.authorizedCreateTokens (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1863-1873) does not use the value returned by external calls:
+	-token.mint(recipient,tokens) (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1867)
+MainSale.finishMinting (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol) does not use the value returned by external calls:
+	-token.mint(multisigVault,restrictedTokens) (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol)
+	-token.finishMinting() (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Authorizable.getAuthorizer.authorizerIndex (local variable @ /sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#903) shadows:
+	- Authorizable.authorizerIndex (state variable @ /sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#859)
+MainSale.retrieveTokens.token (local variable @ /sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol) shadows:
+	- MainSale.token (state variable @ /sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1749)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+Reentrancy in Bank.calculateProbability (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#389-487):
+	External calls:
+	- totalCBCSupplyOfBulls = CBCTokenContract.balanceOf(address(BullsContract)) (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#397-405)
+	- totalCBCSupplyOfBears = CBCTokenContract.balanceOf(address(BearsContract)) (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#405-407)
+	State variables written after the call(s):
+	- probabilityOfBears (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#429-431)
+	- probabilityOfBears (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#431-435)
+	- probabilityOfBears (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#439-441)
+	- probabilityOfBears (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#475-477)
+	- probabilityOfBulls (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#443-446)
+	- probabilityOfBulls (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#453-455)
+	- probabilityOfBulls (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#463-467)
+	- probabilityOfBulls (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#473)
+	- totalCBCSupplyOfBears (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#405-407)
+	- totalCBCSupplyOfBears (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#417-419)
+	- totalCBCSupplyOfBulls (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#409-413)
+Reentrancy in Bears.constructor (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#81-103):
+	External calls:
+	- BankContract.setBearsAddress(address(this)) (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#87-89)
+	State variables written after the call(s):
+	- CBCTokenContract (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#89)
+Reentrancy in Bulls.constructor (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#107-127):
+	External calls:
+	- BankContract.setBullsAddress(address(this)) (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#113)
+	State variables written after the call(s):
+	- CBCTokenContract (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#113-123)
+Reentrancy in Bank.fallback (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#559-655):
+	External calls:
+	- CBCTokenContract.balanceOf(address(BullsContract)) > 0 (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#595-613)
+	- CBCTokenContract.transferFrom(address(BullsContract),address(this),CBCTokenContract.balanceOf(address(BullsContract))) (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#599-613)
+	- CBCTokenContract.transferFrom(address(BearsContract),address(this),CBCTokenContract.balanceOf(address(BearsContract))) (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#625-637)
+	- CBCTokenContract.transfer(msg.sender,payoutCBC) (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#639-641)
+	External calls sending eth:
+	- msg.sender.transfer(payout) (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#587)
+	State variables written after the call(s):
+	- lastHero (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#649)
+	- lastHeroHistory (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#647)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Bank.getState (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#299-307) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp > currentDeadline (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#303-307)
+Bank.setInfo (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#315-385) uses timestamp for comparisons
+	Dangerous comparisons:
+	- currentDeadline.add(120) <= lastDeadline (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#371-381)
+Bank.getWinners (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#489-553) uses timestamp for comparisons
+	Dangerous comparisons:
+	- probabilityOfBears < winningNumber && winningNumber <= 10000 (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#547-552)
+	- randomNumber == 0 (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#533-535)
+	- 1 <= winningNumber && winningNumber <= probabilityOfBears (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#541-547)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+Bank.finished should be constant (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#195-199)
+Bank.lastDeadline should be constant (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#163-165)
+CBCToken.decimals should be constant (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1633)
+CBCToken.name should be constant (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1633)
+CBCToken.symbol should be constant (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1633)
+CryptoTeam.teamAddressOne should be constant (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#27-29)
+CryptoTeam.teamAddressThree should be constant (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#31-35)
+CryptoTeam.teamAddressTwo should be constant (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#29-31)
+ERC20Basic.totalSupply should be constant (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1223-1225)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Bank.setCBCTokenAddress (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#227-233) should be declared external
+Bank.getNow (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#283-294) should be declared external
+Bank.setInfo (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#315-385) should be declared external
+Bank.getWinners (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#489-553) should be declared external
+Ownable.transferOwnership (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#791-807) should be declared external
+ExchangeRate.updateRate (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#985-1003) should be declared external
+ExchangeRate.updateRates (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1015-1043) should be declared external
+ExchangeRate.getRate (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1049-1055) should be declared external
+BasicToken.balanceOf (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1321-1331) should be declared external
+ERC20Basic.balanceOf (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1225-1229) should be declared external
+ERC20.allowance (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1243-1247) should be declared external
+StandardToken.allowance (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1461-1467) should be declared external
+StandardToken.approve (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1400-1439) should be declared external
+ERC20.approve (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1251) should be declared external
+MintableToken.mint (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1531) should be declared external
+MintableToken.finishMinting (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1531) should be declared external
+MintableToken.burn (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1531) should be declared external
+CBCToken.startTrading (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1633) should be declared external
+MainSale.setAltDeposit (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1837-1847) should be declared external
+MainSale.authorizedCreateTokens (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1863-1873) should be declared external
+MainSale.authorizedStartTrading (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1873-1877) should be declared external
+MainSale.authorizedBurnTokens (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1893-1899) should be declared external
+MainSale.setHardCap (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1903-1911) should be declared external
+MainSale.setStart (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1919-1925) should be declared external
+MainSale.setMultisigVault (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol) should be declared external
+MainSale.setExchangeRate (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol) should be declared external
+MainSale.finishMinting (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol) should be declared external
+MainSale.retrieveTokens (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol:
+	- pragma solidity0.5.1 (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#9-14): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Variable 'CryptoTeam.BankContract' (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#37) is not in mixedCase
+Variable 'CryptoTeam.CBCTokenContract' (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#40-43) is not in mixedCase
+Parameter '_bankAddress' of Bears. (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#83) is not in mixedCase
+Parameter '_CBCTokenAddress' of Bears. (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#83-85) is not in mixedCase
+Parameter '_bankAddress' of Bulls. (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#107-109) is not in mixedCase
+Parameter '_CBCTokenAddress' of Bulls. (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#109) is not in mixedCase
+Parameter '_CBCTokenAddress' of Bank.setCBCTokenAddress (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#227) is not in mixedCase
+Parameter '_bearsAddress' of Bank.setBearsAddress (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#245-247) is not in mixedCase
+Parameter '_bullsAddress' of Bank.setBullsAddress (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#267-269) is not in mixedCase
+Parameter '_lastHero' of Bank.setInfo (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#315) is not in mixedCase
+Parameter '_deposit' of Bank.setInfo (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#315-317) is not in mixedCase
+Variable 'Bank.BearsContract' (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#199-201) is not in mixedCase
+Variable 'Bank.BullsContract' (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#201) is not in mixedCase
+Variable 'Bank.CBCTokenContract' (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#201-209) is not in mixedCase
+Parameter '_addr' of Authorizable.isAuthorized (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#909) is not in mixedCase
+Parameter '_addr' of Authorizable.addAuthorized (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#909) is not in mixedCase
+Parameter '_symbol' of ExchangeRate.updateRate (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#985) is not in mixedCase
+Parameter '_rate' of ExchangeRate.updateRate (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#985-987) is not in mixedCase
+Parameter '_symbol' of ExchangeRate.getRate (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1049) is not in mixedCase
+Parameter '_owner' of BasicToken.balanceOf (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1321) is not in mixedCase
+Parameter '_to' of BasicToken.transfer (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1301-1302) is not in mixedCase
+Parameter '_value' of BasicToken.transfer (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1303-1305) is not in mixedCase
+Parameter '_owner' of StandardToken.allowance (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1461) is not in mixedCase
+Parameter '_spender' of StandardToken.allowance (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1461-1464) is not in mixedCase
+Parameter '_from' of StandardToken.transferFrom (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1357-1359) is not in mixedCase
+Parameter '_to' of StandardToken.transferFrom (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1360-1364) is not in mixedCase
+Parameter '_value' of StandardToken.transferFrom (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1365) is not in mixedCase
+Parameter '_spender' of StandardToken.approve (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1403) is not in mixedCase
+Parameter '_value' of StandardToken.approve (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1403) is not in mixedCase
+Parameter '_to' of MintableToken.mint (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1531) is not in mixedCase
+Parameter '_amount' of MintableToken.mint (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1531) is not in mixedCase
+Parameter '_who' of MintableToken.burn (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1531) is not in mixedCase
+Parameter '_value' of MintableToken.burn (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1531) is not in mixedCase
+Function 'MintableToken._burn' (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1531) is not in mixedCase
+Parameter '_who' of MintableToken._burn (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1531) is not in mixedCase
+Parameter '_value' of MintableToken._burn (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1531) is not in mixedCase
+Parameter '_to' of CBCToken.transfer (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1633) is not in mixedCase
+Parameter '_value' of CBCToken.transfer (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1633) is not in mixedCase
+Parameter '_from' of CBCToken.transferFrom (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1633) is not in mixedCase
+Parameter '_to' of CBCToken.transferFrom (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1633) is not in mixedCase
+Parameter '_value' of CBCToken.transferFrom (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1633) is not in mixedCase
+Parameter '_hardcap' of MainSale.setHardCap (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol#1909-1911) is not in mixedCase
+Parameter '_start' of MainSale.setStart (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol) is not in mixedCase
+Parameter '_multisigVault' of MainSale.setMultisigVault (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol) is not in mixedCase
+Parameter '_exchangeRate' of MainSale.setExchangeRate (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol) is not in mixedCase
+Parameter '_token' of MainSale.retrieveTokens (/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xb9bb1057f440aae9c786b3872b08de38562af7ae.sol analyzed (15 contracts), 96 result(s) found

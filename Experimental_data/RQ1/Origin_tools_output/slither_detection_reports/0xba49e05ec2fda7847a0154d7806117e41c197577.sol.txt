@@ -1,0 +1,82 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xba49e05ec2fda7847a0154d7806117e41c197577.sol:
+/sb/0xba49e05ec2fda7847a0154d7806117e41c197577.sol:355:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Transfer(_from, _to, _value);
+        ^--------------------------^
+/sb/0xba49e05ec2fda7847a0154d7806117e41c197577.sol:475:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Transfer(address(0x0), 0x1aD0fFbfefB51ca47fb22506e411F41834289cE3 , 810000000 * 10 ** uint256(decimals));
+        ^------------------------------------------------------------------------------------------------------^
+/sb/0xba49e05ec2fda7847a0154d7806117e41c197577.sol:489:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Transfer(address(0x0), advisorLockUp_address , 190000000 * 10 ** uint256(decimals));
+        ^---------------------------------------------------------------------------------^
+/sb/0xba49e05ec2fda7847a0154d7806117e41c197577.sol:541:5: Warning: Invoking events without "emit" prefix is deprecated.
+    Transfer(_from, _to, _value);
+    ^--------------------------^
+/sb/0xba49e05ec2fda7847a0154d7806117e41c197577.sol:573:5: Warning: Invoking events without "emit" prefix is deprecated.
+    Approval(msg.sender, _spender, _value);
+    ^------------------------------------^
+
+INFO:Detectors:[93m
+Contract locking ether found in /sb/0xba49e05ec2fda7847a0154d7806117e41c197577.sol:
+	Contract SpryOne has payable functions:
+	 - fallback (/sb/0xba49e05ec2fda7847a0154d7806117e41c197577.sol)
+	But does not have a function to withdraw the ether
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#contracts-that-lock-ether[0m
+INFO:Detectors:[92m
+Reentrancy in SpryOne.constructor (/sb/0xba49e05ec2fda7847a0154d7806117e41c197577.sol#471-525):
+	External calls:
+	- advisorLockUp_address.setToken(address(this)) (/sb/0xba49e05ec2fda7847a0154d7806117e41c197577.sol#515-517)
+	State variables written after the call(s):
+	- balances (/sb/0xba49e05ec2fda7847a0154d7806117e41c197577.sol#517-519)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+AdvisorLockUP.maxThreshold should be constant (/sb/0xba49e05ec2fda7847a0154d7806117e41c197577.sol#229)
+AdvisorLockUP.month should be constant (/sb/0xba49e05ec2fda7847a0154d7806117e41c197577.sol#221-225)
+AdvisorLockUP.total_amount should be constant (/sb/0xba49e05ec2fda7847a0154d7806117e41c197577.sol#233-235)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+BasicToken.totalSupply (/sb/0xba49e05ec2fda7847a0154d7806117e41c197577.sol#333-337) should be declared external
+ERC20Basic.totalSupply (/sb/0xba49e05ec2fda7847a0154d7806117e41c197577.sol#109-111) should be declared external
+BasicToken.balanceOf (/sb/0xba49e05ec2fda7847a0154d7806117e41c197577.sol#439-449) should be declared external
+ERC20Basic.balanceOf (/sb/0xba49e05ec2fda7847a0154d7806117e41c197577.sol#111-113) should be declared external
+BasicToken.transfer (/sb/0xba49e05ec2fda7847a0154d7806117e41c197577.sol#391-431) should be declared external
+ERC20Basic.transfer (/sb/0xba49e05ec2fda7847a0154d7806117e41c197577.sol#113-121) should be declared external
+SpryOne.allowance (/sb/0xba49e05ec2fda7847a0154d7806117e41c197577.sol) should be declared external
+ERC20.allowance (/sb/0xba49e05ec2fda7847a0154d7806117e41c197577.sol#131-133) should be declared external
+ERC20.transferFrom (/sb/0xba49e05ec2fda7847a0154d7806117e41c197577.sol#133-135) should be declared external
+SpryOne.transferFrom (/sb/0xba49e05ec2fda7847a0154d7806117e41c197577.sol#551-563) should be declared external
+SpryOne.approve (/sb/0xba49e05ec2fda7847a0154d7806117e41c197577.sol#593-615) should be declared external
+ERC20.approve (/sb/0xba49e05ec2fda7847a0154d7806117e41c197577.sol#135-145) should be declared external
+AdvisorLockUP.setToken (/sb/0xba49e05ec2fda7847a0154d7806117e41c197577.sol#259-271) should be declared external
+AdvisorLockUP.release (/sb/0xba49e05ec2fda7847a0154d7806117e41c197577.sol#279-315) should be declared external
+SpryOne.changeOwner (/sb/0xba49e05ec2fda7847a0154d7806117e41c197577.sol#529-535) should be declared external
+SpryOne.fallback (/sb/0xba49e05ec2fda7847a0154d7806117e41c197577.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xba49e05ec2fda7847a0154d7806117e41c197577.sol:
+	- pragma solidity0.4.23 (/sb/0xba49e05ec2fda7847a0154d7806117e41c197577.sol#9-14): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_token' of AdvisorLockUP.setToken (/sb/0xba49e05ec2fda7847a0154d7806117e41c197577.sol#261) is not in mixedCase
+Variable 'AdvisorLockUP.total_amount' (/sb/0xba49e05ec2fda7847a0154d7806117e41c197577.sol#233-235) is not in mixedCase
+Variable 'AdvisorLockUP.twenty_percent_of_amount' (/sb/0xba49e05ec2fda7847a0154d7806117e41c197577.sol#235-243) is not in mixedCase
+Variable 'AdvisorLockUP.current_month' (/sb/0xba49e05ec2fda7847a0154d7806117e41c197577.sol#243-245) is not in mixedCase
+Variable 'AdvisorLockUP.token_set' (/sb/0xba49e05ec2fda7847a0154d7806117e41c197577.sol#245-247) is not in mixedCase
+Parameter '_owner' of BasicToken.balanceOf (/sb/0xba49e05ec2fda7847a0154d7806117e41c197577.sol#439-443) is not in mixedCase
+Parameter '_to' of BasicToken.transfer (/sb/0xba49e05ec2fda7847a0154d7806117e41c197577.sol#392-393) is not in mixedCase
+Parameter '_value' of BasicToken.transfer (/sb/0xba49e05ec2fda7847a0154d7806117e41c197577.sol#393) is not in mixedCase
+Function 'BasicToken._transfer' (/sb/0xba49e05ec2fda7847a0154d7806117e41c197577.sol#341-383) is not in mixedCase
+Parameter '_from' of BasicToken._transfer (/sb/0xba49e05ec2fda7847a0154d7806117e41c197577.sol#343) is not in mixedCase
+Parameter '_to' of BasicToken._transfer (/sb/0xba49e05ec2fda7847a0154d7806117e41c197577.sol#343) is not in mixedCase
+Parameter '_value' of BasicToken._transfer (/sb/0xba49e05ec2fda7847a0154d7806117e41c197577.sol#343) is not in mixedCase
+Parameter '_owner' of SpryOne.allowance (/sb/0xba49e05ec2fda7847a0154d7806117e41c197577.sol) is not in mixedCase
+Parameter '_spender' of SpryOne.allowance (/sb/0xba49e05ec2fda7847a0154d7806117e41c197577.sol) is not in mixedCase
+Parameter '_from' of SpryOne.transferFrom (/sb/0xba49e05ec2fda7847a0154d7806117e41c197577.sol#551) is not in mixedCase
+Parameter '_to' of SpryOne.transferFrom (/sb/0xba49e05ec2fda7847a0154d7806117e41c197577.sol#551-555) is not in mixedCase
+Parameter '_value' of SpryOne.transferFrom (/sb/0xba49e05ec2fda7847a0154d7806117e41c197577.sol#555) is not in mixedCase
+Parameter '_spender' of SpryOne.approve (/sb/0xba49e05ec2fda7847a0154d7806117e41c197577.sol#593-595) is not in mixedCase
+Parameter '_value' of SpryOne.approve (/sb/0xba49e05ec2fda7847a0154d7806117e41c197577.sol#595) is not in mixedCase
+Parameter 'advisor_address' of SpryOne. (/sb/0xba49e05ec2fda7847a0154d7806117e41c197577.sol#471) is not in mixedCase
+Parameter '_newOwner' of SpryOne.changeOwner (/sb/0xba49e05ec2fda7847a0154d7806117e41c197577.sol#529-531) is not in mixedCase
+Variable 'SpryOne.advisorLockUp_address' (/sb/0xba49e05ec2fda7847a0154d7806117e41c197577.sol#465-467) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xba49e05ec2fda7847a0154d7806117e41c197577.sol analyzed (7 contracts), 42 result(s) found

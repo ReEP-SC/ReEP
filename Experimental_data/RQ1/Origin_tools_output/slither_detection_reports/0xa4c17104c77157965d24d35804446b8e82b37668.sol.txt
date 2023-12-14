@@ -1,0 +1,33 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xa4c17104c77157965d24d35804446b8e82b37668.sol:
+/sb/0xa4c17104c77157965d24d35804446b8e82b37668.sol:50:3: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+  function TokenTimelock(ERC20Basic _token, address _beneficiary, uint256 _releaseTime) public {
+  ^ (Relevant source part starts here and spans across multiple lines).
+
+INFO:Detectors:[92m
+TokenTimelock.TokenTimelock (/sb/0xa4c17104c77157965d24d35804446b8e82b37668.sol#50-59) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool)(_releaseTime > block.timestamp) (/sb/0xa4c17104c77157965d24d35804446b8e82b37668.sol#53-54)
+TokenTimelock.release (/sb/0xa4c17104c77157965d24d35804446b8e82b37668.sol#62-70) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool)(block.timestamp >= releaseTime) (/sb/0xa4c17104c77157965d24d35804446b8e82b37668.sol#65-66)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+ERC20Basic.totalSupply (/sb/0xa4c17104c77157965d24d35804446b8e82b37668.sol#4-5) should be declared external
+ERC20Basic.balanceOf (/sb/0xa4c17104c77157965d24d35804446b8e82b37668.sol#5-6) should be declared external
+ERC20Basic.transfer (/sb/0xa4c17104c77157965d24d35804446b8e82b37668.sol#6-7) should be declared external
+ERC20.allowance (/sb/0xa4c17104c77157965d24d35804446b8e82b37668.sol#11-12) should be declared external
+ERC20.transferFrom (/sb/0xa4c17104c77157965d24d35804446b8e82b37668.sol#12-13) should be declared external
+ERC20.approve (/sb/0xa4c17104c77157965d24d35804446b8e82b37668.sol#13-14) should be declared external
+TokenTimelock.release (/sb/0xa4c17104c77157965d24d35804446b8e82b37668.sol#62-70) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xa4c17104c77157965d24d35804446b8e82b37668.sol:
+	- pragma solidity^0.4.13 (/sb/0xa4c17104c77157965d24d35804446b8e82b37668.sol#1): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'TokenTimelock.TokenTimelock' (/sb/0xa4c17104c77157965d24d35804446b8e82b37668.sol#50-59) is not in mixedCase
+Parameter '_token' of TokenTimelock.TokenTimelock (/sb/0xa4c17104c77157965d24d35804446b8e82b37668.sol#50) is not in mixedCase
+Parameter '_beneficiary' of TokenTimelock.TokenTimelock (/sb/0xa4c17104c77157965d24d35804446b8e82b37668.sol#50-51) is not in mixedCase
+Parameter '_releaseTime' of TokenTimelock.TokenTimelock (/sb/0xa4c17104c77157965d24d35804446b8e82b37668.sol#51) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xa4c17104c77157965d24d35804446b8e82b37668.sol analyzed (4 contracts), 14 result(s) found

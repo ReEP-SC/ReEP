@@ -1,0 +1,240 @@
+INFO:Detectors:[91m
+LockingEth4Reputation.release (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2595-2613) sends eth to arbitrary user
+	Dangerous calls:
+	- _beneficiary.transfer(amount) (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2607-2609)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[91m
+Reputation.balances (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#241-249) is never initialized. It is used in:
+	- balanceOfAt (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#301-320)
+	- mint (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#353-377)
+	- burn (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#389-415)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-state-variables[0m
+INFO:Detectors:[93m
+Address.isContract (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1281-1307) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+claimingContract in DxDaoClaimRedeemHelper.claimAll (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol) is a local variable never initialiazed
+redeemingContract in DxDaoClaimRedeemHelper.redeemAll (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[92m
+Reputation.balanceOf._owner (local variable @ /sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#287) shadows:
+	- Ownable._owner (state variable @ /sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#33)
+Reputation.balanceOfAt._owner (local variable @ /sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#303-305) shadows:
+	- Ownable._owner (state variable @ /sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#33)
+Auction4Reputation.redeem.bid (local variable @ /sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#3269-3275) shadows:
+	- Auction4Reputation.bid (function @ /sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#3331-3393)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+DxDaoClaimRedeemHelper.claimAll has external calls inside a loop:
+	- returnArray[i] = claimingContract.claim(userAddresses[i]) (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol)
+DxDaoClaimRedeemHelper.redeemAll has external calls inside a loop:
+	- returnArray[i] = redeemingContract.redeem(userAddresses[i]) (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol)
+DxDaoClaimRedeemHelper.redeemAllGAR has external calls inside a loop:
+	- returnArray[i] = dxGAR.redeem(userAddresses[i],auctionIndices[i]) (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in ExternalLocking4Reputation.claim (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2775-2843):
+	External calls:
+	- (result,returnValue) = externalLockingContract.call(abi.encodeWithSignature(getBalanceFuncSignature,beneficiary)) (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2801-2821)
+	State variables written after the call(s):
+	- lockers (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2841-2843)
+	- lockingsCounter (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2841-2843)
+	- scores (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2841-2843)
+	- totalLocked (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2841-2843)
+	- totalLockedLeft (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2841-2843)
+	- totalScore (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2841-2843)
+Reentrancy in LockingToken4Reputation.lock (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#3027-3061):
+	External calls:
+	- (numerator,denominator) = priceOracleContract.getPrice(_token) (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#3037-3039)
+	State variables written after the call(s):
+	- lockedTokens (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#3059)
+	- lockers (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#3055-3059)
+	- lockingsCounter (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#3055-3059)
+	- scores (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#3055-3059)
+	- totalLocked (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#3055-3059)
+	- totalLockedLeft (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#3055-3059)
+	- totalScore (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#3055-3059)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Locking4Reputation.redeem (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2233-2265) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(block.timestamp > redeemEnableTime,now > redeemEnableTime) (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2237-2239)
+Locking4Reputation._release (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2273-2301) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(block.timestamp > locker.releaseTime,check the lock period pass) (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2293-2295)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+Address.isContract uses assembly (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1281-1307)
+	- /sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1305-1307
+ExternalLocking4Reputation.claim uses assembly (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2775-2843)
+	- /sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2835-2841
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+Reputation.decimals should be constant (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#189-191)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Ownable.owner (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#63-71) should be declared external
+Ownable.renounceOwnership (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#115-125) should be declared external
+Ownable.transferOwnership (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#139-141) should be declared external
+Reputation.mint (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#353-377) should be declared external
+Reputation.burn (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#389-415) should be declared external
+IERC20.transfer (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#543-547) should be declared external
+ERC20.transfer (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#821-827) should be declared external
+ERC20.approve (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#855-869) should be declared external
+IERC20.approve (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#547-553) should be declared external
+IERC20.transferFrom (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#553-561) should be declared external
+ERC20.transferFrom (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#887-905) should be declared external
+IERC20.balanceOf (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#569-573) should be declared external
+ERC20.balanceOf (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#793-797) should be declared external
+ERC20.allowance (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#810-813) should be declared external
+IERC20.allowance (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#573-575) should be declared external
+ERC20.increaseAllowance (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#923-941) should be declared external
+ERC20.decreaseAllowance (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#971-983) should be declared external
+ERC20Burnable.burn (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1147-1153) should be declared external
+ERC20Burnable.burnFrom (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1171-1177) should be declared external
+DAOToken.mint (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1225-1241) should be declared external
+Avatar.genericCall (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1555-1579) should be declared external
+Avatar.sendEther (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1591-1599) should be declared external
+Avatar.externalTokenTransfer (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1611-1633) should be declared external
+Avatar.externalTokenTransferFrom (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1645-1667) should be declared external
+Avatar.externalTokenApproval (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1695-1709) should be declared external
+GlobalConstraintInterface.pre (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1725-1729) should be declared external
+GlobalConstraintInterface.post (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1729-1739) should be declared external
+GlobalConstraintInterface.when (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1745-1747) should be declared external
+Locking4Reputation.redeem (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2233-2265) should be declared external
+LockingEth4Reputation.release (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2595-2613) should be declared external
+LockingEth4Reputation.lock (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2623-2631) should be declared external
+ExternalLocking4Reputation.claim (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2775-2843) should be declared external
+ExternalLocking4Reputation.register (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2849-2861) should be declared external
+LockingToken4Reputation.release (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#3009-3017) should be declared external
+LockingToken4Reputation.lock (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#3027-3061) should be declared external
+Auction4Reputation.redeem (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#3249-3321) should be declared external
+Auction4Reputation.bid (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#3331-3393) should be declared external
+Auction4Reputation.getBid (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#3405-3411) should be declared external
+Auction4Reputation.transferToWallet (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#3421-3445) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Low level call in SafeERC20.safeTransfer (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1355-1379):
+	-(success,returnValue) = _erc20Addr.call(abi.encodeWithSelector(TRANSFER_SELECTOR,_to,_value)) /sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1363-1371
+Low level call in SafeERC20.safeTransferFrom (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1381-1417):
+	-(success,returnValue) = _erc20Addr.call(abi.encodeWithSelector(TRANSFERFROM_SELECTOR,_from,_to,_value)) /sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1395-1409
+Low level call in SafeERC20.safeApprove (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1417-1459):
+	-(success,returnValue) = _erc20Addr.call(abi.encodeWithSelector(APPROVE_SELECTOR,_spender,_value)) /sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1431-1439
+Low level call in Avatar.genericCall (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1555-1579):
+	-(success,returnValue) = _contract.call(_data) /sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1567-1571
+Low level call in ExternalLocking4Reputation.claim (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2775-2843):
+	-(result,returnValue) = externalLockingContract.call(abi.encodeWithSignature(getBalanceFuncSignature,beneficiary)) /sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2801-2821
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Function 'Ownable._transferOwnership' (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#149-167) is not in mixedCase
+Parameter '_owner' of Reputation.balanceOf (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#287) is not in mixedCase
+Parameter '_owner' of Reputation.balanceOfAt (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#303-305) is not in mixedCase
+Parameter '_blockNumber' of Reputation.balanceOfAt (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#305) is not in mixedCase
+Parameter '_blockNumber' of Reputation.totalSupplyAt (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#329) is not in mixedCase
+Parameter '_user' of Reputation.mint (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#354-355) is not in mixedCase
+Parameter '_amount' of Reputation.mint (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#355) is not in mixedCase
+Parameter '_user' of Reputation.burn (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#389) is not in mixedCase
+Parameter '_amount' of Reputation.burn (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#389-391) is not in mixedCase
+Parameter '_block' of Reputation.getValueAt (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#443) is not in mixedCase
+Parameter '_value' of Reputation.updateValueAtNow (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#493) is not in mixedCase
+Function 'ERC20._transfer' (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#999-1015) is not in mixedCase
+Function 'ERC20._mint' (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1033-1043) is not in mixedCase
+Function 'ERC20._burn' (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1059-1077) is not in mixedCase
+Function 'ERC20._burnFrom' (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1105-1125) is not in mixedCase
+Parameter '_name' of DAOToken. (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1215-1217) is not in mixedCase
+Parameter '_symbol' of DAOToken. (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1217) is not in mixedCase
+Parameter '_cap' of DAOToken. (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1217) is not in mixedCase
+Parameter '_to' of DAOToken.mint (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1225-1227) is not in mixedCase
+Parameter '_amount' of DAOToken.mint (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1227) is not in mixedCase
+Parameter '_erc20Addr' of SafeERC20.safeTransfer (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1355) is not in mixedCase
+Parameter '_to' of SafeERC20.safeTransfer (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1357) is not in mixedCase
+Parameter '_value' of SafeERC20.safeTransfer (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1357) is not in mixedCase
+Parameter '_erc20Addr' of SafeERC20.safeTransferFrom (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1381) is not in mixedCase
+Parameter '_from' of SafeERC20.safeTransferFrom (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1381) is not in mixedCase
+Parameter '_to' of SafeERC20.safeTransferFrom (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1381) is not in mixedCase
+Parameter '_value' of SafeERC20.safeTransferFrom (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1381) is not in mixedCase
+Parameter '_erc20Addr' of SafeERC20.safeApprove (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1417-1419) is not in mixedCase
+Parameter '_spender' of SafeERC20.safeApprove (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1419) is not in mixedCase
+Parameter '_value' of SafeERC20.safeApprove (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1419) is not in mixedCase
+Parameter '_orgName' of Avatar. (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1512-1519) is not in mixedCase
+Parameter '_nativeToken' of Avatar. (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1519) is not in mixedCase
+Parameter '_nativeReputation' of Avatar. (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1519-1521) is not in mixedCase
+Parameter '_contract' of Avatar.genericCall (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1555-1557) is not in mixedCase
+Parameter '_data' of Avatar.genericCall (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1557) is not in mixedCase
+Parameter '_amountInWei' of Avatar.sendEther (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1591) is not in mixedCase
+Parameter '_to' of Avatar.sendEther (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1591-1593) is not in mixedCase
+Parameter '_externalToken' of Avatar.externalTokenTransfer (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1611-1613) is not in mixedCase
+Parameter '_to' of Avatar.externalTokenTransfer (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1613) is not in mixedCase
+Parameter '_value' of Avatar.externalTokenTransfer (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1613) is not in mixedCase
+Parameter '_externalToken' of Avatar.externalTokenTransferFrom (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1649) is not in mixedCase
+Parameter '_from' of Avatar.externalTokenTransferFrom (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1653-1655) is not in mixedCase
+Parameter '_to' of Avatar.externalTokenTransferFrom (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1655) is not in mixedCase
+Parameter '_value' of Avatar.externalTokenTransferFrom (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1655) is not in mixedCase
+Parameter '_externalToken' of Avatar.externalTokenApproval (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1697) is not in mixedCase
+Parameter '_spender' of Avatar.externalTokenApproval (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1697-1699) is not in mixedCase
+Parameter '_value' of Avatar.externalTokenApproval (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#1699) is not in mixedCase
+Parameter '_beneficiary' of Locking4Reputation.redeem (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2235) is not in mixedCase
+Function 'Locking4Reputation._release' (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2273-2301) is not in mixedCase
+Parameter '_beneficiary' of Locking4Reputation._release (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2273) is not in mixedCase
+Parameter '_lockingId' of Locking4Reputation._release (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2273) is not in mixedCase
+Function 'Locking4Reputation._lock' (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2313-2405) is not in mixedCase
+Parameter '_amount' of Locking4Reputation._lock (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2315-2317) is not in mixedCase
+Parameter '_period' of Locking4Reputation._lock (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2317) is not in mixedCase
+Parameter '_locker' of Locking4Reputation._lock (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2319) is not in mixedCase
+Parameter '_numerator' of Locking4Reputation._lock (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2321) is not in mixedCase
+Parameter '_denominator' of Locking4Reputation._lock (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2322-2323) is not in mixedCase
+Function 'Locking4Reputation._initialize' (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2453-2523) is not in mixedCase
+Parameter '_avatar' of Locking4Reputation._initialize (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2453) is not in mixedCase
+Parameter '_reputationReward' of Locking4Reputation._initialize (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2453-2455) is not in mixedCase
+Parameter '_lockingStartTime' of Locking4Reputation._initialize (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2455) is not in mixedCase
+Parameter '_lockingEndTime' of Locking4Reputation._initialize (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2455-2457) is not in mixedCase
+Parameter '_redeemEnableTime' of Locking4Reputation._initialize (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2457-2461) is not in mixedCase
+Parameter '_maxLockingPeriod' of Locking4Reputation._initialize (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2461-2469) is not in mixedCase
+Parameter '_avatar' of LockingEth4Reputation.initialize (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2563-2565) is not in mixedCase
+Parameter '_reputationReward' of LockingEth4Reputation.initialize (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2565) is not in mixedCase
+Parameter '_lockingStartTime' of LockingEth4Reputation.initialize (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2565-2567) is not in mixedCase
+Parameter '_lockingEndTime' of LockingEth4Reputation.initialize (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2567) is not in mixedCase
+Parameter '_redeemEnableTime' of LockingEth4Reputation.initialize (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2569-2571) is not in mixedCase
+Parameter '_maxLockingPeriod' of LockingEth4Reputation.initialize (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2573-2575) is not in mixedCase
+Parameter '_beneficiary' of LockingEth4Reputation.release (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2597) is not in mixedCase
+Parameter '_lockingId' of LockingEth4Reputation.release (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2597) is not in mixedCase
+Parameter '_period' of LockingEth4Reputation.lock (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2623) is not in mixedCase
+Parameter '_avatar' of ExternalLocking4Reputation.initialize (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2717-2721) is not in mixedCase
+Parameter '_reputationReward' of ExternalLocking4Reputation.initialize (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2721) is not in mixedCase
+Parameter '_claimingStartTime' of ExternalLocking4Reputation.initialize (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2721-2729) is not in mixedCase
+Parameter '_claimingEndTime' of ExternalLocking4Reputation.initialize (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2729) is not in mixedCase
+Parameter '_redeemEnableTime' of ExternalLocking4Reputation.initialize (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2729-2735) is not in mixedCase
+Parameter '_externalLockingContract' of ExternalLocking4Reputation.initialize (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2735) is not in mixedCase
+Parameter '_getBalanceFuncSignature' of ExternalLocking4Reputation.initialize (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2737-2741) is not in mixedCase
+Parameter '_beneficiary' of ExternalLocking4Reputation.claim (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2775) is not in mixedCase
+Parameter '_avatar' of LockingToken4Reputation.initialize (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2969) is not in mixedCase
+Parameter '_reputationReward' of LockingToken4Reputation.initialize (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2971) is not in mixedCase
+Parameter '_lockingStartTime' of LockingToken4Reputation.initialize (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2974-2975) is not in mixedCase
+Parameter '_lockingEndTime' of LockingToken4Reputation.initialize (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2977) is not in mixedCase
+Parameter '_redeemEnableTime' of LockingToken4Reputation.initialize (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2979) is not in mixedCase
+Parameter '_maxLockingPeriod' of LockingToken4Reputation.initialize (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2981) is not in mixedCase
+Parameter '_priceOracleContract' of LockingToken4Reputation.initialize (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#2983-2985) is not in mixedCase
+Parameter '_beneficiary' of LockingToken4Reputation.release (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#3011) is not in mixedCase
+Parameter '_lockingId' of LockingToken4Reputation.release (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#3011) is not in mixedCase
+Parameter '_amount' of LockingToken4Reputation.lock (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#3027) is not in mixedCase
+Parameter '_period' of LockingToken4Reputation.lock (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#3027) is not in mixedCase
+Parameter '_token' of LockingToken4Reputation.lock (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#3027) is not in mixedCase
+Parameter '_avatar' of Auction4Reputation.initialize (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#3161) is not in mixedCase
+Parameter '_auctionReputationReward' of Auction4Reputation.initialize (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#3163) is not in mixedCase
+Parameter '_auctionsStartTime' of Auction4Reputation.initialize (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#3163-3165) is not in mixedCase
+Parameter '_auctionPeriod' of Auction4Reputation.initialize (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#3165) is not in mixedCase
+Parameter '_numberOfAuctions' of Auction4Reputation.initialize (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#3167) is not in mixedCase
+Parameter '_redeemEnableTime' of Auction4Reputation.initialize (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#3167-3169) is not in mixedCase
+Parameter '_token' of Auction4Reputation.initialize (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#3169) is not in mixedCase
+Parameter '_wallet' of Auction4Reputation.initialize (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#3169) is not in mixedCase
+Parameter '_beneficiary' of Auction4Reputation.redeem (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#3249-3251) is not in mixedCase
+Parameter '_auctionId' of Auction4Reputation.redeem (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#3251-3257) is not in mixedCase
+Parameter '_amount' of Auction4Reputation.bid (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#3331-3335) is not in mixedCase
+Parameter '_bidder' of Auction4Reputation.getBid (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#3407) is not in mixedCase
+Parameter '_auctionId' of Auction4Reputation.getBid (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol#3407) is not in mixedCase
+Parameter '_dxLER' of DxDaoClaimRedeemHelper. (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol) is not in mixedCase
+Parameter '_dxLMR' of DxDaoClaimRedeemHelper. (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol) is not in mixedCase
+Parameter '_dxLWR' of DxDaoClaimRedeemHelper. (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol) is not in mixedCase
+Parameter '_dxGAR' of DxDaoClaimRedeemHelper. (/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xba87014695d66720fe7e6b98d3fca2f594e67916.sol analyzed (24 contracts), 172 result(s) found

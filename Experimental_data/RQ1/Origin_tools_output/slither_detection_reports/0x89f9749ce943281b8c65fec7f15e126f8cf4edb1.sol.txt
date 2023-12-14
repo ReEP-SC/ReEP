@@ -1,0 +1,63 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x89f9749ce943281b8c65fec7f15e126f8cf4edb1.sol:
+/sb/0x89f9749ce943281b8c65fec7f15e126f8cf4edb1.sol:27:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function DepositGame() public payable{
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x89f9749ce943281b8c65fec7f15e126f8cf4edb1.sol:62:21: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+        return uint(keccak256(block.timestamp)) % MaxNumber + 1;
+                    ^------------------------^
+/sb/0x89f9749ce943281b8c65fec7f15e126f8cf4edb1.sol:62:21: Warning: The provided argument of type uint256 is not implicitly convertible to expected type bytes memory.
+        return uint(keccak256(block.timestamp)) % MaxNumber + 1;
+                    ^------------------------^
+/sb/0x89f9749ce943281b8c65fec7f15e126f8cf4edb1.sol:60:5: Warning: No visibility specified. Defaulting to "public". 
+    function random() returns (uint256) 
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x89f9749ce943281b8c65fec7f15e126f8cf4edb1.sol:60:5: Warning: Function state mutability can be restricted to view
+    function random() returns (uint256) 
+    ^ (Relevant source part starts here and spans across multiple lines).
+
+INFO:Detectors:[91m
+Reentrancy in DepositGame.GetBonusWithdraw (/sb/0x89f9749ce943281b8c65fec7f15e126f8cf4edb1.sol#38-46):
+	External calls:
+	- withdraw() (/sb/0x89f9749ce943281b8c65fec7f15e126f8cf4edb1.sol#43)
+	State variables written after the call(s):
+	- FirstTimeBonus (/sb/0x89f9749ce943281b8c65fec7f15e126f8cf4edb1.sol#45-46)
+Reentrancy in DepositGame.destroy (/sb/0x89f9749ce943281b8c65fec7f15e126f8cf4edb1.sol#72-79):
+	External calls:
+	- require(bool)(msg.sender.call.value(TotalAmount)()) (/sb/0x89f9749ce943281b8c65fec7f15e126f8cf4edb1.sol#73)
+	State variables written after the call(s):
+	- TotalAmount (/sb/0x89f9749ce943281b8c65fec7f15e126f8cf4edb1.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities[0m
+INFO:Detectors:[92m
+Reentrancy in DepositGame.withdraw (/sb/0x89f9749ce943281b8c65fec7f15e126f8cf4edb1.sol#47-62):
+	External calls:
+	- require(bool)(msg.sender.call.value(pendingWithdrawal)()) (/sb/0x89f9749ce943281b8c65fec7f15e126f8cf4edb1.sol#55-57)
+	State variables written after the call(s):
+	- TotalAmount (/sb/0x89f9749ce943281b8c65fec7f15e126f8cf4edb1.sol#60-61)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+DepositGame.randomTN should be constant (/sb/0x89f9749ce943281b8c65fec7f15e126f8cf4edb1.sol#27)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+DepositGame.deposit (/sb/0x89f9749ce943281b8c65fec7f15e126f8cf4edb1.sol#32-38) should be declared external
+DepositGame.GetBonusWithdraw (/sb/0x89f9749ce943281b8c65fec7f15e126f8cf4edb1.sol#38-46) should be declared external
+DepositGame.destroy (/sb/0x89f9749ce943281b8c65fec7f15e126f8cf4edb1.sol#72-79) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x89f9749ce943281b8c65fec7f15e126f8cf4edb1.sol:
+	- pragma solidity^0.4.15 (/sb/0x89f9749ce943281b8c65fec7f15e126f8cf4edb1.sol#5-7): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Low level call in DepositGame.withdraw (/sb/0x89f9749ce943281b8c65fec7f15e126f8cf4edb1.sol#47-62):
+	-require(bool)(msg.sender.call.value(pendingWithdrawal)()) /sb/0x89f9749ce943281b8c65fec7f15e126f8cf4edb1.sol#55-57
+Low level call in DepositGame.destroy (/sb/0x89f9749ce943281b8c65fec7f15e126f8cf4edb1.sol#72-79):
+	-require(bool)(msg.sender.call.value(TotalAmount)()) /sb/0x89f9749ce943281b8c65fec7f15e126f8cf4edb1.sol#73
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Function 'DepositGame.DepositGame' (/sb/0x89f9749ce943281b8c65fec7f15e126f8cf4edb1.sol#27-32) is not in mixedCase
+Function 'DepositGame.GetBonusWithdraw' (/sb/0x89f9749ce943281b8c65fec7f15e126f8cf4edb1.sol#38-46) is not in mixedCase
+Variable 'DepositGame._balances' (/sb/0x89f9749ce943281b8c65fec7f15e126f8cf4edb1.sol#20-21) is not in mixedCase
+Variable 'DepositGame.FirstTimeBonus' (/sb/0x89f9749ce943281b8c65fec7f15e126f8cf4edb1.sol#21-22) is not in mixedCase
+Variable 'DepositGame.TotalAmount' (/sb/0x89f9749ce943281b8c65fec7f15e126f8cf4edb1.sol#23-24) is not in mixedCase
+Constant 'DepositGame.MaxNumber' (/sb/0x89f9749ce943281b8c65fec7f15e126f8cf4edb1.sol#24-25) is not in UPPER_CASE_WITH_UNDERSCORES
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x89f9749ce943281b8c65fec7f15e126f8cf4edb1.sol analyzed (1 contracts), 16 result(s) found

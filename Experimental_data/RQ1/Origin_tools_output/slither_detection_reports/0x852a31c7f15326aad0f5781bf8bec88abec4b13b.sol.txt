@@ -1,0 +1,47 @@
+INFO:Detectors:[93m
+FloatifyAccount.deposit (/sb/0x852a31c7f15326aad0f5781bf8bec88abec4b13b.sol#376-382) uses a dangerous strict equality:
+	- require(bool,string)(cdaiContract.mint(_daiBalance) == 0,Call to mint function failed)
+FloatifyAccount.deposit (/sb/0x852a31c7f15326aad0f5781bf8bec88abec4b13b.sol#376-382) uses a dangerous strict equality:
+	- require(bool,string)(cdaiContract.mint(_daiBalance) == 0,Call to mint function failed)
+FloatifyAccount.redeemAndWithdrawMax (/sb/0x852a31c7f15326aad0f5781bf8bec88abec4b13b.sol#411-430) uses a dangerous strict equality:
+	- require(bool,string)(cdaiContract.redeem(_cdaiBalance) == 0,Redemption of all cDAI for DAI failed)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[92m
+Reentrancy in FloatifyAccount.deposit (/sb/0x852a31c7f15326aad0f5781bf8bec88abec4b13b.sol#376-382):
+	External calls:
+	- _daiBalance = daiContract.balanceOf(address(this)) (/sb/0x852a31c7f15326aad0f5781bf8bec88abec4b13b.sol#377-379)
+	State variables written after the call(s):
+	- totalDeposited (/sb/0x852a31c7f15326aad0f5781bf8bec88abec4b13b.sol#379-380)
+Reentrancy in FloatifyAccount.redeemAndWithdrawMax (/sb/0x852a31c7f15326aad0f5781bf8bec88abec4b13b.sol#411-430):
+	External calls:
+	- _cdaiBalance = cdaiContract.balanceOf(address(this)) (/sb/0x852a31c7f15326aad0f5781bf8bec88abec4b13b.sol#415)
+	- require(bool,string)(cdaiContract.redeem(_cdaiBalance) == 0,Redemption of all cDAI for DAI failed) (/sb/0x852a31c7f15326aad0f5781bf8bec88abec4b13b.sol#420-424)
+	- _daiBalance = daiContract.balanceOf(address(this)) (/sb/0x852a31c7f15326aad0f5781bf8bec88abec4b13b.sol#424-425)
+	State variables written after the call(s):
+	- totalWithdrawn (/sb/0x852a31c7f15326aad0f5781bf8bec88abec4b13b.sol#427-428)
+Reentrancy in FloatifyAccount.redeemAndWithdrawPartial (/sb/0x852a31c7f15326aad0f5781bf8bec88abec4b13b.sol#433-447):
+	External calls:
+	- _initialCdaiBalance = cdaiContract.balanceOf(address(this)) (/sb/0x852a31c7f15326aad0f5781bf8bec88abec4b13b.sol#438)
+	- require(bool,string)(cdaiContract.redeemUnderlying(_daiAmount) == 0,Redemption of some cDAI for DAI failed) (/sb/0x852a31c7f15326aad0f5781bf8bec88abec4b13b.sol#439-440)
+	- _finalCdaiBalance = cdaiContract.balanceOf(address(this)) (/sb/0x852a31c7f15326aad0f5781bf8bec88abec4b13b.sol#440-441)
+	- _daiBalance = daiContract.balanceOf(address(this)) (/sb/0x852a31c7f15326aad0f5781bf8bec88abec4b13b.sol#447)
+	State variables written after the call(s):
+	- totalWithdrawn (/sb/0x852a31c7f15326aad0f5781bf8bec88abec4b13b.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Ownable.owner (/sb/0x852a31c7f15326aad0f5781bf8bec88abec4b13b.sol#145-148) should be declared external
+Ownable.renounceOwnership (/sb/0x852a31c7f15326aad0f5781bf8bec88abec4b13b.sol#172-175) should be declared external
+Ownable.transferOwnership (/sb/0x852a31c7f15326aad0f5781bf8bec88abec4b13b.sol#180-183) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x852a31c7f15326aad0f5781bf8bec88abec4b13b.sol:
+	- pragma solidity0.5.8 (/sb/0x852a31c7f15326aad0f5781bf8bec88abec4b13b.sol#9): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'Ownable._transferOwnership' (/sb/0x852a31c7f15326aad0f5781bf8bec88abec4b13b.sol#184-195) is not in mixedCase
+Parameter '_withdrawalAddress' of FloatifyAccount.withdraw (/sb/0x852a31c7f15326aad0f5781bf8bec88abec4b13b.sol#402) is not in mixedCase
+Parameter '_withdrawalAddress' of FloatifyAccount.redeemAndWithdrawMax (/sb/0x852a31c7f15326aad0f5781bf8bec88abec4b13b.sol#412) is not in mixedCase
+Parameter '_withdrawalAddress' of FloatifyAccount.redeemAndWithdrawPartial (/sb/0x852a31c7f15326aad0f5781bf8bec88abec4b13b.sol#434) is not in mixedCase
+Parameter '_daiAmount' of FloatifyAccount.redeemAndWithdrawPartial (/sb/0x852a31c7f15326aad0f5781bf8bec88abec4b13b.sol#434) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x852a31c7f15326aad0f5781bf8bec88abec4b13b.sol analyzed (4 contracts), 14 result(s) found

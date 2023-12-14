@@ -1,0 +1,241 @@
+INFO:Detectors:[93m
+BytesLib.concat (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#1609-1731) is declared view but contains assembly code
+BytesLib.slice (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2029-2189) is declared view but contains assembly code
+BytesLib.toAddress (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2189-2221) is declared view but contains assembly code
+BytesLib.toUint (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2221-2235) is declared view but contains assembly code
+BytesLib.toBytes32 (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2235-2247) is declared view but contains assembly code
+BytesLib.equal (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2248-2311) is declared view but contains assembly code
+BytesLib.equalStorage (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2311-2523) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+Contract locking ether found in /sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol:
+	Contract AraProxy has payable functions:
+	 - fallback (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#301-341)
+	But does not have a function to withdraw the ether
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#contracts-that-lock-ether[0m
+INFO:Detectors:[93m
+Reentrancy in AFSestimate.purchase (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2837-2843):
+	External calls:
+	- allowance = token_.allowance(msg.sender,address(this)) (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol)
+	- token_.transferFrom(msg.sender,owner_,price_) (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol)
+	State variables written after the call(s):
+	- purchasers_ (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol)
+Reentrancy in AFSestimate.redeemBalance (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2743-2787):
+	External calls:
+	- msg.sender == owner_ || token_.amountDeposited(msg.sender) >= depositRequirement_ || purchasers_[keccak256()(abi.encodePacked(msg.sender))] (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2751-2787)
+	- token_.transfer(msg.sender,rewards_[hashedAddress]) (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2773-2783)
+	State variables written after the call(s):
+	- rewards_ (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2781-2783)
+Reentrancy in AFSestimate.submitBudget (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2641-2675):
+	External calls:
+	- allowance = token_.allowance(msg.sender,address(this)) (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2649-2651)
+	- token_.transferFrom(msg.sender,address(this),_budget) (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2663-2673)
+	State variables written after the call(s):
+	- jobs_ (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2665-2667)
+	- jobs_ (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2667-2669)
+Reentrancy in Registry.upgradeProxyAndCall (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#529-567):
+	External calls:
+	- proxy.setImplementation(versions_[_version]) (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#549)
+	State variables written after the call(s):
+	- proxyImpls_ (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#551)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+AFSestimate.allocateRewards has external calls inside a loop:
+	- require(bool,string)(purchasers_[keccak256()(abi.encodePacked(farmer))] || token_.amountDeposited(farmer) >= depositRequirement_,Farmer must be a purchaser of this AFS or have sufficient token deposit.) (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2695-2709)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in Registry.upgradeProxy (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#509-521):
+	External calls:
+	- proxy.setImplementation(versions_[_version]) (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#517-519)
+	State variables written after the call(s):
+	- proxyImpls_ (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#519)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+AraProxy.constructor uses assembly (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#247-265)
+	- /sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#259-265
+AraProxy.setImplementation uses assembly (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#265-283)
+	- /sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#281-283
+AraProxy.fallback uses assembly (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#301-341)
+	- /sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#305-313
+	- /sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#313-341
+Registry.init uses assembly (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#387-415)
+	- /sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#403-413
+Library.init uses assembly (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#647-673)
+	- /sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#663-665
+AraToken.init uses assembly (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#1453-1481)
+	- /sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#1469-1479
+BytesLib.concat uses assembly (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#1609-1731)
+	- /sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#1615-1731
+BytesLib.concatStorage uses assembly (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#1733-2029)
+	- /sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#1735-2029
+BytesLib.slice uses assembly (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2029-2189)
+	- /sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2041-2189
+BytesLib.toAddress uses assembly (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2189-2221)
+	- /sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2203-2221
+BytesLib.toUint uses assembly (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2221-2235)
+	- /sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2231-2233
+BytesLib.toBytes32 uses assembly (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2235-2247)
+	- /sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2241-2247
+BytesLib.equal uses assembly (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2248-2311)
+	- /sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2251-2311
+BytesLib.equalStorage uses assembly (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2311-2523)
+	- /sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2317-2523
+AFSestimate.init uses assembly (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2599-2633)
+	- /sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2609-2621
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+AFSestimate.version_ should be constant (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2541-2543)
+AraToken.version should be constant (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#1443)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Different versions of Solidity is used in /sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol:
+	- Version used: ['^0.4.19', '^0.4.24']
+	- /sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#13-17 declares pragma solidity^0.4.24
+	- /sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#123-125 declares pragma solidity^0.4.24
+	- /sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#201 declares pragma solidity^0.4.24
+	- /sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#343 declares pragma solidity^0.4.24
+	- /sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#611-613 declares pragma solidity^0.4.24
+	- /sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#741-743 declares pragma solidity^0.4.24
+	- /sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#833-835 declares pragma solidity^0.4.24
+	- /sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#981 declares pragma solidity^0.4.24
+	- /sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#1427 declares pragma solidity^0.4.24
+	- /sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#1606-1609 declares pragma solidity^0.4.19
+	- /sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2529-2531 declares pragma solidity^0.4.24
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#different-pragma-directives-are-used[0m
+INFO:Detectors:[92m
+Ownable.requestOwnership (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#73-85) should be declared external
+Ownable.revokeOwnershipRequest (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#85-95) should be declared external
+Ownable.approveOwnershipTransfer (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#95-123) should be declared external
+AraProxy.setImplementation (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#265-283) should be declared external
+AraProxy.fallback (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#301-341) should be declared external
+Registry.init (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#387-415) should be declared external
+Registry.getProxyOwner (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#449-451) should be declared external
+Registry.getImplementation (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#453-459) should be declared external
+Registry.getProxyVersion (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#459-461) should be declared external
+Registry.createAFS (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#473-495) should be declared external
+Registry.upgradeProxy (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#509-521) should be declared external
+Registry.addStandardVersion (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#585-605) should be declared external
+Library.init (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#647-673) should be declared external
+Library.getLibrarySize (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#681-695) should be declared external
+Library.getLibraryItem (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#695-715) should be declared external
+Library.addLibraryItem (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#717-737) should be declared external
+StandardToken.totalSupply (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#1033-1039) should be declared external
+ERC20.totalSupply (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#773-779) should be declared external
+StandardToken.decreaseApproval (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#1269-1297) should be declared external
+AraToken.init (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#1453-1481) should be declared external
+AraToken.amountDeposited (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#1501-1503) should be declared external
+AFSestimate.init (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2599-2633) should be declared external
+AFSestimate.allocateRewards (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2675-2741) should be declared external
+AFSestimate.redeemBalance (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2743-2787) should be declared external
+AFSestimate.getRewardsBalance (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2787-2797) should be declared external
+AFSestimate.getBudget (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2797-2807) should be declared external
+AFSestimate.write (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol) should be declared external
+AFSestimate.read (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol) should be declared external
+AFSestimate.hasBuffer (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol) should be declared external
+AFSestimate.unlist (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol:
+	- pragma solidity^0.4.19 (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#1606-1609): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Low level call in Registry.upgradeProxyAndCall (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#529-567):
+	-require(bool,string)(address(proxy).call(abi.encodeWithSignature(init(bytes),_data)),Init failed.) /sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#553-563
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Parameter '_newOwner' of Ownable.approveOwnershipTransfer (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#99) is not in mixedCase
+Parameter '_newImplementation' of AraProxy.setImplementation (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#275) is not in mixedCase
+Constant 'AraProxy.registryPosition_' (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#207-211) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'AraProxy.implementationPosition_' (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#213-221) is not in UPPER_CASE_WITH_UNDERSCORES
+Parameter '_contentId' of Registry.getProxyAddress (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#438-439) is not in mixedCase
+Parameter '_contentId' of Registry.getProxyOwner (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#449) is not in mixedCase
+Parameter '_version' of Registry.getImplementation (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#453-455) is not in mixedCase
+Parameter '_contentId' of Registry.getProxyVersion (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#459) is not in mixedCase
+Parameter '_contentId' of Registry.createAFS (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#473) is not in mixedCase
+Parameter '_version' of Registry.createAFS (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#473) is not in mixedCase
+Parameter '_data' of Registry.createAFS (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#473-479) is not in mixedCase
+Parameter '_contentId' of Registry.upgradeProxy (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#509-511) is not in mixedCase
+Parameter '_version' of Registry.upgradeProxy (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#511) is not in mixedCase
+Parameter '_contentId' of Registry.upgradeProxyAndCall (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#529) is not in mixedCase
+Parameter '_version' of Registry.upgradeProxyAndCall (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#529-531) is not in mixedCase
+Parameter '_data' of Registry.upgradeProxyAndCall (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#531) is not in mixedCase
+Parameter '_version' of Registry.addStandardVersion (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#589-591) is not in mixedCase
+Parameter '_address' of Registry.addStandardVersion (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#591-593) is not in mixedCase
+Parameter '_identity' of Library.getLibrarySize (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#683) is not in mixedCase
+Parameter '_identity' of Library.getLibraryItem (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#701) is not in mixedCase
+Parameter '_index' of Library.getLibraryItem (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#701) is not in mixedCase
+Parameter '_identity' of Library.addLibraryItem (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#717) is not in mixedCase
+Parameter '_contentId' of Library.addLibraryItem (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#717-721) is not in mixedCase
+Parameter '_owner' of StandardToken.balanceOf (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#1049-1051) is not in mixedCase
+Parameter '_owner' of StandardToken.allowance (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#1067) is not in mixedCase
+Parameter '_spender' of StandardToken.allowance (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#1067) is not in mixedCase
+Parameter '_to' of StandardToken.transfer (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#1079) is not in mixedCase
+Parameter '_value' of StandardToken.transfer (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#1079-1081) is not in mixedCase
+Parameter '_spender' of StandardToken.approve (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#1143) is not in mixedCase
+Parameter '_value' of StandardToken.approve (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#1143) is not in mixedCase
+Parameter '_from' of StandardToken.transferFrom (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#1173) is not in mixedCase
+Parameter '_to' of StandardToken.transferFrom (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#1173) is not in mixedCase
+Parameter '_value' of StandardToken.transferFrom (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#1175) is not in mixedCase
+Parameter '_spender' of StandardToken.increaseApproval (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#1227-1228) is not in mixedCase
+Parameter '_addedValue' of StandardToken.increaseApproval (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#1229-1235) is not in mixedCase
+Parameter '_spender' of StandardToken.decreaseApproval (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#1271) is not in mixedCase
+Parameter '_subtractedValue' of StandardToken.decreaseApproval (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#1273-1275) is not in mixedCase
+Function 'StandardToken._mint' (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#1313-1328) is not in mixedCase
+Parameter '_account' of StandardToken._mint (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#1313) is not in mixedCase
+Parameter '_amount' of StandardToken._mint (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#1313) is not in mixedCase
+Function 'StandardToken._burn' (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#1349-1369) is not in mixedCase
+Parameter '_account' of StandardToken._burn (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#1349-1351) is not in mixedCase
+Parameter '_amount' of StandardToken._burn (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#1351) is not in mixedCase
+Function 'StandardToken._burnFrom' (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#1395-1419) is not in mixedCase
+Parameter '_account' of StandardToken._burnFrom (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#1395) is not in mixedCase
+Parameter '_amount' of StandardToken._burnFrom (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#1395) is not in mixedCase
+Parameter '_to' of AraToken.transfer (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#1541) is not in mixedCase
+Parameter '_value' of AraToken.transfer (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#1541-1545) is not in mixedCase
+Parameter '_spender' of AraToken.approve (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#1551-1555) is not in mixedCase
+Parameter '_value' of AraToken.approve (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#1555) is not in mixedCase
+Parameter '_from' of AraToken.transferFrom (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#1565) is not in mixedCase
+Parameter '_to' of AraToken.transferFrom (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#1565) is not in mixedCase
+Parameter '_value' of AraToken.transferFrom (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#1565) is not in mixedCase
+Parameter '_spender' of AraToken.increaseApproval (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#1573) is not in mixedCase
+Parameter '_addedValue' of AraToken.increaseApproval (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#1573-1575) is not in mixedCase
+Parameter '_value' of AraToken.formatDecimals (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#1487-1489) is not in mixedCase
+Parameter '_owner' of AraToken.amountDeposited (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#1501) is not in mixedCase
+Parameter '_value' of AraToken.deposit (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#1503) is not in mixedCase
+Parameter '_value' of AraToken.withdraw (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#1523-1525) is not in mixedCase
+Parameter '_bytes' of BytesLib.slice (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2029) is not in mixedCase
+Parameter '_start' of BytesLib.slice (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2031) is not in mixedCase
+Parameter '_length' of BytesLib.slice (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2031-2035) is not in mixedCase
+Parameter '_bytes' of BytesLib.toAddress (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2191) is not in mixedCase
+Parameter '_start' of BytesLib.toAddress (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2191) is not in mixedCase
+Parameter '_bytes' of BytesLib.toUint (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2221) is not in mixedCase
+Parameter '_start' of BytesLib.toUint (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2221) is not in mixedCase
+Parameter '_bytes' of BytesLib.toBytes32 (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2235) is not in mixedCase
+Parameter '_start' of BytesLib.toBytes32 (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2235) is not in mixedCase
+Parameter '_price' of AFSestimate.setPrice (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2633-2637) is not in mixedCase
+Parameter '_jobId' of AFSestimate.submitBudget (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2643) is not in mixedCase
+Parameter '_budget' of AFSestimate.submitBudget (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2643) is not in mixedCase
+Parameter '_jobId' of AFSestimate.allocateRewards (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2675) is not in mixedCase
+Parameter '_farmers' of AFSestimate.allocateRewards (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2675-2677) is not in mixedCase
+Parameter '_rewards' of AFSestimate.allocateRewards (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2677) is not in mixedCase
+Parameter '_farmer' of AFSestimate.getRewardsBalance (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2787) is not in mixedCase
+Parameter '_jobId' of AFSestimate.getBudget (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2797) is not in mixedCase
+Parameter '_purchaser' of AFSestimate.purchase (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2837-2839) is not in mixedCase
+Parameter '_jobId' of AFSestimate.purchase (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2839-2843) is not in mixedCase
+Parameter '_budget' of AFSestimate.purchase (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol) is not in mixedCase
+Parameter '_mtOffsets' of AFSestimate.append (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol) is not in mixedCase
+Parameter '_msOffsets' of AFSestimate.append (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol) is not in mixedCase
+Parameter '_mtBuffer' of AFSestimate.append (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol) is not in mixedCase
+Parameter '_msBuffer' of AFSestimate.append (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol) is not in mixedCase
+Parameter '_mtOffsets' of AFSestimate.write (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol) is not in mixedCase
+Parameter '_msOffsets' of AFSestimate.write (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol) is not in mixedCase
+Parameter '_mtBuffer' of AFSestimate.write (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol) is not in mixedCase
+Parameter '_msBuffer' of AFSestimate.write (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol) is not in mixedCase
+Parameter '_file' of AFSestimate.read (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol) is not in mixedCase
+Parameter '_offset' of AFSestimate.read (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol) is not in mixedCase
+Parameter '_file' of AFSestimate.hasBuffer (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol) is not in mixedCase
+Parameter '_offset' of AFSestimate.hasBuffer (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol) is not in mixedCase
+Parameter '_buffer' of AFSestimate.hasBuffer (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol) is not in mixedCase
+Constant 'AFSestimate.mtBufferSize_' (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2587) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'AFSestimate.msBufferSize_' (/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol#2587-2589) is not in UPPER_CASE_WITH_UNDERSCORES
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xc0c8e33f861dfa70572bd959d49c9abc4871b4f0.sol analyzed (11 contracts), 157 result(s) found

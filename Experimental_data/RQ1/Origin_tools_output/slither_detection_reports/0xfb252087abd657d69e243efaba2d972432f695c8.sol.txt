@@ -1,0 +1,88 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xfb252087abd657d69e243efaba2d972432f695c8.sol:
+/sb/0xfb252087abd657d69e243efaba2d972432f695c8.sol:188:1: Warning: Experimental features are turned on. Do not use experimental features on live deployments.
+pragma experimental ABIEncoderV2;
+^-------------------------------^
+
+INFO:Detectors:[93m
+Etherclear.sliceUint (/sb/0xfb252087abd657d69e243efaba2d972432f695c8.sol) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+Etherclear.cancelPayment (/sb/0xfb252087abd657d69e243efaba2d972432f695c8.sol#529-555) uses a dangerous strict equality:
+	- txn.token == address(0)
+Etherclear.cancelPayment (/sb/0xfb252087abd657d69e243efaba2d972432f695c8.sol#529-555) uses a dangerous strict equality:
+	- txn.token == address(0)
+Etherclear.cancelPaymentAsSender (/sb/0xfb252087abd657d69e243efaba2d972432f695c8.sol#511-524) uses a dangerous strict equality:
+	- require(bool,string)(txn.sender == msg.sender,Payment sender does not match message sender.)
+	- require(bool,string)(txn.state == PaymentState.OPEN,Payment must be open to cancel.)
+Etherclear.cancelPayment (/sb/0xfb252087abd657d69e243efaba2d972432f695c8.sol#529-555) uses a dangerous strict equality:
+	- txn.token == address(0)
+Etherclear.cancelPaymentAsSender (/sb/0xfb252087abd657d69e243efaba2d972432f695c8.sol#511-524) uses a dangerous strict equality:
+	- require(bool,string)(txn.sender == msg.sender,Payment sender does not match message sender.)
+	- require(bool,string)(txn.state == PaymentState.OPEN,Payment must be open to cancel.)
+Etherclear.retrieveFunds (/sb/0xfb252087abd657d69e243efaba2d972432f695c8.sol#840-892) uses a dangerous strict equality:
+	- require(bool,string)(txn.state == PaymentState.OPEN,Payment must be open to retrieve funds)
+	- require(bool,string)(sliceUint(actualHash) == sliceUint(txn.codeHash),Passphrase is not correct)
+	- txn.token == address(0)
+Etherclear.cancelPayment (/sb/0xfb252087abd657d69e243efaba2d972432f695c8.sol#529-555) uses a dangerous strict equality:
+	- txn.token == address(0)
+Etherclear.cancelPaymentAsSender (/sb/0xfb252087abd657d69e243efaba2d972432f695c8.sol#511-524) uses a dangerous strict equality:
+	- require(bool,string)(txn.sender == msg.sender,Payment sender does not match message sender.)
+	- require(bool,string)(txn.state == PaymentState.OPEN,Payment must be open to cancel.)
+Etherclear.retrieveFunds (/sb/0xfb252087abd657d69e243efaba2d972432f695c8.sol#840-892) uses a dangerous strict equality:
+	- require(bool,string)(txn.state == PaymentState.OPEN,Payment must be open to retrieve funds)
+	- require(bool,string)(sliceUint(actualHash) == sliceUint(txn.codeHash),Passphrase is not correct)
+	- txn.token == address(0)
+Etherclear.retrieveFundsAsRecipient (/sb/0xfb252087abd657d69e243efaba2d972432f695c8.sol#823-833) uses a dangerous strict equality:
+	- require(bool,string)(txn.recipient == msg.sender,Message sender must match payment recipient)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Etherclear.setENS (/sb/0xfb252087abd657d69e243efaba2d972432f695c8.sol#432-439) does not use the value returned by external calls:
+	-reverseRegistrar.setName(name) (/sb/0xfb252087abd657d69e243efaba2d972432f695c8.sol#438)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in Etherclear.transferToken (/sb/0xfb252087abd657d69e243efaba2d972432f695c8.sol#577-600):
+	External calls:
+	- require(bool)(IERC20(token).transferFrom(user,address(this),SafeMath.add(originalAmount,feeAmount))) (/sb/0xfb252087abd657d69e243efaba2d972432f695c8.sol#586-593)
+	State variables written after the call(s):
+	- tokens (/sb/0xfb252087abd657d69e243efaba2d972432f695c8.sol#594-598)
+	- tokens (/sb/0xfb252087abd657d69e243efaba2d972432f695c8.sol#598-600)
+Reentrancy in Etherclear.withdrawToken (/sb/0xfb252087abd657d69e243efaba2d972432f695c8.sol#606-618):
+	External calls:
+	- require(bool)(IERC20(token).transfer(userTo,amount)) (/sb/0xfb252087abd657d69e243efaba2d972432f695c8.sol#616-617)
+	State variables written after the call(s):
+	- tokens (/sb/0xfb252087abd657d69e243efaba2d972432f695c8.sol#617-618)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Etherclear.sliceUint uses assembly (/sb/0xfb252087abd657d69e243efaba2d972432f695c8.sol)
+	- /sb/0xfb252087abd657d69e243efaba2d972432f695c8.sol
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+Different versions of Solidity is used in /sb/0xfb252087abd657d69e243efaba2d972432f695c8.sol:
+	- Version used: ['ABIEncoderV2', '^0.5.9']
+	- /sb/0xfb252087abd657d69e243efaba2d972432f695c8.sol#5-7 declares pragma solidity^0.5.9
+	- /sb/0xfb252087abd657d69e243efaba2d972432f695c8.sol#196 declares pragma experimentalABIEncoderV2
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#different-pragma-directives-are-used[0m
+INFO:Detectors:[92m
+ReverseRegistrar.setName (/sb/0xfb252087abd657d69e243efaba2d972432f695c8.sol#237-239) should be declared external
+Etherclear.getSignerForPaymentCompleteRequest (/sb/0xfb252087abd657d69e243efaba2d972432f695c8.sol#375-401) should be declared external
+Etherclear.setENS (/sb/0xfb252087abd657d69e243efaba2d972432f695c8.sol#432-439) should be declared external
+Etherclear.disableRetrieveFunds (/sb/0xfb252087abd657d69e243efaba2d972432f695c8.sol#476-480) should be declared external
+Etherclear.disableCreatePayment (/sb/0xfb252087abd657d69e243efaba2d972432f695c8.sol#480-485) should be declared external
+Etherclear.completePaymentAsProxy (/sb/0xfb252087abd657d69e243efaba2d972432f695c8.sol#771-821) should be declared external
+Etherclear.retrieveFundsAsRecipient (/sb/0xfb252087abd657d69e243efaba2d972432f695c8.sol#823-833) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xfb252087abd657d69e243efaba2d972432f695c8.sol:
+	- pragma solidity^0.5.9 (/sb/0xfb252087abd657d69e243efaba2d972432f695c8.sol#5-7): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_chainId' of Etherclear. (/sb/0xfb252087abd657d69e243efaba2d972432f695c8.sol#401-402) is not in mixedCase
+Constant 'Etherclear.verifyingContract' (/sb/0xfb252087abd657d69e243efaba2d972432f695c8.sol#327-328) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'Etherclear.salt' (/sb/0xfb252087abd657d69e243efaba2d972432f695c8.sol#328-329) is not in UPPER_CASE_WITH_UNDERSCORES
+Variable 'Etherclear.DOMAIN_SEPARATOR' (/sb/0xfb252087abd657d69e243efaba2d972432f695c8.sol#346-347) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+Etherclear.COMPLETE_PAYMENT_REQUEST_TYPE (/sb/0xfb252087abd657d69e243efaba2d972432f695c8.sol#329-332) is never used in Etherclear
+Etherclear.EIP712_DOMAIN_TYPE (/sb/0xfb252087abd657d69e243efaba2d972432f695c8.sol#332-336) is never used in Etherclear
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0xfb252087abd657d69e243efaba2d972432f695c8.sol analyzed (4 contracts), 23 result(s) found

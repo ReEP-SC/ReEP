@@ -1,0 +1,79 @@
+INFO:Detectors:[93m
+Reentrancy in ADR_MAKER.deposit (/sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol#407-421):
+	External calls:
+	- require(bool,string)(Token(tokenAddress).transferFrom(msg.sender,address(this),amountToStake),Insufficient Token Allowance) (/sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol#410-415)
+	- updateAccount(msg.sender) (/sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol#415)
+	State variables written after the call(s):
+	- depositedTokens (/sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol#417)
+Reentrancy in ADR_MAKER.updateAccount (/sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol#370-385):
+	External calls:
+	- require(bool,string)(Token(tokenAddress).transfer(account,pendingDivs),Could not transfer tokens.) (/sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol#375-378)
+	State variables written after the call(s):
+	- lastClaimedTime (/sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol#384-385)
+Reentrancy in ADR_MAKER.withdraw (/sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol#421-445):
+	External calls:
+	- updateAccount(msg.sender) (/sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol#430-431)
+	- require(bool,string)(Token(tokenAddress).transfer(msg.sender,amountToWithdraw),Could not transfer tokens.) (/sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol#432-437)
+	State variables written after the call(s):
+	- depositedTokens (/sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol#437-438)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+EnumerableSet._remove (/sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol#121-157) does not use the value returned by external calls:
+	-set._values.pop() (/sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol#149-150)
+ADR_MAKER.deposit (/sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol#407-421) does not use the value returned by external calls:
+	-holders.add(msg.sender) (/sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol#419-421)
+ADR_MAKER.withdraw (/sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol#421-445) does not use the value returned by external calls:
+	-holders.remove(msg.sender) (/sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol#442-443)
+ADR_MAKER.transferAnyERC20Tokens (/sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol) does not use the value returned by external calls:
+	-Token(_tokenAddr).transfer(_to,_amount) (/sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in ADR_MAKER.deposit (/sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol#407-421):
+	External calls:
+	- require(bool,string)(Token(tokenAddress).transferFrom(msg.sender,address(this),amountToStake),Insufficient Token Allowance) (/sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol#410-415)
+	- updateAccount(msg.sender) (/sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol#415)
+	State variables written after the call(s):
+	- stakingTime (/sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol#421)
+Reentrancy in ADR_MAKER.updateAccount (/sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol#370-385):
+	External calls:
+	- require(bool,string)(Token(tokenAddress).transfer(account,pendingDivs),Could not transfer tokens.) (/sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol#375-378)
+	State variables written after the call(s):
+	- totalClaimedRewards (/sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol#381-382)
+	- totalEarnedTokens (/sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol#378-379)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol#337-344) should be declared external
+ADR_MAKER.getNumberOfHolders (/sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol#402-406) should be declared external
+ADR_MAKER.deposit (/sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol#407-421) should be declared external
+ADR_MAKER.withdraw (/sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol#421-445) should be declared external
+ADR_MAKER.claimDivs (/sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol#445-446) should be declared external
+ADR_MAKER.getStakingAndDaoAmount (/sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol#446-452) should be declared external
+ADR_MAKER.transferAnyERC20Tokens (/sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol:
+	- pragma solidity0.6.12 (/sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol#19-21): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'EnumerableSet._add' (/sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol#103-117) is not in mixedCase
+Function 'EnumerableSet._remove' (/sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol#121-157) is not in mixedCase
+Function 'EnumerableSet._contains' (/sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol#162-165) is not in mixedCase
+Function 'EnumerableSet._length' (/sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol#169-171) is not in mixedCase
+Function 'EnumerableSet._at' (/sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol#180-192) is not in mixedCase
+Parameter '' of Token.transferFrom (/sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol#347) is not in mixedCase
+Parameter '_scope_0' of Token.transferFrom (/sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol#347) is not in mixedCase
+Parameter '_scope_1' of Token.transferFrom (/sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol#347) is not in mixedCase
+Parameter '' of Token.transfer (/sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol#347) is not in mixedCase
+Parameter '_scope_0' of Token.transfer (/sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol#347-348) is not in mixedCase
+Contract 'ADR_MAKER' (/sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol#349-452) is not in CapWords
+Parameter '_holder' of ADR_MAKER.getPendingDivs (/sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol#386) is not in mixedCase
+Parameter '_tokenAddr' of ADR_MAKER.transferAnyERC20Tokens (/sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol) is not in mixedCase
+Parameter '_to' of ADR_MAKER.transferAnyERC20Tokens (/sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol) is not in mixedCase
+Parameter '_amount' of ADR_MAKER.transferAnyERC20Tokens (/sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol) is not in mixedCase
+Constant 'ADR_MAKER.tokenAddress' (/sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol#356-360) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'ADR_MAKER.rewardRate' (/sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol#361-362) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'ADR_MAKER.rewardInterval' (/sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol#362) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'ADR_MAKER.cliffTime' (/sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol#363-365) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'ADR_MAKER.stakingAndDaoTokens' (/sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol#446) is not in UPPER_CASE_WITH_UNDERSCORES
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x9d5015930437ef3316d3f1e70286a8ec2fa5a20e.sol analyzed (5 contracts), 37 result(s) found

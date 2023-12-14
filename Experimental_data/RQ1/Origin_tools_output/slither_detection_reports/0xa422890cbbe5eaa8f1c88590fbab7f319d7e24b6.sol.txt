@@ -1,0 +1,314 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol:
+/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol:1071:1: Warning: Experimental features are turned on. Do not use experimental features on live deployments.
+pragma experimental ABIEncoderV2;
+^-------------------------------^
+
+INFO:Detectors:[91m
+RariFundController._upgradeFundController (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#4325-4350) sends eth to arbitrary user
+	Dangerous calls:
+	- (success) = newContract.call.value(balance)() (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#4347-4348)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[91m
+Ownable.______gap (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#417) shadows:
+	- Initializable.______gap (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#299-300)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variable-shadowing[0m
+INFO:Detectors:[93m
+Initializable.isConstructor (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#279-298) is declared view but contains assembly code
+Address.isContract (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#516-534) is declared view but contains assembly code
+LibEIP712.hashEIP712Domain (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#698-735) is declared view but contains assembly code
+LibEIP712.hashEIP712Message (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#740-777) is declared view but contains assembly code
+LibOrder.getStructHash (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#877-959) is declared view but contains assembly code
+LibRichErrors.rrevert (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#2344-2348) is declared view but contains assembly code
+LibZeroExTransaction.getStructHash (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#3518-3564) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+EnzymePoolController (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#2147-2267) has incorrect ERC20 function interface(s):
+	-approve (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#2181-2190)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[93m
+CompoundPoolController.withdrawAll (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1636-1645) uses a dangerous strict equality:
+	- require(bool,string)(redeemResult == 0,Error calling redeem on Compound cToken: error code not equal to 0)
+RariFundController.withdrawFromPoolKnowingBalance (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#4524-4526) uses a dangerous strict equality:
+	- amount == initialBalance
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Reentrancy in RariFundController.upgradeFundController (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#4360-4376):
+	External calls:
+	- _withdrawAllFromPool(5) (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#4364)
+	- _withdrawAllFromPool(_supportedPools[i]) (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#4373)
+	State variables written after the call(s):
+	- _poolsWithFunds (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#4373)
+Reentrancy in RariFundController.withdrawToManager (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#4561-4576):
+	External calls:
+	- poolBalance = getPoolBalance(5) (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#4565)
+	- withdrawFromPoolKnowingBalance(5,poolAmount,poolBalance) (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#4569-4570)
+	State variables written after the call(s):
+	- _poolsWithFunds (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#4569-4570)
+Reentrancy in RariFundController.withdrawToManager (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#4561-4576):
+	External calls:
+	- poolBalance = getPoolBalance(5) (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#4565)
+	- withdrawFromPoolKnowingBalance(5,poolAmount,poolBalance) (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#4569-4570)
+	- poolBalance_scope_0 = getPoolBalance(pool) (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol)
+	- withdrawFromPoolKnowingBalance(pool,poolAmount_scope_2,poolBalance_scope_0) (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol)
+	State variables written after the call(s):
+	- _poolsWithFunds (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+emptyData in DydxPoolController.withdrawAll (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1521) is a local variable never initialiazed
+emptyData in DydxPoolController.withdraw (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1513) is a local variable never initialiazed
+emptyData in DydxPoolController.deposit (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1477-1479) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[93m
+DydxPoolController.approve (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1449-1457) does not use the value returned by external calls:
+	-_weth.approve(SOLO_MARGIN_CONTRACT,0) (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1454-1456)
+	-_weth.approve(SOLO_MARGIN_CONTRACT,amount) (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1456-1457)
+KeeperDaoPoolController.approve (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1729-1735) does not use the value returned by external calls:
+	-kEther.approve(KEEPERDAO_CONTRACT,0) (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1734)
+	-kEther.approve(KEEPERDAO_CONTRACT,amount) (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1734-1735)
+KeeperDaoPoolController.deposit (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1736-1746) does not use the value returned by external calls:
+	-_liquidityPool.deposit.value(amount)(ETHEREUM_ADDRESS,amount) (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1745-1746)
+EnzymePoolController.approve (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#2181-2190) does not use the value returned by external calls:
+	-_weth.approve(comptroller,0) (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#2185-2186)
+	-_weth.approve(comptroller,amount) (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#2186-2188)
+EnzymePoolController.deposit (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#2200-2219) does not use the value returned by external calls:
+	-ComptrollerLib(comptroller).buyShares(buyers,amounts,minShares) (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#2216-2219)
+EnzymePoolController.withdraw (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#2222-2258) does not use the value returned by external calls:
+	-_comptroller.redeemSharesDetailed(shares,additionalAssets,assetsToSkip) (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#2247-2251)
+EnzymePoolController.withdrawAll (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#2262-2266) does not use the value returned by external calls:
+	-ComptrollerLib(comptroller).redeemShares() (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#2263)
+RariFundController.approveTo0x (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol) does not use the value returned by external calls:
+	-ZeroExExchangeController.approve(erc20Contract,amount) (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in RariFundController.withdrawFromPool (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#4514-4518):
+	External calls:
+	- _withdrawFromPool(pool,amount) (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#4517-4518)
+	- _poolsWithFunds[pool] = _getPoolBalance(pool) > 0 (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#4518)
+	State variables written after the call(s):
+	- _poolsWithFunds (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#4518)
+Reentrancy in RariFundController.withdrawFromPoolKnowingBalance (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#4524-4526):
+	External calls:
+	- _withdrawFromPool(pool,amount) (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#4525)
+	State variables written after the call(s):
+	- _poolsWithFunds (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#4526)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Initializable.isConstructor uses assembly (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#279-298)
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#298
+Address.isContract uses assembly (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#516-534)
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#531-532
+LibEIP712.hashEIP712Domain uses assembly (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#698-735)
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#717-734
+LibEIP712.hashEIP712Message uses assembly (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#740-777)
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#756-775
+LibOrder.getStructHash uses assembly (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#877-959)
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#909-958
+LibRichErrors.rrevert uses assembly (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#2344-2348)
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#2347-2348
+LibZeroExTransaction.getStructHash uses assembly (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#3518-3564)
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#3537-3564
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+Different versions of Solidity is used in /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol:
+	- Version used: ['0.5.17', '>=0.4.24<0.7.0', 'ABIEncoderV2', '^0.5.0', '^0.5.5', '^0.5.9']
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#7-10 declares pragma solidity^0.5.0
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#173 declares pragma solidity^0.5.0
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#237 declares pragma solidity>=0.4.24<0.7.0
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#301 declares pragma solidity^0.5.0
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#335 declares pragma solidity^0.5.0
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#422 declares pragma solidity^0.5.0
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#503-504 declares pragma solidity^0.5.5
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#575-577 declares pragma solidity^0.5.0
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#673-674 declares pragma solidity^0.5.9
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#796-797 declares pragma solidity^0.5.9
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#976-977 declares pragma solidity^0.5.9
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1080 declares pragma solidity^0.5.9
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1105-1107 declares pragma solidity0.5.17
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1107-1111 declares pragma experimentalABIEncoderV2
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1156 declares pragma solidity0.5.17
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1219 declares pragma solidity0.5.17
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1265-1266 declares pragma solidity0.5.17
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1329 declares pragma solidity0.5.17
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1381 declares pragma solidity0.5.17
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1409-1410 declares pragma solidity0.5.17
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1548-1550 declares pragma solidity0.5.17
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1591 declares pragma solidity0.5.17
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1646 declares pragma solidity0.5.17
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1650 declares pragma solidity0.5.17
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1699 declares pragma solidity0.5.17
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1793-1794 declares pragma solidity0.5.17
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1811 declares pragma solidity0.5.17
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1870 declares pragma solidity0.5.17
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1937 declares pragma solidity0.5.17
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1976-1977 declares pragma solidity0.5.17
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#2043-2044 declares pragma solidity0.5.17
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#2140-2142 declares pragma solidity0.5.17
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#2295-2297 declares pragma solidity^0.5.9
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#2353-2354 declares pragma solidity^0.5.9
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#2418-2420 declares pragma solidity^0.5.9
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#2504 declares pragma solidity^0.5.9
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#2550-2551 declares pragma solidity^0.5.9
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#2760-2761 declares pragma solidity^0.5.9
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#3176 declares pragma solidity^0.5.9
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#3308 declares pragma solidity^0.5.9
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#3343-3344 declares pragma solidity^0.5.9
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#3461 declares pragma solidity^0.5.9
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#3586 declares pragma solidity^0.5.9
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#3720-3722 declares pragma solidity^0.5.9
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#3784 declares pragma solidity^0.5.9
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#3816 declares pragma solidity^0.5.9
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#3986 declares pragma solidity^0.5.9
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#4017 declares pragma solidity^0.5.9
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#4034 declares pragma solidity0.5.17
+	- /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#4198 declares pragma solidity0.5.17
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#different-pragma-directives-are-used[0m
+INFO:Detectors:[92m
+Ownable.owner (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#369-370) should be declared external
+Ownable.renounceOwnership (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#390-396) should be declared external
+Ownable.transferOwnership (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#398-405) should be declared external
+IEtherToken.deposit (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1082-1083) should be declared external
+IEtherToken.withdraw (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1083) should be declared external
+Getters.getAccountBalances (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1243-1247) should be declared external
+Operation.operate (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1363) should be declared external
+AToken.balanceOf (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1835-1838) should be declared external
+Bank.totalETH (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1942) should be declared external
+IExchangeCore.fillOrder (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#3272-3285) should be declared external
+IExchangeCore.cancelOrder (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#3287-3288) should be declared external
+IExchangeCore.getOrderInfo (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#3291-3294) should be declared external
+IMatchOrders.batchMatchOrders (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#3358-3371) should be declared external
+IMatchOrders.batchMatchOrdersWithMaximalFill (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#3395-3403) should be declared external
+IMatchOrders.matchOrders (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#3417-3425) should be declared external
+IMatchOrders.matchOrdersWithMaximalFill (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#3441-3452) should be declared external
+ISignatureValidator.isValidHashSignature (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#3636-3643) should be declared external
+ISignatureValidator.isValidOrderSignature (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#3646-3649) should be declared external
+ISignatureValidator.isValidTransactionSignature (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#3657-3659) should be declared external
+ITransactions.executeTransaction (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#3740-3742) should be declared external
+ITransactions.batchExecuteTransactions (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#3754-3757) should be declared external
+IWrapperFunctions.fillOrKillOrder (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#3826-3829) should be declared external
+IWrapperFunctions.batchFillOrders (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#3839-3843) should be declared external
+IWrapperFunctions.batchFillOrKillOrders (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#3849-3858) should be declared external
+IWrapperFunctions.batchFillOrdersNoThrow (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#3873-3878) should be declared external
+IWrapperFunctions.marketSellOrdersNoThrow (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#3893-3896) should be declared external
+IWrapperFunctions.marketBuyOrdersNoThrow (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#3912-3920) should be declared external
+IWrapperFunctions.marketSellOrdersFillOrKill (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#3944-3955) should be declared external
+IWrapperFunctions.marketBuyOrdersFillOrKill (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#3957-3958) should be declared external
+IWrapperFunctions.batchCancelOrders (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#3959-3962) should be declared external
+ITransferSimulator.simulateDispatchTransferFromCalls (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#4007-4010) should be declared external
+RariFundController.getEntireBalance (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#4411-4417) should be declared external
+RariFundController.marketSell0xOrdersFillOrKill (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol:
+	- pragma solidity^0.5.0 (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#7-10): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#173): it allows old versions
+	- pragma solidity>=0.4.24<0.7.0 (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#237): is has a complex pragma
+	- pragma solidity^0.5.0 (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#301): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#335): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#422): it allows old versions
+	- pragma solidity^0.5.5 (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#503-504): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#575-577): it allows old versions
+	- pragma solidity^0.5.9 (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#673-674): it allows old versions
+	- pragma solidity^0.5.9 (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#796-797): it allows old versions
+	- pragma solidity^0.5.9 (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#976-977): it allows old versions
+	- pragma solidity^0.5.9 (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1080): it allows old versions
+	- pragma solidity0.5.17 (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1105-1107): it allows old versions
+	- pragma solidity0.5.17 (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1156): it allows old versions
+	- pragma solidity0.5.17 (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1219): it allows old versions
+	- pragma solidity0.5.17 (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1265-1266): it allows old versions
+	- pragma solidity0.5.17 (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1329): it allows old versions
+	- pragma solidity0.5.17 (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1381): it allows old versions
+	- pragma solidity0.5.17 (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1409-1410): it allows old versions
+	- pragma solidity0.5.17 (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1548-1550): it allows old versions
+	- pragma solidity0.5.17 (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1591): it allows old versions
+	- pragma solidity0.5.17 (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1646): it allows old versions
+	- pragma solidity0.5.17 (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1650): it allows old versions
+	- pragma solidity0.5.17 (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1699): it allows old versions
+	- pragma solidity0.5.17 (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1793-1794): it allows old versions
+	- pragma solidity0.5.17 (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1811): it allows old versions
+	- pragma solidity0.5.17 (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1870): it allows old versions
+	- pragma solidity0.5.17 (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1937): it allows old versions
+	- pragma solidity0.5.17 (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1976-1977): it allows old versions
+	- pragma solidity0.5.17 (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#2043-2044): it allows old versions
+	- pragma solidity0.5.17 (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#2140-2142): it allows old versions
+	- pragma solidity^0.5.9 (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#2295-2297): it allows old versions
+	- pragma solidity^0.5.9 (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#2353-2354): it allows old versions
+	- pragma solidity^0.5.9 (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#2418-2420): it allows old versions
+	- pragma solidity^0.5.9 (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#2504): it allows old versions
+	- pragma solidity^0.5.9 (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#2550-2551): it allows old versions
+	- pragma solidity^0.5.9 (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#2760-2761): it allows old versions
+	- pragma solidity^0.5.9 (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#3176): it allows old versions
+	- pragma solidity^0.5.9 (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#3308): it allows old versions
+	- pragma solidity^0.5.9 (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#3343-3344): it allows old versions
+	- pragma solidity^0.5.9 (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#3461): it allows old versions
+	- pragma solidity^0.5.9 (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#3586): it allows old versions
+	- pragma solidity^0.5.9 (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#3720-3722): it allows old versions
+	- pragma solidity^0.5.9 (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#3784): it allows old versions
+	- pragma solidity^0.5.9 (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#3816): it allows old versions
+	- pragma solidity^0.5.9 (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#3986): it allows old versions
+	- pragma solidity^0.5.9 (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#4017): it allows old versions
+	- pragma solidity0.5.17 (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#4034): it allows old versions
+	- pragma solidity0.5.17 (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#4198): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Low level call in Address.sendValue (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#566-571):
+	-(success) = recipient.call.value(amount)() /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#570
+Low level call in SafeERC20.callOptionalReturn (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#621-650):
+	-(success,returndata) = address(token).call(data) /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#642-646
+Low level call in RariFundController._upgradeFundController (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#4325-4350):
+	-(success) = newContract.call.value(balance)() /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#4347-4348
+Low level call in RariFundController.withdrawToManager (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#4561-4576):
+	-(success) = _rariFundManagerContract.call.value(amount)() /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol
+Low level call in RariFundController.marketSell0xOrdersFillOrKill (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol):
+	-(success) = msg.sender.call.value(refund)() /sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Variable 'Initializable.______gap' (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#299-300) is not in mixedCase
+Function 'Context._msgSender' (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#319-324) is not in mixedCase
+Function 'Context._msgData' (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#325-334) is not in mixedCase
+Function 'Ownable._transferOwnership' (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#410-417) is not in mixedCase
+Variable 'Ownable.______gap' (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#417) is not in mixedCase
+Constant 'DydxPoolController._soloMargin' (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1421-1423) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'DydxPoolController._weth' (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1427-1429) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'CompoundPoolController.cETH_CONTACT_ADDRESS' (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1602-1607) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'CompoundPoolController._cETHContract' (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1607-1611) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'KeeperDaoPoolController._liquidityPool' (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1711-1713) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'AavePoolController._lendingPool' (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1898-1899) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'AavePoolController.aETH' (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1909-1912) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'AlphaPoolController._ibEth' (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#2001-2002) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'EnzymePoolController._weth' (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#2159-2160) is not in UPPER_CASE_WITH_UNDERSCORES
+Function 'LibRichErrors.StandardError' (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#2327-2334) is not in mixedCase
+Function 'LibSafeMathRichErrors.Uint256BinOpError' (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#2383-2405) is not in mixedCase
+Function 'LibSafeMathRichErrors.Uint256DowncastError' (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#2405-2417) is not in mixedCase
+Function 'LibMathRichErrors.DivisionByZeroError' (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#2513-2519) is not in mixedCase
+Function 'LibMathRichErrors.RoundingError' (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#2519-2532) is not in mixedCase
+Function 'LibFillResults._calculateMatchedFillResults' (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#2943-3003) is not in mixedCase
+Function 'LibFillResults._calculateMatchedFillResultsWithMaximalFill' (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#3014-3093) is not in mixedCase
+Function 'LibFillResults._calculateCompleteFillBoth' (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#3119-3140) is not in mixedCase
+Function 'LibFillResults._calculateCompleteRightFill' (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#3147-3163) is not in mixedCase
+Function 'ISignatureValidator._isValidOrderWithHashSignature' (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#3673-3679) is not in mixedCase
+Function 'ISignatureValidator._isValidTransactionWithHashSignature' (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#3693-3699) is not in mixedCase
+Function 'ITransactions._getCurrentContextAddress' (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#3769-3770) is not in mixedCase
+Constant 'ZeroExExchangeController._exchange' (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#4042) is not in UPPER_CASE_WITH_UNDERSCORES
+Function 'RariFundController._upgradeFundController' (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#4325-4350) is not in mixedCase
+Function 'RariFundController._getPoolBalance' (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#4384-4392) is not in mixedCase
+Function 'RariFundController._withdrawFromPool' (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#4496-4512) is not in mixedCase
+Function 'RariFundController._withdrawAllFromPool' (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#4528-4540) is not in mixedCase
+Constant 'RariFundController._weth' (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#4242-4245) is not in UPPER_CASE_WITH_UNDERSCORES
+Variable 'RariFundController._poolsWithFunds' (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#4438-4439) is not in mixedCase
+Variable 'RariFundController._aaveReferralCode' (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#4442) is not in mixedCase
+Variable 'RariFundController._enzymeComptroller' (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#4450-4451) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+DydxPoolController.WETH_CONTRACT (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1425-1426) is never used in DydxPoolController
+CompoundPoolController.cETH_CONTACT_ADDRESS (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1602-1607) is never used in CompoundPoolController
+AavePoolController.LENDING_POOL_CONTRACT (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1886-1891) is never used in AavePoolController
+AavePoolController.LENDING_POOL_CORE_CONTRACT (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1900-1903) is never used in AavePoolController
+AavePoolController.AETH_CONTRACT (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1905-1906) is never used in AavePoolController
+AlphaPoolController.IBETH_CONTRACT (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#1994-1995) is never used in AlphaPoolController
+EnzymePoolController.WETH_CONTRACT (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#2152-2155) is never used in EnzymePoolController
+EnzymePoolController.IBETH_CONTRACT (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#2161-2163) is never used in EnzymePoolController
+ZeroExExchangeController.EXCHANGE_CONTRACT (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#4042) is never used in ZeroExExchangeController
+Ownable.______gap (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#417) is never used in RariFundController
+RariFundController._cachedBalances (/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol#4247-4248) is never used in RariFundController
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0xa422890cbbe5eaa8f1c88590fbab7f319d7e24b6.sol analyzed (49 contracts), 117 result(s) found

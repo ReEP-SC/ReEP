@@ -1,0 +1,132 @@
+INFO:Detectors:[93m
+Reentrancy in TinlakeManager.cull (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#322-337):
+	External calls:
+	- ilk = GemJoinLike(urn.gemJoin()).ilk() (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#324)
+	- (ink,art) = vat.urns(ilk,address(urn)) (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#326-330)
+	- (tau,toc) = liq.ilks(ilk) (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#331-332)
+	State variables written after the call(s):
+	- glad (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#335)
+Reentrancy in TinlakeManager.recover (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#340-353):
+	External calls:
+	- (recovered) = pool.disburse(endEpoch) (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#343-344)
+	- end.debt() == 0 (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#347-353)
+	- dai.approve(address(daiJoin),payBack) (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#349)
+	- daiJoin.join(vow,payBack) (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#349-350)
+	State variables written after the call(s):
+	- tab (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#350-353)
+Reentrancy in TinlakeManager.tell (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#280-296):
+	External calls:
+	- ilk = GemJoinLike(urn.gemJoin()).ilk() (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#282-284)
+	- (toc) = liq.ilks(ilk) (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#285-286)
+	- (art) = vat.urns(ilk,address(urn)) (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#288-291)
+	- (rate) = vat.ilks(ilk) (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#291-292)
+	- ink = gem.balanceOf(address(this)) (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#293)
+	State variables written after the call(s):
+	- safe (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#294)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+payBack in TinlakeManager.recover (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#344-345) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[93m
+TinlakeManager.lock (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#192-198) does not use the value returned by external calls:
+	-GemLike_3(GemJoinLike(urn.gemJoin()).gem()).approve(address(urn),uint256(wad)) (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#193-198)
+TinlakeManager.join (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#202-209) does not use the value returned by external calls:
+	-gem.transferFrom(msg.sender,address(this),wad) (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#208-209)
+TinlakeManager.exit (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#210-218) does not use the value returned by external calls:
+	-gem.transfer(msg.sender,wad) (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#216)
+TinlakeManager.draw (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#222-229) does not use the value returned by external calls:
+	-dai.transfer(msg.sender,wad) (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#225-226)
+TinlakeManager.wipe (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#229-236) does not use the value returned by external calls:
+	-dai.transferFrom(msg.sender,address(urn),wad) (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#231-233)
+TinlakeManager.migrate (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#243-249) does not use the value returned by external calls:
+	-dai.approve(dst,uint256(- 1)) (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#245-246)
+	-gem.approve(dst,uint256(- 1)) (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#246-247)
+TinlakeManager.file (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#250-275) does not use the value returned by external calls:
+	-dai.approve(data,uint256(- 1)) (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#256-258)
+TinlakeManager.tell (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#280-296) does not use the value returned by external calls:
+	-gem.approve(tranche,ink) (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#294)
+TinlakeManager.unwind (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#300-320) does not use the value returned by external calls:
+	-dai.transferFrom(address(this),address(urn),payBack) (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#314-315)
+	-dai.transfer(owner,dai.balanceOf(address(this))) (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#317)
+TinlakeManager.recover (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#340-353) does not use the value returned by external calls:
+	-dai.approve(address(daiJoin),payBack) (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#349)
+	-dai.transfer(owner,dai.balanceOf(address(this))) (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in TinlakeManager.cage (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol):
+	External calls:
+	- require(bool,string)(wards[msg.sender] == 1 || vat.live() == 0,TinlakeMgr/not-authorized) (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol)
+	State variables written after the call(s):
+	- live (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol)
+Reentrancy in TinlakeManager.migrate (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#243-249):
+	External calls:
+	- dai.approve(dst,uint256(- 1)) (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#245-246)
+	- gem.approve(dst,uint256(- 1)) (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#246-247)
+	State variables written after the call(s):
+	- live (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#247-248)
+Reentrancy in TinlakeManager.tell (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#280-296):
+	External calls:
+	- ilk = GemJoinLike(urn.gemJoin()).ilk() (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#282-284)
+	- (toc) = liq.ilks(ilk) (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#285-286)
+	- (art) = vat.urns(ilk,address(urn)) (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#288-291)
+	- (rate) = vat.ilks(ilk) (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#291-292)
+	State variables written after the call(s):
+	- tab (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#292)
+Reentrancy in TinlakeManager.unwind (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#300-320):
+	External calls:
+	- (redeemed) = pool.disburse(endEpoch) (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#303-304)
+	- ilk = GemJoinLike(urn.gemJoin()).ilk() (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#304-307)
+	- (art) = vat.urns(ilk,address(urn)) (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#307-308)
+	- (rate) = vat.ilks(ilk) (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#308)
+	- dai.transferFrom(address(this),address(urn),payBack) (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#314-315)
+	- urn.wipe(payBack) (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#315-316)
+	- dai.transfer(owner,dai.balanceOf(address(this))) (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#317)
+	State variables written after the call(s):
+	- tab (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#319)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+TinlakeManager.cull (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#322-337) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(block.timestamp >= add(toc,tau),TinlakeMgr/early-cull) (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#333-335)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+TinlakeManager.lock (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#192-198) should be declared external
+TinlakeManager.free (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#199-201) should be declared external
+TinlakeManager.join (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#202-209) should be declared external
+TinlakeManager.exit (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#210-218) should be declared external
+TinlakeManager.draw (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#222-229) should be declared external
+TinlakeManager.wipe (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#229-236) should be declared external
+TinlakeManager.quit (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#239-243) should be declared external
+TinlakeManager.migrate (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#243-249) should be declared external
+TinlakeManager.file (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#250-275) should be declared external
+TinlakeManager.tell (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#280-296) should be declared external
+TinlakeManager.unwind (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#300-320) should be declared external
+TinlakeManager.cull (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#322-337) should be declared external
+TinlakeManager.recover (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#340-353) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol:
+	- pragma solidity=0.5.12 (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#13-15): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Contract 'GemLike_3' (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#37-46) is not in CapWords
+Parameter '' of GemLike_3.transfer (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#38-39) is not in mixedCase
+Parameter '_scope_0' of GemLike_3.transfer (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#39) is not in mixedCase
+Parameter '' of GemLike_3.transferFrom (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#39) is not in mixedCase
+Parameter '_scope_0' of GemLike_3.transferFrom (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#39-40) is not in mixedCase
+Parameter '_scope_1' of GemLike_3.transferFrom (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#40) is not in mixedCase
+Parameter '' of GemLike_3.approve (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#40-41) is not in mixedCase
+Parameter '_scope_0' of GemLike_3.approve (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#41) is not in mixedCase
+Parameter '' of GemLike_3.balanceOf (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#45) is not in mixedCase
+Parameter '' of JoinLike.join (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#47) is not in mixedCase
+Parameter '_scope_0' of JoinLike.join (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#47) is not in mixedCase
+Parameter '' of JoinLike.exit (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#50-51) is not in mixedCase
+Parameter '_scope_0' of JoinLike.exit (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#51) is not in mixedCase
+Parameter '' of RedeemLike.redeemOrder (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#56) is not in mixedCase
+Parameter '' of RedeemLike.disburse (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#56-59) is not in mixedCase
+Contract 'VatLike_5' (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#60-66) is not in CapWords
+Parameter '' of VatLike_5.urns (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#61) is not in mixedCase
+Parameter '_scope_0' of VatLike_5.urns (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#61) is not in mixedCase
+Parameter '' of VatLike_5.ilks (/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol#61-62) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xaf1f5f5a203aaf08237013a7280b03f35147b9d2.sol analyzed (9 contracts), 52 result(s) found

@@ -1,0 +1,96 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol:
+Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing "SPDX-License-Identifier: <SPDX-License>" to each source file. Use "SPDX-License-Identifier: UNLICENSED" for non-open-source code. Please see https://spdx.org for more information.
+--> /sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol
+
+
+INFO:Detectors:[93m
+IERC721 (/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#430-555) has incorrect ERC20 function interface(s):
+	-transferFrom (/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#489-493)
+	-approve (/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#509-511)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[93m
+Reentrancy in RNGDistributor.fulfillRandomness (/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#646-649):
+	External calls:
+	- recipient = IERC721(nftRecipientAddress[requestId]).ownerOf(randomness % (endIndex + 1 - startIndex) + startIndex) (/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol)
+	- IERC721(rewardAddress[requestId]).transferFrom(address(this),recipient,rewardId[requestId]) (/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol)
+	State variables written after the call(s):
+	- nftRecipientAddress (/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol)
+	- nftRecipientEnd (/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol)
+	- nftRecipientStart (/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+VRFConsumerBase.requestRandomness (/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#340-362) does not use the value returned by external calls:
+	-LINK.transferAndCall(vrfCoordinator,_fee,abi.encode(_keyHash,USER_SEED_PLACEHOLDER)) (/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#342-343)
+RNGDistributor.distributeToNftHolders (/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#634-646) does not use the value returned by external calls:
+	-link.transferFrom(msg.sender,address(this),fee) (/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#636-637)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in RNGDistributor.distributeToNftHolders (/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#634-646):
+	External calls:
+	- link.transferFrom(msg.sender,address(this),fee) (/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#636-637)
+	- IERC721(_rewardAddress).safeTransferFrom(msg.sender,address(this),_rewardId) (/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#637-638)
+	- requestId = requestRandomness(keyHash,fee) (/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#638-639)
+	State variables written after the call(s):
+	- nftRecipientAddress (/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#639-643)
+	- nftRecipientEnd (/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#643-644)
+	- nftRecipientStart (/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#643)
+	- rewardAddress (/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#644-645)
+	- rewardId (/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#645-646)
+Reentrancy in VRFConsumerBase.requestRandomness (/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#340-362):
+	External calls:
+	- LINK.transferAndCall(vrfCoordinator,_fee,abi.encode(_keyHash,USER_SEED_PLACEHOLDER)) (/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#342-343)
+	State variables written after the call(s):
+	- nonces (/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#359)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Different versions of Solidity is used in /sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol:
+	- Version used: ['^0.6.0', '^0.6.2', '^0.6.8']
+	- /sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#8-11 declares pragma solidity^0.6.0
+	- /sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#122 declares pragma solidity^0.6.0
+	- /sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#145-146 declares pragma solidity^0.6.0
+	- /sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#189 declares pragma solidity^0.6.0
+	- /sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#398 declares pragma solidity^0.6.0
+	- /sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#427 declares pragma solidity^0.6.2
+	- /sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#556 declares pragma solidity^0.6.0
+	- /sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#584-585 declares pragma solidity^0.6.0
+	- /sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#613-615 declares pragma solidity^0.6.8
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#different-pragma-directives-are-used[0m
+INFO:Detectors:[92m
+IERC721Receiver.onERC721Received (/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#580-583) should be declared external
+ERC721Holder.onERC721Received (/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#608-611) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol:
+	- pragma solidity^0.6.0 (/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#8-11): it allows old versions
+	- pragma solidity^0.6.0 (/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#122): it allows old versions
+	- pragma solidity^0.6.0 (/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#145-146): it allows old versions
+	- pragma solidity^0.6.0 (/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#189): it allows old versions
+	- pragma solidity^0.6.0 (/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#398): it allows old versions
+	- pragma solidity^0.6.2 (/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#427): it allows old versions
+	- pragma solidity^0.6.0 (/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#556): it allows old versions
+	- pragma solidity^0.6.0 (/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#584-585): it allows old versions
+	- pragma solidity^0.6.8 (/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#613-615): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_keyHash' of VRFRequestIDBase.makeVRFInputSeed (/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#161) is not in mixedCase
+Parameter '_userSeed' of VRFRequestIDBase.makeVRFInputSeed (/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#161) is not in mixedCase
+Parameter '_requester' of VRFRequestIDBase.makeVRFInputSeed (/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#161-165) is not in mixedCase
+Parameter '_nonce' of VRFRequestIDBase.makeVRFInputSeed (/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#165) is not in mixedCase
+Parameter '_keyHash' of VRFRequestIDBase.makeRequestId (/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#179-181) is not in mixedCase
+Parameter '_vRFInputSeed' of VRFRequestIDBase.makeRequestId (/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#181) is not in mixedCase
+Parameter '_keyHash' of VRFConsumerBase.requestRandomness (/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#341) is not in mixedCase
+Parameter '_fee' of VRFConsumerBase.requestRandomness (/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#341) is not in mixedCase
+Parameter '_vrfCoordinator' of VRFConsumerBase. (/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#375) is not in mixedCase
+Parameter '_link' of VRFConsumerBase. (/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#375-376) is not in mixedCase
+Variable 'VRFConsumerBase.LINK' (/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#362-363) is not in mixedCase
+Parameter '' of ERC721Holder.onERC721Received (/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#608) is not in mixedCase
+Parameter '_scope_0' of ERC721Holder.onERC721Received (/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#608-609) is not in mixedCase
+Parameter '_scope_1' of ERC721Holder.onERC721Received (/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#609) is not in mixedCase
+Parameter '_scope_2' of ERC721Holder.onERC721Received (/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#609) is not in mixedCase
+Parameter '_link' of RNGDistributor. (/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#628) is not in mixedCase
+Parameter '_keyHash' of RNGDistributor. (/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#628-629) is not in mixedCase
+Parameter '_nftRecipientAddress' of RNGDistributor.distributeToNftHolders (/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#634-635) is not in mixedCase
+Parameter '_rewardAddress' of RNGDistributor.distributeToNftHolders (/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#635-636) is not in mixedCase
+Parameter '_rewardId' of RNGDistributor.distributeToNftHolders (/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol#636) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x8d514cf4912c7ed280afe4cdf2738ef9282fa546.sol analyzed (9 contracts), 30 result(s) found

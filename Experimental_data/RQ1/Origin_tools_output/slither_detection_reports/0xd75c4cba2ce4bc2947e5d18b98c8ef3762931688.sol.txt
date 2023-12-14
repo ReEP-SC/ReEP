@@ -1,0 +1,69 @@
+INFO:Detectors:[93m
+KotowarsChallenge.accept_challenge (/sb/0xd75c4cba2ce4bc2947e5d18b98c8ef3762931688.sol#72-90) uses a dangerous strict equality:
+	- require(bool)(challenge.status == ChallengeStatus.Created)
+KotowarsChallenge.accept_challenge (/sb/0xd75c4cba2ce4bc2947e5d18b98c8ef3762931688.sol#72-90) uses a dangerous strict equality:
+	- require(bool)(challenge.status == ChallengeStatus.Created)
+KotowarsChallenge.resolve (/sb/0xd75c4cba2ce4bc2947e5d18b98c8ef3762931688.sol#91-110) uses a dangerous strict equality:
+	- require(bool)(challenge.status == ChallengeStatus.Accepted)
+KotowarsChallenge.accept_challenge (/sb/0xd75c4cba2ce4bc2947e5d18b98c8ef3762931688.sol#72-90) uses a dangerous strict equality:
+	- require(bool)(challenge.status == ChallengeStatus.Created)
+KotowarsChallenge.resolve (/sb/0xd75c4cba2ce4bc2947e5d18b98c8ef3762931688.sol#91-110) uses a dangerous strict equality:
+	- require(bool)(challenge.status == ChallengeStatus.Accepted)
+KotowarsChallenge.unlock_funds (/sb/0xd75c4cba2ce4bc2947e5d18b98c8ef3762931688.sol#110-138) uses a dangerous strict equality:
+	- challenge.status == ChallengeStatus.Created
+	- challenge.status == ChallengeStatus.Accepted
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Reentrancy in KotowarsChallenge.accept_challenge (/sb/0xd75c4cba2ce4bc2947e5d18b98c8ef3762931688.sol#72-90):
+	External calls:
+	- require(bool)(WCK.transferFrom(msg.sender,address(this),(challenge.buy_in + fee) * WCK.decimals())) (/sb/0xd75c4cba2ce4bc2947e5d18b98c8ef3762931688.sol#78-81)
+	State variables written after the call(s):
+	- challenges (/sb/0xd75c4cba2ce4bc2947e5d18b98c8ef3762931688.sol#86-89)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+KotowarsChallenge.withdraw (/sb/0xd75c4cba2ce4bc2947e5d18b98c8ef3762931688.sol#169-175) does not use the value returned by external calls:
+	-WCK.transfer(msg.sender,WCK.balanceOf(address(this))) (/sb/0xd75c4cba2ce4bc2947e5d18b98c8ef3762931688.sol#173-174)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in KotowarsChallenge.create_challenge (/sb/0xd75c4cba2ce4bc2947e5d18b98c8ef3762931688.sol#54-71):
+	External calls:
+	- require(bool)(WCK.transferFrom(msg.sender,address(this),(buy_in + fee) * WCK.decimals())) (/sb/0xd75c4cba2ce4bc2947e5d18b98c8ef3762931688.sol#55-57)
+	State variables written after the call(s):
+	- challenges (/sb/0xd75c4cba2ce4bc2947e5d18b98c8ef3762931688.sol#67)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+KotowarsChallenge.create_challenge (/sb/0xd75c4cba2ce4bc2947e5d18b98c8ef3762931688.sol#54-71) should be declared external
+KotowarsChallenge.accept_challenge (/sb/0xd75c4cba2ce4bc2947e5d18b98c8ef3762931688.sol#72-90) should be declared external
+KotowarsChallenge.resolve (/sb/0xd75c4cba2ce4bc2947e5d18b98c8ef3762931688.sol#91-110) should be declared external
+KotowarsChallenge.unlock_funds (/sb/0xd75c4cba2ce4bc2947e5d18b98c8ef3762931688.sol#110-138) should be declared external
+KotowarsChallenge.set_challenge_ttl (/sb/0xd75c4cba2ce4bc2947e5d18b98c8ef3762931688.sol#138-143) should be declared external
+KotowarsChallenge.set_min_buy_in (/sb/0xd75c4cba2ce4bc2947e5d18b98c8ef3762931688.sol#143-148) should be declared external
+KotowarsChallenge.set_fee (/sb/0xd75c4cba2ce4bc2947e5d18b98c8ef3762931688.sol#148-153) should be declared external
+KotowarsChallenge.set_wck_address (/sb/0xd75c4cba2ce4bc2947e5d18b98c8ef3762931688.sol#153-158) should be declared external
+KotowarsChallenge.add_admin (/sb/0xd75c4cba2ce4bc2947e5d18b98c8ef3762931688.sol#158-164) should be declared external
+KotowarsChallenge.remove_admin (/sb/0xd75c4cba2ce4bc2947e5d18b98c8ef3762931688.sol#165-167) should be declared external
+KotowarsChallenge.withdraw (/sb/0xd75c4cba2ce4bc2947e5d18b98c8ef3762931688.sol#169-175) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xd75c4cba2ce4bc2947e5d18b98c8ef3762931688.sol:
+	- pragma solidity^0.5.0 (/sb/0xd75c4cba2ce4bc2947e5d18b98c8ef3762931688.sol#5-7): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'KotowarsChallenge.create_challenge' (/sb/0xd75c4cba2ce4bc2947e5d18b98c8ef3762931688.sol#54-71) is not in mixedCase
+Parameter 'buy_in' of KotowarsChallenge.create_challenge (/sb/0xd75c4cba2ce4bc2947e5d18b98c8ef3762931688.sol#54-55) is not in mixedCase
+Function 'KotowarsChallenge.accept_challenge' (/sb/0xd75c4cba2ce4bc2947e5d18b98c8ef3762931688.sol#72-90) is not in mixedCase
+Parameter 'challenge_id' of KotowarsChallenge.accept_challenge (/sb/0xd75c4cba2ce4bc2947e5d18b98c8ef3762931688.sol#72-73) is not in mixedCase
+Parameter 'challenge_id' of KotowarsChallenge.resolve (/sb/0xd75c4cba2ce4bc2947e5d18b98c8ef3762931688.sol#91) is not in mixedCase
+Function 'KotowarsChallenge.unlock_funds' (/sb/0xd75c4cba2ce4bc2947e5d18b98c8ef3762931688.sol#110-138) is not in mixedCase
+Parameter 'challenge_id' of KotowarsChallenge.unlock_funds (/sb/0xd75c4cba2ce4bc2947e5d18b98c8ef3762931688.sol#112) is not in mixedCase
+Function 'KotowarsChallenge.set_challenge_ttl' (/sb/0xd75c4cba2ce4bc2947e5d18b98c8ef3762931688.sol#138-143) is not in mixedCase
+Function 'KotowarsChallenge.set_min_buy_in' (/sb/0xd75c4cba2ce4bc2947e5d18b98c8ef3762931688.sol#143-148) is not in mixedCase
+Function 'KotowarsChallenge.set_fee' (/sb/0xd75c4cba2ce4bc2947e5d18b98c8ef3762931688.sol#148-153) is not in mixedCase
+Function 'KotowarsChallenge.set_wck_address' (/sb/0xd75c4cba2ce4bc2947e5d18b98c8ef3762931688.sol#153-158) is not in mixedCase
+Function 'KotowarsChallenge.add_admin' (/sb/0xd75c4cba2ce4bc2947e5d18b98c8ef3762931688.sol#158-164) is not in mixedCase
+Function 'KotowarsChallenge.remove_admin' (/sb/0xd75c4cba2ce4bc2947e5d18b98c8ef3762931688.sol#165-167) is not in mixedCase
+Variable 'KotowarsChallenge.WCKAddress' (/sb/0xd75c4cba2ce4bc2947e5d18b98c8ef3762931688.sol#30) is not in mixedCase
+Variable 'KotowarsChallenge.challenge_ttl' (/sb/0xd75c4cba2ce4bc2947e5d18b98c8ef3762931688.sol#31-32) is not in mixedCase
+Variable 'KotowarsChallenge.min_buy_in' (/sb/0xd75c4cba2ce4bc2947e5d18b98c8ef3762931688.sol#34) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xd75c4cba2ce4bc2947e5d18b98c8ef3762931688.sol analyzed (2 contracts), 34 result(s) found

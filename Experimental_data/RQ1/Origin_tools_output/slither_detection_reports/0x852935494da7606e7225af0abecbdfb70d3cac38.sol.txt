@@ -1,0 +1,93 @@
+INFO:Detectors:[93m
+Reentrancy in Pool1.lift (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#471-496):
+	External calls:
+	- updateAccount(msg.sender) (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#476-478)
+	- require(bool,string)(Token(tokenAddress).transfer(admin,fee),Could not transfer withdraw fee.) (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#483-487)
+	- require(bool,string)(Token(tokenAddress).transfer(msg.sender,amountAfterFee),Could not transfer tokens.) (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#487-490)
+	State variables written after the call(s):
+	- depositedTokens (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#491-494)
+Reentrancy in Pool1.place (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#451-471):
+	External calls:
+	- require(bool,string)(Token(tokenAddress).transferFrom(msg.sender,address(this),amountToStake),Insufficient Token Allowance) (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#454-457)
+	- updateAccount(msg.sender) (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#458)
+	- require(bool,string)(Token(tokenAddress).transfer(admin,fee),Could not transfer deposit fee.) (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#464-466)
+	State variables written after the call(s):
+	- depositedTokens (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#466)
+Reentrancy in Pool1.updateAccount (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#416-432):
+	External calls:
+	- require(bool,string)(Token(tokenAddress).transfer(account,unclaimedDivs),Could not transfer tokens.) (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#421-423)
+	State variables written after the call(s):
+	- lastClaimedTime (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#431)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+EnumerableSet._remove (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#103-139) does not use the value returned by external calls:
+	-set._values.pop() (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#130-131)
+Pool1.transferAnyERC20Tokens (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#410-415) does not use the value returned by external calls:
+	-Token(_tokenAddr).transfer(_to,_amount) (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#415)
+Pool1.place (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#451-471) does not use the value returned by external calls:
+	-holders.add(msg.sender) (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#470)
+Pool1.lift (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#471-496) does not use the value returned by external calls:
+	-holders.remove(msg.sender) (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in Pool1.place (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#451-471):
+	External calls:
+	- require(bool,string)(Token(tokenAddress).transferFrom(msg.sender,address(this),amountToStake),Insufficient Token Allowance) (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#454-457)
+	- updateAccount(msg.sender) (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#458)
+	- require(bool,string)(Token(tokenAddress).transfer(admin,fee),Could not transfer deposit fee.) (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#464-466)
+	State variables written after the call(s):
+	- stakingTime (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#470-471)
+Reentrancy in Pool1.updateAccount (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#416-432):
+	External calls:
+	- require(bool,string)(Token(tokenAddress).transfer(account,unclaimedDivs),Could not transfer tokens.) (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#421-423)
+	State variables written after the call(s):
+	- totalClaimedRewards (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#426-428)
+	- totalEarnedTokens (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#424-426)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#319-326) should be declared external
+Pool1.setTokenAddresses (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#367-377) should be declared external
+Pool1.stakingFeeRateSet (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#377-383) should be declared external
+Pool1.rewardRateSet (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#384-388) should be declared external
+Pool1.StakingReturnsAmountSet (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#388-394) should be declared external
+Pool1.possibleUnstakeTimeSet (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#394-399) should be declared external
+Pool1.rewardIntervalSet (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#399-401) should be declared external
+Pool1.allowStaking (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#401-410) should be declared external
+Pool1.transferAnyERC20Tokens (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#410-415) should be declared external
+Pool1.getNumberOfHolders (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#448-451) should be declared external
+Pool1.place (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#451-471) should be declared external
+Pool1.lift (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#471-496) should be declared external
+Pool1.claimYields (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol:
+	- pragma solidity0.6.12 (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#1): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'EnumerableSet._add' (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#85-99) is not in mixedCase
+Function 'EnumerableSet._remove' (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#103-139) is not in mixedCase
+Function 'EnumerableSet._contains' (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#144-146) is not in mixedCase
+Function 'EnumerableSet._length' (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#151-153) is not in mixedCase
+Function 'EnumerableSet._at' (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#161-174) is not in mixedCase
+Parameter '' of Token.transferFrom (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#328) is not in mixedCase
+Parameter '_scope_0' of Token.transferFrom (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#328-329) is not in mixedCase
+Parameter '_scope_1' of Token.transferFrom (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#329) is not in mixedCase
+Parameter '' of Token.transfer (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#331) is not in mixedCase
+Parameter '_scope_0' of Token.transfer (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#331-332) is not in mixedCase
+Parameter '_tokenAddr' of Pool1.setTokenAddresses (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#368) is not in mixedCase
+Parameter '_stakingFeeRate' of Pool1.stakingFeeRateSet (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#377) is not in mixedCase
+Parameter '_unstakingFeeRate' of Pool1.stakingFeeRateSet (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#377-378) is not in mixedCase
+Parameter '_rewardRate' of Pool1.rewardRateSet (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#384) is not in mixedCase
+Function 'Pool1.StakingReturnsAmountSet' (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#388-394) is not in mixedCase
+Parameter '_poolreward' of Pool1.StakingReturnsAmountSet (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#390) is not in mixedCase
+Parameter '_possibleUnstakeTime' of Pool1.possibleUnstakeTimeSet (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#395) is not in mixedCase
+Parameter '_rewardInterval' of Pool1.rewardIntervalSet (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#399) is not in mixedCase
+Parameter '_status' of Pool1.allowStaking (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#402-403) is not in mixedCase
+Parameter '_tokenAddr' of Pool1.transferAnyERC20Tokens (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#411) is not in mixedCase
+Parameter '_to' of Pool1.transferAnyERC20Tokens (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#411) is not in mixedCase
+Parameter '_amount' of Pool1.transferAnyERC20Tokens (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#411) is not in mixedCase
+Parameter '_holder' of Pool1.getUnclaimedDivs (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#433) is not in mixedCase
+Variable 'Pool1.PossibleUnstakeTime' (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#354) is not in mixedCase
+Variable 'Pool1.FundedTokens' (/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol#355-357) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x852935494da7606e7225af0abecbdfb70d3cac38.sol analyzed (5 contracts), 48 result(s) found

@@ -1,0 +1,65 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xacf999bfa9347e8ebe6816ed30bf44b127233177.sol:
+/sb/0xacf999bfa9347e8ebe6816ed30bf44b127233177.sol:265:20: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+    bytes32 hash = sha256(this, token, amount, user, nonce);
+                   ^--------------------------------------^
+/sb/0xacf999bfa9347e8ebe6816ed30bf44b127233177.sol:273:23: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+    require(ecrecover(keccak256("\x19Ethereum Signed Message:\n32", hash), v, r, s) == user);
+                      ^-------------------------------------------------^
+/sb/0xacf999bfa9347e8ebe6816ed30bf44b127233177.sol:335:25: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+ ... sha256(this, tradeAddresses[0], tradeValues[0], tradeAddresses[1], tradeValues[1], tradeValues[2], tradeValues[3], tradeAddresses[2]) ... 
+     ^-----------------------------------------------------------------------------------------------------------------------------------^
+/sb/0xacf999bfa9347e8ebe6816ed30bf44b127233177.sol:337:23: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+    require(ecrecover(keccak256("\x19Ethereum Signed Message:\n32", orderHash), v[0], rs[0], rs[1]) == tradeAddresses[2]);
+                      ^------------------------------------------------------^
+/sb/0xacf999bfa9347e8ebe6816ed30bf44b127233177.sol:339:25: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+    bytes32 tradeHash = sha256(orderHash, tradeValues[4], tradeAddresses[3], tradeValues[5]);
+                        ^------------------------------------------------------------------^
+/sb/0xacf999bfa9347e8ebe6816ed30bf44b127233177.sol:341:23: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+    require(ecrecover(keccak256("\x19Ethereum Signed Message:\n32", tradeHash), v[1], rs[2], rs[3]) == tradeAddresses[3]);
+                      ^------------------------------------------------------^
+/sb/0xacf999bfa9347e8ebe6816ed30bf44b127233177.sol:381:20: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+    bytes32 hash = sha256(this, tokenGet, amountGet, tokenGive, amountGive, expires, nonce, msg.sender, user);
+                   ^----------------------------------------------------------------------------------------^
+/sb/0xacf999bfa9347e8ebe6816ed30bf44b127233177.sol:383:22: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+    assert(ecrecover(keccak256("\x19Ethereum Signed Message:\n32", hash),v,r,s) == user);
+                     ^-------------------------------------------------^
+
+INFO:Detectors:[92m
+Reentrancy in AXNETDEX.depositToken (/sb/0xacf999bfa9347e8ebe6816ed30bf44b127233177.sol#251-269):
+	External calls:
+	- assert(bool)(Token(token).transferFrom(msg.sender,this,amount)) (/sb/0xacf999bfa9347e8ebe6816ed30bf44b127233177.sol#263)
+	State variables written after the call(s):
+	- tokens (/sb/0xacf999bfa9347e8ebe6816ed30bf44b127233177.sol#263-265)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Token.decimals should be constant (/sb/0xacf999bfa9347e8ebe6816ed30bf44b127233177.sol#157)
+Token.name should be constant (/sb/0xacf999bfa9347e8ebe6816ed30bf44b127233177.sol#155)
+Token.symbol should be constant (/sb/0xacf999bfa9347e8ebe6816ed30bf44b127233177.sol#155-157)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Owned.transferOwnership (/sb/0xacf999bfa9347e8ebe6816ed30bf44b127233177.sol#97-107) should be declared external
+Owned.acceptOwnership (/sb/0xacf999bfa9347e8ebe6816ed30bf44b127233177.sol#107-123) should be declared external
+Token.totalSupply (/sb/0xacf999bfa9347e8ebe6816ed30bf44b127233177.sol#123-125) should be declared external
+Token.balanceOf (/sb/0xacf999bfa9347e8ebe6816ed30bf44b127233177.sol#125-129) should be declared external
+Token.allowance (/sb/0xacf999bfa9347e8ebe6816ed30bf44b127233177.sol#129-131) should be declared external
+Token.transfer (/sb/0xacf999bfa9347e8ebe6816ed30bf44b127233177.sol#131-133) should be declared external
+Token.approve (/sb/0xacf999bfa9347e8ebe6816ed30bf44b127233177.sol#133-137) should be declared external
+Token.transferFrom (/sb/0xacf999bfa9347e8ebe6816ed30bf44b127233177.sol#137-139) should be declared external
+AXNETDEX.fallback (/sb/0xacf999bfa9347e8ebe6816ed30bf44b127233177.sol#219-223) should be declared external
+AXNETDEX.setAdmin (/sb/0xacf999bfa9347e8ebe6816ed30bf44b127233177.sol#227-235) should be declared external
+AXNETDEX.changeFeeAccount (/sb/0xacf999bfa9347e8ebe6816ed30bf44b127233177.sol#239-245) should be declared external
+AXNETDEX.deposit (/sb/0xacf999bfa9347e8ebe6816ed30bf44b127233177.sol#245-251) should be declared external
+AXNETDEX.depositToken (/sb/0xacf999bfa9347e8ebe6816ed30bf44b127233177.sol#251-269) should be declared external
+AXNETDEX.adminWithdraw (/sb/0xacf999bfa9347e8ebe6816ed30bf44b127233177.sol#269-323) should be declared external
+AXNETDEX.balanceOf (/sb/0xacf999bfa9347e8ebe6816ed30bf44b127233177.sol#323-329) should be declared external
+AXNETDEX.trade (/sb/0xacf999bfa9347e8ebe6816ed30bf44b127233177.sol#337-383) should be declared external
+AXNETDEX.cancelOrder (/sb/0xacf999bfa9347e8ebe6816ed30bf44b127233177.sol#383-391) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xacf999bfa9347e8ebe6816ed30bf44b127233177.sol:
+	- pragma solidity^0.4.23 (/sb/0xacf999bfa9347e8ebe6816ed30bf44b127233177.sol#9-13): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_newOwner' of Owned.transferOwnership (/sb/0xacf999bfa9347e8ebe6816ed30bf44b127233177.sol#103) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xacf999bfa9347e8ebe6816ed30bf44b127233177.sol analyzed (4 contracts), 21 result(s) found

@@ -1,0 +1,44 @@
+INFO:Detectors:[93m
+Reentrancy in LockToken.lock (/sb/0x8b0988983dd163390f8a4cc449235a577d7e043c.sol#187-207):
+	External calls:
+	- require(bool)(tokenBalance() > 0) (/sb/0x8b0988983dd163390f8a4cc449235a577d7e043c.sol#197-199)
+	State variables written after the call(s):
+	- isLocked (/sb/0x8b0988983dd163390f8a4cc449235a577d7e043c.sol#205-207)
+Reentrancy in LockToken.release (/sb/0x8b0988983dd163390f8a4cc449235a577d7e043c.sol#215-223):
+	External calls:
+	- token_amount = tokenBalance() (/sb/0x8b0988983dd163390f8a4cc449235a577d7e043c.sol)
+	- token_reward.transfer(beneficiary,token_amount) (/sb/0x8b0988983dd163390f8a4cc449235a577d7e043c.sol)
+	State variables written after the call(s):
+	- isReleased (/sb/0x8b0988983dd163390f8a4cc449235a577d7e043c.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+LockToken.release (/sb/0x8b0988983dd163390f8a4cc449235a577d7e043c.sol#215-223) does not use the value returned by external calls:
+	-token_reward.transfer(beneficiary,token_amount) (/sb/0x8b0988983dd163390f8a4cc449235a577d7e043c.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in LockToken.lock (/sb/0x8b0988983dd163390f8a4cc449235a577d7e043c.sol#187-207):
+	External calls:
+	- require(bool)(tokenBalance() > 0) (/sb/0x8b0988983dd163390f8a4cc449235a577d7e043c.sol#197-199)
+	State variables written after the call(s):
+	- end_time (/sb/0x8b0988983dd163390f8a4cc449235a577d7e043c.sol#204-205)
+	- start_time (/sb/0x8b0988983dd163390f8a4cc449235a577d7e043c.sol#199)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+token.balanceOf (/sb/0x8b0988983dd163390f8a4cc449235a577d7e043c.sol#71-73) should be declared external
+token.transfer (/sb/0x8b0988983dd163390f8a4cc449235a577d7e043c.sol#73-85) should be declared external
+Ownable.transferOwnership (/sb/0x8b0988983dd163390f8a4cc449235a577d7e043c.sol#127-147) should be declared external
+LockToken.lock (/sb/0x8b0988983dd163390f8a4cc449235a577d7e043c.sol#187-207) should be declared external
+LockToken.release (/sb/0x8b0988983dd163390f8a4cc449235a577d7e043c.sol#215-223) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x8b0988983dd163390f8a4cc449235a577d7e043c.sol:
+	- pragma solidity^0.4.18 (/sb/0x8b0988983dd163390f8a4cc449235a577d7e043c.sol#9-14): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Contract 'token' (/sb/0x8b0988983dd163390f8a4cc449235a577d7e043c.sol#71-85) is not in CapWords
+Parameter '_beneficiary' of LockToken. (/sb/0x8b0988983dd163390f8a4cc449235a577d7e043c.sol#171) is not in mixedCase
+Variable 'LockToken.token_reward' (/sb/0x8b0988983dd163390f8a4cc449235a577d7e043c.sol#151-153) is not in mixedCase
+Variable 'LockToken.start_time' (/sb/0x8b0988983dd163390f8a4cc449235a577d7e043c.sol#161) is not in mixedCase
+Variable 'LockToken.end_time' (/sb/0x8b0988983dd163390f8a4cc449235a577d7e043c.sol#161-163) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x8b0988983dd163390f8a4cc449235a577d7e043c.sol analyzed (4 contracts), 15 result(s) found

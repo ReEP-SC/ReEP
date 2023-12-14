@@ -1,0 +1,196 @@
+INFO:Detectors:[91m
+Reentrancy in HorseyExchange.purchaseToken (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#298-334):
+	External calls:
+	- totalToPay = getTokenPrice(tokenId) (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#305)
+	External calls sending eth:
+	- sale.owner.transfer(sale.price) (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#315)
+	State variables written after the call(s):
+	- market (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#321)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities[0m
+INFO:Detectors:[93m
+ERC721Basic (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#156-165) has incorrect ERC20 function interface(s):
+	-approve (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#161)
+	-transferFrom (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#164)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[93m
+HorseyToken.noFeedingInProgress (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#972-976) uses a dangerous strict equality:
+	- require(bool,string)(pendingFeedings[msg.sender].blockNumber == 0,Already feeding)
+	- require(bool,string)(pendingFeedings[msg.sender].blockNumber == 0,Already feeding)
+HorseyPilot._doProposal (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#1282-1320) uses a dangerous strict equality:
+	- currentProposal.methodId == 0
+	- currentProposal.methodId == 1
+	- currentProposal.methodId == 2
+	- currentProposal.methodId == 3
+	- currentProposal.methodId == 4
+	- currentProposal.parameter == 0
+	- currentProposal.methodId == 5
+	- currentProposal.methodId == 8
+	- currentProposal.methodId == 9
+HorseyPilot._doProposal (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#1282-1320) uses a dangerous strict equality:
+	- currentProposal.methodId == 0
+	- currentProposal.methodId == 1
+	- currentProposal.methodId == 2
+	- currentProposal.methodId == 3
+	- currentProposal.methodId == 4
+	- currentProposal.parameter == 0
+	- currentProposal.methodId == 5
+	- currentProposal.methodId == 8
+	- currentProposal.methodId == 9
+HorseyPilot.cooledDown (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#1343-1348) uses a dangerous strict equality:
+	- msg.sender == currentProposal.proposer && (block.timestamp - cooldownStart < 86400)
+	- msg.sender == currentProposal.proposer && (block.timestamp - cooldownStart < 86400)
+HorseyPilot._doProposal (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#1282-1320) uses a dangerous strict equality:
+	- currentProposal.methodId == 0
+	- currentProposal.methodId == 1
+	- currentProposal.methodId == 2
+	- currentProposal.methodId == 3
+	- currentProposal.methodId == 4
+	- currentProposal.parameter == 0
+	- currentProposal.methodId == 5
+	- currentProposal.methodId == 8
+	- currentProposal.methodId == 9
+HorseyPilot.cooledDown (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#1343-1348) uses a dangerous strict equality:
+	- msg.sender == currentProposal.proposer && (block.timestamp - cooldownStart < 86400)
+	- msg.sender == currentProposal.proposer && (block.timestamp - cooldownStart < 86400)
+HorseyPilot.notVoted (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#1357-1372) uses a dangerous strict equality:
+	- currentProposal.yay[i] == msg.sender
+	- currentProposal.yay[i] == msg.sender
+	- currentProposal.nay[i] == msg.sender
+	- currentProposal.nay[i] == msg.sender
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Reentrancy in HorseyPilot.deployChildren (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#1109-1119):
+	External calls:
+	- HorseyExchange(exchangeAddress).setStables(stablesAddress) (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#1116)
+	State variables written after the call(s):
+	- deployed (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#1118)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+horse in EthorseHelpers._isWinnerOf (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#510) is a local variable never initialiazed
+temp in HorseyToken.getHorsey (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#802) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[92m
+Reentrancy in HorseyExchange.cancelSale (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#271-289):
+	External calls:
+	- token.transferFrom(address(this),msg.sender,tokenId) (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#276)
+	State variables written after the call(s):
+	- market (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#279)
+	- userBarn (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#282)
+Reentrancy in HorseyExchange.depositToExchange (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#248-264):
+	External calls:
+	- require(bool,string)(token.getApproved(tokenId) == address(this),Exchange is not allowed to transfer) (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#253)
+	- token.transferFrom(msg.sender,address(this),tokenId) (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#255)
+	State variables written after the call(s):
+	- market (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#258)
+	- userBarn (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#261)
+Reentrancy in HorseyExchange.purchaseToken (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#298-334):
+	External calls:
+	- totalToPay = getTokenPrice(tokenId) (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#305)
+	State variables written after the call(s):
+	- collectedFees (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#312)
+Reentrancy in HorseyExchange.purchaseToken (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#298-334):
+	External calls:
+	- totalToPay = getTokenPrice(tokenId) (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#305)
+	External calls sending eth:
+	- sale.owner.transfer(sale.price) (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#315)
+	State variables written after the call(s):
+	- userBarn (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#318)
+Reentrancy in HorseyPilot.syncFunds (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#1180-1187):
+	External calls:
+	- HorseyToken(tokenAddress).withdraw() (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#1182)
+	- HorseyExchange(exchangeAddress).withdraw() (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#1183)
+	State variables written after the call(s):
+	- toBeDistributed (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#1186)
+Reentrancy in HorseyPilot.voteOnProposal (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#1219-1247):
+	External calls:
+	- _doProposal() (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#1231)
+	State variables written after the call(s):
+	- proposalInProgress (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#1232)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+HorseyPilot.voteOnProposal (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#1219-1247) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool)((block.timestamp - currentProposal.timestamp) <= proposalLife) (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#1224)
+	- currentProposal.nay.length >= votingThreshold (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#1240-1245)
+	- currentProposal.yay.length >= votingThreshold (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#1229-1235)
+HorseyPilot._doProposal (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#1282-1320) uses timestamp for comparisons
+	Dangerous comparisons:
+	- currentProposal.methodId == 4 (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#1296-1304)
+	- currentProposal.parameter == 0 (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#1297-1303)
+	- currentProposal.methodId == 8 (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#1310-1312)
+	- currentProposal.methodId == 2 (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#1290)
+	- currentProposal.methodId == 9 (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#1315-1317)
+	- currentProposal.methodId == 0 (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#1284)
+	- currentProposal.methodId == 3 (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#1293)
+	- currentProposal.methodId == 5 (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#1307)
+	- currentProposal.methodId == 1 (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#1287)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+BettingControllerInterface.owner should be constant (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#425)
+EthorseRace.owner should be constant (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#445)
+RoyalStablesInterface.master should be constant (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#552)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#89-93) should be declared external
+Ownable.renounceOwnership (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#98-101) should be declared external
+Pausable.pause (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#136-139) should be declared external
+Pausable.unpause (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#144-147) should be declared external
+ERC721Basic.balanceOf (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#157) should be declared external
+ERC721Basic.ownerOf (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#158) should be declared external
+ERC721Basic.exists (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#159) should be declared external
+ERC721Basic.approve (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#161) should be declared external
+ERC721Basic.getApproved (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#162) should be declared external
+ERC721Basic.transferFrom (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#164) should be declared external
+EthorseHelpers.getall_horsesCount (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#483-485) should be declared external
+RoyalStablesInterface.getOwnedTokens (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#554) should be declared external
+RoyalStablesInterface.storeName (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#555) should be declared external
+RoyalStablesInterface.storeCarrotsCredit (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#556) should be declared external
+RoyalStablesInterface.storeHorsey (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#557) should be declared external
+RoyalStablesInterface.modifyHorsey (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#558) should be declared external
+RoyalStablesInterface.modifyHorseyDna (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#559) should be declared external
+RoyalStablesInterface.modifyHorseyFeedingCounter (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#560) should be declared external
+RoyalStablesInterface.modifyHorseyTier (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#561) should be declared external
+RoyalStablesInterface.unstoreHorsey (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#562) should be declared external
+RoyalStablesInterface.ownerOf (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#563) should be declared external
+HorseyToken.getOwnedTokens (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#705-707) should be declared external
+HorseyToken.getHorsey (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#801-805) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_token' of HorseyExchange.setStables (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#214) is not in mixedCase
+Function 'HorseyExchange._removeTokenFromBarn' (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#350-364) is not in mixedCase
+Function 'HorseyExchange._indexOf' (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#372-383) is not in mixedCase
+Struct 'EthorseRace.chronus_info' (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#434-443) is not in CapWords
+Variable 'EthorseRace.winner_horse' (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#451) is not in mixedCase
+Function 'EthorseHelpers._addHorse' (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#474-476) is not in mixedCase
+Function 'EthorseHelpers._addLegitOwner' (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#478-481) is not in mixedCase
+Function 'EthorseHelpers.getall_horsesCount' (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#483-485) is not in mixedCase
+Function 'EthorseHelpers._isWinnerOf' (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#492-535) is not in mixedCase
+Parameter 'eth_address' of EthorseHelpers._isWinnerOf (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#492) is not in mixedCase
+Variable 'EthorseHelpers.all_horses' (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#470) is not in mixedCase
+Parameter 'eth_address' of RoyalStablesInterface.getOwnedTokens (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#554) is not in mixedCase
+Variable 'RoyalStablesInterface.carrot_credits' (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#550) is not in mixedCase
+Parameter 'eth_address' of HorseyToken.getOwnedTokens (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#705) is not in mixedCase
+Function 'HorseyToken.can_claim' (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#716-720) is not in mixedCase
+Parameter 'eth_address' of HorseyToken.can_claim (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#716) is not in mixedCase
+Function 'HorseyToken._feed' (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#878-896) is not in mixedCase
+Function 'HorseyToken._makeSpecialId' (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#899-901) is not in mixedCase
+Function 'HorseyToken._generate_special_horsey' (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#913-920) is not in mixedCase
+Parameter 'eth_address' of HorseyToken._generate_special_horsey (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#913) is not in mixedCase
+Function 'HorseyToken._increaseRarity' (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#928-939) is not in mixedCase
+Function 'HorseyToken._shiftLeft' (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#942-944) is not in mixedCase
+Function 'HorseyToken._shiftRight' (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#947-949) is not in mixedCase
+Parameter '_jokerAddress' of HorseyPilot. (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#1089) is not in mixedCase
+Parameter '_knightAddress' of HorseyPilot. (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#1090) is not in mixedCase
+Parameter '_paladinAddress' of HorseyPilot. (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#1091) is not in mixedCase
+Parameter '_voters' of HorseyPilot. (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#1092) is not in mixedCase
+Function 'HorseyPilot._moveBalance' (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#1253-1258) is not in mixedCase
+Function 'HorseyPilot._updateDistribution' (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#1264-1277) is not in mixedCase
+Function 'HorseyPilot._doProposal' (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#1282-1320) is not in mixedCase
+Constant 'HorseyPilot.votingThreshold' (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#1028) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'HorseyPilot.proposalLife' (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#1032) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'HorseyPilot.proposalCooldown' (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#1036) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'HorseyPilot.knightEquity' (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#1050) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'HorseyPilot.paladinEquity' (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#1051) is not in UPPER_CASE_WITH_UNDERSCORES
+Variable 'HorseyPilot._cBalance' (/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol#1058) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x9517c7c2aaf069897cd975fe9be5b68f0ba8d7e4.sol analyzed (11 contracts), 77 result(s) found

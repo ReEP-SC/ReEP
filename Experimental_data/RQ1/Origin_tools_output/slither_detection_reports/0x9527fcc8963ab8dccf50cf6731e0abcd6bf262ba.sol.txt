@@ -1,0 +1,225 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol:
+/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol:96:34: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+  function _postValidatePurchase(address _beneficiary, uint256 _weiAmount) internal {
+                                 ^------------------^
+/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol:96:56: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+  function _postValidatePurchase(address _beneficiary, uint256 _weiAmount) internal {
+                                                       ^----------------^
+/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol:123:35: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+  function _updatePurchasingState(address _beneficiary, uint256 _weiAmount) internal {
+                                  ^------------------^
+/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol:123:57: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+  function _updatePurchasingState(address _beneficiary, uint256 _weiAmount) internal {
+                                                        ^----------------^
+/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol:534:17: Warning: "msg.value" used in non-payable function. Do you want to add the "payable" modifier to this function?
+        require(msg.value == 0);
+                ^-------^
+/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol:86:3: Warning: Function state mutability can be restricted to pure
+  function _preValidatePurchase(address _beneficiary, uint256 _weiAmount) internal {
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol:96:3: Warning: Function state mutability can be restricted to pure
+  function _postValidatePurchase(address _beneficiary, uint256 _weiAmount) internal {
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol:123:3: Warning: Function state mutability can be restricted to pure
+  function _updatePurchasingState(address _beneficiary, uint256 _weiAmount) internal {
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol:739:3: Warning: Function state mutability can be restricted to pure
+  function finalization() internal {
+  ^ (Relevant source part starts here and spans across multiple lines).
+
+INFO:Detectors:[91m
+TimeLockPool.withdraw (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#569-597) sends eth to arbitrary user
+	Dangerous calls:
+	- ! account.send(release_amount) (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#585-587)
+TokenSale.finalization (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#1164-1168) sends eth to arbitrary user
+	Dangerous calls:
+	- poolAddr.transfer(address(this).balance) (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#1166)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[93m
+Contract locking ether found in /sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol:
+	Contract TokenSaleManager has payable functions:
+	 - fallback (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#883-885)
+	But does not have a function to withdraw the ether
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#contracts-that-lock-ether[0m
+INFO:Detectors:[93m
+Reentrancy in TokenSale._deliverTokens (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#1175-1194):
+	External calls:
+	- require(bool)(TokenSaleManager(managerAddr).mint(_beneficiary,instant)) (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#1183)
+	- require(bool)(TokenSaleManager(managerAddr).mintTimeLocked(_beneficiary,time_locked,timeLockEnd)) (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#1186-1190)
+	State variables written after the call(s):
+	- tokensMinted (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#1193)
+Reentrancy in TokenSaleManager.addTokenSale (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#897-929):
+	External calls:
+	- require(bool)(tokenSales.length == 0 || TimedCrowdsale(tokenSales[tokenSales.length - 1]).closingTime() < openingTime) (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#908-911)
+	- require(bool)(TokenController(tokenControllerAddr).state() == TokenController.State.Init) (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#913)
+	State variables written after the call(s):
+	- tokenSales (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#915-926)
+Reentrancy in TokenSaleManager.finalizeTokenSaleManager (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#1018-1026):
+	External calls:
+	- require(bool)(TokenController(tokenControllerAddr).closeTokensale()) (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#1023)
+	State variables written after the call(s):
+	- isFinalized (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#1024)
+Reentrancy in TokenSaleManager.initialize (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#933-937):
+	External calls:
+	- TokenSale(tokenSales[0]).initialize(0) (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#935)
+	State variables written after the call(s):
+	- isStarted (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#936)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+Crowdsale._deliverTokens (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#105-107) does not use the value returned by external calls:
+	-token.transfer(_beneficiary,_tokenAmount) (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#106)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+TokenSaleManager.addToWhitelist has external calls inside a loop:
+	- WhitelistedCrowdsale(tokenSales[i]).addToWhitelist(_beneficiary) (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#980)
+TokenSaleManager.addManyToWhitelist has external calls inside a loop:
+	- WhitelistedCrowdsale(tokenSales[i]).addManyToWhitelist(_beneficiaries) (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#989)
+TokenSaleManager.finalizeTokenSaleManager has external calls inside a loop:
+	- require(bool)(FinalizableCrowdsale(tokenSales[i]).isFinalized()) (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#1021)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in TokenSaleManager.addTokenSale (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#897-929):
+	External calls:
+	- require(bool)(tokenSales.length == 0 || TimedCrowdsale(tokenSales[tokenSales.length - 1]).closingTime() < openingTime) (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#908-911)
+	- require(bool)(TokenController(tokenControllerAddr).state() == TokenController.State.Init) (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#913)
+	State variables written after the call(s):
+	- tokenSaleIndex (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#927)
+Reentrancy in TimeLockPool.depositERC20 (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#526-542):
+	External calls:
+	- require(bool)(ERC20Interface(tokenAddr).transferFrom(msg.sender,this,amount)) (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#536)
+	State variables written after the call(s):
+	- lockedBalances (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#538)
+Reentrancy in TokenController.openTokensale (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#790-803):
+	External calls:
+	- require(bool)(MintableToken(targetToken).owner() == address(this)) (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#796)
+	State variables written after the call(s):
+	- state (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#801)
+	- tokensaleManagerAddr (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#800)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+TimeLockPool.withdraw (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#569-597) uses timestamp for comparisons
+	Dangerous comparisons:
+	- lockedBalances[account][tokenAddr][i].balance > 0 && lockedBalances[account][tokenAddr][i].releaseTime <= block.timestamp (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#574-579)
+TimeLockPool.getAvailableBalanceOf (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#603-617) uses timestamp for comparisons
+	Dangerous comparisons:
+	- lockedBalances[account][tokenAddr][i].releaseTime <= block.timestamp (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#612-614)
+TimeLockPool.getLockedBalanceOf (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#623-637) uses timestamp for comparisons
+	Dangerous comparisons:
+	- lockedBalances[account][tokenAddr][i].releaseTime > block.timestamp (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#632-634)
+TimeLockPool.getNextReleaseTimeOf (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#643-664) uses timestamp for comparisons
+	Dangerous comparisons:
+	- lockedBalances[account][tokenAddr][i].releaseTime > block.timestamp && lockedBalances[account][tokenAddr][i].releaseTime < nextRelease (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#652-656)
+TimedCrowdsale.constructor (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#686-692) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool)(_openingTime >= block.timestamp) (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#687)
+TimedCrowdsale.hasClosed (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#698-700) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp > closingTime (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#699)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+ERC223Standard.transfer uses assembly (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#343-360)
+	- /sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#347-352
+ERC223Standard.transfer uses assembly (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#315-332)
+	- /sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#320-325
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+PoolAndSaleInterface.initialRelease should be constant (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#441)
+PoolAndSaleInterface.initialTap should be constant (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#440)
+PoolAndSaleInterface.tap should be constant (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#439)
+PoolAndSaleInterface.tokenSaleAddr should be constant (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#436)
+PoolAndSaleInterface.votingAddr should be constant (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#437)
+PoolAndSaleInterface.votingTokenAddr should be constant (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#438)
+TokenController.votingAddr should be constant (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#748)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+ERC223ReceivingContract.tokenFallback (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#298) should be declared external
+Ownable.transferOwnership (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#391-395) should be declared external
+MintableToken.mint (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#416-422) should be declared external
+MintableToken.finishMinting (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#428-432) should be declared external
+FinalizableCrowdsale.finalize (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#724-732) should be declared external
+TokenSale.finalize (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#1144-1153) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_rate' of Crowdsale. (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#32) is not in mixedCase
+Parameter '_wallet' of Crowdsale. (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#32) is not in mixedCase
+Parameter '_token' of Crowdsale. (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#32) is not in mixedCase
+Parameter '_beneficiary' of Crowdsale.buyTokens (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#57) is not in mixedCase
+Function 'Crowdsale._preValidatePurchase' (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#86-89) is not in mixedCase
+Parameter '_beneficiary' of Crowdsale._preValidatePurchase (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#86) is not in mixedCase
+Parameter '_weiAmount' of Crowdsale._preValidatePurchase (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#86) is not in mixedCase
+Function 'Crowdsale._postValidatePurchase' (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#96-98) is not in mixedCase
+Function 'Crowdsale._deliverTokens' (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#105-107) is not in mixedCase
+Parameter '_beneficiary' of Crowdsale._deliverTokens (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#105) is not in mixedCase
+Parameter '_tokenAmount' of Crowdsale._deliverTokens (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#105) is not in mixedCase
+Function 'Crowdsale._processPurchase' (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#114-116) is not in mixedCase
+Parameter '_beneficiary' of Crowdsale._processPurchase (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#114) is not in mixedCase
+Parameter '_tokenAmount' of Crowdsale._processPurchase (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#114) is not in mixedCase
+Function 'Crowdsale._updatePurchasingState' (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#123-125) is not in mixedCase
+Function 'Crowdsale._getTokenAmount' (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#132-134) is not in mixedCase
+Parameter '_weiAmount' of Crowdsale._getTokenAmount (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#132) is not in mixedCase
+Function 'Crowdsale._forwardFunds' (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#139-141) is not in mixedCase
+Parameter '_owner' of ERC20Standard.balanceOf (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#229) is not in mixedCase
+Parameter '_to' of ERC20Standard.transfer (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#168) is not in mixedCase
+Parameter '_value' of ERC20Standard.transfer (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#168) is not in mixedCase
+Parameter '_owner' of ERC20Standard.allowance (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#239) is not in mixedCase
+Parameter '_spender' of ERC20Standard.allowance (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#239) is not in mixedCase
+Parameter '_from' of ERC20Standard.transferFrom (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#185) is not in mixedCase
+Parameter '_to' of ERC20Standard.transferFrom (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#185) is not in mixedCase
+Parameter '_value' of ERC20Standard.transferFrom (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#185) is not in mixedCase
+Parameter '_spender' of ERC20Standard.approve (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#210) is not in mixedCase
+Parameter '_value' of ERC20Standard.approve (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#210) is not in mixedCase
+Parameter '_spender' of ERC20Standard.increaseApproval (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#253) is not in mixedCase
+Parameter '_addedValue' of ERC20Standard.increaseApproval (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#253) is not in mixedCase
+Parameter '_spender' of ERC20Standard.decreaseApproval (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#269) is not in mixedCase
+Parameter '_subtractedValue' of ERC20Standard.decreaseApproval (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#269) is not in mixedCase
+Parameter '_to' of ERC223Standard.transfer (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#343) is not in mixedCase
+Parameter '_value' of ERC223Standard.transfer (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#343) is not in mixedCase
+Parameter '_to' of ERC223Standard.transfer (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#315) is not in mixedCase
+Parameter '_value' of ERC223Standard.transfer (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#315) is not in mixedCase
+Parameter '_data' of ERC223Standard.transfer (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#315) is not in mixedCase
+Parameter '_to' of MintableToken.mint (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#416) is not in mixedCase
+Parameter '_amount' of MintableToken.mint (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#416) is not in mixedCase
+Parameter 'index_from' of TimeLockPool.withdraw (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#569) is not in mixedCase
+Parameter 'index_to' of TimeLockPool.withdraw (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#569) is not in mixedCase
+Function 'TimedCrowdsale._preValidatePurchase' (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#707-709) is not in mixedCase
+Parameter '_beneficiary' of TimedCrowdsale._preValidatePurchase (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#707) is not in mixedCase
+Parameter '_weiAmount' of TimedCrowdsale._preValidatePurchase (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#707) is not in mixedCase
+Parameter '_openingTime' of TimedCrowdsale. (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#686) is not in mixedCase
+Parameter '_closingTime' of TimedCrowdsale. (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#686) is not in mixedCase
+Parameter '_targetToken' of TokenController. (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#763) is not in mixedCase
+Parameter '_tokensaleManagerAddr' of TokenController.openTokensale (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#790) is not in mixedCase
+Parameter '_tokenControllerAddr' of TokenSaleManager. (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#863) is not in mixedCase
+Parameter '_timeLockPoolAddr' of TokenSaleManager. (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#864) is not in mixedCase
+Parameter '_daicoPoolAddr' of TokenSaleManager. (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#865) is not in mixedCase
+Parameter '_token' of TokenSaleManager. (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#866) is not in mixedCase
+Parameter '_beneficiary' of TokenSaleManager.mint (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#945) is not in mixedCase
+Parameter '_tokenAmount' of TokenSaleManager.mint (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#946) is not in mixedCase
+Parameter '_beneficiary' of TokenSaleManager.mintTimeLocked (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#959) is not in mixedCase
+Parameter '_tokenAmount' of TokenSaleManager.mintTimeLocked (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#960) is not in mixedCase
+Parameter '_releaseTime' of TokenSaleManager.mintTimeLocked (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#961) is not in mixedCase
+Parameter '_beneficiary' of TokenSaleManager.addToWhitelist (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#977) is not in mixedCase
+Parameter '_beneficiaries' of TokenSaleManager.addManyToWhitelist (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#986) is not in mixedCase
+Parameter '_indexTokenSale' of TokenSaleManager.finalize (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#997) is not in mixedCase
+Function 'WhitelistedCrowdsale._preValidatePurchase' (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#1072-1074) is not in mixedCase
+Parameter '_beneficiary' of WhitelistedCrowdsale._preValidatePurchase (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#1072) is not in mixedCase
+Parameter '_weiAmount' of WhitelistedCrowdsale._preValidatePurchase (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#1072) is not in mixedCase
+Parameter '_beneficiary' of WhitelistedCrowdsale.addToWhitelist (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#1045) is not in mixedCase
+Parameter '_beneficiaries' of WhitelistedCrowdsale.addManyToWhitelist (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#1053) is not in mixedCase
+Parameter '_beneficiary' of WhitelistedCrowdsale.removeFromWhitelist (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#1063) is not in mixedCase
+Function 'TokenSale._preValidatePurchase' (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#1202-1206) is not in mixedCase
+Parameter '_beneficiary' of TokenSale._preValidatePurchase (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#1202) is not in mixedCase
+Parameter '_weiAmount' of TokenSale._preValidatePurchase (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#1202) is not in mixedCase
+Function 'TokenSale._deliverTokens' (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#1175-1194) is not in mixedCase
+Parameter '_beneficiary' of TokenSale._deliverTokens (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#1175) is not in mixedCase
+Parameter '_tokenAmount' of TokenSale._deliverTokens (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#1175) is not in mixedCase
+Function 'TokenSale._getTokenAmount' (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#1214-1216) is not in mixedCase
+Parameter '_weiAmount' of TokenSale._getTokenAmount (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#1214) is not in mixedCase
+Function 'TokenSale._forwardFunds' (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#1197) is not in mixedCase
+Parameter '_poolAddr' of TokenSale. (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#1112) is not in mixedCase
+Parameter '_tokensCap' of TokenSale. (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#1115) is not in mixedCase
+Parameter '_timeLockRate' of TokenSale. (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#1116) is not in mixedCase
+Parameter '_timeLockEnd' of TokenSale. (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#1117) is not in mixedCase
+Parameter '_carryover' of TokenSale. (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#1118) is not in mixedCase
+Parameter '_minAcceptableWei' of TokenSale. (/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol#1119) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x9527fcc8963ab8dccf50cf6731e0abcd6bf262ba.sol analyzed (17 contracts), 110 result(s) found

@@ -1,0 +1,40 @@
+INFO:Detectors:[93m
+Contract locking ether found in /sb/0x81a3593b9625b735870cb5c40b0c32e45145d55d.sol:
+	Contract VestingContractCT has payable functions:
+	 - fallback (/sb/0x81a3593b9625b735870cb5c40b0c32e45145d55d.sol#149-159)
+	But does not have a function to withdraw the ether
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#contracts-that-lock-ether[0m
+INFO:Detectors:[93m
+Reentrancy in VestingContractCT.sendCurrentPayment (/sb/0x81a3593b9625b735870cb5c40b0c32e45145d55d.sol#193-223):
+	External calls:
+	- company_token.transfer(PartnerAccount,unsealedAmount) (/sb/0x81a3593b9625b735870cb5c40b0c32e45145d55d.sol#205-209)
+	State variables written after the call(s):
+	- alreadyTransfered (/sb/0x81a3593b9625b735870cb5c40b0c32e45145d55d.sol#209-211)
+	- currentBalance (/sb/0x81a3593b9625b735870cb5c40b0c32e45145d55d.sol#211-213)
+Reentrancy in VestingContractCT.sendCurrentPayment (/sb/0x81a3593b9625b735870cb5c40b0c32e45145d55d.sol#193-223):
+	External calls:
+	- company_token.transfer(PartnerAccount,currentBalance) (/sb/0x81a3593b9625b735870cb5c40b0c32e45145d55d.sol#217-223)
+	State variables written after the call(s):
+	- alreadyTransfered (/sb/0x81a3593b9625b735870cb5c40b0c32e45145d55d.sol)
+	- currentBalance (/sb/0x81a3593b9625b735870cb5c40b0c32e45145d55d.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+VestingContractCT.sendCurrentPayment (/sb/0x81a3593b9625b735870cb5c40b0c32e45145d55d.sol#193-223) does not use the value returned by external calls:
+	-company_token.transfer(PartnerAccount,unsealedAmount) (/sb/0x81a3593b9625b735870cb5c40b0c32e45145d55d.sol#205-209)
+	-company_token.transfer(PartnerAccount,currentBalance) (/sb/0x81a3593b9625b735870cb5c40b0c32e45145d55d.sol#217-223)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Token.transfer (/sb/0x81a3593b9625b735870cb5c40b0c32e45145d55d.sol#33-35) should be declared external
+Token.balanceOf (/sb/0x81a3593b9625b735870cb5c40b0c32e45145d55d.sol#35-41) should be declared external
+VestingContractCT.fallback (/sb/0x81a3593b9625b735870cb5c40b0c32e45145d55d.sol#149-159) should be declared external
+VestingContractCT.getBalance (/sb/0x81a3593b9625b735870cb5c40b0c32e45145d55d.sol#167-181) should be declared external
+VestingContractCT.setOwner (/sb/0x81a3593b9625b735870cb5c40b0c32e45145d55d.sol#187-193) should be declared external
+VestingContractCT.sendCurrentPayment (/sb/0x81a3593b9625b735870cb5c40b0c32e45145d55d.sol#193-223) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_company_token' of VestingContractCT. (/sb/0x81a3593b9625b735870cb5c40b0c32e45145d55d.sol#103) is not in mixedCase
+Parameter '_owner' of VestingContractCT.setOwner (/sb/0x81a3593b9625b735870cb5c40b0c32e45145d55d.sol#187) is not in mixedCase
+Variable 'VestingContractCT.company_token' (/sb/0x81a3593b9625b735870cb5c40b0c32e45145d55d.sol#51-53) is not in mixedCase
+Variable 'VestingContractCT.PartnerAccount' (/sb/0x81a3593b9625b735870cb5c40b0c32e45145d55d.sol#53-55) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x81a3593b9625b735870cb5c40b0c32e45145d55d.sol analyzed (9 contracts), 14 result(s) found

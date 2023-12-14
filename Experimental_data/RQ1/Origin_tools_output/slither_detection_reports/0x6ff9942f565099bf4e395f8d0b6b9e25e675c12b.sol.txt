@@ -1,0 +1,30 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x6ff9942f565099bf4e395f8d0b6b9e25e675c12b.sol:
+/sb/0x6ff9942f565099bf4e395f8d0b6b9e25e675c12b.sol:84:42: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+        bytes32 hash = keccak256(prefix, keccak256(target, data, nonce));
+                                         ^----------------------------^
+/sb/0x6ff9942f565099bf4e395f8d0b6b9e25e675c12b.sol:84:24: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+        bytes32 hash = keccak256(prefix, keccak256(target, data, nonce));
+                       ^-----------------------------------------------^
+
+INFO:Detectors:[91m
+Reentrancy in Feeless.performFeelessTransaction (/sb/0x6ff9942f565099bf4e395f8d0b6b9e25e675c12b.sol#80-93):
+	External calls:
+	- require(bool)(target.call.value(msg.value)(data)) (/sb/0x6ff9942f565099bf4e395f8d0b6b9e25e675c12b.sol#93)
+	State variables written after the call(s):
+	- msgSender (/sb/0x6ff9942f565099bf4e395f8d0b6b9e25e675c12b.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities[0m
+INFO:Detectors:[93m
+ECRecovery.recover (/sb/0x6ff9942f565099bf4e395f8d0b6b9e25e675c12b.sol#10-50) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[92m
+ECRecovery.recover uses assembly (/sb/0x6ff9942f565099bf4e395f8d0b6b9e25e675c12b.sol#10-50)
+	- /sb/0x6ff9942f565099bf4e395f8d0b6b9e25e675c12b.sol#29-39
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+Feeless.performFeelessTransaction (/sb/0x6ff9942f565099bf4e395f8d0b6b9e25e675c12b.sol#80-93) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Low level call in Feeless.performFeelessTransaction (/sb/0x6ff9942f565099bf4e395f8d0b6b9e25e675c12b.sol#80-93):
+	-require(bool)(target.call.value(msg.value)(data)) /sb/0x6ff9942f565099bf4e395f8d0b6b9e25e675c12b.sol#93
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Slither:/sb/0x6ff9942f565099bf4e395f8d0b6b9e25e675c12b.sol analyzed (2 contracts), 5 result(s) found

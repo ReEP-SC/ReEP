@@ -1,0 +1,74 @@
+INFO:Detectors:[91m
+Ownable.______gap (/sb/0xa34bd6ddafa7b928ef72519610d9bae2b6f62b86.sol#416-417) shadows:
+	- Initializable.______gap (/sb/0xa34bd6ddafa7b928ef72519610d9bae2b6f62b86.sol#149)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variable-shadowing[0m
+INFO:Detectors:[93m
+Initializable.isConstructor (/sb/0xa34bd6ddafa7b928ef72519610d9bae2b6f62b86.sol#129-146) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+LidTimeLock.startRelease (/sb/0xa34bd6ddafa7b928ef72519610d9bae2b6f62b86.sol#491-494) uses a dangerous strict equality:
+	- require(bool,string)(releaseStart == 0,Has already started.)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Reentrancy in LidTimeLock.claimToken (/sb/0xa34bd6ddafa7b928ef72519610d9bae2b6f62b86.sol#478-491):
+	External calls:
+	- token.balanceOf(address(this)) < toClaim (/sb/0xa34bd6ddafa7b928ef72519610d9bae2b6f62b86.sol#485-489)
+	- toClaim = token.balanceOf(address(this)) (/sb/0xa34bd6ddafa7b928ef72519610d9bae2b6f62b86.sol#486-489)
+	State variables written after the call(s):
+	- claimedTokens (/sb/0xa34bd6ddafa7b928ef72519610d9bae2b6f62b86.sol#489)
+Reentrancy in LidTimeLock.startRelease (/sb/0xa34bd6ddafa7b928ef72519610d9bae2b6f62b86.sol#491-494):
+	External calls:
+	- require(bool,string)(token.balanceOf(address(this)) != 0,Must have some lid deposited.) (/sb/0xa34bd6ddafa7b928ef72519610d9bae2b6f62b86.sol)
+	- startingTokens = token.balanceOf(address(this)) (/sb/0xa34bd6ddafa7b928ef72519610d9bae2b6f62b86.sol)
+	State variables written after the call(s):
+	- releaseStart (/sb/0xa34bd6ddafa7b928ef72519610d9bae2b6f62b86.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+LidTimeLock.claimToken (/sb/0xa34bd6ddafa7b928ef72519610d9bae2b6f62b86.sol#478-491) does not use the value returned by external calls:
+	-token.transfer(releaseWallet,toClaim) (/sb/0xa34bd6ddafa7b928ef72519610d9bae2b6f62b86.sol#490)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+LidTimeLock.initialize.owner (local variable @ /sb/0xa34bd6ddafa7b928ef72519610d9bae2b6f62b86.sol#473) shadows:
+	- Ownable.owner (function @ /sb/0xa34bd6ddafa7b928ef72519610d9bae2b6f62b86.sol#368-369)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+Reentrancy in LidTimeLock.startRelease (/sb/0xa34bd6ddafa7b928ef72519610d9bae2b6f62b86.sol#491-494):
+	External calls:
+	- require(bool,string)(token.balanceOf(address(this)) != 0,Must have some lid deposited.) (/sb/0xa34bd6ddafa7b928ef72519610d9bae2b6f62b86.sol)
+	State variables written after the call(s):
+	- releaseWallet (/sb/0xa34bd6ddafa7b928ef72519610d9bae2b6f62b86.sol)
+Reentrancy in LidTimeLock.startRelease (/sb/0xa34bd6ddafa7b928ef72519610d9bae2b6f62b86.sol#491-494):
+	External calls:
+	- require(bool,string)(token.balanceOf(address(this)) != 0,Must have some lid deposited.) (/sb/0xa34bd6ddafa7b928ef72519610d9bae2b6f62b86.sol)
+	- startingTokens = token.balanceOf(address(this)) (/sb/0xa34bd6ddafa7b928ef72519610d9bae2b6f62b86.sol)
+	State variables written after the call(s):
+	- startingTokens (/sb/0xa34bd6ddafa7b928ef72519610d9bae2b6f62b86.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Initializable.isConstructor uses assembly (/sb/0xa34bd6ddafa7b928ef72519610d9bae2b6f62b86.sol#129-146)
+	- /sb/0xa34bd6ddafa7b928ef72519610d9bae2b6f62b86.sol#141-145
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+Ownable.owner (/sb/0xa34bd6ddafa7b928ef72519610d9bae2b6f62b86.sol#368-369) should be declared external
+Ownable.renounceOwnership (/sb/0xa34bd6ddafa7b928ef72519610d9bae2b6f62b86.sol#389-395) should be declared external
+Ownable.transferOwnership (/sb/0xa34bd6ddafa7b928ef72519610d9bae2b6f62b86.sol#397-406) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xa34bd6ddafa7b928ef72519610d9bae2b6f62b86.sol:
+	- pragma solidity0.5.16 (/sb/0xa34bd6ddafa7b928ef72519610d9bae2b6f62b86.sol#5-8): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Variable 'Initializable.______gap' (/sb/0xa34bd6ddafa7b928ef72519610d9bae2b6f62b86.sol#149) is not in mixedCase
+Function 'Context._msgSender' (/sb/0xa34bd6ddafa7b928ef72519610d9bae2b6f62b86.sol#323-330) is not in mixedCase
+Function 'Context._msgData' (/sb/0xa34bd6ddafa7b928ef72519610d9bae2b6f62b86.sol#330-334) is not in mixedCase
+Function 'Ownable._transferOwnership' (/sb/0xa34bd6ddafa7b928ef72519610d9bae2b6f62b86.sol#410-416) is not in mixedCase
+Variable 'Ownable.______gap' (/sb/0xa34bd6ddafa7b928ef72519610d9bae2b6f62b86.sol#416-417) is not in mixedCase
+Parameter '_releaseInterval' of LidTimeLock.initialize (/sb/0xa34bd6ddafa7b928ef72519610d9bae2b6f62b86.sol#472) is not in mixedCase
+Parameter '_releaseBP' of LidTimeLock.initialize (/sb/0xa34bd6ddafa7b928ef72519610d9bae2b6f62b86.sol#472-473) is not in mixedCase
+Parameter '_token' of LidTimeLock.initialize (/sb/0xa34bd6ddafa7b928ef72519610d9bae2b6f62b86.sol#473-474) is not in mixedCase
+Parameter '_releaseWallet' of LidTimeLock.startRelease (/sb/0xa34bd6ddafa7b928ef72519610d9bae2b6f62b86.sol#491) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+Ownable.______gap (/sb/0xa34bd6ddafa7b928ef72519610d9bae2b6f62b86.sol#416-417) is never used in LidTimeLock
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0xa34bd6ddafa7b928ef72519610d9bae2b6f62b86.sol analyzed (7 contracts), 24 result(s) found

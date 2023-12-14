@@ -1,0 +1,200 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol:
+/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol:1265:45: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function _checkIfThresholdReachedForRPS(uint256 _marketId, uint256 plotStaked, uint256 ethStaked) internal view returns(bool) {
+                                            ^---------------^
+
+INFO:Detectors:[91m
+MarketCreationRewards._transferAsset (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol) sends eth to arbitrary user
+	Dangerous calls:
+	- _recipient.transfer(_amount) (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[93m
+UpgradeabilityProxy.implementation (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#73-81) is declared view but contains assembly code
+OwnedUpgradeabilityProxy.proxyOwner (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#146-152) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+Contract locking ether found in /sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol:
+	Contract OwnedUpgradeabilityProxy has payable functions:
+	 - fallback (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#19-37)
+	But does not have a function to withdraw the ether
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#contracts-that-lock-ether[0m
+INFO:Detectors:[93m
+Reentrancy in MarketCreationRewards.calculateMarketCreationIncentive (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1158-1173):
+	External calls:
+	- _checkIfCreatorStaked(_createdBy,_marketId) (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1162-1163)
+	- gasPrice = _checkGasPrice() (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1168)
+	- (incentive) = marketUtility.getValueAndMultiplierParameters(ETH_ADDRESS,gasCost) (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1168-1169)
+	State variables written after the call(s):
+	- marketCreationRewardUserData (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1169-1171)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+count in MarketCreationRewards._getRewardPoolIncentives (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1246) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[93m
+MarketCreationRewards.onlyInternal (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1033-1034) does not use the value returned by external calls:
+	-IMaster(masterAddress).isInternal(msg.sender) (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1033)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+MarketCreationRewards._getRewardPoolIncentives has external calls inside a loop:
+	- allMarkets.marketStatus(rewardData.marketsCreated[i]) == IAllMarkets.PredictionStatus.Settled (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1249-1257)
+MarketCreationRewards._getPendingRewardPoolIncentives has external calls inside a loop:
+	- allMarkets.marketStatus(rewardData.marketsCreated[i]) == IAllMarkets.PredictionStatus.Settled (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in MarketCreationRewards._checkIfCreatorStaked (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1143-1152):
+	External calls:
+	- tokensLocked = ITokenController(tokenController).tokensLockedAtTime(_createdBy,SM,now) (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1145-1147)
+	State variables written after the call(s):
+	- marketCreationRewardData (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1148)
+	- marketCreationRewardData (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1149-1150)
+Reentrancy in MarketCreationRewards.calculateMarketCreationIncentive (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1158-1173):
+	External calls:
+	- _checkIfCreatorStaked(_createdBy,_marketId) (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1162-1163)
+	State variables written after the call(s):
+	- marketCreationRewardUserData (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1163-1165)
+Reentrancy in MarketCreationRewards.setMasterAddress (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1060-1071):
+	External calls:
+	- require(bool,string)(msg.sender == proxy.proxyOwner(),not owner.) (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1065-1067)
+	State variables written after the call(s):
+	- masterAddress (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1069)
+Reentrancy in MarketCreationRewards.setMasterAddress (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1060-1071):
+	External calls:
+	- require(bool,string)(msg.sender == proxy.proxyOwner(),not owner.) (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1065-1067)
+	- plotToken = ms.dAppToken() (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1069-1070)
+	State variables written after the call(s):
+	- plotToken (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1069-1070)
+Reentrancy in MarketCreationRewards.setMasterAddress (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1060-1071):
+	External calls:
+	- require(bool,string)(msg.sender == proxy.proxyOwner(),not owner.) (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1065-1067)
+	- plotToken = ms.dAppToken() (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1069-1070)
+	- tokenController = ITokenController(ms.getLatestAddress(TC)) (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1070)
+	State variables written after the call(s):
+	- tokenController (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1070)
+Reentrancy in MarketCreationRewards.setMasterAddress (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1060-1071):
+	External calls:
+	- require(bool,string)(msg.sender == proxy.proxyOwner(),not owner.) (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1065-1067)
+	- plotToken = ms.dAppToken() (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1069-1070)
+	- tokenController = ITokenController(ms.getLatestAddress(TC)) (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1070)
+	- allMarkets = IAllMarkets(ms.getLatestAddress(AM)) (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1070-1071)
+	State variables written after the call(s):
+	- allMarkets (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1070-1071)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Proxy.fallback uses assembly (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#19-37)
+	- /sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#24-37
+UpgradeabilityProxy.implementation uses assembly (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#73-81)
+	- /sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#80-81
+UpgradeabilityProxy._setImplementation uses assembly (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#84-92)
+	- /sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#91-92
+OwnedUpgradeabilityProxy.proxyOwner uses assembly (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#146-152)
+	- /sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#151-152
+OwnedUpgradeabilityProxy._setUpgradeabilityOwner uses assembly (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#174-184)
+	- /sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#183-184
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+ITokenController.bLOTToken should be constant (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#746)
+ITokenController.token should be constant (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#744-746)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Different versions of Solidity is used in /sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol:
+	- Version used: ['0.5.7', '^0.5.0']
+	- /sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#7-10 declares pragma solidity0.5.7
+	- /sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#50-51 declares pragma solidity0.5.7
+	- /sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#110 declares pragma solidity0.5.7
+	- /sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#187-188 declares pragma solidity^0.5.0
+	- /sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#666-667 declares pragma solidity^0.5.0
+	- /sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#704-705 declares pragma solidity0.5.7
+	- /sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#743-744 declares pragma solidity0.5.7
+	- /sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#805-806 declares pragma solidity0.5.7
+	- /sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#830-831 declares pragma solidity0.5.7
+	- /sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#921 declares pragma solidity0.5.7
+	- /sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#999 declares pragma solidity0.5.7
+	- /sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1017-1018 declares pragma solidity0.5.7
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#different-pragma-directives-are-used[0m
+INFO:Detectors:[92m
+OwnedUpgradeabilityProxy.transferProxyOwnership (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#156-162) should be declared external
+OwnedUpgradeabilityProxy.upgradeTo (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#170-172) should be declared external
+IMaster.dAppToken (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#709-710) should be declared external
+IMaster.isInternal (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#710) should be declared external
+IMaster.getLatestAddress (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#711-712) should be declared external
+IMaster.isAuthorizedToGovern (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#712-717) should be declared external
+Governed.isAuthorizedToGovern (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#737-742) should be declared external
+ITokenController.swapBLOT (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#752-753) should be declared external
+ITokenController.totalBalanceOf (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#754-756) should be declared external
+ITokenController.transferFrom (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#756-760) should be declared external
+ITokenController.tokensLockedAtTime (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#775-778) should be declared external
+ITokenController.lockForGovernanceVote (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#791-795) should be declared external
+ITokenController.totalSupply (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#795-798) should be declared external
+ITokenController.mint (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#798-802) should be declared external
+IMarketUtility.setAuthorizedAddres (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#835) should be declared external
+IMarketUtility.getMarketInitialParams (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#846) should be declared external
+IMarketUtility.getAssetValueETH (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#848-852) should be declared external
+IMarketUtility.checkMultiplier (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#852-858) should be declared external
+IMarketUtility.getOptionPrice (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#865-871) should be declared external
+IMarketUtility.getPriceFeedDecimals (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#872-877) should be declared external
+IMarketUtility.getValueAndMultiplierParameters (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#877-878) should be declared external
+IMarketUtility.calculatePredictionValue (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#881-885) should be declared external
+IMarketUtility.getBasicMarketDetails (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#897-905) should be declared external
+IMarketUtility.getDisputeResolutionParams (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#905-906) should be declared external
+IMarketUtility.calculateOptionPrice (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#906-909) should be declared external
+IMarketUtility.getSettlemetPrice (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#916-920) should be declared external
+IAllMarkets.marketStatus (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1004-1008) should be declared external
+IAllMarkets.getTotalStakedValueInPLOT (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1011-1015) should be declared external
+MarketCreationRewards.setMasterAddress (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1060-1071) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol:
+	- pragma solidity0.5.7 (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#7-10): it allows old versions
+	- pragma solidity0.5.7 (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#50-51): it allows old versions
+	- pragma solidity0.5.7 (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#110): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#187-188): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#666-667): it allows old versions
+	- pragma solidity0.5.7 (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#704-705): it allows old versions
+	- pragma solidity0.5.7 (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#743-744): it allows old versions
+	- pragma solidity0.5.7 (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#805-806): it allows old versions
+	- pragma solidity0.5.7 (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#830-831): it allows old versions
+	- pragma solidity0.5.7 (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#921): it allows old versions
+	- pragma solidity0.5.7 (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#999): it allows old versions
+	- pragma solidity0.5.7 (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1017-1018): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'UpgradeabilityProxy._setImplementation' (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#84-92) is not in mixedCase
+Function 'UpgradeabilityProxy._upgradeTo' (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#95-109) is not in mixedCase
+Parameter '_newImplementation' of UpgradeabilityProxy._upgradeTo (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#95-96) is not in mixedCase
+Parameter '_implementation' of OwnedUpgradeabilityProxy. (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#131-132) is not in mixedCase
+Parameter '_newOwner' of OwnedUpgradeabilityProxy.transferProxyOwnership (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#157) is not in mixedCase
+Parameter '_implementation' of OwnedUpgradeabilityProxy.upgradeTo (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#171) is not in mixedCase
+Function 'OwnedUpgradeabilityProxy._setUpgradeabilityOwner' (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#174-184) is not in mixedCase
+Parameter '_toCheck' of Governed.isAuthorizedToGovern (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#740) is not in mixedCase
+Parameter '_utility' of MarketCreationRewards.initialise (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1075) is not in mixedCase
+Parameter '_clGasPriceAggregator' of MarketCreationRewards.initialise (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1075-1076) is not in mixedCase
+Function 'MarketCreationRewards._checkIfCreatorStaked' (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1143-1152) is not in mixedCase
+Parameter '_createdBy' of MarketCreationRewards._checkIfCreatorStaked (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1144) is not in mixedCase
+Parameter '_marketId' of MarketCreationRewards._checkIfCreatorStaked (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1144-1145) is not in mixedCase
+Parameter '_createdBy' of MarketCreationRewards.calculateMarketCreationIncentive (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1159) is not in mixedCase
+Parameter '_gasCosumed' of MarketCreationRewards.calculateMarketCreationIncentive (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1159) is not in mixedCase
+Parameter '_marketId' of MarketCreationRewards.calculateMarketCreationIncentive (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1159) is not in mixedCase
+Function 'MarketCreationRewards._checkGasPrice' (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1177-1181) is not in mixedCase
+Parameter '_marketId' of MarketCreationRewards.depositMarketRewardPoolShare (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1183) is not in mixedCase
+Parameter '_ethShare' of MarketCreationRewards.depositMarketRewardPoolShare (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1183) is not in mixedCase
+Parameter '_plotShare' of MarketCreationRewards.depositMarketRewardPoolShare (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1184) is not in mixedCase
+Parameter '_ethDeposited' of MarketCreationRewards.depositMarketRewardPoolShare (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1184) is not in mixedCase
+Parameter '_plotDeposited' of MarketCreationRewards.depositMarketRewardPoolShare (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1184) is not in mixedCase
+Parameter '_marketId' of MarketCreationRewards.returnMarketRewardPoolShare (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1197) is not in mixedCase
+Parameter '_maxRecords' of MarketCreationRewards.claimCreationReward (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1216) is not in mixedCase
+Parameter '_asset' of MarketCreationRewards.transferAssets (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1231-1232) is not in mixedCase
+Parameter '_to' of MarketCreationRewards.transferAssets (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1232-1234) is not in mixedCase
+Parameter '_amount' of MarketCreationRewards.transferAssets (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1234-1235) is not in mixedCase
+Function 'MarketCreationRewards._getRewardPoolIncentives' (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1242-1261) is not in mixedCase
+Parameter '_maxRecords' of MarketCreationRewards._getRewardPoolIncentives (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1242-1243) is not in mixedCase
+Parameter '_user' of MarketCreationRewards.getPendingMarketCreationRewards (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1272) is not in mixedCase
+Parameter '_market' of MarketCreationRewards.getMarketCreatorRPoolShareParams (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1278) is not in mixedCase
+Function 'MarketCreationRewards._checkIfThresholdReachedForRPS' (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1289-1294) is not in mixedCase
+Function 'MarketCreationRewards._getPendingRewardPoolIncentives' (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1299-1310) is not in mixedCase
+Parameter '_user' of MarketCreationRewards._getPendingRewardPoolIncentives (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol#1299) is not in mixedCase
+Function 'MarketCreationRewards._transferAsset' (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol) is not in mixedCase
+Parameter '_asset' of MarketCreationRewards._transferAsset (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol) is not in mixedCase
+Parameter '_recipient' of MarketCreationRewards._transferAsset (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol) is not in mixedCase
+Parameter '_amount' of MarketCreationRewards._transferAsset (/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x9e376f30d4e47cc4f792bfc682caeb5dc76155f7.sol analyzed (16 contracts), 90 result(s) found

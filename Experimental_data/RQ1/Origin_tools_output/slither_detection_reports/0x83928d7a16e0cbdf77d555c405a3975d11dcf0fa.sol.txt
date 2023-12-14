@@ -1,0 +1,76 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x83928d7a16e0cbdf77d555c405a3975d11dcf0fa.sol:
+/sb/0x83928d7a16e0cbdf77d555c405a3975d11dcf0fa.sol:485:13: Warning: Using contract member "call" inherited from the address type is deprecated. Convert the contract to "address" type to access the member, for example use "address(contract).call" instead.
+            stubF.call.value(calcStubFundPercent).gas(estGas)();
+            ^--------^
+/sb/0x83928d7a16e0cbdf77d555c405a3975d11dcf0fa.sol:485:13: Warning: Return value of low-level calls not used.
+            stubF.call.value(calcStubFundPercent).gas(estGas)();
+            ^-------------------------------------------------^
+
+INFO:Detectors:[93m
+Reentrancy in Etherhero.receivePercent (/sb/0x83928d7a16e0cbdf77d555c405a3975d11dcf0fa.sol#415-471):
+	External calls:
+	- stubF.ReturnEthToEtherhero() (/sb/0x83928d7a16e0cbdf77d555c405a3975d11dcf0fa.sol#441-443)
+	State variables written after the call(s):
+	- userTime (/sb/0x83928d7a16e0cbdf77d555c405a3975d11dcf0fa.sol#457)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+Etherhero.receivePercent (/sb/0x83928d7a16e0cbdf77d555c405a3975d11dcf0fa.sol#415-471) does not use the value returned by external calls:
+	-stubF.ReturnEthToEtherhero() (/sb/0x83928d7a16e0cbdf77d555c405a3975d11dcf0fa.sol#441-443)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in EtherheroStabilizationFund.ReturnEthToEtherhero (/sb/0x83928d7a16e0cbdf77d555c405a3975d11dcf0fa.sol#129-167):
+	External calls:
+	- etherHero.call.value(address(this).balance).gas(estGas)() (/sb/0x83928d7a16e0cbdf77d555c405a3975d11dcf0fa.sol#137-163)
+	State variables written after the call(s):
+	- investFund (/sb/0x83928d7a16e0cbdf77d555c405a3975d11dcf0fa.sol#151-153)
+Reentrancy in Etherhero.makeDeposit (/sb/0x83928d7a16e0cbdf77d555c405a3975d11dcf0fa.sol#471-511):
+	External calls:
+	- stubF.call.value(calcStubFundPercent).gas(estGas)() (/sb/0x83928d7a16e0cbdf77d555c405a3975d11dcf0fa.sol)
+	External calls sending eth:
+	- projectFund.transfer(calcProjectPercent) (/sb/0x83928d7a16e0cbdf77d555c405a3975d11dcf0fa.sol)
+	- stubF.call.value(calcStubFundPercent).gas(estGas)() (/sb/0x83928d7a16e0cbdf77d555c405a3975d11dcf0fa.sol)
+	State variables written after the call(s):
+	- counterDeposits (/sb/0x83928d7a16e0cbdf77d555c405a3975d11dcf0fa.sol)
+Reentrancy in Etherhero.receivePercent (/sb/0x83928d7a16e0cbdf77d555c405a3975d11dcf0fa.sol#415-471):
+	External calls:
+	- stubF.ReturnEthToEtherhero() (/sb/0x83928d7a16e0cbdf77d555c405a3975d11dcf0fa.sol#441-443)
+	External calls sending eth:
+	- msg.sender.transfer(rate) (/sb/0x83928d7a16e0cbdf77d555c405a3975d11dcf0fa.sol#457-461)
+	State variables written after the call(s):
+	- beneficiaries (/sb/0x83928d7a16e0cbdf77d555c405a3975d11dcf0fa.sol#465-467)
+	- counterBeneficiaries (/sb/0x83928d7a16e0cbdf77d555c405a3975d11dcf0fa.sol#465-467)
+	- counterPercents (/sb/0x83928d7a16e0cbdf77d555c405a3975d11dcf0fa.sol#461-463)
+	- timeLastayment (/sb/0x83928d7a16e0cbdf77d555c405a3975d11dcf0fa.sol#463-465)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Etherhero.chargingTime should be constant (/sb/0x83928d7a16e0cbdf77d555c405a3975d11dcf0fa.sol#213-217)
+Etherhero.estGas should be constant (/sb/0x83928d7a16e0cbdf77d555c405a3975d11dcf0fa.sol#205)
+Etherhero.minPayment should be constant (/sb/0x83928d7a16e0cbdf77d555c405a3975d11dcf0fa.sol#211)
+Etherhero.percentDevFund should be constant (/sb/0x83928d7a16e0cbdf77d555c405a3975d11dcf0fa.sol#199)
+Etherhero.percentProjectFund should be constant (/sb/0x83928d7a16e0cbdf77d555c405a3975d11dcf0fa.sol#195-197)
+Etherhero.percentStubFund should be constant (/sb/0x83928d7a16e0cbdf77d555c405a3975d11dcf0fa.sol#199-201)
+Etherhero.projectFund should be constant (/sb/0x83928d7a16e0cbdf77d555c405a3975d11dcf0fa.sol#185-189)
+Etherhero.responseStubFundLimit should be constant (/sb/0x83928d7a16e0cbdf77d555c405a3975d11dcf0fa.sol#209-211)
+Etherhero.standartPercent should be constant (/sb/0x83928d7a16e0cbdf77d555c405a3975d11dcf0fa.sol#205-209)
+EtherheroStabilizationFund.estGas should be constant (/sb/0x83928d7a16e0cbdf77d555c405a3975d11dcf0fa.sol#97-101)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+EtherheroStabilizationFund.ReturnEthToEtherhero (/sb/0x83928d7a16e0cbdf77d555c405a3975d11dcf0fa.sol#129-167) should be declared external
+Etherhero.getBeneficiaries (/sb/0x83928d7a16e0cbdf77d555c405a3975d11dcf0fa.sol#311-347) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Low level call in EtherheroStabilizationFund.ReturnEthToEtherhero (/sb/0x83928d7a16e0cbdf77d555c405a3975d11dcf0fa.sol#129-167):
+	-etherHero.call.value(address(this).balance).gas(estGas)() /sb/0x83928d7a16e0cbdf77d555c405a3975d11dcf0fa.sol#137-163
+Low level call in Etherhero.makeDeposit (/sb/0x83928d7a16e0cbdf77d555c405a3975d11dcf0fa.sol#471-511):
+	-stubF.call.value(calcStubFundPercent).gas(estGas)() /sb/0x83928d7a16e0cbdf77d555c405a3975d11dcf0fa.sol
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Function 'EtherheroStabilizationFund.ReturnEthToEtherhero' (/sb/0x83928d7a16e0cbdf77d555c405a3975d11dcf0fa.sol#129-167) is not in mixedCase
+Event 'Etherhero.dividendPayment' (/sb/0x83928d7a16e0cbdf77d555c405a3975d11dcf0fa.sol#221-225) is not in CapWords
+Parameter '_address' of Etherhero.insertBeneficiaries (/sb/0x83928d7a16e0cbdf77d555c405a3975d11dcf0fa.sol#273) is not in mixedCase
+Parameter '_percentWithdraw' of Etherhero.insertBeneficiaries (/sb/0x83928d7a16e0cbdf77d555c405a3975d11dcf0fa.sol#273) is not in mixedCase
+Parameter '_ethWithdraw' of Etherhero.insertBeneficiaries (/sb/0x83928d7a16e0cbdf77d555c405a3975d11dcf0fa.sol#274-275) is not in mixedCase
+Parameter '_deposits' of Etherhero.insertBeneficiaries (/sb/0x83928d7a16e0cbdf77d555c405a3975d11dcf0fa.sol#275) is not in mixedCase
+Parameter '_address' of Etherhero.getBeneficiaries (/sb/0x83928d7a16e0cbdf77d555c405a3975d11dcf0fa.sol#313) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x83928d7a16e0cbdf77d555c405a3975d11dcf0fa.sol analyzed (3 contracts), 17 result(s) found

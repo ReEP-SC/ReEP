@@ -1,0 +1,126 @@
+INFO:Detectors:[91m
+Snip3D.vaultToWallet (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#813-827) sends eth to arbitrary user
+	Dangerous calls:
+	- toPay.transfer(value) (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#827)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[91m
+Snip3D.RefundWaitingLine (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#231-233) is never initialized. It is used in:
+	- nextonetogetpaid (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#332-347)
+Snip3D.NextInLine (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#233) is never initialized. It is used in:
+	- nextonetogetpaid (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#332-347)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-state-variables[0m
+INFO:Detectors:[93m
+number in Snip3D.blocksTillSemiShoot (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#365) is a local variable never initialiazed
+number in Snip3D.blocksTillTargetShoot (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#383) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[93m
+Snip3D.sendInSoldier (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#457-521) does not use the value returned by external calls:
+	-P3Dcontract_.buy.value(buyamount)(masternode) (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#503)
+Snip3D.sendInSoldierReferal (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#521-593) does not use the value returned by external calls:
+	-P3Dcontract_.buy.value(buyamount)(masternode) (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#571-573)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Snip3D.legacyStart has external calls inside a loop:
+	- torefund = old.RefundWaitingLine(nextUp + i) (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#873-875)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in Snip3D.DivsToRefundpot (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#965-981):
+	External calls:
+	- dividends = P3Dcontract_.myDividends(true) (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#967-969)
+	- P3Dcontract_.withdraw() (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#977)
+	- SPASM_.disburse.value(base.mul(5))() (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#977-979)
+	External calls sending eth:
+	- SPASM_.disburse.value(base.mul(5))() (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#977-979)
+	State variables written after the call(s):
+	- Refundpot (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#981)
+Reentrancy in Snip3D.P3DDivstocontract (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#835-857):
+	External calls:
+	- divs = harvestabledivs() (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#839)
+	- P3Dcontract_.withdraw() (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#843)
+	- SPASM_.disburse.value(base)() (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#851)
+	External calls sending eth:
+	- SPASM_.disburse.value(base)() (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#851)
+	State variables written after the call(s):
+	- Refundpot (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#854-855)
+Reentrancy in Snip3D.constructor (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#279-285):
+	External calls:
+	- NextInLineOld = old.NextInLine() (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#283)
+	State variables written after the call(s):
+	- lastToPayOld (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#283)
+Reentrancy in Snip3D.legacyStart (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#867-885):
+	External calls:
+	- torefund = old.RefundWaitingLine(nextUp + i) (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#873-875)
+	State variables written after the call(s):
+	- balancesRefund (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#877-879)
+Reentrancy in Snip3D.sendInSoldier (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#457-521):
+	External calls:
+	- P3Dcontract_.buy.value(buyamount)(masternode) (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#503)
+	State variables written after the call(s):
+	- Refundpot (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#507-508)
+	- Refundpot (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#511-513)
+Reentrancy in Snip3D.sendInSoldierReferal (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#521-593):
+	External calls:
+	- P3Dcontract_.buy.value(buyamount)(masternode) (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#571-573)
+	State variables written after the call(s):
+	- Refundpot (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#575-579)
+	- Refundpot (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#579-583)
+Reentrancy in Snip3D.sendInSoldierReferal (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#521-593):
+	External calls:
+	- P3Dcontract_.buy.value(buyamount)(masternode) (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#571-573)
+	- SPASM_.disburse.value(spasmamount)() (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#585-587)
+	State variables written after the call(s):
+	- playerVault (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#587-593)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Snip3D.NextAtLineEnd should be constant (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#235-237)
+Snip3D.NextInLine should be constant (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#233)
+Snip3D.blocksBeforeSemiRandomShoot should be constant (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#243-245)
+Snip3D.blocksBeforeTargetShoot should be constant (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#245-247)
+Snip3D.ethtotalSupply should be constant (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#415)
+Snip3D.ethtotalSupplyRefund should be constant (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#893)
+Snip3D.pointMultiplier should be constant (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#407)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Owned.transferOwnership (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#189-195) should be declared external
+Owned.acceptOwnership (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#195-213) should be declared external
+Snip3D.nextonetogetpaid (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#332-347) should be declared external
+Snip3D.playervanity (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#347-351) should be declared external
+Snip3D.blocksTillSemiShoot (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#353-375) should be declared external
+Snip3D.blocksTillTargetShoot (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#375-399) should be declared external
+Snip3D.sendInSoldier (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#457-521) should be declared external
+Snip3D.sendInSoldierReferal (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#521-593) should be declared external
+Snip3D.shootSemiRandom (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#593-693) should be declared external
+Snip3D.shootTarget (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#693-767) should be declared external
+Snip3D.Payoutnextrefund (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#767-791) should be declared external
+Snip3D.disburse (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#791-813) should be declared external
+Snip3D.vaultToWallet (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#813-827) should be declared external
+Snip3D.changevanity (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#827-835) should be declared external
+Snip3D.P3DDivstocontract (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#835-857) should be declared external
+Snip3D.die (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#861-865) should be declared external
+Snip3D.legacyStart (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#867-885) should be declared external
+Snip3D.disburseRefund (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#951-963) should be declared external
+Snip3D.DivsToRefundpot (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#965-981) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_newOwner' of Owned.transferOwnership (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#191) is not in mixedCase
+Event 'Snip3D.death' (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#249-255) is not in CapWords
+Event 'Snip3D.semiShot' (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#257-259) is not in CapWords
+Event 'Snip3D.targetShot' (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#260-265) is not in CapWords
+Event 'Snip3D.newSoldiers' (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#267-275) is not in CapWords
+Function 'Snip3D.Payoutnextrefund' (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#767-791) is not in mixedCase
+Function 'Snip3D.P3DDivstocontract' (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#835-857) is not in mixedCase
+Function 'Snip3D.DivsToRefundpot' (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#965-981) is not in mixedCase
+Variable 'Snip3D._totalSupply' (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#215) is not in mixedCase
+Variable 'Snip3D.RefundWaitingLine' (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#231-233) is not in mixedCase
+Variable 'Snip3D.NextInLine' (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#233) is not in mixedCase
+Variable 'Snip3D.NextAtLineEnd' (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#235-237) is not in mixedCase
+Variable 'Snip3D.Refundpot' (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#243) is not in mixedCase
+Variable 'Snip3D.NextInLineOld' (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#247-249) is not in mixedCase
+Constant 'Snip3D.P3Dcontract_' (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#287-297) is not in UPPER_CASE_WITH_UNDERSCORES
+Variable 'Snip3D.Vanity' (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#413-415) is not in mixedCase
+Variable 'Snip3D._totalSupplyRefund' (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol#887-889) is not in mixedCase
+Function 'Snip3dInterface.RefundWaitingLine' (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol) is not in mixedCase
+Function 'Snip3dInterface.NextInLine' (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol) is not in mixedCase
+Function 'Snip3dInterface.NextAtLineEnd' (/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x812a935527dac8c340ae875ecb7713fcf85127c6.sol analyzed (6 contracts), 55 result(s) found

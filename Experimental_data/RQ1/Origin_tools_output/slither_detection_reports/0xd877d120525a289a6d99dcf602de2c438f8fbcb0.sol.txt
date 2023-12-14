@@ -1,0 +1,180 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol:
+/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol:495:59: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function checkAndUpdateUniqueness(BaseWallet _wallet, uint256 _nonce, bytes32 _signHash) internal returns (bool) {
+                                                          ^------------^
+/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol:2075:53: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function validateSignatures(BaseWallet _wallet, bytes _data, bytes32 _signHash, bytes _signatures) internal view returns (bool) {
+                                                    ^---------^
+
+INFO:Detectors:[91m
+BaseWallet.invoke (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#1319-1345) sends eth to arbitrary user
+	Dangerous calls:
+	- require(bool,string)(_target.call.value(_value)(_data),BW: call to target failed) (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#1327-1341)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[93m
+RelayerModule.recoverSigner (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#579-613) is declared view but contains assembly code
+RelayerModule.verifyData (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#713-741) is declared view but contains assembly code
+RelayerModule.functionPrefix (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#743-759) is declared view but contains assembly code
+GuardianUtils.isContract (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#1845-1863) is declared view but contains assembly code
+GuardianUtils.isGuardianOwner (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#1881-1905) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+RecoveryManager.notWhenRecovery (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#2011-2015) uses a dangerous strict equality:
+	- require(bool,string)(configs[_wallet].executeAfter == 0,RM: there cannot be an ongoing recovery)
+	- require(bool,string)(configs[_wallet].executeAfter == 0,RM: there cannot be an ongoing recovery)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Reentrancy in RecoveryManager.cancelRecovery (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#2129-2145):
+	External calls:
+	- guardianStorage.setLock(_wallet,0) (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#2141-2143)
+	State variables written after the call(s):
+	- configs (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#2145)
+Reentrancy in RecoveryManager.finalizeRecovery (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#2091-2117):
+	External calls:
+	- _wallet.setOwner(config.recovery) (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#2105-2107)
+	- guardianStorage.setLock(_wallet,0) (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#2111)
+	State variables written after the call(s):
+	- configs (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#2113-2117)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+BaseModule.recoverToken (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#217-225) does not use the value returned by external calls:
+	-ERC20(_token).transfer(address(registry),total) (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#221-225)
+ModuleRegistry.recoverToken (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#1015-1029) does not use the value returned by external calls:
+	-ERC20(_token).transfer(msg.sender,total) (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#1027)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+BaseWallet.init has external calls inside a loop:
+	- Module(_modules[i]).init(this) (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#1229)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+RelayerModule.recoverSigner uses assembly (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#579-613)
+	- /sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#603-613
+RelayerModule.verifyData uses assembly (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#713-741)
+	- /sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#737-741
+RelayerModule.functionPrefix uses assembly (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#743-759)
+	- /sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#757-759
+BaseWallet.fallback uses assembly (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#1381-1435)
+	- /sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#1413-1435
+GuardianUtils.isContract uses assembly (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#1845-1863)
+	- /sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#1853-1857
+GuardianUtils.isGuardianOwner uses assembly (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#1881-1905)
+	- /sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#1889-1905
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+BaseWallet.implementation should be constant (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#1147)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+ERC20.totalSupply (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#773-777) should be declared external
+ERC20.decimals (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#778-779) should be declared external
+ERC20.balanceOf (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#781-785) should be declared external
+ERC20.allowance (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#785-800) should be declared external
+ERC20.transfer (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#801-803) should be declared external
+ERC20.approve (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#805-809) should be declared external
+ERC20.transferFrom (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#809-811) should be declared external
+BaseWallet.fallback (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#1381-1435) should be declared external
+RecoveryManager.getRecovery (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Low level call in RelayerModule.execute (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#375-427):
+	-success = address(this).call(_data) /sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#415
+Low level call in BaseWallet.invoke (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#1319-1345):
+	-require(bool,string)(_target.call.value(_value)(_data),BW: call to target failed) /sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#1327-1341
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Parameter '_wallet' of BaseModule.init (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#177) is not in mixedCase
+Parameter '_wallet' of BaseModule.addModule (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#189) is not in mixedCase
+Parameter '_module' of BaseModule.addModule (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#189-195) is not in mixedCase
+Parameter '_token' of BaseModule.recoverToken (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#217) is not in mixedCase
+Parameter '_registry' of BaseModule. (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#103-106) is not in mixedCase
+Parameter '_name' of BaseModule. (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#108-111) is not in mixedCase
+Parameter '_wallet' of BaseModule.isOwner (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#239) is not in mixedCase
+Parameter '_addr' of BaseModule.isOwner (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#239) is not in mixedCase
+Parameter '_wallet' of RelayerModule.execute (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#375-377) is not in mixedCase
+Parameter '_data' of RelayerModule.execute (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#377) is not in mixedCase
+Parameter '_nonce' of RelayerModule.execute (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#377) is not in mixedCase
+Parameter '_signatures' of RelayerModule.execute (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#377-379) is not in mixedCase
+Parameter '_gasPrice' of RelayerModule.execute (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#379) is not in mixedCase
+Parameter '_gasLimit' of RelayerModule.execute (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#379) is not in mixedCase
+Parameter '_wallet' of RelayerModule.getNonce (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#431) is not in mixedCase
+Parameter '_from' of RelayerModule.getSignHash (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#475) is not in mixedCase
+Parameter '_to' of RelayerModule.getSignHash (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#475-477) is not in mixedCase
+Parameter '_value' of RelayerModule.getSignHash (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#481-485) is not in mixedCase
+Parameter '_data' of RelayerModule.getSignHash (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#485) is not in mixedCase
+Parameter '_nonce' of RelayerModule.getSignHash (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#485-486) is not in mixedCase
+Parameter '_gasPrice' of RelayerModule.getSignHash (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#487) is not in mixedCase
+Parameter '_gasLimit' of RelayerModule.getSignHash (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#489) is not in mixedCase
+Parameter '_wallet' of RelayerModule.checkAndUpdateUniqueness (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#519) is not in mixedCase
+Parameter '_signHash' of RelayerModule.checkAndUpdateUniqueness (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#523) is not in mixedCase
+Parameter '_wallet' of RelayerModule.checkAndUpdateNonce (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#549-551) is not in mixedCase
+Parameter '_nonce' of RelayerModule.checkAndUpdateNonce (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#551) is not in mixedCase
+Parameter '_signedHash' of RelayerModule.recoverSigner (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#579) is not in mixedCase
+Parameter '_wallet' of RelayerModule.refund (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#633) is not in mixedCase
+Parameter '_gasUsed' of RelayerModule.refund (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#633-635) is not in mixedCase
+Parameter '_gasPrice' of RelayerModule.refund (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#635-637) is not in mixedCase
+Parameter '_gasLimit' of RelayerModule.refund (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#639-643) is not in mixedCase
+Parameter '_signatures' of RelayerModule.refund (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#643) is not in mixedCase
+Parameter '_relayer' of RelayerModule.refund (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#643) is not in mixedCase
+Parameter '_wallet' of RelayerModule.verifyRefund (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#681-683) is not in mixedCase
+Parameter '_gasUsed' of RelayerModule.verifyRefund (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#683) is not in mixedCase
+Parameter '_gasPrice' of RelayerModule.verifyRefund (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#683) is not in mixedCase
+Parameter '_signatures' of RelayerModule.verifyRefund (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#683) is not in mixedCase
+Parameter '_wallet' of RelayerModule.verifyData (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#713) is not in mixedCase
+Parameter '_data' of RelayerModule.verifyData (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#714-715) is not in mixedCase
+Parameter '_data' of RelayerModule.functionPrefix (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#745) is not in mixedCase
+Parameter '_newOwner' of Owned.changeOwner (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#859) is not in mixedCase
+Parameter '_module' of ModuleRegistry.registerModule (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#921) is not in mixedCase
+Parameter '_name' of ModuleRegistry.registerModule (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#921) is not in mixedCase
+Parameter '_module' of ModuleRegistry.deregisterModule (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#941) is not in mixedCase
+Parameter '_upgrader' of ModuleRegistry.registerUpgrader (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#963) is not in mixedCase
+Parameter '_name' of ModuleRegistry.registerUpgrader (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#963) is not in mixedCase
+Parameter '_upgrader' of ModuleRegistry.deregisterUpgrader (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#991) is not in mixedCase
+Parameter '_token' of ModuleRegistry.recoverToken (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#1017) is not in mixedCase
+Parameter '_module' of ModuleRegistry.moduleInfo (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#1035-1037) is not in mixedCase
+Parameter '_upgrader' of ModuleRegistry.upgraderInfo (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#1057-1059) is not in mixedCase
+Parameter '_module' of ModuleRegistry.isRegisteredModule (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#1077) is not in mixedCase
+Parameter '_modules' of ModuleRegistry.isRegisteredModule (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#1099) is not in mixedCase
+Parameter '_upgrader' of ModuleRegistry.isRegisteredUpgrader (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#1117) is not in mixedCase
+Parameter '_owner' of BaseWallet.init (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#1201) is not in mixedCase
+Parameter '_modules' of BaseWallet.init (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#1201-1202) is not in mixedCase
+Parameter '_module' of BaseWallet.authoriseModule (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#1247-1249) is not in mixedCase
+Parameter '_value' of BaseWallet.authoriseModule (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#1249) is not in mixedCase
+Parameter '_module' of BaseWallet.enableStaticCall (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#1287) is not in mixedCase
+Parameter '_method' of BaseWallet.enableStaticCall (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#1287) is not in mixedCase
+Parameter '_newOwner' of BaseWallet.setOwner (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#1305-1306) is not in mixedCase
+Parameter '_target' of BaseWallet.invoke (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#1321) is not in mixedCase
+Parameter '_value' of BaseWallet.invoke (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#1321) is not in mixedCase
+Parameter '_data' of BaseWallet.invoke (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#1321) is not in mixedCase
+Parameter '_wallet' of GuardianStorage.addGuardian (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#1555) is not in mixedCase
+Parameter '_guardian' of GuardianStorage.addGuardian (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#1555) is not in mixedCase
+Parameter '_wallet' of GuardianStorage.revokeGuardian (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#1579) is not in mixedCase
+Parameter '_guardian' of GuardianStorage.revokeGuardian (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#1579-1581) is not in mixedCase
+Parameter '_wallet' of GuardianStorage.guardianCount (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#1613-1619) is not in mixedCase
+Parameter '_wallet' of GuardianStorage.getGuardians (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#1637) is not in mixedCase
+Parameter '_wallet' of GuardianStorage.isGuardian (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#1663-1665) is not in mixedCase
+Parameter '_guardian' of GuardianStorage.isGuardian (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#1665) is not in mixedCase
+Parameter '_wallet' of GuardianStorage.setLock (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#1687) is not in mixedCase
+Parameter '_releaseAfter' of GuardianStorage.setLock (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#1687) is not in mixedCase
+Parameter '_wallet' of GuardianStorage.isLocked (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#1705) is not in mixedCase
+Parameter '_wallet' of GuardianStorage.getLock (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#1721) is not in mixedCase
+Parameter '_wallet' of GuardianStorage.getLocker (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#1741) is not in mixedCase
+Parameter '_guardians' of GuardianUtils.isGuardian (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#1779) is not in mixedCase
+Parameter '_guardian' of GuardianUtils.isGuardian (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#1779-1781) is not in mixedCase
+Parameter '_owner' of GuardianUtils.isGuardianOwner (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#1881) is not in mixedCase
+Parameter '_wallet' of RecoveryManager.getRequiredSignatures (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol) is not in mixedCase
+Parameter '_data' of RecoveryManager.getRequiredSignatures (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol) is not in mixedCase
+Parameter '_wallet' of RecoveryManager.validateSignatures (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol) is not in mixedCase
+Parameter '_signHash' of RecoveryManager.validateSignatures (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol) is not in mixedCase
+Parameter '_signatures' of RecoveryManager.validateSignatures (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol) is not in mixedCase
+Parameter '_guardianStorage' of RecoveryManager. (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#2019-2021) is not in mixedCase
+Parameter '_recoveryPeriod' of RecoveryManager. (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#2021-2023) is not in mixedCase
+Parameter '_lockPeriod' of RecoveryManager. (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#2023-2029) is not in mixedCase
+Parameter '_wallet' of RecoveryManager.executeRecovery (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#2061) is not in mixedCase
+Parameter '_recovery' of RecoveryManager.executeRecovery (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#2061-2063) is not in mixedCase
+Parameter '_wallet' of RecoveryManager.finalizeRecovery (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#2095-2097) is not in mixedCase
+Parameter '_wallet' of RecoveryManager.cancelRecovery (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#2129) is not in mixedCase
+Parameter '_wallet' of RecoveryManager.getRecovery (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+RecoveryManager.NAME (/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol#1939-1941) is never used in RecoveryManager
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0xd877d120525a289a6d99dcf602de2c438f8fbcb0.sol analyzed (12 contracts), 123 result(s) found

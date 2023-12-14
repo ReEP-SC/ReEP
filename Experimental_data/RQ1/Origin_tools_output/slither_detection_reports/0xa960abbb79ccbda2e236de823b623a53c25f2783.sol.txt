@@ -1,0 +1,62 @@
+INFO:Detectors:[91m
+MultiBuyer.buy (/sb/0xa960abbb79ccbda2e236de823b623a53c25f2783.sol#513-583) sends eth to arbitrary user
+	Dangerous calls:
+	- require(bool,string)(_exchanges[i].call.value(_values[i])(data),buy: exchange arbitrary call failed) (/sb/0xa960abbb79ccbda2e236de823b623a53c25f2783.sol#559-563)
+	- msg.sender.transfer(address(this).balance) (/sb/0xa960abbb79ccbda2e236de823b623a53c25f2783.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[93m
+MultiBuyer.buy (/sb/0xa960abbb79ccbda2e236de823b623a53c25f2783.sol#513-583) does not use the value returned by external calls:
+	-_throughToken.approve(_exchanges[i],_throughToken.balanceOf(this)) (/sb/0xa960abbb79ccbda2e236de823b623a53c25f2783.sol#555-559)
+	-_throughToken.approve(_exchanges[i],0) (/sb/0xa960abbb79ccbda2e236de823b623a53c25f2783.sol#571)
+	-token.approve(_mtkn,token.balanceOf(this)) (/sb/0xa960abbb79ccbda2e236de823b623a53c25f2783.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+MultiBuyer.buy has external calls inside a loop:
+	- token = _mtkn.tokens(i - 1) (/sb/0xa960abbb79ccbda2e236de823b623a53c25f2783.sol)
+MultiBuyer.buy has external calls inside a loop:
+	- token.approve(_mtkn,token.balanceOf(this)) (/sb/0xa960abbb79ccbda2e236de823b623a53c25f2783.sol)
+MultiBuyer.buy has external calls inside a loop:
+	- amount = j.mul(token.balanceOf(this)).div(token.balanceOf(_mtkn)) (/sb/0xa960abbb79ccbda2e236de823b623a53c25f2783.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+ERC20Basic.totalSupply (/sb/0xa960abbb79ccbda2e236de823b623a53c25f2783.sol#29-31) should be declared external
+ERC20Basic.balanceOf (/sb/0xa960abbb79ccbda2e236de823b623a53c25f2783.sol#31-33) should be declared external
+ERC20Basic.transfer (/sb/0xa960abbb79ccbda2e236de823b623a53c25f2783.sol#33-35) should be declared external
+ERC20.allowance (/sb/0xa960abbb79ccbda2e236de823b623a53c25f2783.sol#57-61) should be declared external
+ERC20.transferFrom (/sb/0xa960abbb79ccbda2e236de823b623a53c25f2783.sol#61-67) should be declared external
+ERC20.approve (/sb/0xa960abbb79ccbda2e236de823b623a53c25f2783.sol#67-73) should be declared external
+IBasicMultiToken.tokensCount (/sb/0xa960abbb79ccbda2e236de823b623a53c25f2783.sol#97-99) should be declared external
+IBasicMultiToken.tokens (/sb/0xa960abbb79ccbda2e236de823b623a53c25f2783.sol#99-101) should be declared external
+IBasicMultiToken.allTokens (/sb/0xa960abbb79ccbda2e236de823b623a53c25f2783.sol#101-103) should be declared external
+IBasicMultiToken.allDecimals (/sb/0xa960abbb79ccbda2e236de823b623a53c25f2783.sol#103-105) should be declared external
+IBasicMultiToken.allBalances (/sb/0xa960abbb79ccbda2e236de823b623a53c25f2783.sol#105-109) should be declared external
+IBasicMultiToken.allTokensDecimalsBalances (/sb/0xa960abbb79ccbda2e236de823b623a53c25f2783.sol#109) should be declared external
+IBasicMultiToken.bundleFirstTokens (/sb/0xa960abbb79ccbda2e236de823b623a53c25f2783.sol#111-115) should be declared external
+IBasicMultiToken.bundle (/sb/0xa960abbb79ccbda2e236de823b623a53c25f2783.sol#115-117) should be declared external
+IBasicMultiToken.unbundle (/sb/0xa960abbb79ccbda2e236de823b623a53c25f2783.sol#117-123) should be declared external
+IBasicMultiToken.unbundleSome (/sb/0xa960abbb79ccbda2e236de823b623a53c25f2783.sol#123-129) should be declared external
+IMultiToken.getReturn (/sb/0xa960abbb79ccbda2e236de823b623a53c25f2783.sol#137) should be declared external
+IMultiToken.change (/sb/0xa960abbb79ccbda2e236de823b623a53c25f2783.sol#141-143) should be declared external
+IMultiToken.allWeights (/sb/0xa960abbb79ccbda2e236de823b623a53c25f2783.sol#143) should be declared external
+IMultiToken.allTokensDecimalsBalancesWeights (/sb/0xa960abbb79ccbda2e236de823b623a53c25f2783.sol#144-157) should be declared external
+Ownable.renounceOwnership (/sb/0xa960abbb79ccbda2e236de823b623a53c25f2783.sol#407-415) should be declared external
+Ownable.transferOwnership (/sb/0xa960abbb79ccbda2e236de823b623a53c25f2783.sol#425-439) should be declared external
+MultiBuyer.buy (/sb/0xa960abbb79ccbda2e236de823b623a53c25f2783.sol#513-583) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Low level call in MultiBuyer.buy (/sb/0xa960abbb79ccbda2e236de823b623a53c25f2783.sol#513-583):
+	-require(bool,string)(_exchanges[i].call.value(_values[i])(data),buy: exchange arbitrary call failed) /sb/0xa960abbb79ccbda2e236de823b623a53c25f2783.sol#559-563
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Parameter '_newOwner' of Ownable.transferOwnership (/sb/0xa960abbb79ccbda2e236de823b623a53c25f2783.sol#433) is not in mixedCase
+Function 'Ownable._transferOwnership' (/sb/0xa960abbb79ccbda2e236de823b623a53c25f2783.sol#443-452) is not in mixedCase
+Parameter '_newOwner' of Ownable._transferOwnership (/sb/0xa960abbb79ccbda2e236de823b623a53c25f2783.sol#443) is not in mixedCase
+Parameter '_mtkn' of MultiBuyer.buy (/sb/0xa960abbb79ccbda2e236de823b623a53c25f2783.sol#513) is not in mixedCase
+Parameter '_minimumReturn' of MultiBuyer.buy (/sb/0xa960abbb79ccbda2e236de823b623a53c25f2783.sol#517) is not in mixedCase
+Parameter '_throughToken' of MultiBuyer.buy (/sb/0xa960abbb79ccbda2e236de823b623a53c25f2783.sol#517-518) is not in mixedCase
+Parameter '_exchanges' of MultiBuyer.buy (/sb/0xa960abbb79ccbda2e236de823b623a53c25f2783.sol#519) is not in mixedCase
+Parameter '_datas' of MultiBuyer.buy (/sb/0xa960abbb79ccbda2e236de823b623a53c25f2783.sol#519) is not in mixedCase
+Parameter '_datasIndexes' of MultiBuyer.buy (/sb/0xa960abbb79ccbda2e236de823b623a53c25f2783.sol#519-521) is not in mixedCase
+Parameter '_values' of MultiBuyer.buy (/sb/0xa960abbb79ccbda2e236de823b623a53c25f2783.sol#521) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xa960abbb79ccbda2e236de823b623a53c25f2783.sol analyzed (9 contracts), 39 result(s) found

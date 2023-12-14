@@ -1,0 +1,48 @@
+INFO:Detectors:[91m
+LockETH.unlockETH (/sb/0x85c5b89993d7a03057928de781cd61b44466f17a.sol) sends eth to arbitrary user
+	Dangerous calls:
+	- _contractOwner.transfer(address(this).balance) (/sb/0x85c5b89993d7a03057928de781cd61b44466f17a.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[93m
+LockDrop.stakeETH (/sb/0x85c5b89993d7a03057928de781cd61b44466f17a.sol#258-291) uses a dangerous strict equality:
+	- require(bool,string)(_weights[msg.sender] == 0,No topping up.)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Reentrancy in LockDrop.claimKong (/sb/0x85c5b89993d7a03057928de781cd61b44466f17a.sol#309-338):
+	External calls:
+	- kongClaim = IERC20(_kongERC20Address).balanceOf(address(this)).mul(weight).div(_weightsSum) (/sb/0x85c5b89993d7a03057928de781cd61b44466f17a.sol#318-322)
+	State variables written after the call(s):
+	- _weights (/sb/0x85c5b89993d7a03057928de781cd61b44466f17a.sol#330)
+	- _weightsSum (/sb/0x85c5b89993d7a03057928de781cd61b44466f17a.sol#330)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+LockDrop.claimKong (/sb/0x85c5b89993d7a03057928de781cd61b44466f17a.sol#309-338) does not use the value returned by external calls:
+	-IERC20(_kongERC20Address).transfer(msg.sender,kongClaim) (/sb/0x85c5b89993d7a03057928de781cd61b44466f17a.sol#332-336)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+LockDrop.stakeETH (/sb/0x85c5b89993d7a03057928de781cd61b44466f17a.sol#258-291) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(_weights[msg.sender] == 0,No topping up.) (/sb/0x85c5b89993d7a03057928de781cd61b44466f17a.sol#262)
+	- require(bool)(address(lockETH).balance >= msg.value) (/sb/0x85c5b89993d7a03057928de781cd61b44466f17a.sol#289-290)
+	- require(bool,string)(block.timestamp <= _stakingEnd,Closed for contributions.) (/sb/0x85c5b89993d7a03057928de781cd61b44466f17a.sol#264-265)
+LockDrop.claimKong (/sb/0x85c5b89993d7a03057928de781cd61b44466f17a.sol#309-338) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(block.timestamp > _lockingEnds[msg.sender],Cannot claim yet.) (/sb/0x85c5b89993d7a03057928de781cd61b44466f17a.sol#313-315)
+	- require(bool,string)(_weights[msg.sender] > 0,Zero contribution.) (/sb/0x85c5b89993d7a03057928de781cd61b44466f17a.sol#311)
+LockETH.unlockETH (/sb/0x85c5b89993d7a03057928de781cd61b44466f17a.sol) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(block.timestamp > _endOfLockUp,Cannot claim yet.) (/sb/0x85c5b89993d7a03057928de781cd61b44466f17a.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+LockDrop.stakeETH (/sb/0x85c5b89993d7a03057928de781cd61b44466f17a.sol#258-291) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Variable 'LockDrop._stakingEnd' (/sb/0x85c5b89993d7a03057928de781cd61b44466f17a.sol#206) is not in mixedCase
+Variable 'LockDrop._weightsSum' (/sb/0x85c5b89993d7a03057928de781cd61b44466f17a.sol#207-209) is not in mixedCase
+Variable 'LockDrop._kongERC20Address' (/sb/0x85c5b89993d7a03057928de781cd61b44466f17a.sol#210) is not in mixedCase
+Variable 'LockDrop._weights' (/sb/0x85c5b89993d7a03057928de781cd61b44466f17a.sol#213-214) is not in mixedCase
+Variable 'LockDrop._lockingEnds' (/sb/0x85c5b89993d7a03057928de781cd61b44466f17a.sol#217-220) is not in mixedCase
+Variable 'LockETH._endOfLockUp' (/sb/0x85c5b89993d7a03057928de781cd61b44466f17a.sol#346-347) is not in mixedCase
+Variable 'LockETH._contractOwner' (/sb/0x85c5b89993d7a03057928de781cd61b44466f17a.sol#347-348) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x85c5b89993d7a03057928de781cd61b44466f17a.sol analyzed (4 contracts), 15 result(s) found

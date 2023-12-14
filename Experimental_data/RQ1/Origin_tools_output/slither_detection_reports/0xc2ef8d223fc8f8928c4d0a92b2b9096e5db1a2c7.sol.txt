@@ -1,0 +1,247 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol:
+/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol:135:55: Warning: This looks like an address but has an invalid checksum. If this is not used as an address, please prepend '00'. Correct checksummed address: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE'. For more information please see https://solidity.readthedocs.io/en/develop/types.html#address-literals
+    ERC20 constant internal ETH_TOKEN_ADDRESS = ERC20(0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee);
+                                                      ^----------------------------------------^
+
+INFO:Detectors:[91m
+TOMORROWPRICE.__withdraw (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#384-390) sends eth to arbitrary user
+	Dangerous calls:
+	- msg.sender.transfer(amount) (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#387)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[93m
+Reentrancy in TOMORROWPRICE.setAward (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#409-429):
+	External calls:
+	- checkInterest() < _amount (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#417-424)
+	- require(bool,string)(DAI_TOKEN_ADDRESS.transferFrom(msg.sender,address(this),_amount),not enough DAI balance) (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#417-421)
+	- DAI_TOKEN_ADDRESS.approve(address(CPProxyContract),_amount) (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#421-423)
+	- CPProxyContract.mint(_amount) (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#424)
+	State variables written after the call(s):
+	- awards (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#427-428)
+	- currentAward (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#429)
+	- totalDeposit (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#424)
+Reentrancy in TOMORROWPRICE.setAwardPartner (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#450-463):
+	External calls:
+	- interest = cDAI2DAI(partners[i].totalCDAI).sub(partners[i].totalDeposit) (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#453-454)
+	- partners[partnerArr[i]].totalCDAI = DAI2cDAI(partners[partnerArr[i]].totalDeposit) (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#462)
+	State variables written after the call(s):
+	- partners (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#462)
+Reentrancy in TOMORROWPRICE.setAwardRanking (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#433-449):
+	External calls:
+	- interest = balanceOfDai().sub(totalDeposit) (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#440-441)
+	State variables written after the call(s):
+	- awardRankings (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#448)
+Reentrancy in TOMORROWPRICE.withdrawByUser (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#308-332):
+	External calls:
+	- CPResult = CPProxyContract.redeem(DAI2cDAI(_numDAI)) (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#312)
+	- DAI_TOKEN_ADDRESS.transfer(msg.sender,_numDAI) (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#313-314)
+	State variables written after the call(s):
+	- usersBalance (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#314-315)
+Reentrancy in TOMORROWPRICE.withdrawByUser (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#308-332):
+	External calls:
+	- CPResult = CPProxyContract.redeem(DAI2cDAI(_numDAI)) (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#312)
+	- CPResult1 = CPProxyContract.redeemUnderlying(DAI2cDAI(_numDAI)) (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#317-321)
+	- DAI_TOKEN_ADDRESS.transfer(msg.sender,_numDAI) (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#321-322)
+	State variables written after the call(s):
+	- usersBalance (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#322)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+i in TOMORROWPRICE.setAwardPartner (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#453) is a local variable never initialiazed
+i in TOMORROWPRICE.checkInterest (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#405) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[93m
+TOMORROWPRICE.depositToken (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#249-269) does not use the value returned by external calls:
+	-srcToken.approve(address(proxyKyberSwap),srcQty) (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#261)
+TOMORROWPRICE.processCP (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#269-273) does not use the value returned by external calls:
+	-DAI_TOKEN_ADDRESS.approve(address(CPProxyContract),_numDAI) (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#270-271)
+TOMORROWPRICE.withdrawByUser (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#308-332) does not use the value returned by external calls:
+	-DAI_TOKEN_ADDRESS.transfer(msg.sender,_numDAI) (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#313-314)
+	-DAI_TOKEN_ADDRESS.transfer(msg.sender,_numDAI) (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#321-322)
+TOMORROWPRICE.proccessWDToken (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#363-384) does not use the value returned by external calls:
+	-DAI_TOKEN_ADDRESS.approve(address(proxyKyberSwap),_numDAI) (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#374-376)
+TOMORROWPRICE.withdraw (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#391-399) does not use the value returned by external calls:
+	-erc20.transfer(msg.sender,_tokenAdmounts[i]) (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#398)
+TOMORROWPRICE.setAward (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#409-429) does not use the value returned by external calls:
+	-DAI_TOKEN_ADDRESS.approve(address(CPProxyContract),_amount) (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#421-423)
+TOMORROWPRICE.pay2seeResult (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#471-473) does not use the value returned by external calls:
+	-DAI_TOKEN_ADDRESS.transfer(ceo,sysAmount) (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol)
+	-DAI_TOKEN_ADDRESS.transfer(_user,userAmount) (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+TOMORROWPRICE.withdraw has external calls inside a loop:
+	- erc20.transfer(msg.sender,_tokenAdmounts[i]) (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#398)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in TOMORROWPRICE.proccessWDToken (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#363-384):
+	External calls:
+	- (minConversionRate,None,None) = proxyKyberSwap.getConversionRates(DAI_TOKEN_ADDRESS,_numDAI,destToken) (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#365-369)
+	- DAI_TOKEN_ADDRESS.approve(address(proxyKyberSwap),_numDAI) (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#374-376)
+	- proxyKyberSwap.executeSwap.value(msg.value)(DAI_TOKEN_ADDRESS,_numDAI,destToken,msg.sender,processAmount,1) (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#376-382)
+	External calls sending eth:
+	- proxyKyberSwap.executeSwap.value(msg.value)(DAI_TOKEN_ADDRESS,_numDAI,destToken,msg.sender,processAmount,1) (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#376-382)
+	State variables written after the call(s):
+	- totalDeposit (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#382-383)
+	- usersBalance (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#382)
+Reentrancy in TOMORROWPRICE.setAward (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#409-429):
+	External calls:
+	- checkInterest() < _amount (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#417-424)
+	- require(bool,string)(DAI_TOKEN_ADDRESS.transferFrom(msg.sender,address(this),_amount),not enough DAI balance) (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#417-421)
+	- DAI_TOKEN_ADDRESS.approve(address(CPProxyContract),_amount) (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#421-423)
+	- CPProxyContract.mint(_amount) (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#424)
+	State variables written after the call(s):
+	- totalAward (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#424-425)
+	- usersBalance (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#425-427)
+Reentrancy in TOMORROWPRICE.setAwardPartner (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#450-463):
+	External calls:
+	- interest = cDAI2DAI(partners[i].totalCDAI).sub(partners[i].totalDeposit) (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#453-454)
+	State variables written after the call(s):
+	- totalAwardPartner (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#459-460)
+	- usersBalance (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#459)
+Reentrancy in TOMORROWPRICE.setAwardRanking (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#433-449):
+	External calls:
+	- interest = balanceOfDai().sub(totalDeposit) (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#440-441)
+	State variables written after the call(s):
+	- totalAwardRanking (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#447-448)
+	- usersBalance (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#444-445)
+Reentrancy in TOMORROWPRICE.withdrawByUser (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#308-332):
+	External calls:
+	- CPResult = CPProxyContract.redeem(DAI2cDAI(_numDAI)) (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#312)
+	- DAI_TOKEN_ADDRESS.transfer(msg.sender,_numDAI) (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#313-314)
+	State variables written after the call(s):
+	- totalDeposit (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#315-316)
+Reentrancy in TOMORROWPRICE.withdrawByUser (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#308-332):
+	External calls:
+	- CPResult = CPProxyContract.redeem(DAI2cDAI(_numDAI)) (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#312)
+	- CPResult1 = CPProxyContract.redeemUnderlying(DAI2cDAI(_numDAI)) (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#317-321)
+	- DAI_TOKEN_ADDRESS.transfer(msg.sender,_numDAI) (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#321-322)
+	State variables written after the call(s):
+	- totalDeposit (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#322-324)
+Reentrancy in TOMORROWPRICE.withdrawByUser (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#308-332):
+	External calls:
+	- CPResult = CPProxyContract.redeem(DAI2cDAI(_numDAI)) (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#312)
+	- DAI_TOKEN_ADDRESS.transfer(msg.sender,_numDAI) (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#313-314)
+	- CPResult1 = CPProxyContract.redeemUnderlying(DAI2cDAI(_numDAI)) (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#317-321)
+	- DAI_TOKEN_ADDRESS.transfer(msg.sender,_numDAI) (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#321-322)
+	State variables written after the call(s):
+	- partners (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#327-329)
+Reentrancy in TOMORROWPRICE.withdrawETHByUser (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#332-349):
+	External calls:
+	- CPResult = CPProxyContract.redeem(DAI2cDAI(_numDAI)) (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#334-337)
+	- proccessWDToken(_numDAI,ETH_TOKEN_ADDRESS) (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#338)
+	- CPResult1 = CPProxyContract.redeemUnderlying(DAI2cDAI(_numDAI)) (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#339)
+	- proccessWDToken(_numDAI,ETH_TOKEN_ADDRESS) (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#342)
+	External calls sending eth:
+	- proccessWDToken(_numDAI,ETH_TOKEN_ADDRESS) (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#338)
+	- proccessWDToken(_numDAI,ETH_TOKEN_ADDRESS) (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#342)
+	State variables written after the call(s):
+	- partners (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#344-346)
+Reentrancy in TOMORROWPRICE.withdrawTokenByUser (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#349-363):
+	External calls:
+	- CPResult = CPProxyContract.redeem(DAI2cDAI(_numDAI)) (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#353-355)
+	- proccessWDToken(_numDAI,destToken) (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#355-356)
+	- CPResult1 = CPProxyContract.redeemUnderlying(DAI2cDAI(_numDAI)) (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#356-358)
+	- proccessWDToken(_numDAI,destToken) (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#359-360)
+	External calls sending eth:
+	- proccessWDToken(_numDAI,destToken) (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#355-356)
+	- proccessWDToken(_numDAI,destToken) (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#359-360)
+	State variables written after the call(s):
+	- partners (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#361-362)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+TOMORROWPRICE.ID should be constant (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#143-145)
+TOMORROWPRICE.totalAwardSystem should be constant (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#174-175)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#34-44) should be declared external
+ProxyKyberSwap.executeSwap (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#116-124) should be declared external
+ProxyKyberSwap.getConversionRates (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#124-128) should be declared external
+CPProxy.mint (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#129) should be declared external
+CPProxy.redeemUnderlying (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#129-130) should be declared external
+CPProxy.redeem (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#132-133) should be declared external
+CPProxy.exchangeRateStored (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#134) should be declared external
+TOMORROWPRICE.getConversionRates (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#205-211) should be declared external
+TOMORROWPRICE.config (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#211-214) should be declared external
+TOMORROWPRICE.configPercenRanking (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#214-218) should be declared external
+TOMORROWPRICE.configSeeResultFee (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#218-221) should be declared external
+TOMORROWPRICE.configPartner (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#221-227) should be declared external
+TOMORROWPRICE.depositEth (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#227-244) should be declared external
+TOMORROWPRICE.depositDai (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#244-249) should be declared external
+TOMORROWPRICE.depositToken (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#249-269) should be declared external
+TOMORROWPRICE.getPartnerArr (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#287-290) should be declared external
+TOMORROWPRICE.getPSeeResultFeePercent (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#290-293) should be declared external
+TOMORROWPRICE.getPercenRanking (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#293-296) should be declared external
+TOMORROWPRICE.withdrawByUser (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#308-332) should be declared external
+TOMORROWPRICE.withdrawETHByUser (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#332-349) should be declared external
+TOMORROWPRICE.withdrawTokenByUser (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#349-363) should be declared external
+TOMORROWPRICE.withdraw (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#391-399) should be declared external
+TOMORROWPRICE.setCeo (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#399-402) should be declared external
+TOMORROWPRICE.setAward (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#409-429) should be declared external
+TOMORROWPRICE.getAward (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#429-433) should be declared external
+TOMORROWPRICE.setAwardRanking (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#433-449) should be declared external
+TOMORROWPRICE.setAwardPartner (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#450-463) should be declared external
+TOMORROWPRICE.getAwardRanking (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#463-466) should be declared external
+TOMORROWPRICE.checkAwardPartner (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#467-471) should be declared external
+TOMORROWPRICE.pay2seeResult (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#471-473) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol:
+	- pragma solidity^0.4.26 (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#5-7): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Struct 'TOMORROWPRICE.partner' (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#151-157) is not in CapWords
+Struct 'TOMORROWPRICE.award' (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#157-161) is not in CapWords
+Struct 'TOMORROWPRICE.awardRanking' (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#161-164) is not in CapWords
+Event 'TOMORROWPRICE._deposit' (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#183-184) is not in CapWords
+Event 'TOMORROWPRICE._withdraw' (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#184-185) is not in CapWords
+Event 'TOMORROWPRICE._setAward' (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#185-186) is not in CapWords
+Event 'TOMORROWPRICE._setAwardRanking' (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#186-187) is not in CapWords
+Event 'TOMORROWPRICE._setAwardPartner' (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#187-191) is not in CapWords
+Event 'TOMORROWPRICE._pay2seeResult' (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#191-196) is not in CapWords
+Parameter '_srcToken' of TOMORROWPRICE.getConversionRates (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#205-207) is not in mixedCase
+Parameter '_minAward' of TOMORROWPRICE.config (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#212) is not in mixedCase
+Parameter '_maxAward' of TOMORROWPRICE.config (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#212-213) is not in mixedCase
+Parameter '_percenRanking' of TOMORROWPRICE.configPercenRanking (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#215-216) is not in mixedCase
+Parameter '_seeResultFee' of TOMORROWPRICE.configSeeResultFee (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#218) is not in mixedCase
+Parameter '_seeResultFeePercent' of TOMORROWPRICE.configSeeResultFee (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#218) is not in mixedCase
+Parameter '_partnerPercent' of TOMORROWPRICE.configPartner (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#222-224) is not in mixedCase
+Parameter '_partners' of TOMORROWPRICE.configPartner (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#224) is not in mixedCase
+Parameter '_periodPartnerAward' of TOMORROWPRICE.configPartner (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#224-225) is not in mixedCase
+Parameter '_partner' of TOMORROWPRICE.depositEth (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#227) is not in mixedCase
+Parameter '_numDAI' of TOMORROWPRICE.depositDai (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#245) is not in mixedCase
+Parameter '_partner' of TOMORROWPRICE.depositDai (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#245) is not in mixedCase
+Parameter '_partner' of TOMORROWPRICE.depositToken (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#249) is not in mixedCase
+Parameter '_numDAI' of TOMORROWPRICE.processCP (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#269-270) is not in mixedCase
+Parameter '_partner' of TOMORROWPRICE.processCP (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#270) is not in mixedCase
+Parameter '_numDAI' of TOMORROWPRICE.updateBalance (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#273) is not in mixedCase
+Parameter '_partner' of TOMORROWPRICE.updateBalance (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#273-274) is not in mixedCase
+Function 'TOMORROWPRICE.DAI2cDAI' (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#296-299) is not in mixedCase
+Parameter '_numDAI' of TOMORROWPRICE.DAI2cDAI (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#296) is not in mixedCase
+Parameter '_numcDAI' of TOMORROWPRICE.cDAI2DAI (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#299-300) is not in mixedCase
+Parameter '_numDAI' of TOMORROWPRICE.withdrawByUser (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#309) is not in mixedCase
+Parameter '_partner' of TOMORROWPRICE.withdrawByUser (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#309) is not in mixedCase
+Parameter '_numDAI' of TOMORROWPRICE.withdrawETHByUser (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#332) is not in mixedCase
+Parameter '_partner' of TOMORROWPRICE.withdrawETHByUser (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#332-333) is not in mixedCase
+Parameter '_numDAI' of TOMORROWPRICE.withdrawTokenByUser (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#349) is not in mixedCase
+Parameter '_partner' of TOMORROWPRICE.withdrawTokenByUser (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#350) is not in mixedCase
+Parameter '_numDAI' of TOMORROWPRICE.proccessWDToken (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#363-364) is not in mixedCase
+Function 'TOMORROWPRICE.__withdraw' (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#384-390) is not in mixedCase
+Parameter '_ethAmount' of TOMORROWPRICE.withdraw (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#391) is not in mixedCase
+Parameter '_tokens' of TOMORROWPRICE.withdraw (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#391-392) is not in mixedCase
+Parameter '_tokenAdmounts' of TOMORROWPRICE.withdraw (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#392-394) is not in mixedCase
+Parameter '_ceo' of TOMORROWPRICE.setCeo (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#399) is not in mixedCase
+Parameter '_awardId' of TOMORROWPRICE.setAward (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#409) is not in mixedCase
+Parameter '_members' of TOMORROWPRICE.setAward (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#410) is not in mixedCase
+Parameter '_awardId' of TOMORROWPRICE.getAward (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#429) is not in mixedCase
+Parameter '_awardId' of TOMORROWPRICE.setAwardRanking (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#433-434) is not in mixedCase
+Parameter '_members' of TOMORROWPRICE.setAwardRanking (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#434) is not in mixedCase
+Parameter '_weekId' of TOMORROWPRICE.setAwardPartner (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#450) is not in mixedCase
+Parameter '_awardId' of TOMORROWPRICE.getAwardRanking (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#463) is not in mixedCase
+Parameter '_partner' of TOMORROWPRICE.checkAwardPartner (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#467) is not in mixedCase
+Parameter '_user' of TOMORROWPRICE.pay2seeResult (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#471) is not in mixedCase
+Constant 'TOMORROWPRICE.cDAI_TOKEN_ADDRESS' (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#138-140) is not in UPPER_CASE_WITH_UNDERSCORES
+Variable 'TOMORROWPRICE.CPProxyContract' (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#140-141) is not in mixedCase
+Variable 'TOMORROWPRICE.ID' (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#143-145) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+TOMORROWPRICE.ID (/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol#143-145) is never used in TOMORROWPRICE
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0xc2ef8d223fc8f8928c4d0a92b2b9096e5db1a2c7.sol analyzed (6 contracts), 111 result(s) found

@@ -1,0 +1,180 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol:
+/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol:829:27: Warning: This declaration shadows an existing declaration.
+    function changeSymbol(string memory symbol) public onlyOwner {
+                          ^------------------^
+/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol:648:5: The shadowed declaration is here:
+    function symbol() public view returns (string memory) {
+    ^ (Relevant source part starts here and spans across multiple lines).
+
+/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol:704:13: Warning: Different number of components on the left hand side (2) than on the right hand side (1).
+            (bool success, ) = uniSyncPairs[i].call(abi.encodeWithSignature('sync()'));
+            ^------------------------------------------------------------------------^
+/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol:743:13: Warning: Different number of components on the left hand side (2) than on the right hand side (1).
+            (bool success, ) = uniSyncPairs[i].call(abi.encodeWithSignature('sync()'));
+            ^------------------------------------------------------------------------^
+/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol:704:14: Warning: Unused local variable.
+            (bool success, ) = uniSyncPairs[i].call(abi.encodeWithSignature('sync()'));
+             ^----------^
+/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol:743:14: Warning: Unused local variable.
+            (bool success, ) = uniSyncPairs[i].call(abi.encodeWithSignature('sync()'));
+             ^----------^
+/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol:824:5: Warning: No visibility specified. Defaulting to "public". 
+    function setDebaseWhitelist(address user, bool val) onlyOwner {
+    ^ (Relevant source part starts here and spans across multiple lines).
+
+INFO:Detectors:[91m
+ERC20Detailed.______gap (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#376-378) shadows:
+	- Initializable.______gap (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#290-292)
+Ownable.______gap (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#459-461) shadows:
+	- Initializable.______gap (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#290-292)
+ReentrancyGuard.______gap (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#497-500) shadows:
+	- Initializable.______gap (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#290-292)
+CNYx._symbol (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#552-554) shadows:
+	- ERC20Detailed._symbol (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#346-347)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variable-shadowing[0m
+INFO:Detectors:[93m
+Initializable.isConstructor (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#278-289) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+Reentrancy in CNYx.positiveRebaseHelper (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#922-938):
+	External calls:
+	- IPool(poolRewardAddress).setLastRebase(synthToLPs) (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#929-930)
+	State variables written after the call(s):
+	- _synthBalances (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#930-931)
+Reentrancy in CNYx.rebase (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#708-753):
+	External calls:
+	- positiveRebaseHelper(supplyDelta) (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#731-733)
+	State variables written after the call(s):
+	- _totalSupply (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#738-739)
+Reentrancy in CNYx.rebase (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#708-753):
+	External calls:
+	- IPool(poolRewardAddress).setLastRebase(0) (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#717-719)
+	- IPool(poolRewardAddress).setLastRebase(0) (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#725-727)
+	- positiveRebaseHelper(supplyDelta) (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#731-733)
+	- (success) = uniSyncPairs[i].call(abi.encodeWithSignature(sync())) (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#743-744)
+	State variables written after the call(s):
+	- _synthBalances (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#746-747)
+	- _totalSupply (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#747-748)
+Reentrancy in CNYx.updateAccount (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#581-613):
+	External calls:
+	- owing = dividendsOwing(account) (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#582-583)
+	- Shares.setSyntheticDividendPoints(address(this),account,_totalDividendPoints) (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#607-608)
+	State variables written after the call(s):
+	- debtPoints (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#608-610)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+CNYx.updateAccount (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#581-613) does not use the value returned by external calls:
+	-Shares.setSyntheticDividendPoints(address(this),account,_totalDividendPoints) (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#607-608)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+ERC20Detailed.initialize.name (local variable @ /sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#349) shadows:
+	- ERC20Detailed.name (function @ /sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#358-362)
+ERC20Detailed.initialize.symbol (local variable @ /sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#349) shadows:
+	- ERC20Detailed.symbol (function @ /sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#365-369)
+ERC20Detailed.initialize.decimals (local variable @ /sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#349) shadows:
+	- ERC20Detailed.decimals (function @ /sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#372-376)
+CNYx.changeSymbol.symbol (local variable @ /sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#829) shadows:
+	- CNYx.symbol (function @ /sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#648-652)
+	- ERC20Detailed.symbol (function @ /sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#365-369)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+CNYx.syncUniswapV2 has external calls inside a loop:
+	- (success) = uniSyncPairs[i].call(abi.encodeWithSignature(sync())) (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#704-705)
+CNYx.rebase has external calls inside a loop:
+	- (success) = uniSyncPairs[i].call(abi.encodeWithSignature(sync())) (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#743-744)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in CNYx.disburse (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#938-944):
+	External calls:
+	- _totalDividendPoints = _totalDividendPoints.add(amount.mul(POINT_MULTIPLIER).div(Shares.totalStaked())) (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#939-940)
+	State variables written after the call(s):
+	- _unclaimedDividends (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#940-942)
+Reentrancy in CNYx.positiveRebaseHelper (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#922-938):
+	External calls:
+	- IPool(poolRewardAddress).setLastRebase(synthToLPs) (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#929-930)
+	State variables written after the call(s):
+	- _totalSupply (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#933-935)
+Reentrancy in CNYx.rebase (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#708-753):
+	External calls:
+	- IPool(poolRewardAddress).setLastRebase(0) (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#717-719)
+	State variables written after the call(s):
+	- lastRebaseNeutral (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#720-721)
+	- lastRebasePositive (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#719-720)
+Reentrancy in CNYx.rebase (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#708-753):
+	External calls:
+	- IPool(poolRewardAddress).setLastRebase(0) (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#725-727)
+	State variables written after the call(s):
+	- _totalDebtPoints (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#728-729)
+	- _unclaimedDebt (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#728-729)
+Reentrancy in CNYx.rebase (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#708-753):
+	External calls:
+	- positiveRebaseHelper(supplyDelta) (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#731-733)
+	State variables written after the call(s):
+	- lastRebaseNeutral (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#735-737)
+	- lastRebasePositive (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#734-735)
+Reentrancy in CNYx.updateAccount (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#581-613):
+	External calls:
+	- owing = dividendsOwing(account) (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#582-583)
+	State variables written after the call(s):
+	- _synthBalances (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#587-588)
+	- _synthBalances (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#599-600)
+	- _totalSupply (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#588-589)
+	- _totalSupply (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#600-601)
+	- _unclaimedDebt (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#593-595)
+	- _unclaimedDebt (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#593-595)
+	- _unclaimedDividends (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#586-587)
+	- _unclaimedDividends (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#586-587)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Initializable.isConstructor uses assembly (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#278-289)
+	- /sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#285-286
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+Different versions of Solidity is used in /sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol:
+	- Version used: ['>=0.4.24', '>=0.4.24<0.6.0', '^0.4.24']
+	- /sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#7-10 declares pragma solidity>=0.4.24
+	- /sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#56-59 declares pragma solidity>=0.4.24
+	- /sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#139-142 declares pragma solidity>=0.4.24
+	- /sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#162-165 declares pragma solidity^0.4.24
+	- /sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#231-234 declares pragma solidity>=0.4.24<0.6.0
+	- /sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#295-298 declares pragma solidity^0.4.24
+	- /sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#333-337 declares pragma solidity^0.4.24
+	- /sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#381-384 declares pragma solidity^0.4.24
+	- /sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#464-467 declares pragma solidity^0.4.24
+	- /sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#502-509 declares pragma solidity>=0.4.24
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#different-pragma-directives-are-used[0m
+INFO:Detectors:[92m
+ERC20Detailed.name (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#358-362) should be declared external
+ERC20Detailed.symbol (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#365-369) should be declared external
+CNYx.symbol (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#648-652) should be declared external
+ERC20Detailed.decimals (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#372-376) should be declared external
+Ownable.owner (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#411-415) should be declared external
+Ownable.renounceOwnership (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#436-441) should be declared external
+Ownable.transferOwnership (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#445-449) should be declared external
+IERC20.balanceOf (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#305-307) should be declared external
+CNYx.balanceOf (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#660-671) should be declared external
+CNYx.initialize (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#621-647) should be declared external
+CNYx.setDebaseWhitelist (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#824-829) should be declared external
+CNYx.changeSymbol (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#829-833) should be declared external
+CNYx.addSyncPairs (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#901-910) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Low level call in CNYx.syncUniswapV2 (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#700-708):
+	-(success) = uniSyncPairs[i].call(abi.encodeWithSignature(sync())) /sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#704-705
+Low level call in CNYx.rebase (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#708-753):
+	-(success) = uniSyncPairs[i].call(abi.encodeWithSignature(sync())) /sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#743-744
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Variable 'Initializable.______gap' (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#290-292) is not in mixedCase
+Variable 'ERC20Detailed.______gap' (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#376-378) is not in mixedCase
+Function 'Ownable._transferOwnership' (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#453-459) is not in mixedCase
+Variable 'Ownable.______gap' (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#459-461) is not in mixedCase
+Variable 'ReentrancyGuard.______gap' (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#497-500) is not in mixedCase
+Parameter '_val' of CNYx.setTenPercentCap (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#850-851) is not in mixedCase
+Variable 'CNYx.Shares' (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#540-542) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+SafeMathInt.MAX_INT256 (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#65-67) is never used in SafeMathInt
+ReentrancyGuard.______gap (/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol#497-500) is never used in CNYx
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0x9aa299849610ece1a95604f42b125012b893e7db.sol analyzed (11 contracts), 48 result(s) found

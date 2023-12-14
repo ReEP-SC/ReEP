@@ -1,0 +1,53 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x7884947f18a20d4b2b25e54b3a68e724f7a3eb80.sol:
+/sb/0x7884947f18a20d4b2b25e54b3a68e724f7a3eb80.sol:167:6: Warning: This looks like an address but has an invalid checksum. If this is not used as an address, please prepend '00'. Correct checksummed address: '0x2e5F02cB099C2B6dDc71694caFa6801Eb30b60Ce'. For more information please see https://solidity.readthedocs.io/en/develop/types.html#address-literals
+   	 0x2e5f02cb099c2b6ddc71694cafa6801eb30b60ce,
+   	 ^----------------------------------------^
+/sb/0x7884947f18a20d4b2b25e54b3a68e724f7a3eb80.sol:169:6: Warning: This looks like an address but has an invalid checksum. If this is not used as an address, please prepend '00'. Correct checksummed address: '0x4E8B6B5B94fFc827b1eC2f6C172a93067248C4fA'. For more information please see https://solidity.readthedocs.io/en/develop/types.html#address-literals
+   	 0x4e8b6b5b94ffc827b1ec2f6c172a93067248c4fa,
+   	 ^----------------------------------------^
+/sb/0x7884947f18a20d4b2b25e54b3a68e724f7a3eb80.sol:171:6: Warning: This looks like an address but has an invalid checksum. If this is not used as an address, please prepend '00'. Correct checksummed address: '0xBE4C612DE6221F557799b7eD456572F0c0A14BD1'. For more information please see https://solidity.readthedocs.io/en/develop/types.html#address-literals
+   	 0xbe4c612de6221f557799b7ed456572f0c0a14bd1,
+   	 ^----------------------------------------^
+/sb/0x7884947f18a20d4b2b25e54b3a68e724f7a3eb80.sol:173:6: Warning: This looks like an address but has an invalid checksum. If this is not used as an address, please prepend '00'. Correct checksummed address: '0xBE4C612DE6221F557799b7eD456572F0c0A14BD1'. For more information please see https://solidity.readthedocs.io/en/develop/types.html#address-literals
+   	 0xbe4c612de6221f557799b7ed456572f0c0a14bd1,
+   	 ^----------------------------------------^
+
+INFO:Detectors:[93m
+ERC20Basic (/sb/0x7884947f18a20d4b2b25e54b3a68e724f7a3eb80.sol#99-113) has incorrect ERC20 function interface(s):
+	-transfer (/sb/0x7884947f18a20d4b2b25e54b3a68e724f7a3eb80.sol#103-111)
+ERC20 (/sb/0x7884947f18a20d4b2b25e54b3a68e724f7a3eb80.sol#113-134) has incorrect ERC20 function interface(s):
+	-transferFrom (/sb/0x7884947f18a20d4b2b25e54b3a68e724f7a3eb80.sol#117-119)
+	-approve (/sb/0x7884947f18a20d4b2b25e54b3a68e724f7a3eb80.sol#119-129)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[93m
+Reentrancy in TokenVesting.release (/sb/0x7884947f18a20d4b2b25e54b3a68e724f7a3eb80.sol#253-283):
+	External calls:
+	- token.transfer(_beneficiary[i],_amount[i].mul(10 ** 18)) (/sb/0x7884947f18a20d4b2b25e54b3a68e724f7a3eb80.sol#269-275)
+	State variables written after the call(s):
+	- _amount (/sb/0x7884947f18a20d4b2b25e54b3a68e724f7a3eb80.sol#281)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+TokenVesting.release has external calls inside a loop:
+	- token.transfer(_beneficiary[i],_amount[i].mul(10 ** 18)) (/sb/0x7884947f18a20d4b2b25e54b3a68e724f7a3eb80.sol#269-275)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+TokenVesting.release (/sb/0x7884947f18a20d4b2b25e54b3a68e724f7a3eb80.sol#253-283) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp >= _unlocktime[i] (/sb/0x7884947f18a20d4b2b25e54b3a68e724f7a3eb80.sol#267-281)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+ERC20Basic.totalSupply should be constant (/sb/0x7884947f18a20d4b2b25e54b3a68e724f7a3eb80.sol#101)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+ERC20Basic.balanceOf (/sb/0x7884947f18a20d4b2b25e54b3a68e724f7a3eb80.sol#101-103) should be declared external
+ERC20Basic.transfer (/sb/0x7884947f18a20d4b2b25e54b3a68e724f7a3eb80.sol#103-111) should be declared external
+ERC20.allowance (/sb/0x7884947f18a20d4b2b25e54b3a68e724f7a3eb80.sol#115-117) should be declared external
+ERC20.transferFrom (/sb/0x7884947f18a20d4b2b25e54b3a68e724f7a3eb80.sol#117-119) should be declared external
+ERC20.approve (/sb/0x7884947f18a20d4b2b25e54b3a68e724f7a3eb80.sol#119-129) should be declared external
+TokenVesting.beneficiary (/sb/0x7884947f18a20d4b2b25e54b3a68e724f7a3eb80.sol#213-221) should be declared external
+TokenVesting.unlocktime (/sb/0x7884947f18a20d4b2b25e54b3a68e724f7a3eb80.sol#227-241) should be declared external
+TokenVesting.amount (/sb/0x7884947f18a20d4b2b25e54b3a68e724f7a3eb80.sol#245-248) should be declared external
+TokenVesting.release (/sb/0x7884947f18a20d4b2b25e54b3a68e724f7a3eb80.sol#253-283) should be declared external
+TokenVesting.checkRelease (/sb/0x7884947f18a20d4b2b25e54b3a68e724f7a3eb80.sol#291-299) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Slither:/sb/0x7884947f18a20d4b2b25e54b3a68e724f7a3eb80.sol analyzed (4 contracts), 16 result(s) found

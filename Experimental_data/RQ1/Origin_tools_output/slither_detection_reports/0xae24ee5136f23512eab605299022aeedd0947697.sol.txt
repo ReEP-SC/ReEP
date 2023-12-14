@@ -1,0 +1,144 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xae24ee5136f23512eab605299022aeedd0947697.sol:
+/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol:1514:9: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+        address operator, // solhint-disable-line no-unused-vars
+        ^--------------^
+/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol:1517:9: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+        bytes memory data // solhint-disable-line no-unused-vars
+        ^---------------^
+/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol:1533:9: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+        bytes memory data // solhint-disable-line no-unused-vars
+        ^---------------^
+
+INFO:Detectors:[93m
+Address.isContract (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#210-225) is declared view but contains assembly code
+ERC165Checker._callERC165SupportsInterface (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#434-466) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+Contract locking ether found in /sb/0xae24ee5136f23512eab605299022aeedd0947697.sol:
+	Contract DAO has payable functions:
+	 - fallback (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1350-1353)
+	But does not have a function to withdraw the ether
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#contracts-that-lock-ether[0m
+INFO:Detectors:[93m
+DAO._approvalReceived (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1583-1594) does not use the value returned by external calls:
+	-IERC20(acceptedToken()).transferFrom(owner,address(this),value) (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1590-1593)
+DAO.use (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1399-1408) does not use the value returned by external calls:
+	-IERC20(acceptedToken()).transfer(msg.sender,amount) (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1405-1406)
+DAO.unstake (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1412-1417) does not use the value returned by external calls:
+	-IERC20(acceptedToken()).transfer(msg.sender,amount) (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1414-1415)
+DAO.recoverERC20 (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1536-1550) does not use the value returned by external calls:
+	-IERC20(tokenAddress).transfer(owner(),tokenAmount) (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1548)
+TokenRecover.recoverERC20 (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1646-1652) does not use the value returned by external calls:
+	-IERC20(tokenAddress).transfer(owner(),tokenAmount) (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1650-1652)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+ERC1363Payable.constructor.acceptedToken (local variable @ /sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#755-756) shadows:
+	- ERC1363Payable.acceptedToken (function @ /sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#808-809)
+DAO._approvalReceived.owner (local variable @ /sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1583) shadows:
+	- Ownable.owner (function @ /sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#875-879)
+DAO.constructor.acceptedToken (local variable @ /sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1342-1343) shadows:
+	- ERC1363Payable.acceptedToken (function @ /sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#808-809)
+TokenDealer.constructor.rate (local variable @ /sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1843) shadows:
+	- TokenDealer.rate (function @ /sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1913-1917)
+TokenDealer.constructor.wallet (local variable @ /sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1844) shadows:
+	- TokenDealer.wallet (function @ /sb/0xae24ee5136f23512eab605299022aeedd0947697.sol)
+TokenDealer.constructor.token (local variable @ /sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1844) shadows:
+	- TokenDealer.token (function @ /sb/0xae24ee5136f23512eab605299022aeedd0947697.sol)
+TokenDealer.constructor.contributions (local variable @ /sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1844) shadows:
+	- TokenDealer.contributions (function @ /sb/0xae24ee5136f23512eab605299022aeedd0947697.sol)
+TokenDealer.constructor.dao (local variable @ /sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1844-1845) shadows:
+	- TokenDealer.dao (function @ /sb/0xae24ee5136f23512eab605299022aeedd0947697.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+Reentrancy in ERC1363Payable.constructor (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#755-766):
+	External calls:
+	- require(bool)(acceptedToken.supportsInterface(_INTERFACE_ID_ERC1363_TRANSFER) && acceptedToken.supportsInterface(_INTERFACE_ID_ERC1363_APPROVE)) (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#757-760)
+	State variables written after the call(s):
+	- _acceptedToken (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#760)
+	- _supportedInterfaces (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#761-763)
+	- _supportedInterfaces (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#764-765)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Address.isContract uses assembly (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#210-225)
+	- /sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#224-225
+ERC165Checker._callERC165SupportsInterface uses assembly (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#434-466)
+	- /sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#442-466
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+IERC1363.transferAndCall (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#567-570) should be declared external
+IERC1363.transferAndCall (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#579-580) should be declared external
+IERC1363.transferFromAndCall (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#587-589) should be declared external
+IERC1363.transferFromAndCall (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#594-596) should be declared external
+IERC1363.approveAndCall (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#607-608) should be declared external
+IERC1363.approveAndCall (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#627-631) should be declared external
+IERC1363Receiver.onTransferReceived (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#659-663) should be declared external
+ERC1363Payable.onTransferReceived (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#776-790) should be declared external
+IERC1363Spender.onApprovalReceived (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#691-693) should be declared external
+ERC1363Payable.onApprovalReceived (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#797-804) should be declared external
+Ownable.renounceOwnership (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#903-911) should be declared external
+Ownable.transferOwnership (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#913-919) should be declared external
+DAORoles.addOperator (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1020-1024) should be declared external
+DAORoles.addDapp (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1029-1034) should be declared external
+DAORoles.removeOperator (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1039-1044) should be declared external
+DAORoles.removeDapp (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1049-1052) should be declared external
+DAO.unstake (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1412-1417) should be declared external
+DAO.membersNumber (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1421-1423) should be declared external
+DAO.totalStakedTokens (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1426-1431) should be declared external
+DAO.totalUsedTokens (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1433-1436) should be declared external
+DAO.creationDateOf (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1453-1458) should be declared external
+DAO.stakedTokensOf (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1466-1472) should be declared external
+DAO.usedTokensOf (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1478-1483) should be declared external
+DAO.isApproved (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1486-1489) should be declared external
+DAO.getMemberByAddress (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1495-1503) should be declared external
+DAO.recoverERC20 (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1536-1550) should be declared external
+TokenRecover.recoverERC20 (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1646-1652) should be declared external
+OperatorRole.addOperator (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1675-1677) should be declared external
+OperatorRole.renounceOperator (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1677-1682) should be declared external
+Contributions.totalSoldTokens (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1720-1722) should be declared external
+Contributions.totalWeiRaised (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1723-1726) should be declared external
+Contributions.getContributorAddress (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1728-1729) should be declared external
+Contributions.getContributorsLength (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1733-1737) should be declared external
+Contributions.weiContribution (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1744-1749) should be declared external
+Contributions.tokenBalance (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1752-1757) should be declared external
+Contributions.contributorExists (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1760-1766) should be declared external
+Contributions.addBalance (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1775-1789) should be declared external
+Contributions.removeOperator (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1796-1797) should be declared external
+TokenDealer.setRate (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1906-1909) should be declared external
+TokenDealer.rate (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1913-1917) should be declared external
+TokenDealer.wallet (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol) should be declared external
+TokenDealer.token (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol) should be declared external
+TokenDealer.contributions (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol) should be declared external
+TokenDealer.dao (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol) should be declared external
+TokenDealer.expectedTokenAmount (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xae24ee5136f23512eab605299022aeedd0947697.sol:
+	- pragma solidity^0.5.10 (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#5-7): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Low level call in SafeERC20.callOptionalReturn (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#274-298):
+	-(success,returndata) = address(token).call(data) /sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#287
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Function 'ERC165Checker._supportsERC165' (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#356-366) is not in mixedCase
+Function 'ERC165Checker._supportsInterface' (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#372-380) is not in mixedCase
+Function 'ERC165Checker._supportsAllInterfaces' (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#388-402) is not in mixedCase
+Function 'ERC165Checker._supportsERC165Interface' (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#417-421) is not in mixedCase
+Function 'ERC165Checker._callERC165SupportsInterface' (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#434-466) is not in mixedCase
+Function 'ERC165._registerInterface' (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#537-540) is not in mixedCase
+Function 'ERC1363Payable._transferReceived' (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#822-828) is not in mixedCase
+Function 'ERC1363Payable._approvalReceived' (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#838-846) is not in mixedCase
+Function 'Ownable._transferOwnership' (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#920-928) is not in mixedCase
+Function 'DAORoles._addOperator' (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1053-1059) is not in mixedCase
+Function 'DAORoles._addDapp' (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1059-1062) is not in mixedCase
+Function 'DAORoles._removeOperator' (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1062-1068) is not in mixedCase
+Function 'DAORoles._removeDapp' (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1068-1071) is not in mixedCase
+Function 'DAO._transferReceived' (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1565-1576) is not in mixedCase
+Function 'DAO._approvalReceived' (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1583-1594) is not in mixedCase
+Function 'DAO._newMember' (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1602-1608) is not in mixedCase
+Function 'DAO._stake' (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1616-1625) is not in mixedCase
+Function 'OperatorRole._addOperator' (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1682-1685) is not in mixedCase
+Function 'OperatorRole._removeOperator' (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol#1685-1691) is not in mixedCase
+Function 'TokenDealer._getTokenAmount' (/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xae24ee5136f23512eab605299022aeedd0947697.sol analyzed (21 contracts), 86 result(s) found

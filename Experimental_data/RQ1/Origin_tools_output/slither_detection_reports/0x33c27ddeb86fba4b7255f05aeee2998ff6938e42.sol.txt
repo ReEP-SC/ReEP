@@ -1,0 +1,67 @@
+INFO:Detectors:[91m
+Reentrancy in BRBasketballControl.PK (/sb/0x33c27ddeb86fba4b7255f05aeee2998ff6938e42.sol#205-297):
+	External calls:
+	- require(bool,string)(msg.value == mConfig.getPrice(),msg.value is error) (/sb/0x33c27ddeb86fba4b7255f05aeee2998ff6938e42.sol#211-213)
+	- winRate = mConfig.getWinRate(mWinner.winCount) (/sb/0x33c27ddeb86fba4b7255f05aeee2998ff6938e42.sol#221-223)
+	- (curWinRate,curOverRate) = getRandom(100) (/sb/0x33c27ddeb86fba4b7255f05aeee2998ff6938e42.sol#227-231)
+	- inviteHandler(name) (/sb/0x33c27ddeb86fba4b7255f05aeee2998ff6938e42.sol#233)
+	External calls sending eth:
+	- inviteHandler(name) (/sb/0x33c27ddeb86fba4b7255f05aeee2998ff6938e42.sol#233)
+	State variables written after the call(s):
+	- mWinner (/sb/0x33c27ddeb86fba4b7255f05aeee2998ff6938e42.sol#241-243)
+	- mWinner (/sb/0x33c27ddeb86fba4b7255f05aeee2998ff6938e42.sol#245)
+	- mWinner (/sb/0x33c27ddeb86fba4b7255f05aeee2998ff6938e42.sol#245-247)
+Reentrancy in BRBasketballControl.PK (/sb/0x33c27ddeb86fba4b7255f05aeee2998ff6938e42.sol#205-297):
+	External calls:
+	- require(bool,string)(msg.value == mConfig.getPrice(),msg.value is error) (/sb/0x33c27ddeb86fba4b7255f05aeee2998ff6938e42.sol#211-213)
+	- winRate = mConfig.getWinRate(mWinner.winCount) (/sb/0x33c27ddeb86fba4b7255f05aeee2998ff6938e42.sol#221-223)
+	- (curWinRate,curOverRate) = getRandom(100) (/sb/0x33c27ddeb86fba4b7255f05aeee2998ff6938e42.sol#227-231)
+	- inviteHandler(name) (/sb/0x33c27ddeb86fba4b7255f05aeee2998ff6938e42.sol#233)
+	- overRate = mConfig.getOverRate(mWinner.winCount) (/sb/0x33c27ddeb86fba4b7255f05aeee2998ff6938e42.sol#247-251)
+	- pkEvent(mWinner.addr,msg.sender,name,winRate,overRate,curWinRate,curOverRate,msg.sender == mWinner.addr,mConfig.getPrice()) (/sb/0x33c27ddeb86fba4b7255f05aeee2998ff6938e42.sol#251-257)
+	- pumpRate = mConfig.getPumpRate() (/sb/0x33c27ddeb86fba4b7255f05aeee2998ff6938e42.sol#265)
+	- gameOverEvent(gameIndex,mWinner.addr,mConfig.getPrice(),giveToActor) (/sb/0x33c27ddeb86fba4b7255f05aeee2998ff6938e42.sol#287-291)
+	External calls sending eth:
+	- inviteHandler(name) (/sb/0x33c27ddeb86fba4b7255f05aeee2998ff6938e42.sol#233)
+	- owner.transfer(giveToOwn) (/sb/0x33c27ddeb86fba4b7255f05aeee2998ff6938e42.sol#279-283)
+	- mWinner.addr.transfer(giveToActor) (/sb/0x33c27ddeb86fba4b7255f05aeee2998ff6938e42.sol#285)
+	State variables written after the call(s):
+	- gameIndex (/sb/0x33c27ddeb86fba4b7255f05aeee2998ff6938e42.sol#293-297)
+	- mConfig (/sb/0x33c27ddeb86fba4b7255f05aeee2998ff6938e42.sol#293-297)
+	- mWinner (/sb/0x33c27ddeb86fba4b7255f05aeee2998ff6938e42.sol#293-297)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities[0m
+INFO:Detectors:[93m
+Reentrancy in BRBasketballControl.getRandom (/sb/0x33c27ddeb86fba4b7255f05aeee2998ff6938e42.sol#329-353):
+	External calls:
+	- curRandom = mConfig.getRandom(curRandom) (/sb/0x33c27ddeb86fba4b7255f05aeee2998ff6938e42.sol#337-339)
+	State variables written after the call(s):
+	- mRandomValue (/sb/0x33c27ddeb86fba4b7255f05aeee2998ff6938e42.sol#351)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+MobaBase.transferOwnership (/sb/0x33c27ddeb86fba4b7255f05aeee2998ff6938e42.sol#69-83) should be declared external
+MobaBase.transferToOwner (/sb/0x33c27ddeb86fba4b7255f05aeee2998ff6938e42.sol#85-101) should be declared external
+MobaBase.updateLock (/sb/0x33c27ddeb86fba4b7255f05aeee2998ff6938e42.sol#101-119) should be declared external
+IConfigData.getPrice (/sb/0x33c27ddeb86fba4b7255f05aeee2998ff6938e42.sol#119-121) should be declared external
+IConfigData.getWinRate (/sb/0x33c27ddeb86fba4b7255f05aeee2998ff6938e42.sol#121-123) should be declared external
+IConfigData.getOverRate (/sb/0x33c27ddeb86fba4b7255f05aeee2998ff6938e42.sol#124-126) should be declared external
+IConfigData.getPumpRate (/sb/0x33c27ddeb86fba4b7255f05aeee2998ff6938e42.sol#127) should be declared external
+IConfigData.getRandom (/sb/0x33c27ddeb86fba4b7255f05aeee2998ff6938e42.sol#127-129) should be declared external
+IConfigData.GetAddressByName (/sb/0x33c27ddeb86fba4b7255f05aeee2998ff6938e42.sol#129-136) should be declared external
+IConfigData.getInviteRate (/sb/0x33c27ddeb86fba4b7255f05aeee2998ff6938e42.sol#137-141) should be declared external
+IConfigData.loseHandler (/sb/0x33c27ddeb86fba4b7255f05aeee2998ff6938e42.sol#141-147) should be declared external
+BRBasketballControl.updateConfig (/sb/0x33c27ddeb86fba4b7255f05aeee2998ff6938e42.sol#195-205) should be declared external
+BRBasketballControl.PK (/sb/0x33c27ddeb86fba4b7255f05aeee2998ff6938e42.sol#205-297) should be declared external
+BRBasketballControl.getGameInfo (/sb/0x33c27ddeb86fba4b7255f05aeee2998ff6938e42.sol#353-375) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x33c27ddeb86fba4b7255f05aeee2998ff6938e42.sol:
+	- pragma solidity^0.4.7 (/sb/0x33c27ddeb86fba4b7255f05aeee2998ff6938e42.sol#9-11): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Event 'MobaBase.transferToOwnerEvent' (/sb/0x33c27ddeb86fba4b7255f05aeee2998ff6938e42.sol#25-29) is not in CapWords
+Function 'IConfigData.GetAddressByName' (/sb/0x33c27ddeb86fba4b7255f05aeee2998ff6938e42.sol#129-136) is not in mixedCase
+Event 'BRBasketballControl.pkEvent' (/sb/0x33c27ddeb86fba4b7255f05aeee2998ff6938e42.sol#165-173) is not in CapWords
+Event 'BRBasketballControl.gameOverEvent' (/sb/0x33c27ddeb86fba4b7255f05aeee2998ff6938e42.sol#173-183) is not in CapWords
+Function 'BRBasketballControl.PK' (/sb/0x33c27ddeb86fba4b7255f05aeee2998ff6938e42.sol#205-297) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x33c27ddeb86fba4b7255f05aeee2998ff6938e42.sol analyzed (3 contracts), 23 result(s) found

@@ -1,0 +1,55 @@
+INFO:Detectors:[93m
+Reentrancy in TokenVesting.release (/sb/0x8d4d9285fd9c03b94e845303762cd4679afd4ea4.sol#659-683):
+	External calls:
+	- unreleased = _releasableAmount(token) (/sb/0x8d4d9285fd9c03b94e845303762cd4679afd4ea4.sol#661-665)
+	State variables written after the call(s):
+	- _released (/sb/0x8d4d9285fd9c03b94e845303762cd4679afd4ea4.sol#669-671)
+Reentrancy in TokenVesting.revoke (/sb/0x8d4d9285fd9c03b94e845303762cd4679afd4ea4.sol#697-721):
+	External calls:
+	- balance = token.balanceOf(address(this)) (/sb/0x8d4d9285fd9c03b94e845303762cd4679afd4ea4.sol#707-709)
+	- unreleased = _releasableAmount(token) (/sb/0x8d4d9285fd9c03b94e845303762cd4679afd4ea4.sol#709-713)
+	State variables written after the call(s):
+	- _revoked (/sb/0x8d4d9285fd9c03b94e845303762cd4679afd4ea4.sol#715)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+TokenVesting.constructor.beneficiary (local variable @ /sb/0x8d4d9285fd9c03b94e845303762cd4679afd4ea4.sol#519) shadows:
+	- TokenVesting.beneficiary (function @ /sb/0x8d4d9285fd9c03b94e845303762cd4679afd4ea4.sol#565-575)
+TokenVesting.constructor.start (local variable @ /sb/0x8d4d9285fd9c03b94e845303762cd4679afd4ea4.sol#519-521) shadows:
+	- TokenVesting.start (function @ /sb/0x8d4d9285fd9c03b94e845303762cd4679afd4ea4.sol#595-603)
+TokenVesting.constructor.duration (local variable @ /sb/0x8d4d9285fd9c03b94e845303762cd4679afd4ea4.sol#523) shadows:
+	- TokenVesting.duration (function @ /sb/0x8d4d9285fd9c03b94e845303762cd4679afd4ea4.sol#609-617)
+TokenVesting.constructor.revocable (local variable @ /sb/0x8d4d9285fd9c03b94e845303762cd4679afd4ea4.sol#523) shadows:
+	- TokenVesting.revocable (function @ /sb/0x8d4d9285fd9c03b94e845303762cd4679afd4ea4.sol#623-625)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+TokenVesting.constructor (/sb/0x8d4d9285fd9c03b94e845303762cd4679afd4ea4.sol#519-561) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool)(start.add(duration) > block.timestamp) (/sb/0x8d4d9285fd9c03b94e845303762cd4679afd4ea4.sol#537-539)
+TokenVesting._vestedAmount (/sb/0x8d4d9285fd9c03b94e845303762cd4679afd4ea4.sol#749-761) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp < _cliff (/sb/0x8d4d9285fd9c03b94e845303762cd4679afd4ea4.sol)
+	- block.timestamp >= _start.add(_duration) || _revoked[address(token)] (/sb/0x8d4d9285fd9c03b94e845303762cd4679afd4ea4.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+Ownable.renounceOwnership (/sb/0x8d4d9285fd9c03b94e845303762cd4679afd4ea4.sol#373-384) should be declared external
+Ownable.transferOwnership (/sb/0x8d4d9285fd9c03b94e845303762cd4679afd4ea4.sol#393-409) should be declared external
+TokenVesting.beneficiary (/sb/0x8d4d9285fd9c03b94e845303762cd4679afd4ea4.sol#565-575) should be declared external
+TokenVesting.cliff (/sb/0x8d4d9285fd9c03b94e845303762cd4679afd4ea4.sol#581-589) should be declared external
+TokenVesting.start (/sb/0x8d4d9285fd9c03b94e845303762cd4679afd4ea4.sol#595-603) should be declared external
+TokenVesting.duration (/sb/0x8d4d9285fd9c03b94e845303762cd4679afd4ea4.sol#609-617) should be declared external
+TokenVesting.revocable (/sb/0x8d4d9285fd9c03b94e845303762cd4679afd4ea4.sol#623-625) should be declared external
+TokenVesting.released (/sb/0x8d4d9285fd9c03b94e845303762cd4679afd4ea4.sol#633-641) should be declared external
+TokenVesting.revoked (/sb/0x8d4d9285fd9c03b94e845303762cd4679afd4ea4.sol#649-651) should be declared external
+TokenVesting.release (/sb/0x8d4d9285fd9c03b94e845303762cd4679afd4ea4.sol#659-683) should be declared external
+TokenVesting.revoke (/sb/0x8d4d9285fd9c03b94e845303762cd4679afd4ea4.sol#697-721) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x8d4d9285fd9c03b94e845303762cd4679afd4ea4.sol:
+	- pragma solidity^0.5.0 (/sb/0x8d4d9285fd9c03b94e845303762cd4679afd4ea4.sol#9-14): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'Ownable._transferOwnership' (/sb/0x8d4d9285fd9c03b94e845303762cd4679afd4ea4.sol#411-421) is not in mixedCase
+Function 'TokenVesting._releasableAmount' (/sb/0x8d4d9285fd9c03b94e845303762cd4679afd4ea4.sol#727-741) is not in mixedCase
+Function 'TokenVesting._vestedAmount' (/sb/0x8d4d9285fd9c03b94e845303762cd4679afd4ea4.sol#749-761) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x8d4d9285fd9c03b94e845303762cd4679afd4ea4.sol analyzed (6 contracts), 23 result(s) found

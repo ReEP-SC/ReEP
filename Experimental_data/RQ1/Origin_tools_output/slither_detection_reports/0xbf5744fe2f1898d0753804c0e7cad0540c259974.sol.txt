@@ -1,0 +1,57 @@
+INFO:Detectors:[93m
+BeastSale.startBeastSale (/sb/0xbf5744fe2f1898d0753804c0e7cad0540c259974.sol#164-167) uses a dangerous strict equality:
+	- require(bool)(msg.sender == owner && startDate == 0)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+BeastSale.fallback (/sb/0xbf5744fe2f1898d0753804c0e7cad0540c259974.sol#99-117) does not use the value returned by external calls:
+	-Token.transfer(msg.sender,amount) (/sb/0xbf5744fe2f1898d0753804c0e7cad0540c259974.sol#116-117)
+BeastSale.support (/sb/0xbf5744fe2f1898d0753804c0e7cad0540c259974.sol#117-134) does not use the value returned by external calls:
+	-Token.transfer(msg.sender,amount) (/sb/0xbf5744fe2f1898d0753804c0e7cad0540c259974.sol#133-134)
+BeastSale.withdrawTokens (/sb/0xbf5744fe2f1898d0753804c0e7cad0540c259974.sol#141-151) does not use the value returned by external calls:
+	-Token.transfer(address(msg.sender),Token.balanceOf(address(this))) (/sb/0xbf5744fe2f1898d0753804c0e7cad0540c259974.sol#147-151)
+BeastSale.burnTokens (/sb/0xbf5744fe2f1898d0753804c0e7cad0540c259974.sol#153-162) does not use the value returned by external calls:
+	-Token.transfer(address(0),Token.balanceOf(address(this))) (/sb/0xbf5744fe2f1898d0753804c0e7cad0540c259974.sol#160-161)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in BeastSale.fallback (/sb/0xbf5744fe2f1898d0753804c0e7cad0540c259974.sol#99-117):
+	External calls:
+	- require(bool)(Token.balanceOf(address(this)) > 0) (/sb/0xbf5744fe2f1898d0753804c0e7cad0540c259974.sol#100-103)
+	State variables written after the call(s):
+	- amount (/sb/0xbf5744fe2f1898d0753804c0e7cad0540c259974.sol#108-109)
+Reentrancy in BeastSale.fallback (/sb/0xbf5744fe2f1898d0753804c0e7cad0540c259974.sol#99-117):
+	External calls:
+	- require(bool)(Token.balanceOf(address(this)) > 0) (/sb/0xbf5744fe2f1898d0753804c0e7cad0540c259974.sol#100-103)
+	- require(bool)(amount <= Token.balanceOf(address(this))) (/sb/0xbf5744fe2f1898d0753804c0e7cad0540c259974.sol#109-110)
+	State variables written after the call(s):
+	- collectedETH (/sb/0xbf5744fe2f1898d0753804c0e7cad0540c259974.sol#111-115)
+	- totalSold (/sb/0xbf5744fe2f1898d0753804c0e7cad0540c259974.sol#110-111)
+Reentrancy in BeastSale.support (/sb/0xbf5744fe2f1898d0753804c0e7cad0540c259974.sol#117-134):
+	External calls:
+	- require(bool)(Token.balanceOf(address(this)) > 0) (/sb/0xbf5744fe2f1898d0753804c0e7cad0540c259974.sol#119-121)
+	State variables written after the call(s):
+	- amount (/sb/0xbf5744fe2f1898d0753804c0e7cad0540c259974.sol#125-126)
+Reentrancy in BeastSale.support (/sb/0xbf5744fe2f1898d0753804c0e7cad0540c259974.sol#117-134):
+	External calls:
+	- require(bool)(Token.balanceOf(address(this)) > 0) (/sb/0xbf5744fe2f1898d0753804c0e7cad0540c259974.sol#119-121)
+	- require(bool)(amount <= Token.balanceOf(address(this))) (/sb/0xbf5744fe2f1898d0753804c0e7cad0540c259974.sol#126-127)
+	State variables written after the call(s):
+	- collectedETH (/sb/0xbf5744fe2f1898d0753804c0e7cad0540c259974.sol#132)
+	- totalSold (/sb/0xbf5744fe2f1898d0753804c0e7cad0540c259974.sol#128-131)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+BeastSale.withdrawETH (/sb/0xbf5744fe2f1898d0753804c0e7cad0540c259974.sol#134-141) should be declared external
+BeastSale.withdrawTokens (/sb/0xbf5744fe2f1898d0753804c0e7cad0540c259974.sol#141-151) should be declared external
+BeastSale.closeBeastSale (/sb/0xbf5744fe2f1898d0753804c0e7cad0540c259974.sol#151-153) should be declared external
+BeastSale.burnTokens (/sb/0xbf5744fe2f1898d0753804c0e7cad0540c259974.sol#153-162) should be declared external
+BeastSale.startBeastSale (/sb/0xbf5744fe2f1898d0753804c0e7cad0540c259974.sol#164-167) should be declared external
+BeastSale.availableTokens (/sb/0xbf5744fe2f1898d0753804c0e7cad0540c259974.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xbf5744fe2f1898d0753804c0e7cad0540c259974.sol:
+	- pragma solidity0.6.8 (/sb/0xbf5744fe2f1898d0753804c0e7cad0540c259974.sol#7-10): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_wallet' of BeastSale. (/sb/0xbf5744fe2f1898d0753804c0e7cad0540c259974.sol#94-96) is not in mixedCase
+Variable 'BeastSale.Token' (/sb/0xbf5744fe2f1898d0753804c0e7cad0540c259974.sol#85-86) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xbf5744fe2f1898d0753804c0e7cad0540c259974.sol analyzed (3 contracts), 18 result(s) found

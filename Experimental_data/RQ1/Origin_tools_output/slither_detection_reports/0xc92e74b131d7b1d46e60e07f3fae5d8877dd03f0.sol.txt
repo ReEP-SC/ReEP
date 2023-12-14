@@ -1,0 +1,526 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol:
+Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing "SPDX-License-Identifier: <SPDX-License>" to each source file. Use "SPDX-License-Identifier: UNLICENSED" for non-open-source code. Please see https://spdx.org for more information.
+--> /sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol
+
+Warning: Contract code size exceeds 24576 bytes (a limit introduced in Spurious Dragon). This contract may not be deployable on mainnet. Consider enabling the optimizer (with a low "runs" value!), turning off revert strings, or using libraries.
+   --> /sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol:392:1:
+    |
+392 | contract Minereum { 
+    | ^ (Relevant source part starts here and spans across multiple lines).
+
+
+INFO:Detectors:[91m
+Minereum.ContractTransferAllFundsOut (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#681-696) sends eth to arbitrary user
+	Dangerous calls:
+	- ! secondaryPayoutAddress.send(address(this).balance) (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#695-696)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[93m
+Minereum (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#400-867) has incorrect ERC20 function interface(s):
+	-transfer (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#526-532)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[93m
+Minereum.BurnTokens (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#739-743) does not use the value returned by external calls:
+	-gn.BurnTokens(msg.sender,mneToBurn) (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#741)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Minereum.UpgradeOthersToLevel2FromLevel1 has external calls inside a loop:
+	- gn.UpgradeToLevel2FromLevel1(_addresses[i],pc.ethFeeToUpgradeToLevel2()) (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#612-614)
+Minereum.UpgradeOthersToLevel3FromLevel1 has external calls inside a loop:
+	- gn.UpgradeToLevel3FromLevel1(_addresses[i],(pc.ethFeeToUpgradeToLevel2() + pc.ethFeeToUpgradeToLevel3())) (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#625-633)
+Minereum.UpgradeOthersToLevel3FromLevel2 has external calls inside a loop:
+	- gn.UpgradeToLevel3FromLevel2(_addresses[i],pc.ethFeeToUpgradeToLevel3()) (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#641-645)
+Minereum.UpgradeOthersToLevel3FromDev has external calls inside a loop:
+	- gn.UpgradeToLevel3FromDev(_addresses[i]) (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#651-654)
+Minereum.PayoutStakeHolders has external calls inside a loop:
+	- add = address(pa.stakeHoldersList(i)) (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#718)
+Minereum.PayoutStakeHolders has external calls inside a loop:
+	- balance = pc.stakeBalances(add) (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#719-722)
+Minereum.PayoutStakeHolders has external calls inside a loop:
+	- amountToSend = contractBalance * balance / pc.stakeDecimals() (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#722-724)
+Minereum.PayoutStakeHolders has external calls inside a loop:
+	- ! add.send(amountToSend) (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#727-734)
+Minereum.PayoutStakeHolders has external calls inside a loop:
+	- pc.totalPaidStakeHoldersSet(pc.totalPaidStakeHolders() + amountToSend) (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#731-733)
+Minereum.registerGenesisAddresses has external calls inside a loop:
+	- Transfer(address(this),_addressList[i],pc.genesisSupplyPerAddress()) (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#856)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in Minereum.constructor (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#429-456):
+	External calls:
+	- pc.setOwnerMain() (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#442-443)
+	State variables written after the call(s):
+	- pa (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#443-444)
+Reentrancy in Minereum.constructor (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#429-456):
+	External calls:
+	- pc.setOwnerMain() (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#442-443)
+	- pa.setOwnerMain() (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#444-445)
+	State variables written after the call(s):
+	- gn (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#445-446)
+Reentrancy in Minereum.constructor (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#429-456):
+	External calls:
+	- pc.setOwnerMain() (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#442-443)
+	- pa.setOwnerMain() (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#444-445)
+	- gn.setOwnerMain() (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#446-447)
+	State variables written after the call(s):
+	- na (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#447-448)
+Reentrancy in Minereum.constructor (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#429-456):
+	External calls:
+	- pc.setOwnerMain() (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#442-443)
+	- pa.setOwnerMain() (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#444-445)
+	- gn.setOwnerMain() (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#446-447)
+	- na.setOwnerMain() (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#448-449)
+	State variables written after the call(s):
+	- st (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#449-450)
+Reentrancy in Minereum.constructor (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#429-456):
+	External calls:
+	- pc.setOwnerMain() (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#442-443)
+	- pa.setOwnerMain() (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#444-445)
+	- gn.setOwnerMain() (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#446-447)
+	- na.setOwnerMain() (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#448-449)
+	- st.setOwnerMain() (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#450-451)
+	State variables written after the call(s):
+	- stb (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#451)
+Reentrancy in Minereum.constructor (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#429-456):
+	External calls:
+	- pc.setOwnerMain() (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#442-443)
+	- pa.setOwnerMain() (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#444-445)
+	- gn.setOwnerMain() (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#446-447)
+	- na.setOwnerMain() (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#448-449)
+	- st.setOwnerMain() (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#450-451)
+	- stb.setOwnerMain() (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#451)
+	State variables written after the call(s):
+	- gnb (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#451-454)
+Reentrancy in Minereum.constructor (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#429-456):
+	External calls:
+	- pc.setOwnerMain() (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#442-443)
+	- pa.setOwnerMain() (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#444-445)
+	- gn.setOwnerMain() (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#446-447)
+	- na.setOwnerMain() (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#448-449)
+	- st.setOwnerMain() (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#450-451)
+	- stb.setOwnerMain() (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#451)
+	- gnb.setOwnerMain() (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#454)
+	State variables written after the call(s):
+	- tks (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#454)
+Reentrancy in Minereum.constructor (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#429-456):
+	External calls:
+	- pc.setOwnerMain() (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#442-443)
+	- pa.setOwnerMain() (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#444-445)
+	- gn.setOwnerMain() (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#446-447)
+	- na.setOwnerMain() (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#448-449)
+	- st.setOwnerMain() (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#450-451)
+	- stb.setOwnerMain() (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#451)
+	- gnb.setOwnerMain() (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#454)
+	- tks.setOwnerMain() (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#454)
+	State variables written after the call(s):
+	- bst (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#454-455)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Minereum.reloadGenesis (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#457) should be declared external
+Minereum.reloadNormalAddress (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#458-459) should be declared external
+Minereum.reloadStakes (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#459) should be declared external
+Minereum.reloadStakeBuys (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#459-460) should be declared external
+Minereum.reloadGenesisBuys (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#460-461) should be declared external
+Minereum.reloadTokenService (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#461-465) should be declared external
+Minereum.reloadPublicCalls (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#465-474) should be declared external
+Minereum.reloadPublicArrays (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#474-490) should be declared external
+Minereum.setPayoutOwner (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#490-497) should be declared external
+Minereum.setSecondaryPayoutAddress (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#497-505) should be declared external
+Minereum.SetBlockPayouts (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#505-510) should be declared external
+Minereum.currentEthBlock (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#510-512) should be declared external
+Minereum.currentBlock (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#512-518) should be declared external
+Minereum.availableBalanceOf (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#519-522) should be declared external
+Minereum.totalSupply (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#522-526) should be declared external
+Minereum.transfer (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#526-532) should be declared external
+Minereum.transferFrom (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#532-540) should be declared external
+Minereum.approve (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#540-547) should be declared external
+Minereum.allowance (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#547-551) should be declared external
+Minereum.stakeBalanceOf (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#558-562) should be declared external
+Minereum.TransferGenesis (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#562-570) should be declared external
+Minereum.SetGenesisForSale (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#570-574) should be declared external
+Minereum.AllowReceiveGenesisTransfers (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#574-575) should be declared external
+Minereum.RemoveAllowReceiveGenesisTransfers (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#577-581) should be declared external
+Minereum.RemoveGenesisAddressFromSale (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#582-583) should be declared external
+Minereum.AllowAddressToDestroyGenesis (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#583-590) should be declared external
+Minereum.RemoveAllowAddressToDestroyGenesis (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#590-592) should be declared external
+Minereum.UpgradeToLevel2FromLevel1 (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#592-594) should be declared external
+Minereum.UpgradeToLevel3FromLevel1 (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#595-601) should be declared external
+Minereum.UpgradeToLevel3FromLevel2 (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#601-603) should be declared external
+Minereum.UpgradeToLevel3FromDev (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#603) should be declared external
+Minereum.UpgradeOthersToLevel2FromLevel1 (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#603-614) should be declared external
+Minereum.UpgradeOthersToLevel3FromLevel1 (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#614-633) should be declared external
+Minereum.UpgradeOthersToLevel3FromLevel2 (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#633-645) should be declared external
+Minereum.UpgradeOthersToLevel3FromDev (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#645-654) should be declared external
+Minereum.BuyGenesisAddress (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#654-662) should be declared external
+Minereum.SetNormalAddressForSale (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#662-666) should be declared external
+Minereum.RemoveNormalAddressFromSale (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#666-668) should be declared external
+Minereum.BuyNormalAddress (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#668-675) should be declared external
+Minereum.setBalanceNormalAddress (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#675-681) should be declared external
+Minereum.ContractTransferAllFundsOut (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#681-696) should be declared external
+Minereum.PayoutStakeHolders (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#696-734) should be declared external
+Minereum.stopSetup (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#734-738) should be declared external
+Minereum.SetStakeForSale (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#743-748) should be declared external
+Minereum.RemoveStakeFromSale (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#748-749) should be declared external
+Minereum.StakeTransferMNE (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#749-756) should be declared external
+Minereum.BurnGenesisAddresses (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#756-765) should be declared external
+Minereum.StakeTransferGenesis (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#765-773) should be declared external
+Minereum.setBalanceStakes (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#773-777) should be declared external
+Minereum.BuyStakeMNE (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#798-806) should be declared external
+Minereum.BuyStakeGenesis (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#807-824) should be declared external
+Minereum.CreateToken (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#824-831) should be declared external
+Minereum.CreateTokenICO (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#831-837) should be declared external
+Minereum.isAnyGenesisAddress (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#837-841) should be declared external
+Minereum.isGenesisAddressLevel1 (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#841-851) should be declared external
+Minereum.isGenesisAddressLevel2 (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#851-852) should be declared external
+Minereum.isGenesisAddressLevel3 (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#852-853) should be declared external
+Minereum.isGenesisAddressLevel2Or3 (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#853-854) should be declared external
+Minereum.registerGenesisAddresses (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#854-857) should be declared external
+Minereum.ethFeeToUpgradeToLevel2Set (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#857-858) should be declared external
+Minereum.ethFeeToUpgradeToLevel3Set (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#858-859) should be declared external
+Minereum.ethFeeToBuyLevel1Set (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#859) should be declared external
+Minereum.ethFeeForSellerLevel1Set (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#859-860) should be declared external
+Minereum.ethFeeForTokenSet (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#860-861) should be declared external
+Minereum.ethFeeForTokenICOSet (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#861-862) should be declared external
+Minereum.ethPercentFeeGenesisExchangeSet (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#862-863) should be declared external
+Minereum.ethPercentFeeNormalExchangeSet (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#863-864) should be declared external
+Minereum.ethPercentStakeExchangeSet (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#864-865) should be declared external
+Minereum.amountOfGenesisToBuyStakesSet (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#865-866) should be declared external
+Minereum.amountOfMNEToBuyStakesSet (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#866-867) should be declared external
+Minereum.amountOfMNEForTokenSet (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol) should be declared external
+Minereum.amountOfMNEForTokenICOSet (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol) should be declared external
+Minereum.amountOfMNEToTransferStakesSet (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol) should be declared external
+Minereum.amountOfGenesisToTransferStakesSet (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol) should be declared external
+Minereum.stakeDecimalsSet (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol:
+	- pragma solidity^0.6.0 (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#5-7): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Contract 'publicCalls' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#7-165) is not in CapWords
+Function 'publicCalls.GenesisDestroyAmountCount' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#8-9) is not in mixedCase
+Function 'publicCalls.GenesisDestroyAmountCountSet' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#9-10) is not in mixedCase
+Function 'publicCalls.GenesisDestroyCountStake' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#10-11) is not in mixedCase
+Function 'publicCalls.GenesisDestroyCountStakeSet' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#11-12) is not in mixedCase
+Function 'publicCalls.GenesisDestroyed' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#12-13) is not in mixedCase
+Function 'publicCalls.GenesisDestroyedSet' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#13-14) is not in mixedCase
+Function 'publicCalls.NormalAddressBuyPricePerMNE' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#14-15) is not in mixedCase
+Parameter '' of publicCalls.NormalAddressBuyPricePerMNE (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#14) is not in mixedCase
+Function 'publicCalls.NormalAddressBuyPricePerMNESet' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#15-16) is not in mixedCase
+Function 'publicCalls.NormalAddressFeeCount' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#16-17) is not in mixedCase
+Function 'publicCalls.NormalAddressFeeCountSet' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#17-18) is not in mixedCase
+Function 'publicCalls.NormalAddressSalesCount' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#18-19) is not in mixedCase
+Function 'publicCalls.NormalAddressSalesCountSet' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#19-20) is not in mixedCase
+Function 'publicCalls.NormalAddressSalesPriceCount' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#20-21) is not in mixedCase
+Function 'publicCalls.NormalAddressSalesPriceCountSet' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#21-22) is not in mixedCase
+Function 'publicCalls.NormalBalanceImported' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#22-23) is not in mixedCase
+Function 'publicCalls.NormalBalanceImportedSet' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#23-24) is not in mixedCase
+Function 'publicCalls.NormalImportedAmountCount' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#24-25) is not in mixedCase
+Function 'publicCalls.NormalImportedAmountCountSet' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#25-26) is not in mixedCase
+Parameter '' of publicCalls.allowAddressToDestroyGenesis (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#26) is not in mixedCase
+Parameter '' of publicCalls.allowReceiveGenesisTransfers (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#28) is not in mixedCase
+Parameter '' of publicCalls.allowed (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#30) is not in mixedCase
+Parameter '_scope_0' of publicCalls.allowed (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#30) is not in mixedCase
+Parameter '' of publicCalls.balances (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#47) is not in mixedCase
+Parameter '' of publicCalls.genesisAddressesForSaleLevel1Index (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#73) is not in mixedCase
+Parameter '' of publicCalls.genesisAddressesForSaleLevel2Index (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#75) is not in mixedCase
+Parameter '' of publicCalls.genesisAddressesForSaleLevel3Index (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#77) is not in mixedCase
+Parameter '' of publicCalls.genesisBuyPrice (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#79) is not in mixedCase
+Parameter '' of publicCalls.genesisInitialSupply (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#83) is not in mixedCase
+Parameter '' of publicCalls.initialBlockCountPerAddress (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#94) is not in mixedCase
+Parameter '' of publicCalls.isGenesisAddress (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#97) is not in mixedCase
+Parameter '' of publicCalls.isGenesisAddressForSale (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#98) is not in mixedCase
+Parameter '' of publicCalls.isNormalAddressForSale (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#101) is not in mixedCase
+Parameter '' of publicCalls.normalAddressesForSaleIndex (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#114) is not in mixedCase
+Parameter '' of publicCalls.stakeBalances (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#135) is not in mixedCase
+Parameter '' of publicCalls.stakeBuyPrice (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#137) is not in mixedCase
+Parameter '' of publicCalls.stakeHoldersListIndex (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#142-143) is not in mixedCase
+Parameter '' of publicCalls.stakesForSaleIndex (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#149) is not in mixedCase
+Parameter '' of publicCalls.tokenCreated (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#151) is not in mixedCase
+Parameter '_scope_0' of publicCalls.tokenCreated (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#151) is not in mixedCase
+Parameter '' of publicCalls.tokenICOCreated (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#153) is not in mixedCase
+Parameter '_scope_0' of publicCalls.tokenICOCreated (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#153) is not in mixedCase
+Contract 'publicArrays' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#165-311) is not in CapWords
+Function 'publicArrays.Level1TradeHistoryAmountETH' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#165-166) is not in mixedCase
+Parameter '' of publicArrays.Level1TradeHistoryAmountETH (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#166) is not in mixedCase
+Function 'publicArrays.Level1TradeHistoryAmountETHFee' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#166-167) is not in mixedCase
+Parameter '' of publicArrays.Level1TradeHistoryAmountETHFee (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#167) is not in mixedCase
+Function 'publicArrays.Level1TradeHistoryAmountETHFeeLength' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#167-168) is not in mixedCase
+Function 'publicArrays.Level1TradeHistoryAmountETHFeeSet' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#168-169) is not in mixedCase
+Function 'publicArrays.Level1TradeHistoryAmountETHLength' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#169-170) is not in mixedCase
+Function 'publicArrays.Level1TradeHistoryAmountETHSet' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#170-171) is not in mixedCase
+Function 'publicArrays.Level1TradeHistoryAmountMNE' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#171-172) is not in mixedCase
+Parameter '' of publicArrays.Level1TradeHistoryAmountMNE (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#172) is not in mixedCase
+Function 'publicArrays.Level1TradeHistoryAmountMNELength' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#172-173) is not in mixedCase
+Function 'publicArrays.Level1TradeHistoryAmountMNESet' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#173-175) is not in mixedCase
+Function 'publicArrays.Level1TradeHistoryBuyer' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#175-176) is not in mixedCase
+Parameter '' of publicArrays.Level1TradeHistoryBuyer (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#175) is not in mixedCase
+Function 'publicArrays.Level1TradeHistoryBuyerLength' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#176-177) is not in mixedCase
+Function 'publicArrays.Level1TradeHistoryBuyerSet' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#177-178) is not in mixedCase
+Function 'publicArrays.Level1TradeHistoryDate' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#178-179) is not in mixedCase
+Parameter '' of publicArrays.Level1TradeHistoryDate (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#178) is not in mixedCase
+Function 'publicArrays.Level1TradeHistoryDateLength' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#179-180) is not in mixedCase
+Function 'publicArrays.Level1TradeHistoryDateSet' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#180-181) is not in mixedCase
+Function 'publicArrays.Level1TradeHistorySeller' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#181-182) is not in mixedCase
+Parameter '' of publicArrays.Level1TradeHistorySeller (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#181) is not in mixedCase
+Function 'publicArrays.Level1TradeHistorySellerLength' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#182-183) is not in mixedCase
+Function 'publicArrays.Level1TradeHistorySellerSet' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#183-184) is not in mixedCase
+Function 'publicArrays.Level2TradeHistoryAmountETH' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#184) is not in mixedCase
+Parameter '' of publicArrays.Level2TradeHistoryAmountETH (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#184) is not in mixedCase
+Function 'publicArrays.Level2TradeHistoryAmountETHFee' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#185) is not in mixedCase
+Parameter '' of publicArrays.Level2TradeHistoryAmountETHFee (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#185) is not in mixedCase
+Function 'publicArrays.Level2TradeHistoryAmountETHFeeLength' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#185-186) is not in mixedCase
+Function 'publicArrays.Level2TradeHistoryAmountETHFeeSet' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#186-188) is not in mixedCase
+Function 'publicArrays.Level2TradeHistoryAmountETHLength' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#188-189) is not in mixedCase
+Function 'publicArrays.Level2TradeHistoryAmountETHSet' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#189-190) is not in mixedCase
+Function 'publicArrays.Level2TradeHistoryAmountMNE' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#190-191) is not in mixedCase
+Parameter '' of publicArrays.Level2TradeHistoryAmountMNE (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#190) is not in mixedCase
+Function 'publicArrays.Level2TradeHistoryAmountMNELength' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#191) is not in mixedCase
+Function 'publicArrays.Level2TradeHistoryAmountMNESet' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#192) is not in mixedCase
+Function 'publicArrays.Level2TradeHistoryAvailableAmountMNE' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#192-193) is not in mixedCase
+Parameter '' of publicArrays.Level2TradeHistoryAvailableAmountMNE (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#193) is not in mixedCase
+Function 'publicArrays.Level2TradeHistoryAvailableAmountMNELength' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#193-194) is not in mixedCase
+Function 'publicArrays.Level2TradeHistoryAvailableAmountMNESet' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#195-196) is not in mixedCase
+Function 'publicArrays.Level2TradeHistoryBuyer' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#196-197) is not in mixedCase
+Parameter '' of publicArrays.Level2TradeHistoryBuyer (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#196) is not in mixedCase
+Function 'publicArrays.Level2TradeHistoryBuyerLength' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#197-198) is not in mixedCase
+Function 'publicArrays.Level2TradeHistoryBuyerSet' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#198-199) is not in mixedCase
+Function 'publicArrays.Level2TradeHistoryDate' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#199-200) is not in mixedCase
+Parameter '' of publicArrays.Level2TradeHistoryDate (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#199) is not in mixedCase
+Function 'publicArrays.Level2TradeHistoryDateLength' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#200-201) is not in mixedCase
+Function 'publicArrays.Level2TradeHistoryDateSet' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#201-202) is not in mixedCase
+Function 'publicArrays.Level2TradeHistorySeller' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#202-203) is not in mixedCase
+Parameter '' of publicArrays.Level2TradeHistorySeller (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#202) is not in mixedCase
+Function 'publicArrays.Level2TradeHistorySellerLength' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#203-204) is not in mixedCase
+Function 'publicArrays.Level2TradeHistorySellerSet' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#204-205) is not in mixedCase
+Function 'publicArrays.Level3TradeHistoryAmountETH' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#205-206) is not in mixedCase
+Parameter '' of publicArrays.Level3TradeHistoryAmountETH (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#205) is not in mixedCase
+Function 'publicArrays.Level3TradeHistoryAmountETHFee' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#206-207) is not in mixedCase
+Parameter '' of publicArrays.Level3TradeHistoryAmountETHFee (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#206) is not in mixedCase
+Function 'publicArrays.Level3TradeHistoryAmountETHFeeLength' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#207-208) is not in mixedCase
+Function 'publicArrays.Level3TradeHistoryAmountETHFeeSet' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#208-209) is not in mixedCase
+Function 'publicArrays.Level3TradeHistoryAmountETHLength' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#209-210) is not in mixedCase
+Function 'publicArrays.Level3TradeHistoryAmountETHSet' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#210-211) is not in mixedCase
+Function 'publicArrays.Level3TradeHistoryAmountMNE' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#211-212) is not in mixedCase
+Parameter '' of publicArrays.Level3TradeHistoryAmountMNE (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#211) is not in mixedCase
+Function 'publicArrays.Level3TradeHistoryAmountMNELength' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#212-213) is not in mixedCase
+Function 'publicArrays.Level3TradeHistoryAmountMNESet' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#213-214) is not in mixedCase
+Function 'publicArrays.Level3TradeHistoryAvailableAmountMNE' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#214-215) is not in mixedCase
+Parameter '' of publicArrays.Level3TradeHistoryAvailableAmountMNE (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#214) is not in mixedCase
+Function 'publicArrays.Level3TradeHistoryAvailableAmountMNELength' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#215-216) is not in mixedCase
+Function 'publicArrays.Level3TradeHistoryAvailableAmountMNESet' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#216-217) is not in mixedCase
+Function 'publicArrays.Level3TradeHistoryBuyer' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#217-218) is not in mixedCase
+Parameter '' of publicArrays.Level3TradeHistoryBuyer (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#217-218) is not in mixedCase
+Function 'publicArrays.Level3TradeHistoryBuyerLength' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#218-219) is not in mixedCase
+Function 'publicArrays.Level3TradeHistoryBuyerSet' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#219-220) is not in mixedCase
+Function 'publicArrays.Level3TradeHistoryDate' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#220-221) is not in mixedCase
+Parameter '' of publicArrays.Level3TradeHistoryDate (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#221) is not in mixedCase
+Function 'publicArrays.Level3TradeHistoryDateLength' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#221-222) is not in mixedCase
+Function 'publicArrays.Level3TradeHistoryDateSet' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#222-223) is not in mixedCase
+Function 'publicArrays.Level3TradeHistorySeller' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#223-224) is not in mixedCase
+Parameter '' of publicArrays.Level3TradeHistorySeller (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#224) is not in mixedCase
+Function 'publicArrays.Level3TradeHistorySellerLength' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#224-225) is not in mixedCase
+Function 'publicArrays.Level3TradeHistorySellerSet' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#225-226) is not in mixedCase
+Function 'publicArrays.MNETradeHistoryAmountETH' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#226-227) is not in mixedCase
+Parameter '' of publicArrays.MNETradeHistoryAmountETH (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#227) is not in mixedCase
+Function 'publicArrays.MNETradeHistoryAmountETHFee' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#227-228) is not in mixedCase
+Parameter '' of publicArrays.MNETradeHistoryAmountETHFee (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#227-228) is not in mixedCase
+Function 'publicArrays.MNETradeHistoryAmountETHFeeLength' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#228-229) is not in mixedCase
+Function 'publicArrays.MNETradeHistoryAmountETHFeeSet' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#229-230) is not in mixedCase
+Function 'publicArrays.MNETradeHistoryAmountETHLength' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#230-231) is not in mixedCase
+Function 'publicArrays.MNETradeHistoryAmountETHSet' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#231-232) is not in mixedCase
+Function 'publicArrays.MNETradeHistoryAmountMNE' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#232-233) is not in mixedCase
+Parameter '' of publicArrays.MNETradeHistoryAmountMNE (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#233) is not in mixedCase
+Function 'publicArrays.MNETradeHistoryAmountMNELength' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#233-234) is not in mixedCase
+Function 'publicArrays.MNETradeHistoryAmountMNESet' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#234-235) is not in mixedCase
+Function 'publicArrays.MNETradeHistoryBuyer' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#235-236) is not in mixedCase
+Parameter '' of publicArrays.MNETradeHistoryBuyer (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#236) is not in mixedCase
+Function 'publicArrays.MNETradeHistoryBuyerLength' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#236-237) is not in mixedCase
+Function 'publicArrays.MNETradeHistoryBuyerSet' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#237-238) is not in mixedCase
+Function 'publicArrays.MNETradeHistoryDate' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#239) is not in mixedCase
+Parameter '' of publicArrays.MNETradeHistoryDate (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#239) is not in mixedCase
+Function 'publicArrays.MNETradeHistoryDateLength' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#240) is not in mixedCase
+Function 'publicArrays.MNETradeHistoryDateSet' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#240-241) is not in mixedCase
+Function 'publicArrays.MNETradeHistorySeller' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#241-242) is not in mixedCase
+Parameter '' of publicArrays.MNETradeHistorySeller (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#242) is not in mixedCase
+Function 'publicArrays.MNETradeHistorySellerLength' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#242-243) is not in mixedCase
+Function 'publicArrays.MNETradeHistorySellerSet' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#243-244) is not in mixedCase
+Function 'publicArrays.StakeTradeHistoryBuyer' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#244-245) is not in mixedCase
+Parameter '' of publicArrays.StakeTradeHistoryBuyer (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#245) is not in mixedCase
+Function 'publicArrays.StakeTradeHistoryBuyerLength' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#245-246) is not in mixedCase
+Function 'publicArrays.StakeTradeHistoryBuyerSet' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#246-247) is not in mixedCase
+Function 'publicArrays.StakeTradeHistoryDate' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#248) is not in mixedCase
+Parameter '' of publicArrays.StakeTradeHistoryDate (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#248) is not in mixedCase
+Function 'publicArrays.StakeTradeHistoryDateLength' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#249) is not in mixedCase
+Function 'publicArrays.StakeTradeHistoryDateSet' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#250) is not in mixedCase
+Function 'publicArrays.StakeTradeHistoryETHFee' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#250-251) is not in mixedCase
+Parameter '' of publicArrays.StakeTradeHistoryETHFee (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#251) is not in mixedCase
+Function 'publicArrays.StakeTradeHistoryETHFeeLength' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#251-252) is not in mixedCase
+Function 'publicArrays.StakeTradeHistoryETHFeeSet' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#252-253) is not in mixedCase
+Function 'publicArrays.StakeTradeHistoryETHPrice' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#253-254) is not in mixedCase
+Parameter '' of publicArrays.StakeTradeHistoryETHPrice (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#254) is not in mixedCase
+Function 'publicArrays.StakeTradeHistoryETHPriceLength' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#254-255) is not in mixedCase
+Function 'publicArrays.StakeTradeHistoryETHPriceSet' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#255-256) is not in mixedCase
+Function 'publicArrays.StakeTradeHistoryMNEGenesisBurned' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#256-257) is not in mixedCase
+Parameter '' of publicArrays.StakeTradeHistoryMNEGenesisBurned (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#257) is not in mixedCase
+Function 'publicArrays.StakeTradeHistoryMNEGenesisBurnedLength' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#257-258) is not in mixedCase
+Function 'publicArrays.StakeTradeHistoryMNEGenesisBurnedSet' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#258-260) is not in mixedCase
+Function 'publicArrays.StakeTradeHistorySeller' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#260) is not in mixedCase
+Parameter '' of publicArrays.StakeTradeHistorySeller (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#260) is not in mixedCase
+Function 'publicArrays.StakeTradeHistorySellerLength' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#261) is not in mixedCase
+Function 'publicArrays.StakeTradeHistorySellerSet' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#261-262) is not in mixedCase
+Function 'publicArrays.StakeTradeHistoryStakeAmount' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#262-264) is not in mixedCase
+Parameter '' of publicArrays.StakeTradeHistoryStakeAmount (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#263) is not in mixedCase
+Function 'publicArrays.StakeTradeHistoryStakeAmountLength' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#264-265) is not in mixedCase
+Function 'publicArrays.StakeTradeHistoryStakeAmountSet' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#265-267) is not in mixedCase
+Parameter '' of publicArrays.genesisAddressesForSaleLevel1 (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#272) is not in mixedCase
+Parameter '' of publicArrays.genesisAddressesForSaleLevel2 (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#276) is not in mixedCase
+Parameter '' of publicArrays.genesisAddressesForSaleLevel3 (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#280) is not in mixedCase
+Parameter '' of publicArrays.normalAddressesForSale (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#284) is not in mixedCase
+Parameter '' of publicArrays.stakeHoldersList (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#301) is not in mixedCase
+Parameter '' of publicArrays.stakesForSale (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#308) is not in mixedCase
+Contract 'genesisCalls' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#311-347) is not in CapWords
+Function 'genesisCalls.AllowAddressToDestroyGenesis' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#311-312) is not in mixedCase
+Function 'genesisCalls.AllowReceiveGenesisTransfers' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#313) is not in mixedCase
+Function 'genesisCalls.BurnTokens' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#314-315) is not in mixedCase
+Function 'genesisCalls.RemoveAllowAddressToDestroyGenesis' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#315-316) is not in mixedCase
+Function 'genesisCalls.RemoveAllowReceiveGenesisTransfers' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#316-317) is not in mixedCase
+Function 'genesisCalls.RemoveGenesisAddressFromSale' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#317-318) is not in mixedCase
+Function 'genesisCalls.SetGenesisForSale' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#318-319) is not in mixedCase
+Function 'genesisCalls.TransferGenesis' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#319) is not in mixedCase
+Function 'genesisCalls.UpgradeToLevel2FromLevel1' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#319-320) is not in mixedCase
+Function 'genesisCalls.UpgradeToLevel3FromDev' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#320-321) is not in mixedCase
+Function 'genesisCalls.UpgradeToLevel3FromLevel1' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#321-322) is not in mixedCase
+Function 'genesisCalls.UpgradeToLevel3FromLevel2' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#322-323) is not in mixedCase
+Function 'genesisCalls.BurnGenesisAddresses' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#346-347) is not in mixedCase
+Contract 'normalAddress' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#347-356) is not in CapWords
+Function 'normalAddress.BuyNormalAddress' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#347-349) is not in mixedCase
+Function 'normalAddress.RemoveNormalAddressFromSale' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#349-353) is not in mixedCase
+Function 'normalAddress.SetNormalAddressForSale' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#355) is not in mixedCase
+Contract 'stakes' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#356-365) is not in CapWords
+Function 'stakes.RemoveStakeFromSale' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#356-357) is not in mixedCase
+Function 'stakes.SetStakeForSale' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#357-358) is not in mixedCase
+Function 'stakes.StakeTransferGenesis' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#358-363) is not in mixedCase
+Function 'stakes.StakeTransferMNE' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#363) is not in mixedCase
+Contract 'stakeBuys' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#365-372) is not in CapWords
+Function 'stakeBuys.BuyStakeGenesis' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#365-370) is not in mixedCase
+Function 'stakeBuys.BuyStakeMNE' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#370-371) is not in mixedCase
+Contract 'genesisBuys' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#372-384) is not in CapWords
+Function 'genesisBuys.BuyGenesisLevel1FromNormal' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#372-374) is not in mixedCase
+Function 'genesisBuys.BuyGenesisLevel2FromNormal' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#375-378) is not in mixedCase
+Function 'genesisBuys.BuyGenesisLevel3FromNormal' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#378-379) is not in mixedCase
+Contract 'tokenService' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#384-389) is not in CapWords
+Function 'tokenService.CreateToken' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#385-387) is not in mixedCase
+Function 'tokenService.CreateTokenICO' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#387-388) is not in mixedCase
+Contract 'baseTransfers' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#389-400) is not in CapWords
+Parameter '_publicCallsAddress' of Minereum. (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#429-430) is not in mixedCase
+Parameter '_publicArraysAddress' of Minereum. (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#430-431) is not in mixedCase
+Parameter '_genesisCallsAddress' of Minereum. (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#431-432) is not in mixedCase
+Parameter '_normalAddressAddress' of Minereum. (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#432-433) is not in mixedCase
+Parameter '_stakesAddress' of Minereum. (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#433-434) is not in mixedCase
+Parameter '_stakesBuysAddress' of Minereum. (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#434-435) is not in mixedCase
+Parameter '_genesisBuysAddress' of Minereum. (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#435-436) is not in mixedCase
+Parameter '_tokenServiceAddress' of Minereum. (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#436-437) is not in mixedCase
+Parameter '_baseTransfersAddress' of Minereum. (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#437-438) is not in mixedCase
+Parameter '_address' of Minereum.reloadGenesis (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#457) is not in mixedCase
+Parameter '_address' of Minereum.reloadNormalAddress (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#458) is not in mixedCase
+Parameter '_address' of Minereum.reloadStakes (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#459) is not in mixedCase
+Parameter '_address' of Minereum.reloadStakeBuys (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#460) is not in mixedCase
+Parameter '_address' of Minereum.reloadGenesisBuys (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#460) is not in mixedCase
+Parameter '_address' of Minereum.reloadTokenService (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#461) is not in mixedCase
+Parameter '_address' of Minereum.reloadPublicCalls (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#465-466) is not in mixedCase
+Parameter '_address' of Minereum.reloadPublicArrays (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#475-478) is not in mixedCase
+Parameter '_address' of Minereum.setSecondaryPayoutAddress (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#500) is not in mixedCase
+Function 'Minereum.SetBlockPayouts' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#505-510) is not in mixedCase
+Parameter '_address' of Minereum.availableBalanceOf (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#520) is not in mixedCase
+Parameter '_to' of Minereum.transfer (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#526) is not in mixedCase
+Parameter '_value' of Minereum.transfer (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#526-527) is not in mixedCase
+Parameter '_from' of Minereum.transferFrom (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#532) is not in mixedCase
+Parameter '_to' of Minereum.transferFrom (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#533) is not in mixedCase
+Parameter '_amount' of Minereum.transferFrom (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#533-536) is not in mixedCase
+Parameter '_spender' of Minereum.approve (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#541) is not in mixedCase
+Parameter '_amount' of Minereum.approve (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#541-544) is not in mixedCase
+Parameter '_owner' of Minereum.allowance (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#547) is not in mixedCase
+Parameter '_spender' of Minereum.allowance (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#547-550) is not in mixedCase
+Parameter '_address' of Minereum.balanceOf (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#554) is not in mixedCase
+Parameter '_address' of Minereum.stakeBalanceOf (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#558) is not in mixedCase
+Function 'Minereum.TransferGenesis' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#562-570) is not in mixedCase
+Parameter '_to' of Minereum.TransferGenesis (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#563) is not in mixedCase
+Function 'Minereum.SetGenesisForSale' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#570-574) is not in mixedCase
+Function 'Minereum.AllowReceiveGenesisTransfers' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#574-575) is not in mixedCase
+Function 'Minereum.RemoveAllowReceiveGenesisTransfers' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#577-581) is not in mixedCase
+Function 'Minereum.RemoveGenesisAddressFromSale' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#582-583) is not in mixedCase
+Function 'Minereum.AllowAddressToDestroyGenesis' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#583-590) is not in mixedCase
+Parameter '_address' of Minereum.AllowAddressToDestroyGenesis (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#586-587) is not in mixedCase
+Function 'Minereum.RemoveAllowAddressToDestroyGenesis' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#590-592) is not in mixedCase
+Function 'Minereum.UpgradeToLevel2FromLevel1' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#592-594) is not in mixedCase
+Function 'Minereum.UpgradeToLevel3FromLevel1' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#595-601) is not in mixedCase
+Function 'Minereum.UpgradeToLevel3FromLevel2' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#601-603) is not in mixedCase
+Function 'Minereum.UpgradeToLevel3FromDev' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#603) is not in mixedCase
+Function 'Minereum.UpgradeOthersToLevel2FromLevel1' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#603-614) is not in mixedCase
+Parameter '_addresses' of Minereum.UpgradeOthersToLevel2FromLevel1 (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#603-604) is not in mixedCase
+Function 'Minereum.UpgradeOthersToLevel3FromLevel1' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#614-633) is not in mixedCase
+Parameter '_addresses' of Minereum.UpgradeOthersToLevel3FromLevel1 (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#614) is not in mixedCase
+Function 'Minereum.UpgradeOthersToLevel3FromLevel2' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#633-645) is not in mixedCase
+Parameter '_addresses' of Minereum.UpgradeOthersToLevel3FromLevel2 (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#635-636) is not in mixedCase
+Function 'Minereum.UpgradeOthersToLevel3FromDev' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#645-654) is not in mixedCase
+Parameter '_addresses' of Minereum.UpgradeOthersToLevel3FromDev (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#646) is not in mixedCase
+Function 'Minereum.BuyGenesisAddress' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#654-662) is not in mixedCase
+Parameter '_address' of Minereum.BuyGenesisAddress (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#654-655) is not in mixedCase
+Function 'Minereum.SetNormalAddressForSale' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#662-666) is not in mixedCase
+Function 'Minereum.RemoveNormalAddressFromSale' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#666-668) is not in mixedCase
+Function 'Minereum.BuyNormalAddress' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#668-675) is not in mixedCase
+Parameter '_address' of Minereum.BuyNormalAddress (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#669-670) is not in mixedCase
+Parameter '_address' of Minereum.setBalanceNormalAddress (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#675-676) is not in mixedCase
+Parameter '_balance' of Minereum.setBalanceNormalAddress (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#676) is not in mixedCase
+Function 'Minereum.ContractTransferAllFundsOut' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#681-696) is not in mixedCase
+Function 'Minereum.PayoutStakeHolders' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#696-734) is not in mixedCase
+Function 'Minereum.BurnTokens' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#739-743) is not in mixedCase
+Function 'Minereum.SetStakeForSale' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#743-748) is not in mixedCase
+Function 'Minereum.RemoveStakeFromSale' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#748-749) is not in mixedCase
+Function 'Minereum.StakeTransferMNE' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#749-756) is not in mixedCase
+Parameter '_to' of Minereum.StakeTransferMNE (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#750) is not in mixedCase
+Parameter '_value' of Minereum.StakeTransferMNE (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#750-751) is not in mixedCase
+Function 'Minereum.BurnGenesisAddresses' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#756-765) is not in mixedCase
+Parameter '_genesisAddressesToBurn' of Minereum.BurnGenesisAddresses (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#756-757) is not in mixedCase
+Function 'Minereum.StakeTransferGenesis' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#765-773) is not in mixedCase
+Parameter '_to' of Minereum.StakeTransferGenesis (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#765) is not in mixedCase
+Parameter '_value' of Minereum.StakeTransferGenesis (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#765) is not in mixedCase
+Parameter '_genesisAddressesToBurn' of Minereum.StakeTransferGenesis (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#765-766) is not in mixedCase
+Parameter '_address' of Minereum.setBalanceStakes (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#773-776) is not in mixedCase
+Function 'Minereum.BuyGenesisLevel1FromNormal' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#777-783) is not in mixedCase
+Parameter '_address' of Minereum.BuyGenesisLevel1FromNormal (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#777) is not in mixedCase
+Function 'Minereum.BuyGenesisLevel2FromNormal' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#783-790) is not in mixedCase
+Parameter '_address' of Minereum.BuyGenesisLevel2FromNormal (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#784) is not in mixedCase
+Function 'Minereum.BuyGenesisLevel3FromNormal' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#790-798) is not in mixedCase
+Parameter '_address' of Minereum.BuyGenesisLevel3FromNormal (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#790) is not in mixedCase
+Function 'Minereum.BuyStakeMNE' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#798-806) is not in mixedCase
+Parameter '_address' of Minereum.BuyStakeMNE (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#798) is not in mixedCase
+Function 'Minereum.BuyStakeGenesis' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#807-824) is not in mixedCase
+Parameter '_address' of Minereum.BuyStakeGenesis (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#809-810) is not in mixedCase
+Parameter '_genesisAddressesToBurn' of Minereum.BuyStakeGenesis (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#810) is not in mixedCase
+Function 'Minereum.CreateToken' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#824-831) is not in mixedCase
+Function 'Minereum.CreateTokenICO' (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#831-837) is not in mixedCase
+Parameter '_address' of Minereum.isAnyGenesisAddress (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#839) is not in mixedCase
+Parameter '_address' of Minereum.isGenesisAddressLevel1 (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#847-851) is not in mixedCase
+Parameter '_address' of Minereum.isGenesisAddressLevel2 (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#851) is not in mixedCase
+Parameter '_address' of Minereum.isGenesisAddressLevel3 (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#852) is not in mixedCase
+Parameter '_address' of Minereum.isGenesisAddressLevel2Or3 (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#853-854) is not in mixedCase
+Parameter '_addressList' of Minereum.registerGenesisAddresses (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#854-855) is not in mixedCase
+Parameter '_ethFeeToUpgradeToLevel2' of Minereum.ethFeeToUpgradeToLevel2Set (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#857) is not in mixedCase
+Parameter '_ethFeeToUpgradeToLevel3' of Minereum.ethFeeToUpgradeToLevel3Set (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#858) is not in mixedCase
+Parameter '_ethFeeToBuyLevel1' of Minereum.ethFeeToBuyLevel1Set (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#859) is not in mixedCase
+Parameter '_ethFeeForSellerLevel1' of Minereum.ethFeeForSellerLevel1Set (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#860) is not in mixedCase
+Parameter '_ethFeeForToken' of Minereum.ethFeeForTokenSet (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#861) is not in mixedCase
+Parameter '_ethFeeForTokenICO' of Minereum.ethFeeForTokenICOSet (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#861-862) is not in mixedCase
+Parameter '_ethPercentFeeGenesisExchange' of Minereum.ethPercentFeeGenesisExchangeSet (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#862-863) is not in mixedCase
+Parameter '_ethPercentFeeNormalExchange' of Minereum.ethPercentFeeNormalExchangeSet (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#864) is not in mixedCase
+Parameter '_ethPercentStakeExchange' of Minereum.ethPercentStakeExchangeSet (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#865) is not in mixedCase
+Parameter '_amountOfGenesisToBuyStakes' of Minereum.amountOfGenesisToBuyStakesSet (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol#865-866) is not in mixedCase
+Parameter '_amountOfMNEToBuyStakes' of Minereum.amountOfMNEToBuyStakesSet (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol) is not in mixedCase
+Parameter '_amountOfMNEForToken' of Minereum.amountOfMNEForTokenSet (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol) is not in mixedCase
+Parameter '_amountOfMNEForTokenICO' of Minereum.amountOfMNEForTokenICOSet (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol) is not in mixedCase
+Parameter '_amountOfMNEToTransferStakes' of Minereum.amountOfMNEToTransferStakesSet (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol) is not in mixedCase
+Parameter '_amountOfGenesisToTransferStakes' of Minereum.amountOfGenesisToTransferStakesSet (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol) is not in mixedCase
+Parameter '_stakeDecimals' of Minereum.stakeDecimalsSet (/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xc92e74b131d7b1d46e60e07f3fae5d8877dd03f0.sol analyzed (10 contracts), 423 result(s) found

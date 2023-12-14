@@ -1,0 +1,36 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xcbb2ba457afe85d90a0aaa240c8eec78f2906f6a.sol:
+/sb/0xcbb2ba457afe85d90a0aaa240c8eec78f2906f6a.sol:29:5: Warning: Functions in interfaces should be declared external.
+    function totalSupply() public view returns (uint supply);
+    ^-------------------------------------------------------^
+/sb/0xcbb2ba457afe85d90a0aaa240c8eec78f2906f6a.sol:31:5: Warning: Functions in interfaces should be declared external.
+    function approve(address _spender, uint _value) public returns (bool success);
+    ^----------------------------------------------------------------------------^
+/sb/0xcbb2ba457afe85d90a0aaa240c8eec78f2906f6a.sol:33:5: Warning: Functions in interfaces should be declared external.
+    function decimals() public view returns(uint digits);
+    ^---------------------------------------------------^
+
+INFO:Detectors:[92m
+Reentrancy in HairyHoover.cleanBalance (/sb/0xcbb2ba457afe85d90a0aaa240c8eec78f2906f6a.sol#115-144):
+	External calls:
+	- b = Yrc20(token).balanceOf(this) (/sb/0xcbb2ba457afe85d90a0aaa240c8eec78f2906f6a.sol#125)
+	- require(bool,string)(Yrc20(token).transfer(msg.sender,b),transfer failed) (/sb/0xcbb2ba457afe85d90a0aaa240c8eec78f2906f6a.sol#129-133)
+	State variables written after the call(s):
+	- counts (/sb/0xcbb2ba457afe85d90a0aaa240c8eec78f2906f6a.sol#141-143)
+Reentrancy in HairyHoover.suckBalance (/sb/0xcbb2ba457afe85d90a0aaa240c8eec78f2906f6a.sol#75-113):
+	External calls:
+	- (a,b) = this.check(token) (/sb/0xcbb2ba457afe85d90a0aaa240c8eec78f2906f6a.sol#79-81)
+	- b = Yrc20(token).balanceOf(msg.sender) (/sb/0xcbb2ba457afe85d90a0aaa240c8eec78f2906f6a.sol#81-83)
+	- a = Yrc20(token).allowance(msg.sender,this) (/sb/0xcbb2ba457afe85d90a0aaa240c8eec78f2906f6a.sol#85-89)
+	- require(bool,string)(Yrc20(token).transferFrom(msg.sender,this,b),not approved) (/sb/0xcbb2ba457afe85d90a0aaa240c8eec78f2906f6a.sol#91-97)
+	- require(bool,string)(Yrc20(token).transferFrom(msg.sender,this,a),not approved) (/sb/0xcbb2ba457afe85d90a0aaa240c8eec78f2906f6a.sol#99-105)
+	State variables written after the call(s):
+	- counts (/sb/0xcbb2ba457afe85d90a0aaa240c8eec78f2906f6a.sol#111)
+	- participantCount (/sb/0xcbb2ba457afe85d90a0aaa240c8eec78f2906f6a.sol#111-113)
+	- participants (/sb/0xcbb2ba457afe85d90a0aaa240c8eec78f2906f6a.sol#111-113)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+YRC20.totalSupply (/sb/0xcbb2ba457afe85d90a0aaa240c8eec78f2906f6a.sol#29-31) should be declared external
+YRC20.approve (/sb/0xcbb2ba457afe85d90a0aaa240c8eec78f2906f6a.sol#31-33) should be declared external
+YRC20.decimals (/sb/0xcbb2ba457afe85d90a0aaa240c8eec78f2906f6a.sol#33-35) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Slither:/sb/0xcbb2ba457afe85d90a0aaa240c8eec78f2906f6a.sol analyzed (4 contracts), 5 result(s) found

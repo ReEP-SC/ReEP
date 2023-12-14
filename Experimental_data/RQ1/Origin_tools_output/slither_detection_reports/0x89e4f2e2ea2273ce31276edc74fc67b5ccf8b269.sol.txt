@@ -1,0 +1,57 @@
+INFO:Detectors:[93m
+Reentrancy in ZSECStaker.claim (/sb/0x89e4f2e2ea2273ce31276edc74fc67b5ccf8b269.sol#186-194):
+	External calls:
+	- _storeWalletContract.giveReward(_msgSender(),amount) (/sb/0x89e4f2e2ea2273ce31276edc74fc67b5ccf8b269.sol#190-192)
+	State variables written after the call(s):
+	- _rewardsMap (/sb/0x89e4f2e2ea2273ce31276edc74fc67b5ccf8b269.sol#193-194)
+Reentrancy in ZSECStaker.unstack (/sb/0x89e4f2e2ea2273ce31276edc74fc67b5ccf8b269.sol#159-186):
+	External calls:
+	- require(bool,string)(_mainTokenContract.transfer(_msgSender(),amount),Stake failed) (/sb/0x89e4f2e2ea2273ce31276edc74fc67b5ccf8b269.sol#169-171)
+	State variables written after the call(s):
+	- _stakerMap (/sb/0x89e4f2e2ea2273ce31276edc74fc67b5ccf8b269.sol#173-174)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+ZSECStaker.claim (/sb/0x89e4f2e2ea2273ce31276edc74fc67b5ccf8b269.sol#186-194) does not use the value returned by external calls:
+	-_storeWalletContract.giveReward(_msgSender(),amount) (/sb/0x89e4f2e2ea2273ce31276edc74fc67b5ccf8b269.sol#190-192)
+ZSECStaker.withdrawAllFromStore (/sb/0x89e4f2e2ea2273ce31276edc74fc67b5ccf8b269.sol#216-228) does not use the value returned by external calls:
+	-_storeWalletContract.withdrawAll(recipient) (/sb/0x89e4f2e2ea2273ce31276edc74fc67b5ccf8b269.sol#226-228)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in ZSECStaker.stake (/sb/0x89e4f2e2ea2273ce31276edc74fc67b5ccf8b269.sol#132-159):
+	External calls:
+	- require(bool,string)(_mainTokenContract.transferFrom(_msgSender(),address(this),amount),Stake failed) (/sb/0x89e4f2e2ea2273ce31276edc74fc67b5ccf8b269.sol#139-146)
+	State variables written after the call(s):
+	- _stakerCount (/sb/0x89e4f2e2ea2273ce31276edc74fc67b5ccf8b269.sol#150-151)
+	- _stakerMap (/sb/0x89e4f2e2ea2273ce31276edc74fc67b5ccf8b269.sol#147-150)
+	- _stakerMap (/sb/0x89e4f2e2ea2273ce31276edc74fc67b5ccf8b269.sol#150)
+	- _stakerMap (/sb/0x89e4f2e2ea2273ce31276edc74fc67b5ccf8b269.sol#151-156)
+	- _totalStackedAmount (/sb/0x89e4f2e2ea2273ce31276edc74fc67b5ccf8b269.sol#156-158)
+Reentrancy in ZSECStaker.unstack (/sb/0x89e4f2e2ea2273ce31276edc74fc67b5ccf8b269.sol#159-186):
+	External calls:
+	- require(bool,string)(_mainTokenContract.transfer(_msgSender(),amount),Stake failed) (/sb/0x89e4f2e2ea2273ce31276edc74fc67b5ccf8b269.sol#169-171)
+	State variables written after the call(s):
+	- _stakerCount (/sb/0x89e4f2e2ea2273ce31276edc74fc67b5ccf8b269.sol#181-182)
+	- _totalStackedAmount (/sb/0x89e4f2e2ea2273ce31276edc74fc67b5ccf8b269.sol#174-177)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+ZSECStaker._devWallet should be constant (/sb/0x89e4f2e2ea2273ce31276edc74fc67b5ccf8b269.sol#108)
+ZSECStaker._minRewardPeriod should be constant (/sb/0x89e4f2e2ea2273ce31276edc74fc67b5ccf8b269.sol#116)
+ZSECStaker._minStakeAmount should be constant (/sb/0x89e4f2e2ea2273ce31276edc74fc67b5ccf8b269.sol#111)
+ZSECStaker._rewardMaxDays should be constant (/sb/0x89e4f2e2ea2273ce31276edc74fc67b5ccf8b269.sol#115)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Ownable.owner (/sb/0x89e4f2e2ea2273ce31276edc74fc67b5ccf8b269.sol#71-74) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x89e4f2e2ea2273ce31276edc74fc67b5ccf8b269.sol:
+	- pragma solidity^0.6.8 (/sb/0x89e4f2e2ea2273ce31276edc74fc67b5ccf8b269.sol#7-9): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'Context._msgSender' (/sb/0x89e4f2e2ea2273ce31276edc74fc67b5ccf8b269.sol#53-56) is not in mixedCase
+Function 'Context._msgData' (/sb/0x89e4f2e2ea2273ce31276edc74fc67b5ccf8b269.sol#56-63) is not in mixedCase
+Struct 'ZSECStaker._stakerData' (/sb/0x89e4f2e2ea2273ce31276edc74fc67b5ccf8b269.sol#98-104) is not in CapWords
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+ZSECStaker._devWallet (/sb/0x89e4f2e2ea2273ce31276edc74fc67b5ccf8b269.sol#108) is never used in ZSECStaker
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0x89e4f2e2ea2273ce31276edc74fc67b5ccf8b269.sol analyzed (6 contracts), 13 result(s) found

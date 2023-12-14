@@ -1,0 +1,33 @@
+INFO:Detectors:[93m
+Reentrancy in ProphetTimelock.unlock (/sb/0xca7e904646b8df5e808f89347d4ab1f491901df0.sol#108-122):
+	External calls:
+	- require(bool,string)(ERC20(tokenAddress).transfer(_msgSender(),lockedMap[_msgSender()][tokenAddress].lockedAmount),Unlock failed) (/sb/0xca7e904646b8df5e808f89347d4ab1f491901df0.sol#112-117)
+	State variables written after the call(s):
+	- lockedMap (/sb/0xca7e904646b8df5e808f89347d4ab1f491901df0.sol#117-118)
+	- lockedMap (/sb/0xca7e904646b8df5e808f89347d4ab1f491901df0.sol#118-121)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+ProphetTimelock.unlock.unlockableTimestamp (local variable @ /sb/0xca7e904646b8df5e808f89347d4ab1f491901df0.sol#108-111) shadows:
+	- ProphetTimelock.unlockableTimestamp (function @ /sb/0xca7e904646b8df5e808f89347d4ab1f491901df0.sol#122-128)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+Reentrancy in ProphetTimelock.lock (/sb/0xca7e904646b8df5e808f89347d4ab1f491901df0.sol#88-107):
+	External calls:
+	- tokenBalance = ERC20(tokenAddress).balanceOf(_msgSender()) (/sb/0xca7e904646b8df5e808f89347d4ab1f491901df0.sol#90-91)
+	- prevLockedAmount = ERC20(tokenAddress).balanceOf(address(this)) (/sb/0xca7e904646b8df5e808f89347d4ab1f491901df0.sol#91)
+	- require(bool,string)(ERC20(tokenAddress).transferFrom(_msgSender(),address(this),lockAmount),Lock failed) (/sb/0xca7e904646b8df5e808f89347d4ab1f491901df0.sol#93-97)
+	- currentLockedAmount = ERC20(tokenAddress).balanceOf(address(this)) (/sb/0xca7e904646b8df5e808f89347d4ab1f491901df0.sol#99)
+	State variables written after the call(s):
+	- lockedMap (/sb/0xca7e904646b8df5e808f89347d4ab1f491901df0.sol#99-101)
+	- lockedMap (/sb/0xca7e904646b8df5e808f89347d4ab1f491901df0.sol#101-103)
+	- lockedMap (/sb/0xca7e904646b8df5e808f89347d4ab1f491901df0.sol#103)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xca7e904646b8df5e808f89347d4ab1f491901df0.sol:
+	- pragma solidity^0.6.0 (/sb/0xca7e904646b8df5e808f89347d4ab1f491901df0.sol#8-10): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'Context._msgSender' (/sb/0xca7e904646b8df5e808f89347d4ab1f491901df0.sol#54-57) is not in mixedCase
+Function 'Context._msgData' (/sb/0xca7e904646b8df5e808f89347d4ab1f491901df0.sol#57-65) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xca7e904646b8df5e808f89347d4ab1f491901df0.sol analyzed (4 contracts), 6 result(s) found

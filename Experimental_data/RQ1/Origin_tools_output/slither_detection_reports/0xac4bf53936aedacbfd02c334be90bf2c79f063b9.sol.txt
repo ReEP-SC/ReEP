@@ -1,0 +1,98 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol:
+/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol:51:3: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+  function Ownable() public {
+
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol:145:9: Warning: Use of the "var" keyword is deprecated.
+        var whitelist = Whitelists[_address];
+
+        ^-----------^
+/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol:173:3: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+  function KRCPreSaleContract(uint256 _startTime, address _wallet, address _tokenAddress) public 
+
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol:216:6: Warning: Use of the "var" keyword is deprecated.
+     var isexist = searchWhitelist(msg.sender);
+
+     ^---------^
+
+INFO:Detectors:[93m
+Reentrancy in KRCPreSaleContract.buyTokens (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#525-561):
+	External calls:
+	- token.transfer(beneficiary,tokens) (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#557)
+	State variables written after the call(s):
+	- TOKENS_SOLD (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#559)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+KRCPreSaleContract.buyTokens (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#525-561) does not use the value returned by external calls:
+	-token.transfer(beneficiary,tokens) (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#557)
+KRCPreSaleContract.takeTokensBack (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#729-741) does not use the value returned by external calls:
+	-token.transfer(owner,remainingTokensInTheContract) (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#739-741)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in KRCPreSaleContract.buyTokens (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#525-561):
+	External calls:
+	- token.transfer(beneficiary,tokens) (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#557)
+	State variables written after the call(s):
+	- CashReserveFundAccumulated (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#559)
+	- FoundersTeamAndAdvisorsAccumulated (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#559)
+	- LegalContingencyFundsAccumulated (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#559)
+	- LongTermFoundationBudgetAccumulated (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#559)
+	- MarketingAndCommunityOutreachAccumulated (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#559)
+	- OperationalExpensesAccumulated (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#559)
+	- SoftwareProductDevelopmentAccumulated (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#559)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+KRCPreSaleContract.totalDurationInDays should be constant (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#241-243)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#135-151) should be declared external
+KRCPreSaleContract.setWhitelist (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#291-309) should be declared external
+KRCPreSaleContract.getWhitelist (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#309-317) should be declared external
+KRCPreSaleContract.countWhitelists (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#331-335) should be declared external
+KRCPreSaleContract.fallback (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#439-455) should be declared external
+KRCPreSaleContract.hasEnded (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#651-661) should be declared external
+KRCPreSaleContract.changeEndDate (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#667-679) should be declared external
+KRCPreSaleContract.changeStartDate (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#689-699) should be declared external
+KRCPreSaleContract.pauseCrowdsale (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#709-713) should be declared external
+KRCPreSaleContract.resumeCrowdsale (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#723-729) should be declared external
+KRCPreSaleContract.takeTokensBack (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#729-741) should be declared external
+KRCPreSaleContract.changeMinimumContribution (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#747-757) should be declared external
+KRCPreSaleContract.changeMaximumContribution (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#763-767) should be declared external
+KRCPreSaleContract.withdrawLongTermFoundationBudget (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#779-791) should be declared external
+KRCPreSaleContract.withdrawLegalContingencyFunds (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#803-809) should be declared external
+KRCPreSaleContract.withdrawMarketingAndCommunityOutreach (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#821-837) should be declared external
+KRCPreSaleContract.withdrawCashReserveFund (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#843-857) should be declared external
+KRCPreSaleContract.withdrawOperationalExpenses (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#863-876) should be declared external
+KRCPreSaleContract.withdrawSoftwareProductDevelopment (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#883-897) should be declared external
+KRCPreSaleContract.withdrawFoundersTeamAndAdvisors (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#905-911) should be declared external
+KRCPreSaleContract.withdrawAllFunds (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Function 'Ownable.Ownable' (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#103-111) is not in mixedCase
+Parameter '_address' of KRCPreSaleContract.setWhitelist (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#295) is not in mixedCase
+Parameter '_Email' of KRCPreSaleContract.setWhitelist (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#295-297) is not in mixedCase
+Parameter '_address' of KRCPreSaleContract.searchWhitelist (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#317-319) is not in mixedCase
+Function 'KRCPreSaleContract.KRCPreSaleContract' (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#355-433) is not in mixedCase
+Parameter '_startTime' of KRCPreSaleContract.KRCPreSaleContract (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#357-359) is not in mixedCase
+Parameter '_wallet' of KRCPreSaleContract.KRCPreSaleContract (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#359) is not in mixedCase
+Parameter '_tokenAddress' of KRCPreSaleContract.KRCPreSaleContract (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#359-361) is not in mixedCase
+Variable 'KRCPreSaleContract.TOKENS_SOLD' (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#221-225) is not in mixedCase
+Variable 'KRCPreSaleContract.LongTermFoundationBudgetAccumulated' (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#243-245) is not in mixedCase
+Variable 'KRCPreSaleContract.LegalContingencyFundsAccumulated' (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#245-247) is not in mixedCase
+Variable 'KRCPreSaleContract.MarketingAndCommunityOutreachAccumulated' (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#247-249) is not in mixedCase
+Variable 'KRCPreSaleContract.CashReserveFundAccumulated' (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#249-251) is not in mixedCase
+Variable 'KRCPreSaleContract.OperationalExpensesAccumulated' (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#251-255) is not in mixedCase
+Variable 'KRCPreSaleContract.SoftwareProductDevelopmentAccumulated' (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#255-257) is not in mixedCase
+Variable 'KRCPreSaleContract.FoundersTeamAndAdvisorsAccumulated' (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#257-259) is not in mixedCase
+Variable 'KRCPreSaleContract.LongTermFoundationBudgetPercentage' (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#259-261) is not in mixedCase
+Variable 'KRCPreSaleContract.LegalContingencyFundsPercentage' (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#261-263) is not in mixedCase
+Variable 'KRCPreSaleContract.MarketingAndCommunityOutreachPercentage' (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#264-265) is not in mixedCase
+Variable 'KRCPreSaleContract.CashReserveFundPercentage' (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#267) is not in mixedCase
+Variable 'KRCPreSaleContract.OperationalExpensesPercentage' (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#267-273) is not in mixedCase
+Variable 'KRCPreSaleContract.SoftwareProductDevelopmentPercentage' (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#273-279) is not in mixedCase
+Variable 'KRCPreSaleContract.FoundersTeamAndAdvisorsPercentage' (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#279-283) is not in mixedCase
+Variable 'KRCPreSaleContract.Whitelists' (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#287-289) is not in mixedCase
+Variable 'KRCPreSaleContract.WhitelistsAccts' (/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol#289-291) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xac4bf53936aedacbfd02c334be90bf2c79f063b9.sol analyzed (4 contracts), 51 result(s) found

@@ -1,0 +1,95 @@
+INFO:Detectors:[93m
+ANKRTokenVault.allocate (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#527-615) uses a dangerous strict equality:
+	- require(bool,string)(token.balanceOf(address(this)) == totalAllocation,Token should not be allocated yet.)
+ANKRTokenVault.allocate (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#527-615) uses a dangerous strict equality:
+	- require(bool,string)(token.balanceOf(address(this)) == totalAllocation,Token should not be allocated yet.)
+ANKRTokenVault.notLocked (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#451-453) uses a dangerous strict equality:
+	- require(bool,string)(lockedAt == 0,lockedAt should be zero.)
+	- require(bool,string)(lockedAt == 0,lockedAt should be zero.)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Reentrancy in ANKRTokenVault.preDistribute (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#687-701):
+	External calls:
+	- claimTokenReserve(opentokenAddress) (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#687-691)
+	- claimTokenReserve(tokenmanAddress) (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#691-699)
+	State variables written after the call(s):
+	- claimed (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#691-699)
+Reentrancy in ANKRTokenVault.preDistribute (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#687-701):
+	External calls:
+	- claimTokenReserve(opentokenAddress) (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#687-691)
+	- claimTokenReserve(tokenmanAddress) (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#691-699)
+	- claimTokenReserve(marketingAddress) (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#699)
+	State variables written after the call(s):
+	- claimed (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#699)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+Reentrancy in ANKRTokenVault.allocate (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#527-615):
+	External calls:
+	- require(bool,string)(token.balanceOf(address(this)) == totalAllocation,Token should not be allocated yet.) (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#533-535)
+	State variables written after the call(s):
+	- allocations (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#537)
+	- allocations (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#539)
+	- allocations (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#539-545)
+	- allocations (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#547-549)
+	- allocations (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#550-553)
+	- allocations (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#583-601)
+	- allocations (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#591-597)
+	- allocations (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#603-613)
+	- allocations (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#607-613)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+ANKRTokenVault.claimLockedInvestorTokenReserve (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#753-767) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(block.timestamp.sub(lockedAt) > investorTimeLock,Still in locking period.) (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#755)
+ANKRTokenVault.distributeLockedInvestorsReserve (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#789-799) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(block.timestamp.sub(lockedAt) > investorTimeLock,Still in locking period.) (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#789-791)
+ANKRTokenVault.nonInvestorVestingStage (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol) uses timestamp for comparisons
+	Dangerous comparisons:
+	- stage > othersVestingStages (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+ANKRTokenVault.communityReserveAllocation should be constant (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#319-321)
+ANKRTokenVault.communityReserveWallet should be constant (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#301-303)
+ANKRTokenVault.investorTimeLock should be constant (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#327-331)
+ANKRTokenVault.marketingAddress should be constant (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#291-297)
+ANKRTokenVault.marketingAllocation should be constant (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#311-315)
+ANKRTokenVault.opentokenAddress should be constant (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#283-288)
+ANKRTokenVault.opentokenAllocation should be constant (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#303-305)
+ANKRTokenVault.othersTimeLock should be constant (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#333)
+ANKRTokenVault.othersVestingStages should be constant (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#339)
+ANKRTokenVault.teamReserveAllocation should be constant (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#315-319)
+ANKRTokenVault.teamReserveWallet should be constant (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#297-300)
+ANKRTokenVault.tokenmanAddress should be constant (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#289-291)
+ANKRTokenVault.tokenmanAllocation should be constant (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#305-311)
+ANKRTokenVault.totalAllocation should be constant (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#325-327)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Ownable.renounceOwnership (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#95-103) should be declared external
+Ownable.transferOwnership (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#113-121) should be declared external
+ERC20Basic.totalSupply (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#257-263) should be declared external
+ERC20Basic.balanceOf (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#263-269) should be declared external
+ERC20Basic.transfer (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#269-275) should be declared external
+ANKRTokenVault.addUnlockedInvestor (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#483-503) should be declared external
+ANKRTokenVault.addLockedInvestor (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#503-527) should be declared external
+ANKRTokenVault.allocate (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#527-615) should be declared external
+ANKRTokenVault.distribute (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#615-621) should be declared external
+ANKRTokenVault.getTotalBalance (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#667-673) should be declared external
+ANKRTokenVault.getLockedBalance (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#673-683) should be declared external
+ANKRTokenVault.claimUnlockedInvestorTokenReserve (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#731-741) should be declared external
+ANKRTokenVault.claimLockedInvestorTokenReserve (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#753-767) should be declared external
+ANKRTokenVault.distributeUnlockedInvestorsReserve (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#769-787) should be declared external
+ANKRTokenVault.distributeLockedInvestorsReserve (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#789-799) should be declared external
+ANKRTokenVault.claimNonInvestorReserve (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#803-861) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol:
+	- pragma solidity^0.4.23 (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#9-15): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_newOwner' of Ownable.transferOwnership (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#119) is not in mixedCase
+Function 'Ownable._transferOwnership' (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#127-153) is not in mixedCase
+Parameter '_newOwner' of Ownable._transferOwnership (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#129) is not in mixedCase
+Parameter '_token' of ANKRTokenVault. (/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol#481) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x9c2578bf9e37eb1d0ddf45a410723d95e554cbdd.sol analyzed (4 contracts), 30 result(s) found

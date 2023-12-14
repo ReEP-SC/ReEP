@@ -1,0 +1,71 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xd7f54a12dd9eb3eda301d53b928829eb13358d66.sol:
+/sb/0xd7f54a12dd9eb3eda301d53b928829eb13358d66.sol:234:5: Warning: Different number of components on the left hand side (2) than on the right hand side (1).
+    (bool success, ) = _wallet.call.value(msg.value)("");
+    ^--------------------------------------------------^
+
+INFO:Detectors:[93m
+ScarlettSale._deliverTokens (/sb/0xd7f54a12dd9eb3eda301d53b928829eb13358d66.sol#185-189) does not use the value returned by external calls:
+	-_token.transfer(beneficiary,tokenAmount) (/sb/0xd7f54a12dd9eb3eda301d53b928829eb13358d66.sol#187-188)
+ScarlettSale.withdrawTokens (/sb/0xd7f54a12dd9eb3eda301d53b928829eb13358d66.sol#242-246) does not use the value returned by external calls:
+	-_token.transfer(_wallet,_amount) (/sb/0xd7f54a12dd9eb3eda301d53b928829eb13358d66.sol#246)
+ScarlettSale.transferFunds (/sb/0xd7f54a12dd9eb3eda301d53b928829eb13358d66.sol#247-253) does not use the value returned by external calls:
+	-_token.transfer(recipients[i],x) (/sb/0xd7f54a12dd9eb3eda301d53b928829eb13358d66.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+ScarlettSale.constructor.wallet (local variable @ /sb/0xd7f54a12dd9eb3eda301d53b928829eb13358d66.sol#122) shadows:
+	- ScarlettSale.wallet (function @ /sb/0xd7f54a12dd9eb3eda301d53b928829eb13358d66.sol#149-152)
+ScarlettSale.constructor.token (local variable @ /sb/0xd7f54a12dd9eb3eda301d53b928829eb13358d66.sol#122) shadows:
+	- ScarlettSale.token (function @ /sb/0xd7f54a12dd9eb3eda301d53b928829eb13358d66.sol#145-148)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+ScarlettSale.transferFunds has external calls inside a loop:
+	- _token.transfer(recipients[i],x) (/sb/0xd7f54a12dd9eb3eda301d53b928829eb13358d66.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in ScarlettSale.buyTokens (/sb/0xd7f54a12dd9eb3eda301d53b928829eb13358d66.sol#156-177):
+	External calls:
+	- _deliverTokens(beneficiary,tokens) (/sb/0xd7f54a12dd9eb3eda301d53b928829eb13358d66.sol#170-172)
+	State variables written after the call(s):
+	- _tokensSold (/sb/0xd7f54a12dd9eb3eda301d53b928829eb13358d66.sol#176-177)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+ScarlettSale._tierFiveRate should be constant (/sb/0xd7f54a12dd9eb3eda301d53b928829eb13358d66.sol#100-102)
+ScarlettSale._tierFourRate should be constant (/sb/0xd7f54a12dd9eb3eda301d53b928829eb13358d66.sol#99-100)
+ScarlettSale._tierOneRate should be constant (/sb/0xd7f54a12dd9eb3eda301d53b928829eb13358d66.sol#92-93)
+ScarlettSale._tierThreeRate should be constant (/sb/0xd7f54a12dd9eb3eda301d53b928829eb13358d66.sol#97)
+ScarlettSale._tierTwoRate should be constant (/sb/0xd7f54a12dd9eb3eda301d53b928829eb13358d66.sol#94-95)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0xd7f54a12dd9eb3eda301d53b928829eb13358d66.sol#67-75) should be declared external
+ScarlettSale.token (/sb/0xd7f54a12dd9eb3eda301d53b928829eb13358d66.sol#145-148) should be declared external
+ScarlettSale.wallet (/sb/0xd7f54a12dd9eb3eda301d53b928829eb13358d66.sol#149-152) should be declared external
+ScarlettSale.weiRaised (/sb/0xd7f54a12dd9eb3eda301d53b928829eb13358d66.sol#152-156) should be declared external
+ScarlettSale.hasEnded (/sb/0xd7f54a12dd9eb3eda301d53b928829eb13358d66.sol#233-235) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Low level call in ScarlettSale._forwardFunds (/sb/0xd7f54a12dd9eb3eda301d53b928829eb13358d66.sol#238-242):
+	-(success) = _wallet.call.value(msg.value)() /sb/0xd7f54a12dd9eb3eda301d53b928829eb13358d66.sol#238-240
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Function 'ScarlettSale._preValidatePurchase' (/sb/0xd7f54a12dd9eb3eda301d53b928829eb13358d66.sol#177-185) is not in mixedCase
+Function 'ScarlettSale._deliverTokens' (/sb/0xd7f54a12dd9eb3eda301d53b928829eb13358d66.sol#185-189) is not in mixedCase
+Function 'ScarlettSale._processPurchase' (/sb/0xd7f54a12dd9eb3eda301d53b928829eb13358d66.sol#189-220) is not in mixedCase
+Function 'ScarlettSale._forwardFunds' (/sb/0xd7f54a12dd9eb3eda301d53b928829eb13358d66.sol#238-242) is not in mixedCase
+Parameter '_amount' of ScarlettSale.withdrawTokens (/sb/0xd7f54a12dd9eb3eda301d53b928829eb13358d66.sol#242-244) is not in mixedCase
+Variable 'ScarlettSale._wallet' (/sb/0xd7f54a12dd9eb3eda301d53b928829eb13358d66.sol#91) is not in mixedCase
+Variable 'ScarlettSale._tierOneRate' (/sb/0xd7f54a12dd9eb3eda301d53b928829eb13358d66.sol#92-93) is not in mixedCase
+Variable 'ScarlettSale._tierTwoRate' (/sb/0xd7f54a12dd9eb3eda301d53b928829eb13358d66.sol#94-95) is not in mixedCase
+Variable 'ScarlettSale._tierThreeRate' (/sb/0xd7f54a12dd9eb3eda301d53b928829eb13358d66.sol#97) is not in mixedCase
+Variable 'ScarlettSale._tierFourRate' (/sb/0xd7f54a12dd9eb3eda301d53b928829eb13358d66.sol#99-100) is not in mixedCase
+Variable 'ScarlettSale._tierFiveRate' (/sb/0xd7f54a12dd9eb3eda301d53b928829eb13358d66.sol#100-102) is not in mixedCase
+Variable 'ScarlettSale._weiRaised' (/sb/0xd7f54a12dd9eb3eda301d53b928829eb13358d66.sol#104-106) is not in mixedCase
+Variable 'ScarlettSale._monthOne' (/sb/0xd7f54a12dd9eb3eda301d53b928829eb13358d66.sol#106-108) is not in mixedCase
+Variable 'ScarlettSale._monthTwo' (/sb/0xd7f54a12dd9eb3eda301d53b928829eb13358d66.sol#108-110) is not in mixedCase
+Variable 'ScarlettSale._monthThree' (/sb/0xd7f54a12dd9eb3eda301d53b928829eb13358d66.sol#110-112) is not in mixedCase
+Variable 'ScarlettSale._monthFour' (/sb/0xd7f54a12dd9eb3eda301d53b928829eb13358d66.sol#112) is not in mixedCase
+Variable 'ScarlettSale._tokensSold' (/sb/0xd7f54a12dd9eb3eda301d53b928829eb13358d66.sol#114) is not in mixedCase
+Variable 'ScarlettSale._startTime' (/sb/0xd7f54a12dd9eb3eda301d53b928829eb13358d66.sol#114-116) is not in mixedCase
+Variable 'ScarlettSale._endTime' (/sb/0xd7f54a12dd9eb3eda301d53b928829eb13358d66.sol#116-118) is not in mixedCase
+Variable 'ScarlettSale._saleSupply' (/sb/0xd7f54a12dd9eb3eda301d53b928829eb13358d66.sol#118) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xd7f54a12dd9eb3eda301d53b928829eb13358d66.sol analyzed (4 contracts), 34 result(s) found

@@ -1,0 +1,55 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x90532e4cdefb32e9ebb7cf5d65eeb5909063fc95.sol:
+/sb/0x90532e4cdefb32e9ebb7cf5d65eeb5909063fc95.sol:109:6: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+     function  KlownGasDrop() public {
+     ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x90532e4cdefb32e9ebb7cf5d65eeb5909063fc95.sol:115:32: Warning: This looks like an address but has an invalid checksum. If this is not used as an address, please prepend '00'. Correct checksummed address: '0x2462b6481Af155709A3044aC1BDE096d861a877b'. For more information please see https://solidity.readthedocs.io/en/develop/types.html#address-literals
+	address currentTokenAddress = 0x2462b6481af155709a3044ac1bde096d861a877b;
+	                              ^----------------------------------------^
+
+INFO:Detectors:[93m
+Reentrancy in KlownGasDrop.claimGasDrop (/sb/0x90532e4cdefb32e9ebb7cf5d65eeb5909063fc95.sol#150-176):
+	External calls:
+	- IERC20(currentTokenAddress).transfer(msg.sender,amountToClaim) (/sb/0x90532e4cdefb32e9ebb7cf5d65eeb5909063fc95.sol#161-170)
+	State variables written after the call(s):
+	- receivers (/sb/0x90532e4cdefb32e9ebb7cf5d65eeb5909063fc95.sol#173-174)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+KlownGasDrop.deposit (/sb/0x90532e4cdefb32e9ebb7cf5d65eeb5909063fc95.sol#123-134) does not use the value returned by external calls:
+	-IERC20(currentTokenAddress).transferFrom(msg.sender,address(this),tokens) (/sb/0x90532e4cdefb32e9ebb7cf5d65eeb5909063fc95.sol#131-133)
+KlownGasDrop.claimGasDrop (/sb/0x90532e4cdefb32e9ebb7cf5d65eeb5909063fc95.sol#150-176) does not use the value returned by external calls:
+	-IERC20(currentTokenAddress).transfer(msg.sender,amountToClaim) (/sb/0x90532e4cdefb32e9ebb7cf5d65eeb5909063fc95.sol#161-170)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in KlownGasDrop.claimGasDrop (/sb/0x90532e4cdefb32e9ebb7cf5d65eeb5909063fc95.sol#150-176):
+	External calls:
+	- IERC20(currentTokenAddress).transfer(msg.sender,amountToClaim) (/sb/0x90532e4cdefb32e9ebb7cf5d65eeb5909063fc95.sol#161-170)
+	State variables written after the call(s):
+	- totalSent (/sb/0x90532e4cdefb32e9ebb7cf5d65eeb5909063fc95.sol#174)
+Reentrancy in KlownGasDrop.deposit (/sb/0x90532e4cdefb32e9ebb7cf5d65eeb5909063fc95.sol#123-134):
+	External calls:
+	- IERC20(currentTokenAddress).transferFrom(msg.sender,address(this),tokens) (/sb/0x90532e4cdefb32e9ebb7cf5d65eeb5909063fc95.sol#131-133)
+	State variables written after the call(s):
+	- whoSent (/sb/0x90532e4cdefb32e9ebb7cf5d65eeb5909063fc95.sol#133-134)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+KlownGasDrop.brpt should be constant (/sb/0x90532e4cdefb32e9ebb7cf5d65eeb5909063fc95.sol#104-105)
+KlownGasDrop.brpt1 should be constant (/sb/0x90532e4cdefb32e9ebb7cf5d65eeb5909063fc95.sol#105)
+KlownGasDrop.temp should be constant (/sb/0x90532e4cdefb32e9ebb7cf5d65eeb5909063fc95.sol#146)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+KlownGasDrop.deposit (/sb/0x90532e4cdefb32e9ebb7cf5d65eeb5909063fc95.sol#123-134) should be declared external
+KlownGasDrop.claimGasDrop (/sb/0x90532e4cdefb32e9ebb7cf5d65eeb5909063fc95.sol#150-176) should be declared external
+KlownGasDrop.getGasClaimAmount (/sb/0x90532e4cdefb32e9ebb7cf5d65eeb5909063fc95.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x90532e4cdefb32e9ebb7cf5d65eeb5909063fc95.sol:
+	- pragma solidity^0.4.17 (/sb/0x90532e4cdefb32e9ebb7cf5d65eeb5909063fc95.sol#5-6): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'KlownGasDrop.KlownGasDrop' (/sb/0x90532e4cdefb32e9ebb7cf5d65eeb5909063fc95.sol#114-115) is not in mixedCase
+Variable 'KlownGasDrop._owner' (/sb/0x90532e4cdefb32e9ebb7cf5d65eeb5909063fc95.sol#96-97) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+KlownGasDrop.temp (/sb/0x90532e4cdefb32e9ebb7cf5d65eeb5909063fc95.sol#146) is never used in KlownGasDrop
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0x90532e4cdefb32e9ebb7cf5d65eeb5909063fc95.sol analyzed (2 contracts), 13 result(s) found

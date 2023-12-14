@@ -1,0 +1,247 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol:
+/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol:3185:13: Warning: Return value of low-level calls not used.
+            address(this).delegatecall(
+            ^ (Relevant source part starts here and spans across multiple lines).
+
+INFO:Detectors:[91m
+Reentrancy in UpgradableExchange.migrateFunds (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2489-2517):
+	External calls:
+	- require(bool,string)(IUpgradableExchange(newExchangeAddress).VERSION() > VERSION,New exchange version should be greater than the current version.) (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2503-2515)
+	- migrateEthers() (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2515-2517)
+	- migrateTokens(_tokens) (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2517)
+	External calls sending eth:
+	- migrateEthers() (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2515-2517)
+	State variables written after the call(s):
+	- balances (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2517)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities[0m
+INFO:Detectors:[93m
+SafeOldERC20.checkSuccess (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#187-245) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+IOldERC20 (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#129-177) has incorrect ERC20 function interface(s):
+	-transfer (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#129-135)
+	-transferFrom (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#135-145)
+	-approve (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#145-153)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[93m
+Reentrancy in ExchangeOffering.buyTokens (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2691-2791):
+	External calls:
+	- require(bool,string)(isUserWhitelisted(_project,contributor),User is not whitelisted) (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2713-2725)
+	- bonus = getBonusFactor(_project,weiAmount) (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2739-2743)
+	State variables written after the call(s):
+	- crowdsales (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2751-2759)
+Reentrancy in ExchangeOffering.buyTokens (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2691-2791):
+	External calls:
+	- require(bool,string)(isUserWhitelisted(_project,contributor),User is not whitelisted) (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2713-2725)
+	- bonus = getBonusFactor(_project,weiAmount) (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2739-2743)
+	- require(bool,string)(Token(_project).transfer(contributor,totalPurchasedTokens),Transfer failed) (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2763-2771)
+	State variables written after the call(s):
+	- crowdsales (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2771-2777)
+	- userContributionForProject (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2777-2781)
+Reentrancy in OldERC20ExchangeSupport.depositOldTokens (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2993-3025):
+	External calls:
+	- _depositOldTokens(_tokenAddress,_amount,user) (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#3011-3015)
+	State variables written after the call(s):
+	- referrals (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#3021-3023)
+Reentrancy in ReferralExchange.depositTokens (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2325-2355):
+	External calls:
+	- super._depositTokens(_tokenAddress,_amount,user) (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2341-2347)
+	State variables written after the call(s):
+	- referrals (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2347)
+Reentrancy in UpgradableExchange.migrateTokens (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2559-2595):
+	External calls:
+	- require(bool,string)(Token(tokenAddress).approve(newExchangeAddress,tokenAmount),Approve failed) (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2579-2588)
+	State variables written after the call(s):
+	- balances (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2591)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+WeiDex.takeAllOrRevert has external calls inside a loop:
+	- require(bool,string)(address(this).delegatecall(_methodId,_orderAddresses[index],_orderValues[index],_takerSellAmount[index],_v[index],_r[index],_s[index]),Method call failed) (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#3287-3309)
+WeiDex.takeAllPossible has external calls inside a loop:
+	- address(this).delegatecall(_methodId,_orderAddresses[index],_orderValues[index],_takerSellAmount[index],_v[index],_r[index],_s[index]) (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#3365-3385)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in ExchangeOffering.buyTokens (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2691-2791):
+	External calls:
+	- require(bool,string)(isUserWhitelisted(_project,contributor),User is not whitelisted) (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2713-2725)
+	- bonus = getBonusFactor(_project,weiAmount) (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2739-2743)
+	- require(bool,string)(Token(_project).transfer(contributor,totalPurchasedTokens),Transfer failed) (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2763-2771)
+	State variables written after the call(s):
+	- balances (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2781-2783)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+SafeOldERC20.checkSuccess uses assembly (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#187-245)
+	- /sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#199-245
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+IUpgradableExchange.VERSION should be constant (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#399-403)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#93-115) should be declared external
+Token.getBonusFactor (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#863-875) should be declared external
+Token.isUserWhitelisted (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#875-881) should be declared external
+DailyVolumeUpdater.setDailyVolumeCap (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#1770-1787) should be declared external
+DiscountTokenExchange.setDiscountToken (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#1893-1921) should be declared external
+ExchangeOffering.registerCrowdsale (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2617-2691) should be declared external
+ExchangeOffering.buyTokens (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2691-2791) should be declared external
+ExchangeOffering.withdrawWhenFinished (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2793-2845) should be declared external
+WeiDex.fallback (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#3161-3173) should be declared external
+WeiDex.takeSellOrder (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#3521-3529) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Low level call in WeiDex.takeAllOrRevert (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#3257-3309):
+	-require(bool,string)(address(this).delegatecall(_methodId,_orderAddresses[index],_orderValues[index],_takerSellAmount[index],_v[index],_r[index],_s[index]),Method call failed) /sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#3287-3309
+Low level call in WeiDex.takeAllPossible (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#3329-3385):
+	-address(this).delegatecall(_methodId,_orderAddresses[index],_orderValues[index],_takerSellAmount[index],_v[index],_r[index],_s[index]) /sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#3365-3385
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Parameter '_self' of CrowdsaleLib.isValid (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#305-311) is not in mixedCase
+Parameter '_self' of CrowdsaleLib.isOpened (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#339-343) is not in mixedCase
+Parameter '_wallet' of CrowdsaleLib.createCrowdsale (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#353-355) is not in mixedCase
+Parameter '_values' of CrowdsaleLib.createCrowdsale (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#355) is not in mixedCase
+Variable 'IUpgradableExchange.VERSION' (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#399-403) is not in mixedCase
+Parameter '_numerator' of Math.calculateRate (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#775) is not in mixedCase
+Parameter '_denominator' of Math.calculateRate (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#775) is not in mixedCase
+Parameter '_fee' of Math.calculateReferralFee (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#795) is not in mixedCase
+Parameter '_referralFeeRate' of Math.calculateReferralFee (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#795-797) is not in mixedCase
+Parameter '_etherAmount' of Math.calculateWdxFee (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#829) is not in mixedCase
+Parameter '_tokenRatio' of Math.calculateWdxFee (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#829-833) is not in mixedCase
+Parameter '_feeRate' of Math.calculateWdxFee (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#833) is not in mixedCase
+Parameter '_feeAccount' of Exchange. (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#919-921) is not in mixedCase
+Parameter '_feeRate' of Exchange. (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#923) is not in mixedCase
+Parameter '_feeRate' of Exchange.setFee (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#1033-1035) is not in mixedCase
+Parameter '_feeAccount' of Exchange.setFeeAccount (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#1051) is not in mixedCase
+Parameter '_beneficiary' of Exchange.depositEthersFor (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#1087-1089) is not in mixedCase
+Parameter '_tokenAddress' of Exchange.depositTokens (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#1123-1125) is not in mixedCase
+Parameter '_amount' of Exchange.depositTokens (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#1125-1127) is not in mixedCase
+Parameter '_tokenAddress' of Exchange.depositTokensFor (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#1179) is not in mixedCase
+Parameter '_amount' of Exchange.depositTokensFor (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#1179-1181) is not in mixedCase
+Parameter '_beneficiary' of Exchange.depositTokensFor (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#1181) is not in mixedCase
+Function 'Exchange._depositEthers' (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#1199-1213) is not in mixedCase
+Parameter '_beneficiary' of Exchange._depositEthers (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#1202-1205) is not in mixedCase
+Function 'Exchange._depositTokens' (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#1221-1249) is not in mixedCase
+Parameter '_tokenAddress' of Exchange._depositTokens (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#1223) is not in mixedCase
+Parameter '_amount' of Exchange._depositTokens (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#1223) is not in mixedCase
+Parameter '_beneficiary' of Exchange._depositTokens (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#1225) is not in mixedCase
+Parameter '_amount' of Exchange.withdrawEthers (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#1266-1271) is not in mixedCase
+Parameter '_tokenAddress' of Exchange.withdrawTokens (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#1317-1321) is not in mixedCase
+Parameter '_amount' of Exchange.withdrawTokens (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#1321) is not in mixedCase
+Parameter '_tokenAddress' of Exchange.transfer (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#1373-1377) is not in mixedCase
+Parameter '_to' of Exchange.transfer (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#1377) is not in mixedCase
+Parameter '_amount' of Exchange.transfer (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#1377) is not in mixedCase
+Parameter '_order' of Exchange.takeOrder (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#1417) is not in mixedCase
+Parameter '_takerSellAmount' of Exchange.takeOrder (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#1417) is not in mixedCase
+Parameter '_v' of Exchange.takeOrder (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#1417) is not in mixedCase
+Parameter '_r' of Exchange.takeOrder (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#1417) is not in mixedCase
+Parameter '_s' of Exchange.takeOrder (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#1417-1421) is not in mixedCase
+Parameter '_orderAddresses' of Exchange.cancelOrder (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#1569-1571) is not in mixedCase
+Parameter '_orderValues' of Exchange.cancelOrder (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#1571-1573) is not in mixedCase
+Parameter '_v' of Exchange.cancelOrder (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#1573) is not in mixedCase
+Parameter '_r' of Exchange.cancelOrder (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#1575) is not in mixedCase
+Parameter '_s' of Exchange.cancelOrder (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#1575-1577) is not in mixedCase
+Parameter '_orderAddresses' of Exchange.cancelMultipleOrders (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#1681) is not in mixedCase
+Parameter '_orderValues' of Exchange.cancelMultipleOrders (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#1681-1683) is not in mixedCase
+Parameter '_v' of Exchange.cancelMultipleOrders (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#1683) is not in mixedCase
+Parameter '_r' of Exchange.cancelMultipleOrders (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#1683-1685) is not in mixedCase
+Parameter '_s' of Exchange.cancelMultipleOrders (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#1687) is not in mixedCase
+Parameter '_dailyVolumeCap' of DailyVolumeUpdater.setDailyVolumeCap (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#1773) is not in mixedCase
+Parameter '_volume' of DailyVolumeUpdater.updateVolume (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#1791-1795) is not in mixedCase
+Parameter '_discountTokenAddress' of DiscountTokenExchange. (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#1867-1869) is not in mixedCase
+Parameter '_discountTokenRatio' of DiscountTokenExchange. (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#1869) is not in mixedCase
+Parameter '_discountTokenAddress' of DiscountTokenExchange.setDiscountToken (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#1895-1899) is not in mixedCase
+Parameter '_discountTokenRatio' of DiscountTokenExchange.setDiscountToken (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#1900-1903) is not in mixedCase
+Parameter '_minimumTokenAmountForUpdate' of DiscountTokenExchange.setDiscountToken (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#1903-1904) is not in mixedCase
+Parameter '_etherAmount' of DiscountTokenExchange.updateTokenRatio (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#1935) is not in mixedCase
+Parameter '_tokenAmount' of DiscountTokenExchange.updateTokenRatio (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#1935) is not in mixedCase
+Parameter '_minimumTokenAmountForUpdate' of DiscountTokenExchange.setMinimumTokenAmountForUpdate (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#1999-2001) is not in mixedCase
+Parameter '_orderAddresses' of DiscountTokenExchange.takeSellTokenOrder (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2053-2055) is not in mixedCase
+Parameter '_orderValues' of DiscountTokenExchange.takeSellTokenOrder (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2055) is not in mixedCase
+Parameter '_takerSellAmount' of DiscountTokenExchange.takeSellTokenOrder (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2059-2063) is not in mixedCase
+Parameter '_v' of DiscountTokenExchange.takeSellTokenOrder (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2063-2064) is not in mixedCase
+Parameter '_r' of DiscountTokenExchange.takeSellTokenOrder (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2067) is not in mixedCase
+Parameter '_s' of DiscountTokenExchange.takeSellTokenOrder (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2067-2071) is not in mixedCase
+Parameter '_orderAddresses' of DiscountTokenExchange.takeBuyTokenOrder (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2177-2179) is not in mixedCase
+Parameter '_orderValues' of DiscountTokenExchange.takeBuyTokenOrder (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2181-2185) is not in mixedCase
+Parameter '_takerSellAmount' of DiscountTokenExchange.takeBuyTokenOrder (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2185-2189) is not in mixedCase
+Parameter '_v' of DiscountTokenExchange.takeBuyTokenOrder (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2191) is not in mixedCase
+Parameter '_r' of DiscountTokenExchange.takeBuyTokenOrder (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2191) is not in mixedCase
+Parameter '_s' of DiscountTokenExchange.takeBuyTokenOrder (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2193) is not in mixedCase
+Parameter '_referralFeeRate' of ReferralExchange. (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2235) is not in mixedCase
+Parameter '_referrer' of ReferralExchange.depositEthers (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2284-2285) is not in mixedCase
+Parameter '_tokenAddress' of ReferralExchange.depositTokens (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2325) is not in mixedCase
+Parameter '_amount' of ReferralExchange.depositTokens (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2327) is not in mixedCase
+Parameter '_referrer' of ReferralExchange.depositTokens (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2327) is not in mixedCase
+Parameter '_referralFeeRate' of ReferralExchange.setReferralFee (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2375) is not in mixedCase
+Parameter '_user' of ReferralExchange.getReferrer (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2397) is not in mixedCase
+Parameter '_newExchangeAddress' of UpgradableExchange.setNewExchangeAddress (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2441) is not in mixedCase
+Parameter '_tokens' of UpgradableExchange.migrateFunds (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2493) is not in mixedCase
+Parameter '_tokens' of UpgradableExchange.migrateTokens (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2561-2565) is not in mixedCase
+Parameter '_project' of ExchangeOffering.registerCrowdsale (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2621) is not in mixedCase
+Parameter '_projectWallet' of ExchangeOffering.registerCrowdsale (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2621-2625) is not in mixedCase
+Parameter '_values' of ExchangeOffering.registerCrowdsale (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2627) is not in mixedCase
+Parameter '_project' of ExchangeOffering.buyTokens (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2691-2693) is not in mixedCase
+Parameter '_project' of ExchangeOffering.withdrawWhenFinished (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2799) is not in mixedCase
+Parameter '_project' of ExchangeOffering.saleOpen (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2846-2847) is not in mixedCase
+Parameter '_project' of ExchangeOffering.getBonusFactor (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2857) is not in mixedCase
+Parameter '_weiAmount' of ExchangeOffering.getBonusFactor (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2857) is not in mixedCase
+Parameter '_project' of ExchangeOffering.isUserWhitelisted (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2865) is not in mixedCase
+Parameter '_user' of ExchangeOffering.isUserWhitelisted (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2865) is not in mixedCase
+Parameter '_project' of ExchangeOffering.validContribution (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2879-2881) is not in mixedCase
+Parameter '_user' of ExchangeOffering.validContribution (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2883) is not in mixedCase
+Parameter '_weiAmount' of ExchangeOffering.validContribution (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2883) is not in mixedCase
+Parameter '_tokenAddress' of OldERC20ExchangeSupport.depositOldTokens (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2963-2967) is not in mixedCase
+Parameter '_amount' of OldERC20ExchangeSupport.depositOldTokens (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2967) is not in mixedCase
+Parameter '_tokenAddress' of OldERC20ExchangeSupport.depositOldTokens (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2995-2997) is not in mixedCase
+Parameter '_amount' of OldERC20ExchangeSupport.depositOldTokens (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2997) is not in mixedCase
+Parameter '_referrer' of OldERC20ExchangeSupport.depositOldTokens (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#2999) is not in mixedCase
+Parameter '_tokenAddress' of OldERC20ExchangeSupport.depositOldTokensFor (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#3059) is not in mixedCase
+Parameter '_amount' of OldERC20ExchangeSupport.depositOldTokensFor (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#3059) is not in mixedCase
+Parameter '_beneficiary' of OldERC20ExchangeSupport.depositOldTokensFor (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#3059) is not in mixedCase
+Parameter '_tokenAddress' of OldERC20ExchangeSupport.withdrawOldTokens (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#3095) is not in mixedCase
+Parameter '_amount' of OldERC20ExchangeSupport.withdrawOldTokens (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#3097-3101) is not in mixedCase
+Function 'OldERC20ExchangeSupport._depositOldTokens' (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#3137-3147) is not in mixedCase
+Parameter '_tokenAddress' of OldERC20ExchangeSupport._depositOldTokens (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#3139-3141) is not in mixedCase
+Parameter '_amount' of OldERC20ExchangeSupport._depositOldTokens (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#3141) is not in mixedCase
+Parameter '_beneficiary' of OldERC20ExchangeSupport._depositOldTokens (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#3141) is not in mixedCase
+Parameter '_methodId' of WeiDex.allowOrRestrictMethod (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#3222-3223) is not in mixedCase
+Parameter '_allowed' of WeiDex.allowOrRestrictMethod (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#3223) is not in mixedCase
+Parameter '_orderAddresses' of WeiDex.takeAllOrRevert (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#3263) is not in mixedCase
+Parameter '_orderValues' of WeiDex.takeAllOrRevert (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#3265) is not in mixedCase
+Parameter '_takerSellAmount' of WeiDex.takeAllOrRevert (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#3265-3271) is not in mixedCase
+Parameter '_v' of WeiDex.takeAllOrRevert (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#3271) is not in mixedCase
+Parameter '_r' of WeiDex.takeAllOrRevert (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#3271) is not in mixedCase
+Parameter '_s' of WeiDex.takeAllOrRevert (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#3271) is not in mixedCase
+Parameter '_methodId' of WeiDex.takeAllOrRevert (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#3271-3273) is not in mixedCase
+Parameter '_orderAddresses' of WeiDex.takeAllPossible (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#3331-3333) is not in mixedCase
+Parameter '_orderValues' of WeiDex.takeAllPossible (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#3335-3337) is not in mixedCase
+Parameter '_takerSellAmount' of WeiDex.takeAllPossible (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#3339-3343) is not in mixedCase
+Parameter '_v' of WeiDex.takeAllPossible (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#3343-3347) is not in mixedCase
+Parameter '_r' of WeiDex.takeAllPossible (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#3347-3349) is not in mixedCase
+Parameter '_s' of WeiDex.takeAllPossible (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#3349) is not in mixedCase
+Parameter '_methodId' of WeiDex.takeAllPossible (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#3351) is not in mixedCase
+Parameter '_orderAddresses' of WeiDex.takeBuyOrder (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#3435) is not in mixedCase
+Parameter '_orderValues' of WeiDex.takeBuyOrder (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#3437) is not in mixedCase
+Parameter '_takerSellAmount' of WeiDex.takeBuyOrder (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#3437-3439) is not in mixedCase
+Parameter '_v' of WeiDex.takeBuyOrder (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#3439) is not in mixedCase
+Parameter '_r' of WeiDex.takeBuyOrder (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#3439) is not in mixedCase
+Parameter '_s' of WeiDex.takeBuyOrder (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#3441) is not in mixedCase
+Parameter '_orderAddresses' of WeiDex.takeSellOrder (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#3523-3525) is not in mixedCase
+Parameter '_orderValues' of WeiDex.takeSellOrder (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#3525) is not in mixedCase
+Parameter '_takerSellAmount' of WeiDex.takeSellOrder (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol#3525-3526) is not in mixedCase
+Parameter '_v' of WeiDex.takeSellOrder (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol) is not in mixedCase
+Parameter '_r' of WeiDex.takeSellOrder (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol) is not in mixedCase
+Parameter '_s' of WeiDex.takeSellOrder (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol) is not in mixedCase
+Parameter '_maker' of WeiDex.takeFee (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol) is not in mixedCase
+Parameter '_taker' of WeiDex.takeFee (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol) is not in mixedCase
+Parameter '_tokenAddress' of WeiDex.takeFee (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol) is not in mixedCase
+Parameter '_tokenFulfilledAmount' of WeiDex.takeFee (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol) is not in mixedCase
+Parameter '_etherFulfilledAmount' of WeiDex.takeFee (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol) is not in mixedCase
+Parameter '_user' of WeiDex.takeFee (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol) is not in mixedCase
+Parameter '_tokenAddress' of WeiDex.takeFee (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol) is not in mixedCase
+Parameter '_tokenFeeAmount' of WeiDex.takeFee (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol) is not in mixedCase
+Parameter '_wdxFeeAmount' of WeiDex.takeFee (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol) is not in mixedCase
+Parameter '_user' of WeiDex.takeFee (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol) is not in mixedCase
+Parameter '_tokenAddress' of WeiDex.takeFee (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol) is not in mixedCase
+Parameter '_fullFee' of WeiDex.takeFee (/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xccd7ce9ec004bfbd5711245f917d6109813a909c.sol analyzed (17 contracts), 173 result(s) found

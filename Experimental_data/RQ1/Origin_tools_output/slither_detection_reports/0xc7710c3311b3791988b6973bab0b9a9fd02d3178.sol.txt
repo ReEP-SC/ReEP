@@ -1,0 +1,131 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol:
+/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol:6:1: Warning: Experimental features are turned on. Do not use experimental features on live deployments.
+pragma experimental ABIEncoderV2;
+^-------------------------------^
+/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol:690:5: Warning: Function state mutability can be restricted to view
+    function depositTokenStoredBalance() internal returns (uint256) {
+    ^ (Relevant source part starts here and spans across multiple lines).
+
+INFO:Detectors:[93m
+UniversalBasicIncome.claim (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#745-768) uses a dangerous strict equality:
+	- claimTimes[msg.sender] == 0
+UniversalBasicIncome.claim (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#745-768) uses a dangerous strict equality:
+	- claimTimes[msg.sender] == 0
+UniversalBasicIncome.claimableBalance (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol) uses a dangerous strict equality:
+	- claimTimes[human] == 0
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Reentrancy in UniversalBasicIncome.claim (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#745-768):
+	External calls:
+	- require(bool,string)(registry.isHuman(msg.sender),UniversalBasicIncome::claim: You must be on the Humanity registry to claim income) (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#748-750)
+	- balance = bank.excessDepositTokens() (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#762-763)
+	- bank.withdrawInterest(msg.sender,actualIncome) (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol)
+	State variables written after the call(s):
+	- claimTimes (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+CompoundPool.withdrawInterest (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#642-652) does not use the value returned by external calls:
+	-depositToken.transfer(_to,_amount) (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#651)
+CompoundPool._approveDepositToken (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#716-725) does not use the value returned by external calls:
+	-depositToken.approve(address(compoundToken),uint256(0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff)) (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#721-724)
+UniversalBasicIncome.claim (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#745-768) does not use the value returned by external calls:
+	-bank.withdrawInterest(msg.sender,actualIncome) (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+ERC20Detailed.constructor.name (local variable @ /sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#209-211) shadows:
+	- ERC20Detailed.name (function @ /sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#219-224)
+ERC20Detailed.constructor.symbol (local variable @ /sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#211) shadows:
+	- ERC20Detailed.symbol (function @ /sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#225-226)
+ERC20Detailed.constructor.decimals (local variable @ /sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#211) shadows:
+	- ERC20Detailed.decimals (function @ /sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#244-245)
+CompoundPool.constructor._name (local variable @ /sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#605) shadows:
+	- ERC20Detailed._name (state variable @ /sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#199)
+CompoundPool.constructor._symbol (local variable @ /sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#606) shadows:
+	- ERC20Detailed._symbol (state variable @ /sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#199-200)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+Reentrancy in CompoundPool.deposit (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#662-670):
+	External calls:
+	- require(bool,string)(depositToken.transferFrom(msg.sender,address(this),_amount),CompoundPool::deposit: Transfer failed) (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#664-666)
+	- _approveDepositToken(_amount) (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#666)
+	- require(bool,string)(compoundToken.mint(_amount) == 0,CompoundPool::deposit: Compound mint failed) (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#666-670)
+	State variables written after the call(s):
+	- _balances (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#670)
+	- _totalSupply (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#670)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+UniversalBasicIncome.claim (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#745-768) uses timestamp for comparisons
+	Dangerous comparisons:
+	- balance < income (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#764-768)
+	- claimTimes[msg.sender] == 0 (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#756-762)
+UniversalBasicIncome.claimableBalance (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol) uses timestamp for comparisons
+	Dangerous comparisons:
+	- claimTimes[human] == 0 (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol)
+	- balance < income (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+CompoundPool.governance should be constant (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#586-587)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Different versions of Solidity is used in /sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol:
+	- Version used: ['ABIEncoderV2', '^0.5.0']
+	- /sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#5-6 declares pragma solidity^0.5.0
+	- /sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#6-8 declares pragma experimentalABIEncoderV2
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#different-pragma-directives-are-used[0m
+INFO:Detectors:[92m
+ERC20Detailed.name (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#219-224) should be declared external
+ERC20Detailed.symbol (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#225-226) should be declared external
+ERC20Detailed.decimals (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#244-245) should be declared external
+ERC20.balanceOf (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#292-295) should be declared external
+IERC20.balanceOf (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#21-24) should be declared external
+IERC20.transfer (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#30-33) should be declared external
+ERC20.transfer (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#302-311) should be declared external
+IERC20.allowance (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#39-42) should be declared external
+ERC20.allowance (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#313-319) should be declared external
+IERC20.approve (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#55-58) should be declared external
+ERC20.approve (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#322-326) should be declared external
+ERC20.transferFrom (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#337-345) should be declared external
+IERC20.transferFrom (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#66-69) should be declared external
+ERC20.increaseAllowance (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#356-363) should be declared external
+ERC20.decreaseAllowance (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#375-383) should be declared external
+Ownable.owner (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#509-510) should be declared external
+Ownable.renounceOwnership (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#531-533) should be declared external
+Ownable.transferOwnership (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#540-541) should be declared external
+CompoundPool.updateBeneficiary (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#633-635) should be declared external
+CompoundPool.withdrawInterest (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#642-652) should be declared external
+CompoundPool.deposit (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#662-670) should be declared external
+CompoundPool.withdraw (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#674-683) should be declared external
+CompoundPool.donate (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#687-694) should be declared external
+CompoundPool.excessDepositTokens (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#701-708) should be declared external
+IHumanityRegistry.isHuman (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#728) should be declared external
+UniversalBasicIncome.claim (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#745-768) should be declared external
+UniversalBasicIncome.claimableBalance (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol:
+	- pragma solidity^0.5.0 (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#5-6): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'ERC20._transfer' (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#392-405) is not in mixedCase
+Function 'ERC20._mint' (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#415-424) is not in mixedCase
+Function 'ERC20._burn' (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#434-444) is not in mixedCase
+Function 'ERC20._approve' (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#454-466) is not in mixedCase
+Function 'ERC20._burnFrom' (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#470-476) is not in mixedCase
+Function 'Ownable._transferOwnership' (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#543-546) is not in mixedCase
+Parameter '_comptroller' of CompoundPool. (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#606) is not in mixedCase
+Parameter '_compoundToken' of CompoundPool. (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#607-610) is not in mixedCase
+Parameter '_depositToken' of CompoundPool. (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#610) is not in mixedCase
+Parameter '_beneficiary' of CompoundPool. (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#610-611) is not in mixedCase
+Parameter '_newBeneficiary' of CompoundPool.updateBeneficiary (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#633) is not in mixedCase
+Parameter '_to' of CompoundPool.withdrawInterest (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#642) is not in mixedCase
+Parameter '_amount' of CompoundPool.withdrawInterest (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#642-643) is not in mixedCase
+Parameter '_amount' of CompoundPool.deposit (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#662-664) is not in mixedCase
+Parameter '_amount' of CompoundPool.withdraw (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#674) is not in mixedCase
+Parameter '_amount' of CompoundPool.donate (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#687) is not in mixedCase
+Function 'CompoundPool._approveDepositToken' (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#716-725) is not in mixedCase
+Parameter '_minimum' of CompoundPool._approveDepositToken (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#717) is not in mixedCase
+Parameter '_registry' of UniversalBasicIncome. (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#741-742) is not in mixedCase
+Parameter '_dai' of UniversalBasicIncome. (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#742) is not in mixedCase
+Parameter '_bank' of UniversalBasicIncome. (/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol#742) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xc7710c3311b3791988b6973bab0b9a9fd02d3178.sol analyzed (10 contracts), 65 result(s) found

@@ -1,0 +1,59 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x8ea439cc99edad03c6eeb838023066a5740ed2f0.sol:
+/sb/0x8ea439cc99edad03c6eeb838023066a5740ed2f0.sol:139:3: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+  function Ownable() public {
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x8ea439cc99edad03c6eeb838023066a5740ed2f0.sol:341:3: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+  function TokenVesting(address _beneficiary, uint256 _start, uint256 _cliff, uint256 _duration, bool _revocable) public {
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x8ea439cc99edad03c6eeb838023066a5740ed2f0.sol:503:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function MetadiumVesting(address _beneficiary, uint256 _start, uint256 _cliff, uint256 _duration, bool _revocable) public 
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x8ea439cc99edad03c6eeb838023066a5740ed2f0.sol:175:5: Warning: Invoking events without "emit" prefix is deprecated.
+    OwnershipTransferred(owner, newOwner);
+    ^-----------------------------------^
+/sb/0x8ea439cc99edad03c6eeb838023066a5740ed2f0.sol:389:5: Warning: Invoking events without "emit" prefix is deprecated.
+    Released(unreleased);
+    ^------------------^
+/sb/0x8ea439cc99edad03c6eeb838023066a5740ed2f0.sol:431:5: Warning: Invoking events without "emit" prefix is deprecated.
+    Revoked();
+    ^-------^
+
+INFO:Detectors:[93m
+Reentrancy in TokenVesting.release (/sb/0x8ea439cc99edad03c6eeb838023066a5740ed2f0.sol#399-417):
+	External calls:
+	- unreleased = releasableAmount(token) (/sb/0x8ea439cc99edad03c6eeb838023066a5740ed2f0.sol#399-401)
+	State variables written after the call(s):
+	- released (/sb/0x8ea439cc99edad03c6eeb838023066a5740ed2f0.sol#405-408)
+Reentrancy in TokenVesting.revoke (/sb/0x8ea439cc99edad03c6eeb838023066a5740ed2f0.sol#439-461):
+	External calls:
+	- balance = token.balanceOf(this) (/sb/0x8ea439cc99edad03c6eeb838023066a5740ed2f0.sol#445)
+	- unreleased = releasableAmount(token) (/sb/0x8ea439cc99edad03c6eeb838023066a5740ed2f0.sol#445-447)
+	State variables written after the call(s):
+	- revoked (/sb/0x8ea439cc99edad03c6eeb838023066a5740ed2f0.sol#455)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0x8ea439cc99edad03c6eeb838023066a5740ed2f0.sol#179-201) should be declared external
+ERC20Basic.totalSupply (/sb/0x8ea439cc99edad03c6eeb838023066a5740ed2f0.sol#207) should be declared external
+ERC20Basic.balanceOf (/sb/0x8ea439cc99edad03c6eeb838023066a5740ed2f0.sol#207-215) should be declared external
+ERC20Basic.transfer (/sb/0x8ea439cc99edad03c6eeb838023066a5740ed2f0.sol#215-219) should be declared external
+ERC20.allowance (/sb/0x8ea439cc99edad03c6eeb838023066a5740ed2f0.sol#225-227) should be declared external
+ERC20.transferFrom (/sb/0x8ea439cc99edad03c6eeb838023066a5740ed2f0.sol#227-237) should be declared external
+ERC20.approve (/sb/0x8ea439cc99edad03c6eeb838023066a5740ed2f0.sol#237-239) should be declared external
+TokenVesting.release (/sb/0x8ea439cc99edad03c6eeb838023066a5740ed2f0.sol#399-417) should be declared external
+TokenVesting.revoke (/sb/0x8ea439cc99edad03c6eeb838023066a5740ed2f0.sol#439-461) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x8ea439cc99edad03c6eeb838023066a5740ed2f0.sol:
+	- pragma solidity^0.4.18 (/sb/0x8ea439cc99edad03c6eeb838023066a5740ed2f0.sol#9-14): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'Ownable.Ownable' (/sb/0x8ea439cc99edad03c6eeb838023066a5740ed2f0.sol#151-155) is not in mixedCase
+Function 'TokenVesting.TokenVesting' (/sb/0x8ea439cc99edad03c6eeb838023066a5740ed2f0.sol#357-385) is not in mixedCase
+Parameter '_beneficiary' of TokenVesting.TokenVesting (/sb/0x8ea439cc99edad03c6eeb838023066a5740ed2f0.sol#365) is not in mixedCase
+Parameter '_start' of TokenVesting.TokenVesting (/sb/0x8ea439cc99edad03c6eeb838023066a5740ed2f0.sol#365) is not in mixedCase
+Parameter '_cliff' of TokenVesting.TokenVesting (/sb/0x8ea439cc99edad03c6eeb838023066a5740ed2f0.sol#365-367) is not in mixedCase
+Parameter '_duration' of TokenVesting.TokenVesting (/sb/0x8ea439cc99edad03c6eeb838023066a5740ed2f0.sol#367) is not in mixedCase
+Parameter '_revocable' of TokenVesting.TokenVesting (/sb/0x8ea439cc99edad03c6eeb838023066a5740ed2f0.sol#367) is not in mixedCase
+Function 'MetadiumVesting.MetadiumVesting' (/sb/0x8ea439cc99edad03c6eeb838023066a5740ed2f0.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x8ea439cc99edad03c6eeb838023066a5740ed2f0.sol analyzed (7 contracts), 20 result(s) found

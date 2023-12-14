@@ -1,0 +1,118 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol:
+/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol:9:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function Controlled() public { controller = msg.sender;}
+    ^------------------------------------------------------^
+/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol:67:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function Token(address _frozenReserveTeamWallet) public {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol:318:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function PreCrowdFunder(address _fundRecipient, Token _addressOfExchangeToken) public {
+    ^ (Relevant source part starts here and spans across multiple lines).
+
+INFO:Detectors:[91m
+Token.balances (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#57) is never initialized. It is used in:
+	- doTransfer (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#103-125)
+	- balanceOfAt (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#167-177)
+	- generateTokens (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#187-199)
+	- destroyTokens (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#199-212)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-state-variables[0m
+INFO:Detectors:[93m
+Token.isContract (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#253-259) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+Reentrancy in Token.approve (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#131-143):
+	External calls:
+	- require(bool)(TokenController(controller).onApprove(msg.sender,_spender,_amount)) (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#137-139)
+	State variables written after the call(s):
+	- allowed (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#142)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+PreCrowdFunder.investment (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#359-380) does not use the value returned by external calls:
+	-exchangeToken.generateTokens(msg.sender,tokenAmount) (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#366-369)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Token.getValueAt.min (local variable @ /sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#225-226) shadows:
+	- Token.min (function @ /sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#259-263)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+Reentrancy in PreCrowdFunder.investment (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#359-380):
+	External calls:
+	- exchangeToken.generateTokens(msg.sender,tokenAmount) (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#366-369)
+	State variables written after the call(s):
+	- state (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#377-380)
+	- tokensIssued (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#372)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Token.isContract uses assembly (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#253-259)
+	- /sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#258-259
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+Token.decimals should be constant (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#46-48)
+Token.name should be constant (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#45-46)
+Token.symbol should be constant (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#48-49)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Controlled.changeController (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#11-16) should be declared external
+TokenController.proxyPayment (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#20-22) should be declared external
+TokenController.onTransfer (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#22-24) should be declared external
+TokenController.onApprove (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#24-27) should be declared external
+ApproveAndCallFallBack.receiveApproval (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#31-34) should be declared external
+Token.transfer (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#78-89) should be declared external
+Token.transferFrom (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#89-103) should be declared external
+Token.allowance (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#144-148) should be declared external
+Token.approveAndCall (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#148-164) should be declared external
+Token.generateTokens (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#187-199) should be declared external
+Token.destroyTokens (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#199-212) should be declared external
+Token.enableTransfers (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#212-215) should be declared external
+Token.fallback (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#263-271) should be declared external
+PreCrowdFunder.startFundraising (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#336-342) should be declared external
+PreCrowdFunder.endFundraising (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#342-351) should be declared external
+PreCrowdFunder.freezeAccount (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#351-355) should be declared external
+PreCrowdFunder.removeContract (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol) should be declared external
+PreCrowdFunder.fallback (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol:
+	- pragma solidity^0.4.21 (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#2-3): it allows old versions
+	- pragma solidity^0.4.21 (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#17-19): it allows old versions
+	- pragma solidity^0.4.21 (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#30): it allows old versions
+	- pragma solidity^0.4.21 (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#42): it allows old versions
+	- pragma solidity^0.4.21 (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#283-284): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'Controlled.Controlled' (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#9-11) is not in mixedCase
+Parameter '_newController' of Controlled.changeController (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#11) is not in mixedCase
+Function 'Token.Token' (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#68-78) is not in mixedCase
+Parameter '_frozenReserveTeamWallet' of Token.Token (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#68-69) is not in mixedCase
+Parameter '_to' of Token.transfer (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#79) is not in mixedCase
+Parameter '_amount' of Token.transfer (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#79-81) is not in mixedCase
+Parameter '_from' of Token.transferFrom (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#90) is not in mixedCase
+Parameter '_to' of Token.transferFrom (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#90) is not in mixedCase
+Parameter '_amount' of Token.transferFrom (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#90-91) is not in mixedCase
+Parameter '_from' of Token.doTransfer (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#104) is not in mixedCase
+Parameter '_to' of Token.doTransfer (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#104) is not in mixedCase
+Parameter '_amount' of Token.doTransfer (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#104-105) is not in mixedCase
+Parameter '_owner' of Token.balanceOf (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#128) is not in mixedCase
+Parameter '_spender' of Token.approve (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#131) is not in mixedCase
+Parameter '_amount' of Token.approve (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#131) is not in mixedCase
+Parameter '_owner' of Token.allowance (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#146) is not in mixedCase
+Parameter '_spender' of Token.allowance (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#146) is not in mixedCase
+Parameter '_spender' of Token.approveAndCall (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#150) is not in mixedCase
+Parameter '_amount' of Token.approveAndCall (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#150) is not in mixedCase
+Parameter '_extraData' of Token.approveAndCall (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#150-151) is not in mixedCase
+Parameter '_owner' of Token.balanceOfAt (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#167-168) is not in mixedCase
+Parameter '_blockNumber' of Token.balanceOfAt (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#168) is not in mixedCase
+Parameter '_blockNumber' of Token.totalSupplyAt (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#178-180) is not in mixedCase
+Parameter '_owner' of Token.generateTokens (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#187-188) is not in mixedCase
+Parameter '_amount' of Token.generateTokens (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#188) is not in mixedCase
+Parameter '_owner' of Token.destroyTokens (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#199) is not in mixedCase
+Parameter '_amount' of Token.destroyTokens (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#199-200) is not in mixedCase
+Parameter '_transfersEnabled' of Token.enableTransfers (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#212-213) is not in mixedCase
+Parameter '_block' of Token.getValueAt (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#216) is not in mixedCase
+Parameter '_value' of Token.updateValueAtNow (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#236) is not in mixedCase
+Parameter '_addr' of Token.isContract (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#253) is not in mixedCase
+Function 'PreCrowdFunder.PreCrowdFunder' (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#325-336) is not in mixedCase
+Parameter '_fundRecipient' of PreCrowdFunder.PreCrowdFunder (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#326) is not in mixedCase
+Parameter '_addressOfExchangeToken' of PreCrowdFunder.PreCrowdFunder (/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol#326-329) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xca35885ddc8f0c6abe561a0e1dacc05a311cfb4e.sol analyzed (5 contracts), 61 result(s) found

@@ -1,0 +1,194 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol:
+/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol:236:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function TittyPurchase(address _wallet, address _boat) public {
+
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol:409:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function CTAuction(
+
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol:46:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Transfer(_from, _to);
+
+        ^------------------^
+/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol:91:9: Warning: Invoking events without "emit" prefix is deprecated.
+        AddAccessory(tittyId, newAccessoryId);
+
+        ^-----------------------------------^
+/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol:130:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Creation(
+
+        ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol:209:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Approval(msg.sender, _to, _tokenId);
+
+        ^---------------------------------^
+/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol:437:9: Warning: Invoking events without "emit" prefix is deprecated.
+        NewAuctionCreated(auctionId, _titty);
+
+        ^----------------------------------^
+/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol:475:9: Warning: Invoking events without "emit" prefix is deprecated.
+        HighestBidIncreased(_auction, msg.sender, msg.value);
+
+        ^--------------------------------------------------^
+/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol:494:9: Warning: Invoking events without "emit" prefix is deprecated.
+        BuyNow(msg.sender, msg.value);
+
+        ^---------------------------^
+/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol:536:9: Warning: Invoking events without "emit" prefix is deprecated.
+        AuctionCancel(_auction);
+
+        ^---------------------^
+/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol:555:9: Warning: Invoking events without "emit" prefix is deprecated.
+        AuctionEnded(auction.highestBidder, auction.highestBid);
+
+        ^-----------------------------------------------------^
+
+INFO:Detectors:[93m
+ERC721 (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#299-353) has incorrect ERC20 function interface(s):
+	-approve (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#307-309)
+	-transferFrom (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#309-311)
+	-transfer (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#311)
+TittyOwnership (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#353-479) has incorrect ERC20 function interface(s):
+	-approve (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#423-431)
+	-transferFrom (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#431-461)
+	-transfer (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#461-475)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[92m
+TittyPurchase.getATitty.name (local variable @ /sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#690-691) shadows:
+	- TittyOwnership.name (state variable @ /sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#361)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+Reentrancy in CTAuction.createAuction (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#859-901):
+	External calls:
+	- ownerAddress = tittyContract.ownerOf(_titty) (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#867-871)
+	State variables written after the call(s):
+	- Auctions (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#895-897)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+TittyOwnership.name should be constant (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#361)
+TittyOwnership.symbol should be constant (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#361)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+TittyBase.totalAccessories (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#197-207) should be declared external
+TittyBase.getAccessory (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#207-231) should be declared external
+ERC721.implementsERC721 (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#299-301) should be declared external
+TittyOwnership.implementsERC721 (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#363-369) should be declared external
+TittyOwnership.balanceOf (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#401-411) should be declared external
+ERC721.balanceOf (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#301-305) should be declared external
+TittyOwnership.ownerOf (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#411-422) should be declared external
+ERC721.ownerOf (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#305-307) should be declared external
+TittyOwnership.approve (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#423-431) should be declared external
+ERC721.approve (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#307-309) should be declared external
+ERC721.transfer (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#311) should be declared external
+TittyOwnership.transfer (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#461-475) should be declared external
+TittyPurchase.purchaseNew (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#497-519) should be declared external
+TittyPurchase.purchaseExistent (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#521-553) should be declared external
+TittyPurchase.purchaseAccessory (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#553-579) should be declared external
+TittyPurchase.getAmountOfTitties (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#579-585) should be declared external
+TittyPurchase.getLatestId (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#585-589) should be declared external
+TittyPurchase.getTittyByWpId (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#589-621) should be declared external
+TittyPurchase.belongsTo (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#621-631) should be declared external
+TittyPurchase.changePrice (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#631-639) should be declared external
+TittyPurchase.changeName (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#639-647) should be declared external
+TittyPurchase.makeItSellable (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#647-659) should be declared external
+TittyPurchase.getATitty (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#683-727) should be declared external
+CTAuction.createAuction (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#859-901) should be declared external
+CTAuction.getTittyOwner (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#901-913) should be declared external
+CTAuction.bid (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#923-977) should be declared external
+CTAuction.buyNow (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#981-1025) should be declared external
+CTAuction.withdraw (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#1027-1081) should be declared external
+CTAuction.auctionCancel (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#1081-1108) should be declared external
+CTAuction.auctionEnd (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#1111-1157) should be declared external
+CTAuction.getAuctionInfo (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol:
+	- pragma solidity^0.4.18 (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#1): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'TittyBase._transfer' (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#71-99) is not in mixedCase
+Parameter '_from' of TittyBase._transfer (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#71) is not in mixedCase
+Parameter '_to' of TittyBase._transfer (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#71-75) is not in mixedCase
+Parameter '_tittyId' of TittyBase._transfer (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#75) is not in mixedCase
+Function 'TittyBase._changeTittyPrice' (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#99-117) is not in mixedCase
+Parameter '_newPrice' of TittyBase._changeTittyPrice (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#101-103) is not in mixedCase
+Parameter '_tittyId' of TittyBase._changeTittyPrice (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#103) is not in mixedCase
+Function 'TittyBase._setTittyForSale' (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#117-135) is not in mixedCase
+Parameter '_forSale' of TittyBase._setTittyForSale (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#121) is not in mixedCase
+Parameter '_tittyId' of TittyBase._setTittyForSale (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#121) is not in mixedCase
+Function 'TittyBase._changeName' (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#138-153) is not in mixedCase
+Parameter '_name' of TittyBase._changeName (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#139) is not in mixedCase
+Parameter '_tittyId' of TittyBase._changeName (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#139) is not in mixedCase
+Parameter '_id' of TittyBase.addAccessory (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#153-154) is not in mixedCase
+Parameter '_name' of TittyBase.addAccessory (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#156-157) is not in mixedCase
+Parameter '_price' of TittyBase.addAccessory (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#157) is not in mixedCase
+Parameter '_tittyId' of TittyBase.totalAccessories (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#197-199) is not in mixedCase
+Parameter '_tittyId' of TittyBase.getAccessory (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#207-211) is not in mixedCase
+Parameter '_aId' of TittyBase.getAccessory (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#211) is not in mixedCase
+Parameter '_id' of TittyBase.createTitty (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#235) is not in mixedCase
+Parameter '_gender' of TittyBase.createTitty (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#235) is not in mixedCase
+Parameter '_price' of TittyBase.createTitty (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#235-237) is not in mixedCase
+Parameter '_owner' of TittyBase.createTitty (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#237-239) is not in mixedCase
+Parameter '_name' of TittyBase.createTitty (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#239) is not in mixedCase
+Variable 'TittyBase.Titties' (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#61) is not in mixedCase
+Variable 'TittyBase.Accessories' (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#63) is not in mixedCase
+Parameter '_owner' of TittyOwnership.balanceOf (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#403) is not in mixedCase
+Parameter '_tokenId' of TittyOwnership.ownerOf (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#411-413) is not in mixedCase
+Parameter '_to' of TittyOwnership.approve (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#423) is not in mixedCase
+Parameter '_tokenId' of TittyOwnership.approve (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#423) is not in mixedCase
+Parameter '_from' of TittyOwnership.transferFrom (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#437-439) is not in mixedCase
+Parameter '_to' of TittyOwnership.transferFrom (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#439) is not in mixedCase
+Parameter '_tokenId' of TittyOwnership.transferFrom (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#439) is not in mixedCase
+Parameter '_to' of TittyOwnership.transfer (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#461) is not in mixedCase
+Parameter '_tokenId' of TittyOwnership.transfer (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#461-465) is not in mixedCase
+Function 'TittyOwnership._isOwner' (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#369-377) is not in mixedCase
+Parameter '_user' of TittyOwnership._isOwner (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#369) is not in mixedCase
+Parameter '_tittyId' of TittyOwnership._isOwner (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#369-371) is not in mixedCase
+Function 'TittyOwnership._approve' (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#377-385) is not in mixedCase
+Parameter '_tittyId' of TittyOwnership._approve (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#377-379) is not in mixedCase
+Parameter '_approved' of TittyOwnership._approve (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#379) is not in mixedCase
+Function 'TittyOwnership._approveFor' (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#385-393) is not in mixedCase
+Parameter '_user' of TittyOwnership._approveFor (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#385-387) is not in mixedCase
+Parameter '_tittyId' of TittyOwnership._approveFor (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#387) is not in mixedCase
+Function 'TittyPurchase.TittyPurchase' (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#485-497) is not in mixedCase
+Parameter '_wallet' of TittyPurchase.TittyPurchase (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#485) is not in mixedCase
+Parameter '_boat' of TittyPurchase.TittyPurchase (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#485) is not in mixedCase
+Parameter '_id' of TittyPurchase.purchaseNew (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#497) is not in mixedCase
+Parameter '_name' of TittyPurchase.purchaseNew (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#497) is not in mixedCase
+Parameter '_gender' of TittyPurchase.purchaseNew (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#497-499) is not in mixedCase
+Parameter '_price' of TittyPurchase.purchaseNew (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#499) is not in mixedCase
+Parameter '_tittyId' of TittyPurchase.purchaseExistent (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#523) is not in mixedCase
+Parameter '_tittyId' of TittyPurchase.purchaseAccessory (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#557-563) is not in mixedCase
+Parameter '_accId' of TittyPurchase.purchaseAccessory (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#563) is not in mixedCase
+Parameter '_name' of TittyPurchase.purchaseAccessory (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#563) is not in mixedCase
+Parameter '_price' of TittyPurchase.purchaseAccessory (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#563) is not in mixedCase
+Parameter '_owner' of TittyPurchase.getTittyByWpId (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#590-591) is not in mixedCase
+Parameter '_wpId' of TittyPurchase.getTittyByWpId (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#591) is not in mixedCase
+Parameter '_account' of TittyPurchase.belongsTo (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#621-623) is not in mixedCase
+Parameter '_tittyId' of TittyPurchase.belongsTo (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#623) is not in mixedCase
+Parameter '_price' of TittyPurchase.changePrice (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#631-637) is not in mixedCase
+Parameter '_tittyId' of TittyPurchase.changePrice (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#637) is not in mixedCase
+Parameter '_name' of TittyPurchase.changeName (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#641-645) is not in mixedCase
+Parameter '_tittyId' of TittyPurchase.changeName (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#645) is not in mixedCase
+Parameter '_tittyId' of TittyPurchase.makeItSellable (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#649-653) is not in mixedCase
+Parameter '_price' of TittyPurchase.calculateFee (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#663) is not in mixedCase
+Parameter '_price' of TittyPurchase.calculateBoatFee (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#673) is not in mixedCase
+Parameter '_tittyId' of TittyPurchase.getATitty (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#685) is not in mixedCase
+Function 'CTAuction.CTAuction' (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#843-859) is not in mixedCase
+Parameter '_tittyPurchaseAddress' of CTAuction.CTAuction (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#843-845) is not in mixedCase
+Parameter '_wallet' of CTAuction.CTAuction (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#845) is not in mixedCase
+Parameter '_biddingTime' of CTAuction.createAuction (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#861-863) is not in mixedCase
+Parameter '_titty' of CTAuction.createAuction (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#863) is not in mixedCase
+Parameter '_minimumBid' of CTAuction.createAuction (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#863) is not in mixedCase
+Parameter '_buyNowPrice' of CTAuction.createAuction (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#864-865) is not in mixedCase
+Parameter '_titty' of CTAuction.getTittyOwner (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#905) is not in mixedCase
+Parameter '_auction' of CTAuction.bid (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#927) is not in mixedCase
+Parameter '_auction' of CTAuction.buyNow (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#981-983) is not in mixedCase
+Parameter '_auction' of CTAuction.auctionCancel (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#1081-1083) is not in mixedCase
+Parameter '_auction' of CTAuction.auctionEnd (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#1113-1115) is not in mixedCase
+Parameter '_auction' of CTAuction.getAuctionInfo (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol) is not in mixedCase
+Parameter '_price' of CTAuction.calculateFee (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol) is not in mixedCase
+Variable 'CTAuction.Auctions' (/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol#785) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xa0acc9fe716c39a68dafb8f10c75b1276b08a17c.sol analyzed (5 contracts), 120 result(s) found

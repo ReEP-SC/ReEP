@@ -1,0 +1,77 @@
+INFO:Detectors:[92m
+MultiTokenNetwork.allWalletBalances has external calls inside a loop:
+	- balances[i] = ERC20(_multitokens[i]).balanceOf(wallet) (/sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol#495-497)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in MultiTokenNetwork.addDeployer (/sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol#551-571):
+	External calls:
+	- require(bool,string)(deployer.owner() == address(this),addDeployer: first set MultiTokenNetwork as owner) (/sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol#559-561)
+	State variables written after the call(s):
+	- _deployers (/sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol#565-571)
+Reentrancy in MultiTokenNetwork.deploy (/sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol):
+	External calls:
+	- mtkn = _deployers[index].deploy(data) (/sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol)
+	State variables written after the call(s):
+	- _multitokens (/sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol)
+Reentrancy in MultiTokenNetwork.setDeployer (/sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol#571-579):
+	External calls:
+	- require(bool,string)(deployer.owner() == address(this),setDeployer: first set MultiTokenNetwork as owner) (/sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol#573-579)
+	State variables written after the call(s):
+	- _deployers (/sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+AbstractDeployer.deploy uses assembly (/sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol#327-353)
+	- /sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol#347-353
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+ERC20Basic.totalSupply (/sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol#29-31) should be declared external
+ERC20Basic.balanceOf (/sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol#31-33) should be declared external
+ERC20Basic.transfer (/sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol#33-35) should be declared external
+ERC20.allowance (/sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol#57-61) should be declared external
+ERC20.transferFrom (/sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol#61-67) should be declared external
+ERC20.approve (/sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol#67-73) should be declared external
+Ownable.renounceOwnership (/sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol#175-181) should be declared external
+Ownable.transferOwnership (/sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol#193-197) should be declared external
+Pausable.pause (/sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol#297-309) should be declared external
+Pausable.unpause (/sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol#315-319) should be declared external
+AbstractDeployer.title (/sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol#323-325) should be declared external
+IBasicMultiToken.tokensCount (/sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol#363-365) should be declared external
+IBasicMultiToken.tokens (/sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol#365-369) should be declared external
+IBasicMultiToken.bundleFirstTokens (/sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol#369-377) should be declared external
+IBasicMultiToken.bundle (/sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol#380-383) should be declared external
+IBasicMultiToken.unbundle (/sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol#385) should be declared external
+IBasicMultiToken.unbundleSome (/sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol#385-389) should be declared external
+IBasicMultiToken.disableBundling (/sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol#389-393) should be declared external
+IBasicMultiToken.enableBundling (/sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol#393) should be declared external
+IMultiToken.weights (/sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol#405-409) should be declared external
+IMultiToken.getReturn (/sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol#409-417) should be declared external
+IMultiToken.change (/sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol#417-423) should be declared external
+IMultiToken.disableChanges (/sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol#423) should be declared external
+MultiTokenNetwork.multitokensCount (/sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol#455-459) should be declared external
+MultiTokenNetwork.multitokens (/sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol#463-465) should be declared external
+MultiTokenNetwork.allMultitokens (/sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol#465-469) should be declared external
+MultiTokenNetwork.deployersCount (/sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol#469-479) should be declared external
+MultiTokenNetwork.deployers (/sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol#479-481) should be declared external
+MultiTokenNetwork.allWalletBalances (/sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol#481-499) should be declared external
+MultiTokenNetwork.deleteMultitoken (/sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol#499-519) should be declared external
+MultiTokenNetwork.deleteDeployer (/sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol#519-535) should be declared external
+MultiTokenNetwork.disableBundlingMultitoken (/sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol#536-539) should be declared external
+MultiTokenNetwork.enableBundlingMultitoken (/sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol#539-547) should be declared external
+MultiTokenNetwork.disableChangesMultitoken (/sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol#547-551) should be declared external
+MultiTokenNetwork.addDeployer (/sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol#551-571) should be declared external
+MultiTokenNetwork.setDeployer (/sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol#571-579) should be declared external
+MultiTokenNetwork.deploy (/sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol) should be declared external
+MultiTokenNetwork.makeCall (/sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Low level call in AbstractDeployer.deploy (/sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol#327-353):
+	-require(bool,string)(address(this).call(data),Arbitrary call failed) /sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol#343-345
+Low level call in MultiTokenNetwork.makeCall (/sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol):
+	-require(bool,string)(target.call.value(value)(data),Arbitrary call failed) /sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Parameter '_newOwner' of Ownable.transferOwnership (/sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol#193) is not in mixedCase
+Function 'Ownable._transferOwnership' (/sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol#211-223) is not in mixedCase
+Parameter '_newOwner' of Ownable._transferOwnership (/sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol#211) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xae269be192e253c643e4f316c9fd7d2c56f06053.sol analyzed (8 contracts), 48 result(s) found

@@ -1,0 +1,147 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol:
+/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol:11:1: Warning: Experimental features are turned on. Do not use experimental features on live deployments.
+pragma experimental ABIEncoderV2;
+^-------------------------------^
+/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol:1995:21: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+        orderHash = keccak256(
+                    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol:2019:24: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+        prefixedHash = keccak256(prefix, orderHash);
+                       ^--------------------------^
+/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol:1281:9: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+        bytes genericPayload,
+        ^------------------^
+/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol:1391:9: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+        bytes genericPayload,
+        ^------------------^
+/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol:129:5: Warning: Function state mutability can be restricted to pure
+    function fetchReturnData() internal returns (bool success){
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol:469:28: Warning: Function declared as view, but this expression (potentially) modifies the state and thus requires non-payable (the default) or payable.
+            let success := call(
+                           ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol:1157:24: Warning: Function declared as view, but this expression (potentially) modifies the state and thus requires non-payable (the default) or payable.
+            success := call(
+                       ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol:1241:24: Warning: Function declared as view, but this expression (potentially) modifies the state and thus requires non-payable (the default) or payable.
+            success := call(
+                       ^ (Relevant source part starts here and spans across multiple lines).
+
+INFO:Detectors:[93m
+Utils.getDecimals (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#457-523) is declared view but contains assembly code
+ExchangeHandler.getAmountToGive (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#1165-1237) is declared view but contains assembly code
+ExchangeHandler.staticExchangeChecks (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#1249-1325) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[92m
+ExchangeHandler.constructor.totlePrimary (local variable @ /sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#1133-1135) shadows:
+	- TotleControl.totlePrimary (state variable @ /sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#845)
+AirSwapHandler.constructor.selectorProvider (local variable @ /sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#1733-1735) shadows:
+	- ExchangeHandler.selectorProvider (state variable @ /sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#1098-1101)
+AirSwapHandler.constructor.totlePrimary (local variable @ /sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#1735) shadows:
+	- TotleControl.totlePrimary (state variable @ /sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#845)
+AirSwapHandler.constructor.errorReporter (local variable @ /sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#1735-1737) shadows:
+	- ExchangeHandler.errorReporter (state variable @ /sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#1101-1103)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+AirSwapHandler.staticExchangeChecks (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#1823-1857) uses timestamp for comparisons
+	Dangerous comparisons:
+	- (data.takerAddress != data.makerAddress && data.expiration >= block.timestamp && ecrecover(bytes32,uint8,bytes32,bytes32)(prefixedHash,data.v,data.r,data.s) == data.makerAddress && ! exchange.fills(orderHash) && data.takerAddress == address(this) && Utils.tokenAllowanceAndBalanceSet(data.makerAddress,data.makerToken,data.makerAmount,address(exchange))) (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#1831-1857)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+ERC20SafeTransfer.fetchReturnData uses assembly (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#135-167)
+	- /sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#141-167
+Utils.getDecimals uses assembly (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#457-523)
+	- /sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#475-523
+ExchangeHandler.getAmountToGive uses assembly (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#1165-1237)
+	- /sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#1171-1237
+ExchangeHandler.staticExchangeChecks uses assembly (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#1249-1325)
+	- /sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#1259-1325
+ExchangeHandler.performBuyOrder uses assembly (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#1345-1441)
+	- /sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#1361-1441
+ExchangeHandler.performSellOrder uses assembly (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#1461-1551)
+	- /sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#1471-1551
+AirSwapHandler.fallback uses assembly (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol)
+	- /sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+Different versions of Solidity is used in /sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol:
+	- Version used: ['0.4.25', 'ABIEncoderV2']
+	- /sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#9-11 declares pragma solidity0.4.25
+	- /sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#11-17 declares pragma experimentalABIEncoderV2
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#different-pragma-directives-are-used[0m
+INFO:Detectors:[92m
+ERC20.totalSupply (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#25-29) should be declared external
+ERC20.balanceOf (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#29-33) should be declared external
+ERC20.allowance (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#33-39) should be declared external
+ERC20.transfer (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#39-43) should be declared external
+ERC20.approve (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#43-49) should be declared external
+ERC20.transferFrom (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#49-55) should be declared external
+ERC20.decimals (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#59-63) should be declared external
+ErrorReporter.revertTx (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#227-235) should be declared external
+Ownable.renounceOwnership (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#799-803) should be declared external
+Ownable.transferOwnership (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#813-817) should be declared external
+Pausable.paused (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#1005-1007) should be declared external
+Pausable.pause (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#1035-1043) should be declared external
+Pausable.unpause (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#1053-1061) should be declared external
+SelectorProvider.getSelector (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#1085-1089) should be declared external
+AirSwapSelectorProvider.getSelector (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#1615-1677) should be declared external
+ExchangeHandler.getAmountToGive (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#1165-1237) should be declared external
+ExchangeHandler.staticExchangeChecks (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#1249-1325) should be declared external
+ExchangeHandler.performBuyOrder (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#1345-1441) should be declared external
+ExchangeHandler.performSellOrder (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#1461-1551) should be declared external
+AirSwapHandler.getAmountToGive (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#1789-1797) should be declared external
+AirSwapHandler.staticExchangeChecks (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#1823-1857) should be declared external
+AirSwapHandler.performBuyOrder (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#1885-1955) should be declared external
+AirSwapHandler.performSellOrder (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#1999-2089) should be declared external
+AirSwapHandler.fallback (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Low level call in ERC20SafeTransfer.safeTransfer (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#87-101):
+	-require(bool)(_tokenAddress.call(bytes4(keccak256()(transfer(address,uint256))),_to,_value)) /sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#92-101
+Low level call in ERC20SafeTransfer.safeTransferFrom (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#101-115):
+	-require(bool)(_tokenAddress.call(bytes4(keccak256()(transferFrom(address,address,uint256))),_from,_to,_value)) /sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#105-115
+Low level call in ERC20SafeTransfer.safeApprove (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#118-133):
+	-require(bool)(_tokenAddress.call(bytes4(keccak256()(approve(address,uint256))),_spender,_value)) /sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#123-131
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Parameter '_tokenAddress' of ERC20SafeTransfer.safeTransfer (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#88-91) is not in mixedCase
+Parameter '_to' of ERC20SafeTransfer.safeTransfer (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#91) is not in mixedCase
+Parameter '_value' of ERC20SafeTransfer.safeTransfer (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#91) is not in mixedCase
+Parameter '_tokenAddress' of ERC20SafeTransfer.safeTransferFrom (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#101-105) is not in mixedCase
+Parameter '_from' of ERC20SafeTransfer.safeTransferFrom (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#105) is not in mixedCase
+Parameter '_to' of ERC20SafeTransfer.safeTransferFrom (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#105) is not in mixedCase
+Parameter '_value' of ERC20SafeTransfer.safeTransferFrom (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#105) is not in mixedCase
+Parameter '_tokenAddress' of ERC20SafeTransfer.safeApprove (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#119) is not in mixedCase
+Parameter '_spender' of ERC20SafeTransfer.safeApprove (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#119) is not in mixedCase
+Parameter '_value' of ERC20SafeTransfer.safeApprove (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#119) is not in mixedCase
+Parameter '_a' of SafeMath.mul (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#281) is not in mixedCase
+Parameter '_b' of SafeMath.mul (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#281-283) is not in mixedCase
+Parameter '_a' of SafeMath.div (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#325) is not in mixedCase
+Parameter '_b' of SafeMath.div (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#325) is not in mixedCase
+Parameter '_a' of SafeMath.sub (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#357-359) is not in mixedCase
+Parameter '_b' of SafeMath.sub (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#361-365) is not in mixedCase
+Parameter '_a' of SafeMath.add (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#373-375) is not in mixedCase
+Parameter '_b' of SafeMath.add (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#375) is not in mixedCase
+Function 'Utils.max_qty' (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#425-427) is not in mixedCase
+Function 'Utils.max_rate' (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#427) is not in mixedCase
+Function 'Utils.max_decimals' (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#429-431) is not in mixedCase
+Function 'Utils.eth_decimals' (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#431-433) is not in mixedCase
+Function 'Utils.max_uint' (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#433-435) is not in mixedCase
+Parameter '_newOwner' of Ownable.transferOwnership (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#813) is not in mixedCase
+Function 'Ownable._transferOwnership' (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#827-833) is not in mixedCase
+Parameter '_newOwner' of Ownable._transferOwnership (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#829) is not in mixedCase
+Parameter '_totlePrimary' of TotleControl. (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#871) is not in mixedCase
+Parameter '_totlePrimary' of TotleControl.setTotle (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#881-887) is not in mixedCase
+Parameter '_token' of Withdrawable.withdrawToken (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#933-939) is not in mixedCase
+Parameter '_amount' of Withdrawable.withdrawToken (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#939) is not in mixedCase
+Parameter '_amount' of Withdrawable.withdrawETH (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#971) is not in mixedCase
+Constant 'SelectorProvider.getAmountToGive' (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#1063-1065) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'SelectorProvider.staticExchangeChecks' (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#1065-1071) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'SelectorProvider.performBuyOrder' (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#1071-1077) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'SelectorProvider.performSellOrder' (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#1079-1085) is not in UPPER_CASE_WITH_UNDERSCORES
+Parameter '_selectorProvider' of ExchangeHandler. (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#1131-1133) is not in mixedCase
+Parameter '_errorReporter' of ExchangeHandler. (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#1135) is not in mixedCase
+Parameter '_exchange' of AirSwapHandler. (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#1731-1733) is not in mixedCase
+Parameter '_weth' of AirSwapHandler. (/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol#1733) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xc4c713b1043c48808f72e375aa061f547835c1b8.sol analyzed (17 contracts), 82 result(s) found

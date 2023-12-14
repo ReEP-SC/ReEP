@@ -1,0 +1,83 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xac851fd3c969f24acb688abba158703279fe6856.sol:
+/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol:49:3: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+  function Ownable() public {
+  ^ (Relevant source part starts here and spans across multiple lines).
+
+INFO:Detectors:[93m
+ITVKey (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol#191-211) has incorrect ERC20 function interface(s):
+	-transferFrom (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol#191-199)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[93m
+Reentrancy in TVLottery.checkCollection (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol#413-451):
+	External calls:
+	- (id,typeId) = IArtefact(collection.tokens[i]).artefacts(elementsIds[i]) (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol#419-431)
+	- require(bool)(IArtefact(collection.tokens[i]).ownerOf(id) == msg.sender) (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol#441-445)
+	State variables written after the call(s):
+	- usedElements (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol#445)
+Reentrancy in TVLottery.getKey (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol#379-413):
+	External calls:
+	- checkCollection(collection,elementIds) (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol#405)
+	State variables written after the call(s):
+	- chests (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol#405-407)
+Reentrancy in TVLottery.onERC721Received (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol#329-361):
+	External calls:
+	- (chestId) = ITVKey(TVKeyAddress).keys(_tokenId) (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol#337-339)
+	- ITVKey(TVKeyAddress).transferFrom(this,lottery.bank,_tokenId) (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol#343)
+	State variables written after the call(s):
+	- chests (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol#351-353)
+	- lotteries (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol#345-351)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+TVLottery.onERC721Received (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol#329-361) does not use the value returned by external calls:
+	-ITVToken(TVTokenAddress).transferFrom(lottery.bank,_from,reward) (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol#355-357)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+TVLottery.checkCollection has external calls inside a loop:
+	- (id,typeId) = IArtefact(collection.tokens[i]).artefacts(elementsIds[i]) (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol#419-431)
+TVLottery.checkCollection has external calls inside a loop:
+	- require(bool)(IArtefact(collection.tokens[i]).ownerOf(id) == msg.sender) (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol#441-445)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol#83-103) should be declared external
+ERC721Receiver.onERC721Received (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol#161-165) should be declared external
+TVLottery.onERC721Received (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol#329-361) should be declared external
+ITVToken.balanceOf (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol#167) should be declared external
+ITVToken.transfer (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol#168-169) should be declared external
+ITVToken.transferFrom (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol#170-177) should be declared external
+ITVToken.safeTransfer (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol#179-185) should be declared external
+IArtefact.artefacts (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol#187) should be declared external
+IArtefact.ownerOf (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol#189-191) should be declared external
+ITVKey.transferFrom (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol#191-199) should be declared external
+ITVKey.keys (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol#199-202) should be declared external
+ITVKey.mint (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol#203-206) should be declared external
+ITVKey.burn (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol#209-211) should be declared external
+TVLottery.getKey (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol#379-413) should be declared external
+TVLottery.setCollection (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol#452-477) should be declared external
+TVLottery.getCollectionElementsCount (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol#477-485) should be declared external
+TVLottery.getCollectionElementByIndex (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol#485-501) should be declared external
+TVLottery.setChest (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol#501-521) should be declared external
+TVLottery.setLottery (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol#521-535) should be declared external
+TVLottery.getLotteryCollectionCount (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol#539-541) should be declared external
+TVLottery.getLotteryCollectionByIndex (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol#541-551) should be declared external
+TVLottery.changeLotteryBank (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol#555-565) should be declared external
+TVLottery.updateCollections (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol#565-577) should be declared external
+TVLottery.setLotteryActive (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol) should be declared external
+TVLottery.changeTVTokenAddress (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol) should be declared external
+TVLottery.changeTVKeyAddress (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol) should be declared external
+TVLottery.setManager (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Function 'Ownable.Ownable' (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol#51-59) is not in mixedCase
+Parameter '_from' of TVLottery.onERC721Received (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol#333) is not in mixedCase
+Parameter '_tokenId' of TVLottery.onERC721Received (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol#333) is not in mixedCase
+Parameter '' of TVLottery.onERC721Received (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol#333) is not in mixedCase
+Parameter '_TVTokenAddress' of TVLottery. (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol#317-320) is not in mixedCase
+Parameter '_TVKeyAddress' of TVLottery. (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol#321-323) is not in mixedCase
+Parameter '_manager' of TVLottery. (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol#323) is not in mixedCase
+Parameter '_collections' of TVLottery.setLottery (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol#523-525) is not in mixedCase
+Parameter '_collections' of TVLottery.updateCollections (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol#571) is not in mixedCase
+Parameter '_manager' of TVLottery.setManager (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol) is not in mixedCase
+Variable 'TVLottery.TVTokenAddress' (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol#219-221) is not in mixedCase
+Variable 'TVLottery.TVKeyAddress' (/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol#224-229) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xac851fd3c969f24acb688abba158703279fe6856.sol analyzed (6 contracts), 46 result(s) found

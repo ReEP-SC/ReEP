@@ -1,0 +1,80 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x8b8242ca04e571b3d03c85be81867cb9300306a6.sol:
+/sb/0x8b8242ca04e571b3d03c85be81867cb9300306a6.sol:58:37: Warning: This looks like an address but has an invalid checksum. If this is not used as an address, please prepend '00'. Correct checksummed address: '0x5dc5C66Eb90DD8C4BE285164cA9EA442fAa1C2E8'. For more information please see https://solidity.readthedocs.io/en/develop/types.html#address-literals
+	address public constant multisig = 0x5dc5c66eb90dd8c4be285164ca9ea442faa1c2e8;
+	                                   ^----------------------------------------^
+/sb/0x8b8242ca04e571b3d03c85be81867cb9300306a6.sol:59:28: Warning: This looks like an address but has an invalid checksum. If this is not used as an address, please prepend '00'. Correct checksummed address: '0x96Abf0420CffE408bA6Bb16699f6748BeF01b02b'. For more information please see https://solidity.readthedocs.io/en/develop/types.html#address-literals
+	address constant bounty = 0x96abf0420cffe408ba6bb16699f6748bef01b02b;
+	                          ^----------------------------------------^
+/sb/0x8b8242ca04e571b3d03c85be81867cb9300306a6.sol:60:38: Warning: This looks like an address but has an invalid checksum. If this is not used as an address, please prepend '00'. Correct checksummed address: '0x44eEDeecc2a6F5F763a18E8876576B29a856d03a'. For more information please see https://solidity.readthedocs.io/en/develop/types.html#address-literals
+	address constant privateInvestors = 0x44eedeecc2a6f5f763a18e8876576b29a856d03a;
+	                                    ^----------------------------------------^
+/sb/0x8b8242ca04e571b3d03c85be81867cb9300306a6.sol:61:23: Warning: This looks like an address but has an invalid checksum. If this is not used as an address, please prepend '00'. Correct checksummed address: '0x8e23cD7CE780e55Ace7309B398336443b408c9D4'. For more information please see https://solidity.readthedocs.io/en/develop/types.html#address-literals
+	address developers = 0x8e23cd7ce780e55ace7309b398336443b408c9d4;
+	                     ^----------------------------------------^
+
+INFO:Detectors:[93m
+Reentrancy in WhalesburgCrowdsale.distributionTokens (/sb/0x8b8242ca04e571b3d03c85be81867cb9300306a6.sol#106-114):
+	External calls:
+	- token.transferFromICO(bounty,bountyReserve * 1e18) (/sb/0x8b8242ca04e571b3d03c85be81867cb9300306a6.sol#107-108)
+	- token.transferFromICO(privateInvestors,privateSaleTokens * 1e18) (/sb/0x8b8242ca04e571b3d03c85be81867cb9300306a6.sol#108-109)
+	- token.transferFromICO(developers,developmentReserve * 1e18) (/sb/0x8b8242ca04e571b3d03c85be81867cb9300306a6.sol#109-113)
+	- token.transferFromICO(founders,foundersReserve * 1e18) (/sb/0x8b8242ca04e571b3d03c85be81867cb9300306a6.sol#113-114)
+	State variables written after the call(s):
+	- distribute (/sb/0x8b8242ca04e571b3d03c85be81867cb9300306a6.sol#114)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+WhalesburgCrowdsale.distributionTokens (/sb/0x8b8242ca04e571b3d03c85be81867cb9300306a6.sol#106-114) does not use the value returned by external calls:
+	-token.transferFromICO(bounty,bountyReserve * 1e18) (/sb/0x8b8242ca04e571b3d03c85be81867cb9300306a6.sol#107-108)
+	-token.transferFromICO(privateInvestors,privateSaleTokens * 1e18) (/sb/0x8b8242ca04e571b3d03c85be81867cb9300306a6.sol#108-109)
+	-token.transferFromICO(developers,developmentReserve * 1e18) (/sb/0x8b8242ca04e571b3d03c85be81867cb9300306a6.sol#109-113)
+	-token.transferFromICO(founders,foundersReserve * 1e18) (/sb/0x8b8242ca04e571b3d03c85be81867cb9300306a6.sol#113-114)
+WhalesburgCrowdsale.finalize (/sb/0x8b8242ca04e571b3d03c85be81867cb9300306a6.sol#140-147) does not use the value returned by external calls:
+	-token.transferFromICO(owner,token.balanceOf(this)) (/sb/0x8b8242ca04e571b3d03c85be81867cb9300306a6.sol#144-147)
+WhalesburgCrowdsale.sell (/sb/0x8b8242ca04e571b3d03c85be81867cb9300306a6.sol#182-188) does not use the value returned by external calls:
+	-token.transferFromICO(_investor,_amount) (/sb/0x8b8242ca04e571b3d03c85be81867cb9300306a6.sol#188)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in WhalesburgCrowdsale.fallback (/sb/0x8b8242ca04e571b3d03c85be81867cb9300306a6.sol#150-166):
+	External calls:
+	- sell(msg.sender,msg.value) (/sb/0x8b8242ca04e571b3d03c85be81867cb9300306a6.sol#157-161)
+	State variables written after the call(s):
+	- weisRaised (/sb/0x8b8242ca04e571b3d03c85be81867cb9300306a6.sol#161-162)
+Reentrancy in WhalesburgCrowdsale.sell (/sb/0x8b8242ca04e571b3d03c85be81867cb9300306a6.sol#182-188):
+	External calls:
+	- token.transferFromICO(_investor,_amount) (/sb/0x8b8242ca04e571b3d03c85be81867cb9300306a6.sol#188)
+	State variables written after the call(s):
+	- investors (/sb/0x8b8242ca04e571b3d03c85be81867cb9300306a6.sol)
+	- onChain (/sb/0x8b8242ca04e571b3d03c85be81867cb9300306a6.sol)
+	- tokenHolders (/sb/0x8b8242ca04e571b3d03c85be81867cb9300306a6.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+WhalesburgCrowdsale.endICO should be constant (/sb/0x8b8242ca04e571b3d03c85be81867cb9300306a6.sol#65-67)
+WhalesburgCrowdsale.startICO should be constant (/sb/0x8b8242ca04e571b3d03c85be81867cb9300306a6.sol#64-65)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+WhalesburgCrowdsale.setVestingAddress (/sb/0x8b8242ca04e571b3d03c85be81867cb9300306a6.sol#103-106) should be declared external
+WhalesburgCrowdsale.distributionTokens (/sb/0x8b8242ca04e571b3d03c85be81867cb9300306a6.sol#106-114) should be declared external
+WhalesburgCrowdsale.addManyAuthorizeToWhitelist (/sb/0x8b8242ca04e571b3d03c85be81867cb9300306a6.sol#122-129) should be declared external
+WhalesburgCrowdsale.revoke (/sb/0x8b8242ca04e571b3d03c85be81867cb9300306a6.sol#129-136) should be declared external
+WhalesburgCrowdsale.finalize (/sb/0x8b8242ca04e571b3d03c85be81867cb9300306a6.sol#140-147) should be declared external
+WhalesburgCrowdsale.fallback (/sb/0x8b8242ca04e571b3d03c85be81867cb9300306a6.sol#150-166) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_token' of WhalesburgCrowdsale. (/sb/0x8b8242ca04e571b3d03c85be81867cb9300306a6.sol#100) is not in mixedCase
+Parameter '_newDevPool' of WhalesburgCrowdsale.setVestingAddress (/sb/0x8b8242ca04e571b3d03c85be81867cb9300306a6.sol#104) is not in mixedCase
+Parameter '_beneficiary' of WhalesburgCrowdsale.authorize (/sb/0x8b8242ca04e571b3d03c85be81867cb9300306a6.sol#116-117) is not in mixedCase
+Parameter '_beneficiaries' of WhalesburgCrowdsale.addManyAuthorizeToWhitelist (/sb/0x8b8242ca04e571b3d03c85be81867cb9300306a6.sol#123-127) is not in mixedCase
+Parameter '_beneficiary' of WhalesburgCrowdsale.revoke (/sb/0x8b8242ca04e571b3d03c85be81867cb9300306a6.sol#132) is not in mixedCase
+Parameter '_investor' of WhalesburgCrowdsale.sell (/sb/0x8b8242ca04e571b3d03c85be81867cb9300306a6.sol#183) is not in mixedCase
+Constant 'WhalesburgCrowdsale.multisig' (/sb/0x8b8242ca04e571b3d03c85be81867cb9300306a6.sol#58-59) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'WhalesburgCrowdsale.bounty' (/sb/0x8b8242ca04e571b3d03c85be81867cb9300306a6.sol#59-60) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'WhalesburgCrowdsale.privateInvestors' (/sb/0x8b8242ca04e571b3d03c85be81867cb9300306a6.sol#60-61) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'WhalesburgCrowdsale.founders' (/sb/0x8b8242ca04e571b3d03c85be81867cb9300306a6.sol#62-64) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'WhalesburgCrowdsale.privateSaleTokens' (/sb/0x8b8242ca04e571b3d03c85be81867cb9300306a6.sol#68-69) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'WhalesburgCrowdsale.foundersReserve' (/sb/0x8b8242ca04e571b3d03c85be81867cb9300306a6.sol#69-70) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'WhalesburgCrowdsale.developmentReserve' (/sb/0x8b8242ca04e571b3d03c85be81867cb9300306a6.sol#70-72) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'WhalesburgCrowdsale.bountyReserve' (/sb/0x8b8242ca04e571b3d03c85be81867cb9300306a6.sol#72-74) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'WhalesburgCrowdsale.hardCap' (/sb/0x8b8242ca04e571b3d03c85be81867cb9300306a6.sol#74-78) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'WhalesburgCrowdsale.buyPrice' (/sb/0x8b8242ca04e571b3d03c85be81867cb9300306a6.sol#80-81) is not in UPPER_CASE_WITH_UNDERSCORES
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x8b8242ca04e571b3d03c85be81867cb9300306a6.sol analyzed (4 contracts), 29 result(s) found

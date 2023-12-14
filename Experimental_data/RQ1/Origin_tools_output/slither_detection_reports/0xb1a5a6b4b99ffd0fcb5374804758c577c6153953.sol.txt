@@ -1,0 +1,82 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xb1a5a6b4b99ffd0fcb5374804758c577c6153953.sol:
+/sb/0xb1a5a6b4b99ffd0fcb5374804758c577c6153953.sol:6:1: Warning: Experimental features are turned on. Do not use experimental features on live deployments.
+pragma experimental ABIEncoderV2;
+^-------------------------------^
+/sb/0xb1a5a6b4b99ffd0fcb5374804758c577c6153953.sol:487:49: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+  function brokerMarginGetTrader(address owner, bytes memory orderData) public returns (address) {
+                                                ^--------------------^
+/sb/0xb1a5a6b4b99ffd0fcb5374804758c577c6153953.sol:502:5: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    address owner, 
+    ^-----------^
+/sb/0xb1a5a6b4b99ffd0fcb5374804758c577c6153953.sol:504:5: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    address oldVersion, 
+    ^----------------^
+/sb/0xb1a5a6b4b99ffd0fcb5374804758c577c6153953.sol:505:5: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    bytes calldata additionalData
+    ^---------------------------^
+
+INFO:Detectors:[93m
+IERC20 (/sb/0xb1a5a6b4b99ffd0fcb5374804758c577c6153953.sol#9-25) has incorrect ERC20 function interface(s):
+	-transfer (/sb/0xb1a5a6b4b99ffd0fcb5374804758c577c6153953.sol#19-20)
+	-transferFrom (/sb/0xb1a5a6b4b99ffd0fcb5374804758c577c6153953.sol#20-21)
+	-approve (/sb/0xb1a5a6b4b99ffd0fcb5374804758c577c6153953.sol#21-25)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[93m
+DepositContractHelper.transferToken (/sb/0xb1a5a6b4b99ffd0fcb5374804758c577c6153953.sol#312-316) does not use the value returned by external calls:
+	-self.perform(token,transfer(address,uint256),abi.encode(recipient,amount),0) (/sb/0xb1a5a6b4b99ffd0fcb5374804758c577c6153953.sol#315-316)
+DepositContractHelper.transferEth (/sb/0xb1a5a6b4b99ffd0fcb5374804758c577c6153953.sol#316-320) does not use the value returned by external calls:
+	-self.perform(recipient,,abi.encode(),amount) (/sb/0xb1a5a6b4b99ffd0fcb5374804758c577c6153953.sol#319-320)
+DepositContractHelper.approveToken (/sb/0xb1a5a6b4b99ffd0fcb5374804758c577c6153953.sol#320-325) does not use the value returned by external calls:
+	-self.perform(token,approve(address,uint256),abi.encode(broker,amount),0) (/sb/0xb1a5a6b4b99ffd0fcb5374804758c577c6153953.sol#323-324)
+DepositContractHelper.wrapEth (/sb/0xb1a5a6b4b99ffd0fcb5374804758c577c6153953.sol#327-329) does not use the value returned by external calls:
+	-self.perform(wethToken,deposit(),abi.encode(),amount) (/sb/0xb1a5a6b4b99ffd0fcb5374804758c577c6153953.sol#327-329)
+DepositContractHelper.unwrapWeth (/sb/0xb1a5a6b4b99ffd0fcb5374804758c577c6153953.sol#329-331) does not use the value returned by external calls:
+	-self.perform(wethToken,withdraw(uint256),abi.encode(amount),0) (/sb/0xb1a5a6b4b99ffd0fcb5374804758c577c6153953.sol#330-331)
+DepositContractHelper.setDydxOperator (/sb/0xb1a5a6b4b99ffd0fcb5374804758c577c6153953.sol#332-350) does not use the value returned by external calls:
+	-self.perform(dydxContract,setOperators((address,bool)[]),encodedParams,0) (/sb/0xb1a5a6b4b99ffd0fcb5374804758c577c6153953.sol#348-350)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+DolomiteDirectV1.brokerRequestAllowance has external calls inside a loop:
+	- depositAddress = registry.depositAddressOf(order.owner) (/sb/0xb1a5a6b4b99ffd0fcb5374804758c577c6153953.sol#469-473)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+DepositContract.owner should be constant (/sb/0xb1a5a6b4b99ffd0fcb5374804758c577c6153953.sol#293-297)
+DepositContract.parent should be constant (/sb/0xb1a5a6b4b99ffd0fcb5374804758c577c6153953.sol#297-299)
+DepositContract.version should be constant (/sb/0xb1a5a6b4b99ffd0fcb5374804758c577c6153953.sol#299)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Different versions of Solidity is used in /sb/0xb1a5a6b4b99ffd0fcb5374804758c577c6153953.sol:
+	- Version used: ['0.5.7', 'ABIEncoderV2']
+	- /sb/0xb1a5a6b4b99ffd0fcb5374804758c577c6153953.sol#5-6 declares pragma solidity0.5.7
+	- /sb/0xb1a5a6b4b99ffd0fcb5374804758c577c6153953.sol#6-9 declares pragma experimentalABIEncoderV2
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#different-pragma-directives-are-used[0m
+INFO:Detectors:[92m
+Requestable.nonceOf (/sb/0xb1a5a6b4b99ffd0fcb5374804758c577c6153953.sol#277-283) should be declared external
+DolomiteDirectV1.brokerRequestAllowance (/sb/0xb1a5a6b4b99ffd0fcb5374804758c577c6153953.sol#439-481) should be declared external
+IBrokerDelegate.brokerRequestAllowance (/sb/0xb1a5a6b4b99ffd0fcb5374804758c577c6153953.sol#145-146) should be declared external
+DolomiteDirectV1.onOrderFillReport (/sb/0xb1a5a6b4b99ffd0fcb5374804758c577c6153953.sol#481-484) should be declared external
+IBrokerDelegate.onOrderFillReport (/sb/0xb1a5a6b4b99ffd0fcb5374804758c577c6153953.sol#154-156) should be declared external
+DolomiteDirectV1.brokerBalanceOf (/sb/0xb1a5a6b4b99ffd0fcb5374804758c577c6153953.sol#484-488) should be declared external
+IBrokerDelegate.brokerBalanceOf (/sb/0xb1a5a6b4b99ffd0fcb5374804758c577c6153953.sol#163-164) should be declared external
+IDolomiteMarginTradingBroker.brokerMarginRequestApproval (/sb/0xb1a5a6b4b99ffd0fcb5374804758c577c6153953.sol#170-171) should be declared external
+DolomiteDirectV1.brokerMarginRequestApproval (/sb/0xb1a5a6b4b99ffd0fcb5374804758c577c6153953.sol#492-501) should be declared external
+IDolomiteMarginTradingBroker.brokerMarginGetTrader (/sb/0xb1a5a6b4b99ffd0fcb5374804758c577c6153953.sol#183-189) should be declared external
+DolomiteDirectV1.brokerMarginGetTrader (/sb/0xb1a5a6b4b99ffd0fcb5374804758c577c6153953.sol#501-507) should be declared external
+DolomiteDirectV1.transfer (/sb/0xb1a5a6b4b99ffd0fcb5374804758c577c6153953.sol#404-417) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xb1a5a6b4b99ffd0fcb5374804758c577c6153953.sol:
+	- pragma solidity0.5.7 (/sb/0xb1a5a6b4b99ffd0fcb5374804758c577c6153953.sol#5-6): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Constant 'RequestHelper.personalPrefix' (/sb/0xb1a5a6b4b99ffd0fcb5374804758c577c6153953.sol#219-223) is not in UPPER_CASE_WITH_UNDERSCORES
+Function 'Requestable._payRequestFee' (/sb/0xb1a5a6b4b99ffd0fcb5374804758c577c6153953.sol#288-292) is not in mixedCase
+Function 'DolomiteDirectV1._payRequestFee' (/sb/0xb1a5a6b4b99ffd0fcb5374804758c577c6153953.sol#507-513) is not in mixedCase
+Parameter '_depositContractRegistry' of DolomiteDirectV1. (/sb/0xb1a5a6b4b99ffd0fcb5374804758c577c6153953.sol#371-372) is not in mixedCase
+Parameter '_loopringRingSubmitter' of DolomiteDirectV1. (/sb/0xb1a5a6b4b99ffd0fcb5374804758c577c6153953.sol#372-373) is not in mixedCase
+Parameter '_dolomiteMarginProtocol' of DolomiteDirectV1. (/sb/0xb1a5a6b4b99ffd0fcb5374804758c577c6153953.sol#373-377) is not in mixedCase
+Parameter '_dydxProtocolAddress' of DolomiteDirectV1. (/sb/0xb1a5a6b4b99ffd0fcb5374804758c577c6153953.sol#377) is not in mixedCase
+Parameter '_wethTokenAddress' of DolomiteDirectV1. (/sb/0xb1a5a6b4b99ffd0fcb5374804758c577c6153953.sol#377) is not in mixedCase
+Function 'DolomiteDirectV1._transfer' (/sb/0xb1a5a6b4b99ffd0fcb5374804758c577c6153953.sol#420-438) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xb1a5a6b4b99ffd0fcb5374804758c577c6153953.sol analyzed (13 contracts), 32 result(s) found

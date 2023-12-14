@@ -1,0 +1,216 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol:
+/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol:565:34: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+  function _postValidatePurchase(address _beneficiary, uint256 _weiAmount) internal {
+
+                                 ^------------------^
+/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol:565:56: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+  function _postValidatePurchase(address _beneficiary, uint256 _weiAmount) internal {
+
+                                                       ^----------------^
+/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol:592:35: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+  function _updatePurchasingState(address _beneficiary, uint256 _weiAmount) internal {
+
+                                  ^------------------^
+/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol:592:57: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+  function _updatePurchasingState(address _beneficiary, uint256 _weiAmount) internal {
+
+                                                        ^----------------^
+/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol:555:3: Warning: Function state mutability can be restricted to pure
+  function _preValidatePurchase(address _beneficiary, uint256 _weiAmount) internal {
+
+  ^
+Spanning multiple lines.
+/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol:565:3: Warning: Function state mutability can be restricted to pure
+  function _postValidatePurchase(address _beneficiary, uint256 _weiAmount) internal {
+
+  ^
+Spanning multiple lines.
+/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol:592:3: Warning: Function state mutability can be restricted to pure
+  function _updatePurchasingState(address _beneficiary, uint256 _weiAmount) internal {
+
+  ^
+Spanning multiple lines.
+/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol:685:3: Warning: Function state mutability can be restricted to pure
+  function finalization() internal {
+
+  ^
+Spanning multiple lines.
+
+INFO:Detectors:[93m
+Contract locking ether found in /sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol:
+	Contract NebulaToken has payable functions:
+	 - fallback (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#977-979)
+	But does not have a function to withdraw the ether
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#contracts-that-lock-ether[0m
+INFO:Detectors:[93m
+Reentrancy in TokenVesting.release (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#579-591):
+	External calls:
+	- unreleased = releasableAmount(token) (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#581-583)
+	State variables written after the call(s):
+	- released (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#583-585)
+Reentrancy in TokenVesting.revoke (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#611-639):
+	External calls:
+	- balance = token.balanceOf(this) (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#623-625)
+	- unreleased = releasableAmount(token) (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#625-628)
+	State variables written after the call(s):
+	- revoked (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#629-631)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+_ret in NebulaToken.distribute_private_sale_fund (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#879) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[93m
+Crowdsale._deliverTokens (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1175-1177) does not use the value returned by external calls:
+	-token.transfer(_beneficiary,_tokenAmount) (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1177)
+NebulaCrowdsale.finalization (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1673-1703) does not use the value returned by external calls:
+	-_nebula_token.finishMinting() (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1690-1693)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+NebulaToken.release_all has external calls inside a loop:
+	- _locks[i].release() (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#931)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+NebulaToken.token_unlock_time should be constant (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#779)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#57-75) should be declared external
+BasicToken.totalSupply (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#121-131) should be declared external
+ERC20Basic.totalSupply (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#75-77) should be declared external
+ERC20Basic.balanceOf (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#77-79) should be declared external
+BasicToken.balanceOf (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#171-183) should be declared external
+BasicToken.transfer (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#137-163) should be declared external
+ERC20Basic.transfer (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#79-81) should be declared external
+StandardToken.allowance (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#277-283) should be declared external
+ERC20.allowance (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#87-89) should be declared external
+ERC20.transferFrom (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#89-91) should be declared external
+StandardToken.transferFrom (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#203-227) should be declared external
+StandardToken.approve (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#249-261) should be declared external
+ERC20.approve (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#91-93) should be declared external
+StandardToken.increaseApproval (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#299-315) should be declared external
+StandardToken.decreaseApproval (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#333-361) should be declared external
+TokenVesting.release (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#579-591) should be declared external
+TokenVesting.revoke (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#611-639) should be declared external
+TokenTimelock.release (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#747-759) should be declared external
+NebulaToken.distribute_private_sale_fund (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#855-885) should be declared external
+NebulaToken.fallback (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#977-979) should be declared external
+FinalizableCrowdsale.finalize (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1393-1407) should be declared external
+CappedCrowdsale.capReached (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1457-1461) should be declared external
+IndividuallyCappedCrowdsale.getUserCap (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1543-1553) should be declared external
+IndividuallyCappedCrowdsale.getUserContribution (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1561-1565) should be declared external
+NebulaCrowdsale.hasStarted (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1707-1709) should be declared external
+NebulaCrowdsale.get_time_locked_contract (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1709-1723) should be declared external
+NebulaCrowdsale.release_all (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1723-1729) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol:
+	- pragma solidity0.4.19 (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'Ownable.Ownable' (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#25-35) is not in mixedCase
+Parameter '_owner' of BasicToken.balanceOf (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#171-179) is not in mixedCase
+Parameter '_to' of BasicToken.transfer (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#139) is not in mixedCase
+Parameter '_value' of BasicToken.transfer (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#139-141) is not in mixedCase
+Parameter '_owner' of StandardToken.allowance (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#279) is not in mixedCase
+Parameter '_spender' of StandardToken.allowance (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#279) is not in mixedCase
+Parameter '_from' of StandardToken.transferFrom (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#203-205) is not in mixedCase
+Parameter '_to' of StandardToken.transferFrom (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#205) is not in mixedCase
+Parameter '_value' of StandardToken.transferFrom (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#205-206) is not in mixedCase
+Parameter '_spender' of StandardToken.approve (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#249) is not in mixedCase
+Parameter '_value' of StandardToken.approve (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#249-251) is not in mixedCase
+Parameter '_spender' of StandardToken.increaseApproval (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#301) is not in mixedCase
+Parameter '_addedValue' of StandardToken.increaseApproval (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#301) is not in mixedCase
+Parameter '_spender' of StandardToken.decreaseApproval (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#335) is not in mixedCase
+Parameter '_subtractedValue' of StandardToken.decreaseApproval (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#335-337) is not in mixedCase
+Parameter '_to' of MintableToken.mint (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#397) is not in mixedCase
+Parameter '_amount' of MintableToken.mint (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#397) is not in mixedCase
+Parameter '_to' of CappedToken.mint (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#471-473) is not in mixedCase
+Parameter '_amount' of CappedToken.mint (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#473) is not in mixedCase
+Function 'CappedToken.CappedToken' (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#449-451) is not in mixedCase
+Parameter '_cap' of CappedToken.CappedToken (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#449) is not in mixedCase
+Function 'TokenVesting.TokenVesting' (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#536-565) is not in mixedCase
+Parameter '_beneficiary' of TokenVesting.TokenVesting (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#537-539) is not in mixedCase
+Parameter '_start' of TokenVesting.TokenVesting (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#539) is not in mixedCase
+Parameter '_cliff' of TokenVesting.TokenVesting (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#540-541) is not in mixedCase
+Parameter '_duration' of TokenVesting.TokenVesting (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#541-547) is not in mixedCase
+Parameter '_revocable' of TokenVesting.TokenVesting (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#548-549) is not in mixedCase
+Function 'TokenTimelock.TokenTimelock' (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#717-743) is not in mixedCase
+Parameter '_token' of TokenTimelock.TokenTimelock (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#721) is not in mixedCase
+Parameter '_beneficiary' of TokenTimelock.TokenTimelock (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#721) is not in mixedCase
+Parameter '_releaseTime' of TokenTimelock.TokenTimelock (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#721-723) is not in mixedCase
+Function 'NebulaToken.NebulaToken' (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#783-799) is not in mixedCase
+Function 'NebulaToken.create_public_sale_token' (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#811-819) is not in mixedCase
+Parameter '_beneficiary' of NebulaToken.create_public_sale_token (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#811) is not in mixedCase
+Parameter '_token_amount' of NebulaToken.create_public_sale_token (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#811) is not in mixedCase
+Function 'NebulaToken.set_private_sale_total' (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#819-833) is not in mixedCase
+Parameter '_pvt_plmt_max_in_Wei' of NebulaToken.set_private_sale_total (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#825-827) is not in mixedCase
+Function 'NebulaToken.distribute_private_sale_fund' (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#855-885) is not in mixedCase
+Parameter '_beneficiary' of NebulaToken.distribute_private_sale_fund (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#855-857) is not in mixedCase
+Parameter '_wei_amount' of NebulaToken.distribute_private_sale_fund (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#857) is not in mixedCase
+Parameter '_rate' of NebulaToken.distribute_private_sale_fund (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#857) is not in mixedCase
+Function 'NebulaToken.mint_time_locked_token' (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#895-903) is not in mixedCase
+Parameter '_beneficiary' of NebulaToken.mint_time_locked_token (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#895-897) is not in mixedCase
+Parameter '_token_amount' of NebulaToken.mint_time_locked_token (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#897) is not in mixedCase
+Function 'NebulaToken.release_all' (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#915-931) is not in mixedCase
+Parameter '_beneficiary' of NebulaToken.release_all (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#915) is not in mixedCase
+Function 'NebulaToken.get_time_locked_contract_size' (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#937-951) is not in mixedCase
+Parameter '_owner' of NebulaToken.get_time_locked_contract_size (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#937-939) is not in mixedCase
+Variable 'NebulaToken.pvt_plmt_set' (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#769) is not in mixedCase
+Variable 'NebulaToken.pvt_plmt_max_in_Wei' (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#769-773) is not in mixedCase
+Variable 'NebulaToken.pvt_plmt_remaining_in_Wei' (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#773-775) is not in mixedCase
+Variable 'NebulaToken.pvt_plmt_token_generated' (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#775-777) is not in mixedCase
+Variable 'NebulaToken.foundation_vesting_contract' (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#777-779) is not in mixedCase
+Variable 'NebulaToken.token_unlock_time' (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#779) is not in mixedCase
+Variable 'NebulaToken.time_locked_reclaim_addresses' (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#781) is not in mixedCase
+Function 'Crowdsale.Crowdsale' (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1037-1057) is not in mixedCase
+Parameter '_rate' of Crowdsale.Crowdsale (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1045) is not in mixedCase
+Parameter '_wallet' of Crowdsale.Crowdsale (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1045) is not in mixedCase
+Parameter '_token' of Crowdsale.Crowdsale (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1045) is not in mixedCase
+Parameter '_beneficiary' of Crowdsale.buyTokens (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1085-1091) is not in mixedCase
+Function 'Crowdsale._preValidatePurchase' (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1131-1141) is not in mixedCase
+Parameter '_beneficiary' of Crowdsale._preValidatePurchase (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1139) is not in mixedCase
+Parameter '_weiAmount' of Crowdsale._preValidatePurchase (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1139) is not in mixedCase
+Function 'Crowdsale._postValidatePurchase' (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1157-1159) is not in mixedCase
+Function 'Crowdsale._deliverTokens' (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1175-1177) is not in mixedCase
+Parameter '_beneficiary' of Crowdsale._deliverTokens (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1175) is not in mixedCase
+Parameter '_tokenAmount' of Crowdsale._deliverTokens (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1175) is not in mixedCase
+Function 'Crowdsale._processPurchase' (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1193-1197) is not in mixedCase
+Parameter '_beneficiary' of Crowdsale._processPurchase (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1195) is not in mixedCase
+Parameter '_tokenAmount' of Crowdsale._processPurchase (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1195) is not in mixedCase
+Function 'Crowdsale._updatePurchasingState' (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1215-1227) is not in mixedCase
+Function 'Crowdsale._getTokenAmount' (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1255-1259) is not in mixedCase
+Parameter '_weiAmount' of Crowdsale._getTokenAmount (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1255) is not in mixedCase
+Function 'Crowdsale._forwardFunds' (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1263-1267) is not in mixedCase
+Function 'TimedCrowdsale._preValidatePurchase' (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1361-1365) is not in mixedCase
+Parameter '_beneficiary' of TimedCrowdsale._preValidatePurchase (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1361) is not in mixedCase
+Parameter '_weiAmount' of TimedCrowdsale._preValidatePurchase (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1361) is not in mixedCase
+Function 'TimedCrowdsale.TimedCrowdsale' (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1301-1317) is not in mixedCase
+Parameter '_openingTime' of TimedCrowdsale.TimedCrowdsale (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1303-1305) is not in mixedCase
+Parameter '_closingTime' of TimedCrowdsale.TimedCrowdsale (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1305) is not in mixedCase
+Function 'CappedCrowdsale._preValidatePurchase' (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1475-1483) is not in mixedCase
+Parameter '_beneficiary' of CappedCrowdsale._preValidatePurchase (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1475-1477) is not in mixedCase
+Parameter '_weiAmount' of CappedCrowdsale._preValidatePurchase (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1477) is not in mixedCase
+Function 'CappedCrowdsale.CappedCrowdsale' (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1443-1449) is not in mixedCase
+Parameter '_cap' of CappedCrowdsale.CappedCrowdsale (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1443) is not in mixedCase
+Function 'IndividuallyCappedCrowdsale._preValidatePurchase' (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1579-1597) is not in mixedCase
+Parameter '_beneficiary' of IndividuallyCappedCrowdsale._preValidatePurchase (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1581-1585) is not in mixedCase
+Parameter '_weiAmount' of IndividuallyCappedCrowdsale._preValidatePurchase (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1585) is not in mixedCase
+Function 'IndividuallyCappedCrowdsale._updatePurchasingState' (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1605-1615) is not in mixedCase
+Parameter '_beneficiary' of IndividuallyCappedCrowdsale._updatePurchasingState (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1605) is not in mixedCase
+Parameter '_weiAmount' of IndividuallyCappedCrowdsale._updatePurchasingState (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1605) is not in mixedCase
+Parameter '_beneficiary' of IndividuallyCappedCrowdsale.setUserCap (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1507) is not in mixedCase
+Parameter '_cap' of IndividuallyCappedCrowdsale.setUserCap (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1507-1513) is not in mixedCase
+Parameter '_beneficiaries' of IndividuallyCappedCrowdsale.setGroupCap (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1525-1531) is not in mixedCase
+Parameter '_cap' of IndividuallyCappedCrowdsale.setGroupCap (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1531-1533) is not in mixedCase
+Parameter '_beneficiary' of IndividuallyCappedCrowdsale.getUserCap (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1545) is not in mixedCase
+Parameter '_beneficiary' of IndividuallyCappedCrowdsale.getUserContribution (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1561) is not in mixedCase
+Function 'NebulaCrowdsale._preValidatePurchase' (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1633-1645) is not in mixedCase
+Parameter '_beneficiary' of NebulaCrowdsale._preValidatePurchase (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1633) is not in mixedCase
+Parameter '_weiAmount' of NebulaCrowdsale._preValidatePurchase (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1633-1635) is not in mixedCase
+Function 'NebulaCrowdsale._deliverTokens' (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1655-1661) is not in mixedCase
+Parameter '_beneficiary' of NebulaCrowdsale._deliverTokens (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1655) is not in mixedCase
+Parameter '_tokenAmount' of NebulaCrowdsale._deliverTokens (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1655) is not in mixedCase
+Function 'NebulaCrowdsale.NebulaCrowdsale' (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1617-1625) is not in mixedCase
+Function 'NebulaCrowdsale.get_time_locked_contract' (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1709-1723) is not in mixedCase
+Parameter '_index' of NebulaCrowdsale.get_time_locked_contract (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1711) is not in mixedCase
+Function 'NebulaCrowdsale.release_all' (/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol#1723-1729) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x83c451371ef470d206cf011405d89f6ccb0e915e.sol analyzed (18 contracts), 143 result(s) found

@@ -1,0 +1,98 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xa3b40ec644ce18f480cd99a74b90e622ae0fd5de.sol:
+/sb/0xa3b40ec644ce18f480cd99a74b90e622ae0fd5de.sol:127:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function Owned() public {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xa3b40ec644ce18f480cd99a74b90e622ae0fd5de.sol:231:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function TextToken() public {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xa3b40ec644ce18f480cd99a74b90e622ae0fd5de.sol:333:51: Warning: This declaration shadows an existing declaration.
+    function batchTransfer(address[] _recipients, uint _tokens) onlyOwner returns (bool) {
+                                                  ^----------^
+/sb/0xa3b40ec644ce18f480cd99a74b90e622ae0fd5de.sol:185:5: The shadowed declaration is here:
+    uint public _tokens;
+    ^-----------------^
+
+/sb/0xa3b40ec644ce18f480cd99a74b90e622ae0fd5de.sol:155:9: Warning: Invoking events without "emit" prefix is deprecated.
+        OwnershipTransferred(owner, newOwner);
+        ^-----------------------------------^
+/sb/0xa3b40ec644ce18f480cd99a74b90e622ae0fd5de.sol:247:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Transfer(address(0), owner, _totalSupply);
+        ^---------------------------------------^
+/sb/0xa3b40ec644ce18f480cd99a74b90e622ae0fd5de.sol:263:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Transfer(owner, address(0), lock.totalAmount);
+        ^-------------------------------------------^
+/sb/0xa3b40ec644ce18f480cd99a74b90e622ae0fd5de.sol:313:13: Warning: Invoking events without "emit" prefix is deprecated.
+            Transfer(address(0), owner, _tokens);
+            ^----------------------------------^
+/sb/0xa3b40ec644ce18f480cd99a74b90e622ae0fd5de.sol:355:13: Warning: Invoking events without "emit" prefix is deprecated.
+            Transfer(owner, _recipients[j], _tokens);
+            ^--------------------------------------^
+/sb/0xa3b40ec644ce18f480cd99a74b90e622ae0fd5de.sol:417:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Transfer(msg.sender, to, tokens);
+        ^------------------------------^
+/sb/0xa3b40ec644ce18f480cd99a74b90e622ae0fd5de.sol:447:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Approval(msg.sender, spender, tokens);
+        ^-----------------------------------^
+/sb/0xa3b40ec644ce18f480cd99a74b90e622ae0fd5de.sol:483:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Transfer(from, to, tokens);
+        ^------------------------^
+/sb/0xa3b40ec644ce18f480cd99a74b90e622ae0fd5de.sol:525:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Approval(msg.sender, spender, tokens);
+        ^-----------------------------------^
+/sb/0xa3b40ec644ce18f480cd99a74b90e622ae0fd5de.sol:333:5: Warning: No visibility specified. Defaulting to "public". 
+    function batchTransfer(address[] _recipients, uint _tokens) onlyOwner returns (bool) {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xa3b40ec644ce18f480cd99a74b90e622ae0fd5de.sol:345:9: Warning: Unused local variable.
+        uint64 _now = uint64(now);
+        ^---------^
+
+INFO:Detectors:[93m
+TextToken.unlockTokens (/sb/0xa3b40ec644ce18f480cd99a74b90e622ae0fd5de.sol#291-335) uses a dangerous strict equality:
+	- lock.id == 1 && lock.amountWithDrawn < lock.totalAmount
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Contract locking ether found in /sb/0xa3b40ec644ce18f480cd99a74b90e622ae0fd5de.sol:
+	Contract TextToken has payable functions:
+	 - fallback (/sb/0xa3b40ec644ce18f480cd99a74b90e622ae0fd5de.sol)
+	But does not have a function to withdraw the ether
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#contracts-that-lock-ether[0m
+INFO:Detectors:[92m
+TextToken.batchTransfer._tokens (local variable @ /sb/0xa3b40ec644ce18f480cd99a74b90e622ae0fd5de.sol#351-353) shadows:
+	- TextToken._tokens (state variable @ /sb/0xa3b40ec644ce18f480cd99a74b90e622ae0fd5de.sol#201)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+SafeMath.safeMul (/sb/0xa3b40ec644ce18f480cd99a74b90e622ae0fd5de.sol#37-45) should be declared external
+ERC20Interface.totalSupply (/sb/0xa3b40ec644ce18f480cd99a74b90e622ae0fd5de.sol#71) should be declared external
+TextToken.totalSupply (/sb/0xa3b40ec644ce18f480cd99a74b90e622ae0fd5de.sol#391-401) should be declared external
+ERC20Interface.balanceOf (/sb/0xa3b40ec644ce18f480cd99a74b90e622ae0fd5de.sol#71-73) should be declared external
+TextToken.balanceOf (/sb/0xa3b40ec644ce18f480cd99a74b90e622ae0fd5de.sol#409-411) should be declared external
+TextToken.allowance (/sb/0xa3b40ec644ce18f480cd99a74b90e622ae0fd5de.sol#519-523) should be declared external
+ERC20Interface.allowance (/sb/0xa3b40ec644ce18f480cd99a74b90e622ae0fd5de.sol#73-75) should be declared external
+TextToken.transfer (/sb/0xa3b40ec644ce18f480cd99a74b90e622ae0fd5de.sol#429-439) should be declared external
+ERC20Interface.transfer (/sb/0xa3b40ec644ce18f480cd99a74b90e622ae0fd5de.sol#76-77) should be declared external
+TextToken.approve (/sb/0xa3b40ec644ce18f480cd99a74b90e622ae0fd5de.sol#465-473) should be declared external
+ERC20Interface.approve (/sb/0xa3b40ec644ce18f480cd99a74b90e622ae0fd5de.sol#77-79) should be declared external
+ERC20Interface.transferFrom (/sb/0xa3b40ec644ce18f480cd99a74b90e622ae0fd5de.sol#79-83) should be declared external
+TextToken.transferFrom (/sb/0xa3b40ec644ce18f480cd99a74b90e622ae0fd5de.sol#495-511) should be declared external
+ApproveAndCallFallBack.receiveApproval (/sb/0xa3b40ec644ce18f480cd99a74b90e622ae0fd5de.sol#109-111) should be declared external
+Owned.transferOwnership (/sb/0xa3b40ec644ce18f480cd99a74b90e622ae0fd5de.sol#152-157) should be declared external
+Owned.acceptOwnership (/sb/0xa3b40ec644ce18f480cd99a74b90e622ae0fd5de.sol#157-173) should be declared external
+TextToken.batchTransfer (/sb/0xa3b40ec644ce18f480cd99a74b90e622ae0fd5de.sol#351-385) should be declared external
+TextToken.approveAndCall (/sb/0xa3b40ec644ce18f480cd99a74b90e622ae0fd5de.sol#543-559) should be declared external
+TextToken.fallback (/sb/0xa3b40ec644ce18f480cd99a74b90e622ae0fd5de.sol) should be declared external
+TextToken.transferAnyERC20Token (/sb/0xa3b40ec644ce18f480cd99a74b90e622ae0fd5de.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xa3b40ec644ce18f480cd99a74b90e622ae0fd5de.sol:
+	- pragma solidity^0.4.18 (/sb/0xa3b40ec644ce18f480cd99a74b90e622ae0fd5de.sol#9-13): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'Owned.Owned' (/sb/0xa3b40ec644ce18f480cd99a74b90e622ae0fd5de.sol#137-145) is not in mixedCase
+Parameter '_newOwner' of Owned.transferOwnership (/sb/0xa3b40ec644ce18f480cd99a74b90e622ae0fd5de.sol#153-155) is not in mixedCase
+Function 'TextToken.TextToken' (/sb/0xa3b40ec644ce18f480cd99a74b90e622ae0fd5de.sol#247-263) is not in mixedCase
+Parameter '_recipients' of TextToken.batchTransfer (/sb/0xa3b40ec644ce18f480cd99a74b90e622ae0fd5de.sol#351) is not in mixedCase
+Parameter '_tokens' of TextToken.batchTransfer (/sb/0xa3b40ec644ce18f480cd99a74b90e622ae0fd5de.sol#351-353) is not in mixedCase
+Variable 'TextToken._totalSupply' (/sb/0xa3b40ec644ce18f480cd99a74b90e622ae0fd5de.sol#197-199) is not in mixedCase
+Variable 'TextToken._tokens' (/sb/0xa3b40ec644ce18f480cd99a74b90e622ae0fd5de.sol#201) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xa3b40ec644ce18f480cd99a74b90e622ae0fd5de.sol analyzed (5 contracts), 31 result(s) found

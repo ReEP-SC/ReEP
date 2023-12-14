@@ -1,0 +1,104 @@
+INFO:Detectors:[91m
+Auth.deployer (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#57) is never initialized. It is used in:
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-state-variables[0m
+INFO:Detectors:[93m
+Reentrancy in GemJoinForCurve.makeBag (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#624-633):
+	External calls:
+	- b.init(curveGauge) (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#632)
+	State variables written after the call(s):
+	- bags (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#633)
+Reentrancy in GemJoinForCurveSimple.makeBag (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#826-835):
+	External calls:
+	- b.init(curveGauge) (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#832)
+	State variables written after the call(s):
+	- bags (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#834)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+Bag.join (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#509-516) does not use the value returned by external calls:
+	-IERC20(gem).approve(address(curveGauge),wad) (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#515)
+Bag.init (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#516-521) does not use the value returned by external calls:
+	-crv.approve(curveGauge.voting_escrow(),uint256(- 1)) (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#521)
+BagSimple.join (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#750-764) does not use the value returned by external calls:
+	-IERC20(gem).approve(address(curveGauge),wad) (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#759-763)
+BagSimple.init (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#764-774) does not use the value returned by external calls:
+	-crv.approve(curveGauge.voting_escrow(),uint256(- 1)) (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#772-774)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in GemJoinForCurve.constructor (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#602-622):
+	External calls:
+	- gem = IERC20(curveGauge.lp_token()) (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#617-618)
+	- dec = gem.decimals() (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#619-620)
+	State variables written after the call(s):
+	- dec (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#619-620)
+Reentrancy in GemJoinForCurveSimple.constructor (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#809-826):
+	External calls:
+	- gem = IERC20(curveGauge.lp_token()) (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#817-819)
+	- dec = gem.decimals() (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#822)
+	State variables written after the call(s):
+	- dec (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#822)
+Reentrancy in GemJoinForCurveSimple.exit (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol):
+	External calls:
+	- vat.slip(ilk,msg.sender,- int256(wad)) (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol)
+	State variables written after the call(s):
+	- totalCollateral (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol)
+Reentrancy in GemJoinForCurveSimple.join (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#837-839):
+	External calls:
+	- vat.slip(ilk,urn,int256(wad)) (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol)
+	State variables written after the call(s):
+	- totalCollateral (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Auth.deployer should be constant (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#57)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Different versions of Solidity is used in /sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol:
+	- Version used: ['>=0.5.12', '^0.5.0', '^0.5.12']
+	- /sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#5-7 declares pragma solidity^0.5.12
+	- /sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#20-22 declares pragma solidity>=0.5.12
+	- /sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#74 declares pragma solidity^0.5.0
+	- /sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#162 declares pragma solidity^0.5.0
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#different-pragma-directives-are-used[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol:
+	- pragma solidity^0.5.12 (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#5-7): it allows old versions
+	- pragma solidity>=0.5.12 (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#20-22): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#74): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#162): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '' of VatLike.slip (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#340) is not in mixedCase
+Parameter '_scope_0' of VatLike.slip (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#340) is not in mixedCase
+Parameter '_scope_1' of VatLike.slip (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#340) is not in mixedCase
+Parameter '' of VatLike.move (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#342) is not in mixedCase
+Parameter '_scope_0' of VatLike.move (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#344-345) is not in mixedCase
+Parameter '_scope_1' of VatLike.move (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#345) is not in mixedCase
+Function 'CurveGaugeWrapper.set_approve_deposit' (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#352) is not in mixedCase
+Parameter 'can_deposit' of CurveGaugeWrapper.set_approve_deposit (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#352) is not in mixedCase
+Function 'CurveGauge.lp_token' (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#439-444) is not in mixedCase
+Function 'CurveGauge.crv_token' (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#444-446) is not in mixedCase
+Function 'CurveGauge.voting_escrow' (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#448) is not in mixedCase
+Function 'CurveGaugeReward.rewarded_token' (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#450-456) is not in mixedCase
+Function 'CurveGaugeReward.claim_rewards' (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#457-460) is not in mixedCase
+Parameter 'gauge_addr' of Minter.mint (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#461-464) is not in mixedCase
+Function 'VotingEscrow.create_lock' (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#464-465) is not in mixedCase
+Parameter '_unlock_time' of VotingEscrow.create_lock (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#465) is not in mixedCase
+Function 'VotingEscrow.increase_amount' (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#465-466) is not in mixedCase
+Function 'VotingEscrow.increase_unlock_time' (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#468-469) is not in mixedCase
+Parameter '_unlock_time' of VotingEscrow.increase_unlock_time (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#468-469) is not in mixedCase
+Function 'Bag.create_lock' (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#521-528) is not in mixedCase
+Parameter '_value' of Bag.create_lock (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#522-525) is not in mixedCase
+Parameter '_unlock_time' of Bag.create_lock (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#525) is not in mixedCase
+Function 'Bag.increase_amount' (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#528-534) is not in mixedCase
+Parameter '_value' of Bag.increase_amount (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#531) is not in mixedCase
+Function 'Bag.increase_unlock_time' (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#534-552) is not in mixedCase
+Parameter '_unlock_time' of Bag.increase_unlock_time (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#536-538) is not in mixedCase
+Function 'GemJoinForCurve.create_lock' (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#663-675) is not in mixedCase
+Parameter '_value' of GemJoinForCurve.create_lock (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#663) is not in mixedCase
+Parameter '_unlock_time' of GemJoinForCurve.create_lock (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#663) is not in mixedCase
+Function 'GemJoinForCurve.increase_amount' (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#675-698) is not in mixedCase
+Parameter '_value' of GemJoinForCurve.increase_amount (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#678) is not in mixedCase
+Function 'GemJoinForCurve.increase_unlock_time' (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#698-704) is not in mixedCase
+Parameter '_unlock_time' of GemJoinForCurve.increase_unlock_time (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#699) is not in mixedCase
+Parameter '' of GemJoinForCurveSimple. (/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol#814) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x730a21fd99e057f119197d06746f694d89aa5f86.sol analyzed (14 contracts), 48 result(s) found

@@ -1,0 +1,65 @@
+INFO:Detectors:[93m
+PaySpec._createInvoiceInternal (/sb/0x92da30c9f8c72baa6e52aaf6f49feba55614998c.sol#153-185) uses a dangerous strict equality:
+	- require(bool)(invoices[newuuid].uuid == 0)
+PaySpec._createInvoiceInternal (/sb/0x92da30c9f8c72baa6e52aaf6f49feba55614998c.sol#153-185) uses a dangerous strict equality:
+	- require(bool)(invoices[newuuid].uuid == 0)
+PaySpec._payInvoiceInternal (/sb/0x92da30c9f8c72baa6e52aaf6f49feba55614998c.sol#195-221) uses a dangerous strict equality:
+	- require(bool)(invoices[invoiceUUID].uuid == invoiceUUID)
+PaySpec._createInvoiceInternal (/sb/0x92da30c9f8c72baa6e52aaf6f49feba55614998c.sol#153-185) uses a dangerous strict equality:
+	- require(bool)(invoices[newuuid].uuid == 0)
+PaySpec._payInvoiceInternal (/sb/0x92da30c9f8c72baa6e52aaf6f49feba55614998c.sol#195-221) uses a dangerous strict equality:
+	- require(bool)(invoices[invoiceUUID].uuid == invoiceUUID)
+PaySpec.invoiceExists (/sb/0x92da30c9f8c72baa6e52aaf6f49feba55614998c.sol#249-254) uses a dangerous strict equality:
+	- invoices[invoiceUUID].uuid == invoiceUUID
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Contract locking ether found in /sb/0x92da30c9f8c72baa6e52aaf6f49feba55614998c.sol:
+	Contract PaySpec has payable functions:
+	 - fallback (/sb/0x92da30c9f8c72baa6e52aaf6f49feba55614998c.sol#135-139)
+	But does not have a function to withdraw the ether
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#contracts-that-lock-ether[0m
+INFO:Detectors:[93m
+Reentrancy in PaySpec._payInvoiceInternal (/sb/0x92da30c9f8c72baa6e52aaf6f49feba55614998c.sol#195-221):
+	External calls:
+	- require(bool)(ERC20Interface(invoices[invoiceUUID].token).transfer(invoices[invoiceUUID].payTo,invoices[invoiceUUID].amountDue)) (/sb/0x92da30c9f8c72baa6e52aaf6f49feba55614998c.sol#201-209)
+	State variables written after the call(s):
+	- invoices (/sb/0x92da30c9f8c72baa6e52aaf6f49feba55614998c.sol#209-216)
+	- invoices (/sb/0x92da30c9f8c72baa6e52aaf6f49feba55614998c.sol#216)
+	- invoices (/sb/0x92da30c9f8c72baa6e52aaf6f49feba55614998c.sol#216-218)
+Reentrancy in PaySpec.payInvoice (/sb/0x92da30c9f8c72baa6e52aaf6f49feba55614998c.sol#185-195):
+	External calls:
+	- require(bool)(ERC20Interface(invoices[invoiceUUID].token).transferFrom(msg.sender,address(this),invoices[invoiceUUID].amountDue)) (/sb/0x92da30c9f8c72baa6e52aaf6f49feba55614998c.sol#187-194)
+	- _payInvoiceInternal(invoiceUUID,msg.sender) (/sb/0x92da30c9f8c72baa6e52aaf6f49feba55614998c.sol#194)
+	State variables written after the call(s):
+	- invoices (/sb/0x92da30c9f8c72baa6e52aaf6f49feba55614998c.sol#194)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+ERC20Interface.totalSupply (/sb/0x92da30c9f8c72baa6e52aaf6f49feba55614998c.sol#65) should be declared external
+ERC20Interface.balanceOf (/sb/0x92da30c9f8c72baa6e52aaf6f49feba55614998c.sol#65-66) should be declared external
+ERC20Interface.allowance (/sb/0x92da30c9f8c72baa6e52aaf6f49feba55614998c.sol#66-67) should be declared external
+ERC20Interface.transfer (/sb/0x92da30c9f8c72baa6e52aaf6f49feba55614998c.sol#67-68) should be declared external
+ERC20Interface.approve (/sb/0x92da30c9f8c72baa6e52aaf6f49feba55614998c.sol#68-69) should be declared external
+ERC20Interface.transferFrom (/sb/0x92da30c9f8c72baa6e52aaf6f49feba55614998c.sol#69-71) should be declared external
+ApproveAndCallFallBack.receiveApproval (/sb/0x92da30c9f8c72baa6e52aaf6f49feba55614998c.sol#77-90) should be declared external
+PaySpec.getContractVersion (/sb/0x92da30c9f8c72baa6e52aaf6f49feba55614998c.sol#139) should be declared external
+PaySpec.createInvoice (/sb/0x92da30c9f8c72baa6e52aaf6f49feba55614998c.sol#139-143) should be declared external
+PaySpec.createAndPayInvoice (/sb/0x92da30c9f8c72baa6e52aaf6f49feba55614998c.sol#143-153) should be declared external
+PaySpec.getDescription (/sb/0x92da30c9f8c72baa6e52aaf6f49feba55614998c.sol#221-227) should be declared external
+PaySpec.getRefNumber (/sb/0x92da30c9f8c72baa6e52aaf6f49feba55614998c.sol#228-231) should be declared external
+PaySpec.getTokenAddress (/sb/0x92da30c9f8c72baa6e52aaf6f49feba55614998c.sol#238-243) should be declared external
+PaySpec.getRecipientAddress (/sb/0x92da30c9f8c72baa6e52aaf6f49feba55614998c.sol#243-249) should be declared external
+PaySpec.invoiceExists (/sb/0x92da30c9f8c72baa6e52aaf6f49feba55614998c.sol#249-254) should be declared external
+PaySpec.getAmountDue (/sb/0x92da30c9f8c72baa6e52aaf6f49feba55614998c.sol#254-259) should be declared external
+PaySpec.getAmountPaid (/sb/0x92da30c9f8c72baa6e52aaf6f49feba55614998c.sol#259-267) should be declared external
+PaySpec.getEthBlockPaidAt (/sb/0x92da30c9f8c72baa6e52aaf6f49feba55614998c.sol#267-272) should be declared external
+PaySpec.receiveApproval (/sb/0x92da30c9f8c72baa6e52aaf6f49feba55614998c.sol#287-306) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x92da30c9f8c72baa6e52aaf6f49feba55614998c.sol:
+	- pragma solidity^0.5.0 (/sb/0x92da30c9f8c72baa6e52aaf6f49feba55614998c.sol#5-9): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'PaySpec._createInvoiceInternal' (/sb/0x92da30c9f8c72baa6e52aaf6f49feba55614998c.sol#153-185) is not in mixedCase
+Function 'PaySpec._payInvoiceInternal' (/sb/0x92da30c9f8c72baa6e52aaf6f49feba55614998c.sol#195-221) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x92da30c9f8c72baa6e52aaf6f49feba55614998c.sol analyzed (4 contracts), 28 result(s) found

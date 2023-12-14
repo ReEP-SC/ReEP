@@ -1,0 +1,222 @@
+INFO:Detectors:[93m
+Reentrancy in TokenController._lock (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#1082-1100):
+	External calls:
+	- require(bool)(token.operatorTransfer(_of,_amount)) (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#1089-1090)
+	State variables written after the call(s):
+	- locked (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#1094-1095)
+Reentrancy in TokenController.increaseLockAmount (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#825-840):
+	External calls:
+	- token.operatorTransfer(msg.sender,_amount) (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#832-834)
+	State variables written after the call(s):
+	- locked (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#834-835)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+TokenController.increaseLockAmount (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#825-840) does not use the value returned by external calls:
+	-token.operatorTransfer(msg.sender,_amount) (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#832-834)
+TokenController.changeOperator (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#730-736) does not use the value returned by external calls:
+	-token.changeOperator(_newOperator) (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#735-736)
+TokenController.addToWhitelist (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#895-896) does not use the value returned by external calls:
+	-token.addToWhiteList(_member) (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#896)
+TokenController.removeFromWhitelist (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#901-905) does not use the value returned by external calls:
+	-token.removeFromWhiteList(_member) (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#903-904)
+TokenController._burnLockedTokens (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#1175-1190) does not use the value returned by external calls:
+	-token.burn(_amount) (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#1187)
+TokenController._removeReason (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol) does not use the value returned by external calls:
+	-lockReason[_of].pop() (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+TokenController._removeReason has external calls inside a loop:
+	- lockReason[_of].pop() (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in TokenController.changeDependentContractAddress (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#727-729):
+	External calls:
+	- token = NXMToken(ms.tokenAddress()) (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#728)
+	- pooledStaking = IPooledStaking(ms.getLatestAddress(PS)) (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#728)
+	State variables written after the call(s):
+	- pooledStaking (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#728)
+Reentrancy in TokenController.updateUintParameters (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#945-954):
+	External calls:
+	- require(bool)(ms.checkIsAuthToGoverned(msg.sender)) (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#948)
+	State variables written after the call(s):
+	- minCALockTime (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#948-953)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+INXMMaster.owner should be constant (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#33)
+INXMMaster.pauseTime should be constant (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#35)
+INXMMaster.tokenAddress should be constant (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#28-30)
+NXMToken.decimals should be constant (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#374)
+NXMToken.name should be constant (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#373)
+NXMToken.symbol should be constant (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#373-374)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+INXMMaster.masterInitialized (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#37-39) should be declared external
+INXMMaster.isInternal (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#39-41) should be declared external
+INXMMaster.isPause (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#41-43) should be declared external
+INXMMaster.isOwner (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#43-45) should be declared external
+INXMMaster.isMember (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#45-47) should be declared external
+INXMMaster.checkIsAuthToGoverned (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#47-49) should be declared external
+INXMMaster.updatePauseTime (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#51) should be declared external
+INXMMaster.dAppLocker (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#51-53) should be declared external
+INXMMaster.dAppToken (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#53-55) should be declared external
+INXMMaster.getLatestAddress (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#55-61) should be declared external
+Iupgradable.changeDependentContractAddress (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#94-95) should be declared external
+TokenController.changeDependentContractAddress (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#727-729) should be declared external
+Iupgradable.changeMasterAddress (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#98-111) should be declared external
+TokenController.lock (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#757-772) should be declared external
+IERC1132.lock (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#162-165) should be declared external
+TokenController.tokensLocked (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#991-996) should be declared external
+IERC1132.tokensLocked (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#172-175) should be declared external
+IERC1132.tokensLockedAtTime (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#183-186) should be declared external
+TokenController.tokensLockedAtTime (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#1020-1025) should be declared external
+TokenController.totalBalanceOf (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#1032-1045) should be declared external
+IERC1132.totalBalanceOf (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#191-194) should be declared external
+IERC1132.extendLock (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#199-202) should be declared external
+TokenController.extendLock (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#802-810) should be declared external
+IERC1132.increaseLockAmount (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#207-208) should be declared external
+TokenController.increaseLockAmount (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#825-840) should be declared external
+TokenController.tokensUnlockable (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#1004-1007) should be declared external
+IERC1132.tokensUnlockable (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#215-218) should be declared external
+IERC1132.unlock (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#222-225) should be declared external
+TokenController.unlock (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#927-940) should be declared external
+TokenController.getUnlockableTokens (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#972-986) should be declared external
+IERC1132.getUnlockableTokens (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#234-236) should be declared external
+IERC20.transfer (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#240-242) should be declared external
+NXMToken.transfer (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#552-561) should be declared external
+NXMToken.approve (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#430-434) should be declared external
+IERC20.approve (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#242-246) should be declared external
+IERC20.transferFrom (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#246-249) should be declared external
+NXMToken.transferFrom (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#584-596) should be declared external
+NXMToken.totalSupply (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#390-394) should be declared external
+IERC20.totalSupply (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#249-251) should be declared external
+NXMToken.balanceOf (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#397-401) should be declared external
+IERC20.balanceOf (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#252-256) should be declared external
+IERC20.allowance (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#256-263) should be declared external
+NXMToken.allowance (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#412-414) should be declared external
+NXMToken.increaseAllowance (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#452-458) should be declared external
+NXMToken.decreaseAllowance (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#477-489) should be declared external
+NXMToken.addToWhiteList (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#495-499) should be declared external
+NXMToken.removeFromWhiteList (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#505-511) should be declared external
+NXMToken.changeOperator (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#515-517) should be declared external
+NXMToken.burn (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#525-527) should be declared external
+NXMToken.burnFrom (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#535-539) should be declared external
+NXMToken.mint (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#544-549) should be declared external
+NXMToken.operatorTransfer (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#566-574) should be declared external
+NXMToken.lockForMemberVote (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#601-603) should be declared external
+TokenController.changeOperator (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#730-736) should be declared external
+TokenController.lockOf (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#781-795) should be declared external
+TokenController.extendLockOf (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#813-820) should be declared external
+TokenController.burnFrom (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#844-849) should be declared external
+TokenController.burnLockedTokens (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#854-862) should be declared external
+TokenController.reduceLock (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#870-873) should be declared external
+TokenController.releaseLockedTokens (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#882-890) should be declared external
+TokenController.addToWhitelist (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#895-896) should be declared external
+TokenController.removeFromWhitelist (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#901-905) should be declared external
+TokenController.mint (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#911-914) should be declared external
+TokenController.lockForMemberVote (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#916-919) should be declared external
+TokenController.updateUintParameters (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#945-954) should be declared external
+TokenController.getLockedTokensValidity (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#960-968) should be declared external
+TokenController.totalSupply (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#1007-1011) should be declared external
+TokenController.totalLockedBalance (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#1059-1069) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol:
+	- pragma solidity0.5.7 (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#9-12): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_masterAddress' of Iupgradable.changeMasterAddress (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#99) is not in mixedCase
+Parameter '_founderAddress' of NXMToken. (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#386-387) is not in mixedCase
+Parameter '_initialSupply' of NXMToken. (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#387) is not in mixedCase
+Parameter '_member' of NXMToken.addToWhiteList (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#496) is not in mixedCase
+Parameter '_member' of NXMToken.removeFromWhiteList (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#506-507) is not in mixedCase
+Parameter '_newOperator' of NXMToken.changeOperator (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#516) is not in mixedCase
+Parameter '_of' of NXMToken.lockForMemberVote (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#601) is not in mixedCase
+Parameter '_days' of NXMToken.lockForMemberVote (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#601-602) is not in mixedCase
+Function 'NXMToken._transfer' (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#610-616) is not in mixedCase
+Function 'NXMToken._transferFrom' (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#623-634) is not in mixedCase
+Function 'NXMToken._mint' (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#642-649) is not in mixedCase
+Function 'NXMToken._burn' (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#654-659) is not in mixedCase
+Function 'NXMToken._burnFrom' (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#671-677) is not in mixedCase
+Parameter '_reason' of TokenController.lock (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#757-759) is not in mixedCase
+Parameter '_amount' of TokenController.lock (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#759) is not in mixedCase
+Parameter '_time' of TokenController.lock (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#759) is not in mixedCase
+Parameter '_of' of TokenController.tokensLocked (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#991) is not in mixedCase
+Parameter '_reason' of TokenController.tokensLocked (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#991-993) is not in mixedCase
+Parameter '_of' of TokenController.tokensLockedAtTime (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#1020-1021) is not in mixedCase
+Parameter '_reason' of TokenController.tokensLockedAtTime (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#1021-1024) is not in mixedCase
+Parameter '_time' of TokenController.tokensLockedAtTime (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#1024) is not in mixedCase
+Parameter '_of' of TokenController.totalBalanceOf (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#1032-1034) is not in mixedCase
+Parameter '_reason' of TokenController.extendLock (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#802) is not in mixedCase
+Parameter '_time' of TokenController.extendLock (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#802) is not in mixedCase
+Parameter '_reason' of TokenController.increaseLockAmount (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#825) is not in mixedCase
+Parameter '_amount' of TokenController.increaseLockAmount (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#826-829) is not in mixedCase
+Parameter '_of' of TokenController.tokensUnlockable (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#1004) is not in mixedCase
+Parameter '_reason' of TokenController.tokensUnlockable (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#1004) is not in mixedCase
+Parameter '_of' of TokenController.unlock (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#927) is not in mixedCase
+Parameter '_of' of TokenController.getUnlockableTokens (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#972) is not in mixedCase
+Parameter '_newOperator' of TokenController.changeOperator (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#731-732) is not in mixedCase
+Parameter '_from' of TokenController.operatorTransfer (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#741) is not in mixedCase
+Parameter '_to' of TokenController.operatorTransfer (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#741-742) is not in mixedCase
+Parameter '_value' of TokenController.operatorTransfer (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#742-743) is not in mixedCase
+Parameter '_of' of TokenController.lockOf (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#781-782) is not in mixedCase
+Parameter '_reason' of TokenController.lockOf (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#782-783) is not in mixedCase
+Parameter '_amount' of TokenController.lockOf (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#783-786) is not in mixedCase
+Parameter '_time' of TokenController.lockOf (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#786) is not in mixedCase
+Parameter '_of' of TokenController.extendLockOf (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#814) is not in mixedCase
+Parameter '_reason' of TokenController.extendLockOf (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#814) is not in mixedCase
+Parameter '_time' of TokenController.extendLockOf (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#814) is not in mixedCase
+Parameter '_of' of TokenController.burnFrom (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#845) is not in mixedCase
+Parameter '_of' of TokenController.burnLockedTokens (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#855-856) is not in mixedCase
+Parameter '_reason' of TokenController.burnLockedTokens (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#856-857) is not in mixedCase
+Parameter '_amount' of TokenController.burnLockedTokens (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#857-858) is not in mixedCase
+Parameter '_of' of TokenController.reduceLock (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#870) is not in mixedCase
+Parameter '_reason' of TokenController.reduceLock (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#870-871) is not in mixedCase
+Parameter '_time' of TokenController.reduceLock (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#871) is not in mixedCase
+Parameter '_of' of TokenController.releaseLockedTokens (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#882-883) is not in mixedCase
+Parameter '_reason' of TokenController.releaseLockedTokens (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#883) is not in mixedCase
+Parameter '_amount' of TokenController.releaseLockedTokens (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#883) is not in mixedCase
+Parameter '_member' of TokenController.addToWhitelist (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#895) is not in mixedCase
+Parameter '_member' of TokenController.removeFromWhitelist (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#903) is not in mixedCase
+Parameter '_member' of TokenController.mint (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#912) is not in mixedCase
+Parameter '_amount' of TokenController.mint (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#912) is not in mixedCase
+Parameter '_of' of TokenController.lockForMemberVote (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#917) is not in mixedCase
+Parameter '_days' of TokenController.lockForMemberVote (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#917) is not in mixedCase
+Parameter '_of' of TokenController.getLockedTokensValidity (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#962) is not in mixedCase
+Parameter '_of' of TokenController.totalLockedBalance (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#1060) is not in mixedCase
+Parameter '_time' of TokenController.totalLockedBalance (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#1060) is not in mixedCase
+Function 'TokenController._lock' (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#1082-1100) is not in mixedCase
+Parameter '_of' of TokenController._lock (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#1083) is not in mixedCase
+Parameter '_reason' of TokenController._lock (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#1083) is not in mixedCase
+Parameter '_amount' of TokenController._lock (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#1083-1084) is not in mixedCase
+Parameter '_time' of TokenController._lock (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#1084-1085) is not in mixedCase
+Function 'TokenController._tokensLocked' (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#1105-1109) is not in mixedCase
+Parameter '_of' of TokenController._tokensLocked (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#1105) is not in mixedCase
+Parameter '_reason' of TokenController._tokensLocked (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#1105-1106) is not in mixedCase
+Function 'TokenController._tokensLockedAtTime' (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#1117-1121) is not in mixedCase
+Parameter '_of' of TokenController._tokensLockedAtTime (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#1118) is not in mixedCase
+Parameter '_reason' of TokenController._tokensLockedAtTime (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#1118) is not in mixedCase
+Parameter '_time' of TokenController._tokensLockedAtTime (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#1118) is not in mixedCase
+Function 'TokenController._extendLock' (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#1127-1137) is not in mixedCase
+Parameter '_of' of TokenController._extendLock (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#1127) is not in mixedCase
+Parameter '_reason' of TokenController._extendLock (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#1127-1128) is not in mixedCase
+Parameter '_time' of TokenController._extendLock (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#1128) is not in mixedCase
+Function 'TokenController._reduceLock' (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#1143-1152) is not in mixedCase
+Parameter '_of' of TokenController._reduceLock (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#1143) is not in mixedCase
+Parameter '_reason' of TokenController._reduceLock (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#1143) is not in mixedCase
+Parameter '_time' of TokenController._reduceLock (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#1143) is not in mixedCase
+Function 'TokenController._tokensUnlockable' (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#1161-1167) is not in mixedCase
+Parameter '_of' of TokenController._tokensUnlockable (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#1161-1162) is not in mixedCase
+Parameter '_reason' of TokenController._tokensUnlockable (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#1162) is not in mixedCase
+Function 'TokenController._burnLockedTokens' (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#1175-1190) is not in mixedCase
+Parameter '_of' of TokenController._burnLockedTokens (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#1175) is not in mixedCase
+Parameter '_reason' of TokenController._burnLockedTokens (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#1175-1176) is not in mixedCase
+Parameter '_amount' of TokenController._burnLockedTokens (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol#1176) is not in mixedCase
+Function 'TokenController._releaseLockedTokens' (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol) is not in mixedCase
+Parameter '_of' of TokenController._releaseLockedTokens (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol) is not in mixedCase
+Parameter '_reason' of TokenController._releaseLockedTokens (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol) is not in mixedCase
+Parameter '_amount' of TokenController._releaseLockedTokens (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol) is not in mixedCase
+Function 'TokenController._removeReason' (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol) is not in mixedCase
+Parameter '_of' of TokenController._removeReason (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol) is not in mixedCase
+Parameter '_reason' of TokenController._removeReason (/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xcafea42a1f81ecab1e616fa69ea14716c7ae70f1.sol analyzed (8 contracts), 175 result(s) found

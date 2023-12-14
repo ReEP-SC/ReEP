@@ -1,0 +1,43 @@
+INFO:Detectors:[91m
+Reentrancy in EnglishAuction.end (/sb/0x854ae5f5c23a54e3ac3567ddc100a4b4b40d468b.sol#120-134):
+	External calls:
+	- IERC1155(token).safeTransferFrom(address(this),winning,id,1,new bytes(0x0)) (/sb/0x854ae5f5c23a54e3ac3567ddc100a4b4b40d468b.sol#124-126)
+	External calls sending eth:
+	- haus.transfer(hausFee) (/sb/0x854ae5f5c23a54e3ac3567ddc100a4b4b40d468b.sol#129-132)
+	- seller.transfer(address(this).balance) (/sb/0x854ae5f5c23a54e3ac3567ddc100a4b4b40d468b.sol#132-133)
+	State variables written after the call(s):
+	- ended (/sb/0x854ae5f5c23a54e3ac3567ddc100a4b4b40d468b.sol#133-134)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities[0m
+INFO:Detectors:[93m
+Reentrancy in EnglishAuction.pull (/sb/0x854ae5f5c23a54e3ac3567ddc100a4b4b40d468b.sol#135-145):
+	External calls:
+	- IERC1155(token).safeTransferFrom(address(this),seller,id,1,new bytes(0x0)) (/sb/0x854ae5f5c23a54e3ac3567ddc100a4b4b40d468b.sol#141-145)
+	State variables written after the call(s):
+	- ended (/sb/0x854ae5f5c23a54e3ac3567ddc100a4b4b40d468b.sol#145)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+EnglishAuction.bid (/sb/0x854ae5f5c23a54e3ac3567ddc100a4b4b40d468b.sol#100-120) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(block.timestamp < endTime,Auction ended) (/sb/0x854ae5f5c23a54e3ac3567ddc100a4b4b40d468b.sol#102-103)
+	- require(bool,string)(block.timestamp >= startTime,Auction not started) (/sb/0x854ae5f5c23a54e3ac3567ddc100a4b4b40d468b.sol#101-102)
+EnglishAuction.live (/sb/0x854ae5f5c23a54e3ac3567ddc100a4b4b40d468b.sol#145-146) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp < endTime (/sb/0x854ae5f5c23a54e3ac3567ddc100a4b4b40d468b.sol#145-146)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+EnglishAuction.bid (/sb/0x854ae5f5c23a54e3ac3567ddc100a4b4b40d468b.sol#100-120) should be declared external
+EnglishAuction.end (/sb/0x854ae5f5c23a54e3ac3567ddc100a4b4b40d468b.sol#120-134) should be declared external
+EnglishAuction.pull (/sb/0x854ae5f5c23a54e3ac3567ddc100a4b4b40d468b.sol#135-145) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x854ae5f5c23a54e3ac3567ddc100a4b4b40d468b.sol:
+	- pragma solidity^0.6.7 (/sb/0x854ae5f5c23a54e3ac3567ddc100a4b4b40d468b.sol#10-11): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '' of EnglishAuction.onERC1155Received (/sb/0x854ae5f5c23a54e3ac3567ddc100a4b4b40d468b.sol#146) is not in mixedCase
+Parameter '_scope_0' of EnglishAuction.onERC1155Received (/sb/0x854ae5f5c23a54e3ac3567ddc100a4b4b40d468b.sol#146) is not in mixedCase
+Parameter '_scope_1' of EnglishAuction.onERC1155Received (/sb/0x854ae5f5c23a54e3ac3567ddc100a4b4b40d468b.sol#146) is not in mixedCase
+Parameter '_scope_2' of EnglishAuction.onERC1155Received (/sb/0x854ae5f5c23a54e3ac3567ddc100a4b4b40d468b.sol#146-147) is not in mixedCase
+Parameter '_scope_3' of EnglishAuction.onERC1155Received (/sb/0x854ae5f5c23a54e3ac3567ddc100a4b4b40d468b.sol#147-148) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x854ae5f5c23a54e3ac3567ddc100a4b4b40d468b.sol analyzed (3 contracts), 13 result(s) found

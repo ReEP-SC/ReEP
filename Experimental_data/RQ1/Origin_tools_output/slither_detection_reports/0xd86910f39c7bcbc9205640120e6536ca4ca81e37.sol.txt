@@ -1,0 +1,49 @@
+INFO:Detectors:[93m
+Vesting (/sb/0xd86910f39c7bcbc9205640120e6536ca4ca81e37.sol#161-284) has incorrect ERC20 function interface(s):
+	-transfer (/sb/0xd86910f39c7bcbc9205640120e6536ca4ca81e37.sol#263-284)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[93m
+Vesting.initialize (/sb/0xd86910f39c7bcbc9205640120e6536ca4ca81e37.sol#179-215) does not use the value returned by external calls:
+	-token.transferFrom(msg.sender,address(this),_totalTokens) (/sb/0xd86910f39c7bcbc9205640120e6536ca4ca81e37.sol#198-199)
+Vesting.claim (/sb/0xd86910f39c7bcbc9205640120e6536ca4ca81e37.sol#216-238) does not use the value returned by external calls:
+	-token.transfer(user,claimAmount) (/sb/0xd86910f39c7bcbc9205640120e6536ca4ca81e37.sol#236-237)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in Vesting.initialize (/sb/0xd86910f39c7bcbc9205640120e6536ca4ca81e37.sol#179-215):
+	External calls:
+	- token.transferFrom(msg.sender,address(this),_totalTokens) (/sb/0xd86910f39c7bcbc9205640120e6536ca4ca81e37.sol#198-199)
+	State variables written after the call(s):
+	- grantedToken (/sb/0xd86910f39c7bcbc9205640120e6536ca4ca81e37.sol#203-204)
+	- starts (/sb/0xd86910f39c7bcbc9205640120e6536ca4ca81e37.sol#203)
+	- totalTokens (/sb/0xd86910f39c7bcbc9205640120e6536ca4ca81e37.sol#199)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Vesting.claim (/sb/0xd86910f39c7bcbc9205640120e6536ca4ca81e37.sol#216-238) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(releaseStart <= block.timestamp,Release has not started) (/sb/0xd86910f39c7bcbc9205640120e6536ca4ca81e37.sol#218-220)
+Vesting.releasable (/sb/0xd86910f39c7bcbc9205640120e6536ca4ca81e37.sol#249-255) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp >= releaseEnd (/sb/0xd86910f39c7bcbc9205640120e6536ca4ca81e37.sol#253-254)
+	- block.timestamp < releaseStart (/sb/0xd86910f39c7bcbc9205640120e6536ca4ca81e37.sol#249-253)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+Vesting.initialize (/sb/0xd86910f39c7bcbc9205640120e6536ca4ca81e37.sol#179-215) should be declared external
+Vesting.claim (/sb/0xd86910f39c7bcbc9205640120e6536ca4ca81e37.sol#216-238) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xd86910f39c7bcbc9205640120e6536ca4ca81e37.sol:
+	- pragma solidity^0.6.12 (/sb/0xd86910f39c7bcbc9205640120e6536ca4ca81e37.sol#11-14): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_token' of Vesting.initialize (/sb/0xd86910f39c7bcbc9205640120e6536ca4ca81e37.sol#179-181) is not in mixedCase
+Parameter '_totalTokens' of Vesting.initialize (/sb/0xd86910f39c7bcbc9205640120e6536ca4ca81e37.sol#182-183) is not in mixedCase
+Parameter '_start' of Vesting.initialize (/sb/0xd86910f39c7bcbc9205640120e6536ca4ca81e37.sol#183) is not in mixedCase
+Parameter '_period' of Vesting.initialize (/sb/0xd86910f39c7bcbc9205640120e6536ca4ca81e37.sol#183) is not in mixedCase
+Parameter '_recipients' of Vesting.initialize (/sb/0xd86910f39c7bcbc9205640120e6536ca4ca81e37.sol#183-184) is not in mixedCase
+Parameter '_grantedToken' of Vesting.initialize (/sb/0xd86910f39c7bcbc9205640120e6536ca4ca81e37.sol#184) is not in mixedCase
+Parameter '_user' of Vesting.claimableAmount (/sb/0xd86910f39c7bcbc9205640120e6536ca4ca81e37.sol#244-245) is not in mixedCase
+Parameter '_user' of Vesting.releasable (/sb/0xd86910f39c7bcbc9205640120e6536ca4ca81e37.sol#249) is not in mixedCase
+Parameter '_to' of Vesting.transfer (/sb/0xd86910f39c7bcbc9205640120e6536ca4ca81e37.sol#263-264) is not in mixedCase
+Parameter '_amountInFullTokens' of Vesting.transfer (/sb/0xd86910f39c7bcbc9205640120e6536ca4ca81e37.sol#264) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xd86910f39c7bcbc9205640120e6536ca4ca81e37.sol analyzed (3 contracts), 19 result(s) found

@@ -1,0 +1,86 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol:
+/sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol:47:34: Warning: Initial value for constant variable has to be compile-time constant. This will fail to compile with the next breaking version change.
+    uint256 constant BASE_UNIT = 10 ** ABEToken.decimals() * 10000;//10 ** 18; // ABEToken.decimals() * 10000
+                                 ^-------------------------------^
+
+INFO:Detectors:[93m
+ABERoll.verifyMerkleProof (/sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol#1009-1157) is declared view but contains assembly code
+ABERoll.requireCorrectReceipt (/sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol#1165-1261) is declared view but contains assembly code
+ABERoll.memcpy (/sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+Reentrancy in ABERoll.increaseJackpot (/sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol#375-383):
+	External calls:
+	- require(bool,string)(increaseAmount <= ABEToken.balanceOf(this),Increase amount larger than balance.) (/sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol#377-379)
+	- require(bool,string)(jackpotSize + lockedInBets + increaseAmount <= ABEToken.balanceOf(this),Not enough funds.) (/sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol#379-381)
+	State variables written after the call(s):
+	- jackpotSize (/sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol#381-383)
+Reentrancy in ABERoll.placeBet (/sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol#479-607):
+	External calls:
+	- require(bool)(ABEToken.transferFrom(msg.sender,this,amount)) (/sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol#489)
+	- require(bool,string)(jackpotSize + lockedInBets <= ABEToken.balanceOf(this),Cannot afford to lose this bet.) (/sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol#593-595)
+	State variables written after the call(s):
+	- bets (/sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol#597-599)
+	- bets (/sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol#599)
+	- bets (/sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol#599-601)
+	- bets (/sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol#601)
+	- bets (/sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol#605)
+	- bets (/sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol#607)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+mask in ABERoll.placeBet (/sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol#519) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[92m
+Reentrancy in ABERoll.placeBet (/sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol#479-607):
+	External calls:
+	- require(bool)(ABEToken.transferFrom(msg.sender,this,amount)) (/sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol#489)
+	State variables written after the call(s):
+	- jackpotSize (/sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol#585-591)
+	- lockedInBets (/sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol#581-585)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+ABERoll.verifyMerkleProof uses assembly (/sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol#1009-1157)
+	- /sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol#1019-1025
+	- /sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol#1047-1049
+	- /sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol#1053-1057
+	- /sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol#1061-1065
+	- /sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol#1069-1083
+	- /sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol#1097-1102
+	- /sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol#1103-1105
+	- /sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol#1113-1115
+	- /sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol#1117-1119
+	- /sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol#1123-1133
+	- /sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol#1141
+	- /sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol#1145-1157
+ABERoll.requireCorrectReceipt uses assembly (/sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol#1165-1261)
+	- /sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol#1167-1173
+	- /sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol#1177-1183
+	- /sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol#1193-1199
+	- /sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol#1207
+	- /sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol#1215-1217
+	- /sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol#1221
+	- /sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol#1239-1247
+	- /sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol#1253-1259
+	- /sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol
+	- /sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol
+	- /sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol
+ABERoll.memcpy uses assembly (/sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol)
+	- /sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol
+	- /sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+ABERoll.beneficiary_ should be constant (/sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol#204-209)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+ABERoll.fallback (/sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol#343-347) should be declared external
+ABERoll.setMaxProfit (/sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol#365-367) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_nextOwner' of ABERoll.approveNextOwner (/sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol#313-315) is not in mixedCase
+Parameter '_maxProfit' of ABERoll.setMaxProfit (/sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol#365) is not in mixedCase
+Variable 'ABERoll.ABEToken' (/sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol#41-47) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+ABERoll.BASE_UNIT (/sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol#47-49) is never used in ABERoll
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0x9582940f86d1da372f382de6fa027d49fc5e0d28.sol analyzed (2 contracts), 17 result(s) found

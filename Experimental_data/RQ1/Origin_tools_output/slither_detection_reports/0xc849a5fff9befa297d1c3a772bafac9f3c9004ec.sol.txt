@@ -1,0 +1,81 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol:
+/sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol:55:5: Warning: No visibility specified. Defaulting to "public". 
+    function tokenFallback(address _from, uint _value, bytes _data);
+    ^--------------------------------------------------------------^
+/sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol:375:56: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function tokenFallback(address _from, uint _value, bytes _data) public whenNotPaused {
+                                                       ^---------^
+
+INFO:Detectors:[93m
+ERC20Basic (/sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol#21-35) has incorrect ERC20 function interface(s):
+	-transfer (/sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol#27-29)
+ERC20 (/sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol#351-367) has incorrect ERC20 function interface(s):
+	-transferFrom (/sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol#361-363)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[93m
+Bounty0xEscrow.approveToPullOutTokens (/sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol) does not use the value returned by external calls:
+	-ERC20(_token).approve(_receiver,_amount) (/sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Bounty0xEscrow.distributeTokenToAddressesAndAmounts has external calls inside a loop:
+	- require(bool)(_hunters[i].send(_amounts[i])) (/sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol#475)
+Bounty0xEscrow.distributeTokenToAddressesAndAmounts has external calls inside a loop:
+	- ERC20(_token).transfer(_hunters[k],_amounts[k]) (/sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol#483-485)
+Bounty0xEscrow.distributeTokenToAddressesAndAmountsWithoutHost has external calls inside a loop:
+	- require(bool)(_hunters[i].send(_amounts[i])) (/sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol#515)
+Bounty0xEscrow.distributeTokenToAddressesAndAmountsWithoutHost has external calls inside a loop:
+	- ERC20(_token).transfer(_hunters[k],_amounts[k]) (/sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol#525-527)
+Bounty0xEscrow.distributeWithTransferFrom has external calls inside a loop:
+	- ERC20(_token).transferFrom(_ownerOfTokens,_hunters[i],_amounts[i]) (/sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in Bounty0xEscrow.depositToken (/sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol#395-411):
+	External calls:
+	- ERC20(_token).transferFrom(msg.sender,this,_amount) (/sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol#405-407)
+	State variables written after the call(s):
+	- tokens (/sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol#407-411)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+ERC20Basic.totalSupply (/sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol#23-25) should be declared external
+ERC20Basic.balanceOf (/sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol#25-27) should be declared external
+ERC20Basic.transfer (/sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol#27-29) should be declared external
+ERC223ReceivingContract.tokenFallback (/sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol#55-63) should be declared external
+Bounty0xEscrow.tokenFallback (/sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol#387-395) should be declared external
+Ownable.renounceOwnership (/sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol#132-135) should be declared external
+Ownable.transferOwnership (/sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol#147-153) should be declared external
+Pausable.pause (/sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol#329-335) should be declared external
+Pausable.unpause (/sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol#341-345) should be declared external
+ERC20.allowance (/sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol#353-361) should be declared external
+ERC20.transferFrom (/sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol#361-363) should be declared external
+ERC20.approve (/sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol#363) should be declared external
+Bounty0xEscrow.depositToken (/sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol#395-411) should be declared external
+Bounty0xEscrow.depositEther (/sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol#413-425) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_newOwner' of Ownable.transferOwnership (/sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol#147-149) is not in mixedCase
+Function 'Ownable._transferOwnership' (/sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol#159-177) is not in mixedCase
+Parameter '_newOwner' of Ownable._transferOwnership (/sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol#165-167) is not in mixedCase
+Parameter '_from' of Bounty0xEscrow.tokenFallback (/sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol#389) is not in mixedCase
+Parameter '_value' of Bounty0xEscrow.tokenFallback (/sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol#389) is not in mixedCase
+Parameter '_token' of Bounty0xEscrow.depositToken (/sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol#397) is not in mixedCase
+Parameter '_amount' of Bounty0xEscrow.depositToken (/sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol#397) is not in mixedCase
+Parameter '_token' of Bounty0xEscrow.distributeTokenToAddress (/sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol#425-428) is not in mixedCase
+Parameter '_host' of Bounty0xEscrow.distributeTokenToAddress (/sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol#429) is not in mixedCase
+Parameter '_hunter' of Bounty0xEscrow.distributeTokenToAddress (/sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol#429) is not in mixedCase
+Parameter '_amount' of Bounty0xEscrow.distributeTokenToAddress (/sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol#429) is not in mixedCase
+Parameter '_token' of Bounty0xEscrow.distributeTokenToAddressesAndAmounts (/sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol#449) is not in mixedCase
+Parameter '_host' of Bounty0xEscrow.distributeTokenToAddressesAndAmounts (/sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol#449) is not in mixedCase
+Parameter '_hunters' of Bounty0xEscrow.distributeTokenToAddressesAndAmounts (/sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol#449) is not in mixedCase
+Parameter '_amounts' of Bounty0xEscrow.distributeTokenToAddressesAndAmounts (/sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol#449-451) is not in mixedCase
+Parameter '_token' of Bounty0xEscrow.distributeTokenToAddressesAndAmountsWithoutHost (/sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol#493) is not in mixedCase
+Parameter '_hunters' of Bounty0xEscrow.distributeTokenToAddressesAndAmountsWithoutHost (/sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol#493) is not in mixedCase
+Parameter '_amounts' of Bounty0xEscrow.distributeTokenToAddressesAndAmountsWithoutHost (/sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol#495) is not in mixedCase
+Parameter '_token' of Bounty0xEscrow.distributeWithTransferFrom (/sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol#533) is not in mixedCase
+Parameter '_ownerOfTokens' of Bounty0xEscrow.distributeWithTransferFrom (/sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol#533) is not in mixedCase
+Parameter '_hunters' of Bounty0xEscrow.distributeWithTransferFrom (/sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol#533) is not in mixedCase
+Parameter '_amounts' of Bounty0xEscrow.distributeWithTransferFrom (/sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol#533-535) is not in mixedCase
+Parameter '_token' of Bounty0xEscrow.approveToPullOutTokens (/sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol) is not in mixedCase
+Parameter '_receiver' of Bounty0xEscrow.approveToPullOutTokens (/sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol) is not in mixedCase
+Parameter '_amount' of Bounty0xEscrow.approveToPullOutTokens (/sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xc849a5fff9befa297d1c3a772bafac9f3c9004ec.sol analyzed (7 contracts), 48 result(s) found

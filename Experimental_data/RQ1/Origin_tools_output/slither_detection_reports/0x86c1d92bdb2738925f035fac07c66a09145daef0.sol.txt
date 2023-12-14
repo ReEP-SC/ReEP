@@ -1,0 +1,28 @@
+INFO:Detectors:[93m
+OneYearDreamTokensVestingAdvisors.withdrawTokens (/sb/0x86c1d92bdb2738925f035fac07c66a09145daef0.sol#355-369) uses a dangerous strict equality:
+	- dreamToken.balanceOf(this) == 0
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Reentrancy in OneYearDreamTokensVestingAdvisors.withdrawTokens (/sb/0x86c1d92bdb2738925f035fac07c66a09145daef0.sol#355-369):
+	External calls:
+	- tokensToSend = getAvailableTokensToWithdraw() (/sb/0x86c1d92bdb2738925f035fac07c66a09145daef0.sol#357-361)
+	- sendTokens(tokensToSend) (/sb/0x86c1d92bdb2738925f035fac07c66a09145daef0.sol#361)
+	State variables written after the call(s):
+	- tokensSent (/sb/0x86c1d92bdb2738925f035fac07c66a09145daef0.sol#361)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+allowedPercent in OneYearDreamTokensVestingAdvisors.getTokensUnlockedPercentage (/sb/0x86c1d92bdb2738925f035fac07c66a09145daef0.sol) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[93m
+OneYearDreamTokensVestingAdvisors.sendTokens (/sb/0x86c1d92bdb2738925f035fac07c66a09145daef0.sol#373-391) does not use the value returned by external calls:
+	-dreamToken.transfer(withdrawalAddress,tokensToSend) (/sb/0x86c1d92bdb2738925f035fac07c66a09145daef0.sol#385)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in OneYearDreamTokensVestingAdvisors.initializeVestingFor (/sb/0x86c1d92bdb2738925f035fac07c66a09145daef0.sol#271-285):
+	External calls:
+	- initialTokensBalance = dreamToken.balanceOf(this) (/sb/0x86c1d92bdb2738925f035fac07c66a09145daef0.sol#279-283)
+	State variables written after the call(s):
+	- stages (/sb/0x86c1d92bdb2738925f035fac07c66a09145daef0.sol#285)
+	- withdrawalAddress (/sb/0x86c1d92bdb2738925f035fac07c66a09145daef0.sol#283-285)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Slither:/sb/0x86c1d92bdb2738925f035fac07c66a09145daef0.sol analyzed (3 contracts), 5 result(s) found

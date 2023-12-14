@@ -1,0 +1,83 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol:
+/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol:111:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function Hive() public {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol:192:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function UhiveVest(Hive _token, uint256 _releaseDate) public {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol:95:9: Warning: Invoking events without "emit" prefix is deprecated.
+        FrozenFunds(target, freeze);
+        ^-------------------------^
+/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol:130:13: Warning: Invoking events without "emit" prefix is deprecated.
+            Transfer(msg.sender, _to, _value);
+            ^-------------------------------^
+/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol:148:13: Warning: Invoking events without "emit" prefix is deprecated.
+            Transfer(_from, _to, _value);
+            ^--------------------------^
+/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol:159:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Approval(msg.sender, _spender, _value);
+        ^------------------------------------^
+/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol:252:9: Warning: Invoking events without "emit" prefix is deprecated.
+        TokenTransfer(msg.sender, _beneficiary, 0, _tokenAmount);
+        ^------------------------------------------------------^
+
+INFO:Detectors:[93m
+UhiveVest.withdrawTokens (/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol#229-234) does not use the value returned by external calls:
+	-token.transfer(owner,unsold) (/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol#234)
+UhiveVest._deliverTokens (/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol) does not use the value returned by external calls:
+	-token.transfer(_beneficiary,_tokenAmount) (/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+ERC20Basic.totalSupply (/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol#10-11) should be declared external
+Hive.totalSupply (/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol#120-121) should be declared external
+ERC20Basic.balanceOf (/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol#11-12) should be declared external
+Hive.balanceOf (/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol#124-126) should be declared external
+ERC20Basic.transfer (/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol#12-13) should be declared external
+Hive.transfer (/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol#127-138) should be declared external
+Hive.allowance (/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol#169-176) should be declared external
+ERC20.allowance (/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol#55-56) should be declared external
+Hive.transferFrom (/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol#144-156) should be declared external
+ERC20.transferFrom (/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol#56-57) should be declared external
+ERC20.approve (/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol#57-58) should be declared external
+Hive.approve (/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol#159-166) should be declared external
+Hive.changeOwner (/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol#89-94) should be declared external
+Hive.freezeAccount (/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol#94-99) should be declared external
+Hive.destroyCoins (/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol#103-113) should be declared external
+UhiveVest.forwardTokens (/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol#219-225) should be declared external
+UhiveVest.withdrawTokens (/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol#229-234) should be declared external
+UhiveVest.changeOwner (/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol#234-239) should be declared external
+UhiveVest.terminate (/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol#243-244) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol:
+	- pragma solidity^0.4.18 (/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol#1): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_owner' of Hive.balanceOf (/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol#125) is not in mixedCase
+Parameter '_to' of Hive.transfer (/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol#127) is not in mixedCase
+Parameter '_value' of Hive.transfer (/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol#127) is not in mixedCase
+Parameter '_owner' of Hive.allowance (/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol#171) is not in mixedCase
+Parameter '_spender' of Hive.allowance (/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol#171-172) is not in mixedCase
+Parameter '_from' of Hive.transferFrom (/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol#144) is not in mixedCase
+Parameter '_to' of Hive.transferFrom (/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol#144) is not in mixedCase
+Parameter '_value' of Hive.transferFrom (/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol#144) is not in mixedCase
+Parameter '_spender' of Hive.approve (/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol#159-160) is not in mixedCase
+Parameter '_value' of Hive.approve (/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol#160-161) is not in mixedCase
+Parameter '_newOwner' of Hive.changeOwner (/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol#90) is not in mixedCase
+Parameter '_addr' of Hive.isFrozenAccount (/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol#102) is not in mixedCase
+Function 'Hive.Hive' (/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol#116-120) is not in mixedCase
+Variable 'Hive._totalSupply' (/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol#70-71) is not in mixedCase
+Function 'UhiveVest.UhiveVest' (/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol#198-207) is not in mixedCase
+Parameter '_token' of UhiveVest.UhiveVest (/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol#199) is not in mixedCase
+Parameter '_releaseDate' of UhiveVest.UhiveVest (/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol#199-202) is not in mixedCase
+Function 'UhiveVest._forwardFunds' (/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol#209-211) is not in mixedCase
+Parameter '_beneficiary' of UhiveVest.forwardTokens (/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol#222) is not in mixedCase
+Parameter '_newOwner' of UhiveVest.changeOwner (/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol#235) is not in mixedCase
+Function 'UhiveVest._preValidateTokenTransfer' (/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol#249-252) is not in mixedCase
+Parameter '_beneficiary' of UhiveVest._preValidateTokenTransfer (/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol#250) is not in mixedCase
+Parameter '_tokenAmount' of UhiveVest._preValidateTokenTransfer (/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol#250) is not in mixedCase
+Function 'UhiveVest._deliverTokens' (/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol) is not in mixedCase
+Parameter '_beneficiary' of UhiveVest._deliverTokens (/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol) is not in mixedCase
+Parameter '_tokenAmount' of UhiveVest._deliverTokens (/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xafe52d419821a2df4413d4d116e4d47119e43d85.sol analyzed (5 contracts), 48 result(s) found

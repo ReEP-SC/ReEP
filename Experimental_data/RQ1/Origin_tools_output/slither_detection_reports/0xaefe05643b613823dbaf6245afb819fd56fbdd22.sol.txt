@@ -1,0 +1,39 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xaefe05643b613823dbaf6245afb819fd56fbdd22.sol:
+/sb/0xaefe05643b613823dbaf6245afb819fd56fbdd22.sol:22:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function TimedVault(
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xaefe05643b613823dbaf6245afb819fd56fbdd22.sol:4:5: Warning: Functions in interfaces should be declared external.
+    function transfer(address receiver, uint amount) public;
+    ^------------------------------------------------------^
+/sb/0xaefe05643b613823dbaf6245afb819fd56fbdd22.sol:5:5: Warning: Functions in interfaces should be declared external.
+    function balanceOf(address addr) public returns (uint);
+    ^-----------------------------------------------------^
+
+INFO:Detectors:[93m
+token (/sb/0xaefe05643b613823dbaf6245afb819fd56fbdd22.sol#3-8) has incorrect ERC20 function interface(s):
+	-transfer (/sb/0xaefe05643b613823dbaf6245afb819fd56fbdd22.sol#4-5)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[93m
+Contract locking ether found in /sb/0xaefe05643b613823dbaf6245afb819fd56fbdd22.sol:
+	Contract TimedVault has payable functions:
+	 - fallback (/sb/0xaefe05643b613823dbaf6245afb819fd56fbdd22.sol#36-38)
+	But does not have a function to withdraw the ether
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#contracts-that-lock-ether[0m
+INFO:Detectors:[92m
+TimedVault.releaseDate should be constant (/sb/0xaefe05643b613823dbaf6245afb819fd56fbdd22.sol#12-13)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+token.transfer (/sb/0xaefe05643b613823dbaf6245afb819fd56fbdd22.sol#4-5) should be declared external
+token.balanceOf (/sb/0xaefe05643b613823dbaf6245afb819fd56fbdd22.sol#5-8) should be declared external
+TimedVault.fallback (/sb/0xaefe05643b613823dbaf6245afb819fd56fbdd22.sol#36-38) should be declared external
+TimedVault.safeWithdrawal (/sb/0xaefe05643b613823dbaf6245afb819fd56fbdd22.sol#47-51) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xaefe05643b613823dbaf6245afb819fd56fbdd22.sol:
+	- pragma solidity^0.4.16 (/sb/0xaefe05643b613823dbaf6245afb819fd56fbdd22.sol#1): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Contract 'token' (/sb/0xaefe05643b613823dbaf6245afb819fd56fbdd22.sol#3-8) is not in CapWords
+Function 'TimedVault.TimedVault' (/sb/0xaefe05643b613823dbaf6245afb819fd56fbdd22.sol#23-31) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xaefe05643b613823dbaf6245afb819fd56fbdd22.sol analyzed (2 contracts), 10 result(s) found

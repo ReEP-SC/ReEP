@@ -1,0 +1,43 @@
+INFO:Detectors:[93m
+Reentrancy in ManagedAsyncDaiRedemptionPool.capitalize (/sb/0x58de49407f664695f96f18da2fe5321558e76b3d.sol#476-522):
+	External calls:
+	- requestDaiAmount = _cadOracle.cadToDai(request.tokenAmount.mul(_fixedPriceCADCent)).div(100) (/sb/0x58de49407f664695f96f18da2fe5321558e76b3d.sol#487-489)
+	- _daiContract.transferFrom(msg.sender,address(this),daiAmountRemaining) (/sb/0x58de49407f664695f96f18da2fe5321558e76b3d.sol#509-513)
+	State variables written after the call(s):
+	- _asyncIndex (/sb/0x58de49407f664695f96f18da2fe5321558e76b3d.sol#520)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+ManagedAsyncDaiRedemptionPool.instantRedemption (/sb/0x58de49407f664695f96f18da2fe5321558e76b3d.sol#437-453) does not use the value returned by external calls:
+	-_wToken.transferFrom(msg.sender,_poolSource,tokenAmount) (/sb/0x58de49407f664695f96f18da2fe5321558e76b3d.sol#449-450)
+	-_daiContract.transfer(msg.sender,requestDaiAmount) (/sb/0x58de49407f664695f96f18da2fe5321558e76b3d.sol#450-452)
+ManagedAsyncDaiRedemptionPool.asyncRedemption (/sb/0x58de49407f664695f96f18da2fe5321558e76b3d.sol#457-472) does not use the value returned by external calls:
+	-_wToken.transferFrom(msg.sender,address(this),tokenAmount) (/sb/0x58de49407f664695f96f18da2fe5321558e76b3d.sol#469-470)
+ManagedAsyncDaiRedemptionPool.capitalize (/sb/0x58de49407f664695f96f18da2fe5321558e76b3d.sol#476-522) does not use the value returned by external calls:
+	-_wToken.transfer(_poolSource,request.tokenAmount) (/sb/0x58de49407f664695f96f18da2fe5321558e76b3d.sol#495-497)
+	-_daiContract.transferFrom(msg.sender,request.account,requestDaiAmount) (/sb/0x58de49407f664695f96f18da2fe5321558e76b3d.sol#498-501)
+	-_daiContract.transferFrom(msg.sender,address(this),daiAmountRemaining) (/sb/0x58de49407f664695f96f18da2fe5321558e76b3d.sol#509-513)
+ManagedAsyncDaiRedemptionPool.withdrawReserve (/sb/0x58de49407f664695f96f18da2fe5321558e76b3d.sol#523-531) does not use the value returned by external calls:
+	-_daiContract.transfer(_poolSource,daiAmount) (/sb/0x58de49407f664695f96f18da2fe5321558e76b3d.sol#530)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+ManagedAsyncDaiRedemptionPool.capitalize has external calls inside a loop:
+	- requestDaiAmount = _cadOracle.cadToDai(request.tokenAmount.mul(_fixedPriceCADCent)).div(100) (/sb/0x58de49407f664695f96f18da2fe5321558e76b3d.sol#487-489)
+ManagedAsyncDaiRedemptionPool.capitalize has external calls inside a loop:
+	- _wToken.transfer(_poolSource,request.tokenAmount) (/sb/0x58de49407f664695f96f18da2fe5321558e76b3d.sol#495-497)
+ManagedAsyncDaiRedemptionPool.capitalize has external calls inside a loop:
+	- _daiContract.transferFrom(msg.sender,request.account,requestDaiAmount) (/sb/0x58de49407f664695f96f18da2fe5321558e76b3d.sol#498-501)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x58de49407f664695f96f18da2fe5321558e76b3d.sol:
+	- pragma solidity0.6.8 (/sb/0x58de49407f664695f96f18da2fe5321558e76b3d.sol#9-12): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Variable 'ManagedAsyncDaiRedemptionPool._poolSource' (/sb/0x58de49407f664695f96f18da2fe5321558e76b3d.sol#388) is not in mixedCase
+Variable 'ManagedAsyncDaiRedemptionPool._wToken' (/sb/0x58de49407f664695f96f18da2fe5321558e76b3d.sol#390-391) is not in mixedCase
+Variable 'ManagedAsyncDaiRedemptionPool._cadOracle' (/sb/0x58de49407f664695f96f18da2fe5321558e76b3d.sol#392-394) is not in mixedCase
+Variable 'ManagedAsyncDaiRedemptionPool._fixedPriceCADCent' (/sb/0x58de49407f664695f96f18da2fe5321558e76b3d.sol#398-399) is not in mixedCase
+Variable 'ManagedAsyncDaiRedemptionPool._daiContract' (/sb/0x58de49407f664695f96f18da2fe5321558e76b3d.sol#399-401) is not in mixedCase
+Variable 'ManagedAsyncDaiRedemptionPool._asyncRequests' (/sb/0x58de49407f664695f96f18da2fe5321558e76b3d.sol#415-416) is not in mixedCase
+Variable 'ManagedAsyncDaiRedemptionPool._asyncIndex' (/sb/0x58de49407f664695f96f18da2fe5321558e76b3d.sol#417-419) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x58de49407f664695f96f18da2fe5321558e76b3d.sol analyzed (5 contracts), 16 result(s) found

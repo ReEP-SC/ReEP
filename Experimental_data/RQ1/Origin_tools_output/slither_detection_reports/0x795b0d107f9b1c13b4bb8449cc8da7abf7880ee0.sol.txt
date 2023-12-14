@@ -1,0 +1,92 @@
+INFO:Detectors:[91m
+OTCDeal.transferAssets (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#881-941) sends eth to arbitrary user
+	Dangerous calls:
+	- sellerAssetSent = seller.send(sellerAsset) (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#935-937)
+OTCDesk.newDeal (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#1005-1095) sends eth to arbitrary user
+	Dangerous calls:
+	- _deal.transferCloseoutCredit.value(_closeoutCredit)() (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#1077-1081)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[93m
+closeoutCreditReturn in OTCDeal.transferAssets (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#900-901) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[93m
+OTCDesk.removeArbitratorFromPool (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#1193-1211) does not use the value returned by external calls:
+	-arbitratorsPool.pop() (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#1211)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in OTCDeal.transferAssets (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#881-941):
+	External calls:
+	- desk.collectFee.value(deskFee.add(closeoutCreditReturn))(closeoutCreditReturn) (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#929-933)
+	External calls sending eth:
+	- desk.collectFee.value(deskFee.add(closeoutCreditReturn))(closeoutCreditReturn) (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#929-933)
+	- sellerAssetSent = seller.send(sellerAsset) (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#935-937)
+	State variables written after the call(s):
+	- sellerAssetSent (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#935-937)
+Reentrancy in OTCDeal.transferAssets (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#881-941):
+	External calls:
+	- desk.collectFee.value(deskFee.add(closeoutCreditReturn))(closeoutCreditReturn) (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#929-933)
+	External calls sending eth:
+	- desk.collectFee.value(deskFee.add(closeoutCreditReturn))(closeoutCreditReturn) (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#929-933)
+	- sellerAssetSent = seller.send(sellerAsset) (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#935-937)
+	- buyerAssetSent = buyer.send(buyerAsset) (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#939)
+	State variables written after the call(s):
+	- buyerAssetSent (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#939)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Ownable.owner (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#59-67) should be declared external
+Ownable.renounceOwnership (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#111-121) should be declared external
+Ownable.transferOwnership (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#135-137) should be declared external
+OTCDesk.newDeal (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#1005-1095) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol:
+	- pragma solidity0.5.4 (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#9-14): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Low level call in OTCDeal.unsafeTransfer (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#941-955):
+	-(success,None) = _recipient.call.value(_amount)() /sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#949-953
+Low level call in OTCDesk.withdraw (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol):
+	-(_successfulTransfer) = beneficiary.call.value(_amount)() /sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Function 'Ownable._transferOwnership' (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#145-159) is not in mixedCase
+Parameter '_dataHash' of OTCDeal. (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#497-501) is not in mixedCase
+Parameter '_seller' of OTCDeal. (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#501-505) is not in mixedCase
+Parameter '_buyer' of OTCDeal. (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#505-507) is not in mixedCase
+Parameter '_sellerPartner' of OTCDeal. (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#507-509) is not in mixedCase
+Parameter '_buyerPartner' of OTCDeal. (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#509-511) is not in mixedCase
+Parameter '_price' of OTCDeal. (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#511-513) is not in mixedCase
+Parameter '_paymentWindow' of OTCDeal. (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#513-514) is not in mixedCase
+Parameter '_buyerIsTaker' of OTCDeal. (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#515-517) is not in mixedCase
+Parameter '_paymentWindow' of OTCDeal.prolong (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#581) is not in mixedCase
+Parameter '_dataHash' of OTCDeal.prolong (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#581-583) is not in mixedCase
+Parameter '_refund' of OTCDeal.closeOut (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#643-645) is not in mixedCase
+Parameter '_claimHash' of OTCDeal.escalate (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#741-743) is not in mixedCase
+Parameter '_dataHash' of OTCDeal.resolveDispute (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#779) is not in mixedCase
+Parameter '_sellerAsset' of OTCDeal.resolveDispute (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#779) is not in mixedCase
+Parameter '_sellerAsset' of OTCDeal.transferAssets (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#881) is not in mixedCase
+Parameter '_recipient' of OTCDeal.unsafeTransfer (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#941) is not in mixedCase
+Parameter '_amount' of OTCDeal.unsafeTransfer (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#941-945) is not in mixedCase
+Constant 'OTCDeal.version' (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#394-397) is not in UPPER_CASE_WITH_UNDERSCORES
+Parameter '_dataHash' of OTCDesk.newDeal (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#1005-1007) is not in mixedCase
+Parameter '_buyer' of OTCDesk.newDeal (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#1009-1015) is not in mixedCase
+Parameter '_sellerPartner' of OTCDesk.newDeal (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#1015) is not in mixedCase
+Parameter '_buyerPartner' of OTCDesk.newDeal (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#1017-1019) is not in mixedCase
+Parameter '_price' of OTCDesk.newDeal (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#1023) is not in mixedCase
+Parameter '_paymentWindow' of OTCDesk.newDeal (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#1023-1029) is not in mixedCase
+Parameter '_buyerIsTaker' of OTCDesk.newDeal (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#1029) is not in mixedCase
+Parameter '_beneficiary' of OTCDesk.setBeneficiary (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#1101) is not in mixedCase
+Parameter '_arbitrationManager' of OTCDesk.setArbitrationManager (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#1111-1117) is not in mixedCase
+Parameter '_closeoutCredit' of OTCDesk.setCloseoutCredit (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#1125-1129) is not in mixedCase
+Parameter '_closeoutCreditReturn' of OTCDesk.collectFee (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#1137-1139) is not in mixedCase
+Parameter '_arbitrator' of OTCDesk.addArbitratorToPool (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#1179) is not in mixedCase
+Parameter '_index' of OTCDesk.removeArbitratorFromPool (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#1193-1195) is not in mixedCase
+Parameter '_deal' of OTCDesk.assignArbitrator (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol) is not in mixedCase
+Parameter '_arbitrator' of OTCDesk.assignArbitrator (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol) is not in mixedCase
+Parameter '_deal' of OTCDesk.resolveDispute (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol) is not in mixedCase
+Parameter '_dataHash' of OTCDesk.resolveDispute (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol) is not in mixedCase
+Parameter '_sellerAsset' of OTCDesk.resolveDispute (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol) is not in mixedCase
+Parameter '_rest' of OTCDesk.withdraw (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol) is not in mixedCase
+Constant 'OTCDesk.version' (/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol#967-969) is not in UPPER_CASE_WITH_UNDERSCORES
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x795b0d107f9b1c13b4bb8449cc8da7abf7880ee0.sol analyzed (5 contracts), 52 result(s) found

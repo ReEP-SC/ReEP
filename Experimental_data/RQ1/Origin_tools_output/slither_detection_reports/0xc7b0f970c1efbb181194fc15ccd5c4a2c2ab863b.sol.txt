@@ -1,0 +1,43 @@
+INFO:Detectors:[93m
+TwoWeeksNotice.updateAccumulated (/sb/0xc7b0f970c1efbb181194fc15ccd5c4a2c2ab863b.sol#140-155) uses a dangerous strict equality:
+	- ss.lockedUntil == 0
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Reentrancy in TwoWeeksNotice.stake (/sb/0xc7b0f970c1efbb181194fc15ccd5c4a2c2ab863b.sol#155-179):
+	External calls:
+	- require(bool,string)(token.transferFrom(msg.sender,address(this),delta),transfer unsuccessful) (/sb/0xc7b0f970c1efbb181194fc15ccd5c4a2c2ab863b.sol#169-172)
+	State variables written after the call(s):
+	- _states (/sb/0xc7b0f970c1efbb181194fc15ccd5c4a2c2ab863b.sol#172-174)
+	- _states (/sb/0xc7b0f970c1efbb181194fc15ccd5c4a2c2ab863b.sol#175)
+	- _states (/sb/0xc7b0f970c1efbb181194fc15ccd5c4a2c2ab863b.sol#176)
+	- _states (/sb/0xc7b0f970c1efbb181194fc15ccd5c4a2c2ab863b.sol#176-177)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+TwoWeeksNotice.estimateAccumulated (/sb/0xc7b0f970c1efbb181194fc15ccd5c4a2c2ab863b.sol#117-139) uses timestamp for comparisons
+	Dangerous comparisons:
+	- ss.lockedUntil > 0 && ss.lockedUntil < block.timestamp (/sb/0xc7b0f970c1efbb181194fc15ccd5c4a2c2ab863b.sol#125-126)
+	- until > ss.since (/sb/0xc7b0f970c1efbb181194fc15ccd5c4a2c2ab863b.sol#127-138)
+TwoWeeksNotice.updateAccumulated (/sb/0xc7b0f970c1efbb181194fc15ccd5c4a2c2ab863b.sol#140-155) uses timestamp for comparisons
+	Dangerous comparisons:
+	- ss.lockedUntil > 0 && ss.lockedUntil < block.timestamp (/sb/0xc7b0f970c1efbb181194fc15ccd5c4a2c2ab863b.sol#143-145)
+	- until > ss.since (/sb/0xc7b0f970c1efbb181194fc15ccd5c4a2c2ab863b.sol#145-155)
+	- ss.lockedUntil == 0 (/sb/0xc7b0f970c1efbb181194fc15ccd5c4a2c2ab863b.sol#153-154)
+TwoWeeksNotice.stake (/sb/0xc7b0f970c1efbb181194fc15ccd5c4a2c2ab863b.sol#155-179) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(ss.unlockPeriod <= unlockPeriod,cannot decrease unlock period) (/sb/0xc7b0f970c1efbb181194fc15ccd5c4a2c2ab863b.sol#159-163)
+	- require(bool,string)(ss.balance <= amount,cannot decrease balance) (/sb/0xc7b0f970c1efbb181194fc15ccd5c4a2c2ab863b.sol#158)
+TwoWeeksNotice.requestWithdraw (/sb/0xc7b0f970c1efbb181194fc15ccd5c4a2c2ab863b.sol#179-186) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool)(ss.balance > 0) (/sb/0xc7b0f970c1efbb181194fc15ccd5c4a2c2ab863b.sol#181-183)
+TwoWeeksNotice.withdraw (/sb/0xc7b0f970c1efbb181194fc15ccd5c4a2c2ab863b.sol#186-197) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(ss.lockedUntil < block.timestamp,still locked) (/sb/0xc7b0f970c1efbb181194fc15ccd5c4a2c2ab863b.sol#192-194)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xc7b0f970c1efbb181194fc15ccd5c4a2c2ab863b.sol:
+	- pragma solidity0.6.12 (/sb/0xc7b0f970c1efbb181194fc15ccd5c4a2c2ab863b.sol#7-10): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_token' of TwoWeeksNotice. (/sb/0xc7b0f970c1efbb181194fc15ccd5c4a2c2ab863b.sol#106) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xc7b0f970c1efbb181194fc15ccd5c4a2c2ab863b.sol analyzed (2 contracts), 9 result(s) found

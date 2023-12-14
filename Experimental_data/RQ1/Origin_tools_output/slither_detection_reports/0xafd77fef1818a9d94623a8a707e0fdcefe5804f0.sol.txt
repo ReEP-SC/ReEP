@@ -1,0 +1,50 @@
+INFO:Detectors:[93m
+YFMSTokenLock.lockDevTokens (/sb/0xafd77fef1818a9d94623a8a707e0fdcefe5804f0.sol#86-94) does not use the value returned by external calls:
+	-YFMSToken.transferFrom(owner,address(this),_amount) (/sb/0xafd77fef1818a9d94623a8a707e0fdcefe5804f0.sol#94)
+YFMSTokenLock.lockRewardsTokens (/sb/0xafd77fef1818a9d94623a8a707e0fdcefe5804f0.sol#95-104) does not use the value returned by external calls:
+	-YFMSToken.transferFrom(owner,address(this),_amount) (/sb/0xafd77fef1818a9d94623a8a707e0fdcefe5804f0.sol#102-103)
+YFMSTokenLock.withdrawDevTokens (/sb/0xafd77fef1818a9d94623a8a707e0fdcefe5804f0.sol#104-112) does not use the value returned by external calls:
+	-YFMSToken.transfer(_to,_amount) (/sb/0xafd77fef1818a9d94623a8a707e0fdcefe5804f0.sol#110-112)
+YFMSTokenLock.withdrawRewardsTokens (/sb/0xafd77fef1818a9d94623a8a707e0fdcefe5804f0.sol#112-121) does not use the value returned by external calls:
+	-YFMSToken.transfer(_to,_amount) (/sb/0xafd77fef1818a9d94623a8a707e0fdcefe5804f0.sol#119-120)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in YFMSTokenLock.lockDevTokens (/sb/0xafd77fef1818a9d94623a8a707e0fdcefe5804f0.sol#86-94):
+	External calls:
+	- require(bool)(YFMSToken.balanceOf(_from) >= _amount) (/sb/0xafd77fef1818a9d94623a8a707e0fdcefe5804f0.sol#89-90)
+	State variables written after the call(s):
+	- YFMSLockedDev (/sb/0xafd77fef1818a9d94623a8a707e0fdcefe5804f0.sol#90-91)
+	- unlockDateDev (/sb/0xafd77fef1818a9d94623a8a707e0fdcefe5804f0.sol#93-94)
+Reentrancy in YFMSTokenLock.lockRewardsTokens (/sb/0xafd77fef1818a9d94623a8a707e0fdcefe5804f0.sol#95-104):
+	External calls:
+	- require(bool)(YFMSToken.balanceOf(_from) >= _amount) (/sb/0xafd77fef1818a9d94623a8a707e0fdcefe5804f0.sol#98-99)
+	State variables written after the call(s):
+	- YFMSLockedRewards (/sb/0xafd77fef1818a9d94623a8a707e0fdcefe5804f0.sol#99-102)
+	- unlockDateRewards (/sb/0xafd77fef1818a9d94623a8a707e0fdcefe5804f0.sol#102)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+YFMSTokenLock.lockDevTokens (/sb/0xafd77fef1818a9d94623a8a707e0fdcefe5804f0.sol#86-94) should be declared external
+YFMSTokenLock.lockRewardsTokens (/sb/0xafd77fef1818a9d94623a8a707e0fdcefe5804f0.sol#95-104) should be declared external
+YFMSTokenLock.withdrawDevTokens (/sb/0xafd77fef1818a9d94623a8a707e0fdcefe5804f0.sol#104-112) should be declared external
+YFMSTokenLock.withdrawRewardsTokens (/sb/0xafd77fef1818a9d94623a8a707e0fdcefe5804f0.sol#112-121) should be declared external
+YFMSTokenLock.balanceOf (/sb/0xafd77fef1818a9d94623a8a707e0fdcefe5804f0.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xafd77fef1818a9d94623a8a707e0fdcefe5804f0.sol:
+	- pragma solidity0.6.0 (/sb/0xafd77fef1818a9d94623a8a707e0fdcefe5804f0.sol#1): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_wallet' of YFMSTokenLock. (/sb/0xafd77fef1818a9d94623a8a707e0fdcefe5804f0.sol#81-84) is not in mixedCase
+Parameter '_from' of YFMSTokenLock.lockDevTokens (/sb/0xafd77fef1818a9d94623a8a707e0fdcefe5804f0.sol#87) is not in mixedCase
+Parameter '_amount' of YFMSTokenLock.lockDevTokens (/sb/0xafd77fef1818a9d94623a8a707e0fdcefe5804f0.sol#87) is not in mixedCase
+Parameter '_from' of YFMSTokenLock.lockRewardsTokens (/sb/0xafd77fef1818a9d94623a8a707e0fdcefe5804f0.sol#96) is not in mixedCase
+Parameter '_amount' of YFMSTokenLock.lockRewardsTokens (/sb/0xafd77fef1818a9d94623a8a707e0fdcefe5804f0.sol#96-97) is not in mixedCase
+Parameter '_to' of YFMSTokenLock.withdrawDevTokens (/sb/0xafd77fef1818a9d94623a8a707e0fdcefe5804f0.sol#104-105) is not in mixedCase
+Parameter '_amount' of YFMSTokenLock.withdrawDevTokens (/sb/0xafd77fef1818a9d94623a8a707e0fdcefe5804f0.sol#105) is not in mixedCase
+Parameter '_to' of YFMSTokenLock.withdrawRewardsTokens (/sb/0xafd77fef1818a9d94623a8a707e0fdcefe5804f0.sol#113) is not in mixedCase
+Parameter '_amount' of YFMSTokenLock.withdrawRewardsTokens (/sb/0xafd77fef1818a9d94623a8a707e0fdcefe5804f0.sol#113) is not in mixedCase
+Variable 'YFMSTokenLock.YFMSLockedDev' (/sb/0xafd77fef1818a9d94623a8a707e0fdcefe5804f0.sol#76-77) is not in mixedCase
+Variable 'YFMSTokenLock.YFMSLockedRewards' (/sb/0xafd77fef1818a9d94623a8a707e0fdcefe5804f0.sol#77-79) is not in mixedCase
+Variable 'YFMSTokenLock.YFMSToken' (/sb/0xafd77fef1818a9d94623a8a707e0fdcefe5804f0.sol#80-81) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xafd77fef1818a9d94623a8a707e0fdcefe5804f0.sol analyzed (3 contracts), 24 result(s) found

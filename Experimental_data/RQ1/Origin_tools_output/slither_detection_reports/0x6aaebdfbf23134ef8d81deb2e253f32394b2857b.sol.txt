@@ -1,0 +1,98 @@
+INFO:Detectors:[93m
+Contract locking ether found in /sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol:
+	Contract Proxy has payable functions:
+	 - fallback (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#167-194)
+	But does not have a function to withdraw the ether
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#contracts-that-lock-ether[0m
+INFO:Detectors:[93m
+feesPaid in FeePool._recordFeePayment (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#1979) is a local variable never initialiazed
+rewardPaid in FeePool._recordRewardPayment (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#2016) is a local variable never initialiazed
+nullResults in FeePool.feesByPeriod (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#2169-2170) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[93m
+FeePool.appendVestingEntry (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#1957-1971) does not use the value returned by external calls:
+	-IERC20(address(synthetix())).transferFrom(messageSender,address(rewardEscrow()),quantity) (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#1962-1968)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+FeePoolEternalStorage.importFeeWithdrawalData has external calls inside a loop:
+	- this.setUIntValue(keccak256(bytes)(abi.encodePacked(LAST_FEE_WITHDRAWAL,accounts[i])),feePeriodIDs[i]) (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#1422-1424)
+FeePool.setExchangeFeeRateForSynths has external calls inside a loop:
+	- feePoolEternalStorage().setUIntValue(keccak256(bytes)(abi.encodePacked(SYNTH_EXCHANGE_FEE_RATE,synthKeys[i])),exchangeFeeRates[i]) (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#1946-1947)
+FeePool.feesByPeriod has external calls inside a loop:
+	- (userOwnershipPercentage,debtEntryIndex) = _feePoolState.applicableIssuanceData(account,closingDebtIndex) (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#2215-2217)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in FeePool.importFeePeriod (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#1918-1939):
+	External calls:
+	- require(bool,string)(startingDebtIndex <= synthetixState().debtLedgerLength(),Cannot import bad data) (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#1923-1926)
+	State variables written after the call(s):
+	- _recentFeePeriods (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#1926-1938)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Proxy._emit uses assembly (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#131-164)
+	- /sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#139-164
+Proxy.fallback uses assembly (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#167-194)
+	- /sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#171-191
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+FeePool.sUSD should be constant (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#1583-1584)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+FeePoolState.getAccountsDebtEntry (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#1116-1126) should be declared external
+FeePool.importFeePeriod (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#1918-1939) should be declared external
+FeePool.appendVestingEntry (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#1957-1971) should be declared external
+FeePool.getPenaltyThresholdRatio (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#2326-2329) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol:
+	- pragma solidity^0.5.16 (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#77-78): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_owner' of Owned. (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#82-83) is not in mixedCase
+Parameter '_owner' of Owned.nominateNewOwner (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#89-90) is not in mixedCase
+Parameter '_target' of Proxy.setTarget (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#127) is not in mixedCase
+Function 'Proxy._emit' (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#131-164) is not in mixedCase
+Parameter '_proxy' of Proxyable. (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#215-216) is not in mixedCase
+Parameter '_proxy' of Proxyable.setProxy (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#224) is not in mixedCase
+Parameter '_integrationProxy' of Proxyable.setIntegrationProxy (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#231-232) is not in mixedCase
+Modifier 'Proxyable.optionalProxy_onlyOwner' (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#247-263) is not in mixedCase
+Parameter '_beneficiary' of SelfDestructible.setSelfDestructBeneficiary (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#286-287) is not in mixedCase
+Parameter '_resolver' of MixinResolver. (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#514-515) is not in mixedCase
+Parameter '_addressesToCache' of MixinResolver. (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#515-517) is not in mixedCase
+Parameter '_resolver' of MixinResolver.setResolverAndSyncCache (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#536-537) is not in mixedCase
+Parameter '_resolver' of MixinResolver.isResolverCached (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#558-559) is not in mixedCase
+Function 'IFeePool.FEE_ADDRESS' (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#605-607) is not in mixedCase
+Function 'SafeDecimalMath._multiplyDecimalRound' (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#806-815) is not in mixedCase
+Function 'SafeDecimalMath._divideDecimalRound' (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#879-885) is not in mixedCase
+Constant 'SafeDecimalMath.highPrecisionDecimals' (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#758) is not in UPPER_CASE_WITH_UNDERSCORES
+Parameter '_feePool' of FeePoolState. (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#1101) is not in mixedCase
+Parameter '_feePool' of FeePoolState.setFeePool (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#1110) is not in mixedCase
+Parameter '_associatedContract' of State. (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#1245) is not in mixedCase
+Parameter '_associatedContract' of State.setAssociatedContract (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#1254-1255) is not in mixedCase
+Variable 'EternalStorage.UIntStorage' (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#1288-1289) is not in mixedCase
+Variable 'EternalStorage.StringStorage' (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#1289-1292) is not in mixedCase
+Variable 'EternalStorage.AddressStorage' (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#1292) is not in mixedCase
+Variable 'EternalStorage.BytesStorage' (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#1293-1296) is not in mixedCase
+Variable 'EternalStorage.Bytes32Storage' (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#1296) is not in mixedCase
+Variable 'EternalStorage.BooleanStorage' (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#1296-1297) is not in mixedCase
+Variable 'EternalStorage.IntStorage' (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#1298-1301) is not in mixedCase
+Function 'FeePool._recentFeePeriodsStorage' (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#1743-1745) is not in mixedCase
+Parameter '_feePeriodDuration' of FeePool.setFeePeriodDuration (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#1771) is not in mixedCase
+Parameter '_percent' of FeePool.setTargetThreshold (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#1775) is not in mixedCase
+Function 'FeePool._claimFees' (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#1877-1913) is not in mixedCase
+Function 'FeePool._recordFeePayment' (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#1975-2009) is not in mixedCase
+Function 'FeePool._recordRewardPayment' (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#2012-2060) is not in mixedCase
+Function 'FeePool._payFees' (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#2062-2079) is not in mixedCase
+Function 'FeePool._payRewards' (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#2085-2091) is not in mixedCase
+Function 'FeePool._isFeesClaimableAndAnyRatesStale' (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#2133-2155) is not in mixedCase
+Function 'FeePool._feesAndRewardsFromPeriod' (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#2230-2256) is not in mixedCase
+Function 'FeePool._effectiveDebtRatioForPeriod' (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#2256-2273) is not in mixedCase
+Parameter '_claimingAddress' of FeePool.getLastFeeWithdrawal (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#2316) is not in mixedCase
+Function 'FeePool._setLastFeeWithdrawal' (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#2335-2340) is not in mixedCase
+Parameter '_claimingAddress' of FeePool._setLastFeeWithdrawal (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#2335) is not in mixedCase
+Parameter '_feePeriodID' of FeePool._setLastFeeWithdrawal (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#2335) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+FeePool.addressesToCache (/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol#1645-1653) is never used in FeePool
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0x6aaebdfbf23134ef8d81deb2e253f32394b2857b.sol analyzed (26 contracts), 61 result(s) found

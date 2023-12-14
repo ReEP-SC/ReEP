@@ -1,0 +1,50 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x53886565ca8d856eb96f0d2859d1e49a71211880.sol:
+/sb/0x53886565ca8d856eb96f0d2859d1e49a71211880.sol:149:42: Warning: Using contract member "balance" inherited from the address type is deprecated. Convert the contract to "address" type to access the member, for example use "address(contract).balance" instead.
+      if((_address [i].balance == 0) && (this.balance >= _ethAmount))
+                                         ^----------^
+/sb/0x53886565ca8d856eb96f0d2859d1e49a71211880.sol:189:24: Warning: Using contract member "balance" inherited from the address type is deprecated. Convert the contract to "address" type to access the member, for example use "address(contract).balance" instead.
+    require(owner.send(this.balance));
+                       ^----------^
+/sb/0x53886565ca8d856eb96f0d2859d1e49a71211880.sol:201:3: Warning: No visibility specified. Defaulting to "public". 
+  function() payable {
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x53886565ca8d856eb96f0d2859d1e49a71211880.sol:217:3: Warning: No visibility specified. Defaulting to "public". 
+  function kill() onlyOwner {
+  ^ (Relevant source part starts here and spans across multiple lines).
+
+INFO:Detectors:[93m
+AirDrop.doAirDrop (/sb/0x53886565ca8d856eb96f0d2859d1e49a71211880.sol#139-169) uses a dangerous strict equality:
+	- (_address[i].balance == 0) && (this.balance >= _ethAmount)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+AirDrop.doAirDrop (/sb/0x53886565ca8d856eb96f0d2859d1e49a71211880.sol#139-169) does not use the value returned by external calls:
+	-tokenInstance.transfer(_address[i],_amount) (/sb/0x53886565ca8d856eb96f0d2859d1e49a71211880.sol#153-157)
+AirDrop.sendBatch (/sb/0x53886565ca8d856eb96f0d2859d1e49a71211880.sol#173-201) does not use the value returned by external calls:
+	-tokenInstance.transfer(_recipients[i],_values[i]) (/sb/0x53886565ca8d856eb96f0d2859d1e49a71211880.sol#189-197)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+AirDrop.doAirDrop has external calls inside a loop:
+	- tokenInstance.transfer(_address[i],_amount) (/sb/0x53886565ca8d856eb96f0d2859d1e49a71211880.sol#153-157)
+AirDrop.doAirDrop has external calls inside a loop:
+	- require(bool)(_address[i].send(_ethAmount)) (/sb/0x53886565ca8d856eb96f0d2859d1e49a71211880.sol#165-169)
+AirDrop.sendBatch has external calls inside a loop:
+	- tokenInstance.transfer(_recipients[i],_values[i]) (/sb/0x53886565ca8d856eb96f0d2859d1e49a71211880.sol#189-197)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Token.transfer (/sb/0x53886565ca8d856eb96f0d2859d1e49a71211880.sol#23-25) should be declared external
+Ownable.transferOwnership (/sb/0x53886565ca8d856eb96f0d2859d1e49a71211880.sol#91-109) should be declared external
+AirDrop.doAirDrop (/sb/0x53886565ca8d856eb96f0d2859d1e49a71211880.sol#139-169) should be declared external
+AirDrop.sendBatch (/sb/0x53886565ca8d856eb96f0d2859d1e49a71211880.sol#173-201) should be declared external
+AirDrop.transferEthToOnwer (/sb/0x53886565ca8d856eb96f0d2859d1e49a71211880.sol#201-219) should be declared external
+AirDrop.fallback (/sb/0x53886565ca8d856eb96f0d2859d1e49a71211880.sol) should be declared external
+AirDrop.kill (/sb/0x53886565ca8d856eb96f0d2859d1e49a71211880.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_tokenAddress' of AirDrop. (/sb/0x53886565ca8d856eb96f0d2859d1e49a71211880.sol#131) is not in mixedCase
+Parameter '_address' of AirDrop.doAirDrop (/sb/0x53886565ca8d856eb96f0d2859d1e49a71211880.sol#141) is not in mixedCase
+Parameter '_amount' of AirDrop.doAirDrop (/sb/0x53886565ca8d856eb96f0d2859d1e49a71211880.sol#141-143) is not in mixedCase
+Parameter '_ethAmount' of AirDrop.doAirDrop (/sb/0x53886565ca8d856eb96f0d2859d1e49a71211880.sol#143-145) is not in mixedCase
+Parameter '_recipients' of AirDrop.sendBatch (/sb/0x53886565ca8d856eb96f0d2859d1e49a71211880.sol#173-175) is not in mixedCase
+Parameter '_values' of AirDrop.sendBatch (/sb/0x53886565ca8d856eb96f0d2859d1e49a71211880.sol#175) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x53886565ca8d856eb96f0d2859d1e49a71211880.sol analyzed (3 contracts), 19 result(s) found

@@ -1,0 +1,105 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol:
+Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing "SPDX-License-Identifier: <SPDX-License>" to each source file. Use "SPDX-License-Identifier: UNLICENSED" for non-open-source code. Please see https://spdx.org for more information.
+--> /sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol
+
+
+INFO:Detectors:[93m
+Nft.isContract (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+Token (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#9-14) has incorrect ERC20 function interface(s):
+	-transfer (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#10-14)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[93m
+Reentrancy in Nft.buy (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#164-186):
+	External calls:
+	- require(bool,string)(FtInterface(ft).onBuy(seller,msg.sender,priceOf[_id],sellPrice),onBuy) (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#168-169)
+	- transfer(seller,msg.sender,_id) (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#169-170)
+	State variables written after the call(s):
+	- ownerOf (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#169-170)
+	- priceOf (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#172)
+	- sellPriceOf (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#173)
+Reentrancy in Nft.transfer (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#309-322):
+	External calls:
+	- ownerToIds[from].pop() (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol)
+	State variables written after the call(s):
+	- idToIndex (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol)
+	- ownerToIds (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+Nft.transfer (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#309-322) does not use the value returned by external calls:
+	-ownerToIds[from].pop() (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in Nft.mint (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#121-155):
+	External calls:
+	- require(bool,string)(FtInterface(ft).onMint(msg.sender,_price),onMint) (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#132-133)
+	State variables written after the call(s):
+	- descriptionOf (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#140)
+	- idToIndex (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#134-135)
+	- imageOf (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#140-141)
+	- nameOf (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#139)
+	- ownerOf (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#133-134)
+	- ownerToIds (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#136-137)
+	- priceOf (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#137)
+	- sellPriceOf (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#138-139)
+	- totalSupply (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#148)
+Reentrancy in Nft.safeBatchTransferFrom (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#216-250):
+	External calls:
+	- transfer(_from,_to,id) (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#231-233)
+	State variables written after the call(s):
+	- sellPriceOf (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#236-237)
+Reentrancy in Nft.safeTransferFrom (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#187-215):
+	External calls:
+	- transfer(_from,_to,_id) (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#195-196)
+	- require(bool,string)(FtInterface(ft).onTransfer(_from,_to,priceOf[_id]),onTransfer) (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#196-199)
+	State variables written after the call(s):
+	- sellPriceOf (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#202)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Nft.isContract uses assembly (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol)
+	- /sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol:
+	- pragma solidity^0.6.4 (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#5-8): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_contract' of Nft.clean (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#109-111) is not in mixedCase
+Parameter '_value' of Nft.clean (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#111) is not in mixedCase
+Parameter '_ft' of Nft.setFt (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#116) is not in mixedCase
+Parameter '_price' of Nft.mint (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#122) is not in mixedCase
+Parameter '_sellPrice' of Nft.mint (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#122-123) is not in mixedCase
+Parameter '_name' of Nft.mint (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#123-125) is not in mixedCase
+Parameter '_description' of Nft.mint (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#125) is not in mixedCase
+Parameter '_image' of Nft.mint (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#125-126) is not in mixedCase
+Parameter '_data' of Nft.mint (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#126) is not in mixedCase
+Parameter '_id' of Nft.setPrice (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#156) is not in mixedCase
+Parameter '_sellPrice' of Nft.setPrice (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#156) is not in mixedCase
+Parameter '_id' of Nft.buy (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#164) is not in mixedCase
+Parameter '_data' of Nft.buy (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#164-165) is not in mixedCase
+Parameter '_from' of Nft.safeTransferFrom (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#188) is not in mixedCase
+Parameter '_to' of Nft.safeTransferFrom (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#188) is not in mixedCase
+Parameter '_id' of Nft.safeTransferFrom (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#188) is not in mixedCase
+Parameter '_value' of Nft.safeTransferFrom (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#188-189) is not in mixedCase
+Parameter '_data' of Nft.safeTransferFrom (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#189) is not in mixedCase
+Parameter '_from' of Nft.safeBatchTransferFrom (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#217) is not in mixedCase
+Parameter '_to' of Nft.safeBatchTransferFrom (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#217) is not in mixedCase
+Parameter '_ids' of Nft.safeBatchTransferFrom (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#217-218) is not in mixedCase
+Parameter '_values' of Nft.safeBatchTransferFrom (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#218) is not in mixedCase
+Parameter '_data' of Nft.safeBatchTransferFrom (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#218) is not in mixedCase
+Parameter '_operator' of Nft.setApprovalForAll (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#253-254) is not in mixedCase
+Parameter '_approved' of Nft.setApprovalForAll (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#254) is not in mixedCase
+Parameter '_owner' of Nft.balanceOf (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#259-260) is not in mixedCase
+Parameter '_id' of Nft.balanceOf (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#260) is not in mixedCase
+Parameter '_owners' of Nft.balanceOfBatch (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#262) is not in mixedCase
+Parameter '_ids' of Nft.balanceOfBatch (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#262-263) is not in mixedCase
+Parameter '_owner' of Nft.tokensOf (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#277) is not in mixedCase
+Parameter '_owner' of Nft.idOf (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#278-281) is not in mixedCase
+Parameter '_index' of Nft.idOf (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#281) is not in mixedCase
+Parameter '_owner' of Nft.isApprovedForAll (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#284) is not in mixedCase
+Parameter '_operator' of Nft.isApprovedForAll (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#284) is not in mixedCase
+Parameter '_interfaceId' of Nft.supportsInterface (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#289) is not in mixedCase
+Parameter '_id' of Nft.uri (/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol#297) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xc569b368d2f6ce6ae819caddedfd95dce3390d51.sol analyzed (5 contracts), 46 result(s) found

@@ -1,0 +1,83 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x719c46594beb8cfcf14a11f9c42612150c04af7d.sol:
+/sb/0x719c46594beb8cfcf14a11f9c42612150c04af7d.sol:101:24: Warning: This looks like an address but has an invalid checksum. If this is not used as an address, please prepend '00'. Correct checksummed address: '0xa949f4b5083b6F8A4e945812754E86E08B418F13'. For more information please see https://solidity.readthedocs.io/en/develop/types.html#address-literals
+        feeCollector = 0xa949f4b5083b6f8a4e945812754e86e08b418f13;
+                       ^----------------------------------------^
+/sb/0x719c46594beb8cfcf14a11f9c42612150c04af7d.sol:103:39: Warning: This looks like an address but has an invalid checksum. If this is not used as an address, please prepend '00'. Correct checksummed address: '0x14be332156b67F8e8A1e99a59c6943c128260aBb'. For more information please see https://solidity.readthedocs.io/en/develop/types.html#address-literals
+        discountToken = DiscountToken(0x14be332156b67f8e8a1e99a59c6943c128260abb);
+                                      ^----------------------------------------^
+/sb/0x719c46594beb8cfcf14a11f9c42612150c04af7d.sol:183:13: Warning: Return value of low-level calls not used.
+            feeCollector.call.value(fee)();
+            ^----------------------------^
+
+INFO:Detectors:[91m
+Reentrancy in TwoCoinsOneMoon.withdraw (/sb/0x719c46594beb8cfcf14a11f9c42612150c04af7d.sol#183-207):
+	External calls:
+	- feeCollector.call.value(fee)() (/sb/0x719c46594beb8cfcf14a11f9c42612150c04af7d.sol#199)
+	State variables written after the call(s):
+	- balance (/sb/0x719c46594beb8cfcf14a11f9c42612150c04af7d.sol#205)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities[0m
+INFO:Detectors:[93m
+TwoCoinsOneMoon.depositBalance (/sb/0x719c46594beb8cfcf14a11f9c42612150c04af7d.sol#207-235) uses a dangerous strict equality:
+	- winner == 0
+TwoCoinsOneMoon.depositBalance (/sb/0x719c46594beb8cfcf14a11f9c42612150c04af7d.sol#207-235) uses a dangerous strict equality:
+	- winner == 0
+TwoCoinsOneMoon.getBetAmount (/sb/0x719c46594beb8cfcf14a11f9c42612150c04af7d.sol#119-147) uses a dangerous strict equality:
+	- discountToken.balanceOf(msg.sender) == 0
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Reentrancy in TwoCoinsOneMoon.betBlueCoin (/sb/0x719c46594beb8cfcf14a11f9c42612150c04af7d.sol#147-165):
+	External calls:
+	- betAmount = getBetAmount() (/sb/0x719c46594beb8cfcf14a11f9c42612150c04af7d.sol#147-152)
+	State variables written after the call(s):
+	- balance (/sb/0x719c46594beb8cfcf14a11f9c42612150c04af7d.sol#165)
+Reentrancy in TwoCoinsOneMoon.betRedCoin (/sb/0x719c46594beb8cfcf14a11f9c42612150c04af7d.sol#165-182):
+	External calls:
+	- betAmount = getBetAmount() (/sb/0x719c46594beb8cfcf14a11f9c42612150c04af7d.sol#169-175)
+	State variables written after the call(s):
+	- balance (/sb/0x719c46594beb8cfcf14a11f9c42612150c04af7d.sol#181)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+Reentrancy in TwoCoinsOneMoon.betBlueCoin (/sb/0x719c46594beb8cfcf14a11f9c42612150c04af7d.sol#147-165):
+	External calls:
+	- betAmount = getBetAmount() (/sb/0x719c46594beb8cfcf14a11f9c42612150c04af7d.sol#147-152)
+	State variables written after the call(s):
+	- bettorsBlue (/sb/0x719c46594beb8cfcf14a11f9c42612150c04af7d.sol#159-163)
+	- history (/sb/0x719c46594beb8cfcf14a11f9c42612150c04af7d.sol#165)
+	- lastEventId (/sb/0x719c46594beb8cfcf14a11f9c42612150c04af7d.sol#165)
+	- lastLevelChangeBlock (/sb/0x719c46594beb8cfcf14a11f9c42612150c04af7d.sol#165)
+	- marketCapBlue (/sb/0x719c46594beb8cfcf14a11f9c42612150c04af7d.sol#157)
+	- marketCapBlue (/sb/0x719c46594beb8cfcf14a11f9c42612150c04af7d.sol#165)
+	- marketCapRed (/sb/0x719c46594beb8cfcf14a11f9c42612150c04af7d.sol#165)
+	- moonLevel (/sb/0x719c46594beb8cfcf14a11f9c42612150c04af7d.sol#165)
+	- startBetBlue (/sb/0x719c46594beb8cfcf14a11f9c42612150c04af7d.sol#165)
+	- startBetRed (/sb/0x719c46594beb8cfcf14a11f9c42612150c04af7d.sol#165)
+Reentrancy in TwoCoinsOneMoon.betRedCoin (/sb/0x719c46594beb8cfcf14a11f9c42612150c04af7d.sol#165-182):
+	External calls:
+	- betAmount = getBetAmount() (/sb/0x719c46594beb8cfcf14a11f9c42612150c04af7d.sol#169-175)
+	State variables written after the call(s):
+	- bettorsRed (/sb/0x719c46594beb8cfcf14a11f9c42612150c04af7d.sol#177-181)
+	- history (/sb/0x719c46594beb8cfcf14a11f9c42612150c04af7d.sol#181)
+	- lastEventId (/sb/0x719c46594beb8cfcf14a11f9c42612150c04af7d.sol#181)
+	- lastLevelChangeBlock (/sb/0x719c46594beb8cfcf14a11f9c42612150c04af7d.sol#181)
+	- marketCapBlue (/sb/0x719c46594beb8cfcf14a11f9c42612150c04af7d.sol#181)
+	- marketCapRed (/sb/0x719c46594beb8cfcf14a11f9c42612150c04af7d.sol#175-177)
+	- marketCapRed (/sb/0x719c46594beb8cfcf14a11f9c42612150c04af7d.sol#181)
+	- moonLevel (/sb/0x719c46594beb8cfcf14a11f9c42612150c04af7d.sol#181)
+	- startBetBlue (/sb/0x719c46594beb8cfcf14a11f9c42612150c04af7d.sol#181)
+	- startBetRed (/sb/0x719c46594beb8cfcf14a11f9c42612150c04af7d.sol#181)
+Reentrancy in TwoCoinsOneMoon.getBetAmount (/sb/0x719c46594beb8cfcf14a11f9c42612150c04af7d.sol#119-147):
+	External calls:
+	- discountToken.balanceOf(msg.sender) == 0 (/sb/0x719c46594beb8cfcf14a11f9c42612150c04af7d.sol#125-141)
+	State variables written after the call(s):
+	- balance (/sb/0x719c46594beb8cfcf14a11f9c42612150c04af7d.sol#139-141)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+TwoCoinsOneMoon.betBlueCoin (/sb/0x719c46594beb8cfcf14a11f9c42612150c04af7d.sol#147-165) should be declared external
+TwoCoinsOneMoon.betRedCoin (/sb/0x719c46594beb8cfcf14a11f9c42612150c04af7d.sol#165-182) should be declared external
+TwoCoinsOneMoon.withdraw (/sb/0x719c46594beb8cfcf14a11f9c42612150c04af7d.sol#183-207) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Low level call in TwoCoinsOneMoon.withdraw (/sb/0x719c46594beb8cfcf14a11f9c42612150c04af7d.sol#183-207):
+	-feeCollector.call.value(fee)() /sb/0x719c46594beb8cfcf14a11f9c42612150c04af7d.sol#199
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Slither:/sb/0x719c46594beb8cfcf14a11f9c42612150c04af7d.sol analyzed (2 contracts), 12 result(s) found

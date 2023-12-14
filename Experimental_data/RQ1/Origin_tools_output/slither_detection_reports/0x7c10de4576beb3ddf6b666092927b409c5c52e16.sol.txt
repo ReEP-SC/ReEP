@@ -1,0 +1,66 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x7c10de4576beb3ddf6b666092927b409c5c52e16.sol:
+/sb/0x7c10de4576beb3ddf6b666092927b409c5c52e16.sol:503:9: Warning: Return value of low-level calls not used.
+        _target.call.value(_value)(_data);
+        ^-------------------------------^
+
+INFO:Detectors:[92m
+MultiTokenNetwork.allWalletBalances has external calls inside a loop:
+	- balances[i] = ERC20(multitokens[i]).balanceOf(wallet) (/sb/0x7c10de4576beb3ddf6b666092927b409c5c52e16.sol#451)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in MultiTokenNetwork.deploy (/sb/0x7c10de4576beb3ddf6b666092927b409c5c52e16.sol):
+	External calls:
+	- mtkn = deployers[index].deploy(data) (/sb/0x7c10de4576beb3ddf6b666092927b409c5c52e16.sol)
+	State variables written after the call(s):
+	- multitokens (/sb/0x7c10de4576beb3ddf6b666092927b409c5c52e16.sol)
+Reentrancy in MultiTokenNetwork.setDeployer (/sb/0x7c10de4576beb3ddf6b666092927b409c5c52e16.sol#493-507):
+	External calls:
+	- require(bool,string)(deployer.owner() == address(this),setDeployer: first set MultiTokenNetwork as owner) (/sb/0x7c10de4576beb3ddf6b666092927b409c5c52e16.sol#499-503)
+	State variables written after the call(s):
+	- deployers (/sb/0x7c10de4576beb3ddf6b666092927b409c5c52e16.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+ERC20Basic.totalSupply (/sb/0x7c10de4576beb3ddf6b666092927b409c5c52e16.sol#29-31) should be declared external
+ERC20Basic.balanceOf (/sb/0x7c10de4576beb3ddf6b666092927b409c5c52e16.sol#31-33) should be declared external
+ERC20Basic.transfer (/sb/0x7c10de4576beb3ddf6b666092927b409c5c52e16.sol#33-35) should be declared external
+ERC20.allowance (/sb/0x7c10de4576beb3ddf6b666092927b409c5c52e16.sol#57-61) should be declared external
+ERC20.transferFrom (/sb/0x7c10de4576beb3ddf6b666092927b409c5c52e16.sol#61-67) should be declared external
+ERC20.approve (/sb/0x7c10de4576beb3ddf6b666092927b409c5c52e16.sol#67-73) should be declared external
+Ownable.renounceOwnership (/sb/0x7c10de4576beb3ddf6b666092927b409c5c52e16.sol#175-181) should be declared external
+Ownable.transferOwnership (/sb/0x7c10de4576beb3ddf6b666092927b409c5c52e16.sol#193-197) should be declared external
+Pausable.pause (/sb/0x7c10de4576beb3ddf6b666092927b409c5c52e16.sol#297-309) should be declared external
+Pausable.unpause (/sb/0x7c10de4576beb3ddf6b666092927b409c5c52e16.sol#315-321) should be declared external
+IBasicMultiToken.tokensCount (/sb/0x7c10de4576beb3ddf6b666092927b409c5c52e16.sol#343) should be declared external
+IBasicMultiToken.bundleFirstTokens (/sb/0x7c10de4576beb3ddf6b666092927b409c5c52e16.sol#347-355) should be declared external
+IBasicMultiToken.bundle (/sb/0x7c10de4576beb3ddf6b666092927b409c5c52e16.sol#355-359) should be declared external
+IBasicMultiToken.unbundle (/sb/0x7c10de4576beb3ddf6b666092927b409c5c52e16.sol#361-363) should be declared external
+IBasicMultiToken.unbundleSome (/sb/0x7c10de4576beb3ddf6b666092927b409c5c52e16.sol#363-367) should be declared external
+IBasicMultiToken.disableBundling (/sb/0x7c10de4576beb3ddf6b666092927b409c5c52e16.sol#367-371) should be declared external
+IBasicMultiToken.enableBundling (/sb/0x7c10de4576beb3ddf6b666092927b409c5c52e16.sol#371) should be declared external
+IMultiToken.getReturn (/sb/0x7c10de4576beb3ddf6b666092927b409c5c52e16.sol#387-393) should be declared external
+IMultiToken.change (/sb/0x7c10de4576beb3ddf6b666092927b409c5c52e16.sol#393-399) should be declared external
+IMultiToken.disableChanges (/sb/0x7c10de4576beb3ddf6b666092927b409c5c52e16.sol#399-403) should be declared external
+MultiTokenNetwork.multitokensCount (/sb/0x7c10de4576beb3ddf6b666092927b409c5c52e16.sol#423-429) should be declared external
+MultiTokenNetwork.allMultitokens (/sb/0x7c10de4576beb3ddf6b666092927b409c5c52e16.sol#429-437) should be declared external
+MultiTokenNetwork.allWalletBalances (/sb/0x7c10de4576beb3ddf6b666092927b409c5c52e16.sol#437-453) should be declared external
+MultiTokenNetwork.deleteMultitoken (/sb/0x7c10de4576beb3ddf6b666092927b409c5c52e16.sol#453-475) should be declared external
+MultiTokenNetwork.disableBundlingMultitoken (/sb/0x7c10de4576beb3ddf6b666092927b409c5c52e16.sol#475-477) should be declared external
+MultiTokenNetwork.enableBundlingMultitoken (/sb/0x7c10de4576beb3ddf6b666092927b409c5c52e16.sol#477-487) should be declared external
+MultiTokenNetwork.disableChangesMultitoken (/sb/0x7c10de4576beb3ddf6b666092927b409c5c52e16.sol#487-491) should be declared external
+MultiTokenNetwork.setDeployer (/sb/0x7c10de4576beb3ddf6b666092927b409c5c52e16.sol#493-507) should be declared external
+MultiTokenNetwork.deploy (/sb/0x7c10de4576beb3ddf6b666092927b409c5c52e16.sol) should be declared external
+MultiTokenNetwork.makeCall (/sb/0x7c10de4576beb3ddf6b666092927b409c5c52e16.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Low level call in MultiTokenNetwork.makeCall (/sb/0x7c10de4576beb3ddf6b666092927b409c5c52e16.sol):
+	-_target.call.value(_value)(_data) /sb/0x7c10de4576beb3ddf6b666092927b409c5c52e16.sol
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Parameter '_newOwner' of Ownable.transferOwnership (/sb/0x7c10de4576beb3ddf6b666092927b409c5c52e16.sol#193) is not in mixedCase
+Function 'Ownable._transferOwnership' (/sb/0x7c10de4576beb3ddf6b666092927b409c5c52e16.sol#211-223) is not in mixedCase
+Parameter '_newOwner' of Ownable._transferOwnership (/sb/0x7c10de4576beb3ddf6b666092927b409c5c52e16.sol#211) is not in mixedCase
+Parameter '_target' of MultiTokenNetwork.makeCall (/sb/0x7c10de4576beb3ddf6b666092927b409c5c52e16.sol) is not in mixedCase
+Parameter '_value' of MultiTokenNetwork.makeCall (/sb/0x7c10de4576beb3ddf6b666092927b409c5c52e16.sol) is not in mixedCase
+Parameter '_data' of MultiTokenNetwork.makeCall (/sb/0x7c10de4576beb3ddf6b666092927b409c5c52e16.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x7c10de4576beb3ddf6b666092927b409c5c52e16.sol analyzed (8 contracts), 40 result(s) found

@@ -1,0 +1,112 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol:
+/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol:131:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function AXD(string name, string symbol, uint8 decimals, uint256 totalSupply) public {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol:73:3: Warning: Functions in interfaces should be declared external.
+  function balanceOf(address who) public view returns (uint256);
+  ^------------------------------------------------------------^
+/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol:75:3: Warning: Functions in interfaces should be declared external.
+  function transfer(address to, uint256 value) public returns (bool);
+  ^-----------------------------------------------------------------^
+/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol:77:3: Warning: Functions in interfaces should be declared external.
+  function allowance(address owner, address spender) public view returns (uint256);
+  ^-------------------------------------------------------------------------------^
+/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol:79:3: Warning: Functions in interfaces should be declared external.
+  function transferFrom(address from, address to, uint256 value) public returns (bool);
+  ^-----------------------------------------------------------------------------------^
+/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol:81:3: Warning: Functions in interfaces should be declared external.
+  function approve(address spender, uint256 value) public returns (bool);
+  ^---------------------------------------------------------------------^
+/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol:93:5: Warning: Functions in interfaces should be declared external.
+    function transfer(address to, uint value, bytes data) public;
+    ^-----------------------------------------------------------^
+/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol:213:6: Warning: Invoking events without "emit" prefix is deprecated.
+     Transfer(msg.sender, _to, _value);
+     ^-------------------------------^
+/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol:245:5: Warning: Invoking events without "emit" prefix is deprecated.
+    Transfer(_from, _to, _value);
+    ^--------------------------^
+/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol:257:6: Warning: Invoking events without "emit" prefix is deprecated.
+     Approval(msg.sender, _spender, _value);
+     ^------------------------------------^
+/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol:277:6: Warning: Invoking events without "emit" prefix is deprecated.
+     Approval(msg.sender, _spender, allowed[msg.sender][_spender]);
+     ^-----------------------------------------------------------^
+/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol:299:6: Warning: Invoking events without "emit" prefix is deprecated.
+     Approval(msg.sender, _spender, allowed[msg.sender][_spender]);
+     ^-----------------------------------------------------------^
+/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol:323:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Transfer(msg.sender, _to, _value, _data);
+        ^--------------------------------------^
+/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol:329:3: Warning: Function state mutability can be restricted to view
+  function isContract(address _addr) private returns (bool is_contract) {
+  ^ (Relevant source part starts here and spans across multiple lines).
+
+INFO:Detectors:[92m
+AXD.AXD.name (local variable @ /sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol#137) shadows:
+	- AXD.name (function @ /sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol#165-177)
+AXD.AXD.symbol (local variable @ /sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol#137-139) shadows:
+	- AXD.symbol (function @ /sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol#179-193)
+AXD.AXD.decimals (local variable @ /sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol#139) shadows:
+	- AXD.decimals (function @ /sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol#195-203)
+AXD.AXD.totalSupply (local variable @ /sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol#139-141) shadows:
+	- AXD.totalSupply (function @ /sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol#203-209)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+Reentrancy in AXD.transfer (/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol#319-345):
+	External calls:
+	- receiver.tokenFallback(msg.sender,_value,_data) (/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol#329-335)
+	State variables written after the call(s):
+	- balances (/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol#335-337)
+	- balances (/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol#337-341)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+AXD.isContract uses assembly (/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol)
+	- /sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+ERC20.balanceOf (/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol#75-76) should be declared external
+AXD.balanceOf (/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol#231-236) should be declared external
+ERC20.transfer (/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol#77) should be declared external
+AXD.transfer (/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol#209-231) should be declared external
+ERC20.allowance (/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol#77-79) should be declared external
+AXD.allowance (/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol#275-279) should be declared external
+AXD.transferFrom (/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol#239-265) should be declared external
+ERC20.transferFrom (/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol#79-83) should be declared external
+ERC20.approve (/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol#83-85) should be declared external
+AXD.approve (/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol#265-275) should be declared external
+AXD.transfer (/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol#319-345) should be declared external
+ERC223.transfer (/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol#95) should be declared external
+ERC223ReceivingContract.tokenFallback (/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol#109-116) should be declared external
+AXD.name (/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol#165-177) should be declared external
+AXD.symbol (/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol#179-193) should be declared external
+AXD.decimals (/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol#195-203) should be declared external
+AXD.totalSupply (/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol#203-209) should be declared external
+AXD.increaseApproval (/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol#281-295) should be declared external
+AXD.decreaseApproval (/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol#295-319) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_owner' of AXD.balanceOf (/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol#232-233) is not in mixedCase
+Parameter '_to' of AXD.transfer (/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol#209-211) is not in mixedCase
+Parameter '_value' of AXD.transfer (/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol#211) is not in mixedCase
+Parameter '_owner' of AXD.allowance (/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol#275) is not in mixedCase
+Parameter '_spender' of AXD.allowance (/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol#275) is not in mixedCase
+Parameter '_from' of AXD.transferFrom (/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol#239) is not in mixedCase
+Parameter '_to' of AXD.transferFrom (/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol#239) is not in mixedCase
+Parameter '_value' of AXD.transferFrom (/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol#239-241) is not in mixedCase
+Parameter '_spender' of AXD.approve (/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol#265-267) is not in mixedCase
+Parameter '_value' of AXD.approve (/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol#267) is not in mixedCase
+Parameter '_to' of AXD.transfer (/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol#319-321) is not in mixedCase
+Parameter '_value' of AXD.transfer (/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol#321) is not in mixedCase
+Parameter '_data' of AXD.transfer (/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol#321) is not in mixedCase
+Function 'AXD.AXD' (/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol#135-163) is not in mixedCase
+Parameter '_spender' of AXD.increaseApproval (/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol#285) is not in mixedCase
+Parameter '_addedValue' of AXD.increaseApproval (/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol#285) is not in mixedCase
+Parameter '_spender' of AXD.decreaseApproval (/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol#295-297) is not in mixedCase
+Parameter '_subtractedValue' of AXD.decreaseApproval (/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol#297-299) is not in mixedCase
+Variable 'AXD._name' (/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol#121-125) is not in mixedCase
+Variable 'AXD._symbol' (/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol#125) is not in mixedCase
+Variable 'AXD._decimals' (/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol#127) is not in mixedCase
+Variable 'AXD._totalSupply' (/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol#127) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x42759fcc26f16dd954c3a6ae01fa6d3435e955db.sol analyzed (5 contracts), 47 result(s) found

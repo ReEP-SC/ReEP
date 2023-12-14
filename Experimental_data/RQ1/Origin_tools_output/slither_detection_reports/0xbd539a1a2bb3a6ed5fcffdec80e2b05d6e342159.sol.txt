@@ -1,0 +1,227 @@
+INFO:Detectors:[91m
+NokuCustomCrowdsale.forwardFunds (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol) sends eth to arbitrary user
+	Dangerous calls:
+	- wallet.transfer(amount) (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[93m
+AddressUtils.isContract (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#317-359) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+Reentrancy in TokenVesting.release (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2511-2525):
+	External calls:
+	- unreleased = releasableAmount(token) (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2513-2517)
+	State variables written after the call(s):
+	- released (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2519-2523)
+Reentrancy in TokenVesting.revoke (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2533-2553):
+	External calls:
+	- balance = token.balanceOf(this) (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2539)
+	- unreleased = releasableAmount(token) (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2541-2545)
+	State variables written after the call(s):
+	- revoked (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2547-2551)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+Crowdsale.distributeTokens (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#1687-1691) does not use the value returned by external calls:
+	-token.mint(beneficiary,tokenAmount) (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#1691)
+NokuCustomCrowdsale.distributeTokens (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol) does not use the value returned by external calls:
+	-NokuCustomERC20(token).mintLocked(beneficiary,tokenAmount) (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Crowdsale.constructor.maxWhitelistLength (local variable @ /sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#1367) shadows:
+	- Whitelistable.maxWhitelistLength (state variable @ /sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#123)
+Crowdsale.setMaxWhitelistLength.maxWhitelistLength (local variable @ /sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#1511-1513) shadows:
+	- Whitelistable.maxWhitelistLength (state variable @ /sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#123)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+Reentrancy in NokuTokenBurner.tokenReceived (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2047-2095):
+	External calls:
+	- assert(bool)(BurnableERC20(_token).burn(amountToBurn)) (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2075-2081)
+	State variables written after the call(s):
+	- burnedTokens (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2083-2085)
+Reentrancy in NokuTokenBurner.tokenReceived (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2047-2095):
+	External calls:
+	- assert(bool)(BurnableERC20(_token).burn(amountToBurn)) (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2075-2081)
+	- assert(bool)(BurnableERC20(_token).transfer(wallet,amountToTransfer)) (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2087-2092)
+	State variables written after the call(s):
+	- transferredTokens (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2093)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+TokenTimelock.constructor (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2323-2357) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool)(_releaseTime > block.timestamp) (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2343-2345)
+TokenTimelock.release (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2361-2383) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool)(block.timestamp >= releaseTime) (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2367-2371)
+TokenVesting.vestedAmount (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2575-2593) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp >= start.add(duration) || revoked[token] (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2585-2593)
+	- block.timestamp < cliff (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2583-2593)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+AddressUtils.isContract uses assembly (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#317-359)
+	- /sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#347-353
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+Whitelistable.isWhitelisted (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#165-167) should be declared external
+Ownable.renounceOwnership (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#439-445) should be declared external
+Ownable.transferOwnership (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#459-467) should be declared external
+Pausable.pause (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#571-575) should be declared external
+Pausable.unpause (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#577-581) should be declared external
+ERC20Basic.totalSupply (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#715-719) should be declared external
+BasicToken.totalSupply (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#759-763) should be declared external
+ERC20.allowance (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#839-847) should be declared external
+StandardToken.allowance (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#1006-1015) should be declared external
+ERC20.approve (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#851-853) should be declared external
+StandardToken.approve (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#969-977) should be declared external
+StandardToken.increaseApproval (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#1043-1071) should be declared external
+StandardToken.decreaseApproval (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#1097-1139) should be declared external
+MintableToken.finishMinting (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#1232-1245) should be declared external
+Crowdsale.hasStarted (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#1411-1413) should be declared external
+NokuPricingPlan.payFee (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#1739-1743) should be declared external
+NokuPricingPlan.usageFee (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#1773-1779) should be declared external
+NokuCustomToken.isCustomToken (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#1861-1867) should be declared external
+NokuCustomToken.finishBurning (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#1875-1883) should be declared external
+NokuCustomToken.setPricingPlan (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#1901-1911) should be declared external
+BurnableERC20.burn (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#1915-1919) should be declared external
+NokuTokenBurner.setBurningPercentage (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2011-2035) should be declared external
+NokuTokenBurner.tokenReceived (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2047-2095) should be declared external
+TokenTimelock.release (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2361-2383) should be declared external
+TokenVesting.release (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2511-2525) should be declared external
+TokenVesting.revoke (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2533-2553) should be declared external
+NokuCustomERC20.setMintingFeeEnabled (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2813-2833) should be declared external
+NokuCustomERC20.setInformation (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2847-2865) should be declared external
+NokuCustomERC20.finishTransferFeePayment (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2877-2887) should be declared external
+NokuCustomERC20.setTransferFeePercentage (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2899-2931) should be declared external
+NokuCustomERC20.mintLocked (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#3145-3155) should be declared external
+NokuCustomERC20.mintTimelocked (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#3173-3203) should be declared external
+NokuCustomERC20.mintVested (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#3233-3257) should be declared external
+NokuCustomERC20.releaseVested (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#3269-3283) should be declared external
+NokuCustomERC20.revokeVested (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#3301-3317) should be declared external
+NokuCustomService.setPricingPlan (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol) should be declared external
+NokuCustomCrowdsaleService.createCustomCrowdsale (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol:
+	- pragma solidity^0.4.23 (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#9-13): it allows old versions
+	- pragma solidity^0.4.23 (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2393): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_maxWhitelistLength' of WhitelistableConstraints.isAllowedWhitelist (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#61-63) is not in mixedCase
+Parameter '_weiWhitelistThresholdBalance' of WhitelistableConstraints.isAllowedWhitelist (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#63) is not in mixedCase
+Parameter '_maxWhitelistLength' of Whitelistable. (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#125) is not in mixedCase
+Parameter '_whitelistThresholdBalance' of Whitelistable. (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#125) is not in mixedCase
+Parameter '_subscriber' of Whitelistable.isWhitelisted (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#165) is not in mixedCase
+Parameter '_maxWhitelistLength' of Whitelistable.setMaxWhitelistLengthInternal (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#169-171) is not in mixedCase
+Parameter '_whitelistThresholdBalance' of Whitelistable.setWhitelistThresholdBalanceInternal (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#189-191) is not in mixedCase
+Parameter '_subscriber' of Whitelistable.addToWhitelistInternal (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#213) is not in mixedCase
+Parameter '_subscriber' of Whitelistable.removeFromWhitelistInternal (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#237) is not in mixedCase
+Parameter '_balance' of Whitelistable.removeFromWhitelistInternal (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#237) is not in mixedCase
+Parameter '_subscriber' of Whitelistable.isAllowedBalance (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#285) is not in mixedCase
+Parameter '_balance' of Whitelistable.isAllowedBalance (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#285) is not in mixedCase
+Parameter '_newOwner' of Ownable.transferOwnership (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#459) is not in mixedCase
+Function 'Ownable._transferOwnership' (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#479-495) is not in mixedCase
+Parameter '_newOwner' of Ownable._transferOwnership (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#484-487) is not in mixedCase
+Parameter '_owner' of BasicToken.balanceOf (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#824-827) is not in mixedCase
+Parameter '_to' of BasicToken.transfer (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#783) is not in mixedCase
+Parameter '_value' of BasicToken.transfer (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#783) is not in mixedCase
+Parameter '_owner' of StandardToken.allowance (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#1009) is not in mixedCase
+Parameter '_spender' of StandardToken.allowance (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#1009) is not in mixedCase
+Parameter '_from' of StandardToken.transferFrom (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#905) is not in mixedCase
+Parameter '_to' of StandardToken.transferFrom (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#905) is not in mixedCase
+Parameter '_value' of StandardToken.transferFrom (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#907) is not in mixedCase
+Parameter '_spender' of StandardToken.approve (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#970-971) is not in mixedCase
+Parameter '_value' of StandardToken.approve (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#971) is not in mixedCase
+Parameter '_spender' of StandardToken.increaseApproval (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#1045) is not in mixedCase
+Parameter '_addedValue' of StandardToken.increaseApproval (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#1047-1049) is not in mixedCase
+Parameter '_spender' of StandardToken.decreaseApproval (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#1100-1105) is not in mixedCase
+Parameter '_subtractedValue' of StandardToken.decreaseApproval (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#1105-1107) is not in mixedCase
+Parameter '_to' of MintableToken.mint (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#1209-1211) is not in mixedCase
+Parameter '_amount' of MintableToken.mint (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#1211) is not in mixedCase
+Parameter '_startBlock' of Crowdsale. (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#1363) is not in mixedCase
+Parameter '_endBlock' of Crowdsale. (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#1365) is not in mixedCase
+Parameter '_rate' of Crowdsale. (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#1365) is not in mixedCase
+Parameter '_minDeposit' of Crowdsale. (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#1365-1367) is not in mixedCase
+Parameter '_startBlock' of Crowdsale.setStartBlock (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#1435) is not in mixedCase
+Parameter '_endBlock' of Crowdsale.setEndBlock (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#1453) is not in mixedCase
+Parameter '_minDeposit' of Crowdsale.setMinDeposit (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#1487-1489) is not in mixedCase
+Parameter '_pricingPlan' of NokuCustomToken. (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#1839-1843) is not in mixedCase
+Parameter '_serviceProvider' of NokuCustomToken. (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#1843) is not in mixedCase
+Parameter '_pricingPlan' of NokuCustomToken.setPricingPlan (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#1901-1903) is not in mixedCase
+Parameter '_wallet' of NokuTokenBurner. (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#1975-1981) is not in mixedCase
+Parameter '_burningPercentage' of NokuTokenBurner.setBurningPercentage (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2011-2013) is not in mixedCase
+Parameter '_token' of NokuTokenBurner.tokenReceived (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2051) is not in mixedCase
+Parameter '_amount' of NokuTokenBurner.tokenReceived (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2051) is not in mixedCase
+Parameter '_value' of BurnableToken.burn (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2139-2141) is not in mixedCase
+Function 'BurnableToken._burn' (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2141-2177) is not in mixedCase
+Parameter '_who' of BurnableToken._burn (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2143) is not in mixedCase
+Parameter '_value' of BurnableToken._burn (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2143) is not in mixedCase
+Parameter '_name' of DetailedERC20. (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2213-2215) is not in mixedCase
+Parameter '_symbol' of DetailedERC20. (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2215) is not in mixedCase
+Parameter '_decimals' of DetailedERC20. (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2215-2219) is not in mixedCase
+Parameter '_token' of TokenTimelock. (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2325-2327) is not in mixedCase
+Parameter '_beneficiary' of TokenTimelock. (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2327-2329) is not in mixedCase
+Parameter '_releaseTime' of TokenTimelock. (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2329-2333) is not in mixedCase
+Parameter '_beneficiary' of TokenVesting. (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2489) is not in mixedCase
+Parameter '_start' of TokenVesting. (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2489) is not in mixedCase
+Parameter '_cliff' of TokenVesting. (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2489-2491) is not in mixedCase
+Parameter '_duration' of TokenVesting. (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2491) is not in mixedCase
+Parameter '_revocable' of TokenVesting. (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2491) is not in mixedCase
+Parameter '_to' of NokuCustomERC20.transfer (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#3001) is not in mixedCase
+Parameter '_value' of NokuCustomERC20.transfer (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#3001) is not in mixedCase
+Parameter '_from' of NokuCustomERC20.transferFrom (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#3031) is not in mixedCase
+Parameter '_to' of NokuCustomERC20.transferFrom (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#3031) is not in mixedCase
+Parameter '_value' of NokuCustomERC20.transferFrom (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#3031) is not in mixedCase
+Parameter '_to' of NokuCustomERC20.mint (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#3090-3091) is not in mixedCase
+Parameter '_amount' of NokuCustomERC20.mint (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#3091) is not in mixedCase
+Parameter '_amount' of NokuCustomERC20.burn (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#3059-3063) is not in mixedCase
+Parameter '_name' of NokuCustomERC20. (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2771-2773) is not in mixedCase
+Parameter '_symbol' of NokuCustomERC20. (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2773) is not in mixedCase
+Parameter '_decimals' of NokuCustomERC20. (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2773) is not in mixedCase
+Parameter '_transferableFromBlock' of NokuCustomERC20. (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2773) is not in mixedCase
+Parameter '_lockEndBlock' of NokuCustomERC20. (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2773-2775) is not in mixedCase
+Parameter '_pricingPlan' of NokuCustomERC20. (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2775) is not in mixedCase
+Parameter '_serviceProvider' of NokuCustomERC20. (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2775) is not in mixedCase
+Parameter '_mintingFeeEnabled' of NokuCustomERC20.setMintingFeeEnabled (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2813-2817) is not in mixedCase
+Parameter '_name' of NokuCustomERC20.setInformation (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2847) is not in mixedCase
+Parameter '_symbol' of NokuCustomERC20.setInformation (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2847) is not in mixedCase
+Parameter '_transferFeePercentage' of NokuCustomERC20.setTransferFeePercentage (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2901) is not in mixedCase
+Parameter '_to' of NokuCustomERC20.lockedBalanceOf (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2931) is not in mixedCase
+Parameter '_value' of NokuCustomERC20.transferFee (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#2968-2969) is not in mixedCase
+Parameter '_to' of NokuCustomERC20.mintLocked (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#3145) is not in mixedCase
+Parameter '_amount' of NokuCustomERC20.mintLocked (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#3145-3147) is not in mixedCase
+Parameter '_to' of NokuCustomERC20.mintTimelocked (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#3173) is not in mixedCase
+Parameter '_amount' of NokuCustomERC20.mintTimelocked (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#3173) is not in mixedCase
+Parameter '_releaseTime' of NokuCustomERC20.mintTimelocked (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#3173-3175) is not in mixedCase
+Parameter '_to' of NokuCustomERC20.mintVested (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#3233-3235) is not in mixedCase
+Parameter '_amount' of NokuCustomERC20.mintVested (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#3235) is not in mixedCase
+Parameter '_startTime' of NokuCustomERC20.mintVested (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#3235-3237) is not in mixedCase
+Parameter '_duration' of NokuCustomERC20.mintVested (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#3237) is not in mixedCase
+Parameter '_rate' of NokuCustomCrowdsale. (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#3463) is not in mixedCase
+Parameter '_token' of NokuCustomCrowdsale. (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#3473) is not in mixedCase
+Parameter '_tokenMaximumSupply' of NokuCustomCrowdsale. (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#3473-3475) is not in mixedCase
+Parameter '_wallet' of NokuCustomCrowdsale. (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#3475-3477) is not in mixedCase
+Parameter '_platinumAgeEndBlock' of NokuCustomCrowdsale.setThreePowerAges (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#3525) is not in mixedCase
+Parameter '_goldenAgeEndBlock' of NokuCustomCrowdsale.setThreePowerAges (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#3528-3531) is not in mixedCase
+Parameter '_silverAgeEndBlock' of NokuCustomCrowdsale.setThreePowerAges (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#3531) is not in mixedCase
+Parameter '_platinumAgeRate' of NokuCustomCrowdsale.setThreePowerAges (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#3531-3533) is not in mixedCase
+Parameter '_goldenAgeRate' of NokuCustomCrowdsale.setThreePowerAges (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#3533) is not in mixedCase
+Parameter '_silverAgeRate' of NokuCustomCrowdsale.setThreePowerAges (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#3533-3535) is not in mixedCase
+Parameter '_platinumAgeEndBlock' of NokuCustomCrowdsale.setTwoPowerAges (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#3621) is not in mixedCase
+Parameter '_goldenAgeEndBlock' of NokuCustomCrowdsale.setTwoPowerAges (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#3621-3625) is not in mixedCase
+Parameter '_platinumAgeRate' of NokuCustomCrowdsale.setTwoPowerAges (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#3625) is not in mixedCase
+Parameter '_goldenAgeRate' of NokuCustomCrowdsale.setTwoPowerAges (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#3625-3627) is not in mixedCase
+Parameter '_platinumAgeEndBlock' of NokuCustomCrowdsale.setOnePowerAge (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#3687) is not in mixedCase
+Parameter '_platinumAgeRate' of NokuCustomCrowdsale.setOnePowerAge (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#3687) is not in mixedCase
+Parameter '_client' of NokuCustomCrowdsale.grantTokenOwnership (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol#3733-3735) is not in mixedCase
+Parameter '_pricingPlan' of NokuCustomService. (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol) is not in mixedCase
+Parameter '_pricingPlan' of NokuCustomService.setPricingPlan (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol) is not in mixedCase
+Parameter '_startBlock' of NokuCustomCrowdsaleService.createCustomCrowdsale (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol) is not in mixedCase
+Parameter '_endBlock' of NokuCustomCrowdsaleService.createCustomCrowdsale (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol) is not in mixedCase
+Parameter '_rate' of NokuCustomCrowdsaleService.createCustomCrowdsale (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol) is not in mixedCase
+Parameter '_minDeposit' of NokuCustomCrowdsaleService.createCustomCrowdsale (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol) is not in mixedCase
+Parameter '_maxWhitelistLength' of NokuCustomCrowdsaleService.createCustomCrowdsale (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol) is not in mixedCase
+Parameter '_whitelistThreshold' of NokuCustomCrowdsaleService.createCustomCrowdsale (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol) is not in mixedCase
+Parameter '_token' of NokuCustomCrowdsaleService.createCustomCrowdsale (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol) is not in mixedCase
+Parameter '_tokenMaximumSupply' of NokuCustomCrowdsaleService.createCustomCrowdsale (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol) is not in mixedCase
+Parameter '_wallet' of NokuCustomCrowdsaleService.createCustomCrowdsale (/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xbd539a1a2bb3a6ed5fcffdec80e2b05d6e342159.sol analyzed (27 contracts), 170 result(s) found

@@ -1,0 +1,59 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x9992ec8cb404d95c52611bdc08e38fa71d159fd4.sol:
+/sb/0x9992ec8cb404d95c52611bdc08e38fa71d159fd4.sol:64:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function ReservedContract () payable public{
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x9992ec8cb404d95c52611bdc08e38fa71d159fd4.sol:27:35: Warning: This looks like an address but has an invalid checksum. If this is not used as an address, please prepend '00'. Correct checksummed address: '0x93663F1A42a0D38d5Fe23fc77494E61118c2F30E'. For more information please see https://solidity.readthedocs.io/en/develop/types.html#address-literals
+    ERC20 public Paytoken = ERC20(0x93663f1a42a0d38d5fe23fc77494e61118c2f30e);
+                                  ^----------------------------------------^
+/sb/0x9992ec8cb404d95c52611bdc08e38fa71d159fd4.sol:48:27: Warning: Using contract member "balance" inherited from the address type is deprecated. Convert the contract to "address" type to access the member, for example use "address(contract).balance" instead.
+        require(amount <= this.balance);
+                          ^----------^
+/sb/0x9992ec8cb404d95c52611bdc08e38fa71d159fd4.sol:93:16: Warning: Using contract member "balance" inherited from the address type is deprecated. Convert the contract to "address" type to access the member, for example use "address(contract).balance" instead.
+        return this.balance;
+               ^----------^
+/sb/0x9992ec8cb404d95c52611bdc08e38fa71d159fd4.sol:70:5: Warning: No visibility specified. Defaulting to "public". 
+    function becomeRichest() payable returns (bool){
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x9992ec8cb404d95c52611bdc08e38fa71d159fd4.sol:87:39: Warning: "msg.value" used in non-payable function. Do you want to add the "payable" modifier to this function?
+        Paytoken.transfer(_reserve20, msg.value*20/100);
+                                      ^-------^
+/sb/0x9992ec8cb404d95c52611bdc08e38fa71d159fd4.sol:88:46: Warning: "msg.value" used in non-payable function. Do you want to add the "payable" modifier to this function?
+        emit PackageJoinedViaPAD(msg.sender, msg.value);
+                                             ^-------^
+
+INFO:Detectors:[93m
+ReservedContract.swapUsdeToDpa (/sb/0x9992ec8cb404d95c52611bdc08e38fa71d159fd4.sol#53-59) does not use the value returned by external calls:
+	-Paytoken.transfer(_to,amount) (/sb/0x9992ec8cb404d95c52611bdc08e38fa71d159fd4.sol#57-59)
+ReservedContract.joinPackageViaPAD (/sb/0x9992ec8cb404d95c52611bdc08e38fa71d159fd4.sol#87-93) does not use the value returned by external calls:
+	-Paytoken.transfer(_reserve20,msg.value * 20 / 100) (/sb/0x9992ec8cb404d95c52611bdc08e38fa71d159fd4.sol#88-92)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+ReservedContract._reserve20 should be constant (/sb/0x9992ec8cb404d95c52611bdc08e38fa71d159fd4.sol#28-30)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+ERC20.totalSupply (/sb/0x9992ec8cb404d95c52611bdc08e38fa71d159fd4.sol#12-13) should be declared external
+ERC20.balanceOf (/sb/0x9992ec8cb404d95c52611bdc08e38fa71d159fd4.sol#13-14) should be declared external
+ERC20.allowance (/sb/0x9992ec8cb404d95c52611bdc08e38fa71d159fd4.sol#14-15) should be declared external
+ERC20.transfer (/sb/0x9992ec8cb404d95c52611bdc08e38fa71d159fd4.sol#15-16) should be declared external
+ERC20.approve (/sb/0x9992ec8cb404d95c52611bdc08e38fa71d159fd4.sol#16-17) should be declared external
+ERC20.transferFrom (/sb/0x9992ec8cb404d95c52611bdc08e38fa71d159fd4.sol#17-18) should be declared external
+ReservedContract.setPayanyToken (/sb/0x9992ec8cb404d95c52611bdc08e38fa71d159fd4.sol#42-47) should be declared external
+ReservedContract.wdE (/sb/0x9992ec8cb404d95c52611bdc08e38fa71d159fd4.sol#47-53) should be declared external
+ReservedContract.swapUsdeToDpa (/sb/0x9992ec8cb404d95c52611bdc08e38fa71d159fd4.sol#53-59) should be declared external
+ReservedContract.setPrices (/sb/0x9992ec8cb404d95c52611bdc08e38fa71d159fd4.sol#59-64) should be declared external
+ReservedContract.becomeRichest (/sb/0x9992ec8cb404d95c52611bdc08e38fa71d159fd4.sol#71-80) should be declared external
+ReservedContract.joinPackageViaETH (/sb/0x9992ec8cb404d95c52611bdc08e38fa71d159fd4.sol#80-86) should be declared external
+ReservedContract.joinPackageViaPAD (/sb/0x9992ec8cb404d95c52611bdc08e38fa71d159fd4.sol#87-93) should be declared external
+ReservedContract.getBalanceContract (/sb/0x9992ec8cb404d95c52611bdc08e38fa71d159fd4.sol#94-97) should be declared external
+ReservedContract.getTokenBalanceOf (/sb/0x9992ec8cb404d95c52611bdc08e38fa71d159fd4.sol#97-99) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_PayToken' of ReservedContract.setPayanyToken (/sb/0x9992ec8cb404d95c52611bdc08e38fa71d159fd4.sol#43) is not in mixedCase
+Parameter '_to' of ReservedContract.swapUsdeToDpa (/sb/0x9992ec8cb404d95c52611bdc08e38fa71d159fd4.sol#53-54) is not in mixedCase
+Function 'ReservedContract.ReservedContract' (/sb/0x9992ec8cb404d95c52611bdc08e38fa71d159fd4.sol#65-71) is not in mixedCase
+Parameter '_amount' of ReservedContract.joinPackageViaETH (/sb/0x9992ec8cb404d95c52611bdc08e38fa71d159fd4.sol#81) is not in mixedCase
+Parameter '_amount' of ReservedContract.joinPackageViaPAD (/sb/0x9992ec8cb404d95c52611bdc08e38fa71d159fd4.sol#87) is not in mixedCase
+Variable 'ReservedContract.Paytoken' (/sb/0x9992ec8cb404d95c52611bdc08e38fa71d159fd4.sol#27-28) is not in mixedCase
+Variable 'ReservedContract._reserve20' (/sb/0x9992ec8cb404d95c52611bdc08e38fa71d159fd4.sol#28-30) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x9992ec8cb404d95c52611bdc08e38fa71d159fd4.sol analyzed (2 contracts), 25 result(s) found

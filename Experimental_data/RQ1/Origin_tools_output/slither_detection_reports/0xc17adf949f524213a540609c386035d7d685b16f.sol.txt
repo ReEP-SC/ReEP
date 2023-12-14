@@ -1,0 +1,62 @@
+INFO:Detectors:[93m
+Address.isContract (/sb/0xc17adf949f524213a540609c386035d7d685b16f.sol#268-282) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+StrategyProxy.vote (/sb/0xc17adf949f524213a540609c386035d7d685b16f.sol#457-460) does not use the value returned by external calls:
+	-proxy.execute(gauge,0,abi.encodeWithSignature(vote_for_gauge_weights(address,uint256),_gauge,_amount)) (/sb/0xc17adf949f524213a540609c386035d7d685b16f.sol#458-460)
+StrategyProxy.withdraw (/sb/0xc17adf949f524213a540609c386035d7d685b16f.sol#461-476) does not use the value returned by external calls:
+	-proxy.execute(_gauge,0,abi.encodeWithSignature(withdraw(uint256),_amount)) (/sb/0xc17adf949f524213a540609c386035d7d685b16f.sol#467-469)
+	-proxy.execute(_token,0,abi.encodeWithSignature(transfer(address,uint256),msg.sender,_net)) (/sb/0xc17adf949f524213a540609c386035d7d685b16f.sol#471-475)
+StrategyProxy.deposit (/sb/0xc17adf949f524213a540609c386035d7d685b16f.sol#481-495) does not use the value returned by external calls:
+	-proxy.execute(_token,0,abi.encodeWithSignature(approve(address,uint256),_gauge,0)) (/sb/0xc17adf949f524213a540609c386035d7d685b16f.sol#488-489)
+	-proxy.execute(_token,0,abi.encodeWithSignature(approve(address,uint256),_gauge,_balance)) (/sb/0xc17adf949f524213a540609c386035d7d685b16f.sol#489-491)
+StrategyProxy.harvest (/sb/0xc17adf949f524213a540609c386035d7d685b16f.sol#495-503) does not use the value returned by external calls:
+	-proxy.execute(mintr,0,abi.encodeWithSignature(mint(address),_gauge)) (/sb/0xc17adf949f524213a540609c386035d7d685b16f.sol#498-499)
+	-proxy.execute(crv,0,abi.encodeWithSignature(transfer(address,uint256),msg.sender,_balance)) (/sb/0xc17adf949f524213a540609c386035d7d685b16f.sol)
+StrategyProxy.claim (/sb/0xc17adf949f524213a540609c386035d7d685b16f.sol) does not use the value returned by external calls:
+	-proxy.execute(CRV3,0,abi.encodeWithSignature(transfer(address,uint256),recipient,amount)) (/sb/0xc17adf949f524213a540609c386035d7d685b16f.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Address.isContract uses assembly (/sb/0xc17adf949f524213a540609c386035d7d685b16f.sol#268-282)
+	- /sb/0xc17adf949f524213a540609c386035d7d685b16f.sol#279-281
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+StrategyProxy.vote (/sb/0xc17adf949f524213a540609c386035d7d685b16f.sol#457-460) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xc17adf949f524213a540609c386035d7d685b16f.sol:
+	- pragma solidity^0.5.17 (/sb/0xc17adf949f524213a540609c386035d7d685b16f.sol#11-15): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Low level call in Address.sendValue (/sb/0xc17adf949f524213a540609c386035d7d685b16f.sol#309-319):
+	-(success) = recipient.call.value(amount)() /sb/0xc17adf949f524213a540609c386035d7d685b16f.sol#316-317
+Low level call in SafeERC20.callOptionalReturn (/sb/0xc17adf949f524213a540609c386035d7d685b16f.sol#366-405):
+	-(success,returndata) = address(token).call(data) /sb/0xc17adf949f524213a540609c386035d7d685b16f.sol#383-387
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Parameter '' of Proxy.increaseAmount (/sb/0xc17adf949f524213a540609c386035d7d685b16f.sol#411) is not in mixedCase
+Parameter '' of Mintr.mint (/sb/0xc17adf949f524213a540609c386035d7d685b16f.sol#411) is not in mixedCase
+Parameter '' of FeeDistribution.claim (/sb/0xc17adf949f524213a540609c386035d7d685b16f.sol#412) is not in mixedCase
+Parameter '_governance' of StrategyProxy.setGovernance (/sb/0xc17adf949f524213a540609c386035d7d685b16f.sol#438) is not in mixedCase
+Parameter '_strategy' of StrategyProxy.approveStrategy (/sb/0xc17adf949f524213a540609c386035d7d685b16f.sol#443-444) is not in mixedCase
+Parameter '_strategy' of StrategyProxy.revokeStrategy (/sb/0xc17adf949f524213a540609c386035d7d685b16f.sol#448) is not in mixedCase
+Parameter '_gauge' of StrategyProxy.vote (/sb/0xc17adf949f524213a540609c386035d7d685b16f.sol#457) is not in mixedCase
+Parameter '_amount' of StrategyProxy.vote (/sb/0xc17adf949f524213a540609c386035d7d685b16f.sol#457-458) is not in mixedCase
+Parameter '_gauge' of StrategyProxy.withdraw (/sb/0xc17adf949f524213a540609c386035d7d685b16f.sol#461) is not in mixedCase
+Parameter '_token' of StrategyProxy.withdraw (/sb/0xc17adf949f524213a540609c386035d7d685b16f.sol#461) is not in mixedCase
+Parameter '_amount' of StrategyProxy.withdraw (/sb/0xc17adf949f524213a540609c386035d7d685b16f.sol#461) is not in mixedCase
+Parameter '_gauge' of StrategyProxy.balanceOf (/sb/0xc17adf949f524213a540609c386035d7d685b16f.sol#476) is not in mixedCase
+Parameter '_gauge' of StrategyProxy.withdrawAll (/sb/0xc17adf949f524213a540609c386035d7d685b16f.sol#478) is not in mixedCase
+Parameter '_token' of StrategyProxy.withdrawAll (/sb/0xc17adf949f524213a540609c386035d7d685b16f.sol#478-480) is not in mixedCase
+Parameter '_gauge' of StrategyProxy.deposit (/sb/0xc17adf949f524213a540609c386035d7d685b16f.sol#481) is not in mixedCase
+Parameter '_token' of StrategyProxy.deposit (/sb/0xc17adf949f524213a540609c386035d7d685b16f.sol#481-482) is not in mixedCase
+Parameter '_gauge' of StrategyProxy.harvest (/sb/0xc17adf949f524213a540609c386035d7d685b16f.sol#495) is not in mixedCase
+Constant 'StrategyProxy.proxy' (/sb/0xc17adf949f524213a540609c386035d7d685b16f.sol#414-415) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'StrategyProxy.mintr' (/sb/0xc17adf949f524213a540609c386035d7d685b16f.sol#415-416) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'StrategyProxy.crv' (/sb/0xc17adf949f524213a540609c386035d7d685b16f.sol#416-417) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'StrategyProxy.gauge' (/sb/0xc17adf949f524213a540609c386035d7d685b16f.sol#417-419) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'StrategyProxy.y' (/sb/0xc17adf949f524213a540609c386035d7d685b16f.sol#419-423) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'StrategyProxy.yveCRV' (/sb/0xc17adf949f524213a540609c386035d7d685b16f.sol#423-427) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'StrategyProxy.feeDistribution' (/sb/0xc17adf949f524213a540609c386035d7d685b16f.sol#430-432) is not in UPPER_CASE_WITH_UNDERSCORES
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xc17adf949f524213a540609c386035d7d685b16f.sol analyzed (8 contracts), 35 result(s) found

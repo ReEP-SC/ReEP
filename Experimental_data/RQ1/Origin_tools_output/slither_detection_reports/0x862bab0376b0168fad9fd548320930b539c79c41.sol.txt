@@ -1,0 +1,110 @@
+INFO:Detectors:[93m
+Address.isContract (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#207-222) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+Reentrancy in Cascade._stakeFor (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#603-644):
+	External calls:
+	- require(bool,string)(totalStakingShares == 0 || totalStaked() > 0,Cascade: Invalid state. Staking shares exist, but no staking tokens do) (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#609-613)
+	- updateAccounting() (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#621)
+	- mintedStakingShares = totalStakingShares.mul(amount).div(totalStaked()) (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#613-617)
+	State variables written after the call(s):
+	- _users (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#623-627)
+	- _users (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#627)
+	- _users (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#628-629)
+	- totalStakingShares (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#631-632)
+Reentrancy in Cascade._unstake (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#661-719):
+	External calls:
+	- updateAccounting() (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#664)
+	- require(bool,string)(totalStakedFor(msg.sender) >= amount,Cascade: unstake amount is greater than total user stakes) (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#666-668)
+	- stakingSharesToBurn = totalStakingShares.mul(amount).div(totalStaked()) (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#668-669)
+	- rewardAmount = computeNewReward(rewardAmount,newStakingShareSecondsToBurn,stakeTimeSec) (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#681-682)
+	State variables written after the call(s):
+	- _users (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#687)
+Reentrancy in Cascade._unstake (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#661-719):
+	External calls:
+	- updateAccounting() (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#664)
+	- require(bool,string)(totalStakedFor(msg.sender) >= amount,Cascade: unstake amount is greater than total user stakes) (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#666-668)
+	- stakingSharesToBurn = totalStakingShares.mul(amount).div(totalStaked()) (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#668-669)
+	State variables written after the call(s):
+	- _totalStakingShareSeconds (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#706-707)
+	- _users (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#699-701)
+	- _users (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#701-703)
+	- totalStakingShares (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#707-711)
+Reentrancy in Cascade.lockTokens (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#875-900):
+	External calls:
+	- updateAccounting() (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#884)
+	- lockedTokens = totalLocked() (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#884-885)
+	State variables written after the call(s):
+	- totalLockedShares (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#897)
+	- unlockSchedules (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#896)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+schedule in Cascade.lockTokens (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#889-891) is a local variable never initialiazed
+stakingShareSecondsToBurn in Cascade._unstake (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#674) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[92m
+Reentrancy in Cascade.unlockTokens (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#906-931):
+	External calls:
+	- lockedTokens = totalLocked() (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#913)
+	State variables written after the call(s):
+	- totalLockedShares (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#922-923)
+	- unlockSchedules (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#919)
+Reentrancy in Cascade.updateAccounting (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#811-853):
+	External calls:
+	- unlockTokens() (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#814)
+	State variables written after the call(s):
+	- _lastAccountingTimestampSec (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#823-825)
+	- _totalStakingShareSeconds (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#821-823)
+	- _users (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#837-842)
+	- _users (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#843)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Address.isContract uses assembly (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#207-222)
+	- /sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#218
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+Different versions of Solidity is used in /sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol:
+	- Version used: ['0.5.13', '^0.5.13']
+	- /sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#7-9 declares pragma solidity0.5.13
+	- /sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#23-26 declares pragma solidity^0.5.13
+	- /sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#191-192 declares pragma solidity0.5.13
+	- /sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#264 declares pragma solidity0.5.13
+	- /sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#340 declares pragma solidity0.5.13
+	- /sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#369-370 declares pragma solidity0.5.13
+	- /sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#431 declares pragma solidity0.5.13
+	- /sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#464 declares pragma solidity0.5.13
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#different-pragma-directives-are-used[0m
+INFO:Detectors:[92m
+Ownable.renounceOwnership (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#405-411) should be declared external
+Ownable.transferOwnership (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#420-428) should be declared external
+TokenPool.balance (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#441-444) should be declared external
+Cascade.getDistributionToken (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#583-588) should be declared external
+Cascade.unstakeQuery (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#654-656) should be declared external
+Cascade.userTotals (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#774-783) should be declared external
+Cascade.globalTotals (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#783-787) should be declared external
+Cascade.unlockScheduleCount (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#861-864) should be declared external
+Cascade.rescueFundsFromStakingPool (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol:
+	- pragma solidity0.5.13 (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#7-9): it allows old versions
+	- pragma solidity^0.5.13 (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#23-26): it allows old versions
+	- pragma solidity0.5.13 (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#191-192): it allows old versions
+	- pragma solidity0.5.13 (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#264): it allows old versions
+	- pragma solidity0.5.13 (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#340): it allows old versions
+	- pragma solidity0.5.13 (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#369-370): it allows old versions
+	- pragma solidity0.5.13 (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#431): it allows old versions
+	- pragma solidity0.5.13 (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#464): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Low level call in Address.sendValue (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#248-263):
+	-(success) = recipient.call.value(amount)() /sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#261-262
+Low level call in SafeERC20.callOptionalReturn (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#313-339):
+	-(success,returndata) = address(token).call(data) /sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#325-330
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Parameter '_token' of TokenPool. (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#440-441) is not in mixedCase
+Function 'Cascade._stakeFor' (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#603-644) is not in mixedCase
+Function 'Cascade._unstake' (/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol#661-719) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x862bab0376b0168fad9fd548320930b539c79c41.sol analyzed (8 contracts), 26 result(s) found

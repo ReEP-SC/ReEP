@@ -1,0 +1,90 @@
+INFO:Detectors:[91m
+CrowdsaleGeneratorETH.processListingFee (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#363-407) sends eth to arbitrary user
+	Dangerous calls:
+	- listingFeePaid = kyber.trade.value(estimation)(_paymentTokenAddress,estimation,listingFeeTokenAddress,platformFundsWallet,listingFee,0,0) (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#383-386)
+CrowdsaleGeneratorETH.lockEscrowETH (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#407-433) sends eth to arbitrary user
+	Dangerous calls:
+	- amount = kyber.trade.value(_amount)(_paymentTokenAddress,_amount,platformTokenAddress,address(this),2 ** 255,0,0) (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#414)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[93m
+CrowdsaleGeneratorETH.createAssetOrderETH (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#292-318) does not use the value returned by external calls:
+	-CrowdsaleGeneratorETH_ERC20(_paymentToken).transferFrom(msg.sender,address(this),_escrowAndFee) (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#299-300)
+CrowdsaleGeneratorETH.processListingFee (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#363-407) does not use the value returned by external calls:
+	-paymentToken.approve(address(kyber),0) (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#397)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+CrowdsaleGeneratorETH.fallback (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#284-285) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_amount' of SafeMath.getFractionalAmount (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#42-43) is not in mixedCase
+Parameter '_percentage' of SafeMath.getFractionalAmount (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#44) is not in mixedCase
+Parameter '_database' of Events. (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#151) is not in mixedCase
+Parameter '_message' of Events.message (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#154) is not in mixedCase
+Parameter '_message' of Events.transaction (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#157) is not in mixedCase
+Parameter '_from' of Events.transaction (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#157) is not in mixedCase
+Parameter '_to' of Events.transaction (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#157) is not in mixedCase
+Parameter '_amount' of Events.transaction (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#157) is not in mixedCase
+Parameter '_token' of Events.transaction (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#157) is not in mixedCase
+Parameter '_message' of Events.registration (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#163-166) is not in mixedCase
+Parameter '_account' of Events.registration (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#166) is not in mixedCase
+Parameter '_message' of Events.contractChange (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#169) is not in mixedCase
+Parameter '_account' of Events.contractChange (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#169-172) is not in mixedCase
+Parameter '_name' of Events.contractChange (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#172) is not in mixedCase
+Parameter '_message' of Events.asset (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#175) is not in mixedCase
+Parameter '_uri' of Events.asset (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#175) is not in mixedCase
+Parameter '_assetAddress' of Events.asset (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#175) is not in mixedCase
+Parameter '_manager' of Events.asset (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#175) is not in mixedCase
+Parameter '_message' of Events.escrow (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#181) is not in mixedCase
+Parameter '_assetAddress' of Events.escrow (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#181) is not in mixedCase
+Parameter '_escrowID' of Events.escrow (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#181) is not in mixedCase
+Parameter '_manager' of Events.escrow (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#181) is not in mixedCase
+Parameter '_amount' of Events.escrow (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#182-184) is not in mixedCase
+Parameter '_message' of Events.order (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#187) is not in mixedCase
+Parameter '_orderID' of Events.order (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#187-190) is not in mixedCase
+Parameter '_amount' of Events.order (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#190) is not in mixedCase
+Parameter '_price' of Events.order (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#190) is not in mixedCase
+Parameter '_message' of Events.exchange (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#193) is not in mixedCase
+Parameter '_orderID' of Events.exchange (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#193) is not in mixedCase
+Parameter '_assetAddress' of Events.exchange (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#193-196) is not in mixedCase
+Parameter '_account' of Events.exchange (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#196) is not in mixedCase
+Parameter '_message' of Events.operator (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#199) is not in mixedCase
+Parameter '_id' of Events.operator (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#199) is not in mixedCase
+Parameter '_name' of Events.operator (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#200-202) is not in mixedCase
+Parameter '_ipfs' of Events.operator (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#202) is not in mixedCase
+Parameter '_account' of Events.operator (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#202) is not in mixedCase
+Parameter '_message' of Events.consensus (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#205) is not in mixedCase
+Parameter '_executionID' of Events.consensus (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#205) is not in mixedCase
+Parameter '_votesID' of Events.consensus (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#205) is not in mixedCase
+Parameter '_votes' of Events.consensus (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#205-206) is not in mixedCase
+Parameter '_tokens' of Events.consensus (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#207-208) is not in mixedCase
+Parameter '_quorum' of Events.consensus (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#208-209) is not in mixedCase
+Contract 'CrowdsaleGeneratorETH_ERC20' (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#248-259) is not in CapWords
+Parameter '_database' of CrowdsaleGeneratorETH. (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#273-274) is not in mixedCase
+Parameter '_events' of CrowdsaleGeneratorETH. (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#276) is not in mixedCase
+Parameter '_kyber' of CrowdsaleGeneratorETH. (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#276) is not in mixedCase
+Parameter '_assetURI' of CrowdsaleGeneratorETH.createAssetOrderETH (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#293-294) is not in mixedCase
+Parameter '_ipfs' of CrowdsaleGeneratorETH.createAssetOrderETH (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#294) is not in mixedCase
+Parameter '_fundingLength' of CrowdsaleGeneratorETH.createAssetOrderETH (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#294-295) is not in mixedCase
+Parameter '_amountToRaise' of CrowdsaleGeneratorETH.createAssetOrderETH (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#295) is not in mixedCase
+Parameter '_assetManagerPerc' of CrowdsaleGeneratorETH.createAssetOrderETH (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#295) is not in mixedCase
+Parameter '_escrowAndFee' of CrowdsaleGeneratorETH.createAssetOrderETH (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#295) is not in mixedCase
+Parameter '_paymentToken' of CrowdsaleGeneratorETH.createAssetOrderETH (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#295) is not in mixedCase
+Parameter '_assetAddress' of CrowdsaleGeneratorETH.updateIPFS (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#318-322) is not in mixedCase
+Parameter '_ipfs' of CrowdsaleGeneratorETH.updateIPFS (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#322) is not in mixedCase
+Parameter '_assetAddress' of CrowdsaleGeneratorETH.setCrowdsaleValues (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#339) is not in mixedCase
+Parameter '_fundingLength' of CrowdsaleGeneratorETH.setCrowdsaleValues (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#339) is not in mixedCase
+Parameter '_amountToRaise' of CrowdsaleGeneratorETH.setCrowdsaleValues (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#339-340) is not in mixedCase
+Parameter '_assetAddress' of CrowdsaleGeneratorETH.setAssetValues (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#348) is not in mixedCase
+Parameter '_assetURI' of CrowdsaleGeneratorETH.setAssetValues (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#348) is not in mixedCase
+Parameter '_ipfs' of CrowdsaleGeneratorETH.setAssetValues (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#348) is not in mixedCase
+Parameter '_assetManager' of CrowdsaleGeneratorETH.setAssetValues (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#348) is not in mixedCase
+Parameter '_assetManagerPerc' of CrowdsaleGeneratorETH.setAssetValues (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#348) is not in mixedCase
+Parameter '_amountToRaise' of CrowdsaleGeneratorETH.setAssetValues (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#348) is not in mixedCase
+Parameter '_paymentTokenAddress' of CrowdsaleGeneratorETH.processListingFee (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#363) is not in mixedCase
+Parameter '_fromAmount' of CrowdsaleGeneratorETH.processListingFee (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#363) is not in mixedCase
+Parameter '_assetManager' of CrowdsaleGeneratorETH.lockEscrowETH (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#408) is not in mixedCase
+Parameter '_assetAddress' of CrowdsaleGeneratorETH.lockEscrowETH (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#408) is not in mixedCase
+Parameter '_paymentTokenAddress' of CrowdsaleGeneratorETH.lockEscrowETH (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#408-409) is not in mixedCase
+Parameter '_amount' of CrowdsaleGeneratorETH.lockEscrowETH (/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol#409) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xbc944ac853f62ad10d354b9cdbbdecac14e263c0.sol analyzed (7 contracts), 75 result(s) found

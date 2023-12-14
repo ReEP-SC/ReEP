@@ -1,0 +1,122 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol:
+/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol:73:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function AppCoins() public {
+    ^ (Relevant source part starts here and spans across multiple lines).
+
+INFO:Detectors:[91m
+RBAC.roles (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#477-483) is never initialized. It is used in:
+	- checkRole (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#499-508)
+	- hasRole (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#515-535)
+	- addRole (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#535-545)
+	- removeRole (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#545-559)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-state-variables[0m
+INFO:Detectors:[93m
+ERC20Interface (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#13-33) has incorrect ERC20 function interface(s):
+	-transferFrom (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#23-25)
+AppCoins (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#33-277) has incorrect ERC20 function interface(s):
+	-transferFrom (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#189-215)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[93m
+Reentrancy in AppCoinsCreditsBalance.withdrawFunds (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol):
+	External calls:
+	- appc.transfer(msg.sender,_amount) (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol)
+	State variables written after the call(s):
+	- balance (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+AppCoinsCreditsBalance.depositFunds (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol) does not use the value returned by external calls:
+	-appc.transferFrom(msg.sender,address(this),_amount) (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol)
+AppCoinsCreditsBalance.withdrawFunds (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol) does not use the value returned by external calls:
+	-appc.transfer(msg.sender,_amount) (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in AppCoinsCreditsBalance.depositFunds (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol):
+	External calls:
+	- require(bool)(appc.allowance(msg.sender,address(this)) >= _amount) (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol)
+	State variables written after the call(s):
+	- balanceProof (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol)
+Reentrancy in AppCoinsCreditsBalance.depositFunds (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol):
+	External calls:
+	- require(bool)(appc.allowance(msg.sender,address(this)) >= _amount) (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol)
+	- appc.transferFrom(msg.sender,address(this),_amount) (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol)
+	State variables written after the call(s):
+	- balance (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+AppCoins.decimals should be constant (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#45)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+AppCoins.name (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#99-104) should be declared external
+ERC20Interface.name (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#15-17) should be declared external
+ERC20Interface.symbol (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#17-19) should be declared external
+AppCoins.symbol (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#107-109) should be declared external
+ERC20Interface.balanceOf (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#19-21) should be declared external
+AppCoins.balanceOf (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#109-121) should be declared external
+ERC20Interface.transfer (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#21-23) should be declared external
+AppCoins.transfer (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#161-187) should be declared external
+AppCoins.transferFrom (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#189-215) should be declared external
+ERC20Interface.transferFrom (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#23-25) should be declared external
+AppCoins.approve (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#215-219) should be declared external
+AppCoins.burn (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#219-237) should be declared external
+AppCoins.burnFrom (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#237-275) should be declared external
+Ownable.renounceOwnership (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#339-343) should be declared external
+Ownable.transferOwnership (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#343-359) should be declared external
+Whitelist.whitelist (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#621-631) should be declared external
+Whitelist.addAddressesToWhitelist (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#635-661) should be declared external
+Whitelist.removeAddressesFromWhitelist (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#681-709) should be declared external
+AppCoinsCreditsBalance.getBalance (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#743-751) should be declared external
+AppCoinsCreditsBalance.getBalanceProof (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#751-757) should be declared external
+AppCoinsCreditsBalance.depositFunds (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol) should be declared external
+AppCoinsCreditsBalance.withdrawFunds (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_owner' of AppCoins.balanceOf (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#115-117) is not in mixedCase
+Parameter '_to' of AppCoins.transfer (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#161-163) is not in mixedCase
+Parameter '_amount' of AppCoins.transfer (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#165) is not in mixedCase
+Parameter '_from' of AppCoins.transferFrom (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#189) is not in mixedCase
+Parameter '_to' of AppCoins.transferFrom (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#191) is not in mixedCase
+Parameter '_value' of AppCoins.transferFrom (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#191) is not in mixedCase
+Function 'AppCoins.AppCoins' (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#77-95) is not in mixedCase
+Function 'AppCoins._transfer' (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#123-161) is not in mixedCase
+Parameter '_from' of AppCoins._transfer (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#123-125) is not in mixedCase
+Parameter '_to' of AppCoins._transfer (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#125) is not in mixedCase
+Parameter '_value' of AppCoins._transfer (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#125) is not in mixedCase
+Parameter '_spender' of AppCoins.approve (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#215) is not in mixedCase
+Parameter '_value' of AppCoins.approve (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#215-217) is not in mixedCase
+Parameter '_value' of AppCoins.burn (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#220-221) is not in mixedCase
+Parameter '_from' of AppCoins.burnFrom (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#237) is not in mixedCase
+Parameter '_value' of AppCoins.burnFrom (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#239) is not in mixedCase
+Variable 'AppCoins.token_name' (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#41-43) is not in mixedCase
+Variable 'AppCoins.token_symbol' (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#43-45) is not in mixedCase
+Parameter '_newOwner' of Ownable.transferOwnership (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#345-351) is not in mixedCase
+Function 'Ownable._transferOwnership' (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#363-401) is not in mixedCase
+Parameter '_newOwner' of Ownable._transferOwnership (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#367) is not in mixedCase
+Parameter '_role' of Roles.add (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#415-417) is not in mixedCase
+Parameter '_addr' of Roles.add (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#417-420) is not in mixedCase
+Parameter '_role' of Roles.remove (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#437) is not in mixedCase
+Parameter '_addr' of Roles.remove (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#437-441) is not in mixedCase
+Parameter '_role' of Roles.check (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#445-447) is not in mixedCase
+Parameter '_addr' of Roles.check (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#447) is not in mixedCase
+Parameter '_role' of Roles.has (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#453-457) is not in mixedCase
+Parameter '_addr' of Roles.has (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#458-459) is not in mixedCase
+Parameter '_operator' of RBAC.checkRole (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#499-501) is not in mixedCase
+Parameter '_role' of RBAC.checkRole (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#501-503) is not in mixedCase
+Parameter '_operator' of RBAC.hasRole (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#515-516) is not in mixedCase
+Parameter '_role' of RBAC.hasRole (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#517-519) is not in mixedCase
+Parameter '_operator' of RBAC.addRole (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#535-541) is not in mixedCase
+Parameter '_role' of RBAC.addRole (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#541) is not in mixedCase
+Parameter '_operator' of RBAC.removeRole (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#545) is not in mixedCase
+Parameter '_role' of RBAC.removeRole (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#545) is not in mixedCase
+Parameter '_operator' of Whitelist.addAddressToWhitelist (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#605-613) is not in mixedCase
+Parameter '_operator' of Whitelist.whitelist (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#621-623) is not in mixedCase
+Parameter '_operators' of Whitelist.addAddressesToWhitelist (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#635-636) is not in mixedCase
+Parameter '_operator' of Whitelist.removeAddressFromWhitelist (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#667) is not in mixedCase
+Parameter '_operators' of Whitelist.removeAddressesFromWhitelist (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#687-689) is not in mixedCase
+Parameter '_addrAppc' of AppCoinsCreditsBalance. (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#739) is not in mixedCase
+Parameter '_merkleTreeHash' of AppCoinsCreditsBalance.registerBalanceProof (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol#759) is not in mixedCase
+Parameter '_amount' of AppCoinsCreditsBalance.depositFunds (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol) is not in mixedCase
+Parameter '_merkleTreeHash' of AppCoinsCreditsBalance.depositFunds (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol) is not in mixedCase
+Parameter '_amount' of AppCoinsCreditsBalance.withdrawFunds (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol) is not in mixedCase
+Parameter '_merkleTreeHash' of AppCoinsCreditsBalance.withdrawFunds (/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xfd810ccff10dba53c619806940a4acf4416ddbe0.sol analyzed (8 contracts), 79 result(s) found

@@ -1,0 +1,143 @@
+INFO:Detectors:[91m
+TutellusPartnerCrowdsale.withdraw (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol) sends eth to arbitrary user
+	Dangerous calls:
+	- partner.transfer(amount) (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[93m
+Reentrancy in TokenVesting.release (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#436-446):
+	External calls:
+	- unreleased = releasableAmount(token) (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#439)
+	State variables written after the call(s):
+	- released (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#441-443)
+Reentrancy in TokenVesting.revoke (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#457-467):
+	External calls:
+	- balance = token.balanceOf(this) (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#459-460)
+	- unreleased = releasableAmount(token) (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#460-464)
+	State variables written after the call(s):
+	- revoked (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#465)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+TutellusVestingFactory.setValidKYC (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#550-565) does not use the value returned by external calls:
+	-TokenVesting(vestingAddress).setValidKYC() (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#556-557)
+Crowdsale.buyTokens (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#654-669) does not use the value returned by external calls:
+	-token.mint(beneficiary,tokens) (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#662-663)
+TutellusPartnerCrowdsale.buyTokens (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#820-834) does not use the value returned by external calls:
+	-vault.mint(vestingAddress,tokens) (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+TutellusVestingFactory.setValidKYC has external calls inside a loop:
+	- TokenVesting(vestingAddress).setValidKYC() (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#556-557)
+TutellusVestingFactory.release has external calls inside a loop:
+	- TokenVesting(vestingAddress).release(token) (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#574-576)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in TutellusPartnerCrowdsale.TutellusPartnerCrowdsale (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#789-820):
+	External calls:
+	- token = MintableToken(vault.token()) (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#813)
+	State variables written after the call(s):
+	- cliff (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#819)
+	- duration (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#819)
+	- partner (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#818-819)
+	- percent (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#819-820)
+	- vestingFactory (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#813-818)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+TutellusToken.decimals should be constant (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#327)
+TutellusToken.name should be constant (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#324-325)
+TutellusToken.symbol should be constant (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#327)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Different versions of Solidity is used in /sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol:
+	- Version used: ['0.4.15', '^0.4.15']
+	- /sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#1 declares pragma solidity0.4.15
+	- /sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#378-379 declares pragma solidity^0.4.15
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#different-pragma-directives-are-used[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#39-49) should be declared external
+Authorizable.unauthorize (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#67-75) should be declared external
+BasicToken.balanceOf (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#155-161) should be declared external
+ERC20Basic.balanceOf (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#114-115) should be declared external
+BasicToken.transfer (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#137-147) should be declared external
+ERC20Basic.transfer (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#115-118) should be declared external
+ERC20.allowance (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#163-164) should be declared external
+StandardToken.allowance (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#231-233) should be declared external
+StandardToken.transferFrom (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#193-206) should be declared external
+ERC20.transferFrom (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#165-168) should be declared external
+ERC20.approve (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#168-171) should be declared external
+StandardToken.approve (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#220-222) should be declared external
+StandardToken.increaseApproval (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#238-247) should be declared external
+StandardToken.decreaseApproval (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#248-262) should be declared external
+MintableToken.mint (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#292-305) should be declared external
+MintableToken.finishMinting (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#310-316) should be declared external
+TutellusVault.mint (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#340-344) should be declared external
+TokenVesting.release (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#436-446) should be declared external
+TokenVesting.revoke (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#457-467) should be declared external
+TokenVesting.setValidKYC (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#492-495) should be declared external
+TutellusVestingFactory.getVestingFromContract (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#527-531) should be declared external
+TutellusVestingFactory.createVesting (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#532-549) should be declared external
+TutellusVestingFactory.setValidKYC (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#550-565) should be declared external
+TutellusVestingFactory.release (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#565-581) should be declared external
+Crowdsale.fallback (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#649-651) should be declared external
+Pausable.pause (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#765-769) should be declared external
+Pausable.unpause (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#772-775) should be declared external
+TutellusPartnerCrowdsale.withdraw (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol:
+	- pragma solidity0.4.15 (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#1): it allows old versions
+	- pragma solidity^0.4.15 (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#378-379): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'Ownable.Ownable' (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#21-27) is not in mixedCase
+Parameter '_address' of Authorizable.authorize (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#62-63) is not in mixedCase
+Parameter '_address' of Authorizable.unauthorize (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#67-68) is not in mixedCase
+Parameter '_owner' of BasicToken.balanceOf (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#155-158) is not in mixedCase
+Parameter '_to' of BasicToken.transfer (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#137) is not in mixedCase
+Parameter '_value' of BasicToken.transfer (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#137-138) is not in mixedCase
+Parameter '_owner' of StandardToken.allowance (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#231) is not in mixedCase
+Parameter '_spender' of StandardToken.allowance (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#231) is not in mixedCase
+Parameter '_from' of StandardToken.transferFrom (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#193) is not in mixedCase
+Parameter '_to' of StandardToken.transferFrom (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#193) is not in mixedCase
+Parameter '_value' of StandardToken.transferFrom (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#193) is not in mixedCase
+Parameter '_spender' of StandardToken.approve (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#220) is not in mixedCase
+Parameter '_value' of StandardToken.approve (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#220) is not in mixedCase
+Parameter '_spender' of StandardToken.increaseApproval (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#240-242) is not in mixedCase
+Parameter '_addedValue' of StandardToken.increaseApproval (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#242) is not in mixedCase
+Parameter '_spender' of StandardToken.decreaseApproval (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#248) is not in mixedCase
+Parameter '_subtractedValue' of StandardToken.decreaseApproval (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#248) is not in mixedCase
+Parameter '_to' of MintableToken.mint (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#292) is not in mixedCase
+Parameter '_amount' of MintableToken.mint (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#292-293) is not in mixedCase
+Function 'TutellusVault.TutellusVault' (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#336-340) is not in mixedCase
+Parameter '_to' of TutellusVault.mint (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#340) is not in mixedCase
+Parameter '_amount' of TutellusVault.mint (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#340) is not in mixedCase
+Function 'TokenVesting.TokenVesting' (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#419-435) is not in mixedCase
+Parameter '_beneficiary' of TokenVesting.TokenVesting (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#419) is not in mixedCase
+Parameter '_start' of TokenVesting.TokenVesting (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#419-421) is not in mixedCase
+Parameter '_cliff' of TokenVesting.TokenVesting (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#421) is not in mixedCase
+Parameter '_duration' of TokenVesting.TokenVesting (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#421) is not in mixedCase
+Parameter '_revocable' of TokenVesting.TokenVesting (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#421-422) is not in mixedCase
+Parameter '_address' of TutellusVestingFactory.authorize (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#521) is not in mixedCase
+Function 'TutellusVestingFactory.TutellusVestingFactory' (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#518-520) is not in mixedCase
+Parameter '_token' of TutellusVestingFactory.TutellusVestingFactory (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#518) is not in mixedCase
+Parameter '_address' of TutellusVestingFactory.getVesting (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#524) is not in mixedCase
+Parameter '_contract' of TutellusVestingFactory.getVestingFromContract (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#528-529) is not in mixedCase
+Parameter '_address' of TutellusVestingFactory.getVestingFromContract (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#529) is not in mixedCase
+Parameter '_address' of TutellusVestingFactory.createVesting (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#532) is not in mixedCase
+Parameter '_address' of TutellusVestingFactory.setValidKYC (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#550) is not in mixedCase
+Parameter '_address' of TutellusVestingFactory.release (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#565) is not in mixedCase
+Function 'Crowdsale.Crowdsale' (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#624-639) is not in mixedCase
+Parameter '_startTime' of Crowdsale.Crowdsale (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#625-626) is not in mixedCase
+Parameter '_endTime' of Crowdsale.Crowdsale (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#626) is not in mixedCase
+Parameter '_rate' of Crowdsale.Crowdsale (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#626-629) is not in mixedCase
+Parameter '_wallet' of Crowdsale.Crowdsale (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#629) is not in mixedCase
+Function 'CappedCrowdsale.CappedCrowdsale' (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#704-705) is not in mixedCase
+Parameter '_cap' of CappedCrowdsale.CappedCrowdsale (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#705) is not in mixedCase
+Function 'TutellusPartnerCrowdsale.TutellusPartnerCrowdsale' (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#789-820) is not in mixedCase
+Parameter '_cliff' of TutellusPartnerCrowdsale.TutellusPartnerCrowdsale (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#792-793) is not in mixedCase
+Parameter '_duration' of TutellusPartnerCrowdsale.TutellusPartnerCrowdsale (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#793-794) is not in mixedCase
+Parameter '_partner' of TutellusPartnerCrowdsale.TutellusPartnerCrowdsale (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#797) is not in mixedCase
+Parameter '_percent' of TutellusPartnerCrowdsale.TutellusPartnerCrowdsale (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#797-798) is not in mixedCase
+Parameter '_tutellusVault' of TutellusPartnerCrowdsale.TutellusPartnerCrowdsale (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#798) is not in mixedCase
+Parameter '_tutellusVestingFactory' of TutellusPartnerCrowdsale.TutellusPartnerCrowdsale (/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol#799-801) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xb334247f37f4d9dcbf480c4f28fcc7376410a906.sol analyzed (17 contracts), 91 result(s) found

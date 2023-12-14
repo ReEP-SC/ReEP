@@ -1,0 +1,79 @@
+INFO:Detectors:[93m
+Address.isContract (/sb/0x99d05fd74d5d4619f81e9908719558ee536b9045.sol#197-216) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+Reentrancy in RugPool.exit (/sb/0x99d05fd74d5d4619f81e9908719558ee536b9045.sol#479-482):
+	External calls:
+	- withdraw(balanceOf(msg.sender)) (/sb/0x99d05fd74d5d4619f81e9908719558ee536b9045.sol#480-481)
+	- getReward() (/sb/0x99d05fd74d5d4619f81e9908719558ee536b9045.sol#482)
+	State variables written after the call(s):
+	- lastUpdateTime (/sb/0x99d05fd74d5d4619f81e9908719558ee536b9045.sol#482)
+	- rewardPerTokenStored (/sb/0x99d05fd74d5d4619f81e9908719558ee536b9045.sol#482)
+	- rewards (/sb/0x99d05fd74d5d4619f81e9908719558ee536b9045.sol#482)
+	- userRewardPerTokenPaid (/sb/0x99d05fd74d5d4619f81e9908719558ee536b9045.sol#482)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+TokenRecover.recoverERC20 (/sb/0x99d05fd74d5d4619f81e9908719558ee536b9045.sol#179-187) does not use the value returned by external calls:
+	-IERC20(tokenAddress).transfer(owner(),tokenAmount) (/sb/0x99d05fd74d5d4619f81e9908719558ee536b9045.sol#185-187)
+LPTokenWrapper.stake (/sb/0x99d05fd74d5d4619f81e9908719558ee536b9045.sol#372-388) does not use the value returned by external calls:
+	-rugStake.burn(burnAmount,100) (/sb/0x99d05fd74d5d4619f81e9908719558ee536b9045.sol#379)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in LPTokenWrapper.stake (/sb/0x99d05fd74d5d4619f81e9908719558ee536b9045.sol#372-388):
+	External calls:
+	- rugStake.burn(burnAmount,100) (/sb/0x99d05fd74d5d4619f81e9908719558ee536b9045.sol#379)
+	State variables written after the call(s):
+	- _balances (/sb/0x99d05fd74d5d4619f81e9908719558ee536b9045.sol#385-387)
+	- _totalSupply (/sb/0x99d05fd74d5d4619f81e9908719558ee536b9045.sol#380-385)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+RugPool.notifyRewardAmount (/sb/0x99d05fd74d5d4619f81e9908719558ee536b9045.sol#488-516) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp > starttime (/sb/0x99d05fd74d5d4619f81e9908719558ee536b9045.sol#492-516)
+	- block.timestamp >= periodFinish (/sb/0x99d05fd74d5d4619f81e9908719558ee536b9045.sol#494-503)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+Address.isContract uses assembly (/sb/0x99d05fd74d5d4619f81e9908719558ee536b9045.sol#197-216)
+	- /sb/0x99d05fd74d5d4619f81e9908719558ee536b9045.sol#212
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+LPTokenWrapper.burnRate should be constant (/sb/0x99d05fd74d5d4619f81e9908719558ee536b9045.sol#363)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Different versions of Solidity is used in /sb/0x99d05fd74d5d4619f81e9908719558ee536b9045.sol:
+	- Version used: ['^0.5.0', '^0.5.5']
+	- /sb/0x99d05fd74d5d4619f81e9908719558ee536b9045.sol#40-42 declares pragma solidity^0.5.0
+	- /sb/0x99d05fd74d5d4619f81e9908719558ee536b9045.sol#187-188 declares pragma solidity^0.5.5
+	- /sb/0x99d05fd74d5d4619f81e9908719558ee536b9045.sol#332-333 declares pragma solidity^0.5.0
+	- /sb/0x99d05fd74d5d4619f81e9908719558ee536b9045.sol#358 declares pragma solidity^0.5.0
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#different-pragma-directives-are-used[0m
+INFO:Detectors:[92m
+Ownable.renounceOwnership (/sb/0x99d05fd74d5d4619f81e9908719558ee536b9045.sol#141-147) should be declared external
+Ownable.transferOwnership (/sb/0x99d05fd74d5d4619f81e9908719558ee536b9045.sol#147-148) should be declared external
+TokenRecover.recoverERC20 (/sb/0x99d05fd74d5d4619f81e9908719558ee536b9045.sol#179-187) should be declared external
+RugPool.setRewardAddress (/sb/0x99d05fd74d5d4619f81e9908719558ee536b9045.sol#516-521) should be declared external
+RugPool.setStakeAddress (/sb/0x99d05fd74d5d4619f81e9908719558ee536b9045.sol) should be declared external
+RugPool.setStartTime (/sb/0x99d05fd74d5d4619f81e9908719558ee536b9045.sol) should be declared external
+RugPool.setDuration (/sb/0x99d05fd74d5d4619f81e9908719558ee536b9045.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x99d05fd74d5d4619f81e9908719558ee536b9045.sol:
+	- pragma solidity^0.5.0 (/sb/0x99d05fd74d5d4619f81e9908719558ee536b9045.sol#40-42): it allows old versions
+	- pragma solidity^0.5.5 (/sb/0x99d05fd74d5d4619f81e9908719558ee536b9045.sol#187-188): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0x99d05fd74d5d4619f81e9908719558ee536b9045.sol#332-333): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0x99d05fd74d5d4619f81e9908719558ee536b9045.sol#358): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Low level call in Address.sendValue (/sb/0x99d05fd74d5d4619f81e9908719558ee536b9045.sol#242-252):
+	-(success) = recipient.call.value(amount)() /sb/0x99d05fd74d5d4619f81e9908719558ee536b9045.sol#251
+Low level call in SafeERC20.callOptionalReturn (/sb/0x99d05fd74d5d4619f81e9908719558ee536b9045.sol#302-329):
+	-(success,returndata) = address(token).call(data) /sb/0x99d05fd74d5d4619f81e9908719558ee536b9045.sol#314-319
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Function 'Ownable._transferOwnership' (/sb/0x99d05fd74d5d4619f81e9908719558ee536b9045.sol#149-159) is not in mixedCase
+Parameter '_rewardDistribution' of IRewardDistributionRecipient.setRewardDistribution (/sb/0x99d05fd74d5d4619f81e9908719558ee536b9045.sol#351-352) is not in mixedCase
+Variable 'LPTokenWrapper._totalSupply' (/sb/0x99d05fd74d5d4619f81e9908719558ee536b9045.sol#367) is not in mixedCase
+Variable 'LPTokenWrapper._balances' (/sb/0x99d05fd74d5d4619f81e9908719558ee536b9045.sol#367-368) is not in mixedCase
+Variable 'RugPool.DURATION' (/sb/0x99d05fd74d5d4619f81e9908719558ee536b9045.sol#403) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x99d05fd74d5d4619f81e9908719558ee536b9045.sol analyzed (10 contracts), 24 result(s) found

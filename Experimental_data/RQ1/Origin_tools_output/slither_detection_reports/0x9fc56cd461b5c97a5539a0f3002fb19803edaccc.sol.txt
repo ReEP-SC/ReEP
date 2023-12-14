@@ -1,0 +1,82 @@
+INFO:Detectors:[93m
+Reentrancy in YarnStacking.deposit (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol#259-276):
+	External calls:
+	- require(bool,string)(Token(tokenAddress).transferFrom(msg.sender,address(this),amountToStake),Insufficient Token Allowance) (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol#262-263)
+	- updateAccount(msg.sender) (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol#265)
+	- require(bool,string)(Token(tokenAddress).transfer(owner,fee),Could not transfer deposit fee.) (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol#268-273)
+	State variables written after the call(s):
+	- depositedTokens (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol#273-274)
+Reentrancy in YarnStacking.updateAccount (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol#226-238):
+	External calls:
+	- require(bool,string)(Token(tokenAddress).transfer(account,pendingDivs),Could not transfer tokens.) (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol#228-230)
+	State variables written after the call(s):
+	- lastClaimedTime (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol#238)
+Reentrancy in YarnStacking.withdraw (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol#276-302):
+	External calls:
+	- updateAccount(msg.sender) (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol#284)
+	- require(bool,string)(Token(tokenAddress).transfer(owner,fee),Could not transfer withdraw fee.) (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol#286-288)
+	- require(bool,string)(Token(tokenAddress).transfer(msg.sender,amountAfterFee),Could not transfer tokens.) (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol#288-293)
+	State variables written after the call(s):
+	- depositedTokens (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol#294-298)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+EnumerableSet._remove (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol#56-88) does not use the value returned by external calls:
+	-set._values.pop() (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol#77)
+YarnStacking.deposit (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol#259-276) does not use the value returned by external calls:
+	-holders.add(msg.sender) (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol#276)
+YarnStacking.withdraw (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol#276-302) does not use the value returned by external calls:
+	-holders.remove(msg.sender) (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol#301)
+YarnStacking.transferAnyERC20Tokens (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol#316-319) does not use the value returned by external calls:
+	-Token(_tokenAddr).transfer(_to,_amount) (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in YarnStacking.deposit (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol#259-276):
+	External calls:
+	- require(bool,string)(Token(tokenAddress).transferFrom(msg.sender,address(this),amountToStake),Insufficient Token Allowance) (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol#262-263)
+	- updateAccount(msg.sender) (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol#265)
+	- require(bool,string)(Token(tokenAddress).transfer(owner,fee),Could not transfer deposit fee.) (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol#268-273)
+	State variables written after the call(s):
+	- stakingTime (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol#276)
+Reentrancy in YarnStacking.updateAccount (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol#226-238):
+	External calls:
+	- require(bool,string)(Token(tokenAddress).transfer(account,pendingDivs),Could not transfer tokens.) (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol#228-230)
+	State variables written after the call(s):
+	- totalClaimedRewards (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol#234-235)
+	- totalEarnedTokens (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol#231-234)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol#186-192) should be declared external
+YarnStacking.getNumberOfHolders (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol#257-258) should be declared external
+YarnStacking.deposit (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol#259-276) should be declared external
+YarnStacking.withdraw (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol#276-302) should be declared external
+YarnStacking.claimDivs (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol#302-305) should be declared external
+YarnStacking.transferAnyERC20Tokens (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol#316-319) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol:
+	- pragma solidity0.6.12 (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol#7-9): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'EnumerableSet._add' (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol#45-56) is not in mixedCase
+Function 'EnumerableSet._remove' (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol#56-88) is not in mixedCase
+Function 'EnumerableSet._contains' (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol#89-93) is not in mixedCase
+Function 'EnumerableSet._length' (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol#93-97) is not in mixedCase
+Function 'EnumerableSet._at' (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol#97-107) is not in mixedCase
+Parameter '' of Token.transferFrom (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol#194) is not in mixedCase
+Parameter '_scope_0' of Token.transferFrom (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol#194) is not in mixedCase
+Parameter '_scope_1' of Token.transferFrom (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol#194) is not in mixedCase
+Parameter '' of Token.transfer (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol#196) is not in mixedCase
+Parameter '_scope_0' of Token.transfer (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol#196) is not in mixedCase
+Parameter '_holder' of YarnStacking.getPendingDivs (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol#239) is not in mixedCase
+Parameter '_tokenAddr' of YarnStacking.transferAnyERC20Tokens (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol#317) is not in mixedCase
+Parameter '_to' of YarnStacking.transferAnyERC20Tokens (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol#317-319) is not in mixedCase
+Parameter '_amount' of YarnStacking.transferAnyERC20Tokens (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol) is not in mixedCase
+Constant 'YarnStacking.tokenAddress' (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol#203-206) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'YarnStacking.rewardRate' (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol#208-209) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'YarnStacking.rewardInterval' (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol#209-211) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'YarnStacking.stakingFeeRate' (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol#212) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'YarnStacking.unstakingFeeRate' (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol#214-216) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'YarnStacking.cliffTime' (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol#218-219) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'YarnStacking.stakingAndDaoTokens' (/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol#305-306) is not in UPPER_CASE_WITH_UNDERSCORES
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x9fc56cd461b5c97a5539a0f3002fb19803edaccc.sol analyzed (5 contracts), 37 result(s) found

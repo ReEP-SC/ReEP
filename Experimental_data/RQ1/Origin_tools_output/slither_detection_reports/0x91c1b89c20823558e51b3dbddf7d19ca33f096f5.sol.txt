@@ -1,0 +1,45 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x91c1b89c20823558e51b3dbddf7d19ca33f096f5.sol:
+/sb/0x91c1b89c20823558e51b3dbddf7d19ca33f096f5.sol:105:22: Warning: This looks like an address but has an invalid checksum. If this is not used as an address, please prepend '00'. Correct checksummed address: '0xBb48ffFd077C2517bCC981207F278e799FBF7801'. For more information please see https://solidity.readthedocs.io/en/develop/types.html#address-literals
+    PartnerAccount = 0xbb48fffd077c2517bcc981207f278e799fbf7801;
+                     ^----------------------------------------^
+
+INFO:Detectors:[93m
+Contract locking ether found in /sb/0x91c1b89c20823558e51b3dbddf7d19ca33f096f5.sol:
+	Contract SwapContractPDATAtoDateum has payable functions:
+	 - fallback (/sb/0x91c1b89c20823558e51b3dbddf7d19ca33f096f5.sol#151-161)
+	But does not have a function to withdraw the ether
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#contracts-that-lock-ether[0m
+INFO:Detectors:[93m
+Reentrancy in SwapContractPDATAtoDateum.sendCurrentPayment (/sb/0x91c1b89c20823558e51b3dbddf7d19ca33f096f5.sol#195-229):
+	External calls:
+	- company_token.transfer(PartnerAccount,unsealedAmount) (/sb/0x91c1b89c20823558e51b3dbddf7d19ca33f096f5.sol#209-213)
+	State variables written after the call(s):
+	- alreadyTransfered (/sb/0x91c1b89c20823558e51b3dbddf7d19ca33f096f5.sol#213-215)
+	- currentBalance (/sb/0x91c1b89c20823558e51b3dbddf7d19ca33f096f5.sol#215-217)
+Reentrancy in SwapContractPDATAtoDateum.sendCurrentPayment (/sb/0x91c1b89c20823558e51b3dbddf7d19ca33f096f5.sol#195-229):
+	External calls:
+	- company_token.transfer(PartnerAccount,currentBalance) (/sb/0x91c1b89c20823558e51b3dbddf7d19ca33f096f5.sol#221-229)
+	State variables written after the call(s):
+	- alreadyTransfered (/sb/0x91c1b89c20823558e51b3dbddf7d19ca33f096f5.sol)
+	- currentBalance (/sb/0x91c1b89c20823558e51b3dbddf7d19ca33f096f5.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+SwapContractPDATAtoDateum.sendCurrentPayment (/sb/0x91c1b89c20823558e51b3dbddf7d19ca33f096f5.sol#195-229) does not use the value returned by external calls:
+	-company_token.transfer(PartnerAccount,unsealedAmount) (/sb/0x91c1b89c20823558e51b3dbddf7d19ca33f096f5.sol#209-213)
+	-company_token.transfer(PartnerAccount,currentBalance) (/sb/0x91c1b89c20823558e51b3dbddf7d19ca33f096f5.sol#221-229)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+OpiriaToken.transfer (/sb/0x91c1b89c20823558e51b3dbddf7d19ca33f096f5.sol#35-37) should be declared external
+OpiriaToken.balanceOf (/sb/0x91c1b89c20823558e51b3dbddf7d19ca33f096f5.sol#37-43) should be declared external
+SwapContractPDATAtoDateum.fallback (/sb/0x91c1b89c20823558e51b3dbddf7d19ca33f096f5.sol#151-161) should be declared external
+SwapContractPDATAtoDateum.getBalance (/sb/0x91c1b89c20823558e51b3dbddf7d19ca33f096f5.sol#169-184) should be declared external
+SwapContractPDATAtoDateum.setOwner (/sb/0x91c1b89c20823558e51b3dbddf7d19ca33f096f5.sol#189-195) should be declared external
+SwapContractPDATAtoDateum.sendCurrentPayment (/sb/0x91c1b89c20823558e51b3dbddf7d19ca33f096f5.sol#195-229) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_company_token' of SwapContractPDATAtoDateum. (/sb/0x91c1b89c20823558e51b3dbddf7d19ca33f096f5.sol#105) is not in mixedCase
+Parameter '_owner' of SwapContractPDATAtoDateum.setOwner (/sb/0x91c1b89c20823558e51b3dbddf7d19ca33f096f5.sol#189) is not in mixedCase
+Variable 'SwapContractPDATAtoDateum.company_token' (/sb/0x91c1b89c20823558e51b3dbddf7d19ca33f096f5.sol#53-55) is not in mixedCase
+Variable 'SwapContractPDATAtoDateum.PartnerAccount' (/sb/0x91c1b89c20823558e51b3dbddf7d19ca33f096f5.sol#55-57) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x91c1b89c20823558e51b3dbddf7d19ca33f096f5.sol analyzed (10 contracts), 14 result(s) found

@@ -1,0 +1,115 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol:
+/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol:119:3: Warning: Function state mutability can be restricted to pure
+  function _willFallback() internal {
+  ^ (Relevant source part starts here and spans across multiple lines).
+
+INFO:Detectors:[93m
+AddressUtils.isContract (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#173-207) is declared view but contains assembly code
+UpgradeabilityProxy._implementation (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#285-293) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+Contract locking ether found in /sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol:
+	Contract RegulatorProxy has payable functions:
+	 - fallback (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#39-47)
+	But does not have a function to withdraw the ether
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#contracts-that-lock-ether[0m
+INFO:Detectors:[92m
+UpgradeabilityProxy.constructor._implementation (local variable @ /sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#263) shadows:
+	- UpgradeabilityProxy._implementation (function @ /sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#285-293)
+	- Proxy._implementation (function @ /sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#51-57)
+RegulatorProxy.constructor._implementation (local variable @ /sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#867) shadows:
+	- UpgradeabilityProxy._implementation (function @ /sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#285-293)
+	- Proxy._implementation (function @ /sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#51-57)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+Reentrancy in RegulatorProxyFactory.createRegulatorProxy (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#1309-1339):
+	External calls:
+	- newRegulator.addValidator(msg.sender) (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#1329)
+	- addAllPermissions(newRegulator) (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#1329-1331)
+	- RegulatorProxy(proxy).transferOwnership(msg.sender) (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#1333-1339)
+	State variables written after the call(s):
+	- regulators (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Proxy._delegate uses assembly (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#69-113)
+	- /sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#71-113
+AddressUtils.isContract uses assembly (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#173-207)
+	- /sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#205-207
+UpgradeabilityProxy._implementation uses assembly (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#285-293)
+	- /sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#291-293
+UpgradeabilityProxy._setImplementation uses assembly (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#329-339)
+	- /sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#337-339
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#463-465) should be declared external
+Ownable.claimOwnership (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#473-489) should be declared external
+RegulatorStorage.addPermission (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#623-641) should be declared external
+RegulatorStorage.removePermission (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#645-655) should be declared external
+RegulatorStorage.addValidator (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#723-731) should be declared external
+RegulatorStorage.removeValidator (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#741-747) should be declared external
+RegulatorStorage.getPermission (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#791-805) should be declared external
+RegulatorProxy.upgradeTo (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#891-902) should be declared external
+RegulatorProxy.implementation (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#909-913) should be declared external
+Regulator.setMinter (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#979-981) should be declared external
+Regulator.removeMinter (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#987-989) should be declared external
+Regulator.setBlacklistSpender (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#1001-1009) should be declared external
+Regulator.removeBlacklistSpender (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#1023-1031) should be declared external
+Regulator.setBlacklistDestroyer (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#1043-1059) should be declared external
+Regulator.removeBlacklistDestroyer (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#1067-1083) should be declared external
+Regulator.setBlacklistedUser (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#1097-1103) should be declared external
+Regulator.removeBlacklistedUser (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#1117-1119) should be declared external
+Regulator.isBlacklistedUser (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#1133-1135) should be declared external
+Regulator.isBlacklistSpender (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#1149-1155) should be declared external
+Regulator.isBlacklistDestroyer (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#1166-1177) should be declared external
+Regulator.isMinter (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#1183-1191) should be declared external
+RegulatorProxyFactory.createRegulatorProxy (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#1309-1339) should be declared external
+RegulatorProxyFactory.getRegulatorProxy (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Function 'Proxy._implementation' (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#51-57) is not in mixedCase
+Function 'Proxy._delegate' (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#69-113) is not in mixedCase
+Function 'Proxy._willFallback' (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#129-133) is not in mixedCase
+Function 'Proxy._fallback' (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#147-157) is not in mixedCase
+Function 'UpgradeabilityProxy._implementation' (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#285-293) is not in mixedCase
+Parameter '_implementation' of UpgradeabilityProxy. (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#263) is not in mixedCase
+Function 'UpgradeabilityProxy._upgradeTo' (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#307-309) is not in mixedCase
+Function 'UpgradeabilityProxy._setImplementation' (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#329-339) is not in mixedCase
+Parameter '_newOwner' of Ownable.transferOwnership (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#463) is not in mixedCase
+Parameter '_methodsignature' of RegulatorStorage.addPermission (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#623-625) is not in mixedCase
+Parameter '_permissionName' of RegulatorStorage.addPermission (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#625) is not in mixedCase
+Parameter '_permissionDescription' of RegulatorStorage.addPermission (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#627) is not in mixedCase
+Parameter '_contractName' of RegulatorStorage.addPermission (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#628-633) is not in mixedCase
+Parameter '_methodsignature' of RegulatorStorage.removePermission (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#648-653) is not in mixedCase
+Parameter '_who' of RegulatorStorage.setUserPermission (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#661-663) is not in mixedCase
+Parameter '_methodsignature' of RegulatorStorage.setUserPermission (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#663) is not in mixedCase
+Parameter '_who' of RegulatorStorage.removeUserPermission (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#695) is not in mixedCase
+Parameter '_methodsignature' of RegulatorStorage.removeUserPermission (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#695-697) is not in mixedCase
+Parameter '_validator' of RegulatorStorage.addValidator (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#725) is not in mixedCase
+Parameter '_validator' of RegulatorStorage.removeValidator (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#741) is not in mixedCase
+Parameter '_validator' of RegulatorStorage.isValidator (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#757) is not in mixedCase
+Parameter '_methodsignature' of RegulatorStorage.isPermission (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#769-771) is not in mixedCase
+Parameter '_methodsignature' of RegulatorStorage.getPermission (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#791) is not in mixedCase
+Parameter '_who' of RegulatorStorage.hasUserPermission (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#815) is not in mixedCase
+Parameter '_methodsignature' of RegulatorStorage.hasUserPermission (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#815) is not in mixedCase
+Parameter '_who' of Regulator.setMinter (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#979) is not in mixedCase
+Parameter '_who' of Regulator.removeMinter (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#987) is not in mixedCase
+Parameter '_who' of Regulator.setBlacklistSpender (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#1001) is not in mixedCase
+Parameter '_who' of Regulator.removeBlacklistSpender (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#1023) is not in mixedCase
+Parameter '_who' of Regulator.setBlacklistDestroyer (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#1045) is not in mixedCase
+Parameter '_who' of Regulator.removeBlacklistDestroyer (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#1067-1069) is not in mixedCase
+Parameter '_who' of Regulator.setBlacklistedUser (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#1101) is not in mixedCase
+Parameter '_who' of Regulator.removeBlacklistedUser (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#1117) is not in mixedCase
+Parameter '_who' of Regulator.isBlacklistedUser (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#1133) is not in mixedCase
+Parameter '_who' of Regulator.isBlacklistSpender (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#1149) is not in mixedCase
+Parameter '_who' of Regulator.isBlacklistDestroyer (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#1167) is not in mixedCase
+Parameter '_who' of Regulator.isMinter (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#1183-1185) is not in mixedCase
+Function 'Regulator._setMinter' (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#1193-1215) is not in mixedCase
+Parameter '_who' of Regulator._setMinter (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#1193) is not in mixedCase
+Function 'Regulator._removeMinter' (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#1219-1237) is not in mixedCase
+Parameter '_who' of Regulator._removeMinter (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#1219) is not in mixedCase
+Function 'Regulator._setBlacklistedUser' (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#1237-1243) is not in mixedCase
+Parameter '_who' of Regulator._setBlacklistedUser (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#1239) is not in mixedCase
+Function 'Regulator._removeBlacklistedUser' (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#1243-1255) is not in mixedCase
+Parameter '_who' of Regulator._removeBlacklistedUser (/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol#1245) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x8180522f083bf9a1f756745e5decff48e007d370.sol analyzed (8 contracts), 78 result(s) found

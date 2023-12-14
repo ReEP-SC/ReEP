@@ -1,0 +1,110 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol:
+/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol:289:5: Warning: Functions in interfaces should be declared external.
+    function addVersion(string _contractName, string version, address implementation) public;
+    ^---------------------------------------------------------------------------------------^
+/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol:297:5: Warning: Functions in interfaces should be declared external.
+    function getVersion(string _contractName, string version) public view returns (address);
+    ^--------------------------------------------------------------------------------------^
+/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol:687:27: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+        bytes32 keyHash = keccak256(_addressToCampaignType, _campaignAddress);
+                          ^-------------------------------------------------^
+/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol:696:49: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+        return PROXY_STORAGE_CONTRACT.getString(keccak256(_addressToCampaignType, _key));
+                                                ^-------------------------------------^
+/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol:397:25: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function initialize(address sender) public payable {
+                        ^------------^
+
+INFO:Detectors:[91m
+UpgradeabilityStorage.registry (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#378-380) is never initialized. It is used in:
+	- initialize (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#397-402)
+UpgradeabilityStorage._implementation (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#381-383) is never initialized. It is used in:
+	- implementation (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#387-392)
+UpgradeabilityCampaignStorage._implementation (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#712-714) is never initialized. It is used in:
+	- implementation (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#718-723)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-state-variables[0m
+INFO:Detectors:[93m
+Contract locking ether found in /sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol:
+	Contract TwoKeyFactory has payable functions:
+	 - initialize (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#397-402)
+	 - createProxiesForAcquisitions (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#486-570)
+	But does not have a function to withdraw the ether
+Contract locking ether found in /sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol:
+	Contract ProxyCampaign has payable functions:
+	 - fallback (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#358-376)
+	But does not have a function to withdraw the ether
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#contracts-that-lock-ether[0m
+INFO:Detectors:[92m
+Proxy.fallback uses assembly (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#358-376)
+	- /sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#362-376
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+UpgradeabilityStorage._implementation should be constant (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#381-383)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+IHandleCampaignDeployment.setInitialParamsCampaign (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#15-26) should be declared external
+IHandleCampaignDeployment.setInitialParamsLogicHandler (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#32-43) should be declared external
+IHandleCampaignDeployment.setInitialParamsConversionHandler (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#49-59) should be declared external
+IHandleCampaignDeployment.setInitialParamsPurchasesHandler (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#65-74) should be declared external
+IHandleCampaignDeployment.setInitialParamsDonationCampaign (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#80-90) should be declared external
+IHandleCampaignDeployment.setInitialParamsDonationConversionHandler (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#96-106) should be declared external
+IHandleCampaignDeployment.setInitialParamsDonationLogicHandler (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#106-117) should be declared external
+IHandleCampaignDeployment.setInitialParamsCPCCampaign (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#117-128) should be declared external
+ITwoKeyCampaignValidator.isCampaignValidated (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#176-177) should be declared external
+ITwoKeyCampaignValidator.validateAcquisitionCampaign (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#177-178) should be declared external
+ITwoKeyCampaignValidator.validateDonationCampaign (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#178-179) should be declared external
+ITwoKeyCampaignValidator.validateCPCCampaign (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#179-182) should be declared external
+ITwoKeyEventSourceEvents.ethereumOf (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#184-185) should be declared external
+ITwoKeyEventSourceEvents.plasmaOf (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#185-187) should be declared external
+ITwoKeyEventSourceEvents.emitHandleChangedEvent (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#242-249) should be declared external
+ITwoKeyMaintainersRegistry.checkIsAddressMaintainer (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#252-253) should be declared external
+ITwoKeyMaintainersRegistry.checkIsAddressCoreDev (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#253-255) should be declared external
+ITwoKeyMaintainersRegistry.addMaintainers (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#255-256) should be declared external
+ITwoKeyMaintainersRegistry.addCoreDevs (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#256-257) should be declared external
+ITwoKeyMaintainersRegistry.removeMaintainers (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#257-258) should be declared external
+ITwoKeyMaintainersRegistry.removeCoreDevs (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#258-261) should be declared external
+ITwoKeySingletoneRegistryFetchAddress.getContractProxyAddress (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#262-263) should be declared external
+ITwoKeySingletoneRegistryFetchAddress.getNonUpgradableContractAddress (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#263-264) should be declared external
+ITwoKeySingletoneRegistryFetchAddress.getLatestCampaignApprovedVersion (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#264-267) should be declared external
+ITwoKeySingletonesRegistry.addVersion (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#289-291) should be declared external
+ITwoKeySingletonesRegistry.getVersion (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#297-300) should be declared external
+Proxy.fallback (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#358-376) should be declared external
+UpgradeabilityStorage.implementation (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#387-392) should be declared external
+Upgradeable.initialize (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#397-402) should be declared external
+TwoKeyFactory.setInitialParams (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#432-445) should be declared external
+TwoKeyFactory.createProxiesForAcquisitions (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#486-570) should be declared external
+TwoKeyFactory.createProxiesForDonationCampaign (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#573-645) should be declared external
+TwoKeyFactory.createProxyForCPCCampaign (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#645-681) should be declared external
+TwoKeyFactory.addressToCampaignType (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#695-699) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol:
+	- pragma solidity^0.4.13 (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#5-7): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_username_walletName' of ITwoKeyEventSourceEvents.userRegistered (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#231-232) is not in mixedCase
+Variable 'ITwoKeySingletonUtils.TWO_KEY_SINGLETON_REGISTRY' (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#306-308) is not in mixedCase
+Variable 'UpgradeabilityStorage._implementation' (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#381-383) is not in mixedCase
+Parameter '_twoKeySingletonRegistry' of TwoKeyFactory.setInitialParams (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#433-434) is not in mixedCase
+Parameter '_proxyStorage' of TwoKeyFactory.setInitialParams (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#434-435) is not in mixedCase
+Parameter '_currency' of TwoKeyFactory.createProxiesForAcquisitions (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#491-492) is not in mixedCase
+Parameter '_nonSingletonHash' of TwoKeyFactory.createProxiesForAcquisitions (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#492-493) is not in mixedCase
+Parameter '_moderator' of TwoKeyFactory.createProxiesForDonationCampaign (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#574-575) is not in mixedCase
+Parameter '_currency' of TwoKeyFactory.createProxiesForDonationCampaign (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#577-578) is not in mixedCase
+Parameter '_url' of TwoKeyFactory.createProxyForCPCCampaign (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#646-647) is not in mixedCase
+Parameter '_bountyPerConversion' of TwoKeyFactory.createProxyForCPCCampaign (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#647-648) is not in mixedCase
+Parameter '_mirrorCampaignOnPlasma' of TwoKeyFactory.createProxyForCPCCampaign (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#648-649) is not in mixedCase
+Parameter '_nonSingletonHash' of TwoKeyFactory.createProxyForCPCCampaign (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#649-650) is not in mixedCase
+Parameter '_campaignAddress' of TwoKeyFactory.setAddressToCampaignType (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#686) is not in mixedCase
+Parameter '_campaignType' of TwoKeyFactory.setAddressToCampaignType (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#686) is not in mixedCase
+Parameter '_key' of TwoKeyFactory.addressToCampaignType (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#695) is not in mixedCase
+Parameter '_address' of TwoKeyFactory.plasmaOf (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#699) is not in mixedCase
+Constant 'TwoKeyFactory._addressToCampaignType' (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#406-407) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'TwoKeyFactory._twoKeyEventSource' (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#407-408) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'TwoKeyFactory._twoKeyCampaignValidator' (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#408-410) is not in UPPER_CASE_WITH_UNDERSCORES
+Variable 'TwoKeyFactory.PROXY_STORAGE_CONTRACT' (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#410-412) is not in mixedCase
+Variable 'UpgradeabilityCampaignStorage._implementation' (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#712-714) is not in mixedCase
+Parameter '_contractName' of ProxyCampaign. (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#725) is not in mixedCase
+Parameter '_version' of ProxyCampaign. (/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol#725) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x9b450b14f19fd2106abdea24b94982663d9f14c6.sol analyzed (16 contracts), 66 result(s) found

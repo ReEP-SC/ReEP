@@ -1,0 +1,35 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xad6942baace09e2aca2818e7ef488e0be854c678.sol:
+/sb/0xad6942baace09e2aca2818e7ef488e0be854c678.sol:65:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function Ownable() public {
+
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xad6942baace09e2aca2818e7ef488e0be854c678.sol:121:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function Airdropper(address tokenAddress, uint decimals) public {
+
+    ^ (Relevant source part starts here and spans across multiple lines).
+
+INFO:Detectors:[93m
+Airdropper.returnTokens (/sb/0xad6942baace09e2aca2818e7ef488e0be854c678.sol#307-313) does not use the value returned by external calls:
+	-token.transfer(owner,token.balanceOf(this)) (/sb/0xad6942baace09e2aca2818e7ef488e0be854c678.sol#311-313)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Airdropper.airdrop has external calls inside a loop:
+	- require(bool)(token.transferFrom(source,dests[i],values[i].mul(multiplier))) (/sb/0xad6942baace09e2aca2818e7ef488e0be854c678.sol#291-293)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0xad6942baace09e2aca2818e7ef488e0be854c678.sol#163-181) should be declared external
+ERC20.totalSupply (/sb/0xad6942baace09e2aca2818e7ef488e0be854c678.sol#183-185) should be declared external
+ERC20.balanceOf (/sb/0xad6942baace09e2aca2818e7ef488e0be854c678.sol#185-187) should be declared external
+ERC20.transfer (/sb/0xad6942baace09e2aca2818e7ef488e0be854c678.sol#187-189) should be declared external
+ERC20.allowance (/sb/0xad6942baace09e2aca2818e7ef488e0be854c678.sol#189-191) should be declared external
+ERC20.transferFrom (/sb/0xad6942baace09e2aca2818e7ef488e0be854c678.sol#191-193) should be declared external
+ERC20.approve (/sb/0xad6942baace09e2aca2818e7ef488e0be854c678.sol#193-195) should be declared external
+Airdropper.airdrop (/sb/0xad6942baace09e2aca2818e7ef488e0be854c678.sol#271-297) should be declared external
+Airdropper.returnTokens (/sb/0xad6942baace09e2aca2818e7ef488e0be854c678.sol#307-313) should be declared external
+Airdropper.destroy (/sb/0xad6942baace09e2aca2818e7ef488e0be854c678.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Function 'Ownable.Ownable' (/sb/0xad6942baace09e2aca2818e7ef488e0be854c678.sol#134-139) is not in mixedCase
+Function 'Airdropper.Airdropper' (/sb/0xad6942baace09e2aca2818e7ef488e0be854c678.sol#243-259) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xad6942baace09e2aca2818e7ef488e0be854c678.sol analyzed (4 contracts), 14 result(s) found

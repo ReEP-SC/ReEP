@@ -1,0 +1,194 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol:
+/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol:491:3: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+  function Ownable() public {
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol:593:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function SingleLockingContract(ERC20 _tokenContract, uint256 _unlockTime, address _beneficiary) public {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol:751:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function LockingContract(ERC20 _tokenContract, uint256 _unlockTime) public {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol:937:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function CrowdfundableToken(uint256 _cap, string _name, string _symbol, uint8 _decimals) public {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol:1563:3: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+  function TokenVesting(address _beneficiary, uint256 _start, uint256 _cliff, uint256 _duration, bool _revocable) public {
+  ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol:201:5: Warning: Invoking events without "emit" prefix is deprecated.
+    Transfer(msg.sender, _to, _value);
+    ^-------------------------------^
+/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol:319:5: Warning: Invoking events without "emit" prefix is deprecated.
+    Transfer(_from, _to, _value);
+    ^--------------------------^
+/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol:351:5: Warning: Invoking events without "emit" prefix is deprecated.
+    Approval(msg.sender, _spender, _value);
+    ^------------------------------------^
+/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol:403:5: Warning: Invoking events without "emit" prefix is deprecated.
+    Approval(msg.sender, _spender, allowed[msg.sender][_spender]);
+    ^-----------------------------------------------------------^
+/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol:445:5: Warning: Invoking events without "emit" prefix is deprecated.
+    Approval(msg.sender, _spender, allowed[msg.sender][_spender]);
+    ^-----------------------------------------------------------^
+/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol:527:5: Warning: Invoking events without "emit" prefix is deprecated.
+    OwnershipTransferred(owner, newOwner);
+    ^-----------------------------------^
+/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol:891:5: Warning: Invoking events without "emit" prefix is deprecated.
+    Mint(_to, _amount);
+    ^----------------^
+/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol:893:5: Warning: Invoking events without "emit" prefix is deprecated.
+    Transfer(address(0), _to, _amount);
+    ^--------------------------------^
+/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol:913:5: Warning: Invoking events without "emit" prefix is deprecated.
+    MintFinished();
+    ^------------^
+/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol:1611:5: Warning: Invoking events without "emit" prefix is deprecated.
+    Released(unreleased);
+    ^------------------^
+/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol:1653:5: Warning: Invoking events without "emit" prefix is deprecated.
+    Revoked();
+    ^-------^
+
+INFO:Detectors:[93m
+Reentrancy in DeferredKyc.approve (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#1441-1467):
+	External calls:
+	- minter.mintReserved(investor,etherInProgress[investor],tokenInProgress[investor]) (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#1445-1457)
+	State variables written after the call(s):
+	- etherInProgress (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#1461)
+	- tokenInProgress (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#1461-1465)
+Reentrancy in DeferredKyc.reject (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#1467-1499):
+	External calls:
+	- minter.unreserve(etherInProgress[investor]) (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#1471-1475)
+	State variables written after the call(s):
+	- etherInProgress (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#1485)
+Reentrancy in TokenVesting.release (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#1699-1731):
+	External calls:
+	- unreleased = releasableAmount(token) (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#1701-1715)
+	State variables written after the call(s):
+	- released (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#1717-1725)
+Reentrancy in TokenVesting.revoke (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#1743-1765):
+	External calls:
+	- balance = token.balanceOf(this) (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#1751-1753)
+	- unreleased = releasableAmount(token) (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#1753-1755)
+	State variables written after the call(s):
+	- revoked (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#1759-1763)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+Reentrancy in DeferredKyc.addToKyc (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#1417-1441):
+	External calls:
+	- minter.reserve(msg.value) (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#1421)
+	- tokenAmount = minter.getTokensForEther(msg.value) (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#1421-1427)
+	State variables written after the call(s):
+	- etherInProgress (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#1431-1435)
+	- tokenInProgress (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#1435-1441)
+Reentrancy in Allocator.initialize (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol):
+	External calls:
+	- token = minter.token() (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol)
+	- tokensSold = token.totalSupply() (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol)
+	State variables written after the call(s):
+	- advisorsPool (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol)
+	- communityPool (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol)
+	- customerPool (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol)
+	- teamPool (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol)
+Reentrancy in LockingContract.noteTokens (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#809-843):
+	External calls:
+	- tokenBalance = tokenContract.balanceOf(this) (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#815-817)
+	State variables written after the call(s):
+	- tokens (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#821-825)
+	- totalTokens (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#837-841)
+Reentrancy in DeferredKyc.reject (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#1467-1499):
+	External calls:
+	- minter.unreserve(etherInProgress[investor]) (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#1471-1475)
+	State variables written after the call(s):
+	- etherRejected (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#1479-1483)
+	- tokenInProgress (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#1489-1497)
+Reentrancy in LockingContract.releaseTokens (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#843-865):
+	External calls:
+	- require(bool)(tokenContract.transfer(_beneficiary,amount)) (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#851-853)
+	State variables written after the call(s):
+	- totalTokens (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#857-859)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+BasicToken.totalSupply (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#181-187) should be declared external
+ERC20Basic.totalSupply (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#31-33) should be declared external
+ERC20Basic.balanceOf (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#33-35) should be declared external
+BasicToken.balanceOf (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#247-251) should be declared external
+StandardToken.allowance (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#387-393) should be declared external
+ERC20.allowance (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#257-260) should be declared external
+ERC20.approve (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#273-277) should be declared external
+StandardToken.approve (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#365-371) should be declared external
+StandardToken.increaseApproval (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#417-427) should be declared external
+StandardToken.decreaseApproval (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#461-487) should be declared external
+Ownable.transferOwnership (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#569-589) should be declared external
+SingleLockingContract.releaseTokens (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#673-689) should be declared external
+Whitelist.add (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#709-719) should be declared external
+Whitelist.remove (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#719-733) should be declared external
+LockingContract.balanceOf (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#797-799) should be declared external
+LockingContract.releaseTokens (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#843-865) should be declared external
+LockingContract.reduceLockingTime (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#869-885) should be declared external
+MintableToken.finishMinting (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#971-983) should be declared external
+CrowdfundableToken.burn (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#1067-1071) should be declared external
+Minter.unreserve (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#1261-1269) should be declared external
+Minter.mint (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#1269-1297) should be declared external
+Minter.getTokensForEther (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#1323-1327) should be declared external
+TokenVesting.release (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#1699-1731) should be declared external
+TokenVesting.revoke (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#1743-1765) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_owner' of BasicToken.balanceOf (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#249) is not in mixedCase
+Parameter '_to' of BasicToken.transfer (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#195) is not in mixedCase
+Parameter '_value' of BasicToken.transfer (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#197) is not in mixedCase
+Parameter '_owner' of StandardToken.allowance (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#389) is not in mixedCase
+Parameter '_spender' of StandardToken.allowance (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#389-391) is not in mixedCase
+Parameter '_from' of StandardToken.transferFrom (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#317) is not in mixedCase
+Parameter '_to' of StandardToken.transferFrom (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#317) is not in mixedCase
+Parameter '_value' of StandardToken.transferFrom (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#317) is not in mixedCase
+Parameter '_spender' of StandardToken.approve (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#365) is not in mixedCase
+Parameter '_value' of StandardToken.approve (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#365) is not in mixedCase
+Parameter '_spender' of StandardToken.increaseApproval (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#417-419) is not in mixedCase
+Parameter '_addedValue' of StandardToken.increaseApproval (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#419) is not in mixedCase
+Parameter '_spender' of StandardToken.decreaseApproval (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#463) is not in mixedCase
+Parameter '_subtractedValue' of StandardToken.decreaseApproval (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#463) is not in mixedCase
+Function 'Ownable.Ownable' (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#527-531) is not in mixedCase
+Function 'SingleLockingContract.SingleLockingContract' (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#627-653) is not in mixedCase
+Parameter '_tokenContract' of SingleLockingContract.SingleLockingContract (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#629-633) is not in mixedCase
+Parameter '_unlockTime' of SingleLockingContract.SingleLockingContract (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#633) is not in mixedCase
+Parameter '_beneficiary' of SingleLockingContract.SingleLockingContract (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#633-635) is not in mixedCase
+Parameter '_address' of Whitelist.add (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#713) is not in mixedCase
+Parameter '_address' of Whitelist.remove (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#723) is not in mixedCase
+Parameter '_address' of Whitelist.isWhitelisted (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#738-741) is not in mixedCase
+Function 'LockingContract.LockingContract' (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#781-793) is not in mixedCase
+Parameter '_tokenContract' of LockingContract.LockingContract (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#783) is not in mixedCase
+Parameter '_unlockTime' of LockingContract.LockingContract (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#783) is not in mixedCase
+Parameter '_owner' of LockingContract.balanceOf (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#797) is not in mixedCase
+Parameter '_beneficiary' of LockingContract.noteTokens (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#809-815) is not in mixedCase
+Parameter '_tokenAmount' of LockingContract.noteTokens (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#815) is not in mixedCase
+Parameter '_beneficiary' of LockingContract.releaseTokens (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#843) is not in mixedCase
+Parameter '_newUnlockTime' of LockingContract.reduceLockingTime (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#875-877) is not in mixedCase
+Parameter '_to' of MintableToken.mint (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#943) is not in mixedCase
+Parameter '_amount' of MintableToken.mint (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#944-945) is not in mixedCase
+Parameter '_to' of CrowdfundableToken.transfer (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#1033) is not in mixedCase
+Parameter '_value' of CrowdfundableToken.transfer (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#1033) is not in mixedCase
+Parameter '_from' of CrowdfundableToken.transferFrom (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#1047-1049) is not in mixedCase
+Parameter '_to' of CrowdfundableToken.transferFrom (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#1049) is not in mixedCase
+Parameter '_value' of CrowdfundableToken.transferFrom (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#1049) is not in mixedCase
+Parameter '_to' of CrowdfundableToken.mint (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#1021) is not in mixedCase
+Parameter '_amount' of CrowdfundableToken.mint (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#1021-1022) is not in mixedCase
+Function 'CrowdfundableToken.CrowdfundableToken' (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#987-1011) is not in mixedCase
+Parameter '_cap' of CrowdfundableToken.CrowdfundableToken (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#993) is not in mixedCase
+Parameter '_name' of CrowdfundableToken.CrowdfundableToken (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#993-995) is not in mixedCase
+Parameter '_symbol' of CrowdfundableToken.CrowdfundableToken (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#995) is not in mixedCase
+Parameter '_decimals' of CrowdfundableToken.CrowdfundableToken (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#995) is not in mixedCase
+Parameter '_token' of Minter. (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#1177-1183) is not in mixedCase
+Parameter '_saleEtherCap' of Minter. (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#1183) is not in mixedCase
+Parameter '_minter' of DeferredKyc. (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#1387-1389) is not in mixedCase
+Parameter '_approver' of DeferredKyc. (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#1389) is not in mixedCase
+Parameter '_treasury' of DeferredKyc. (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#1389-1395) is not in mixedCase
+Function 'TokenVesting.TokenVesting' (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#1669-1690) is not in mixedCase
+Parameter '_beneficiary' of TokenVesting.TokenVesting (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#1669-1671) is not in mixedCase
+Parameter '_start' of TokenVesting.TokenVesting (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#1673-1677) is not in mixedCase
+Parameter '_cliff' of TokenVesting.TokenVesting (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#1677) is not in mixedCase
+Parameter '_duration' of TokenVesting.TokenVesting (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#1677) is not in mixedCase
+Parameter '_revocable' of TokenVesting.TokenVesting (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#1677-1678) is not in mixedCase
+Parameter '_minter' of Allocator. (/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol#1937-1939) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xbd81230d5f568f837d32da0fd4d0c5ebf62bb71e.sol analyzed (17 contracts), 89 result(s) found

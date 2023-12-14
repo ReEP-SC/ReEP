@@ -1,0 +1,124 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol:
+/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol:719:25: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function __callback(bytes32 _myid, string _result, bytes _proof) public {
+                        ^-----------^
+/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol:719:56: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function __callback(bytes32 _myid, string _result, bytes _proof) public {
+                                                       ^----------^
+/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol:613:5: Warning: Function state mutability can be restricted to view
+    function hasAccess(address _who) external returns(bool) {
+    ^ (Relevant source part starts here and spans across multiple lines).
+
+INFO:Detectors:[93m
+UsingOraclize.getCodeSize (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#277-285) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+Reentrancy in Reoraclizer.__callback (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#761-779):
+	External calls:
+	- msg.sender != oraclize_cbAddress() (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#769-771)
+	State variables written after the call(s):
+	- lastTimeUpdate (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#777-779)
+Reentrancy in Reoraclizer.constructor (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#749-755):
+	External calls:
+	- oraclize_setProof(proofType_Android | proofStorage_IPFS) (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#753-755)
+	- oraclize_setCustomGasPrice(10000000000) (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#755)
+	State variables written after the call(s):
+	- OAR (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#755)
+	- oraclize (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#755)
+Reentrancy in UsingOraclize.oraclizeAPI (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#91-111):
+	External calls:
+	- address(oraclize) != OAR.getAddress() (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#100-109)
+	- oraclize = OraclizeI(OAR.getAddress()) (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#109)
+	State variables written after the call(s):
+	- oraclize (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#109)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+_accessExpTime in Accessable.grantAccess (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#691-693) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[92m
+Reentrancy in Reoraclizer.__callback (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#761-779):
+	External calls:
+	- msg.sender != oraclize_cbAddress() (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#769-771)
+	State variables written after the call(s):
+	- price (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#777)
+Reentrancy in Reoraclizer.__callback (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#761-779):
+	External calls:
+	- msg.sender != oraclize_cbAddress() (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#769-771)
+	- _update(3600) (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#779)
+	External calls sending eth:
+	- _update(3600) (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#779)
+	State variables written after the call(s):
+	- oraclize_network_name (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#779)
+Reentrancy in Reoraclizer.constructor (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#749-755):
+	External calls:
+	- oraclize_setProof(proofType_Android | proofStorage_IPFS) (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#753-755)
+	- oraclize_setCustomGasPrice(10000000000) (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#755)
+	State variables written after the call(s):
+	- oraclize_network_name (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#755)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+UsingOraclize.getCodeSize uses assembly (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#277-285)
+	- /sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#281-285
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+Accessable.billingPeriod should be constant (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#591)
+OraclizeI.cbAddress should be constant (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#19-21)
+Reoraclizer.response should be constant (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#723)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+OraclizeI.getPrice (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#29-31) should be declared external
+OraclizeI.getPrice (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#45-55) should be declared external
+OraclizeAddrResolverI.getAddress (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#56-67) should be declared external
+Ownable.transferOwnership (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#537-543) should be declared external
+Ownable.claimOwnership (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#551-569) should be declared external
+Reoraclizer.__callback (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#761-779) should be declared external
+Reoraclizer.update (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Function 'OraclizeI.query_withGasLimit' (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#31-35) is not in mixedCase
+Function 'UsingOraclize.oraclize_setNetwork' (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#111-123) is not in mixedCase
+Function 'UsingOraclize.oraclize_setNetwork' (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#123-185) is not in mixedCase
+Function 'UsingOraclize.oraclize_getPrice' (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#185-193) is not in mixedCase
+Function 'UsingOraclize.oraclize_getPrice' (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#193-197) is not in mixedCase
+Function 'UsingOraclize.oraclize_query' (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#197-208) is not in mixedCase
+Function 'UsingOraclize.oraclize_query' (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#209-229) is not in mixedCase
+Function 'UsingOraclize.oraclize_query' (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#229-247) is not in mixedCase
+Function 'UsingOraclize.oraclize_cbAddress' (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#249-255) is not in mixedCase
+Function 'UsingOraclize.oraclize_setProof' (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#255-263) is not in mixedCase
+Function 'UsingOraclize.oraclize_setCustomGasPrice' (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#263-275) is not in mixedCase
+Parameter '_a' of UsingOraclize.parseInt (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#289) is not in mixedCase
+Parameter '_b' of UsingOraclize.parseInt (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#289) is not in mixedCase
+Function 'UsingOraclize.oraclize_setNetworkName' (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#347-351) is not in mixedCase
+Parameter '_networkName' of UsingOraclize.oraclize_setNetworkName (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#349) is not in mixedCase
+Constant 'UsingOraclize.proofType_Ledger' (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#69-71) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'UsingOraclize.proofType_Android' (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#71-73) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'UsingOraclize.proofStorage_IPFS' (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#73-75) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'UsingOraclize.networkID_auto' (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#75-77) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'UsingOraclize.networkID_mainnet' (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#77-81) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'UsingOraclize.networkID_testnet' (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#81-89) is not in UPPER_CASE_WITH_UNDERSCORES
+Variable 'UsingOraclize.OAR' (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#89-91) is not in mixedCase
+Variable 'UsingOraclize.oraclize_network_name' (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#345) is not in mixedCase
+Parameter '_priceInWei' of Accessable.setOneTimePrice (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#625-627) is not in mixedCase
+Parameter '_priceInWei' of Accessable.setbillingAmount (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#633-639) is not in mixedCase
+Parameter '_who' of Accessable.hasAccess (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#649) is not in mixedCase
+Parameter '_beneficiary' of Accessable.processPurchase (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#655) is not in mixedCase
+Parameter '_addr' of Accessable.grantAccess (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#687) is not in mixedCase
+Parameter '_periods' of Accessable.grantAccess (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#687-691) is not in mixedCase
+Function 'Reoraclizer.__callback' (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#761-779) is not in mixedCase
+Parameter '_result' of Reoraclizer.__callback (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#761-763) is not in mixedCase
+Function 'Reoraclizer._update' (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#795-801) is not in mixedCase
+Parameter '_timeout' of Reoraclizer._update (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#795) is not in mixedCase
+Parameter '_timeout' of Reoraclizer.update (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol) is not in mixedCase
+Parameter '_gasLimit' of Reoraclizer.setOraclizeGasLimit (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol) is not in mixedCase
+Parameter '_gasPrice' of Reoraclizer.setGasPrice (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol) is not in mixedCase
+Parameter '_value' of Reoraclizer.withdrawEth (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol) is not in mixedCase
+Parameter '_minUpdatePeriod' of Reoraclizer.setMinUpdatePeriod (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol) is not in mixedCase
+Variable 'Reoraclizer.CALLBACK_GAS_LIMIT' (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#727-729) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+UsingOraclize.proofType_Ledger (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#69-71) is never used in Reoraclizer
+UsingOraclize.networkID_mainnet (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#77-81) is never used in Reoraclizer
+UsingOraclize.networkID_testnet (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#81-89) is never used in Reoraclizer
+Reoraclizer.response (/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol#723) is never used in Reoraclizer
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0x9276096a81159eff8aac815d2578aece98cd7053.sol analyzed (7 contracts), 57 result(s) found

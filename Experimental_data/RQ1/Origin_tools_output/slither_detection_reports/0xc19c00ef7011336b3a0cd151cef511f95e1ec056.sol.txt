@@ -1,0 +1,72 @@
+INFO:Detectors:[93m
+CheckedERC20.checkedTransfer (/sb/0xc19c00ef7011336b3a0cd151cef511f95e1ec056.sol#207-223) uses a dangerous strict equality:
+	- require(bool,string)(_token.balanceOf(this) == balance.sub(_value),checkedTransfer: Final balance didn't match)
+CheckedERC20.checkedTransfer (/sb/0xc19c00ef7011336b3a0cd151cef511f95e1ec056.sol#207-223) uses a dangerous strict equality:
+	- require(bool,string)(_token.balanceOf(this) == balance.sub(_value),checkedTransfer: Final balance didn't match)
+CheckedERC20.checkedTransferFrom (/sb/0xc19c00ef7011336b3a0cd151cef511f95e1ec056.sol#225-243) uses a dangerous strict equality:
+	- require(bool,string)(_token.balanceOf(_to) == toBalance.add(_value),checkedTransfer: Final balance didn't match)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+CheckedERC20.checkedTransfer (/sb/0xc19c00ef7011336b3a0cd151cef511f95e1ec056.sol#207-223) does not use the value returned by external calls:
+	-_token.transfer(_to,_value) (/sb/0xc19c00ef7011336b3a0cd151cef511f95e1ec056.sol#215)
+CheckedERC20.checkedTransferFrom (/sb/0xc19c00ef7011336b3a0cd151cef511f95e1ec056.sol#225-243) does not use the value returned by external calls:
+	-_token.transferFrom(_from,_to,_value) (/sb/0xc19c00ef7011336b3a0cd151cef511f95e1ec056.sol#239-241)
+MultiSeller.sell (/sb/0xc19c00ef7011336b3a0cd151cef511f95e1ec056.sol#575-615) does not use the value returned by external calls:
+	-_mtkn.transferFrom(msg.sender,this,_amount) (/sb/0xc19c00ef7011336b3a0cd151cef511f95e1ec056.sol#599-603)
+	-token.transfer(msg.sender,token.balanceOf(this)) (/sb/0xc19c00ef7011336b3a0cd151cef511f95e1ec056.sol)
+	-token.approve(_exchanges[i],token.balanceOf(this)) (/sb/0xc19c00ef7011336b3a0cd151cef511f95e1ec056.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+MultiSeller.sell has external calls inside a loop:
+	- token = _mtkn.tokens(i) (/sb/0xc19c00ef7011336b3a0cd151cef511f95e1ec056.sol#607-611)
+MultiSeller.sell has external calls inside a loop:
+	- token.transfer(msg.sender,token.balanceOf(this)) (/sb/0xc19c00ef7011336b3a0cd151cef511f95e1ec056.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+ERC20Basic.totalSupply (/sb/0xc19c00ef7011336b3a0cd151cef511f95e1ec056.sol#137) should be declared external
+ERC20Basic.balanceOf (/sb/0xc19c00ef7011336b3a0cd151cef511f95e1ec056.sol#138-139) should be declared external
+ERC20Basic.transfer (/sb/0xc19c00ef7011336b3a0cd151cef511f95e1ec056.sol#139-145) should be declared external
+ERC20.allowance (/sb/0xc19c00ef7011336b3a0cd151cef511f95e1ec056.sol#167-171) should be declared external
+ERC20.transferFrom (/sb/0xc19c00ef7011336b3a0cd151cef511f95e1ec056.sol#171-179) should be declared external
+ERC20.approve (/sb/0xc19c00ef7011336b3a0cd151cef511f95e1ec056.sol#181-191) should be declared external
+IBasicMultiToken.tokensCount (/sb/0xc19c00ef7011336b3a0cd151cef511f95e1ec056.sol#255-257) should be declared external
+IBasicMultiToken.tokens (/sb/0xc19c00ef7011336b3a0cd151cef511f95e1ec056.sol#257) should be declared external
+IBasicMultiToken.allTokens (/sb/0xc19c00ef7011336b3a0cd151cef511f95e1ec056.sol#257-261) should be declared external
+IBasicMultiToken.allDecimals (/sb/0xc19c00ef7011336b3a0cd151cef511f95e1ec056.sol#261) should be declared external
+IBasicMultiToken.allBalances (/sb/0xc19c00ef7011336b3a0cd151cef511f95e1ec056.sol#263) should be declared external
+IBasicMultiToken.allTokensDecimalsBalances (/sb/0xc19c00ef7011336b3a0cd151cef511f95e1ec056.sol#263-269) should be declared external
+IBasicMultiToken.bundleFirstTokens (/sb/0xc19c00ef7011336b3a0cd151cef511f95e1ec056.sol#269-275) should be declared external
+IBasicMultiToken.bundle (/sb/0xc19c00ef7011336b3a0cd151cef511f95e1ec056.sol#275-281) should be declared external
+IBasicMultiToken.unbundle (/sb/0xc19c00ef7011336b3a0cd151cef511f95e1ec056.sol#281-283) should be declared external
+IBasicMultiToken.unbundleSome (/sb/0xc19c00ef7011336b3a0cd151cef511f95e1ec056.sol#283-287) should be declared external
+IMultiToken.getReturn (/sb/0xc19c00ef7011336b3a0cd151cef511f95e1ec056.sol#293-295) should be declared external
+IMultiToken.change (/sb/0xc19c00ef7011336b3a0cd151cef511f95e1ec056.sol#295-301) should be declared external
+IMultiToken.allWeights (/sb/0xc19c00ef7011336b3a0cd151cef511f95e1ec056.sol#307-309) should be declared external
+IMultiToken.allTokensDecimalsBalancesWeights (/sb/0xc19c00ef7011336b3a0cd151cef511f95e1ec056.sol#309-313) should be declared external
+Ownable.renounceOwnership (/sb/0xc19c00ef7011336b3a0cd151cef511f95e1ec056.sol#461-467) should be declared external
+Ownable.transferOwnership (/sb/0xc19c00ef7011336b3a0cd151cef511f95e1ec056.sol#481-487) should be declared external
+MultiSeller.fallback (/sb/0xc19c00ef7011336b3a0cd151cef511f95e1ec056.sol#569-573) should be declared external
+MultiSeller.sell (/sb/0xc19c00ef7011336b3a0cd151cef511f95e1ec056.sol#575-615) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Low level call in MultiSeller.sell (/sb/0xc19c00ef7011336b3a0cd151cef511f95e1ec056.sol#575-615):
+	-require(bool,string)(_exchanges[i].call(data),sell: exchange arbitrary call failed) /sb/0xc19c00ef7011336b3a0cd151cef511f95e1ec056.sol
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Parameter '_token' of CheckedERC20.checkedTransfer (/sb/0xc19c00ef7011336b3a0cd151cef511f95e1ec056.sol#207-209) is not in mixedCase
+Parameter '_to' of CheckedERC20.checkedTransfer (/sb/0xc19c00ef7011336b3a0cd151cef511f95e1ec056.sol#209) is not in mixedCase
+Parameter '_value' of CheckedERC20.checkedTransfer (/sb/0xc19c00ef7011336b3a0cd151cef511f95e1ec056.sol#209) is not in mixedCase
+Parameter '_token' of CheckedERC20.checkedTransferFrom (/sb/0xc19c00ef7011336b3a0cd151cef511f95e1ec056.sol#225) is not in mixedCase
+Parameter '_from' of CheckedERC20.checkedTransferFrom (/sb/0xc19c00ef7011336b3a0cd151cef511f95e1ec056.sol#225-227) is not in mixedCase
+Parameter '_to' of CheckedERC20.checkedTransferFrom (/sb/0xc19c00ef7011336b3a0cd151cef511f95e1ec056.sol#227) is not in mixedCase
+Parameter '_value' of CheckedERC20.checkedTransferFrom (/sb/0xc19c00ef7011336b3a0cd151cef511f95e1ec056.sol#227) is not in mixedCase
+Parameter '_newOwner' of Ownable.transferOwnership (/sb/0xc19c00ef7011336b3a0cd151cef511f95e1ec056.sol#481) is not in mixedCase
+Function 'Ownable._transferOwnership' (/sb/0xc19c00ef7011336b3a0cd151cef511f95e1ec056.sol#491-505) is not in mixedCase
+Parameter '_newOwner' of Ownable._transferOwnership (/sb/0xc19c00ef7011336b3a0cd151cef511f95e1ec056.sol#493) is not in mixedCase
+Parameter '_mtkn' of MultiSeller.sell (/sb/0xc19c00ef7011336b3a0cd151cef511f95e1ec056.sol#575-579) is not in mixedCase
+Parameter '_amount' of MultiSeller.sell (/sb/0xc19c00ef7011336b3a0cd151cef511f95e1ec056.sol#579) is not in mixedCase
+Parameter '_exchanges' of MultiSeller.sell (/sb/0xc19c00ef7011336b3a0cd151cef511f95e1ec056.sol#579-581) is not in mixedCase
+Parameter '_datas' of MultiSeller.sell (/sb/0xc19c00ef7011336b3a0cd151cef511f95e1ec056.sol#581) is not in mixedCase
+Parameter '_datasIndexes' of MultiSeller.sell (/sb/0xc19c00ef7011336b3a0cd151cef511f95e1ec056.sol#583) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xc19c00ef7011336b3a0cd151cef511f95e1ec056.sol analyzed (10 contracts), 47 result(s) found

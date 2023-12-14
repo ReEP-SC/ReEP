@@ -1,0 +1,130 @@
+INFO:Detectors:[91m
+Reentrancy in lexArtWrapper.acceptOffer (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#1075-1089):
+	External calls:
+	- ERC721(tokenAddress).transferFrom(owners[tokenKey][owners[tokenKey].length - 1].ownerAddress,buyers[tokenKey].buyerAddress,tokenId) (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol)
+	External calls sending eth:
+	- royaltyPayout = distributeRoyalties(tokenKey,buyers[tokenKey].transactionValue) (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#1087-1089)
+	- owners[tokenKey][owners[tokenKey].length - 1].ownerAddress.transfer(buyers[tokenKey].transactionValue - royaltyPayout) (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol)
+	State variables written after the call(s):
+	- buyers (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol)
+	- owners (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities[0m
+INFO:Detectors:[91m
+ERC721._ownedTokensCount (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#550-551) is never initialized. It is used in:
+	- balanceOf (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#584-591)
+	- _mint (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#787-800)
+	- _transferFrom (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#831-843)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-state-variables[0m
+INFO:Detectors:[93m
+Address.isContract (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#391-411) is declared view but contains assembly code
+Utilities.toBytes (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#1004-1006) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+IERC721 (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#146-197) has incorrect ERC20 function interface(s):
+	-transferFrom (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#182-184)
+	-approve (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#184-185)
+ERC721 (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#536-883) has incorrect ERC20 function interface(s):
+	-transferFrom (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#664-670)
+	-approve (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#612-623)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[92m
+ERC721Metadata.constructor.name (local variable @ /sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#923-924) shadows:
+	- ERC721Metadata.name (function @ /sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#930-935)
+	- IERC721Metadata.name (function @ /sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#890-891)
+ERC721Metadata.constructor.symbol (local variable @ /sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#924) shadows:
+	- ERC721Metadata.symbol (function @ /sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#937-939)
+	- IERC721Metadata.symbol (function @ /sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#892-894)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+lexArtWrapper.distributeRoyalties has external calls inside a loop:
+	- owners[_tokenKey][i].ownerAddress.transfer(eachPayout) (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#1072)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in lexArtWrapper.acceptOffer (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#1075-1089):
+	External calls:
+	- ERC721(tokenAddress).transferFrom(owners[tokenKey][owners[tokenKey].length - 1].ownerAddress,buyers[tokenKey].buyerAddress,tokenId) (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol)
+	External calls sending eth:
+	- royaltyPayout = distributeRoyalties(tokenKey,buyers[tokenKey].transactionValue) (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#1087-1089)
+	- owners[tokenKey][owners[tokenKey].length - 1].ownerAddress.transfer(buyers[tokenKey].transactionValue - royaltyPayout) (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol)
+	State variables written after the call(s):
+	- NFTs (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol)
+Reentrancy in lexArtWrapper.makeOffer (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#1045-1063):
+	External calls:
+	- require(bool,string)(ERC721(tokenAddress).ownerOf(tokenId) == msg.sender,Sender not authorized to make offer!) (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#1048-1051)
+	State variables written after the call(s):
+	- buyers (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#1060)
+	- buyers (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#1062)
+	- buyers (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#1062)
+Reentrancy in lexArtWrapper.wrapNFT (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#1026-1041):
+	External calls:
+	- require(bool,string)(ERC721(tokenAddress).ownerOf(tokenId) == msg.sender,Sender not authorized to wrap!) (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#1030)
+	State variables written after the call(s):
+	- NFTs (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#1033)
+	- NFTs (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#1034)
+	- NFTs (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#1035-1036)
+	- NFTs (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#1036-1040)
+	- nftCount (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#1040)
+	- owners (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#1040)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Address.isContract uses assembly (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#391-411)
+	- /sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#406-407
+Utilities.toBytes uses assembly (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#1004-1006)
+	- /sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#1006
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+Ownable.owner (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#72-76) should be declared external
+Ownable.renounceOwnership (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#98-104) should be declared external
+Ownable.transferOwnership (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#108-113) should be declared external
+IERC721.balanceOf (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#156-157) should be declared external
+ERC721.balanceOf (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#584-591) should be declared external
+ERC721.safeTransferFrom (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#682-684) should be declared external
+IERC721.safeTransferFrom (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#174-177) should be declared external
+IERC721.transferFrom (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#182-184) should be declared external
+ERC721.transferFrom (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#664-670) should be declared external
+ERC721.approve (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#612-623) should be declared external
+IERC721.approve (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#184-185) should be declared external
+ERC721.setApprovalForAll (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#640-646) should be declared external
+IERC721.setApprovalForAll (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#188) should be declared external
+IERC721Receiver.onERC721Received (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#217-220) should be declared external
+lexArtWrapper.wrapNFT (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#1026-1041) should be declared external
+lexArtWrapper.makeOffer (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#1045-1063) should be declared external
+lexArtWrapper.acceptOffer (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#1075-1089) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x9713709d8d544871107860b522c525f4a70011c4.sol:
+	- pragma solidity^0.5.17 (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#13-16): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Low level call in Address.sendValue (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#440-445):
+	-(success) = recipient.call.value(amount)() /sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#443-444
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Function 'Context._msgSender' (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#33-37) is not in mixedCase
+Function 'Context._msgData' (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#37-43) is not in mixedCase
+Function 'Ownable._transferOwnership' (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#114-123) is not in mixedCase
+Function 'ERC165._registerInterface' (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#529-533) is not in mixedCase
+Parameter '_data' of ERC721.safeTransferFrom (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#699) is not in mixedCase
+Function 'ERC721._safeTransferFrom' (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#719-725) is not in mixedCase
+Parameter '_data' of ERC721._safeTransferFrom (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#721) is not in mixedCase
+Function 'ERC721._exists' (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#727-732) is not in mixedCase
+Function 'ERC721._isApprovedOrOwner' (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#737-747) is not in mixedCase
+Function 'ERC721._safeMint' (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#756-758) is not in mixedCase
+Function 'ERC721._safeMint' (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#772-781) is not in mixedCase
+Parameter '_data' of ERC721._safeMint (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#774-778) is not in mixedCase
+Function 'ERC721._mint' (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#787-800) is not in mixedCase
+Function 'ERC721._burn' (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#807-812) is not in mixedCase
+Function 'ERC721._burn' (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#818-822) is not in mixedCase
+Function 'ERC721._transferFrom' (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#831-843) is not in mixedCase
+Function 'ERC721._checkOnERC721Received' (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#863-873) is not in mixedCase
+Parameter '_data' of ERC721._checkOnERC721Received (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#864-865) is not in mixedCase
+Function 'ERC721._clearApproval' (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#879-883) is not in mixedCase
+Function 'ERC721Metadata._burn' (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#978-990) is not in mixedCase
+Function 'ERC721Metadata._setTokenURI' (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#957-965) is not in mixedCase
+Contract 'lexArtWrapper' (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#1006-1089) is not in CapWords
+Parameter '_royalties' of lexArtWrapper.decayRoyalties (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#1041) is not in mixedCase
+Parameter '_tokenKey' of lexArtWrapper.distributeRoyalties (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#1064) is not in mixedCase
+Parameter '_transactionValue' of lexArtWrapper.distributeRoyalties (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#1064-1067) is not in mixedCase
+Variable 'lexArtWrapper.NFTs' (/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol#1025) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x9713709d8d544871107860b522c525f4a70011c4.sol analyzed (14 contracts), 59 result(s) found

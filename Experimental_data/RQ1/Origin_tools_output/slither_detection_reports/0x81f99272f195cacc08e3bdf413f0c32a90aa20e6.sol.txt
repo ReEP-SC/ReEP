@@ -1,0 +1,73 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x81f99272f195cacc08e3bdf413f0c32a90aa20e6.sol:
+/sb/0x81f99272f195cacc08e3bdf413f0c32a90aa20e6.sol:91:22: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+  function balanceOf(address _owner) public pure returns (uint256 balance) {}
+
+                     ^------------^
+/sb/0x81f99272f195cacc08e3bdf413f0c32a90aa20e6.sol:91:59: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+  function balanceOf(address _owner) public pure returns (uint256 balance) {}
+
+                                                          ^-------------^
+
+INFO:Detectors:[93m
+Reentrancy in ESSENTIA_PE.buy (/sb/0x81f99272f195cacc08e3bdf413f0c32a90aa20e6.sol#383-431):
+	External calls:
+	- require(bool)(tokenAmount <= TokenCHK(ESSgenesis).balanceOf(contractAddr)) (/sb/0x81f99272f195cacc08e3bdf413f0c32a90aa20e6.sol#409-411)
+	State variables written after the call(s):
+	- totalSold (/sb/0x81f99272f195cacc08e3bdf413f0c32a90aa20e6.sol#420-425)
+Reentrancy in ESSENTIA_PE.withdrawPUB (/sb/0x81f99272f195cacc08e3bdf413f0c32a90aa20e6.sol#431-465):
+	External calls:
+	- ! ESSgenesis.call(bytes4(keccak256()(transfer(address,uint256))),msg.sender,sold[msg.sender]) (/sb/0x81f99272f195cacc08e3bdf413f0c32a90aa20e6.sol#457-461)
+	State variables written after the call(s):
+	- sold (/sb/0x81f99272f195cacc08e3bdf413f0c32a90aa20e6.sol#461)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+Reentrancy in ESSENTIA_PE.buy (/sb/0x81f99272f195cacc08e3bdf413f0c32a90aa20e6.sol#383-431):
+	External calls:
+	- require(bool)(tokenAmount <= TokenCHK(ESSgenesis).balanceOf(contractAddr)) (/sb/0x81f99272f195cacc08e3bdf413f0c32a90aa20e6.sol#409-411)
+	State variables written after the call(s):
+	- sold (/sb/0x81f99272f195cacc08e3bdf413f0c32a90aa20e6.sol#411)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+ESSENTIA_PE.buy (/sb/0x81f99272f195cacc08e3bdf413f0c32a90aa20e6.sol#383-431) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool)(block.timestamp < pubEnd) (/sb/0x81f99272f195cacc08e3bdf413f0c32a90aa20e6.sol#383-385)
+ESSENTIA_PE.withdrawPUB (/sb/0x81f99272f195cacc08e3bdf413f0c32a90aa20e6.sol#431-465) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool)(block.timestamp > pubEnd) (/sb/0x81f99272f195cacc08e3bdf413f0c32a90aa20e6.sol#431-435)
+ESSENTIA_PE.EMGwithdraw (/sb/0x81f99272f195cacc08e3bdf413f0c32a90aa20e6.sol#497-503) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool)(block.timestamp > pubEnd) (/sb/0x81f99272f195cacc08e3bdf413f0c32a90aa20e6.sol#497-499)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+ESSENTIA_PE.decimals should be constant (/sb/0x81f99272f195cacc08e3bdf413f0c32a90aa20e6.sol#219)
+ESSENTIA_PE.name should be constant (/sb/0x81f99272f195cacc08e3bdf413f0c32a90aa20e6.sol#205)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0x81f99272f195cacc08e3bdf413f0c32a90aa20e6.sol#141-159) should be declared external
+TokenCHK.balanceOf (/sb/0x81f99272f195cacc08e3bdf413f0c32a90aa20e6.sol#195-203) should be declared external
+ESSENTIA_PE.fallback (/sb/0x81f99272f195cacc08e3bdf413f0c32a90aa20e6.sol#313-318) should be declared external
+ESSENTIA_PE.setFWDaddrETH (/sb/0x81f99272f195cacc08e3bdf413f0c32a90aa20e6.sol#325-327) should be declared external
+ESSENTIA_PE.setGenesis (/sb/0x81f99272f195cacc08e3bdf413f0c32a90aa20e6.sol#333-349) should be declared external
+ESSENTIA_PE.setMaxCap (/sb/0x81f99272f195cacc08e3bdf413f0c32a90aa20e6.sol#349-361) should be declared external
+ESSENTIA_PE.setPrice (/sb/0x81f99272f195cacc08e3bdf413f0c32a90aa20e6.sol#361-377) should be declared external
+ESSENTIA_PE.setPubEnd (/sb/0x81f99272f195cacc08e3bdf413f0c32a90aa20e6.sol#377-383) should be declared external
+ESSENTIA_PE.withdrawPUB (/sb/0x81f99272f195cacc08e3bdf413f0c32a90aa20e6.sol#431-465) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Low level call in ESSENTIA_PE.withdrawPUB (/sb/0x81f99272f195cacc08e3bdf413f0c32a90aa20e6.sol#431-465):
+	-! ESSgenesis.call(bytes4(keccak256()(transfer(address,uint256))),msg.sender,sold[msg.sender]) /sb/0x81f99272f195cacc08e3bdf413f0c32a90aa20e6.sol#457-461
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Contract 'ESSENTIA_PE' (/sb/0x81f99272f195cacc08e3bdf413f0c32a90aa20e6.sol#203-503) is not in CapWords
+Parameter '_value' of ESSENTIA_PE.setFWDaddrETH (/sb/0x81f99272f195cacc08e3bdf413f0c32a90aa20e6.sol#325) is not in mixedCase
+Parameter '_value' of ESSENTIA_PE.setGenesis (/sb/0x81f99272f195cacc08e3bdf413f0c32a90aa20e6.sol#337) is not in mixedCase
+Parameter '_value' of ESSENTIA_PE.setMaxCap (/sb/0x81f99272f195cacc08e3bdf413f0c32a90aa20e6.sol#349-351) is not in mixedCase
+Parameter '_value' of ESSENTIA_PE.setPrice (/sb/0x81f99272f195cacc08e3bdf413f0c32a90aa20e6.sol#363) is not in mixedCase
+Parameter '_value' of ESSENTIA_PE.setPubEnd (/sb/0x81f99272f195cacc08e3bdf413f0c32a90aa20e6.sol#378-381) is not in mixedCase
+Parameter '_to' of ESSENTIA_PE.transferBuy (/sb/0x81f99272f195cacc08e3bdf413f0c32a90aa20e6.sol#465) is not in mixedCase
+Parameter '_value' of ESSENTIA_PE.transferBuy (/sb/0x81f99272f195cacc08e3bdf413f0c32a90aa20e6.sol#465) is not in mixedCase
+Function 'ESSENTIA_PE.EMGwithdraw' (/sb/0x81f99272f195cacc08e3bdf413f0c32a90aa20e6.sol#497-503) is not in mixedCase
+Variable 'ESSENTIA_PE.FWDaddrETH' (/sb/0x81f99272f195cacc08e3bdf413f0c32a90aa20e6.sol#211) is not in mixedCase
+Variable 'ESSENTIA_PE.ESSgenesis' (/sb/0x81f99272f195cacc08e3bdf413f0c32a90aa20e6.sol#213) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x81f99272f195cacc08e3bdf413f0c32a90aa20e6.sol analyzed (4 contracts), 28 result(s) found

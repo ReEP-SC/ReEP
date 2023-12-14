@@ -1,0 +1,201 @@
+INFO:Detectors:[91m
+Ownable.______gap (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#407) shadows:
+	- Initializable.______gap (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#289-290)
+OperatorRole.______gap (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#597) shadows:
+	- Ownable.______gap (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#407)
+	- Initializable.______gap (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#289-290)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variable-shadowing[0m
+INFO:Detectors:[93m
+Initializable.isConstructor (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#269-288) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+Whitelist.authorizeTransfer (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1428-1464) uses a dangerous strict equality:
+	- callingContract.balanceOf(_from) == _value && _from != address(0)
+Whitelist.authorizeTransfer (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1428-1464) uses a dangerous strict equality:
+	- callingContract.balanceOf(_from) == _value && _from != address(0)
+Whitelist.deactivateWallet (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1352-1357) uses a dangerous strict equality:
+	- require(bool,string)(callingContract.balanceOf(_wallet) == 0,ATTEMPT_TO_DEACTIVATE_WALLET_WITH_BALANCE)
+Whitelist.authorizeTransfer (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1428-1464) uses a dangerous strict equality:
+	- callingContract.balanceOf(_from) == _value && _from != address(0)
+Whitelist.deactivateWallet (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1352-1357) uses a dangerous strict equality:
+	- require(bool,string)(callingContract.balanceOf(_wallet) == 0,ATTEMPT_TO_DEACTIVATE_WALLET_WITH_BALANCE)
+Whitelist.deactivateWallets (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1357-1360) uses a dangerous strict equality:
+	- require(bool,string)(callingContract.balanceOf(_wallets[i]) == 0,ATTEMPT_TO_DEACTIVATE_WALLET_WITH_BALANCE)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Reentrancy in Whitelist.authorizeTransfer (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1428-1464):
+	External calls:
+	- callingContract.balanceOf(_from) == _value && _from != address(0) (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1447-1450)
+	State variables written after the call(s):
+	- authorizedUserIdInfo (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol)
+	- currentInvestors (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1449-1450)
+	- currentInvestorsByJurisdiction (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1449-1450)
+	- investorEnlisted (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1449-1450)
+	- userActiveWalletCount (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1449-1450)
+	- walletActivated (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1449-1450)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+Whitelist.deactivateWallets has external calls inside a loop:
+	- require(bool,string)(callingContract.balanceOf(_wallets[i]) == 0,ATTEMPT_TO_DEACTIVATE_WALLET_WITH_BALANCE) (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1359-1360)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in Whitelist.authorizeTransfer (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1428-1464):
+	External calls:
+	- callingContract.balanceOf(_from) == _value && _from != address(0) (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1447-1450)
+	State variables written after the call(s):
+	- userIdLockups (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol)
+	- userIdLockups (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol)
+Reentrancy in Whitelist.deactivateWallet (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1352-1357):
+	External calls:
+	- require(bool,string)(callingContract.balanceOf(_wallet) == 0,ATTEMPT_TO_DEACTIVATE_WALLET_WITH_BALANCE) (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1354-1356)
+	State variables written after the call(s):
+	- currentInvestors (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1356-1357)
+	- currentInvestorsByJurisdiction (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1356-1357)
+	- investorEnlisted (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1356-1357)
+	- userActiveWalletCount (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1356-1357)
+	- walletActivated (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1356-1357)
+Reentrancy in Whitelist.deactivateWallets (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1357-1360):
+	External calls:
+	- require(bool,string)(callingContract.balanceOf(_wallets[i]) == 0,ATTEMPT_TO_DEACTIVATE_WALLET_WITH_BALANCE) (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1359-1360)
+	State variables written after the call(s):
+	- currentInvestors (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1360)
+	- currentInvestorsByJurisdiction (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1360)
+	- investorEnlisted (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1360)
+	- userActiveWalletCount (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1360)
+	- walletActivated (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1360)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Whitelist.authorizeTransfer (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1428-1464) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(block.timestamp >= startDate,WAIT_FOR_START_DATE) (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol)
+Whitelist.getLockedTokenCount (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#851-870) uses timestamp for comparisons
+	Dangerous comparisons:
+	- lockup.lockupExpirationDate > block.timestamp (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#862-866)
+Whitelist._addLockup (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1115-1157) uses timestamp for comparisons
+	Dangerous comparisons:
+	- _numberOfTokensLocked == 0 || _lockupExpirationDate <= block.timestamp (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1122-1126)
+	- lockup.lockupExpirationDate + lockupGranularity >= _lockupExpirationDate (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1143-1151)
+Whitelist._processLockup (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1178-1201) uses timestamp for comparisons
+	Dangerous comparisons:
+	- lockup.lockupExpirationDate > block.timestamp && ! _ignoreExpiration (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1189-1192)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+Initializable.isConstructor uses assembly (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#269-288)
+	- /sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#287-288
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+Different versions of Solidity is used in /sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol:
+	- Version used: ['0.5.17', '>=0.4.24<0.7.0', '^0.5.0']
+	- /sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#7-10 declares pragma solidity0.5.17
+	- /sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#63 declares pragma solidity^0.5.0
+	- /sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#227 declares pragma solidity>=0.4.24<0.7.0
+	- /sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#291 declares pragma solidity^0.5.0
+	- /sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#325 declares pragma solidity^0.5.0
+	- /sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#411-412 declares pragma solidity^0.5.0
+	- /sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#496-497 declares pragma solidity^0.5.0
+	- /sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#539 declares pragma solidity^0.5.0
+	- /sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#598 declares pragma solidity0.5.17
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#different-pragma-directives-are-used[0m
+INFO:Detectors:[92m
+Ownable.owner (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#358-360) should be declared external
+Ownable.renounceOwnership (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#380-386) should be declared external
+Ownable.transferOwnership (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#388-395) should be declared external
+OperatorRole.addOperator (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#576-586) should be declared external
+OperatorRole.removeOperator (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#586-589) should be declared external
+OperatorRole.renounceOperator (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#589-592) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol:
+	- pragma solidity0.5.17 (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#7-10): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#63): it allows old versions
+	- pragma solidity>=0.4.24<0.7.0 (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#227): is has a complex pragma
+	- pragma solidity^0.5.0 (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#291): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#325): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#411-412): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#496-497): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#539): it allows old versions
+	- pragma solidity0.5.17 (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#598): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Variable 'Initializable.______gap' (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#289-290) is not in mixedCase
+Function 'Context._msgSender' (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#309-313) is not in mixedCase
+Function 'Context._msgData' (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#313-324) is not in mixedCase
+Function 'Ownable._transferOwnership' (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#400-406) is not in mixedCase
+Variable 'Ownable.______gap' (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#407) is not in mixedCase
+Function 'OperatorRole._initializeOperatorRole' (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#559-563) is not in mixedCase
+Function 'OperatorRole._addOperator' (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#592-594) is not in mixedCase
+Function 'OperatorRole._removeOperator' (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#594-596) is not in mixedCase
+Variable 'OperatorRole.______gap' (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#597) is not in mixedCase
+Parameter '_from' of Whitelist.detectTransferRestriction (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#875-877) is not in mixedCase
+Parameter '_to' of Whitelist.detectTransferRestriction (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#879) is not in mixedCase
+Parameter '' of Whitelist.detectTransferRestriction (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#879) is not in mixedCase
+Parameter '_restrictionCode' of Whitelist.messageForTransferRestriction (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#911) is not in mixedCase
+Parameter '_from' of Whitelist.authorizeTransfer (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1428) is not in mixedCase
+Parameter '_to' of Whitelist.authorizeTransfer (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1428) is not in mixedCase
+Parameter '_value' of Whitelist.authorizeTransfer (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1428) is not in mixedCase
+Parameter '_isSell' of Whitelist.authorizeTransfer (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1429) is not in mixedCase
+Parameter '_callingContract' of Whitelist.initialize (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#935-936) is not in mixedCase
+Parameter '_fromJurisdictionId' of Whitelist.getJurisdictionFlow (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#815) is not in mixedCase
+Parameter '_toJurisdictionId' of Whitelist.getJurisdictionFlow (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#815) is not in mixedCase
+Parameter '_userId' of Whitelist.getAuthorizedUserIdInfo (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#821-824) is not in mixedCase
+Parameter '_userId' of Whitelist.getUserIdLockup (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#837) is not in mixedCase
+Parameter '_lockupIndex' of Whitelist.getUserIdLockup (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#837-838) is not in mixedCase
+Parameter '_userId' of Whitelist.getLockedTokenCount (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#852) is not in mixedCase
+Parameter '_startDate' of Whitelist.configWhitelist (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#943-944) is not in mixedCase
+Parameter '_lockupGranularity' of Whitelist.configWhitelist (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#944) is not in mixedCase
+Parameter '_fromJurisdictionIds' of Whitelist.updateJurisdictionFlows (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#967-968) is not in mixedCase
+Parameter '_toJurisdictionIds' of Whitelist.updateJurisdictionFlows (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#968-969) is not in mixedCase
+Parameter '_lockupLengths' of Whitelist.updateJurisdictionFlows (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#969-970) is not in mixedCase
+Parameter '_traders' of Whitelist.approveNewUsers (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#994-995) is not in mixedCase
+Parameter '_jurisdictionIds' of Whitelist.approveNewUsers (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#995-996) is not in mixedCase
+Parameter '_userIds' of Whitelist.addApprovedUserWallets (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1024-1025) is not in mixedCase
+Parameter '_newWallets' of Whitelist.addApprovedUserWallets (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1027) is not in mixedCase
+Parameter '_wallets' of Whitelist.revokeUserWallets (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1060) is not in mixedCase
+Parameter '_userIds' of Whitelist.updateJurisdictionsForUserIds (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1079) is not in mixedCase
+Parameter '_jurisdictionIds' of Whitelist.updateJurisdictionsForUserIds (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1080) is not in mixedCase
+Function 'Whitelist._addLockup' (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1115-1157) is not in mixedCase
+Parameter '_userId' of Whitelist._addLockup (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1116) is not in mixedCase
+Parameter '_lockupExpirationDate' of Whitelist._addLockup (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1117-1118) is not in mixedCase
+Parameter '_numberOfTokensLocked' of Whitelist._addLockup (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1121-1122) is not in mixedCase
+Parameter '_userIds' of Whitelist.addLockups (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1161-1162) is not in mixedCase
+Parameter '_lockupExpirationDates' of Whitelist.addLockups (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1162-1163) is not in mixedCase
+Parameter '_numberOfTokensLocked' of Whitelist.addLockups (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1163-1164) is not in mixedCase
+Function 'Whitelist._processLockup' (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1178-1201) is not in mixedCase
+Parameter '_userId' of Whitelist._processLockup (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1180) is not in mixedCase
+Parameter '_ignoreExpiration' of Whitelist._processLockup (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1180) is not in mixedCase
+Parameter '_userId' of Whitelist.processLockups (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1209) is not in mixedCase
+Parameter '_maxCount' of Whitelist.processLockups (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1209-1210) is not in mixedCase
+Parameter '_userId' of Whitelist.forceUnlockUpTo (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1225-1226) is not in mixedCase
+Parameter '_maxLockupIndex' of Whitelist.forceUnlockUpTo (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1226) is not in mixedCase
+Function 'Whitelist._isJurisdictionHalted' (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1238-1244) is not in mixedCase
+Parameter '_jurisdictionId' of Whitelist._isJurisdictionHalted (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1239) is not in mixedCase
+Parameter '_jurisdictionIds' of Whitelist.halt (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1252-1254) is not in mixedCase
+Parameter '_expirationTimestamps' of Whitelist.halt (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1254) is not in mixedCase
+Function 'Whitelist._halt' (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1260-1264) is not in mixedCase
+Parameter '_jurisdictionId' of Whitelist._halt (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1261) is not in mixedCase
+Parameter '_until' of Whitelist._halt (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1261) is not in mixedCase
+Parameter '_jurisdictionIds' of Whitelist.resume (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1267-1268) is not in mixedCase
+Function 'Whitelist._resume' (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1270-1278) is not in mixedCase
+Parameter '_jurisdictionId' of Whitelist._resume (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1270-1271) is not in mixedCase
+Parameter '_limit' of Whitelist.setInvestorLimit (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1284) is not in mixedCase
+Parameter '_jurisdictionIds' of Whitelist.setInvestorLimitForJurisdiction (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1301-1304) is not in mixedCase
+Parameter '_limits' of Whitelist.setInvestorLimitForJurisdiction (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1304) is not in mixedCase
+Parameter '_wallets' of Whitelist.activateWallets (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1325-1326) is not in mixedCase
+Function 'Whitelist._activateWallet' (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1328-1346) is not in mixedCase
+Parameter '_wallet' of Whitelist._activateWallet (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1328-1329) is not in mixedCase
+Parameter '_wallet' of Whitelist.deactivateWallet (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1353) is not in mixedCase
+Parameter '_wallets' of Whitelist.deactivateWallets (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1357-1358) is not in mixedCase
+Function 'Whitelist._deactivateWallet' (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1360-1376) is not in mixedCase
+Parameter '_wallet' of Whitelist._deactivateWallet (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1360-1361) is not in mixedCase
+Parameter '_userIds' of Whitelist.enlistUsers (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1376-1377) is not in mixedCase
+Function 'Whitelist._enlistUser' (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1381-1401) is not in mixedCase
+Parameter '_userId' of Whitelist._enlistUser (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1381) is not in mixedCase
+Parameter '_userIds' of Whitelist.delistUsers (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1404) is not in mixedCase
+Function 'Whitelist._delistUser' (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1409-1422) is not in mixedCase
+Parameter '_userId' of Whitelist._delistUser (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#1409) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+OperatorRole.______gap (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#597) is never used in Whitelist
+Whitelist.STATUS_ERROR_NON_LISTED_USER (/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol#621) is never used in Whitelist
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0x916c729002c041972c640390a0fad1db29b6a6c2.sol analyzed (9 contracts), 101 result(s) found

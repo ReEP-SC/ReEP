@@ -1,0 +1,116 @@
+INFO:Detectors:[91m
+DSRoles._root_users (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#209-213) is never initialized. It is used in:
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-state-variables[0m
+INFO:Detectors:[93m
+VoteProxyFactory.breakLink (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol) uses a dangerous strict equality:
+	- require(bool,string)(chief.IOU().balanceOf(voteProxy) == 0,VoteProxy still has funds attached to it)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Reentrancy in VoteProxyFactory.breakLink (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol):
+	External calls:
+	- cold = voteProxy.cold() (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol)
+	- hot = voteProxy.hot() (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol)
+	- require(bool,string)(chief.IOU().balanceOf(voteProxy) == 0,VoteProxy still has funds attached to it) (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol)
+	State variables written after the call(s):
+	- coldMap (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol)
+	- hotMap (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+VoteProxy.constructor (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#1729-1747) does not use the value returned by external calls:
+	-gov.approve(chief,uint256(- 1)) (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#1739-1745)
+	-iou.approve(chief,uint256(- 1)) (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#1745-1747)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+DSChief.constructor.GOV (local variable @ /sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#1640-1645) shadows:
+	- DSChiefApprovals.GOV (state variable @ /sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#1371)
+DSChief.constructor.IOU (local variable @ /sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#1645) shadows:
+	- DSChiefApprovals.IOU (state variable @ /sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#1375)
+DSChief.constructor.MAX_YAYS (local variable @ /sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#1645-1647) shadows:
+	- DSChiefApprovals.MAX_YAYS (state variable @ /sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#1387-1389)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+Reentrancy in VoteProxy.constructor (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#1729-1747):
+	External calls:
+	- gov = chief.GOV() (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#1739)
+	- iou = chief.IOU() (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#1739)
+	State variables written after the call(s):
+	- iou (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#1739)
+Reentrancy in DSChiefApprovals.lock (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#1423-1441):
+	External calls:
+	- GOV.pull(msg.sender,wad) (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#1425-1427)
+	- IOU.mint(msg.sender,wad) (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#1427-1433)
+	State variables written after the call(s):
+	- approvals (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#1439-1441)
+	- deposits (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#1433-1435)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+DSToken.decimals should be constant (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#1145-1149)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+DSRoles.canCall (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#315-347) should be declared external
+DSAuthority.canCall (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#51-61) should be declared external
+DSChief.setOwner (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#1655-1659) should be declared external
+DSAuth.setOwner (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#95-111) should be declared external
+DSChief.setAuthority (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#1659-1667) should be declared external
+DSAuth.setAuthority (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#111-129) should be declared external
+DSRoles.hasUserRole (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#293-313) should be declared external
+DSRoles.setRootUser (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#357-365) should be declared external
+DSChief.setRootUser (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#1679-1685) should be declared external
+DSRoles.setUserRole (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#365-397) should be declared external
+DSRoles.setPublicCapability (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#397-405) should be declared external
+DSRoles.setRoleCapability (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#405-435) should be declared external
+DSStop.stop (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#857-859) should be declared external
+DSStop.start (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#859-863) should be declared external
+DSTokenBase.totalSupply (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#1005-1013) should be declared external
+ERC20.totalSupply (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#897-899) should be declared external
+DSTokenBase.balanceOf (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#1013-1023) should be declared external
+ERC20.balanceOf (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#899-901) should be declared external
+ERC20.allowance (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#901-903) should be declared external
+DSTokenBase.allowance (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#1023-1031) should be declared external
+DSTokenBase.transfer (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#1031-1035) should be declared external
+ERC20.transfer (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#907-909) should be declared external
+DSToken.approve (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#1165-1175) should be declared external
+DSToken.push (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#1213-1223) should be declared external
+DSToken.pull (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#1223-1231) should be declared external
+DSToken.move (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#1231-1235) should be declared external
+DSToken.mint (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#1235-1237) should be declared external
+DSToken.burn (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#1241-1243) should be declared external
+DSToken.setName (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#1277-1281) should be declared external
+DSChiefApprovals.lock (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#1423-1441) should be declared external
+DSChiefApprovals.free (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#1443-1461) should be declared external
+DSChiefApprovals.vote (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#1487-1497) should be declared external
+DSChiefApprovals.lift (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#1521-1537) should be declared external
+DSChiefFab.newChief (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#1690-1707) should be declared external
+VoteProxy.lock (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#1753-1761) should be declared external
+VoteProxy.free (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#1761-1765) should be declared external
+VoteProxy.freeAll (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#1765-1773) should be declared external
+VoteProxy.vote (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#1773-1779) should be declared external
+VoteProxy.vote (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#1783-1785) should be declared external
+VoteProxyFactory.breakLink (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol) should be declared external
+VoteProxyFactory.linkSelf (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Function 'DSRoles.BITNOT' (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#347-357) is not in mixedCase
+Variable 'DSRoles._root_users' (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#209-213) is not in mixedCase
+Variable 'DSRoles._user_roles' (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#213-217) is not in mixedCase
+Variable 'DSRoles._capability_roles' (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#219-223) is not in mixedCase
+Variable 'DSRoles._public_capabilities' (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#225-229) is not in mixedCase
+Function 'DSThing.S' (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#767-773) is not in mixedCase
+Variable 'DSTokenBase._supply' (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#981) is not in mixedCase
+Variable 'DSTokenBase._balances' (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#983-987) is not in mixedCase
+Variable 'DSTokenBase._approvals' (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#989-993) is not in mixedCase
+Parameter 'GOV_' of DSChiefApprovals. (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#1413) is not in mixedCase
+Parameter 'IOU_' of DSChiefApprovals. (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#1413) is not in mixedCase
+Parameter 'MAX_YAYS_' of DSChiefApprovals. (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#1413-1415) is not in mixedCase
+Variable 'DSChiefApprovals.GOV' (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#1371) is not in mixedCase
+Variable 'DSChiefApprovals.IOU' (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#1375) is not in mixedCase
+Variable 'DSChiefApprovals.MAX_YAYS' (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#1387-1389) is not in mixedCase
+Parameter 'GOV' of DSChief. (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#1640-1645) is not in mixedCase
+Parameter 'IOU' of DSChief. (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#1645) is not in mixedCase
+Parameter 'MAX_YAYS' of DSChief. (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#1645-1647) is not in mixedCase
+Parameter 'MAX_YAYS' of DSChiefFab.newChief (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#1693) is not in mixedCase
+Parameter '_chief' of VoteProxy. (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#1729-1731) is not in mixedCase
+Parameter '_cold' of VoteProxy. (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#1733) is not in mixedCase
+Parameter '_hot' of VoteProxy. (/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol#1733) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x719d7dc797951eda31dd60d43bd8df38b7ed1317.sol analyzed (17 contracts), 73 result(s) found

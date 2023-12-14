@@ -1,0 +1,53 @@
+INFO:Detectors:[91m
+SellERC20BasicTokens.fallback (/sb/0x967719548b8385be3c21ee96bdc57b9409b501cb.sol#349-435) sends eth to arbitrary user
+	Dangerous calls:
+	- owner.transfer(address(this).balance) (/sb/0x967719548b8385be3c21ee96bdc57b9409b501cb.sol#433-435)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[91m
+Reentrancy in SellERC20BasicTokens.fallback (/sb/0x967719548b8385be3c21ee96bdc57b9409b501cb.sol#349-435):
+	External calls:
+	- balance = token.balanceOf(address(this)) (/sb/0x967719548b8385be3c21ee96bdc57b9409b501cb.sol#361)
+	- assert(bool)(token.transfer(msg.sender,tokenBought)) (/sb/0x967719548b8385be3c21ee96bdc57b9409b501cb.sol#383)
+	- assert(bool)(token.transfer(msg.sender,tokenBought)) (/sb/0x967719548b8385be3c21ee96bdc57b9409b501cb.sol#403-407)
+	External calls sending eth:
+	- msg.sender.transfer(weiAmount - weiExpense.mul(10 ** decimalDiff)) (/sb/0x967719548b8385be3c21ee96bdc57b9409b501cb.sol#409-413)
+	State variables written after the call(s):
+	- deposit (/sb/0x967719548b8385be3c21ee96bdc57b9409b501cb.sol#415-423)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities[0m
+INFO:Detectors:[93m
+Reentrancy in SellERC20BasicTokens.sendToken (/sb/0x967719548b8385be3c21ee96bdc57b9409b501cb.sol#441-463):
+	External calls:
+	- assert(bool)(token.transfer(_receiver,_amount)) (/sb/0x967719548b8385be3c21ee96bdc57b9409b501cb.sol#459)
+	State variables written after the call(s):
+	- deposit (/sb/0x967719548b8385be3c21ee96bdc57b9409b501cb.sol#459-461)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+SellERC20BasicTokens.etherDecimals should be constant (/sb/0x967719548b8385be3c21ee96bdc57b9409b501cb.sol#267-271)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+ERC20Basic.totalSupply (/sb/0x967719548b8385be3c21ee96bdc57b9409b501cb.sol#19-21) should be declared external
+ERC20Basic.balanceOf (/sb/0x967719548b8385be3c21ee96bdc57b9409b501cb.sol#21-23) should be declared external
+ERC20Basic.transfer (/sb/0x967719548b8385be3c21ee96bdc57b9409b501cb.sol#23-25) should be declared external
+Ownable.transferOwnership (/sb/0x967719548b8385be3c21ee96bdc57b9409b501cb.sol#97-111) should be declared external
+SellERC20BasicTokens.fallback (/sb/0x967719548b8385be3c21ee96bdc57b9409b501cb.sol#349-435) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x967719548b8385be3c21ee96bdc57b9409b501cb.sol:
+	- pragma solidity^0.4.21 (/sb/0x967719548b8385be3c21ee96bdc57b9409b501cb.sol#1): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_newOwner' of Ownable.transferOwnership (/sb/0x967719548b8385be3c21ee96bdc57b9409b501cb.sol#99) is not in mixedCase
+Parameter '_token' of Ownable.rescueTokens (/sb/0x967719548b8385be3c21ee96bdc57b9409b501cb.sol#121) is not in mixedCase
+Parameter '_token' of SellERC20BasicTokens. (/sb/0x967719548b8385be3c21ee96bdc57b9409b501cb.sol#317) is not in mixedCase
+Parameter '_tokenDecimals' of SellERC20BasicTokens. (/sb/0x967719548b8385be3c21ee96bdc57b9409b501cb.sol#317-319) is not in mixedCase
+Parameter '_etherMinimum' of SellERC20BasicTokens. (/sb/0x967719548b8385be3c21ee96bdc57b9409b501cb.sol#319) is not in mixedCase
+Parameter '_rate' of SellERC20BasicTokens. (/sb/0x967719548b8385be3c21ee96bdc57b9409b501cb.sol#319) is not in mixedCase
+Parameter '_depositRate' of SellERC20BasicTokens. (/sb/0x967719548b8385be3c21ee96bdc57b9409b501cb.sol#319-321) is not in mixedCase
+Parameter '_wallet' of SellERC20BasicTokens. (/sb/0x967719548b8385be3c21ee96bdc57b9409b501cb.sol#321) is not in mixedCase
+Parameter '_receiver' of SellERC20BasicTokens.sendToken (/sb/0x967719548b8385be3c21ee96bdc57b9409b501cb.sol#441-447) is not in mixedCase
+Parameter '_amount' of SellERC20BasicTokens.sendToken (/sb/0x967719548b8385be3c21ee96bdc57b9409b501cb.sol#447-449) is not in mixedCase
+Parameter '_rate' of SellERC20BasicTokens.setRate (/sb/0x967719548b8385be3c21ee96bdc57b9409b501cb.sol#479) is not in mixedCase
+Parameter '_depositRate' of SellERC20BasicTokens.setRate (/sb/0x967719548b8385be3c21ee96bdc57b9409b501cb.sol#479) is not in mixedCase
+Parameter '_wallet' of SellERC20BasicTokens.setWallet (/sb/0x967719548b8385be3c21ee96bdc57b9409b501cb.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x967719548b8385be3c21ee96bdc57b9409b501cb.sol analyzed (4 contracts), 23 result(s) found

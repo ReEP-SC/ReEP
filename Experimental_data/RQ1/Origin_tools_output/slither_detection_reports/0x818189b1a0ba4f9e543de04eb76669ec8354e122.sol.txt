@@ -1,0 +1,103 @@
+INFO:Detectors:[91m
+ZethrBankroll.buyTokens (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#613-629) sends eth to arbitrary user
+	Dangerous calls:
+	- ZTHTKN.buyAndSetDivPercentage.value(savings)(address(0x0),33,) (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#617-625)
+ZethrBankroll.buyInWithAllBalanced (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#1603-1625) sends eth to arbitrary user
+	Dangerous calls:
+	- ZTHTKN.buyAndSetDivPercentage.value(balance)(address(0x0),33,) (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#1617-1625)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[91m
+Reentrancy in ZethrBankroll.receiveDividends (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#1567-1599):
+	External calls:
+	- ZTHTKN.buyAndSetDivPercentage.value(ActualBalance)(address(0x0),33,) (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#1575-1589)
+	State variables written after the call(s):
+	- reEntered (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#1591-1593)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities[0m
+INFO:Detectors:[93m
+ZethrBankroll.buyTokens (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#613-629) does not use the value returned by external calls:
+	-ZTHTKN.buyAndSetDivPercentage.value(savings)(address(0x0),33,) (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#617-625)
+ZethrBankroll.devTokenWithdraw (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#1511-1535) does not use the value returned by external calls:
+	-ZTHTKN.transfer(owners[i],amountPerPerson) (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#1529-1531)
+ZethrBankroll.receiveDividends (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#1567-1599) does not use the value returned by external calls:
+	-ZTHTKN.buyAndSetDivPercentage.value(ActualBalance)(address(0x0),33,) (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#1575-1589)
+ZethrBankroll.buyInWithAllBalanced (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#1603-1625) does not use the value returned by external calls:
+	-ZTHTKN.buyAndSetDivPercentage.value(balance)(address(0x0),33,) (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#1617-1625)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+ZethrBankroll.devTokenWithdraw has external calls inside a loop:
+	- ZTHTKN.transfer(owners[i],amountPerPerson) (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#1529-1531)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in ZethrBankroll.permissibleTokenWithdrawal (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#647-717):
+	External calls:
+	- tokenBalance = ZTHTKN.balanceOf(address(this)) (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#659)
+	State variables written after the call(s):
+	- dailyResetTime (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#677-683)
+	- dailyTknLimit (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#683-689)
+	- tknsDispensedToday (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#689-691)
+	- tknsDispensedToday (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#707-709)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+ZTHInterface.buyAndSetDivPercentage (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#77-81) should be declared external
+ZTHInterface.balanceOf (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#81) should be declared external
+ZTHInterface.transfer (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#83) should be declared external
+ZTHInterface.transferFrom (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#83-87) should be declared external
+ZTHInterface.exit (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#89) should be declared external
+ZTHInterface.sell (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#89-95) should be declared external
+ZTHInterface.withdraw (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#97) should be declared external
+ZethrBankroll.tokenFallback (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#629-641) should be declared external
+ERC223Receiving.tokenFallback (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#98-109) should be declared external
+ZethrBankroll.addZethrAddresses (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#573-589) should be declared external
+ZethrBankroll.fallback (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#591-597) should be declared external
+ZethrBankroll.deposit (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#597-605) should be declared external
+ZethrBankroll.buyTokens (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#613-629) should be declared external
+ZethrBankroll.setDailyTokenLimit (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#721-729) should be declared external
+ZethrBankroll.addOwner (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#737-757) should be declared external
+ZethrBankroll.removeOwner (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#761-797) should be declared external
+ZethrBankroll.replaceOwner (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#807-835) should be declared external
+ZethrBankroll.submitTransaction (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#873-887) should be declared external
+ZethrBankroll.revokeConfirmation (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#919-939) should be declared external
+ZethrBankroll.getConfirmationCount (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#1087-1105) should be declared external
+ZethrBankroll.getTransactionCount (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#1121-1141) should be declared external
+ZethrBankroll.getOwners (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#1143-1149) should be declared external
+ZethrBankroll.getConfirmations (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#1159-1193) should be declared external
+ZethrBankroll.getTransactionIds (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#1213-1241) should be declared external
+ZethrBankroll.whiteListContract (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#1243-1277) should be declared external
+ZethrBankroll.deWhiteListContract (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#1305-1335) should be declared external
+ZethrBankroll.contractTokenWithdraw (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#1337-1351) should be declared external
+ZethrBankroll.alterTokenGrant (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#1359-1367) should be declared external
+ZethrBankroll.queryTokenGrant (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#1369-1377) should be declared external
+ZethrBankroll.dailyAccounting (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#1387-1405) should be declared external
+ZethrBankroll.retrieveTokens (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#1413-1419) should be declared external
+ZethrBankroll.devTokenWithdraw (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#1511-1535) should be declared external
+ZethrBankroll.changeDivCardAddress (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#1541-1551) should be declared external
+ZethrBankroll.receiveDividends (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#1567-1599) should be declared external
+ZethrBankroll.buyInWithAllBalanced (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#1603-1625) should be declared external
+ZethrBankroll.fromHex (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#1668-1675) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Low level call in ZethrBankroll.executeTransaction (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#951-983):
+	-txToExecute.destination.call.value(txToExecute.value)(txToExecute.data) /sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#972-981
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Parameter '' of ZethrBankroll.tokenFallback (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#633) is not in mixedCase
+Parameter '_scope_0' of ZethrBankroll.tokenFallback (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#633) is not in mixedCase
+Parameter '_scope_1' of ZethrBankroll.tokenFallback (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#637) is not in mixedCase
+Parameter '_owners' of ZethrBankroll. (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#503-507) is not in mixedCase
+Parameter '_required' of ZethrBankroll. (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#507) is not in mixedCase
+Parameter '_zethr' of ZethrBankroll.addZethrAddresses (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#573) is not in mixedCase
+Parameter '_divcards' of ZethrBankroll.addZethrAddresses (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#573-575) is not in mixedCase
+Parameter '_toWithdraw' of ZethrBankroll.permissibleTokenWithdrawal (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#651-653) is not in mixedCase
+Parameter '_required' of ZethrBankroll.changeRequirement (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#847-849) is not in mixedCase
+Parameter '_contract' of ZethrBankroll.alterTokenGrant (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#1359) is not in mixedCase
+Parameter '_newAmount' of ZethrBankroll.alterTokenGrant (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#1359-1365) is not in mixedCase
+Parameter '_contract' of ZethrBankroll.queryTokenGrant (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#1369) is not in mixedCase
+Parameter '_contract' of ZethrBankroll.retrieveTokens (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#1413) is not in mixedCase
+Parameter '_amount' of ZethrBankroll.retrieveTokens (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#1413-1415) is not in mixedCase
+Parameter '_contract' of ZethrBankroll.allocateTokens (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#1443) is not in mixedCase
+Parameter '_newDivCardAddress' of ZethrBankroll.changeDivCardAddress (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#1541-1545) is not in mixedCase
+Constant 'ZethrBankroll.resetTimer' (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#175-181) is not in UPPER_CASE_WITH_UNDERSCORES
+Variable 'ZethrBankroll.ZTHTKN' (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#193) is not in mixedCase
+Variable 'ZethrBankroll.NonICOBuyins' (/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol#597) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x818189b1a0ba4f9e543de04eb76669ec8354e122.sol analyzed (4 contracts), 65 result(s) found

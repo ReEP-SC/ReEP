@@ -1,0 +1,62 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x33d4876a16f712f1a305c5594a5adedc9b7a9f14.sol:
+Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing "SPDX-License-Identifier: <SPDX-License>" to each source file. Use "SPDX-License-Identifier: UNLICENSED" for non-open-source code. Please see https://spdx.org for more information.
+--> /sb/0x33d4876a16f712f1a305c5594a5adedc9b7a9f14.sol
+
+Warning: Using ".value(...)" is deprecated. Use "{value: ...}" instead.
+   --> /sb/0x33d4876a16f712f1a305c5594a5adedc9b7a9f14.sol:130:13:
+    |
+130 |             CETHInterface(cToken).mint.value(_amt)();
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Warning: Using ".value(...)" is deprecated. Use "{value: ...}" instead.
+   --> /sb/0x33d4876a16f712f1a305c5594a5adedc9b7a9f14.sol:184:13:
+    |
+184 |             CETHInterface(cToken).repayBorrow.value(_amt)();
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+INFO:Detectors:[91m
+BasicResolver.deposit (/sb/0x33d4876a16f712f1a305c5594a5adedc9b7a9f14.sol#125-143) sends eth to arbitrary user
+	Dangerous calls:
+	- CETHInterface(cToken).mint.value(_amt)() (/sb/0x33d4876a16f712f1a305c5594a5adedc9b7a9f14.sol#133)
+BasicResolver.payback (/sb/0x33d4876a16f712f1a305c5594a5adedc9b7a9f14.sol#179-198) sends eth to arbitrary user
+	Dangerous calls:
+	- CETHInterface(cToken).repayBorrow.value(_amt)() (/sb/0x33d4876a16f712f1a305c5594a5adedc9b7a9f14.sol#187-188)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[93m
+TokenInterface (/sb/0x33d4876a16f712f1a305c5594a5adedc9b7a9f14.sol#21-29) has incorrect ERC20 function interface(s):
+	-approve (/sb/0x33d4876a16f712f1a305c5594a5adedc9b7a9f14.sol#24-25)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[93m
+BasicResolver.deposit (/sb/0x33d4876a16f712f1a305c5594a5adedc9b7a9f14.sol#125-143) uses a dangerous strict equality:
+	- require(bool,string)(CTokenInterface(cToken).mint(_amt) == 0,minting-failed)
+BasicResolver.deposit (/sb/0x33d4876a16f712f1a305c5594a5adedc9b7a9f14.sol#125-143) uses a dangerous strict equality:
+	- require(bool,string)(CTokenInterface(cToken).mint(_amt) == 0,minting-failed)
+BasicResolver.withdraw (/sb/0x33d4876a16f712f1a305c5594a5adedc9b7a9f14.sol#148-161) uses a dangerous strict equality:
+	- require(bool,string)(cTokenContract.redeem(cTokenContract.balanceOf(address(this))) == 0,full-withdraw-failed)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+CompoundHelpers.enterMarket (/sb/0x33d4876a16f712f1a305c5594a5adedc9b7a9f14.sol#106-114) does not use the value returned by external calls:
+	-troller.enterMarkets(cTokens) (/sb/0x33d4876a16f712f1a305c5594a5adedc9b7a9f14.sol#114)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+ConnectCompound.name should be constant (/sb/0x33d4876a16f712f1a305c5594a5adedc9b7a9f14.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x33d4876a16f712f1a305c5594a5adedc9b7a9f14.sol:
+	- pragma solidity^0.6.0 (/sb/0x33d4876a16f712f1a305c5594a5adedc9b7a9f14.sol#1): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '' of TokenInterface.allowance (/sb/0x33d4876a16f712f1a305c5594a5adedc9b7a9f14.sol#22) is not in mixedCase
+Parameter '_scope_0' of TokenInterface.allowance (/sb/0x33d4876a16f712f1a305c5594a5adedc9b7a9f14.sol#22) is not in mixedCase
+Parameter '' of TokenInterface.balanceOf (/sb/0x33d4876a16f712f1a305c5594a5adedc9b7a9f14.sol#23) is not in mixedCase
+Parameter '' of TokenInterface.approve (/sb/0x33d4876a16f712f1a305c5594a5adedc9b7a9f14.sol#24-25) is not in mixedCase
+Parameter '_scope_0' of TokenInterface.approve (/sb/0x33d4876a16f712f1a305c5594a5adedc9b7a9f14.sol#25) is not in mixedCase
+Parameter '' of TokenInterface.transfer (/sb/0x33d4876a16f712f1a305c5594a5adedc9b7a9f14.sol#25) is not in mixedCase
+Parameter '_scope_0' of TokenInterface.transfer (/sb/0x33d4876a16f712f1a305c5594a5adedc9b7a9f14.sol#25) is not in mixedCase
+Parameter '' of TokenInterface.transferFrom (/sb/0x33d4876a16f712f1a305c5594a5adedc9b7a9f14.sol#26) is not in mixedCase
+Parameter '_scope_0' of TokenInterface.transferFrom (/sb/0x33d4876a16f712f1a305c5594a5adedc9b7a9f14.sol#26) is not in mixedCase
+Parameter '_scope_1' of TokenInterface.transferFrom (/sb/0x33d4876a16f712f1a305c5594a5adedc9b7a9f14.sol#26) is not in mixedCase
+Parameter '' of InstaMapping.cTokenMapping (/sb/0x33d4876a16f712f1a305c5594a5adedc9b7a9f14.sol#35) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x33d4876a16f712f1a305c5594a5adedc9b7a9f14.sol analyzed (10 contracts), 19 result(s) found

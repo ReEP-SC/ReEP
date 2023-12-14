@@ -1,0 +1,93 @@
+INFO:Detectors:[93m
+Reentrancy in YeFiMpool2.farm (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#455-475):
+	External calls:
+	- require(bool,string)(Token(tokenAddress).transferFrom(msg.sender,address(this),amountToStake),Insufficient Token Allowance) (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#458-461)
+	- updateAccount(msg.sender) (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#462)
+	- require(bool,string)(Token(tokenAddress).transfer(admin,fee),Could not transfer deposit fee.) (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#468-470)
+	State variables written after the call(s):
+	- depositedTokens (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#470)
+Reentrancy in YeFiMpool2.unfarm (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#475-500):
+	External calls:
+	- updateAccount(msg.sender) (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#481-482)
+	- require(bool,string)(Token(tokenAddress).transfer(admin,fee),Could not transfer withdraw fee.) (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#488-491)
+	- require(bool,string)(Token(tokenAddress).transfer(msg.sender,amountAfterFee),Could not transfer tokens.) (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#491-495)
+	State variables written after the call(s):
+	- depositedTokens (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#495-500)
+Reentrancy in YeFiMpool2.updateAccount (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#420-436):
+	External calls:
+	- require(bool,string)(Token(tokenAddress).transfer(account,unclaimedDivs),Could not transfer tokens.) (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#425-427)
+	State variables written after the call(s):
+	- lastClaimedTime (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#435-436)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+EnumerableSet._remove (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#107-143) does not use the value returned by external calls:
+	-set._values.pop() (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#134-135)
+YeFiMpool2.transferAnyERC20Tokens (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#414-419) does not use the value returned by external calls:
+	-Token(_tokenAddr).transfer(_to,_amount) (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#419)
+YeFiMpool2.farm (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#455-475) does not use the value returned by external calls:
+	-holders.add(msg.sender) (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#474)
+YeFiMpool2.unfarm (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#475-500) does not use the value returned by external calls:
+	-holders.remove(msg.sender) (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in YeFiMpool2.farm (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#455-475):
+	External calls:
+	- require(bool,string)(Token(tokenAddress).transferFrom(msg.sender,address(this),amountToStake),Insufficient Token Allowance) (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#458-461)
+	- updateAccount(msg.sender) (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#462)
+	- require(bool,string)(Token(tokenAddress).transfer(admin,fee),Could not transfer deposit fee.) (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#468-470)
+	State variables written after the call(s):
+	- stakingTime (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#474-475)
+Reentrancy in YeFiMpool2.updateAccount (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#420-436):
+	External calls:
+	- require(bool,string)(Token(tokenAddress).transfer(account,unclaimedDivs),Could not transfer tokens.) (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#425-427)
+	State variables written after the call(s):
+	- totalClaimedRewards (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#430-432)
+	- totalEarnedTokens (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#428-430)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Ownable.transferOwnership (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#323-330) should be declared external
+YeFiMpool2.setTokenAddresses (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#371-381) should be declared external
+YeFiMpool2.stakingFeeRateSet (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#381-387) should be declared external
+YeFiMpool2.rewardRateSet (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#388-392) should be declared external
+YeFiMpool2.StakingReturnsAmountSet (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#392-398) should be declared external
+YeFiMpool2.possibleUnstakeTimeSet (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#398-403) should be declared external
+YeFiMpool2.rewardIntervalSet (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#403-405) should be declared external
+YeFiMpool2.allowStaking (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#405-414) should be declared external
+YeFiMpool2.transferAnyERC20Tokens (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#414-419) should be declared external
+YeFiMpool2.getNumberOfHolders (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#452-455) should be declared external
+YeFiMpool2.farm (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#455-475) should be declared external
+YeFiMpool2.unfarm (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#475-500) should be declared external
+YeFiMpool2.harvest (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol:
+	- pragma solidity0.6.12 (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#5-7): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'EnumerableSet._add' (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#89-103) is not in mixedCase
+Function 'EnumerableSet._remove' (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#107-143) is not in mixedCase
+Function 'EnumerableSet._contains' (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#148-150) is not in mixedCase
+Function 'EnumerableSet._length' (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#155-157) is not in mixedCase
+Function 'EnumerableSet._at' (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#166-178) is not in mixedCase
+Parameter '' of Token.transferFrom (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#332) is not in mixedCase
+Parameter '_scope_0' of Token.transferFrom (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#333) is not in mixedCase
+Parameter '_scope_1' of Token.transferFrom (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#333) is not in mixedCase
+Parameter '' of Token.transfer (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#335-336) is not in mixedCase
+Parameter '_scope_0' of Token.transfer (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#336) is not in mixedCase
+Parameter '_tokenAddr' of YeFiMpool2.setTokenAddresses (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#372) is not in mixedCase
+Parameter '_stakingFeeRate' of YeFiMpool2.stakingFeeRateSet (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#381) is not in mixedCase
+Parameter '_unstakingFeeRate' of YeFiMpool2.stakingFeeRateSet (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#381-382) is not in mixedCase
+Parameter '_rewardRate' of YeFiMpool2.rewardRateSet (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#388-389) is not in mixedCase
+Function 'YeFiMpool2.StakingReturnsAmountSet' (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#392-398) is not in mixedCase
+Parameter '_poolreward' of YeFiMpool2.StakingReturnsAmountSet (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#394) is not in mixedCase
+Parameter '_possibleUnstakeTime' of YeFiMpool2.possibleUnstakeTimeSet (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#399) is not in mixedCase
+Parameter '_rewardInterval' of YeFiMpool2.rewardIntervalSet (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#403) is not in mixedCase
+Parameter '_status' of YeFiMpool2.allowStaking (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#406-407) is not in mixedCase
+Parameter '_tokenAddr' of YeFiMpool2.transferAnyERC20Tokens (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#415) is not in mixedCase
+Parameter '_to' of YeFiMpool2.transferAnyERC20Tokens (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#415) is not in mixedCase
+Parameter '_amount' of YeFiMpool2.transferAnyERC20Tokens (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#415) is not in mixedCase
+Parameter '_holder' of YeFiMpool2.getUnclaimedDivs (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#437) is not in mixedCase
+Variable 'YeFiMpool2.PossibleUnstakeTime' (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#358-359) is not in mixedCase
+Variable 'YeFiMpool2.FundedTokens' (/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol#360-361) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x5b820770bf7e46f036271f465f767d563d4982d9.sol analyzed (5 contracts), 48 result(s) found

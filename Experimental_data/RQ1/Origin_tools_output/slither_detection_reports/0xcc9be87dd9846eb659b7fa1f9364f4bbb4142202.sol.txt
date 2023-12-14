@@ -1,0 +1,175 @@
+INFO:Detectors:[93m
+CloneFactory.isClone (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#20-40) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+IERC721 (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#78-131) has incorrect ERC20 function interface(s):
+	-transferFrom (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#114-115)
+	-approve (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#115-117)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[93m
+Reentrancy in CardERC20Wrapper.burnTokensAndWithdrawCards (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#833-845):
+	External calls:
+	- cards.transferFrom(address(this),receiver,depositedCards[index]) (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#838-839)
+	State variables written after the call(s):
+	- depositedCards (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#839-843)
+Reentrancy in CardERC20WrapperFactory.createWrapper (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#889-902):
+	External calls:
+	- uniswapExchange = uniswapFactory.getExchange(address(newCardWrapper)) (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#897-898)
+	State variables written after the call(s):
+	- _protoQualityToTokenAddress (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#898-899)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+CardERC20Wrapper.depositCardsAndMintTokens has external calls inside a loop:
+	- (currentCardProto,currentCardQuality) = cards.getDetails(cardIds[index]) (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#824-827)
+CardERC20Wrapper.burnTokensAndWithdrawCards has external calls inside a loop:
+	- cards.transferFrom(address(this),receiver,depositedCards[index]) (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#838-839)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in CardERC20WrapperFactory.createWrapper (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#889-902):
+	External calls:
+	- uniswapExchange = uniswapFactory.getExchange(address(newCardWrapper)) (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#897-898)
+	State variables written after the call(s):
+	- _validWrapperAddresses (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#899-902)
+Reentrancy in CardERC20Wrapper.depositCardsAndMintTokens (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#812-833):
+	External calls:
+	- cardWrapperFactory.transferAllFrom(msg.sender,address(this),cardIds) (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#815-817)
+	- (currentCardProto,currentCardQuality) = cards.getDetails(cardIds[index]) (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#824-827)
+	State variables written after the call(s):
+	- depositedCards (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#831-832)
+Reentrancy in CardERC20Wrapper.depositCardsAndMintTokens (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#812-833):
+	External calls:
+	- cardWrapperFactory.transferAllFrom(msg.sender,address(this),cardIds) (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#815-817)
+	State variables written after the call(s):
+	- _balances (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#832-833)
+	- _totalSupply (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#832-833)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+CloneFactory.createClone uses assembly (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#9-20)
+	- /sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#11-20
+CloneFactory.isClone uses assembly (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#20-40)
+	- /sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#23-39
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+IUniswapExchange.decimals should be constant (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#225)
+IUniswapExchange.name should be constant (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#224)
+IUniswapExchange.symbol should be constant (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#224-225)
+IUniswapFactory.exchangeTemplate should be constant (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#42-43)
+IUniswapFactory.tokenCount should be constant (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#43-44)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+IERC721.balanceOf (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#88-90) should be declared external
+IERC721.ownerOf (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#93-94) should be declared external
+IERC721.safeTransferFrom (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#106-107) should be declared external
+IERC721.transferFrom (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#114-115) should be declared external
+IERC721.approve (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#115-117) should be declared external
+IERC721.getApproved (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#117-118) should be declared external
+IERC721.setApprovalForAll (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#118-121) should be declared external
+ICards.setApprovalForAll (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#188-189) should be declared external
+IERC721.isApprovedForAll (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#121-124) should be declared external
+IERC721.safeTransferFrom (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#124-131) should be declared external
+ICards.batches (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#133-138) should be declared external
+ICards.userIDToAddress (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#138-142) should be declared external
+ICards.getDetails (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#142-152) should be declared external
+ICards.setQuality (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#152-156) should be declared external
+ICards.mintCards (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#156-166) should be declared external
+ICards.mintCard (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#166-174) should be declared external
+ICards.burn (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#174-176) should be declared external
+ICards.batchSize (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#176-180) should be declared external
+ICards.transferAllFrom (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#181-188) should be declared external
+ERC20.balanceOf (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#497-499) should be declared external
+IERC20.balanceOf (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#247-250) should be declared external
+ERC20.transfer (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#510-516) should be declared external
+IERC20.transfer (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#255-257) should be declared external
+ERC20.approve (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#524-527) should be declared external
+IERC20.approve (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#282-284) should be declared external
+ERC20.transferFrom (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#537-546) should be declared external
+IERC20.transferFrom (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#294-297) should be declared external
+CardERC20Wrapper.transferFrom (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#859-866) should be declared external
+ERC20.increaseAllowance (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#560-564) should be declared external
+ERC20.decreaseAllowance (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#578-584) should be declared external
+ERC20Burnable.burn (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#695-696) should be declared external
+ERC20Burnable.burnFrom (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#697-704) should be declared external
+MinterRole.addMinter (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#760-766) should be declared external
+MinterRole.renounceMinter (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#766-767) should be declared external
+ERC20Mintable.mint (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#776-781) should be declared external
+CardERC20Wrapper.init (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#803-812) should be declared external
+CardERC20WrapperFactory.transferAllFrom (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol:
+	- pragma solidity^0.5.0 (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#5-7): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter 'min_liquidity' of IUniswapExchange.addLiquidity (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#193) is not in mixedCase
+Parameter 'max_tokens' of IUniswapExchange.addLiquidity (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#193) is not in mixedCase
+Parameter 'min_eth' of IUniswapExchange.removeLiquidity (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#195) is not in mixedCase
+Parameter 'min_tokens' of IUniswapExchange.removeLiquidity (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#195-196) is not in mixedCase
+Parameter 'eth_sold' of IUniswapExchange.getEthToTokenInputPrice (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#197) is not in mixedCase
+Parameter 'tokens_bought' of IUniswapExchange.getEthToTokenOutputPrice (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#198) is not in mixedCase
+Parameter 'tokens_sold' of IUniswapExchange.getTokenToEthInputPrice (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#200) is not in mixedCase
+Parameter 'eth_bought' of IUniswapExchange.getTokenToEthOutputPrice (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#200-201) is not in mixedCase
+Parameter 'min_tokens' of IUniswapExchange.ethToTokenSwapInput (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#201) is not in mixedCase
+Parameter 'min_tokens' of IUniswapExchange.ethToTokenTransferInput (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#202) is not in mixedCase
+Parameter 'tokens_bought' of IUniswapExchange.ethToTokenSwapOutput (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#203) is not in mixedCase
+Parameter 'tokens_bought' of IUniswapExchange.ethToTokenTransferOutput (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#205) is not in mixedCase
+Parameter 'tokens_sold' of IUniswapExchange.tokenToEthSwapInput (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#206) is not in mixedCase
+Parameter 'min_eth' of IUniswapExchange.tokenToEthSwapInput (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#206) is not in mixedCase
+Parameter 'tokens_sold' of IUniswapExchange.tokenToEthTransferInput (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#207) is not in mixedCase
+Parameter 'min_eth' of IUniswapExchange.tokenToEthTransferInput (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#207) is not in mixedCase
+Parameter 'eth_bought' of IUniswapExchange.tokenToEthSwapOutput (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#208) is not in mixedCase
+Parameter 'max_tokens' of IUniswapExchange.tokenToEthSwapOutput (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#208) is not in mixedCase
+Parameter 'eth_bought' of IUniswapExchange.tokenToEthTransferOutput (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#210) is not in mixedCase
+Parameter 'max_tokens' of IUniswapExchange.tokenToEthTransferOutput (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#210) is not in mixedCase
+Parameter 'tokens_sold' of IUniswapExchange.tokenToTokenSwapInput (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#211) is not in mixedCase
+Parameter 'min_tokens_bought' of IUniswapExchange.tokenToTokenSwapInput (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#211) is not in mixedCase
+Parameter 'min_eth_bought' of IUniswapExchange.tokenToTokenSwapInput (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#211) is not in mixedCase
+Parameter 'token_addr' of IUniswapExchange.tokenToTokenSwapInput (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#211) is not in mixedCase
+Parameter 'tokens_sold' of IUniswapExchange.tokenToTokenTransferInput (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#212) is not in mixedCase
+Parameter 'min_tokens_bought' of IUniswapExchange.tokenToTokenTransferInput (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#212) is not in mixedCase
+Parameter 'min_eth_bought' of IUniswapExchange.tokenToTokenTransferInput (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#212) is not in mixedCase
+Parameter 'token_addr' of IUniswapExchange.tokenToTokenTransferInput (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#212) is not in mixedCase
+Parameter 'tokens_bought' of IUniswapExchange.tokenToTokenSwapOutput (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#213) is not in mixedCase
+Parameter 'max_tokens_sold' of IUniswapExchange.tokenToTokenSwapOutput (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#213) is not in mixedCase
+Parameter 'max_eth_sold' of IUniswapExchange.tokenToTokenSwapOutput (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#213) is not in mixedCase
+Parameter 'token_addr' of IUniswapExchange.tokenToTokenSwapOutput (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#213) is not in mixedCase
+Parameter 'tokens_bought' of IUniswapExchange.tokenToTokenTransferOutput (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#215) is not in mixedCase
+Parameter 'max_tokens_sold' of IUniswapExchange.tokenToTokenTransferOutput (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#215) is not in mixedCase
+Parameter 'max_eth_sold' of IUniswapExchange.tokenToTokenTransferOutput (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#215) is not in mixedCase
+Parameter 'token_addr' of IUniswapExchange.tokenToTokenTransferOutput (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#215) is not in mixedCase
+Parameter 'tokens_sold' of IUniswapExchange.tokenToExchangeSwapInput (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#216) is not in mixedCase
+Parameter 'min_tokens_bought' of IUniswapExchange.tokenToExchangeSwapInput (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#216) is not in mixedCase
+Parameter 'min_eth_bought' of IUniswapExchange.tokenToExchangeSwapInput (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#216) is not in mixedCase
+Parameter 'exchange_addr' of IUniswapExchange.tokenToExchangeSwapInput (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#216) is not in mixedCase
+Parameter 'tokens_sold' of IUniswapExchange.tokenToExchangeTransferInput (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#217) is not in mixedCase
+Parameter 'min_tokens_bought' of IUniswapExchange.tokenToExchangeTransferInput (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#217) is not in mixedCase
+Parameter 'min_eth_bought' of IUniswapExchange.tokenToExchangeTransferInput (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#217) is not in mixedCase
+Parameter 'exchange_addr' of IUniswapExchange.tokenToExchangeTransferInput (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#217) is not in mixedCase
+Parameter 'tokens_bought' of IUniswapExchange.tokenToExchangeSwapOutput (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#218) is not in mixedCase
+Parameter 'max_tokens_sold' of IUniswapExchange.tokenToExchangeSwapOutput (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#218) is not in mixedCase
+Parameter 'max_eth_sold' of IUniswapExchange.tokenToExchangeSwapOutput (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#218) is not in mixedCase
+Parameter 'exchange_addr' of IUniswapExchange.tokenToExchangeSwapOutput (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#218) is not in mixedCase
+Parameter 'tokens_bought' of IUniswapExchange.tokenToExchangeTransferOutput (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#219-220) is not in mixedCase
+Parameter 'max_tokens_sold' of IUniswapExchange.tokenToExchangeTransferOutput (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#220-221) is not in mixedCase
+Parameter 'max_eth_sold' of IUniswapExchange.tokenToExchangeTransferOutput (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#221-222) is not in mixedCase
+Parameter 'exchange_addr' of IUniswapExchange.tokenToExchangeTransferOutput (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#223) is not in mixedCase
+Parameter 'token_addr' of IUniswapExchange.setup (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#239) is not in mixedCase
+Function 'Context._msgSender' (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#464-467) is not in mixedCase
+Function 'Context._msgData' (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#467-479) is not in mixedCase
+Function 'ERC20._transfer' (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#595-610) is not in mixedCase
+Function 'ERC20._mint' (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#618-625) is not in mixedCase
+Function 'ERC20._burn' (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#634-643) is not in mixedCase
+Function 'ERC20._approve' (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#657-671) is not in mixedCase
+Function 'ERC20._burnFrom' (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#680-688) is not in mixedCase
+Function 'MinterRole._addMinter' (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#767-769) is not in mixedCase
+Function 'MinterRole._removeMinter' (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#770-772) is not in mixedCase
+Parameter '_cards' of CardERC20Wrapper.init (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#805) is not in mixedCase
+Parameter '_proto' of CardERC20Wrapper.init (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#805) is not in mixedCase
+Parameter '_quality' of CardERC20Wrapper.init (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#805) is not in mixedCase
+Parameter '_uniswapExchange' of CardERC20Wrapper.init (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#805-806) is not in mixedCase
+Parameter '_target' of CardERC20WrapperFactory. (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#884) is not in mixedCase
+Parameter '_cards' of CardERC20WrapperFactory. (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#884-886) is not in mixedCase
+Parameter '_uniswapFactory' of CardERC20WrapperFactory. (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#886) is not in mixedCase
+Variable 'CardERC20WrapperFactory._protoQualityToTokenAddress' (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#878-880) is not in mixedCase
+Variable 'CardERC20WrapperFactory._validWrapperAddresses' (/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol#880-881) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xcc9be87dd9846eb659b7fa1f9364f4bbb4142202.sol analyzed (16 contracts), 121 result(s) found

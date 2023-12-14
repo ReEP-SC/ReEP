@@ -1,0 +1,169 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol:
+/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol:6:1: Warning: Experimental features are turned on. Do not use experimental features on live deployments.
+pragma experimental ABIEncoderV2;
+^-------------------------------^
+
+INFO:Detectors:[91m
+GovernorAlpha.execute (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#795-806) sends eth to arbitrary user
+	Dangerous calls:
+	- timelock.executeTransaction.value(proposal.values[i])(proposal.targets[i],proposal.values[i],proposal.signatures[i],proposal.calldatas[i],proposal.eta) (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#800-803)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[93m
+GovernanceToken.getChainId (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#594-597) is declared view but contains assembly code
+GovernorAlpha.getChainId (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#919-925) is declared view but contains assembly code
+CloneFactory.isClone (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#983-993) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+GovernanceToken._writeCheckpoint (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#550-571) uses a dangerous strict equality:
+	- nCheckpoints > 0 && checkpoints[delegatee][nCheckpoints - 1].fromBlock == blockNumber
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Reentrancy in GovernorAlpha._castVote (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#870-886):
+	External calls:
+	- require(bool,string)(state(proposalId) == ProposalState.Active,GovernorAlpha::_castVote: voting is closed) (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#871-875)
+	- votes = token.getPriorVotes(voter,proposal.startBlock) (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#880-881)
+	State variables written after the call(s):
+	- proposals (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#881-882)
+	- proposals (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#882-885)
+Reentrancy in GovernorAlpha.cancel (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#806-820):
+	External calls:
+	- state = state(proposalId) (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#806)
+	- require(bool,string)(msg.sender == guardian || token.getPriorVotes(proposal.proposer,sub256(block.number,1)) < proposalThreshold,GovernorAlpha::cancel: proposer above threshold) (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#811-815)
+	State variables written after the call(s):
+	- proposals (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#815-816)
+Reentrancy in GovernorAlpha.execute (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#795-806):
+	External calls:
+	- require(bool,string)(state(proposalId) == ProposalState.Queued,GovernorAlpha::execute: proposal can only be executed if it is queued) (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#796)
+	State variables written after the call(s):
+	- proposals (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#798-799)
+Reentrancy in GovernorAlpha.propose (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#731-777):
+	External calls:
+	- require(bool,string)(token.getPriorVotes(msg.sender,sub256(block.number,1)) > proposalThreshold,GovernorAlpha::propose: proposer votes below proposal threshold) (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#734)
+	- proposersLatestProposalState = state(latestProposalId) (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#747-749)
+	State variables written after the call(s):
+	- latestProposalIds (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#773-776)
+	- proposalCount (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#762-765)
+	- proposals (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#770-772)
+Reentrancy in GovernorAlpha.queue (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#777-786):
+	External calls:
+	- require(bool,string)(state(proposalId) == ProposalState.Succeeded,GovernorAlpha::queue: proposal can only be queued if it is succeeded) (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#777-779)
+	- eta = add256(block.timestamp,timelock.delay()) (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#782)
+	State variables written after the call(s):
+	- proposals (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#785)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+GovernorAlpha._queueOrRevert (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#786-795) does not use the value returned by external calls:
+	-timelock.queueTransaction(target,value,signature,data,eta) (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#793)
+GovernorAlpha.execute (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#795-806) does not use the value returned by external calls:
+	-timelock.executeTransaction.value(proposal.values[i])(proposal.targets[i],proposal.values[i],proposal.signatures[i],proposal.calldatas[i],proposal.eta) (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#800-803)
+GovernorAlpha.__queueSetTimelockPendingAdmin (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#896-909) does not use the value returned by external calls:
+	-timelock.queueTransaction(address(timelock),0,setPendingAdmin(address),abi.encode(newPendingAdmin),eta) (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#903-909)
+GovernorAlpha.__executeSetTimelockPendingAdmin (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#909-914) does not use the value returned by external calls:
+	-timelock.executeTransaction(address(timelock),0,setPendingAdmin(address),abi.encode(newPendingAdmin),eta) (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#913-914)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+GovernorAlpha.cancel.state (local variable @ /sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#806) shadows:
+	- GovernorAlpha.state (function @ /sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#829-851)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+GovernorAlpha.execute has external calls inside a loop:
+	- timelock.executeTransaction.value(proposal.values[i])(proposal.targets[i],proposal.values[i],proposal.signatures[i],proposal.calldatas[i],proposal.eta) (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#800-803)
+GovernorAlpha.cancel has external calls inside a loop:
+	- timelock.cancelTransaction(proposal.targets[i],proposal.values[i],proposal.signatures[i],proposal.calldatas[i],proposal.eta) (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#816-819)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+GovernorAlpha._queueOrRevert (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#786-795) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(! timelock.queuedTransactions(keccak256(bytes)(abi.encode(target,value,signature,data,eta))),GovernorAlpha::_queueOrRevert: proposal action already queued at eta) (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#788-793)
+GovernorAlpha.state (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#829-851) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp >= add256(proposal.eta,timelock.GRACE_PERIOD()) (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#846-850)
+GovernorAlpha.add256 (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#914-915) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(c >= a,addition overflow) (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#915)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+GovernanceToken.getChainId uses assembly (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#594-597)
+	- /sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#595-597
+GovernorAlpha.getChainId uses assembly (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#919-925)
+	- /sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#924
+CloneFactory.createClone uses assembly (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#967-983)
+	- /sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#976-983
+CloneFactory.isClone uses assembly (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#983-993)
+	- /sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#987-993
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+Different versions of Solidity is used in /sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol:
+	- Version used: ['ABIEncoderV2', '^0.5.16']
+	- /sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#5-6 declares pragma solidity^0.5.16
+	- /sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#6-8 declares pragma experimentalABIEncoderV2
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#different-pragma-directives-are-used[0m
+INFO:Detectors:[92m
+Timelock.setDelay (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#205-217) should be declared external
+Timelock.acceptAdmin (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#217-224) should be declared external
+Timelock.setPendingAdmin (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#224-228) should be declared external
+Timelock.queueTransaction (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#228-241) should be declared external
+Timelock.cancelTransaction (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#241-248) should be declared external
+Timelock.executeTransaction (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#250-282) should be declared external
+GovernanceToken.delegate (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#438-441) should be declared external
+GovernanceToken.delegateBySig (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#445-463) should be declared external
+GovernanceToken.getPriorVotes (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#479-514) should be declared external
+GovernorAlpha.propose (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#731-777) should be declared external
+GovernorAlpha.queue (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#777-786) should be declared external
+GovernorAlpha.execute (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#795-806) should be declared external
+GovernorAlpha.cancel (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#806-820) should be declared external
+GovernorAlpha.getActions (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#820-825) should be declared external
+GovernorAlpha.getReceipt (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#826-829) should be declared external
+GovernorAlpha.castVote (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#851-852) should be declared external
+GovernorAlpha.castVoteBySig (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#852-870) should be declared external
+GovernorAlpha.__acceptAdmin (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#886-890) should be declared external
+GovernorAlpha.__abdicate (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#890-896) should be declared external
+GovernorAlpha.__queueSetTimelockPendingAdmin (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#896-909) should be declared external
+GovernorAlpha.__executeSetTimelockPendingAdmin (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#909-914) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol:
+	- pragma solidity^0.5.16 (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#5-6): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Low level call in Timelock.executeTransaction (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#250-282):
+	-(success,returnData) = target.call.value(value)(callData) /sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#271-274
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Parameter '_admin' of Timelock.init (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#195) is not in mixedCase
+Parameter '_delay' of Timelock.init (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#195) is not in mixedCase
+Parameter '_name' of GovernanceToken. (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#349) is not in mixedCase
+Parameter '_symbol' of GovernanceToken. (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#349-350) is not in mixedCase
+Parameter '_totalSupply' of GovernanceToken. (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#350) is not in mixedCase
+Function 'GovernanceToken._delegate' (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#514-519) is not in mixedCase
+Function 'GovernanceToken._transferTokens' (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#519-532) is not in mixedCase
+Function 'GovernanceToken._moveDelegates' (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#533-549) is not in mixedCase
+Function 'GovernanceToken._writeCheckpoint' (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#550-571) is not in mixedCase
+Parameter '_timelock' of GovernorAlpha.init (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#726) is not in mixedCase
+Parameter '_token' of GovernorAlpha.init (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#726) is not in mixedCase
+Parameter '_guardian' of GovernorAlpha.init (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#726) is not in mixedCase
+Parameter '_name' of GovernorAlpha.init (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#726) is not in mixedCase
+Parameter '_quorumVotes' of GovernorAlpha.init (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#726) is not in mixedCase
+Parameter '_proposalThreshold' of GovernorAlpha.init (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#726-727) is not in mixedCase
+Parameter '_votingPeriod' of GovernorAlpha.init (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#727) is not in mixedCase
+Function 'GovernorAlpha._queueOrRevert' (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#786-795) is not in mixedCase
+Function 'GovernorAlpha._castVote' (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#870-886) is not in mixedCase
+Function 'GovernorAlpha.__acceptAdmin' (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#886-890) is not in mixedCase
+Function 'GovernorAlpha.__abdicate' (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#890-896) is not in mixedCase
+Function 'GovernorAlpha.__queueSetTimelockPendingAdmin' (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#896-909) is not in mixedCase
+Function 'GovernorAlpha.__executeSetTimelockPendingAdmin' (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#909-914) is not in mixedCase
+Function 'TimelockInterface.GRACE_PERIOD' (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#926-927) is not in mixedCase
+Parameter '_timeLockTemplate' of GovernanceFactory. (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#997-998) is not in mixedCase
+Parameter '_governorAlphaTemplate' of GovernanceFactory. (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#998) is not in mixedCase
+Parameter '_name' of GovernanceFactory.deployGovernance (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#1002) is not in mixedCase
+Parameter '_symbol' of GovernanceFactory.deployGovernance (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#1002) is not in mixedCase
+Parameter '_totalSupply' of GovernanceFactory.deployGovernance (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#1002) is not in mixedCase
+Parameter '_quorumVotes' of GovernanceFactory.deployGovernance (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#1002-1003) is not in mixedCase
+Parameter '_proposalThreshold' of GovernanceFactory.deployGovernance (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#1003) is not in mixedCase
+Parameter '_votingPeriod' of GovernanceFactory.deployGovernance (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol#1003) is not in mixedCase
+Parameter '_name' of GovernanceFactory.initGovernor (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol) is not in mixedCase
+Parameter '_quorumVotes' of GovernanceFactory.initGovernor (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol) is not in mixedCase
+Parameter '_proposalThreshold' of GovernanceFactory.initGovernor (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol) is not in mixedCase
+Parameter '_votingPeriod' of GovernanceFactory.initGovernor (/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x72237caa65c3092be989d997d19c2b6c694ac8b0.sol analyzed (8 contracts), 83 result(s) found

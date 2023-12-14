@@ -1,0 +1,133 @@
+INFO:Detectors:[93m
+Initializable.isConstructor (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#51-63) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+CompoundBorrower.borrowWithErc20AndBurn (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#374-408) does not use the value returned by external calls:
+	-token.transferFrom(msg.sender,address(this),_tokenAmount) (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#381-383)
+	-token.approve(address(_cTokenAddress),uint256(- 1)) (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#387-389)
+	-token.approve(address(_cWbtcAddress),uint256(- 1)) (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#389-393)
+	-wbtc.approve(address(_cTokenAddress),uint256(- 1)) (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#393-394)
+	-wbtc.approve(address(_cWbtcAddress),uint256(- 1)) (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#394-395)
+CompoundBorrower.borrowWithErc20 (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#426-463) does not use the value returned by external calls:
+	-token.transferFrom(msg.sender,address(this),_tokenAmount) (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#435-437)
+	-token.approve(address(_cTokenAddress),uint256(- 1)) (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#441-444)
+	-token.approve(address(_cWbtcAddress),uint256(- 1)) (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#445-446)
+	-wbtc.approve(address(_cTokenAddress),uint256(- 1)) (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#446-447)
+	-wbtc.approve(address(_cWbtcAddress),uint256(- 1)) (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#447)
+CompoundBorrower.borrowWbtcWithErc20 (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#474-515) does not use the value returned by external calls:
+	-cToken.mint(_tokenAmount) (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#487)
+	-cWbtc.borrow(_wbtcAmount) (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#511)
+CompoundBorrower.repayBorrow (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#519-524) does not use the value returned by external calls:
+	-wbtc.transferFrom(msg.sender,address(this),_repayAmount) (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#522-523)
+	-cWbtc.repayBorrow(_repayAmount) (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#523)
+CompoundBorrower.redeemUnderlyingAndWithdraw (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#533-536) does not use the value returned by external calls:
+	-CErc20(_cTokenAddress).redeemUnderlying(_amount) (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol)
+	-Erc20(_tokenAddress).transfer(owner,_amount) (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol)
+CompoundBorrower.withdrawToken (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol) does not use the value returned by external calls:
+	-Erc20(_tokenAddress).transfer(owner,_withdrawAmount) (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in CompoundBorrower.borrowWithErc20 (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#426-463):
+	External calls:
+	- token.transferFrom(msg.sender,address(this),_tokenAmount) (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#435-437)
+	- startWbtcBal = wbtc.balanceOf(address(this)) (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#437-439)
+	- token.approve(address(_cTokenAddress),uint256(- 1)) (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#441-444)
+	- token.approve(address(_cWbtcAddress),uint256(- 1)) (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#445-446)
+	- wbtc.approve(address(_cTokenAddress),uint256(- 1)) (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#446-447)
+	- wbtc.approve(address(_cWbtcAddress),uint256(- 1)) (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#447)
+	- borrowWbtcWithErc20(_cTokenAddress,_tokenAmount,_comptrollerAddress,_cWbtcAddress,_wbtcAmount) (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#450-456)
+	- endWbtcBal = wbtc.balanceOf(address(this)) (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#457)
+	- curveAdapter.swapThenBurn(_btcDestination,endWbtcBal.sub(startWbtcBal),_minRenbtcAmount) (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#457-459)
+	State variables written after the call(s):
+	- activeCToken (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#462-463)
+	- activeToken (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#460-461)
+Reentrancy in CompoundBorrower.borrowWithErc20AndBurn (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#374-408):
+	External calls:
+	- token.transferFrom(msg.sender,address(this),_tokenAmount) (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#381-383)
+	- startWbtcBal = wbtc.balanceOf(address(this)) (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#384-385)
+	- token.approve(address(_cTokenAddress),uint256(- 1)) (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#387-389)
+	- token.approve(address(_cWbtcAddress),uint256(- 1)) (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#389-393)
+	- wbtc.approve(address(_cTokenAddress),uint256(- 1)) (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#393-394)
+	- wbtc.approve(address(_cWbtcAddress),uint256(- 1)) (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#394-395)
+	- borrowWbtcWithErc20(_cTokenAddress,_tokenAmount,_comptrollerAddress,_cWbtcAddress,_wbtcAmount) (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#397-402)
+	- endWbtcBal = startWbtcBal.sub(wbtc.balanceOf(address(this))) (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#403-405)
+	- curveAdapter.swapThenBurn(_btcDestination,endWbtcBal,_minRenbtcAmount) (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#405-406)
+	State variables written after the call(s):
+	- activeCToken (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#408)
+	- activeToken (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#407)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Initializable.isConstructor uses assembly (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#51-63)
+	- /sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#61-63
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+OpenZeppelinUpgradesOwnable.owner (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#99-101) should be declared external
+OpenZeppelinUpgradesOwnable.renounceOwnership (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#121-126) should be declared external
+OpenZeppelinUpgradesOwnable.transferOwnership (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#133-134) should be declared external
+CompoundBorrower.initialize (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#351-356) should be declared external
+CompoundBorrower.repayBorrow (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#519-524) should be declared external
+CompoundBorrower.redeemUnderlyingAndWithdraw (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#533-536) should be declared external
+CompoundBorrower.withdrawToken (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol:
+	- pragma solidity^0.5.12 (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#5-7): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Variable 'Initializable.______gap' (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#69) is not in mixedCase
+Function 'OpenZeppelinUpgradesOwnable._transferOwnership' (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#138-148) is not in mixedCase
+Parameter '' of Erc20.approve (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#277) is not in mixedCase
+Parameter '_scope_0' of Erc20.approve (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#277) is not in mixedCase
+Parameter '' of Erc20.transfer (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#281) is not in mixedCase
+Parameter '_scope_0' of Erc20.transfer (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#281) is not in mixedCase
+Parameter '' of CErc20.mint (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#285) is not in mixedCase
+Parameter '' of CErc20.borrow (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#286) is not in mixedCase
+Parameter '' of CErc20.borrowBalanceCurrent (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#292) is not in mixedCase
+Parameter '' of CErc20.repayBorrow (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#293) is not in mixedCase
+Parameter '' of CErc20.redeemUnderlying (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#294) is not in mixedCase
+Parameter '' of CErc20.redeem (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#297-298) is not in mixedCase
+Parameter '' of CEth.borrow (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#300) is not in mixedCase
+Parameter '' of CEth.borrowBalanceCurrent (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#304-305) is not in mixedCase
+Parameter '' of Comptroller.markets (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#309) is not in mixedCase
+Parameter '' of Comptroller.enterMarkets (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#312) is not in mixedCase
+Parameter '' of Comptroller.getAccountLiquidity (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#314) is not in mixedCase
+Parameter '' of PriceOracle.getUnderlyingPrice (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#318) is not in mixedCase
+Parameter 'min_dy' of CurveExchange.exchange (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#322) is not in mixedCase
+Function 'CurveExchange.get_dy' (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#322-323) is not in mixedCase
+Parameter '' of CurveExchange.get_dy (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#322) is not in mixedCase
+Parameter '_owner' of CompoundBorrower.initialize (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#351) is not in mixedCase
+Parameter '_wbtcToken' of CompoundBorrower.initialize (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#351-353) is not in mixedCase
+Parameter '_curveAdapter' of CompoundBorrower.initialize (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#353) is not in mixedCase
+Parameter '_tokenAddress' of CompoundBorrower.borrowWithErc20AndBurn (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#374) is not in mixedCase
+Parameter '_cTokenAddress' of CompoundBorrower.borrowWithErc20AndBurn (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#375) is not in mixedCase
+Parameter '_tokenAmount' of CompoundBorrower.borrowWithErc20AndBurn (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#375-376) is not in mixedCase
+Parameter '_comptrollerAddress' of CompoundBorrower.borrowWithErc20AndBurn (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#377) is not in mixedCase
+Parameter '_cWbtcAddress' of CompoundBorrower.borrowWithErc20AndBurn (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#377-378) is not in mixedCase
+Parameter '_wbtcAmount' of CompoundBorrower.borrowWithErc20AndBurn (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#378) is not in mixedCase
+Parameter '_minRenbtcAmount' of CompoundBorrower.borrowWithErc20AndBurn (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#378-379) is not in mixedCase
+Parameter '_btcDestination' of CompoundBorrower.borrowWithErc20AndBurn (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#379-380) is not in mixedCase
+Parameter '_tokenAddress' of CompoundBorrower.borrowWithErc20 (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#427) is not in mixedCase
+Parameter '_cTokenAddress' of CompoundBorrower.borrowWithErc20 (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#428-429) is not in mixedCase
+Parameter '_tokenAmount' of CompoundBorrower.borrowWithErc20 (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#429-430) is not in mixedCase
+Parameter '_comptrollerAddress' of CompoundBorrower.borrowWithErc20 (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#430) is not in mixedCase
+Parameter '_cWbtcAddress' of CompoundBorrower.borrowWithErc20 (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#430-431) is not in mixedCase
+Parameter '_wbtcAmount' of CompoundBorrower.borrowWithErc20 (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#431) is not in mixedCase
+Parameter '_minRenbtcAmount' of CompoundBorrower.borrowWithErc20 (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#431-432) is not in mixedCase
+Parameter '_btcDestination' of CompoundBorrower.borrowWithErc20 (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#432) is not in mixedCase
+Parameter '_cTokenAddress' of CompoundBorrower.borrowWbtcWithErc20 (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#475-476) is not in mixedCase
+Parameter '_tokenAmount' of CompoundBorrower.borrowWbtcWithErc20 (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#476) is not in mixedCase
+Parameter '_comptrollerAddress' of CompoundBorrower.borrowWbtcWithErc20 (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#477-478) is not in mixedCase
+Parameter '_cWbtcAddress' of CompoundBorrower.borrowWbtcWithErc20 (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#478) is not in mixedCase
+Parameter '_wbtcAmount' of CompoundBorrower.borrowWbtcWithErc20 (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#478-479) is not in mixedCase
+Parameter '_cWbtcAddress' of CompoundBorrower.repayBorrow (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#519-521) is not in mixedCase
+Parameter '_repayAmount' of CompoundBorrower.repayBorrow (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#521) is not in mixedCase
+Parameter '_cTokenAddress' of CompoundBorrower.redeemUnderlyingAndWithdraw (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#534) is not in mixedCase
+Parameter '_tokenAddress' of CompoundBorrower.redeemUnderlyingAndWithdraw (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#534-536) is not in mixedCase
+Parameter '_amount' of CompoundBorrower.redeemUnderlyingAndWithdraw (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol) is not in mixedCase
+Parameter '_tokenAddress' of CompoundBorrower.withdrawToken (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol) is not in mixedCase
+Parameter '_withdrawAmount' of CompoundBorrower.withdrawToken (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+Initializable.______gap (/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol#69) is never used in CompoundBorrower
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0x9052871a3bd3956625df59b57d517fb0eddf9312.sol analyzed (13 contracts), 71 result(s) found

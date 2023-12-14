@@ -1,0 +1,33 @@
+INFO:Detectors:[93m
+Reentrancy in Timlock.unlock (/sb/0xbaa8e2f6261576769b1d91d0c040ff6442c7699d.sol#112-126):
+	External calls:
+	- require(bool,string)(ERC20(tokenAddress).transfer(_msgSender(),lockedMap[_msgSender()][tokenAddress].lockedAmount),Unlock failed) (/sb/0xbaa8e2f6261576769b1d91d0c040ff6442c7699d.sol#116-121)
+	State variables written after the call(s):
+	- lockedMap (/sb/0xbaa8e2f6261576769b1d91d0c040ff6442c7699d.sol#121-122)
+	- lockedMap (/sb/0xbaa8e2f6261576769b1d91d0c040ff6442c7699d.sol#122-125)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+Timlock.unlock.unlockableTimestamp (local variable @ /sb/0xbaa8e2f6261576769b1d91d0c040ff6442c7699d.sol#112-115) shadows:
+	- Timlock.unlockableTimestamp (function @ /sb/0xbaa8e2f6261576769b1d91d0c040ff6442c7699d.sol#126-132)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+Reentrancy in Timlock.lock (/sb/0xbaa8e2f6261576769b1d91d0c040ff6442c7699d.sol#92-111):
+	External calls:
+	- tokenBalance = ERC20(tokenAddress).balanceOf(_msgSender()) (/sb/0xbaa8e2f6261576769b1d91d0c040ff6442c7699d.sol#94-95)
+	- prevLockedAmount = ERC20(tokenAddress).balanceOf(address(this)) (/sb/0xbaa8e2f6261576769b1d91d0c040ff6442c7699d.sol#95)
+	- require(bool,string)(ERC20(tokenAddress).transferFrom(_msgSender(),address(this),lockAmount),Lock failed) (/sb/0xbaa8e2f6261576769b1d91d0c040ff6442c7699d.sol#97-102)
+	- currentLockedAmount = ERC20(tokenAddress).balanceOf(address(this)) (/sb/0xbaa8e2f6261576769b1d91d0c040ff6442c7699d.sol#103)
+	State variables written after the call(s):
+	- lockedMap (/sb/0xbaa8e2f6261576769b1d91d0c040ff6442c7699d.sol#103-105)
+	- lockedMap (/sb/0xbaa8e2f6261576769b1d91d0c040ff6442c7699d.sol#105-107)
+	- lockedMap (/sb/0xbaa8e2f6261576769b1d91d0c040ff6442c7699d.sol#107)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xbaa8e2f6261576769b1d91d0c040ff6442c7699d.sol:
+	- pragma solidity^0.6.0 (/sb/0xbaa8e2f6261576769b1d91d0c040ff6442c7699d.sol#12-14): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'Context._msgSender' (/sb/0xbaa8e2f6261576769b1d91d0c040ff6442c7699d.sol#58-61) is not in mixedCase
+Function 'Context._msgData' (/sb/0xbaa8e2f6261576769b1d91d0c040ff6442c7699d.sol#61-69) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xbaa8e2f6261576769b1d91d0c040ff6442c7699d.sol analyzed (4 contracts), 6 result(s) found

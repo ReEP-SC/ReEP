@@ -1,0 +1,39 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x78e6d2bfe731e578a50a4129df89bb4950591d18.sol:
+/sb/0x78e6d2bfe731e578a50a4129df89bb4950591d18.sol:54:9: Warning: Failure condition of 'send' ignored. Consider using 'transfer' instead.
+        msg.sender.send(msg.value);
+        ^------------------------^
+/sb/0x78e6d2bfe731e578a50a4129df89bb4950591d18.sol:65:9: Warning: Failure condition of 'send' ignored. Consider using 'transfer' instead.
+        beneficiary.send(msg.value);
+        ^-------------------------^
+
+INFO:Detectors:[91m
+Reentrancy in Swap.fallback (/sb/0x78e6d2bfe731e578a50a4129df89bb4950591d18.sol#41-70):
+	External calls:
+	- swapaddress.transfer(msg.sender,5000000) (/sb/0x78e6d2bfe731e578a50a4129df89bb4950591d18.sol#54-55)
+	- swapaddress.transfer(msg.sender,amount / secondvalue) (/sb/0x78e6d2bfe731e578a50a4129df89bb4950591d18.sol#59-61)
+	- swapaddress.transfer(msg.sender,amount / thirdvalue) (/sb/0x78e6d2bfe731e578a50a4129df89bb4950591d18.sol#63-66)
+	External calls sending eth:
+	- msg.sender.send(msg.value) (/sb/0x78e6d2bfe731e578a50a4129df89bb4950591d18.sol#55-56)
+	- beneficiary.send(msg.value) (/sb/0x78e6d2bfe731e578a50a4129df89bb4950591d18.sol#66-67)
+	State variables written after the call(s):
+	- check (/sb/0x78e6d2bfe731e578a50a4129df89bb4950591d18.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities[0m
+INFO:Detectors:[93m
+collectible (/sb/0x78e6d2bfe731e578a50a4129df89bb4950591d18.sol#7-11) has incorrect ERC20 function interface(s):
+	-transfer (/sb/0x78e6d2bfe731e578a50a4129df89bb4950591d18.sol#8-11)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[92m
+Swap.contractover should be constant (/sb/0x78e6d2bfe731e578a50a4129df89bb4950591d18.sol#15-16)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x78e6d2bfe731e578a50a4129df89bb4950591d18.sol:
+	- pragma solidity>=0.4.22<0.6.0 (/sb/0x78e6d2bfe731e578a50a4129df89bb4950591d18.sol#5-7): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Contract 'collectible' (/sb/0x78e6d2bfe731e578a50a4129df89bb4950591d18.sol#7-11) is not in CapWords
+Parameter 'SendTo' of Swap. (/sb/0x78e6d2bfe731e578a50a4129df89bb4950591d18.sol#30) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+Swap.contractover (/sb/0x78e6d2bfe731e578a50a4129df89bb4950591d18.sol#15-16) is never used in Swap
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0x78e6d2bfe731e578a50a4129df89bb4950591d18.sol analyzed (2 contracts), 7 result(s) found

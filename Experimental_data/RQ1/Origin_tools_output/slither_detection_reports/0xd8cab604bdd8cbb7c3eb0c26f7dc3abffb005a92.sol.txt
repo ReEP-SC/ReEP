@@ -1,0 +1,263 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol:
+/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol:847:1: Warning: Experimental features are turned on. Do not use experimental features on live deployments.
+pragma experimental ABIEncoderV2;
+^-------------------------------^
+/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol:1340:9: Warning: Unused local variable.
+        uint256 startGas = gasleft();
+        ^--------------^
+/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol:893:5: Warning: Function state mutability can be restricted to pure
+    function getChainId() public view returns (uint256) {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol:1175:5: Warning: Function state mutability can be restricted to pure
+    function _getGasBuffer(bytes memory _txData) internal view returns (uint256) {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol:1372:6: Warning: Function state mutability can be restricted to pure
+     function verifyLoginKeyParamDataLength(
+     ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol:1497:6: Warning: Function state mutability can be restricted to pure
+     function verifyAuthKeyParamDataLength(
+     ^ (Relevant source part starts here and spans across multiple lines).
+
+INFO:Detectors:[91m
+BaseAccount._executeTransaction (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1166-1181) sends eth to arbitrary user
+	Dangerous calls:
+	- (success,response) = _destination.call.gas(_gasLimit).value(_value)(_data) (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1171-1173)
+BaseAccount._issueRefund (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1187-1198) sends eth to arbitrary user
+	Dangerous calls:
+	- msg.sender.transfer(_gasUsed.mul(_gasPrice)) (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1195-1198)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[91m
+AccountUpgradeability.upgradeToAndCall (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol) uses delegatecall to a input-controlled function id
+	(success) = _newImplementation.delegatecall(_data) (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#controlled-delegatecall[0m
+INFO:Detectors:[93m
+ECDSA.recover (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#172-214) is declared view but contains assembly code
+BytesLib.concat (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#362-433) is declared view but contains assembly code
+BytesLib.slice (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#584-651) is declared view but contains assembly code
+BytesLib.toAddress (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#651-662) is declared view but contains assembly code
+BytesLib.toUint8 (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#662-673) is declared view but contains assembly code
+BytesLib.toUint16 (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#673-684) is declared view but contains assembly code
+BytesLib.toUint32 (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#685-696) is declared view but contains assembly code
+BytesLib.toUint64 (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#696-707) is declared view but contains assembly code
+BytesLib.toUint96 (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#707-718) is declared view but contains assembly code
+BytesLib.toUint128 (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#718-729) is declared view but contains assembly code
+BytesLib.toUint (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#729-738) is declared view but contains assembly code
+BytesLib.toBytes32 (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#738-747) is declared view but contains assembly code
+BytesLib.equal (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#748-792) is declared view but contains assembly code
+BytesLib.equalStorage (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#792-881) is declared view but contains assembly code
+OpenZeppelinUpgradesAddress.isContract (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1574-1592) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[92m
+Reentrancy in BaseAccount._executeTransaction (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1166-1181):
+	External calls:
+	- (success,response) = _destination.call.gas(_gasLimit).value(_value)(_data) (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1171-1173)
+	State variables written after the call(s):
+	- nonce (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1180-1181)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+ECDSA.recover uses assembly (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#172-214)
+	- /sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#189-190
+BytesLib.concat uses assembly (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#362-433)
+	- /sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#367-433
+BytesLib.concatStorage uses assembly (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#433-584)
+	- /sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#435-584
+BytesLib.slice uses assembly (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#584-651)
+	- /sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#588-648
+BytesLib.toAddress uses assembly (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#651-662)
+	- /sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#656-662
+BytesLib.toUint8 uses assembly (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#662-673)
+	- /sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#668-673
+BytesLib.toUint16 uses assembly (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#673-684)
+	- /sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#681-684
+BytesLib.toUint32 uses assembly (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#685-696)
+	- /sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#692-695
+BytesLib.toUint64 uses assembly (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#696-707)
+	- /sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#703-706
+BytesLib.toUint96 uses assembly (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#707-718)
+	- /sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#715-717
+BytesLib.toUint128 uses assembly (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#718-729)
+	- /sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#726-728
+BytesLib.toUint uses assembly (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#729-738)
+	- /sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#735-737
+BytesLib.toBytes32 uses assembly (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#738-747)
+	- /sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#743-747
+BytesLib.equal uses assembly (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#748-792)
+	- /sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#750-792
+BytesLib.equalStorage uses assembly (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#792-881)
+	- /sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#795-879
+OpenZeppelinUpgradesAddress.isContract uses assembly (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1574-1592)
+	- /sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1591-1592
+AccountUpgradeability.setImplementation uses assembly (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol)
+	- /sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+Different versions of Solidity is used in /sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol:
+	- Version used: ['0.5.12', 'ABIEncoderV2', '^0.5.0']
+	- /sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#5-7 declares pragma solidity0.5.12
+	- /sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#26-29 declares pragma solidity0.5.12
+	- /sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#45-46 declares pragma solidity0.5.12
+	- /sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#86-87 declares pragma solidity0.5.12
+	- /sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#118 declares pragma solidity0.5.12
+	- /sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#134-136 declares pragma solidity0.5.12
+	- /sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#147 declares pragma solidity^0.5.0
+	- /sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#234 declares pragma solidity^0.5.0
+	- /sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#361 declares pragma solidity^0.5.0
+	- /sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#885 declares pragma solidity0.5.12
+	- /sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#885-886 declares pragma experimentalABIEncoderV2
+	- /sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1278-1280 declares pragma solidity0.5.12
+	- /sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1442-1443 declares pragma solidity0.5.12
+	- /sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1544-1547 declares pragma solidity^0.5.0
+	- /sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1593 declares pragma solidity0.5.12
+	- /sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol declares pragma solidity0.5.12
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#different-pragma-directives-are-used[0m
+INFO:Detectors:[92m
+AccountInitializeV1.initializeV1 (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#100-116) should be declared external
+IERC1271.isValidSignature (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#137-145) should be declared external
+BaseAccount.isValidSignature (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1028-1039) should be declared external
+BaseAccount.getNonce (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#918-921) should be declared external
+BaseAccount.getChainId (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#923-924) should be declared external
+BaseAccount.executeTransaction (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#933-941) should be declared external
+BaseAccount.addMultipleAuthKeys (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#952-959) should be declared external
+BaseAccount.removeMultipleAuthKeys (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#975-982) should be declared external
+BaseAccount.swapMultipleAuthKeys (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1002-1012) should be declared external
+LoginKeyMetaTxAccount.executeMultipleLoginKeyMetaTx (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1297-1331) should be declared external
+LoginKeyMetaTxAccount.isValidLoginKey (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1340-1358) should be declared external
+AuthKeyMetaTxAccount.executeMultipleAuthKeyMetaTx (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1461-1495) should be declared external
+AccountUpgradeability.upgradeToAndCall (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol:
+	- pragma solidity0.5.12 (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#5-7): it allows old versions
+	- pragma solidity0.5.12 (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#26-29): it allows old versions
+	- pragma solidity0.5.12 (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#45-46): it allows old versions
+	- pragma solidity0.5.12 (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#86-87): it allows old versions
+	- pragma solidity0.5.12 (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#118): it allows old versions
+	- pragma solidity0.5.12 (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#134-136): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#147): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#234): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#361): it allows old versions
+	- pragma solidity0.5.12 (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#885): it allows old versions
+	- pragma solidity0.5.12 (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1278-1280): it allows old versions
+	- pragma solidity0.5.12 (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1442-1443): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1544-1547): it allows old versions
+	- pragma solidity0.5.12 (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1593): it allows old versions
+	- pragma solidity0.5.12 (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Low level call in BaseAccount._executeTransaction (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1166-1181):
+	-(success,response) = _destination.call.gas(_gasLimit).value(_value)(_data) /sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1171-1173
+Low level call in AccountUpgradeability.upgradeToAndCall (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol):
+	-(success) = _newImplementation.delegatecall(_data) /sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Parameter '_authKey' of AccountInitializeV1.initializeV1 (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#101) is not in mixedCase
+Parameter '_bytes' of BytesLib.slice (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#585) is not in mixedCase
+Parameter '_start' of BytesLib.slice (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#585) is not in mixedCase
+Parameter '_length' of BytesLib.slice (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#585) is not in mixedCase
+Parameter '_bytes' of BytesLib.toAddress (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#651) is not in mixedCase
+Parameter '_start' of BytesLib.toAddress (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#651) is not in mixedCase
+Parameter '_bytes' of BytesLib.toUint8 (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#663) is not in mixedCase
+Parameter '_start' of BytesLib.toUint8 (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#663) is not in mixedCase
+Parameter '_bytes' of BytesLib.toUint16 (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#674) is not in mixedCase
+Parameter '_start' of BytesLib.toUint16 (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#674) is not in mixedCase
+Parameter '_bytes' of BytesLib.toUint32 (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#685) is not in mixedCase
+Parameter '_start' of BytesLib.toUint32 (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#685-686) is not in mixedCase
+Parameter '_bytes' of BytesLib.toUint64 (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#696-697) is not in mixedCase
+Parameter '_start' of BytesLib.toUint64 (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#697) is not in mixedCase
+Parameter '_bytes' of BytesLib.toUint96 (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#707-708) is not in mixedCase
+Parameter '_start' of BytesLib.toUint96 (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#708) is not in mixedCase
+Parameter '_bytes' of BytesLib.toUint128 (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#719) is not in mixedCase
+Parameter '_start' of BytesLib.toUint128 (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#719-721) is not in mixedCase
+Parameter '_bytes' of BytesLib.toUint (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#731-732) is not in mixedCase
+Parameter '_start' of BytesLib.toUint (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#732) is not in mixedCase
+Parameter '_bytes' of BytesLib.toBytes32 (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#738-739) is not in mixedCase
+Parameter '_start' of BytesLib.toBytes32 (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#739) is not in mixedCase
+Parameter '_msg' of BaseAccount.isValidSignature (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1029-1030) is not in mixedCase
+Parameter '_signatures' of BaseAccount.isValidSignature (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1030-1032) is not in mixedCase
+Parameter '_destination' of BaseAccount.executeTransaction (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#934) is not in mixedCase
+Parameter '_value' of BaseAccount.executeTransaction (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#934-936) is not in mixedCase
+Parameter '_data' of BaseAccount.executeTransaction (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#938) is not in mixedCase
+Parameter '_gasLimit' of BaseAccount.executeTransaction (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#938) is not in mixedCase
+Parameter '_authKey' of BaseAccount.addAuthKey (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#944-945) is not in mixedCase
+Parameter '_authKeys' of BaseAccount.addMultipleAuthKeys (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#953-956) is not in mixedCase
+Parameter '_authKey' of BaseAccount.removeAuthKey (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#966) is not in mixedCase
+Parameter '_authKeys' of BaseAccount.removeMultipleAuthKeys (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#976) is not in mixedCase
+Parameter '_oldAuthKey' of BaseAccount.swapAuthKeys (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#986-988) is not in mixedCase
+Parameter '_newAuthKey' of BaseAccount.swapAuthKeys (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#988) is not in mixedCase
+Parameter '_oldAuthKeys' of BaseAccount.swapMultipleAuthKeys (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1003) is not in mixedCase
+Parameter '_newAuthKeys' of BaseAccount.swapMultipleAuthKeys (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1003-1004) is not in mixedCase
+Parameter '_msg' of BaseAccount.isValidAuthKeySignature (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1049) is not in mixedCase
+Parameter '_signature' of BaseAccount.isValidAuthKeySignature (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1049) is not in mixedCase
+Parameter '_msg' of BaseAccount.isValidLoginKeySignature (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1075) is not in mixedCase
+Parameter '_signatures' of BaseAccount.isValidLoginKeySignature (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1075) is not in mixedCase
+Function 'BaseAccount._validateAuthKey' (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1099-1103) is not in mixedCase
+Parameter '_authKey' of BaseAccount._validateAuthKey (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1099-1100) is not in mixedCase
+Function 'BaseAccount._validateAuthKeyMetaTxSigs' (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1113-1125) is not in mixedCase
+Parameter '_txDataMessageHash' of BaseAccount._validateAuthKeyMetaTxSigs (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1114) is not in mixedCase
+Parameter '_transactionDataSignature' of BaseAccount._validateAuthKeyMetaTxSigs (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1115-1117) is not in mixedCase
+Parameter '_txDataMessageHash' of BaseAccount.validateLoginKeyMetaTxSigs (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1133-1134) is not in mixedCase
+Parameter '_transactionDataSignature' of BaseAccount.validateLoginKeyMetaTxSigs (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1135-1136) is not in mixedCase
+Parameter '_loginKeyAuthorizationSignature' of BaseAccount.validateLoginKeyMetaTxSigs (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1137-1139) is not in mixedCase
+Function 'BaseAccount._executeTransaction' (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1166-1181) is not in mixedCase
+Parameter '_destination' of BaseAccount._executeTransaction (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1166-1169) is not in mixedCase
+Parameter '_value' of BaseAccount._executeTransaction (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1169) is not in mixedCase
+Parameter '_data' of BaseAccount._executeTransaction (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1169-1170) is not in mixedCase
+Parameter '_gasLimit' of BaseAccount._executeTransaction (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1170) is not in mixedCase
+Function 'BaseAccount._issueRefund' (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1187-1198) is not in mixedCase
+Parameter '_startGas' of BaseAccount._issueRefund (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1188) is not in mixedCase
+Parameter '_gasPrice' of BaseAccount._issueRefund (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1188) is not in mixedCase
+Function 'BaseAccount._getGasBuffer' (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1212-1219) is not in mixedCase
+Parameter '_txData' of BaseAccount._getGasBuffer (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1212) is not in mixedCase
+Function 'BaseAccount._encodeData' (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1231-1248) is not in mixedCase
+Parameter '_nonce' of BaseAccount._encodeData (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1232-1233) is not in mixedCase
+Parameter '_destination' of BaseAccount._encodeData (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1233) is not in mixedCase
+Parameter '_value' of BaseAccount._encodeData (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1234) is not in mixedCase
+Parameter '_data' of BaseAccount._encodeData (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1235-1236) is not in mixedCase
+Function 'BaseAccount._getEthSignedMessageHash' (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1255-1259) is not in mixedCase
+Parameter '_msg' of BaseAccount._getEthSignedMessageHash (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1255-1256) is not in mixedCase
+Function 'BaseAccount._uint2str' (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1261-1277) is not in mixedCase
+Parameter '_num' of BaseAccount._uint2str (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1261-1262) is not in mixedCase
+Parameter '_destinations' of LoginKeyMetaTxAccount.executeMultipleLoginKeyMetaTx (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1299-1300) is not in mixedCase
+Parameter '_datas' of LoginKeyMetaTxAccount.executeMultipleLoginKeyMetaTx (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1300) is not in mixedCase
+Parameter '_values' of LoginKeyMetaTxAccount.executeMultipleLoginKeyMetaTx (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1300-1303) is not in mixedCase
+Parameter '_gasLimits' of LoginKeyMetaTxAccount.executeMultipleLoginKeyMetaTx (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1303-1305) is not in mixedCase
+Parameter '_transactionDataSignatures' of LoginKeyMetaTxAccount.executeMultipleLoginKeyMetaTx (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1306) is not in mixedCase
+Parameter '_loginKeyAuthorizationSignature' of LoginKeyMetaTxAccount.executeMultipleLoginKeyMetaTx (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1306-1307) is not in mixedCase
+Parameter '_transactionDataSigner' of LoginKeyMetaTxAccount.isValidLoginKey (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1342) is not in mixedCase
+Parameter '_loginKeyAuthorizationSignature' of LoginKeyMetaTxAccount.isValidLoginKey (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1343) is not in mixedCase
+Function 'LoginKeyMetaTxAccount._executeLoginKeyMetaTx' (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1371-1393) is not in mixedCase
+Parameter '_destination' of LoginKeyMetaTxAccount._executeLoginKeyMetaTx (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1372) is not in mixedCase
+Parameter '_data' of LoginKeyMetaTxAccount._executeLoginKeyMetaTx (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1373) is not in mixedCase
+Parameter '_value' of LoginKeyMetaTxAccount._executeLoginKeyMetaTx (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1373-1374) is not in mixedCase
+Parameter '_gasLimit' of LoginKeyMetaTxAccount._executeLoginKeyMetaTx (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1374) is not in mixedCase
+Parameter '_transactionDataSignature' of LoginKeyMetaTxAccount._executeLoginKeyMetaTx (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1375-1376) is not in mixedCase
+Parameter '_loginKeyAuthorizationSignature' of LoginKeyMetaTxAccount._executeLoginKeyMetaTx (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1376-1377) is not in mixedCase
+Parameter '_destinations' of LoginKeyMetaTxAccount.verifyLoginKeyParamDataLength (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1411-1412) is not in mixedCase
+Parameter '_dataArray' of LoginKeyMetaTxAccount.verifyLoginKeyParamDataLength (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1412-1413) is not in mixedCase
+Parameter '_values' of LoginKeyMetaTxAccount.verifyLoginKeyParamDataLength (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1413) is not in mixedCase
+Parameter '_gasLimits' of LoginKeyMetaTxAccount.verifyLoginKeyParamDataLength (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1414) is not in mixedCase
+Parameter '_transactionDataSignatures' of LoginKeyMetaTxAccount.verifyLoginKeyParamDataLength (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1414-1415) is not in mixedCase
+Function 'LoginKeyMetaTxAccount._checkDestination' (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1437-1438) is not in mixedCase
+Parameter '_destination' of LoginKeyMetaTxAccount._checkDestination (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1437-1438) is not in mixedCase
+Parameter '_destinations' of AuthKeyMetaTxAccount.executeMultipleAuthKeyMetaTx (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1463-1464) is not in mixedCase
+Parameter '_datas' of AuthKeyMetaTxAccount.executeMultipleAuthKeyMetaTx (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1464) is not in mixedCase
+Parameter '_values' of AuthKeyMetaTxAccount.executeMultipleAuthKeyMetaTx (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1465-1467) is not in mixedCase
+Parameter '_gasLimits' of AuthKeyMetaTxAccount.executeMultipleAuthKeyMetaTx (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1467-1469) is not in mixedCase
+Parameter '_transactionDataSignatures' of AuthKeyMetaTxAccount.executeMultipleAuthKeyMetaTx (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1469) is not in mixedCase
+Function 'AuthKeyMetaTxAccount._executeAuthKeyMetaTx' (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1507-1524) is not in mixedCase
+Parameter '_destination' of AuthKeyMetaTxAccount._executeAuthKeyMetaTx (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1508) is not in mixedCase
+Parameter '_data' of AuthKeyMetaTxAccount._executeAuthKeyMetaTx (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1508) is not in mixedCase
+Parameter '_value' of AuthKeyMetaTxAccount._executeAuthKeyMetaTx (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1508-1509) is not in mixedCase
+Parameter '_gasLimit' of AuthKeyMetaTxAccount._executeAuthKeyMetaTx (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1509) is not in mixedCase
+Parameter '_transactionDataSignature' of AuthKeyMetaTxAccount._executeAuthKeyMetaTx (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1509) is not in mixedCase
+Parameter '_destinations' of AuthKeyMetaTxAccount.verifyAuthKeyParamDataLength (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1532) is not in mixedCase
+Parameter '_dataArray' of AuthKeyMetaTxAccount.verifyAuthKeyParamDataLength (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1532-1534) is not in mixedCase
+Parameter '_values' of AuthKeyMetaTxAccount.verifyAuthKeyParamDataLength (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1534) is not in mixedCase
+Parameter '_gasLimits' of AuthKeyMetaTxAccount.verifyAuthKeyParamDataLength (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1534-1535) is not in mixedCase
+Parameter '_transactionDataSignatures' of AuthKeyMetaTxAccount.verifyAuthKeyParamDataLength (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol#1535-1536) is not in mixedCase
+Parameter '_newImplementation' of AccountUpgradeability.upgradeToAndCall (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol) is not in mixedCase
+Parameter '_data' of AccountUpgradeability.upgradeToAndCall (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol) is not in mixedCase
+Parameter '_newImplementation' of AccountUpgradeability.setImplementation (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol) is not in mixedCase
+Constant 'AuthereumAccount.authereumVersion' (/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol) is not in UPPER_CASE_WITH_UNDERSCORES
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xd8cab604bdd8cbb7c3eb0c26f7dc3abffb005a92.sol analyzed (15 contracts), 162 result(s) found

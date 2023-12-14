@@ -1,0 +1,40 @@
+INFO:Detectors:[93m
+Contract locking ether found in /sb/0xcc7c11666ee324e280512ef3f5f33b2a8ef10b19.sol:
+	Contract SwapContractPDATAtoAligatoCoin has payable functions:
+	 - fallback (/sb/0xcc7c11666ee324e280512ef3f5f33b2a8ef10b19.sol#151-161)
+	But does not have a function to withdraw the ether
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#contracts-that-lock-ether[0m
+INFO:Detectors:[93m
+Reentrancy in SwapContractPDATAtoAligatoCoin.sendCurrentPayment (/sb/0xcc7c11666ee324e280512ef3f5f33b2a8ef10b19.sol#195-225):
+	External calls:
+	- company_token.transfer(PartnerAccount,unsealedAmount) (/sb/0xcc7c11666ee324e280512ef3f5f33b2a8ef10b19.sol#207-211)
+	State variables written after the call(s):
+	- alreadyTransfered (/sb/0xcc7c11666ee324e280512ef3f5f33b2a8ef10b19.sol#211-213)
+	- currentBalance (/sb/0xcc7c11666ee324e280512ef3f5f33b2a8ef10b19.sol#213-215)
+Reentrancy in SwapContractPDATAtoAligatoCoin.sendCurrentPayment (/sb/0xcc7c11666ee324e280512ef3f5f33b2a8ef10b19.sol#195-225):
+	External calls:
+	- company_token.transfer(PartnerAccount,currentBalance) (/sb/0xcc7c11666ee324e280512ef3f5f33b2a8ef10b19.sol#220-225)
+	State variables written after the call(s):
+	- alreadyTransfered (/sb/0xcc7c11666ee324e280512ef3f5f33b2a8ef10b19.sol)
+	- currentBalance (/sb/0xcc7c11666ee324e280512ef3f5f33b2a8ef10b19.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+SwapContractPDATAtoAligatoCoin.sendCurrentPayment (/sb/0xcc7c11666ee324e280512ef3f5f33b2a8ef10b19.sol#195-225) does not use the value returned by external calls:
+	-company_token.transfer(PartnerAccount,unsealedAmount) (/sb/0xcc7c11666ee324e280512ef3f5f33b2a8ef10b19.sol#207-211)
+	-company_token.transfer(PartnerAccount,currentBalance) (/sb/0xcc7c11666ee324e280512ef3f5f33b2a8ef10b19.sol#220-225)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+OpiriaToken.transfer (/sb/0xcc7c11666ee324e280512ef3f5f33b2a8ef10b19.sol#35-37) should be declared external
+OpiriaToken.balanceOf (/sb/0xcc7c11666ee324e280512ef3f5f33b2a8ef10b19.sol#37-43) should be declared external
+SwapContractPDATAtoAligatoCoin.fallback (/sb/0xcc7c11666ee324e280512ef3f5f33b2a8ef10b19.sol#151-161) should be declared external
+SwapContractPDATAtoAligatoCoin.getBalance (/sb/0xcc7c11666ee324e280512ef3f5f33b2a8ef10b19.sol#169-184) should be declared external
+SwapContractPDATAtoAligatoCoin.setOwner (/sb/0xcc7c11666ee324e280512ef3f5f33b2a8ef10b19.sol#189-195) should be declared external
+SwapContractPDATAtoAligatoCoin.sendCurrentPayment (/sb/0xcc7c11666ee324e280512ef3f5f33b2a8ef10b19.sol#195-225) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_company_token' of SwapContractPDATAtoAligatoCoin. (/sb/0xcc7c11666ee324e280512ef3f5f33b2a8ef10b19.sol#105) is not in mixedCase
+Parameter '_owner' of SwapContractPDATAtoAligatoCoin.setOwner (/sb/0xcc7c11666ee324e280512ef3f5f33b2a8ef10b19.sol#189) is not in mixedCase
+Variable 'SwapContractPDATAtoAligatoCoin.company_token' (/sb/0xcc7c11666ee324e280512ef3f5f33b2a8ef10b19.sol#53-55) is not in mixedCase
+Variable 'SwapContractPDATAtoAligatoCoin.PartnerAccount' (/sb/0xcc7c11666ee324e280512ef3f5f33b2a8ef10b19.sol#55-57) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xcc7c11666ee324e280512ef3f5f33b2a8ef10b19.sol analyzed (10 contracts), 14 result(s) found

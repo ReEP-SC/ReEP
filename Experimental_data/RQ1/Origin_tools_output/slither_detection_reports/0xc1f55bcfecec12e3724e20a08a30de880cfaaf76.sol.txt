@@ -1,0 +1,118 @@
+INFO:Detectors:[91m
+GenArt721Minter3._splitFundsETH (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#308-341) sends eth to arbitrary user
+	Dangerous calls:
+	- artblocksContract.artblocksAddress().transfer(artBlocksAmount) (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#322)
+	- ownerAddress.transfer(ownerFunds) (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#325)
+	- artblocksContract.projectIdToAdditionalPayee(_projectId).transfer(additionalPayeeAmount) (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#337-338)
+	- artblocksContract.projectIdToArtistAddress(_projectId).transfer(creatorFunds) (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#339-341)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[93m
+additionalPayeeAmount in GenArt721Minter3._splitFundsERC20 (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#355) is a local variable never initialiazed
+additionalPayeeAmount in GenArt721Minter3._splitFundsETH (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#327) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[93m
+GenArt721Minter3.purchaseTo (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#275-307) does not use the value returned by external calls:
+	-BonusContract(projectIdToBonusContractAddress[_projectId]).triggerBonus(msg.sender) (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#306)
+GenArt721Minter3._splitFundsERC20 (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#341-364) does not use the value returned by external calls:
+	-ERC20(artblocksContract.projectIdToCurrencyAddress(_projectId)).transferFrom(msg.sender,artblocksContract.artblocksAddress(),artBlocksAmount) (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#347-350)
+	-ERC20(artblocksContract.projectIdToCurrencyAddress(_projectId)).transferFrom(msg.sender,ownerAddress,ownerFunds) (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#353-354)
+	-ERC20(artblocksContract.projectIdToCurrencyAddress(_projectId)).transferFrom(msg.sender,artblocksContract.projectIdToAdditionalPayee(_projectId),additionalPayeeAmount) (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#360-364)
+	-ERC20(artblocksContract.projectIdToCurrencyAddress(_projectId)).transferFrom(msg.sender,artblocksContract.projectIdToArtistAddress(_projectId),creatorFunds) (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in GenArt721Minter3.artistSetBonusContractAddress (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#266-273):
+	External calls:
+	- require(bool,string)(msg.sender == artblocksContract.projectIdToArtistAddress(_projectId),can only be set by artist) (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#269-272)
+	State variables written after the call(s):
+	- projectIdToBonusContractAddress (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#272-273)
+Reentrancy in GenArt721Minter3.artistToggleBonus (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#264-266):
+	External calls:
+	- require(bool,string)(msg.sender == artblocksContract.projectIdToArtistAddress(_projectId),can only be set by artist) (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#264-265)
+	State variables written after the call(s):
+	- projectIdToBonus (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#265-266)
+Reentrancy in GenArt721Minter3.purchaseTo (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#275-307):
+	External calls:
+	- keccak256(bytes)(abi.encodePacked(artblocksContract.projectIdToCurrencySymbol(_projectId))) != keccak256(bytes)(abi.encodePacked(ETH)) (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#276-289)
+	- require(bool,string)(ERC20(artblocksContract.projectIdToCurrencyAddress(_projectId)).allowance(msg.sender,address(this)) >= artblocksContract.projectIdToPricePerTokenInWei(_projectId),Insufficient Funds Approved for TX) (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#277-280)
+	- require(bool,string)(ERC20(artblocksContract.projectIdToCurrencyAddress(_projectId)).balanceOf(msg.sender) >= artblocksContract.projectIdToPricePerTokenInWei(_projectId),Insufficient balance.) (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#280-284)
+	- _splitFundsERC20(_projectId) (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#284-285)
+	- require(bool,string)(msg.value >= artblocksContract.projectIdToPricePerTokenInWei(_projectId),Must send minimum value to mint!) (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#285-288)
+	- _splitFundsETH(_projectId) (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#288-289)
+	External calls sending eth:
+	- _splitFundsETH(_projectId) (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#288-289)
+	State variables written after the call(s):
+	- projectMintCounter (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#297)
+Reentrancy in GenArt721Minter3.setOwnerAddress (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#249-254):
+	External calls:
+	- require(bool,string)(artblocksContract.isWhitelisted(msg.sender),can only be set by admin) (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#250-254)
+	State variables written after the call(s):
+	- ownerAddress (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#254)
+Reentrancy in GenArt721Minter3.setOwnerPercentage (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#254-259):
+	External calls:
+	- require(bool,string)(artblocksContract.isWhitelisted(msg.sender),can only be set by admin) (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#255-256)
+	State variables written after the call(s):
+	- ownerPercentage (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#256-259)
+Reentrancy in GenArt721Minter3.setProjectMintLimit (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#244-249):
+	External calls:
+	- require(bool,string)(artblocksContract.isWhitelisted(msg.sender),can only be set by admin) (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#245-247)
+	State variables written after the call(s):
+	- projectMintLimit (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#249)
+Reentrancy in GenArt721Minter3.toggleContractFilter (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#259-264):
+	External calls:
+	- require(bool,string)(artblocksContract.isWhitelisted(msg.sender),can only be set by admin) (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#260-261)
+	State variables written after the call(s):
+	- contractFilterProject (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#261-264)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+GenArt721Minter3.getYourBalanceOfProjectERC20 (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#234-236) should be declared external
+GenArt721Minter3.checkYourAllowanceOfProjectERC20 (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#236-244) should be declared external
+GenArt721Minter3.setProjectMintLimit (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#244-249) should be declared external
+GenArt721Minter3.setOwnerAddress (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#249-254) should be declared external
+GenArt721Minter3.setOwnerPercentage (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#254-259) should be declared external
+GenArt721Minter3.toggleContractFilter (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#259-264) should be declared external
+GenArt721Minter3.artistToggleBonus (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#264-266) should be declared external
+GenArt721Minter3.artistSetBonusContractAddress (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#266-273) should be declared external
+GenArt721Minter3.purchase (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#273-274) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol:
+	- pragma solidity^0.5.0 (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#15-18): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#116-118): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#185): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_a' of Strings.strConcat (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#119) is not in mixedCase
+Parameter '_b' of Strings.strConcat (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#119-122) is not in mixedCase
+Parameter '_a' of Strings.strConcat (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#123) is not in mixedCase
+Parameter '_b' of Strings.strConcat (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#123) is not in mixedCase
+Parameter '_c' of Strings.strConcat (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#123-126) is not in mixedCase
+Parameter '_a' of Strings.strConcat (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#126-127) is not in mixedCase
+Parameter '_b' of Strings.strConcat (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#127) is not in mixedCase
+Parameter '_c' of Strings.strConcat (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#127) is not in mixedCase
+Parameter '_d' of Strings.strConcat (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#128-130) is not in mixedCase
+Parameter '_a' of Strings.strConcat (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#130) is not in mixedCase
+Parameter '_b' of Strings.strConcat (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#130-131) is not in mixedCase
+Parameter '_c' of Strings.strConcat (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#131) is not in mixedCase
+Parameter '_d' of Strings.strConcat (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#131-132) is not in mixedCase
+Parameter '_e' of Strings.strConcat (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#132) is not in mixedCase
+Parameter '_i' of Strings.uint2str (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#163-164) is not in mixedCase
+Parameter '_genArt721Address' of GenArt721Minter3. (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#230) is not in mixedCase
+Parameter '_projectId' of GenArt721Minter3.getYourBalanceOfProjectERC20 (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#234) is not in mixedCase
+Parameter '_projectId' of GenArt721Minter3.checkYourAllowanceOfProjectERC20 (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#239) is not in mixedCase
+Parameter '_projectId' of GenArt721Minter3.setProjectMintLimit (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#244-245) is not in mixedCase
+Parameter '_limit' of GenArt721Minter3.setProjectMintLimit (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#245) is not in mixedCase
+Parameter '_ownerAddress' of GenArt721Minter3.setOwnerAddress (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#250) is not in mixedCase
+Parameter '_ownerPercentage' of GenArt721Minter3.setOwnerPercentage (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#255) is not in mixedCase
+Parameter '_projectId' of GenArt721Minter3.toggleContractFilter (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#260) is not in mixedCase
+Parameter '_projectId' of GenArt721Minter3.artistToggleBonus (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#264) is not in mixedCase
+Parameter '_projectId' of GenArt721Minter3.artistSetBonusContractAddress (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#269) is not in mixedCase
+Parameter '_bonusContractAddress' of GenArt721Minter3.artistSetBonusContractAddress (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#269) is not in mixedCase
+Parameter '_projectId' of GenArt721Minter3.purchase (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#273-274) is not in mixedCase
+Parameter '_to' of GenArt721Minter3.purchaseTo (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#275) is not in mixedCase
+Parameter '_projectId' of GenArt721Minter3.purchaseTo (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#275) is not in mixedCase
+Function 'GenArt721Minter3._splitFundsETH' (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#308-341) is not in mixedCase
+Parameter '_projectId' of GenArt721Minter3._splitFundsETH (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#308-310) is not in mixedCase
+Function 'GenArt721Minter3._splitFundsERC20' (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#341-364) is not in mixedCase
+Parameter '_projectId' of GenArt721Minter3._splitFundsERC20 (/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol#341) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xc1f55bcfecec12e3724e20a08a30de880cfaaf76.sol analyzed (6 contracts), 55 result(s) found

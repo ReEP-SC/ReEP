@@ -1,0 +1,32 @@
+INFO:Detectors:[93m
+Reentrancy in LevTreasuryVester.claim (/sb/0xcc7a47ea7d8d0e586ea0d66314c9278691c6340b.sol#165-194):
+	External calls:
+	- ILev(lev).balanceOf(address(this)) < amount (/sb/0xcc7a47ea7d8d0e586ea0d66314c9278691c6340b.sol#181-184)
+	- amount = ILev(lev).balanceOf(address(this)) (/sb/0xcc7a47ea7d8d0e586ea0d66314c9278691c6340b.sol#183)
+	State variables written after the call(s):
+	- _Treasury (/sb/0xcc7a47ea7d8d0e586ea0d66314c9278691c6340b.sol#185-190)
+	- _Treasury (/sb/0xcc7a47ea7d8d0e586ea0d66314c9278691c6340b.sol#190-192)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+LevTreasuryVester.creatTreasury (/sb/0xcc7a47ea7d8d0e586ea0d66314c9278691c6340b.sol#118-148) does not use the value returned by external calls:
+	-ILev(lev).transferFrom(msg.sender,address(this),vestingAmount_) (/sb/0xcc7a47ea7d8d0e586ea0d66314c9278691c6340b.sol#147-148)
+LevTreasuryVester.claim (/sb/0xcc7a47ea7d8d0e586ea0d66314c9278691c6340b.sol#165-194) does not use the value returned by external calls:
+	-ILev(lev).transfer(msg.sender,amount) (/sb/0xcc7a47ea7d8d0e586ea0d66314c9278691c6340b.sol#192-194)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+LevTreasuryVester.creatTreasury (/sb/0xcc7a47ea7d8d0e586ea0d66314c9278691c6340b.sol#118-148) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(vestingBegin_ >= block.timestamp,TreasuryVester::creat: vesting begin too early) (/sb/0xcc7a47ea7d8d0e586ea0d66314c9278691c6340b.sol#126-130)
+LevTreasuryVester.claim (/sb/0xcc7a47ea7d8d0e586ea0d66314c9278691c6340b.sol#165-194) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(block.timestamp >= treasury.nextTime,TreasuryVester::claim: not time yet) (/sb/0xcc7a47ea7d8d0e586ea0d66314c9278691c6340b.sol#172-175)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xcc7a47ea7d8d0e586ea0d66314c9278691c6340b.sol:
+	- pragma solidity^0.6.12 (/sb/0xcc7a47ea7d8d0e586ea0d66314c9278691c6340b.sol#6-8): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_lev' of LevTreasuryVester. (/sb/0xcc7a47ea7d8d0e586ea0d66314c9278691c6340b.sol#117) is not in mixedCase
+Variable 'LevTreasuryVester._Treasury' (/sb/0xcc7a47ea7d8d0e586ea0d66314c9278691c6340b.sol#103-105) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xcc7a47ea7d8d0e586ea0d66314c9278691c6340b.sol analyzed (3 contracts), 8 result(s) found

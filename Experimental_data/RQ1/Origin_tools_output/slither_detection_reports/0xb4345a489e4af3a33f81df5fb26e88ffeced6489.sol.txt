@@ -1,0 +1,68 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xb4345a489e4af3a33f81df5fb26e88ffeced6489.sol:
+Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing "SPDX-License-Identifier: <SPDX-License>" to each source file. Use "SPDX-License-Identifier: UNLICENSED" for non-open-source code. Please see https://spdx.org for more information.
+--> /sb/0xb4345a489e4af3a33f81df5fb26e88ffeced6489.sol
+
+Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+   --> /sb/0xb4345a489e4af3a33f81df5fb26e88ffeced6489.sol:246:38:
+    |
+246 |     function buyFor(uint256 _amount, address _user)
+    |                                      ^^^^^^^^^^^^^
+
+
+INFO:Detectors:[93m
+Contract locking ether found in /sb/0xb4345a489e4af3a33f81df5fb26e88ffeced6489.sol:
+	Contract LeviathanClaim has payable functions:
+	 - constructor (/sb/0xb4345a489e4af3a33f81df5fb26e88ffeced6489.sol#249-253)
+	But does not have a function to withdraw the ether
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#contracts-that-lock-ether[0m
+INFO:Detectors:[93m
+Reentrancy in LeviathanClaim.release (/sb/0xb4345a489e4af3a33f81df5fb26e88ffeced6489.sol#274-285):
+	External calls:
+	- totalReceived = IERC20(_surf).balanceOf(address(this)).add(_totalReleased) (/sb/0xb4345a489e4af3a33f81df5fb26e88ffeced6489.sol#278-281)
+	State variables written after the call(s):
+	- _totalReleased (/sb/0xb4345a489e4af3a33f81df5fb26e88ffeced6489.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+LeviathanClaim.buyFor (/sb/0xb4345a489e4af3a33f81df5fb26e88ffeced6489.sol#253-260) does not use the value returned by external calls:
+	-IERC20(_surf).transferFrom(msg.sender,address(this),_amount) (/sb/0xb4345a489e4af3a33f81df5fb26e88ffeced6489.sol#257-260)
+LeviathanClaim.release (/sb/0xb4345a489e4af3a33f81df5fb26e88ffeced6489.sol#274-285) does not use the value returned by external calls:
+	-IERC20(_surf).transfer(IERC721(_leviathan).ownerOf(payID),payment) (/sb/0xb4345a489e4af3a33f81df5fb26e88ffeced6489.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in LeviathanClaim.release (/sb/0xb4345a489e4af3a33f81df5fb26e88ffeced6489.sol#274-285):
+	External calls:
+	- totalReceived = IERC20(_surf).balanceOf(address(this)).add(_totalReleased) (/sb/0xb4345a489e4af3a33f81df5fb26e88ffeced6489.sol#278-281)
+	State variables written after the call(s):
+	- _released (/sb/0xb4345a489e4af3a33f81df5fb26e88ffeced6489.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Different versions of Solidity is used in /sb/0xb4345a489e4af3a33f81df5fb26e88ffeced6489.sol:
+	- Version used: ['>=0.6.0<0.8.0', '^0.6.0']
+	- /sb/0xb4345a489e4af3a33f81df5fb26e88ffeced6489.sol#8-11 declares pragma solidity^0.6.0
+	- /sb/0xb4345a489e4af3a33f81df5fb26e88ffeced6489.sol#37 declares pragma solidity^0.6.0
+	- /sb/0xb4345a489e4af3a33f81df5fb26e88ffeced6489.sol#204-205 declares pragma solidity>=0.6.0<0.8.0
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#different-pragma-directives-are-used[0m
+INFO:Detectors:[92m
+LeviathanClaim.buyFor (/sb/0xb4345a489e4af3a33f81df5fb26e88ffeced6489.sol#253-260) should be declared external
+LeviathanClaim.totalReleased (/sb/0xb4345a489e4af3a33f81df5fb26e88ffeced6489.sol#263-267) should be declared external
+LeviathanClaim.released (/sb/0xb4345a489e4af3a33f81df5fb26e88ffeced6489.sol#268-271) should be declared external
+LeviathanClaim.release (/sb/0xb4345a489e4af3a33f81df5fb26e88ffeced6489.sol#274-285) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xb4345a489e4af3a33f81df5fb26e88ffeced6489.sol:
+	- pragma solidity^0.6.0 (/sb/0xb4345a489e4af3a33f81df5fb26e88ffeced6489.sol#8-11): it allows old versions
+	- pragma solidity^0.6.0 (/sb/0xb4345a489e4af3a33f81df5fb26e88ffeced6489.sol#37): it allows old versions
+	- pragma solidity>=0.6.0<0.8.0 (/sb/0xb4345a489e4af3a33f81df5fb26e88ffeced6489.sol#204-205): is has a complex pragma
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'Context._msgSender' (/sb/0xb4345a489e4af3a33f81df5fb26e88ffeced6489.sol#21-25) is not in mixedCase
+Function 'Context._msgData' (/sb/0xb4345a489e4af3a33f81df5fb26e88ffeced6489.sol#25-31) is not in mixedCase
+Parameter '' of IERC20.balanceOf (/sb/0xb4345a489e4af3a33f81df5fb26e88ffeced6489.sol#210) is not in mixedCase
+Parameter '' of IERC20.transfer (/sb/0xb4345a489e4af3a33f81df5fb26e88ffeced6489.sol#211) is not in mixedCase
+Parameter '_scope_0' of IERC20.transfer (/sb/0xb4345a489e4af3a33f81df5fb26e88ffeced6489.sol#211) is not in mixedCase
+Parameter '' of IERC20.transferFrom (/sb/0xb4345a489e4af3a33f81df5fb26e88ffeced6489.sol#212) is not in mixedCase
+Parameter '_scope_0' of IERC20.transferFrom (/sb/0xb4345a489e4af3a33f81df5fb26e88ffeced6489.sol#212) is not in mixedCase
+Parameter '_scope_1' of IERC20.transferFrom (/sb/0xb4345a489e4af3a33f81df5fb26e88ffeced6489.sol#212) is not in mixedCase
+Parameter '_amount' of LeviathanClaim.buyFor (/sb/0xb4345a489e4af3a33f81df5fb26e88ffeced6489.sol#254-255) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xb4345a489e4af3a33f81df5fb26e88ffeced6489.sol analyzed (5 contracts), 20 result(s) found

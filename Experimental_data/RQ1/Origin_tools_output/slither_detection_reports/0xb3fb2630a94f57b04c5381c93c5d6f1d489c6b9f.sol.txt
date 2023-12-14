@@ -1,0 +1,104 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol:
+/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol:769:9: Warning: This declaration shadows an existing declaration.
+        uint256 fee = currentFee(msg.sender);
+        ^---------^
+/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol:687:5: The shadowed declaration is here:
+    function fee() public view returns(uint256) {
+    ^ (Relevant source part starts here and spans across multiple lines).
+
+/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol:319:9: Warning: Invoking events without "emit" prefix is deprecated.
+        OwnershipTransferred(owner(), newOwner);
+        ^-------------------------------------^
+/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol:409:9: Warning: Invoking events without "emit" prefix is deprecated.
+        OwnershipTransferred(owner(), pendingOwner());
+        ^-------------------------------------------^
+/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol:757:13: Warning: Invoking events without "emit" prefix is deprecated.
+            Multisended(total, token);
+            ^-----------------------^
+/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol:791:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Multisended(msg.value, 0x000000000000000000000000000000000000bEEF);
+        ^----------------------------------------------------------------^
+/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol:801:30: Warning: Using contract member "balance" inherited from the address type is deprecated. Convert the contract to "address" type to access the member, for example use "address(contract).balance" instead.
+            owner().transfer(this.balance);
+                             ^----------^
+/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol:813:9: Warning: Invoking events without "emit" prefix is deprecated.
+        ClaimedTokens(_token, owner(), balance);
+        ^-------------------------------------^
+
+INFO:Detectors:[91m
+UpgradeabilityStorage._version (/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol#85) is never initialized. It is used in:
+	- version (/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol#107-109)
+UpgradeabilityStorage._implementation (/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol#91-93) is never initialized. It is used in:
+	- implementation (/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol#123-129)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-state-variables[0m
+INFO:Detectors:[93m
+UpgradebleStormSender.multisendToken (/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol#761-799) does not use the value returned by external calls:
+	-erc20token.transferFrom(msg.sender,_contributors[i],_balances[i]) (/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol#785-789)
+UpgradebleStormSender.claimTokens (/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol) does not use the value returned by external calls:
+	-erc20token.transfer(owner(),balance) (/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+UpgradebleStormSender.multisendEther.fee (local variable @ /sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol#809-811) shadows:
+	- UpgradebleStormSender.fee (function @ /sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol#731-733)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+UpgradebleStormSender.multisendToken has external calls inside a loop:
+	- erc20token.transferFrom(msg.sender,_contributors[i],_balances[i]) (/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol#785-789)
+UpgradebleStormSender.multisendEther has external calls inside a loop:
+	- _contributors[i].transfer(_balances[i]) (/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+UpgradeabilityStorage._implementation should be constant (/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol#91-93)
+UpgradeabilityStorage._version should be constant (/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol#85)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+UpgradeabilityStorage.version (/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol#107-109) should be declared external
+UpgradeabilityStorage.implementation (/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol#123-129) should be declared external
+UpgradeabilityOwnerStorage.upgradeabilityOwner (/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol#171-177) should be declared external
+Ownable.transferOwnership (/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol#320-335) should be declared external
+Claimable.transferOwnership (/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol#411-421) should be declared external
+Claimable.claimOwnership (/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol#429-453) should be declared external
+ERC20Basic.totalSupply (/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol#577-579) should be declared external
+ERC20Basic.balanceOf (/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol#579-587) should be declared external
+ERC20Basic.transfer (/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol#587-589) should be declared external
+ERC20.allowance (/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol#595-601) should be declared external
+ERC20.transferFrom (/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol#603-613) should be declared external
+ERC20.approve (/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol#613-619) should be declared external
+UpgradebleStormSender.fallback (/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol#651) should be declared external
+UpgradebleStormSender.initialize (/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol#651-671) should be declared external
+UpgradebleStormSender.multisendToken (/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol#761-799) should be declared external
+UpgradebleStormSender.claimTokens (/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol:
+	- pragma solidity0.4.23 (/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol#17-25): it allows old versions
+	- pragma solidity0.4.23 (/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol#69-71): it allows old versions
+	- pragma solidity0.4.23 (/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol#141-145): it allows old versions
+	- pragma solidity0.4.23 (/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol#213): it allows old versions
+	- pragma solidity0.4.23 (/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol#249-251): it allows old versions
+	- pragma solidity0.4.23 (/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol#361): it allows old versions
+	- pragma solidity0.4.23 (/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol#473): it allows old versions
+	- pragma solidity0.4.23 (/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol#573): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Variable 'UpgradeabilityStorage._version' (/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol#85) is not in mixedCase
+Variable 'UpgradeabilityStorage._implementation' (/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol#91-93) is not in mixedCase
+Parameter '_owner' of UpgradebleStormSender.initialize (/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol#653) is not in mixedCase
+Parameter '_newLimit' of UpgradebleStormSender.setArrayLimit (/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol#697-699) is not in mixedCase
+Parameter '_newStep' of UpgradebleStormSender.setDiscountStep (/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol#721) is not in mixedCase
+Parameter '_customer' of UpgradebleStormSender.currentFee (/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol#733) is not in mixedCase
+Parameter '_newStep' of UpgradebleStormSender.setFee (/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol#745-747) is not in mixedCase
+Parameter '_customer' of UpgradebleStormSender.discountRate (/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol#751) is not in mixedCase
+Parameter '_contributors' of UpgradebleStormSender.multisendToken (/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol#765) is not in mixedCase
+Parameter '_balances' of UpgradebleStormSender.multisendToken (/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol#765) is not in mixedCase
+Parameter '_contributors' of UpgradebleStormSender.multisendEther (/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol#801-803) is not in mixedCase
+Parameter '_balances' of UpgradebleStormSender.multisendEther (/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol#803-805) is not in mixedCase
+Parameter '_token' of UpgradebleStormSender.claimTokens (/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol) is not in mixedCase
+Parameter '_txCount' of UpgradebleStormSender.setTxCount (/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+EternalStorage.stringStorage (/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol#37-39) is never used in UpgradebleStormSender
+EternalStorage.bytesStorage (/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol#41-43) is never used in UpgradebleStormSender
+EternalStorage.intStorage (/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol#45-53) is never used in UpgradebleStormSender
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0xb3fb2630a94f57b04c5381c93c5d6f1d489c6b9f.sol analyzed (10 contracts), 40 result(s) found

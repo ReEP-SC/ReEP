@@ -1,0 +1,58 @@
+INFO:Detectors:[91m
+P3DRaffle.validateraffle (/sb/0x989eb9629225b8c06997ef0577cc08535fd789f9.sol#427-487) sends eth to arbitrary user
+	Dangerous calls:
+	- winner.transfer(jackpot) (/sb/0x989eb9629225b8c06997ef0577cc08535fd789f9.sol#481)
+	- winner.transfer(100000000000000000) (/sb/0x989eb9629225b8c06997ef0577cc08535fd789f9.sol)
+	- msg.sender.transfer(3000000000000000) (/sb/0x989eb9629225b8c06997ef0577cc08535fd789f9.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[91m
+Reentrancy in P3DRaffle.devfeetodev (/sb/0x989eb9629225b8c06997ef0577cc08535fd789f9.sol#395-401):
+	External calls:
+	- SPASM_.disburse.value(devfee)() (/sb/0x989eb9629225b8c06997ef0577cc08535fd789f9.sol#397)
+	State variables written after the call(s):
+	- devfee (/sb/0x989eb9629225b8c06997ef0577cc08535fd789f9.sol#401)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities[0m
+INFO:Detectors:[93m
+P3DRaffle.buytickets (/sb/0x989eb9629225b8c06997ef0577cc08535fd789f9.sol#339-371) does not use the value returned by external calls:
+	-P3Dcontract_.buy.value(msg.value)(masternode) (/sb/0x989eb9629225b8c06997ef0577cc08535fd789f9.sol#363-371)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+P3DRaffle.pots.rafflepot (local variable @ /sb/0x989eb9629225b8c06997ef0577cc08535fd789f9.sol#287) shadows:
+	- P3DRaffle.rafflepot (state variable @ /sb/0x989eb9629225b8c06997ef0577cc08535fd789f9.sol#323)
+P3DRaffle.pots.jackpot (local variable @ /sb/0x989eb9629225b8c06997ef0577cc08535fd789f9.sol#287-293) shadows:
+	- P3DRaffle.jackpot (state variable @ /sb/0x989eb9629225b8c06997ef0577cc08535fd789f9.sol#323)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+Reentrancy in P3DRaffle.fetchdivstopot (/sb/0x989eb9629225b8c06997ef0577cc08535fd789f9.sol#371-395):
+	External calls:
+	- divs = harvestabledivs() (/sb/0x989eb9629225b8c06997ef0577cc08535fd789f9.sol#375-377)
+	State variables written after the call(s):
+	- devfee (/sb/0x989eb9629225b8c06997ef0577cc08535fd789f9.sol#391-393)
+	- jackpot (/sb/0x989eb9629225b8c06997ef0577cc08535fd789f9.sol#385-387)
+	- rafflepot (/sb/0x989eb9629225b8c06997ef0577cc08535fd789f9.sol#381-383)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Owned.transferOwnership (/sb/0x989eb9629225b8c06997ef0577cc08535fd789f9.sol#131-135) should be declared external
+Owned.acceptOwnership (/sb/0x989eb9629225b8c06997ef0577cc08535fd789f9.sol#135-153) should be declared external
+P3DRaffle.raffleinfo (/sb/0x989eb9629225b8c06997ef0577cc08535fd789f9.sol#209-249) should be declared external
+P3DRaffle.FetchVanity (/sb/0x989eb9629225b8c06997ef0577cc08535fd789f9.sol#249-257) should be declared external
+P3DRaffle.devfeesoutstanding (/sb/0x989eb9629225b8c06997ef0577cc08535fd789f9.sol#257-265) should be declared external
+P3DRaffle.nextlotnumber (/sb/0x989eb9629225b8c06997ef0577cc08535fd789f9.sol#265-273) should be declared external
+P3DRaffle.nextrafflenumber (/sb/0x989eb9629225b8c06997ef0577cc08535fd789f9.sol#275-283) should be declared external
+P3DRaffle.pots (/sb/0x989eb9629225b8c06997ef0577cc08535fd789f9.sol#283-297) should be declared external
+P3DRaffle.buytickets (/sb/0x989eb9629225b8c06997ef0577cc08535fd789f9.sol#339-371) should be declared external
+P3DRaffle.fetchdivstopot (/sb/0x989eb9629225b8c06997ef0577cc08535fd789f9.sol#371-395) should be declared external
+P3DRaffle.devfeetodev (/sb/0x989eb9629225b8c06997ef0577cc08535fd789f9.sol#395-401) should be declared external
+P3DRaffle.changevanity (/sb/0x989eb9629225b8c06997ef0577cc08535fd789f9.sol#401-413) should be declared external
+P3DRaffle.startraffle (/sb/0x989eb9629225b8c06997ef0577cc08535fd789f9.sol#413-427) should be declared external
+P3DRaffle.validateraffle (/sb/0x989eb9629225b8c06997ef0577cc08535fd789f9.sol#427-487) should be declared external
+P3DRaffle.dusttorafflepot (/sb/0x989eb9629225b8c06997ef0577cc08535fd789f9.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_newOwner' of Owned.transferOwnership (/sb/0x989eb9629225b8c06997ef0577cc08535fd789f9.sol#133) is not in mixedCase
+Function 'P3DRaffle.FetchVanity' (/sb/0x989eb9629225b8c06997ef0577cc08535fd789f9.sol#249-257) is not in mixedCase
+Constant 'P3DRaffle.P3Dcontract_' (/sb/0x989eb9629225b8c06997ef0577cc08535fd789f9.sol#189-197) is not in UPPER_CASE_WITH_UNDERSCORES
+Variable 'P3DRaffle.Raffles' (/sb/0x989eb9629225b8c06997ef0577cc08535fd789f9.sol#313-315) is not in mixedCase
+Variable 'P3DRaffle.Vanity' (/sb/0x989eb9629225b8c06997ef0577cc08535fd789f9.sol#315-321) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x989eb9629225b8c06997ef0577cc08535fd789f9.sol analyzed (5 contracts), 26 result(s) found

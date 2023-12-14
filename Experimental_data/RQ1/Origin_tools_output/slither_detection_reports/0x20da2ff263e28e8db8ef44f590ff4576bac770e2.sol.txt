@@ -1,0 +1,179 @@
+INFO:Detectors:[91m
+MilFold.checkRoundAndDraw (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#1039-1181) sends eth to arbitrary user
+	Dangerous calls:
+	- _addr.transfer(COMMON_REWARD_AMOUNT) (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#1069)
+	- _addr.transfer(COMMON_REWARD_AMOUNT) (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#1109)
+	- _addr.transfer(COMMON_REWARD_AMOUNT) (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#1159-1161)
+MilFold.claimWinner (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#1187-1279) sends eth to arbitrary user
+	Dangerous calls:
+	- msg.sender.transfer(rewardAmount) (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#1261-1263)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[91m
+Reentrancy in MilFold.buyTickets (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#501-537):
+	External calls:
+	- compressData = checkRoundAndDraw(msg.sender) (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#513-515)
+	- buyCore(msg.sender,_affID,msg.value) (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#519)
+	State variables written after the call(s):
+	- round_ (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#519)
+Reentrancy in MilFold.checkRoundAndDraw (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#1039-1181):
+	External calls:
+	- assignCore() (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#1095)
+	State variables written after the call(s):
+	- round_ (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#1097-1099)
+	- round_ (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#1103-1105)
+Reentrancy in MilFold.expressBuyNumSec (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#611-671):
+	External calls:
+	- compressData = checkRoundAndDraw(msg.sender) (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#635-637)
+	- buyCore(msg.sender,_affID,msg.value) (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#637-639)
+	State variables written after the call(s):
+	- playerTickets_ (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#641-653)
+	- round_ (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#637-639)
+Reentrancy in MilFold.expressBuyNums (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#551-593):
+	External calls:
+	- compressData = checkRoundAndDraw(msg.sender) (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#569-571)
+	- buyCore(msg.sender,_affID,msg.value) (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#571-573)
+	State variables written after the call(s):
+	- playerTickets_ (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#573-577)
+	- round_ (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#571-573)
+Reentrancy in MilFold.expressReloadNumSec (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#797-843):
+	External calls:
+	- compressData = checkRoundAndDraw(msg.sender) (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#807-813)
+	- reloadCore(msg.sender,_affID,_eth) (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#815-817)
+	State variables written after the call(s):
+	- playerTickets_ (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#819-825)
+Reentrancy in MilFold.expressReloadNums (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#739-769):
+	External calls:
+	- compressData = checkRoundAndDraw(msg.sender) (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#747-751)
+	- reloadCore(msg.sender,_affID,_eth) (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#751)
+	State variables written after the call(s):
+	- playerTickets_ (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#751-759)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities[0m
+INFO:Detectors:[91m
+MilFold.playerTicketNumbers_ (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#315-317) is never initialized. It is used in:
+	- convertCore (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#1015-1027)
+	- claimWinner (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#1187-1279)
+	- getPlayerRoundNums (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#1513-1535)
+	- getPlayerRoundWinningInfo (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#1548-1627)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-state-variables[0m
+INFO:Detectors:[92m
+MilFold.assignCore has external calls inside a loop:
+	- millionaire_.assign.value(amount)(addr) (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#1321)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in MilFold.addPot (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#1471-1489):
+	External calls:
+	- require(bool,string)(milAuth_.checkGameClosed(address(this)) == false,game already closed) (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#1477-1481)
+	State variables written after the call(s):
+	- round_ (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#1487-1489)
+Reentrancy in MilFold.assignCore (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#1281-1327):
+	External calls:
+	- millionaire_.assign.value(amount)(addr) (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#1321)
+	External calls sending eth:
+	- fundAddr_.transfer(foundFee) (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#1309-1311)
+	- millionaire_.assign.value(amount)(addr) (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#1321)
+	State variables written after the call(s):
+	- playerWinTotal_ (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#1321-1323)
+Reentrancy in MilFold.buyCore (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#919-961):
+	External calls:
+	- millionaire_.updateGenVaultAndMask.value(milFee)(_addr,_affID) (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#955-959)
+	External calls sending eth:
+	- fundAddr_.transfer(foundFee) (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#945-947)
+	- millionaire_.updateGenVaultAndMask.value(milFee)(_addr,_affID) (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#955-959)
+	State variables written after the call(s):
+	- round_ (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#959-961)
+Reentrancy in MilFold.close (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#1489-1499):
+	External calls:
+	- require(bool,string)(milAuth_.checkGameClosed(address(this)),game no closed) (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#1493-1495)
+	State variables written after the call(s):
+	- activated_ (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#1495)
+Reentrancy in MilFold.convertNumSec (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#891-919):
+	External calls:
+	- compressData = checkRoundAndDraw(msg.sender) (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#895-897)
+	State variables written after the call(s):
+	- playerTickets_ (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#897-903)
+Reentrancy in MilFold.convertNums (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#847-883):
+	External calls:
+	- compressData = checkRoundAndDraw(msg.sender) (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#851-855)
+	State variables written after the call(s):
+	- playerTickets_ (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#857-863)
+Reentrancy in MilFold.reloadCore (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#963-1015):
+	External calls:
+	- millionaire_.clearGenVaultAndMask(_addr,_affID,_eth,milFee) (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#991)
+	State variables written after the call(s):
+	- playerTickets_ (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#997-1005)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+MilFoldInterface.activate (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#59-63) should be declared external
+MilFold.activate (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#1421-1471) should be declared external
+MilFold.fallback (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#483-491) should be declared external
+MilFold.buyTickets (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#501-537) should be declared external
+MilFold.expressBuyNums (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#551-593) should be declared external
+MilFold.expressBuyNumSec (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#611-671) should be declared external
+MilFold.reloadTickets (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#687-715) should be declared external
+MilFold.expressReloadNums (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#739-769) should be declared external
+MilFold.expressReloadNumSec (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#797-843) should be declared external
+MilFold.convertNums (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#847-883) should be declared external
+MilFold.convertNumSec (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#891-919) should be declared external
+MilFold.claimWinner (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#1187-1279) should be declared external
+MilFold.close (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#1489-1499) should be declared external
+MilFold.getPlayerAccount (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#1507-1511) should be declared external
+MilFold.getPlayerRoundNums (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#1513-1535) should be declared external
+MilFold.getPlayerRoundWinningInfo (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#1548-1627) should be declared external
+MilFold.checkPlayerClaimed (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#1641-1655) should be declared external
+MilFold.getCurrentRoundInfo (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#1677-1703) should be declared external
+MilFold.getHistoryRoundInfo (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#1733-1783) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Event 'Milevents.onNewPlayer' (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#69-85) is not in CapWords
+Event 'Milevents.onEndTx' (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#85-109) is not in CapWords
+Event 'Milevents.onGameClose' (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#111-125) is not in CapWords
+Event 'Milevents.onReward' (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#127-143) is not in CapWords
+Event 'Milevents.onWithdraw' (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#151-161) is not in CapWords
+Event 'Milevents.onAffiliatePayout' (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#161-175) is not in CapWords
+Event 'Milevents.onICO' (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#177-197) is not in CapWords
+Event 'Milevents.onPlayerWin' (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#205-219) is not in CapWords
+Event 'Milevents.onClaimWinner' (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#221-233) is not in CapWords
+Event 'Milevents.onBuyMFCoins' (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#233-247) is not in CapWords
+Event 'Milevents.onSellMFCoins' (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#247-265) is not in CapWords
+Event 'Milevents.onUpdateGenVault' (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#265-269) is not in CapWords
+Parameter '_affID' of MilFold.buyTickets (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#502-505) is not in mixedCase
+Parameter '_affID' of MilFold.expressBuyNums (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#553) is not in mixedCase
+Parameter '_nums' of MilFold.expressBuyNums (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#555) is not in mixedCase
+Parameter '_affID' of MilFold.expressBuyNumSec (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#613-615) is not in mixedCase
+Parameter '_startNums' of MilFold.expressBuyNumSec (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#615-616) is not in mixedCase
+Parameter '_endNums' of MilFold.expressBuyNumSec (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#617) is not in mixedCase
+Parameter '_affID' of MilFold.reloadTickets (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#687) is not in mixedCase
+Parameter '_eth' of MilFold.reloadTickets (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#687-689) is not in mixedCase
+Parameter '_affID' of MilFold.expressReloadNums (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#741) is not in mixedCase
+Parameter '_eth' of MilFold.expressReloadNums (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#741) is not in mixedCase
+Parameter '_nums' of MilFold.expressReloadNums (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#741) is not in mixedCase
+Parameter '_affID' of MilFold.expressReloadNumSec (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#797-799) is not in mixedCase
+Parameter '_eth' of MilFold.expressReloadNumSec (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#799) is not in mixedCase
+Parameter '_startNums' of MilFold.expressReloadNumSec (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#799) is not in mixedCase
+Parameter '_endNums' of MilFold.expressReloadNumSec (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#799-803) is not in mixedCase
+Parameter '_addr' of MilFold.buyCore (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#919) is not in mixedCase
+Parameter '_affID' of MilFold.buyCore (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#919) is not in mixedCase
+Parameter '_eth' of MilFold.buyCore (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#919-921) is not in mixedCase
+Parameter '_addr' of MilFold.reloadCore (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#967) is not in mixedCase
+Parameter '_affID' of MilFold.reloadCore (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#967) is not in mixedCase
+Parameter '_eth' of MilFold.reloadCore (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#967) is not in mixedCase
+Parameter '_addr' of MilFold.convertCore (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#1015-1017) is not in mixedCase
+Parameter '_addr' of MilFold.checkRoundAndDraw (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#1039) is not in mixedCase
+Parameter '_addr' of MilFold.claimWinner (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#1187) is not in mixedCase
+Parameter '_addr' of MilFold.getPlayerAccount (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#1507) is not in mixedCase
+Parameter '_rid' of MilFold.getPlayerRoundNums (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#1515) is not in mixedCase
+Parameter '_addr' of MilFold.getPlayerRoundNums (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#1517) is not in mixedCase
+Parameter '_rid' of MilFold.getPlayerRoundWinningInfo (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#1551-1553) is not in mixedCase
+Parameter '_addr' of MilFold.getPlayerRoundWinningInfo (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#1553) is not in mixedCase
+Parameter '_rid' of MilFold.checkPlayerClaimed (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#1643-1645) is not in mixedCase
+Parameter '_addr' of MilFold.checkPlayerClaimed (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#1645) is not in mixedCase
+Parameter '_rid' of MilFold.getHistoryRoundInfo (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#1735) is not in mixedCase
+Constant 'MilFold.rndMax_' (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#277) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'MilFold.claimMax_' (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#279) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'MilFold.fundAddr_' (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#281-283) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'MilFold.millionaire_' (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#305-307) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'MilFold.milAuth_' (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#307-309) is not in UPPER_CASE_WITH_UNDERSCORES
+Parameter '_input' of TicketCompressor.decode (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol) is not in mixedCase
+Constant 'TicketCompressor.mask' (/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol#2163-2165) is not in UPPER_CASE_WITH_UNDERSCORES
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x20da2ff263e28e8db8ef44f590ff4576bac770e2.sol analyzed (8 contracts), 87 result(s) found

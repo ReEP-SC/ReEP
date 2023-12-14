@@ -1,0 +1,67 @@
+INFO:Detectors:[93m
+Reentrancy in DividendManager._claimDividend (/sb/0xa0c2a926b68c7f2b76e815202e297add439e489b.sol#384-397):
+	External calls:
+	- balance = dividendToken.balanceOfAt(msg.sender,dividend.blockNumber) (/sb/0xa0c2a926b68c7f2b76e815202e297add439e489b.sol#390-393)
+	State variables written after the call(s):
+	- dividends (/sb/0xa0c2a926b68c7f2b76e815202e297add439e489b.sol#394-396)
+	- dividends (/sb/0xa0c2a926b68c7f2b76e815202e297add439e489b.sol#396-397)
+Reentrancy in DividendManager.claimDividendAll (/sb/0xa0c2a926b68c7f2b76e815202e297add439e489b.sol#408-426):
+	External calls:
+	- claim = _claimDividend(i) (/sb/0xa0c2a926b68c7f2b76e815202e297add439e489b.sol#420)
+	State variables written after the call(s):
+	- dividendsClaimed (/sb/0xa0c2a926b68c7f2b76e815202e297add439e489b.sol#420-421)
+Reentrancy in DividendManager.recycleDividend (/sb/0xa0c2a926b68c7f2b76e815202e297add439e489b.sol#426-441):
+	External calls:
+	- currentSupply = dividendToken.totalSupplyAt(block.number) (/sb/0xa0c2a926b68c7f2b76e815202e297add439e489b.sol#436-439)
+	State variables written after the call(s):
+	- dividends (/sb/0xa0c2a926b68c7f2b76e815202e297add439e489b.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+claimSum in DividendManager.claimDividendAll (/sb/0xa0c2a926b68c7f2b76e815202e297add439e489b.sol#411) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[93m
+CanReclaimToken.reclaimToken (/sb/0xa0c2a926b68c7f2b76e815202e297add439e489b.sol#288-293) does not use the value returned by external calls:
+	-token.transfer(owner(),balance) (/sb/0xa0c2a926b68c7f2b76e815202e297add439e489b.sol#292-293)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in DividendManager._depositDividend (/sb/0xa0c2a926b68c7f2b76e815202e297add439e489b.sol#346-364):
+	External calls:
+	- currentSupply = dividendToken.totalSupplyAt(block.number) (/sb/0xa0c2a926b68c7f2b76e815202e297add439e489b.sol#350-353)
+	State variables written after the call(s):
+	- dividends (/sb/0xa0c2a926b68c7f2b76e815202e297add439e489b.sol#356-360)
+Reentrancy in DividendManager.claimDividend (/sb/0xa0c2a926b68c7f2b76e815202e297add439e489b.sol#397-408):
+	External calls:
+	- claim = _claimDividend(_dividendIndex) (/sb/0xa0c2a926b68c7f2b76e815202e297add439e489b.sol#402)
+	External calls sending eth:
+	- msg.sender.transfer(claim) (/sb/0xa0c2a926b68c7f2b76e815202e297add439e489b.sol#404-405)
+	State variables written after the call(s):
+	- dividendsClaimed (/sb/0xa0c2a926b68c7f2b76e815202e297add439e489b.sol#406-408)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+DividendManager.RECYCLE_TIME should be constant (/sb/0xa0c2a926b68c7f2b76e815202e297add439e489b.sol#313-315)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Ownable.renounceOwnership (/sb/0xa0c2a926b68c7f2b76e815202e297add439e489b.sol#249-252) should be declared external
+Ownable.transferOwnership (/sb/0xa0c2a926b68c7f2b76e815202e297add439e489b.sol#258-260) should be declared external
+DividendManager.depositDividend (/sb/0xa0c2a926b68c7f2b76e815202e297add439e489b.sol#342-346) should be declared external
+DividendManager.provisionDividendAll (/sb/0xa0c2a926b68c7f2b76e815202e297add439e489b.sol#373-384) should be declared external
+DividendManager.claimDividend (/sb/0xa0c2a926b68c7f2b76e815202e297add439e489b.sol#397-408) should be declared external
+DividendManager.claimDividendAll (/sb/0xa0c2a926b68c7f2b76e815202e297add439e489b.sol#408-426) should be declared external
+DividendManager.recycleDividend (/sb/0xa0c2a926b68c7f2b76e815202e297add439e489b.sol#426-441) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xa0c2a926b68c7f2b76e815202e297add439e489b.sol:
+	- pragma solidity^0.5.0 (/sb/0xa0c2a926b68c7f2b76e815202e297add439e489b.sol#5-7): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'Ownable._transferOwnership' (/sb/0xa0c2a926b68c7f2b76e815202e297add439e489b.sol#267-270) is not in mixedCase
+Parameter '_dividendToken' of DividendManager. (/sb/0xa0c2a926b68c7f2b76e815202e297add439e489b.sol#335) is not in mixedCase
+Function 'DividendManager._depositDividend' (/sb/0xa0c2a926b68c7f2b76e815202e297add439e489b.sol#346-364) is not in mixedCase
+Parameter '_dividendIndex' of DividendManager.provisionDividend (/sb/0xa0c2a926b68c7f2b76e815202e297add439e489b.sol#364) is not in mixedCase
+Function 'DividendManager._claimDividend' (/sb/0xa0c2a926b68c7f2b76e815202e297add439e489b.sol#384-397) is not in mixedCase
+Parameter '_dividendIndex' of DividendManager._claimDividend (/sb/0xa0c2a926b68c7f2b76e815202e297add439e489b.sol#385) is not in mixedCase
+Parameter '_dividendIndex' of DividendManager.claimDividend (/sb/0xa0c2a926b68c7f2b76e815202e297add439e489b.sol#397-401) is not in mixedCase
+Parameter '_dividendIndex' of DividendManager.recycleDividend (/sb/0xa0c2a926b68c7f2b76e815202e297add439e489b.sol#426) is not in mixedCase
+Variable 'DividendManager.RECYCLE_TIME' (/sb/0xa0c2a926b68c7f2b76e815202e297add439e489b.sol#313-315) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xa0c2a926b68c7f2b76e815202e297add439e489b.sol analyzed (6 contracts), 25 result(s) found

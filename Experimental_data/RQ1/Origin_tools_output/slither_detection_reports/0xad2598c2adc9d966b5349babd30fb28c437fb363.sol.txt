@@ -1,0 +1,100 @@
+INFO:Detectors:[93m
+Address.isContract (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#68-75) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+StrategyETHCurve.constructor (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#208-217) does not use the value returned by external calls:
+	-IERC20(CRV).approve(unirouter,uint256(- 1)) (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#216-217)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in StrategyETHCurve.deposit (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#218-237):
+	External calls:
+	- _want = IERC20(want).balanceOf(address(this)) (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#219)
+	- WETH(address(weth)).withdraw(_want) (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#220-221)
+	- v = _want.mul(1e18).div(ICurveFi(eCRVPool).get_virtual_price()) (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#221-222)
+	- beforeCRV = IERC20(eCRVToken).balanceOf(address(this)) (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#222-223)
+	- ICurveFi(eCRVPool).add_liquidity.value(_want)(amounts,v.mul(DENOMINATOR.sub(slip)).div(DENOMINATOR)) (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#223-227)
+	- _eCRV = IERC20(eCRVToken).balanceOf(address(this)) (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#227-228)
+	External calls sending eth:
+	- ICurveFi(eCRVPool).add_liquidity.value(_want)(amounts,v.mul(DENOMINATOR.sub(slip)).div(DENOMINATOR)) (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#223-227)
+	State variables written after the call(s):
+	- depositLastPrice (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#228-233)
+Reentrancy in StrategyETHCurve.harvest (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#323-324):
+	External calls:
+	- Mintr(CRVMinter).mint(eCRVGauge) (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#323-324)
+	- redelivery() (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#324)
+	External calls sending eth:
+	- redelivery() (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#324)
+	State variables written after the call(s):
+	- depositLastPrice (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#324)
+Reentrancy in StrategyETHCurve.redelivery (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#324-342):
+	External calls:
+	- reward = IERC20(CRV).balanceOf(address(this)) (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#324-325)
+	- UniswapRouter(unirouter).swapExactTokensForTokens(_2weth,0,swap2TokenRouting,address(this),now.add(1800)) (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#331-337)
+	- UniswapRouter(unirouter).swapExactTokensForTokens(_2bt,0,swap2BTRouting,Controller(controller).rewards(),now.add(1800)) (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#337-339)
+	- deposit() (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#340-342)
+	External calls sending eth:
+	- deposit() (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#340-342)
+	State variables written after the call(s):
+	- depositLastPrice (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#340-342)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Address.isContract uses assembly (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#68-75)
+	- /sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#73-75
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+StrategyETHCurve.getPending (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#312-319) should be declared external
+StrategyETHCurve.getCRV (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#319-322) should be declared external
+StrategyETHCurve.harvest (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#323-324) should be declared external
+StrategyETHCurve.setredeliverynum (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#342-347) should be declared external
+StrategyETHCurve.setGovernance (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#347-351) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol:
+	- pragma solidity^0.5.17 (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#7-9): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Low level call in Address.sendValue (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#79-89):
+	-(success) = recipient.call.value(amount)() /sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#83
+Low level call in SafeERC20.callOptionalReturn (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#106-121):
+	-(success,returndata) = address(token).call(data) /sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#110-112
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Parameter '' of Controller.vaults (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#125) is not in mixedCase
+Parameter '' of UniswapRouter.swapExactTokensForTokens (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#131) is not in mixedCase
+Parameter '_scope_0' of UniswapRouter.swapExactTokensForTokens (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#131) is not in mixedCase
+Parameter '_scope_1' of UniswapRouter.swapExactTokensForTokens (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#131) is not in mixedCase
+Parameter '_scope_2' of UniswapRouter.swapExactTokensForTokens (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#131-132) is not in mixedCase
+Parameter '_scope_3' of UniswapRouter.swapExactTokensForTokens (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#132) is not in mixedCase
+Function 'ICurveFi.add_liquidity' (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#141-146) is not in mixedCase
+Parameter 'min_mint_amount' of ICurveFi.add_liquidity (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#144) is not in mixedCase
+Function 'ICurveFi.remove_liquidity_one_coin' (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#146-151) is not in mixedCase
+Parameter '_token_amount' of ICurveFi.remove_liquidity_one_coin (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#146-149) is not in mixedCase
+Parameter 'min_amount' of ICurveFi.remove_liquidity_one_coin (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#150) is not in mixedCase
+Function 'ICurveFi.get_virtual_price' (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#151-152) is not in mixedCase
+Parameter '' of Gauge.deposit (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#153) is not in mixedCase
+Parameter '' of Gauge.balanceOf (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#153-154) is not in mixedCase
+Parameter '' of Gauge.withdraw (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#158) is not in mixedCase
+Function 'Gauge.integrate_fraction' (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#158-161) is not in mixedCase
+Parameter '' of Gauge.integrate_fraction (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#158) is not in mixedCase
+Parameter '' of Mintr.mint (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#163) is not in mixedCase
+Parameter '' of Mintr.minted (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#164) is not in mixedCase
+Parameter '_scope_0' of Mintr.minted (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#164) is not in mixedCase
+Parameter '_amount' of StrategyETHCurve.withdraw (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#239-241) is not in mixedCase
+Function 'StrategyETHCurve._withdraw' (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#247-266) is not in mixedCase
+Parameter '_amount' of StrategyETHCurve._withdraw (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#247-248) is not in mixedCase
+Function 'StrategyETHCurve._withdrawSome' (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#267-283) is not in mixedCase
+Parameter '_amount' of StrategyETHCurve._withdrawSome (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#267) is not in mixedCase
+Parameter '_governance' of StrategyETHCurve.setGovernance (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#348) is not in mixedCase
+Parameter '_controller' of StrategyETHCurve.setController (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#352) is not in mixedCase
+Parameter '_slip' of StrategyETHCurve.setSlip (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol) is not in mixedCase
+Parameter '_check' of StrategyETHCurve.setWithdrawSlipCheck (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol) is not in mixedCase
+Constant 'StrategyETHCurve.unirouter' (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#167-168) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'StrategyETHCurve.weth' (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#168-170) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'StrategyETHCurve.bt' (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#170-172) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'StrategyETHCurve.want' (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#172-173) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'StrategyETHCurve.eCRVPool' (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#173-175) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'StrategyETHCurve.eCRVToken' (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#175-177) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'StrategyETHCurve.eCRVGauge' (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#177-178) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'StrategyETHCurve.CRVMinter' (/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol#179-182) is not in UPPER_CASE_WITH_UNDERSCORES
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xad2598c2adc9d966b5349babd30fb28c437fb363.sol analyzed (11 contracts), 51 result(s) found

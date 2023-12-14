@@ -1,0 +1,95 @@
+INFO:Detectors:[93m
+Reentrancy in TokenFarm.stakeTokens (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#231-253):
+	External calls:
+	- claimToken(address(token)) (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#240)
+	- token.transferFrom(msg.sender,address(this),_amount) (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#241-242)
+	State variables written after the call(s):
+	- stakers (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#242-244)
+	- stakers (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#249-250)
+	- stakers (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#250-253)
+	- totalStaked (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#246-248)
+Reentrancy in TokenFarm.unstakeToken (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#253-275):
+	External calls:
+	- token.transfer(owner,fee) (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#264-265)
+	- claimTokens() (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#266-269)
+	State variables written after the call(s):
+	- stakers (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#266-269)
+	- stakers (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#269-272)
+	- totalStaked (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#272-273)
+Reentrancy in TokenFarm.unstakeTokens (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#275-293):
+	External calls:
+	- claimTokens() (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#276)
+	State variables written after the call(s):
+	- stakers (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#280-281)
+	- totalStaked (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#279-280)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+TokenFarm.stakeTokens (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#231-253) does not use the value returned by external calls:
+	-token.transferFrom(msg.sender,address(this),_amount) (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#241-242)
+TokenFarm.unstakeToken (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#253-275) does not use the value returned by external calls:
+	-token.transfer(owner,fee) (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#264-265)
+	-token.transfer(msg.sender,balance) (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#274-275)
+TokenFarm.unstakeTokens (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#275-293) does not use the value returned by external calls:
+	-IERC20(tokenPools[i]).transfer(owner,fee) (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#290)
+	-IERC20(tokenPools[i]).transfer(msg.sender,balance) (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#291)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+TokenFarm.unstakeTokens has external calls inside a loop:
+	- IERC20(tokenPools[i]).transfer(owner,fee) (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#290)
+TokenFarm.unstakeTokens has external calls inside a loop:
+	- IERC20(tokenPools[i]).transfer(msg.sender,balance) (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#291)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+TokenFarm.unstakeToken (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#253-275) uses timestamp for comparisons
+	Dangerous comparisons:
+	- (block.timestamp.sub(stakers[msg.sender].timefeestartstamp[address(token)])) < (minimumDaysLockup * 24 * 60 * 60) (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#258-266)
+TokenFarm.unstakeTokens (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#275-293) uses timestamp for comparisons
+	Dangerous comparisons:
+	- (block.timestamp.sub(stakers[msg.sender].timefeestartstamp[tokenPools[i]])) < (minimumDaysLockup * 24 * 60 * 60) (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#281-291)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+ClashPay.decimals should be constant (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#375-377)
+ClashPay.name should be constant (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#369-370)
+ClashPay.symbol should be constant (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#370-373)
+TokenFarm.name should be constant (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#199-200)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+IERC20.decimals (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#155) should be declared external
+IERC20Mintable.decimals (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#166-167) should be declared external
+IERC20Mintable.mint (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#168-169) should be declared external
+IERC20Mintable.burn (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#169-172) should be declared external
+ClashPay.mint (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#421-430) should be declared external
+ClashPay.burn (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol:
+	- pragma solidity^0.5.0 (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#5-7): it allows old versions
+	- pragma solidity^0.5.0 (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#364): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Struct 'TokenFarm.staker' (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#204-212) is not in CapWords
+Struct 'TokenFarm.rate' (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#212-213) is not in CapWords
+Parameter '_dapptoken' of TokenFarm. (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#227) is not in mixedCase
+Parameter '_spiritclashtoken' of TokenFarm. (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#227-228) is not in mixedCase
+Parameter '_amount' of TokenFarm.stakeTokens (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#231-232) is not in mixedCase
+Parameter '_days' of TokenFarm.setMinimumLockup (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#335) is not in mixedCase
+Parameter '_fee' of TokenFarm.setPenaltyFee (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#337-338) is not in mixedCase
+Parameter '_newOwner' of TokenFarm.transferOwnership (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#343) is not in mixedCase
+Parameter 'Rate' of TokenFarm.setCoinRate (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#346) is not in mixedCase
+Variable 'TokenFarm.RatePerCoin' (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#217-218) is not in mixedCase
+Variable 'TokenFarm.Admins' (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#218-219) is not in mixedCase
+Parameter '_contract' of ClashPay.setContract (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#394-395) is not in mixedCase
+Parameter '_to' of ClashPay.transfer (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#399) is not in mixedCase
+Parameter '_value' of ClashPay.transfer (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#399) is not in mixedCase
+Parameter '_spender' of ClashPay.approve (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#407) is not in mixedCase
+Parameter '_value' of ClashPay.approve (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#407) is not in mixedCase
+Parameter '_from' of ClashPay.transferFrom (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#410-411) is not in mixedCase
+Parameter '_to' of ClashPay.transferFrom (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#411) is not in mixedCase
+Parameter '_value' of ClashPay.transferFrom (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#412-413) is not in mixedCase
+Parameter '_to' of ClashPay.mint (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#421-422) is not in mixedCase
+Parameter '_value' of ClashPay.mint (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#422) is not in mixedCase
+Parameter '_value' of ClashPay.burn (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol) is not in mixedCase
+Parameter '_newOwner' of ClashPay.transferOwnership (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol) is not in mixedCase
+Variable 'ClashPay.Tokenfarm' (/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol#379-380) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x8254079f3469304b2077019788887be7bd5fbd93.sol analyzed (5 contracts), 42 result(s) found

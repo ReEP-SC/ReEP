@@ -1,0 +1,68 @@
+INFO:Detectors:[92m
+Reentrancy in DutchSwapAuction.initDutchAuction (/sb/0x976f035dd2bc70f0dc399eaed61090cdadee15b6.sol#112-150):
+	External calls:
+	- require(bool,string)(IERC20(auctionToken).transferFrom(msg.sender,address(this),_tokenSupply),Fail to transfer tokens to this contract) (/sb/0x976f035dd2bc70f0dc399eaed61090cdadee15b6.sol#127-130)
+	State variables written after the call(s):
+	- endDate (/sb/0x976f035dd2bc70f0dc399eaed61090cdadee15b6.sol#139-140)
+	- finalised (/sb/0x976f035dd2bc70f0dc399eaed61090cdadee15b6.sol#149)
+	- minimumPrice (/sb/0x976f035dd2bc70f0dc399eaed61090cdadee15b6.sol#145)
+	- startDate (/sb/0x976f035dd2bc70f0dc399eaed61090cdadee15b6.sol#138-139)
+	- startPrice (/sb/0x976f035dd2bc70f0dc399eaed61090cdadee15b6.sol#141-142)
+	- tokenSupply (/sb/0x976f035dd2bc70f0dc399eaed61090cdadee15b6.sol#136-138)
+	- wallet (/sb/0x976f035dd2bc70f0dc399eaed61090cdadee15b6.sol#148)
+	- withdrawDelay (/sb/0x976f035dd2bc70f0dc399eaed61090cdadee15b6.sol#146-147)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+DutchSwapAuction.priceFunction (/sb/0x976f035dd2bc70f0dc399eaed61090cdadee15b6.sol#177-189) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp <= startDate (/sb/0x976f035dd2bc70f0dc399eaed61090cdadee15b6.sol#181-182)
+	- block.timestamp >= endDate (/sb/0x976f035dd2bc70f0dc399eaed61090cdadee15b6.sol#182-186)
+DutchSwapAuction.auctionEnded (/sb/0x976f035dd2bc70f0dc399eaed61090cdadee15b6.sol#199-201) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp > endDate (/sb/0x976f035dd2bc70f0dc399eaed61090cdadee15b6.sol#200-201)
+DutchSwapAuction.checkWithdraw (/sb/0x976f035dd2bc70f0dc399eaed61090cdadee15b6.sol#205-218) uses timestamp for comparisons
+	Dangerous comparisons:
+	- _elapsed >= withdrawDelay (/sb/0x976f035dd2bc70f0dc399eaed61090cdadee15b6.sol#213-218)
+	- block.timestamp < endDate (/sb/0x976f035dd2bc70f0dc399eaed61090cdadee15b6.sol#206-209)
+DutchSwapAuction.getTokenNotYetWithdrawn (/sb/0x976f035dd2bc70f0dc399eaed61090cdadee15b6.sol#223-231) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp < endDate (/sb/0x976f035dd2bc70f0dc399eaed61090cdadee15b6.sol#227-228)
+DutchSwapAuction.commitEth (/sb/0x976f035dd2bc70f0dc399eaed61090cdadee15b6.sol#241-264) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool)(block.timestamp >= startDate && block.timestamp <= endDate) (/sb/0x976f035dd2bc70f0dc399eaed61090cdadee15b6.sol#243-245)
+DutchSwapAuction.transferLeftOver (/sb/0x976f035dd2bc70f0dc399eaed61090cdadee15b6.sol#331-340) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(block.timestamp > endDate.add(withdrawDelay).add(7 * 24 * 60 * 60),Cannot transfer auction tokens within 7 days after withdraw day) (/sb/0x976f035dd2bc70f0dc399eaed61090cdadee15b6.sol#335-337)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+DutchSwapAuction.getTokenWithdrawn (/sb/0x976f035dd2bc70f0dc399eaed61090cdadee15b6.sol#219-221) should be declared external
+DutchSwapAuction.getTokenNotYetWithdrawn (/sb/0x976f035dd2bc70f0dc399eaed61090cdadee15b6.sol#223-231) should be declared external
+DutchSwapAuction.finaliseAuction (/sb/0x976f035dd2bc70f0dc399eaed61090cdadee15b6.sol#310-314) should be declared external
+DutchSwapAuction.withdrawTokens (/sb/0x976f035dd2bc70f0dc399eaed61090cdadee15b6.sol#315-329) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x976f035dd2bc70f0dc399eaed61090cdadee15b6.sol:
+	- pragma solidity^0.6.9 (/sb/0x976f035dd2bc70f0dc399eaed61090cdadee15b6.sol#2-3): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_token' of DutchSwapAuction.initDutchAuction (/sb/0x976f035dd2bc70f0dc399eaed61090cdadee15b6.sol#113-114) is not in mixedCase
+Parameter '_tokenSupply' of DutchSwapAuction.initDutchAuction (/sb/0x976f035dd2bc70f0dc399eaed61090cdadee15b6.sol#114-115) is not in mixedCase
+Parameter '_auctionDuration' of DutchSwapAuction.initDutchAuction (/sb/0x976f035dd2bc70f0dc399eaed61090cdadee15b6.sol#116-117) is not in mixedCase
+Parameter '_startPrice' of DutchSwapAuction.initDutchAuction (/sb/0x976f035dd2bc70f0dc399eaed61090cdadee15b6.sol#117-119) is not in mixedCase
+Parameter '_minimumPrice' of DutchSwapAuction.initDutchAuction (/sb/0x976f035dd2bc70f0dc399eaed61090cdadee15b6.sol#119-121) is not in mixedCase
+Parameter '_withdrawDelay' of DutchSwapAuction.initDutchAuction (/sb/0x976f035dd2bc70f0dc399eaed61090cdadee15b6.sol#121) is not in mixedCase
+Parameter '_wallet' of DutchSwapAuction.initDutchAuction (/sb/0x976f035dd2bc70f0dc399eaed61090cdadee15b6.sol#121) is not in mixedCase
+Parameter '_user' of DutchSwapAuction.tokensClaimable (/sb/0x976f035dd2bc70f0dc399eaed61090cdadee15b6.sol#194) is not in mixedCase
+Parameter '_from' of DutchSwapAuction.commitEth (/sb/0x976f035dd2bc70f0dc399eaed61090cdadee15b6.sol#241) is not in mixedCase
+Parameter '_addr' of DutchSwapAuction.addCommitment (/sb/0x976f035dd2bc70f0dc399eaed61090cdadee15b6.sol#267) is not in mixedCase
+Parameter '_commitment' of DutchSwapAuction.addCommitment (/sb/0x976f035dd2bc70f0dc399eaed61090cdadee15b6.sol#267) is not in mixedCase
+Parameter '_tokensToPurchase' of DutchSwapAuction.calculatePurchasable (/sb/0x976f035dd2bc70f0dc399eaed61090cdadee15b6.sol#276-278) is not in mixedCase
+Parameter '_delay' of DutchSwapAuction.addWithdrawDelay (/sb/0x976f035dd2bc70f0dc399eaed61090cdadee15b6.sol#299) is not in mixedCase
+Parameter '_amount' of DutchSwapAuction.transferLeftOver (/sb/0x976f035dd2bc70f0dc399eaed61090cdadee15b6.sol#331-332) is not in mixedCase
+Parameter '_addr' of DutchSwapAuction.transferLeftOver (/sb/0x976f035dd2bc70f0dc399eaed61090cdadee15b6.sol#332-333) is not in mixedCase
+Function 'DutchSwapAuction._tokenPayment' (/sb/0x976f035dd2bc70f0dc399eaed61090cdadee15b6.sol) is not in mixedCase
+Parameter '_token' of DutchSwapAuction._tokenPayment (/sb/0x976f035dd2bc70f0dc399eaed61090cdadee15b6.sol) is not in mixedCase
+Parameter '_to' of DutchSwapAuction._tokenPayment (/sb/0x976f035dd2bc70f0dc399eaed61090cdadee15b6.sol) is not in mixedCase
+Parameter '_amount' of DutchSwapAuction._tokenPayment (/sb/0x976f035dd2bc70f0dc399eaed61090cdadee15b6.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x976f035dd2bc70f0dc399eaed61090cdadee15b6.sol analyzed (4 contracts), 31 result(s) found

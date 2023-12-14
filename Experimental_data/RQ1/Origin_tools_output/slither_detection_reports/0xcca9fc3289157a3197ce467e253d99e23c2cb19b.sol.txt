@@ -1,0 +1,92 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xcca9fc3289157a3197ce467e253d99e23c2cb19b.sol:
+/sb/0xcca9fc3289157a3197ce467e253d99e23c2cb19b.sol:72:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function EtheraffleLOTPromo(address _LOT, address _ER) public {
+
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xcca9fc3289157a3197ce467e253d99e23c2cb19b.sol:29:32: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function getUserNumEntries(address _entrant, uint _week) public view returns (uint) {}
+
+                               ^--------------^
+/sb/0xcca9fc3289157a3197ce467e253d99e23c2cb19b.sol:29:50: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function getUserNumEntries(address _entrant, uint _week) public view returns (uint) {}
+
+                                                 ^--------^
+/sb/0xcca9fc3289157a3197ce467e253d99e23c2cb19b.sol:33:23: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function transfer(address _to, uint _value) public {}
+
+                      ^---------^
+/sb/0xcca9fc3289157a3197ce467e253d99e23c2cb19b.sol:33:36: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function transfer(address _to, uint _value) public {}
+
+                                   ^---------^
+/sb/0xcca9fc3289157a3197ce467e253d99e23c2cb19b.sol:34:24: Warning: Unused function parameter. Remove or comment out the variable name to silence this warning.
+    function balanceOf(address _owner) public view returns (uint) {}
+
+                       ^------------^
+/sb/0xcca9fc3289157a3197ce467e253d99e23c2cb19b.sol:29:5: Warning: Function state mutability can be restricted to pure
+    function getUserNumEntries(address _entrant, uint _week) public view returns (uint) {}
+
+    ^------------------------------------------------------------------------------------^
+/sb/0xcca9fc3289157a3197ce467e253d99e23c2cb19b.sol:33:5: Warning: Function state mutability can be restricted to pure
+    function transfer(address _to, uint _value) public {}
+
+    ^---------------------------------------------------^
+/sb/0xcca9fc3289157a3197ce467e253d99e23c2cb19b.sol:34:5: Warning: Function state mutability can be restricted to pure
+    function balanceOf(address _owner) public view returns (uint) {}
+
+    ^--------------------------------------------------------------^
+
+INFO:Detectors:[93m
+LOTInterface (/sb/0xcca9fc3289157a3197ce467e253d99e23c2cb19b.sol#91-101) has incorrect ERC20 function interface(s):
+	-transfer (/sb/0xcca9fc3289157a3197ce467e253d99e23c2cb19b.sol#93-97)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[93m
+Reentrancy in EtheraffleLOTPromo.redeem (/sb/0xcca9fc3289157a3197ce467e253d99e23c2cb19b.sol#215-249):
+	External calls:
+	- entries = getNumEntries(msg.sender,week) (/sb/0xcca9fc3289157a3197ce467e253d99e23c2cb19b.sol#221)
+	- amt = getPromoLOTEarnt(entries) (/sb/0xcca9fc3289157a3197ce467e253d99e23c2cb19b.sol#225-231)
+	- getLOTBalance(this) < amt (/sb/0xcca9fc3289157a3197ce467e253d99e23c2cb19b.sol#231-239)
+	State variables written after the call(s):
+	- isActive (/sb/0xcca9fc3289157a3197ce467e253d99e23c2cb19b.sol#233)
+Reentrancy in EtheraffleLOTPromo.redeem (/sb/0xcca9fc3289157a3197ce467e253d99e23c2cb19b.sol#215-249):
+	External calls:
+	- entries = getNumEntries(msg.sender,week) (/sb/0xcca9fc3289157a3197ce467e253d99e23c2cb19b.sol#221)
+	- amt = getPromoLOTEarnt(entries) (/sb/0xcca9fc3289157a3197ce467e253d99e23c2cb19b.sol#225-231)
+	State variables written after the call(s):
+	- claimed (/sb/0xcca9fc3289157a3197ce467e253d99e23c2cb19b.sol#241)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+EtheraffleInterface.tktPrice should be constant (/sb/0xcca9fc3289157a3197ce467e253d99e23c2cb19b.sol#89)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+EtheraffleInterface.getUserNumEntries (/sb/0xcca9fc3289157a3197ce467e253d99e23c2cb19b.sol#89-91) should be declared external
+LOTInterface.transfer (/sb/0xcca9fc3289157a3197ce467e253d99e23c2cb19b.sol#93-97) should be declared external
+LOTInterface.balanceOf (/sb/0xcca9fc3289157a3197ce467e253d99e23c2cb19b.sol#97-101) should be declared external
+EtheraffleLOTPromo.redeem (/sb/0xcca9fc3289157a3197ce467e253d99e23c2cb19b.sol#215-249) should be declared external
+EtheraffleLOTPromo.togglePromo (/sb/0xcca9fc3289157a3197ce467e253d99e23c2cb19b.sol#285-293) should be declared external
+EtheraffleLOTPromo.hasRedeemed (/sb/0xcca9fc3289157a3197ce467e253d99e23c2cb19b.sol#367-375) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xcca9fc3289157a3197ce467e253d99e23c2cb19b.sol:
+	- pragma solidity^0.4.21 (/sb/0xcca9fc3289157a3197ce467e253d99e23c2cb19b.sol#1): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'EtheraffleLOTPromo.EtheraffleLOTPromo' (/sb/0xcca9fc3289157a3197ce467e253d99e23c2cb19b.sol#173-187) is not in mixedCase
+Parameter '_LOT' of EtheraffleLOTPromo.EtheraffleLOTPromo (/sb/0xcca9fc3289157a3197ce467e253d99e23c2cb19b.sol#175) is not in mixedCase
+Parameter '_ER' of EtheraffleLOTPromo.EtheraffleLOTPromo (/sb/0xcca9fc3289157a3197ce467e253d99e23c2cb19b.sol#175) is not in mixedCase
+Parameter '_weekNo' of EtheraffleLOTPromo.redeem (/sb/0xcca9fc3289157a3197ce467e253d99e23c2cb19b.sol#217) is not in mixedCase
+Parameter '_address' of EtheraffleLOTPromo.getNumEntries (/sb/0xcca9fc3289157a3197ce467e253d99e23c2cb19b.sol#263) is not in mixedCase
+Parameter '_weekNo' of EtheraffleLOTPromo.getNumEntries (/sb/0xcca9fc3289157a3197ce467e253d99e23c2cb19b.sol#263) is not in mixedCase
+Parameter '_status' of EtheraffleLOTPromo.togglePromo (/sb/0xcca9fc3289157a3197ce467e253d99e23c2cb19b.sol#285) is not in mixedCase
+Parameter '_from' of EtheraffleLOTPromo.tokenFallback (/sb/0xcca9fc3289157a3197ce467e253d99e23c2cb19b.sol#325) is not in mixedCase
+Parameter '_value' of EtheraffleLOTPromo.tokenFallback (/sb/0xcca9fc3289157a3197ce467e253d99e23c2cb19b.sol#325-329) is not in mixedCase
+Parameter '_data' of EtheraffleLOTPromo.tokenFallback (/sb/0xcca9fc3289157a3197ce467e253d99e23c2cb19b.sol#329-331) is not in mixedCase
+Parameter '_address' of EtheraffleLOTPromo.getLOTBalance (/sb/0xcca9fc3289157a3197ce467e253d99e23c2cb19b.sol#345-347) is not in mixedCase
+Parameter '_address' of EtheraffleLOTPromo.hasRedeemed (/sb/0xcca9fc3289157a3197ce467e253d99e23c2cb19b.sol#369) is not in mixedCase
+Parameter '_weekNo' of EtheraffleLOTPromo.hasRedeemed (/sb/0xcca9fc3289157a3197ce467e253d99e23c2cb19b.sol#369) is not in mixedCase
+Parameter '_entries' of EtheraffleLOTPromo.getPromoLOTEarnt (/sb/0xcca9fc3289157a3197ce467e253d99e23c2cb19b.sol) is not in mixedCase
+Parameter '_LOT' of EtheraffleLOTPromo.updateAddresses (/sb/0xcca9fc3289157a3197ce467e253d99e23c2cb19b.sol) is not in mixedCase
+Parameter '_ER' of EtheraffleLOTPromo.updateAddresses (/sb/0xcca9fc3289157a3197ce467e253d99e23c2cb19b.sol) is not in mixedCase
+Variable 'EtheraffleLOTPromo.LOTContract' (/sb/0xcca9fc3289157a3197ce467e253d99e23c2cb19b.sol#137) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xcca9fc3289157a3197ce467e253d99e23c2cb19b.sol analyzed (3 contracts), 28 result(s) found

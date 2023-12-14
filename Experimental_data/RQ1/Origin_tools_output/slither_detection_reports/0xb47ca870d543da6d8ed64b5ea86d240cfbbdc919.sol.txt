@@ -1,0 +1,469 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol:
+/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol:2541:2: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+	function EOSWINBankroll(address dice, address slots) public payable {
+ ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol:3377:2: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+	function EOSWINDice() public {
+ ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol:1895:50: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+        oraclize_randomDS_setCommitment(queryId, keccak256(delay_bytes8_left, args[1], sha256(args[0]), args[2]));
+                                                 ^-------------------------------------------------------------^
+/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol:2119:47: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+        if (!(keccak256(keyhash) == keccak256(sha256(context_name, queryId)))) return false;
+                                              ^---------------------------^
+/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol:2119:37: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+        if (!(keccak256(keyhash) == keccak256(sha256(context_name, queryId)))) return false;
+                                    ^--------------------------------------^
+/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol:2119:37: Warning: The provided argument of type bytes32 is not implicitly convertible to expected type bytes memory.
+        if (!(keccak256(keyhash) == keccak256(sha256(context_name, queryId)))) return false;
+                                    ^--------------------------------------^
+/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol:2155:48: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+        if (oraclize_randomDS_args[queryId] == keccak256(commitmentSlice1, sessionPubkeyHash)){ //unonce, nbytes and sessionKeyHash match
+                                               ^--------------------------------------------^
+/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol:3907:23: Warning: This function only accepts a single "bytes" argument. Please use "abi.encodePacked(...)" or a similar function to encode the data.
+				if (uint8(uint256(keccak256(_result, gamesPlayed)) % 100) + 1 < data.rollUnder){
+				                  ^-----------------------------^
+/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol:657:5: Warning: Function state mutability can be restricted to pure
+    function __callback(bytes32 myid, string result, bytes proof) public {
+    ^ (Relevant source part starts here and spans across multiple lines).
+
+INFO:Detectors:[91m
+EOSWINBankroll.payEtherToWinner (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2745-2777) sends eth to arbitrary user
+	Dangerous calls:
+	- ! winner.send(amtEther) (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2773-2777)
+	- ! OWNER.send(amtEther) (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2775-2777)
+EOSWINBankroll.payOraclize (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2787-2800) sends eth to arbitrary user
+	Dangerous calls:
+	- EOSWINGameInterface(msg.sender).receivePaymentForOraclize.value(amountToPay)() (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2797-2799)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#functions-that-send-ether-to-arbitrary-destinations[0m
+INFO:Detectors:[93m
+Buffer.init (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#113-139) is declared view but contains assembly code
+Buffer.append (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#179-265) is declared view but contains assembly code
+Buffer.append (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#283-319) is declared view but contains assembly code
+Buffer.appendInt (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#333-377) is declared view but contains assembly code
+usingOraclize.getCodeSize (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1540-1549) is declared view but contains assembly code
+usingOraclize.copyBytes (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2309-2343) is declared view but contains assembly code
+usingOraclize.safeMemoryCleaner (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2501-2515) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+EOSWINDice.refund (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3855-3899) uses a dangerous strict equality:
+	- require(bool)(block.timestamp - data.start >= ORACLIZEQUERYMAXTIME && (msg.sender == OWNER || msg.sender == data.player) && (! data.paidOut) && LIABILITIES >= data.etherReceived && data.etherReceived > 0 && REFUNDSACTIVE)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Reentrancy in EOSWINDice.EOSWINDice (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3599-3651):
+	External calls:
+	- oraclize_setProof(proofType_Ledger) (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3607-3611)
+	- oraclize_setCustomGasPrice(8000000000) (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3617-3619)
+	State variables written after the call(s):
+	- OAR (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3617-3619)
+	- oraclize (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3617-3619)
+Reentrancy in EOSWINDice.__callback (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3995-4023):
+	External calls:
+	- require(bool)(msg.sender == oraclize_cbAddress() && ! data.paidOut && data.player != address(0) && LIABILITIES >= data.etherReceived) (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#4005-4011)
+	State variables written after the call(s):
+	- LIABILITIES (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol)
+	- LIABILITIES (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol)
+	- diceData (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol)
+	- diceData (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol)
+Reentrancy in usingOraclize.oraclizeAPI (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#575-585):
+	External calls:
+	- address(oraclize) != OAR.getAddress() (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#581-585)
+	- oraclize = OraclizeI(OAR.getAddress()) (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#583-585)
+	State variables written after the call(s):
+	- oraclize (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#583-585)
+Reentrancy in EOSWINDice.setBankrollerContractOnce (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3691-3723):
+	External calls:
+	- require(bool)(EOSWINBankrollInterface(bankrollAddress).getBankroll() != 0) (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3715-3721)
+	State variables written after the call(s):
+	- BANKROLLER (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3721-3723)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+EOSWINDice.DEVELOPERSFUND (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3541-3544) shadows:
+	- EOSWINGameInterface.DEVELOPERSFUND (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2517)
+EOSWINDice.LIABILITIES (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3539-3540) shadows:
+	- EOSWINGameInterface.LIABILITIES (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2517-2519)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variable-shadowing-from-abstract-contracts[0m
+INFO:Detectors:[93m
+ifContributionTakesBankrollOverLimit_Refund in EOSWINBankroll.fallback (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2839-2841) is a local variable never initialiazed
+buf in usingOraclize.ba2cbor (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1859) is a local variable never initialiazed
+contributionTakesBankrollOverLimit in EOSWINBankroll.fallback (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2839) is a local variable never initialiazed
+buf in usingOraclize.stra2cbor (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1835-1837) is a local variable never initialiazed
+gamesPlayed in EOSWINDice.__callback (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[93m
+CBOR.encodeType (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#399-439) does not use the value returned by external calls:
+	-buf.appendInt(value,1) (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#411)
+	-buf.appendInt(value,2) (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#419-421)
+	-buf.appendInt(value,4) (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#427-429)
+	-buf.appendInt(value,8) (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#436-437)
+CBOR.encodeBytes (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#473-483) does not use the value returned by external calls:
+	-buf.append(value) (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#481)
+CBOR.encodeString (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#487-505) does not use the value returned by external calls:
+	-buf.append(bytes(value)) (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#499-505)
+EOSWINBankroll.ERC20Rescue (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3239-3255) does not use the value returned by external calls:
+	-ERC20(tokenAddress).transfer(msg.sender,amtTokens) (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3244-3253)
+EOSWINDice.ERC20Rescue (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3825-3837) does not use the value returned by external calls:
+	-ERC20(tokenAddress).transfer(msg.sender,amtTokens) (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3837)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in EOSWINDice.EOSWINDice (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3599-3651):
+	External calls:
+	- oraclize_setProof(proofType_Ledger) (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3607-3611)
+	- oraclize_setCustomGasPrice(8000000000) (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3617-3619)
+	State variables written after the call(s):
+	- AMOUNTWAGERED (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3629)
+	- GAMEPAUSED (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3631)
+	- GAMESPLAYED (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3629)
+	- HOUSEEDGE_inTHOUSANDTHPERCENTS (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3637)
+	- INITIALGASFORORACLIZE (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3623-3629)
+	- MAXWIN_inTHOUSANDTHPERCENTS (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3643)
+	- MINBET_perROLL (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3633)
+	- MINBET_perTX (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3633-3637)
+	- ORACLIZEGASPRICE (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3619-3623)
+	- ORACLIZEQUERYMAXTIME (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3633)
+	- OWNER (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3650-3651)
+	- REFUNDSACTIVE (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3631)
+	- oraclize_network_name (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3617-3619)
+Reentrancy in EOSWINDice.__callback (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3995-4023):
+	External calls:
+	- require(bool)(msg.sender == oraclize_cbAddress() && ! data.paidOut && data.player != address(0) && LIABILITIES >= data.etherReceived) (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#4005-4011)
+	State variables written after the call(s):
+	- AMOUNTWAGERED (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol)
+	- DEVELOPERSFUND (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol)
+	- GAMESPLAYED (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol)
+	- oraclize_randomDS_args (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#4013-4023)
+	- oraclize_randomDS_sessionKeysHashVerified (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#4013-4023)
+Reentrancy in usingOraclize.oraclize_newRandomDSQuery (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1877-1999):
+	External calls:
+	- sessionKeyHash_bytes32 = oraclize_randomDS_getSessionPubKeyHash() (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1885)
+	- queryId = oraclize_query(random,args,_customGasLimit) (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1933-1935)
+	External calls sending eth:
+	- queryId = oraclize_query(random,args,_customGasLimit) (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1933-1935)
+	State variables written after the call(s):
+	- oraclize_network_name (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1933-1935)
+	- oraclize_randomDS_args (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1993-1997)
+Reentrancy in EOSWINDice.play (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3899-3989):
+	External calls:
+	- require(bool)(! GAMEPAUSED && betPerRoll * rolls >= minBetPerTx && msg.value >= minBetPerTx && betPerRoll >= MINBET_perROLL && rolls > 0 && rolls <= 1024 && betPerRoll <= msg.value && rollUnder > 1 && rollUnder < 98 && (SafeMath.mul(betPerRoll,100) / (rollUnder - 1)) <= getMaxWin()) (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3907-3931)
+	- EOSWINBankrollInterface(BANKROLLER).payOraclize(oraclize_getPrice(random,gasToSend)) (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3945-3953)
+	State variables written after the call(s):
+	- oraclize_network_name (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3945-3953)
+Reentrancy in EOSWINDice.play (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3899-3989):
+	External calls:
+	- require(bool)(! GAMEPAUSED && betPerRoll * rolls >= minBetPerTx && msg.value >= minBetPerTx && betPerRoll >= MINBET_perROLL && rolls > 0 && rolls <= 1024 && betPerRoll <= msg.value && rollUnder > 1 && rollUnder < 98 && (SafeMath.mul(betPerRoll,100) / (rollUnder - 1)) <= getMaxWin()) (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3907-3931)
+	- EOSWINBankrollInterface(BANKROLLER).payOraclize(oraclize_getPrice(random,gasToSend)) (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3945-3953)
+	- oraclizeQueryId = oraclize_newRandomDSQuery(0,30,gasToSend) (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3959-3965)
+	External calls sending eth:
+	- oraclizeQueryId = oraclize_newRandomDSQuery(0,30,gasToSend) (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3959-3965)
+	State variables written after the call(s):
+	- LIABILITIES (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3983-3985)
+	- diceData (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3965-3977)
+	- oraclize_network_name (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3959-3965)
+	- oraclize_randomDS_args (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3959-3965)
+Reentrancy in EOSWINBankroll.withdrawDevelopersFund (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3195-3232):
+	External calls:
+	- EOSWINGameInterface(DICE).payDevelopersFund(receiver) (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3209-3219)
+	- EOSWINGameInterface(SLOTS).payDevelopersFund(receiver) (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3219-3221)
+	State variables written after the call(s):
+	- DEVELOPERSFUND (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3227-3229)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+EOSWINBankroll.transfer (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3287-3321) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool)(balances[msg.sender] >= _value && contributionTime[msg.sender] + WAITTIMEUNTILWITHDRAWORTRANSFER <= block.timestamp && _to != address(this) && _to != address(0)) (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3289-3296)
+EOSWINBankroll.transferFrom (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3331-3379) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool)(allowed[_from][msg.sender] >= _value && balances[_from] >= _value && contributionTime[_from] + WAITTIMEUNTILWITHDRAWORTRANSFER <= block.timestamp && _to != address(this) && _to != address(0)) (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3339-3349)
+EOSWINBankroll.cashoutEOSWINStakeTokens (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2943-3038) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool)(_amountTokens <= tokenBalance && contributionTime[msg.sender] + WAITTIMEUNTILWITHDRAWORTRANSFER <= block.timestamp && _amountTokens > 0) (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2959-2961)
+EOSWINDice.__callback (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3995-4023) uses timestamp for comparisons
+	Dangerous comparisons:
+	- uint8(uint256(keccak256()(_result,gamesPlayed)) % 100) + 1 < data.rollUnder (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol)
+	- gamesPlayed < data.rolls && etherAvailable >= data.betPerRoll (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol)
+	- require(bool)(msg.sender == oraclize_cbAddress() && ! data.paidOut && data.player != address(0) && LIABILITIES >= data.etherReceived) (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#4005-4011)
+EOSWINDice.refund (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3855-3899) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool)(block.timestamp - data.start >= ORACLIZEQUERYMAXTIME && (msg.sender == OWNER || msg.sender == data.player) && (! data.paidOut) && LIABILITIES >= data.etherReceived && data.etherReceived > 0 && REFUNDSACTIVE) (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3863-3875)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+Buffer.init uses assembly (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#113-139)
+	- /sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#127-139
+Buffer.append uses assembly (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#179-265)
+	- /sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#201-235
+	- /sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#237-241
+	- /sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#257-265
+Buffer.append uses assembly (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#283-319)
+	- /sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#291-319
+Buffer.appendInt uses assembly (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#333-377)
+	- /sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#345-377
+usingOraclize.getCodeSize uses assembly (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1540-1549)
+	- /sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1545-1549
+usingOraclize.oraclize_newRandomDSQuery uses assembly (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1877-1999)
+	- /sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1887-1913
+	- /sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1913-1917
+	- /sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1939-1995
+usingOraclize.verifySig uses assembly (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2013-2063)
+	- /sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2043-2045
+usingOraclize.copyBytes uses assembly (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2309-2343)
+	- /sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2333-2339
+usingOraclize.safer_ecrecover uses assembly (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2355-2425)
+	- /sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2399-2419
+usingOraclize.ecrecovery uses assembly (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2429-2501)
+	- /sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2439-2493
+usingOraclize.safeMemoryCleaner uses assembly (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2501-2515)
+	- /sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2507-2515
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+EOSWINGameInterface.DEVELOPERSFUND should be constant (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2517)
+EOSWINGameInterface.LIABILITIES should be constant (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2517-2519)
+OraclizeI.cbAddress should be constant (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#17-19)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+OraclizeI.query2 (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#23-25) should be declared external
+OraclizeI.queryN (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#27-29) should be declared external
+OraclizeI.getPrice (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#31-33) should be declared external
+OraclizeI.getPrice (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#33-35) should be declared external
+OraclizeAddrResolverI.getAddress (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#47-57) should be declared external
+usingOraclize.__callback (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#683-687) should be declared external
+EOSWINGameInterface.payDevelopersFund (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2519) should be declared external
+EOSWINDice.payDevelopersFund (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3657-3661) should be declared external
+EOSWINGameInterface.receivePaymentForOraclize (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2519-2521) should be declared external
+EOSWINDice.receivePaymentForOraclize (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3665-3669) should be declared external
+EOSWINBankrollInterface.payEtherToWinner (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2527-2531) should be declared external
+EOSWINBankroll.payEtherToWinner (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2745-2777) should be declared external
+EOSWINBankroll.receiveEtherFromGameAddress (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2779-2787) should be declared external
+EOSWINBankrollInterface.receiveEtherFromGameAddress (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2531-2540) should be declared external
+EOSWINBankroll.payOraclize (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2787-2800) should be declared external
+EOSWINBankrollInterface.payOraclize (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2541) should be declared external
+ERC20.totalSupply (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2543-2545) should be declared external
+EOSWINBankroll.totalSupply (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3259-3273) should be declared external
+EOSWINBankroll.balanceOf (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3273-3283) should be declared external
+ERC20.balanceOf (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2545-2555) should be declared external
+ERC20.transfer (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2555-2557) should be declared external
+EOSWINBankroll.transfer (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3287-3321) should be declared external
+EOSWINBankroll.transferFrom (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3331-3379) should be declared external
+ERC20.transferFrom (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2557-2565) should be declared external
+EOSWINBankroll.approve (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3379-3391) should be declared external
+ERC20.approve (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2565-2571) should be declared external
+EOSWINBankroll.allowance (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3393-3407) should be declared external
+ERC20.allowance (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2571-2572) should be declared external
+EOSWINBankroll.checkWhenContributorCanTransferOrWithdraw (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2717-2727) should be declared external
+EOSWINBankroll.fallback (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2831-2943) should be declared external
+EOSWINBankroll.cashoutEOSWINStakeTokens_ALL (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3045-3061) should be declared external
+EOSWINBankroll.transferOwnership (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3145-3159) should be declared external
+EOSWINBankroll.changeWaitTimeUntilWithdrawOrTransfer (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3159-3177) should be declared external
+EOSWINBankroll.changeMaximumInvestmentsAllowed (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3183-3195) should be declared external
+EOSWINBankroll.withdrawDevelopersFund (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3195-3232) should be declared external
+EOSWINBankroll.ERC20Rescue (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3239-3255) should be declared external
+EOSWINDice.setBankrollerContractOnce (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3691-3723) should be declared external
+EOSWINDice.transferOwnership (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3725-3733) should be declared external
+EOSWINDice.setOraclizeQueryMaxTime (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3735-3739) should be declared external
+EOSWINDice.setOraclizeQueryGasPrice (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3749-3757) should be declared external
+EOSWINDice.setInitialGasForOraclize (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3757-3763) should be declared external
+EOSWINDice.setGamePaused (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3763-3773) should be declared external
+EOSWINDice.setRefundsActive (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3773-3783) should be declared external
+EOSWINDice.setHouseEdge (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3783-3801) should be declared external
+EOSWINDice.setMinBetPerRoll (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3801-3805) should be declared external
+EOSWINDice.setMinBetPerTx (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3805-3811) should be declared external
+EOSWINDice.setMaxWin (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3811-3823) should be declared external
+EOSWINDice.ERC20Rescue (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3825-3837) should be declared external
+EOSWINDice.refund (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3855-3899) should be declared external
+EOSWINDice.play (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3899-3989) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol:
+	- pragma solidity^0.4.21 (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#9-15): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Function 'OraclizeI.query_withGasLimit' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#21-23) is not in mixedCase
+Function 'OraclizeI.query2_withGasLimit' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#25-27) is not in mixedCase
+Function 'OraclizeI.queryN_withGasLimit' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#29-31) is not in mixedCase
+Function 'OraclizeI.randomDS_getSessionPubKeyHash' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#39-45) is not in mixedCase
+Struct 'Buffer.buffer' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#109-111) is not in CapWords
+Parameter '_capacity' of Buffer.init (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#113) is not in mixedCase
+Contract 'usingOraclize' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#529-2517) is not in CapWords
+Function 'usingOraclize.oraclize_setNetwork' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#591-597) is not in mixedCase
+Function 'usingOraclize.oraclize_setNetwork' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#599-683) is not in mixedCase
+Function 'usingOraclize.__callback' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#683-687) is not in mixedCase
+Function 'usingOraclize.__callback' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#687-693) is not in mixedCase
+Function 'usingOraclize.oraclize_getPrice' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#693-697) is not in mixedCase
+Function 'usingOraclize.oraclize_getPrice' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#697-703) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#703-709) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#709-719) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#719-733) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#733-743) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#743-749) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#749-759) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#759-773) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#775-787) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#787-795) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#795-807) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#807-823) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#823-837) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#837-847) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#847-861) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#861-873) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#873-885) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#885-895) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#895-909) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#909-923) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#925-935) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#935-948) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#949-965) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#967-983) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#983-997) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#997-1011) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1013-1030) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1031-1049) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1049-1065) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1065-1083) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1083-1099) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1099-1115) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1115-1127) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1127-1137) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1137-1153) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1153-1167) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1167-1185) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1185-1197) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1197-1207) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1209-1217) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1217-1229) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1229-1243) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1243-1255) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1257-1269) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1269-1281) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1281-1297) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1297-1313) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1313-1329) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1329-1343) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1343-1359) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1359-1377) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1377-1395) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1395-1411) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1411-1435) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1435-1457) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1457-1485) is not in mixedCase
+Function 'usingOraclize.oraclize_query' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1485-1503) is not in mixedCase
+Function 'usingOraclize.oraclize_cbAddress' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1505-1511) is not in mixedCase
+Function 'usingOraclize.oraclize_setProof' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1513-1517) is not in mixedCase
+Function 'usingOraclize.oraclize_setCustomGasPrice' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1519-1527) is not in mixedCase
+Function 'usingOraclize.oraclize_randomDS_getSessionPubKeyHash' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1527-1539) is not in mixedCase
+Parameter '_a' of usingOraclize.parseAddr (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1551) is not in mixedCase
+Parameter '_a' of usingOraclize.strCompare (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1599) is not in mixedCase
+Parameter '_b' of usingOraclize.strCompare (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1599) is not in mixedCase
+Parameter '_haystack' of usingOraclize.indexOf (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1621-1623) is not in mixedCase
+Parameter '_needle' of usingOraclize.indexOf (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1623) is not in mixedCase
+Parameter '_a' of usingOraclize.strConcat (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1677) is not in mixedCase
+Parameter '_b' of usingOraclize.strConcat (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1677) is not in mixedCase
+Parameter '_c' of usingOraclize.strConcat (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1677) is not in mixedCase
+Parameter '_d' of usingOraclize.strConcat (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1677-1678) is not in mixedCase
+Parameter '_e' of usingOraclize.strConcat (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1679) is not in mixedCase
+Parameter '_a' of usingOraclize.strConcat (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1739) is not in mixedCase
+Parameter '_b' of usingOraclize.strConcat (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1739-1740) is not in mixedCase
+Parameter '_c' of usingOraclize.strConcat (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1741) is not in mixedCase
+Parameter '_d' of usingOraclize.strConcat (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1741) is not in mixedCase
+Parameter '_a' of usingOraclize.strConcat (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1747) is not in mixedCase
+Parameter '_b' of usingOraclize.strConcat (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1747) is not in mixedCase
+Parameter '_c' of usingOraclize.strConcat (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1747-1749) is not in mixedCase
+Parameter '_a' of usingOraclize.strConcat (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1757) is not in mixedCase
+Parameter '_b' of usingOraclize.strConcat (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1757) is not in mixedCase
+Parameter '_a' of usingOraclize.parseInt (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1769) is not in mixedCase
+Parameter '_a' of usingOraclize.parseInt (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1777) is not in mixedCase
+Parameter '_b' of usingOraclize.parseInt (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1777) is not in mixedCase
+Function 'usingOraclize.oraclize_setNetworkName' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1873-1875) is not in mixedCase
+Parameter '_network_name' of usingOraclize.oraclize_setNetworkName (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1873) is not in mixedCase
+Function 'usingOraclize.oraclize_getNetworkName' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1875-1877) is not in mixedCase
+Function 'usingOraclize.oraclize_newRandomDSQuery' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1877-1999) is not in mixedCase
+Parameter '_delay' of usingOraclize.oraclize_newRandomDSQuery (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1877) is not in mixedCase
+Parameter '_nbytes' of usingOraclize.oraclize_newRandomDSQuery (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1877) is not in mixedCase
+Parameter '_customGasLimit' of usingOraclize.oraclize_newRandomDSQuery (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1877-1879) is not in mixedCase
+Function 'usingOraclize.oraclize_randomDS_setCommitment' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1999-2003) is not in mixedCase
+Function 'usingOraclize.oraclize_randomDS_proofVerify__sessionKeyValidity' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2063-2129) is not in mixedCase
+Function 'usingOraclize.oraclize_randomDS_proofVerify__returnCode' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2141-2157) is not in mixedCase
+Parameter '_queryId' of usingOraclize.oraclize_randomDS_proofVerify__returnCode (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2141) is not in mixedCase
+Parameter '_result' of usingOraclize.oraclize_randomDS_proofVerify__returnCode (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2141-2145) is not in mixedCase
+Parameter '_proof' of usingOraclize.oraclize_randomDS_proofVerify__returnCode (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2145) is not in mixedCase
+Parameter 'n_random_bytes' of usingOraclize.matchBytes32Prefix (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2165) is not in mixedCase
+Function 'usingOraclize.oraclize_randomDS_proofVerify__main' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2175-2297) is not in mixedCase
+Parameter 'context_name' of usingOraclize.oraclize_randomDS_proofVerify__main (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2177) is not in mixedCase
+Function 'usingOraclize.safer_ecrecover' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2355-2425) is not in mixedCase
+Constant 'usingOraclize.day' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#531) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'usingOraclize.week' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#532-533) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'usingOraclize.month' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#533-537) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'usingOraclize.proofType_NONE' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#539-543) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'usingOraclize.proofType_TLSNotary' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#543-545) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'usingOraclize.proofType_Ledger' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#545-547) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'usingOraclize.proofType_Android' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#547-551) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'usingOraclize.proofType_Native' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#551-553) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'usingOraclize.proofStorage_IPFS' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#553) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'usingOraclize.networkID_auto' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#557-561) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'usingOraclize.networkID_mainnet' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#561-563) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'usingOraclize.networkID_testnet' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#563-571) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'usingOraclize.networkID_morden' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#571) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'usingOraclize.networkID_consensys' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#571-573) is not in UPPER_CASE_WITH_UNDERSCORES
+Variable 'usingOraclize.OAR' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#573-575) is not in mixedCase
+Variable 'usingOraclize.oraclize_network_name' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#1873) is not in mixedCase
+Variable 'usingOraclize.oraclize_randomDS_args' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2003-2007) is not in mixedCase
+Variable 'usingOraclize.oraclize_randomDS_sessionKeysHashVerified' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2007-2013) is not in mixedCase
+Modifier 'usingOraclize.oraclize_randomDS_proofVerify' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2129-2139) is not in mixedCase
+Variable 'EOSWINGameInterface.DEVELOPERSFUND' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2517) is not in mixedCase
+Variable 'EOSWINGameInterface.LIABILITIES' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2517-2519) is not in mixedCase
+Parameter '_owner' of EOSWINBankroll.balanceOf (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3273) is not in mixedCase
+Parameter '_to' of EOSWINBankroll.transfer (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3289) is not in mixedCase
+Parameter '_value' of EOSWINBankroll.transfer (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3289) is not in mixedCase
+Parameter '_from' of EOSWINBankroll.transferFrom (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3331-3333) is not in mixedCase
+Parameter '_to' of EOSWINBankroll.transferFrom (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3333) is not in mixedCase
+Parameter '_value' of EOSWINBankroll.transferFrom (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3333-3337) is not in mixedCase
+Parameter '_spender' of EOSWINBankroll.approve (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3381) is not in mixedCase
+Parameter '_value' of EOSWINBankroll.approve (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3381) is not in mixedCase
+Parameter '_owner' of EOSWINBankroll.allowance (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3395-3397) is not in mixedCase
+Parameter '_spender' of EOSWINBankroll.allowance (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3397-3401) is not in mixedCase
+Function 'EOSWINBankroll.EOSWINBankroll' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2675-2711) is not in mixedCase
+Parameter '_amountTokens' of EOSWINBankroll.cashoutEOSWINStakeTokens (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2943) is not in mixedCase
+Function 'EOSWINBankroll.cashoutEOSWINStakeTokens_ALL' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3045-3061) is not in mixedCase
+Function 'EOSWINBankroll.ERC20Rescue' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3239-3255) is not in mixedCase
+Variable 'EOSWINBankroll.OWNER' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2597-2601) is not in mixedCase
+Variable 'EOSWINBankroll.MAXIMUMINVESTMENTSALLOWED' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2601) is not in mixedCase
+Variable 'EOSWINBankroll.WAITTIMEUNTILWITHDRAWORTRANSFER' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2601) is not in mixedCase
+Variable 'EOSWINBankroll.DEVELOPERSFUND' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2603) is not in mixedCase
+Variable 'EOSWINBankroll.TRUSTEDADDRESSES' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2621-2623) is not in mixedCase
+Variable 'EOSWINBankroll.DICE' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2623) is not in mixedCase
+Variable 'EOSWINBankroll.SLOTS' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#2623-2627) is not in mixedCase
+Function 'EOSWINDice.__callback' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3995-4023) is not in mixedCase
+Parameter '_queryId' of EOSWINDice.__callback (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3995-3997) is not in mixedCase
+Parameter '_result' of EOSWINDice.__callback (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3997) is not in mixedCase
+Parameter '_proof' of EOSWINDice.__callback (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3997) is not in mixedCase
+Function 'EOSWINDice.EOSWINDice' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3599-3651) is not in mixedCase
+Function 'EOSWINDice.ERC20Rescue' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3825-3837) is not in mixedCase
+Variable 'EOSWINDice.DEVELOPERSFUND' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3541-3544) is not in mixedCase
+Variable 'EOSWINDice.LIABILITIES' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3539-3540) is not in mixedCase
+Variable 'EOSWINDice.AMOUNTWAGERED' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3547-3551) is not in mixedCase
+Variable 'EOSWINDice.GAMESPLAYED' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3553) is not in mixedCase
+Variable 'EOSWINDice.ORACLIZEQUERYMAXTIME' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3555-3557) is not in mixedCase
+Variable 'EOSWINDice.MINBET_perROLL' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3557-3561) is not in mixedCase
+Variable 'EOSWINDice.MINBET_perTX' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3561-3563) is not in mixedCase
+Variable 'EOSWINDice.ORACLIZEGASPRICE' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3567) is not in mixedCase
+Variable 'EOSWINDice.INITIALGASFORORACLIZE' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3567-3569) is not in mixedCase
+Variable 'EOSWINDice.HOUSEEDGE_inTHOUSANDTHPERCENTS' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3571-3579) is not in mixedCase
+Variable 'EOSWINDice.MAXWIN_inTHOUSANDTHPERCENTS' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3581-3585) is not in mixedCase
+Variable 'EOSWINDice.GAMEPAUSED' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3593) is not in mixedCase
+Variable 'EOSWINDice.REFUNDSACTIVE' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3593) is not in mixedCase
+Variable 'EOSWINDice.OWNER' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3595) is not in mixedCase
+Variable 'EOSWINDice.BANKROLLER' (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#3599) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+usingOraclize.day (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#531) is never used in EOSWINDice
+usingOraclize.week (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#532-533) is never used in EOSWINDice
+usingOraclize.month (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#533-537) is never used in EOSWINDice
+usingOraclize.proofType_NONE (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#539-543) is never used in EOSWINDice
+usingOraclize.proofType_TLSNotary (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#543-545) is never used in EOSWINDice
+usingOraclize.proofType_Android (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#547-551) is never used in EOSWINDice
+usingOraclize.proofType_Native (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#551-553) is never used in EOSWINDice
+usingOraclize.proofStorage_IPFS (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#553) is never used in EOSWINDice
+usingOraclize.networkID_mainnet (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#561-563) is never used in EOSWINDice
+usingOraclize.networkID_testnet (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#563-571) is never used in EOSWINDice
+usingOraclize.networkID_morden (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#571) is never used in EOSWINDice
+usingOraclize.networkID_consensys (/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol#571-573) is never used in EOSWINDice
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0xb47ca870d543da6d8ed64b5ea86d240cfbbdc919.sol analyzed (11 contracts), 276 result(s) found

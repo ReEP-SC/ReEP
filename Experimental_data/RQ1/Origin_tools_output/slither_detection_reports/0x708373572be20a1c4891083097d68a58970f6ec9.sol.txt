@@ -1,0 +1,90 @@
+INFO:Detectors:[93m
+LikaCrowdsale.ICOBuy (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#481-537) does not use the value returned by external calls:
+	-managedTokenLedger.mint(_for,tokensBought) (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#517)
+LikaCrowdsale.refundICO (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#555-589) does not use the value returned by external calls:
+	-managedTokenLedger.demint(refundAdress,tokenValue) (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#579-581)
+LikaCrowdsale.manualSendTokens (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol) does not use the value returned by external calls:
+	-managedTokenLedger.mint(rAddress,amount) (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+Reentrancy in LikaCrowdsale.ICOBuy (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#481-537):
+	External calls:
+	- balanceOf(_for) == 0 (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#509-517)
+	State variables written after the call(s):
+	- ICOcontributors (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#511-517)
+Reentrancy in LikaCrowdsale.ICOBuy (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#481-537):
+	External calls:
+	- balanceOf(_for) == 0 (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#509-517)
+	- managedTokenLedger.mint(_for,tokensBought) (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#517)
+	State variables written after the call(s):
+	- ICOcollected (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#533)
+	- ICOtokensSold (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#534-535)
+	- balancesForICO (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#519-521)
+	- weiForRefundICO (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#521-523)
+	- weiToRecoverICO (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#525-530)
+Reentrancy in LikaCrowdsale.manualSendTokens (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol):
+	External calls:
+	- managedTokenLedger.mint(rAddress,amount) (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol)
+	State variables written after the call(s):
+	- ICOtokensSold (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol)
+	- balancesForICO (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+LikaCrowdsale.ICOprice should be constant (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#143-145)
+LikaCrowdsale.ICOstart should be constant (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#113-115)
+LikaCrowdsale.decimals should be constant (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#141-143)
+LikaCrowdsale.minTokensToBuy should be constant (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#111)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+LikaCrowdsale.advanceState (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#181-185) should be declared external
+LikaCrowdsale.transferOwnership (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#269-281) should be declared external
+LikaCrowdsale.totalSupply (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#291-298) should be declared external
+LikaCrowdsale.setNameAndTicker (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#313-329) should be declared external
+LikaCrowdsale.setBonusState (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#329-341) should be declared external
+LikaCrowdsale.setLedger (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#342-355) should be declared external
+LikaCrowdsale.fallback (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#355-373) should be declared external
+LikaCrowdsale.finalize (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#373-377) should be declared external
+LikaCrowdsale.setHalt (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#379-385) should be declared external
+LikaCrowdsale.recoverLeftoversICO (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#537-555) should be declared external
+LikaCrowdsale.refundICO (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#555-589) should be declared external
+LikaCrowdsale.withdrawFunds (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#589-603) should be declared external
+LikaCrowdsale.setSoftCap (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#603-607) should be declared external
+LikaCrowdsale.setHardCap (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#609-617) should be declared external
+LikaCrowdsale.setEndDate (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol) should be declared external
+LikaCrowdsale.manualSendTokens (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol:
+	- pragma solidity^0.4.18 (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#1): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_owner' of LikaCrowdsale.balanceOf (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#287) is not in mixedCase
+Parameter '_newLedgerAddress' of LikaCrowdsale. (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#299-301) is not in mixedCase
+Parameter '_name' of LikaCrowdsale.setNameAndTicker (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#313) is not in mixedCase
+Parameter '_symbol' of LikaCrowdsale.setNameAndTicker (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#313) is not in mixedCase
+Parameter '_newState' of LikaCrowdsale.setBonusState (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#329-331) is not in mixedCase
+Parameter '_newLedgerAddress' of LikaCrowdsale.setLedger (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#343) is not in mixedCase
+Parameter '_halt' of LikaCrowdsale.setHalt (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#379-381) is not in mixedCase
+Parameter '_weisSentScaled' of LikaCrowdsale.calculateAmountBoughtICO (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#387) is not in mixedCase
+Parameter '_amountBonusMultiplier' of LikaCrowdsale.calculateAmountBoughtICO (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#387) is not in mixedCase
+Parameter '_sentAmount' of LikaCrowdsale.getBonusMultipierInPercents (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#419-425) is not in mixedCase
+Function 'LikaCrowdsale.ICOBuy' (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#481-537) is not in mixedCase
+Parameter '_newSoftCap' of LikaCrowdsale.setSoftCap (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#603-604) is not in mixedCase
+Parameter '_newHardCap' of LikaCrowdsale.setHardCap (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#609) is not in mixedCase
+Parameter '_newEndDate' of LikaCrowdsale.setEndDate (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol) is not in mixedCase
+Variable 'LikaCrowdsale.ICOcontributors' (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#111-113) is not in mixedCase
+Variable 'LikaCrowdsale.ICOstart' (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#113-115) is not in mixedCase
+Variable 'LikaCrowdsale.ICOend' (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#117-119) is not in mixedCase
+Variable 'LikaCrowdsale.Hardcap' (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#119-121) is not in mixedCase
+Variable 'LikaCrowdsale.ICOcollected' (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#123) is not in mixedCase
+Variable 'LikaCrowdsale.Softcap' (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#127-131) is not in mixedCase
+Variable 'LikaCrowdsale.ICOtokensSold' (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#131) is not in mixedCase
+Variable 'LikaCrowdsale.TakedFunds' (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#131-135) is not in mixedCase
+Variable 'LikaCrowdsale.ICOstate' (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#137-141) is not in mixedCase
+Variable 'LikaCrowdsale.DECIMAL_MULTIPLIER' (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#143) is not in mixedCase
+Variable 'LikaCrowdsale.ICOprice' (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#143-145) is not in mixedCase
+Variable 'LikaCrowdsale.ICOamountBonusLimits' (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#145-147) is not in mixedCase
+Variable 'LikaCrowdsale.ICOamountBonusMultipierInPercent' (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#147-151) is not in mixedCase
+Variable 'LikaCrowdsale.ICOweekBonus' (/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol#155-159) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x708373572be20a1c4891083097d68a58970f6ec9.sol analyzed (3 contracts), 52 result(s) found

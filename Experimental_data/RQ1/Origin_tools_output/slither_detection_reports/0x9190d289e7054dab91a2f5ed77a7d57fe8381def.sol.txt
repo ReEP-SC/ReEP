@@ -1,0 +1,236 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol:
+/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol:184:4: Warning: Modifiers of functions without implementation are ignored.
+   function qsLevel(address _addr) onlyContract public ;
+   ^---------------------------------------------------^
+/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol:188:4: Warning: Modifiers of functions without implementation are ignored.
+   function clearLock(address _addr) onlyContract public ;
+   ^-----------------------------------------------------^
+/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol:189:4: Warning: Modifiers of functions without implementation are ignored.
+   function pushInvite(address _addr,
+   ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol:193:4: Warning: Modifiers of functions without implementation are ignored.
+   function setLastInvite(address _addr,
+   ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol:196:4: Warning: Modifiers of functions without implementation are ignored.
+   function pushTeam(address _addr,
+   ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol:201:4: Warning: Modifiers of functions without implementation are ignored.
+   function setLastTeam(address _addr,
+   ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol:206:4: Warning: Modifiers of functions without implementation are ignored.
+   function subTotalUsers(address _addr) onlyContract public ;
+   ^---------------------------------------------------------^
+/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol:207:4: Warning: Modifiers of functions without implementation are ignored.
+   function subTotalLockingAmount(address _addr,uint256 _amount) onlyContract public ;
+   ^---------------------------------------------------------------------------------^
+/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol:208:4: Warning: Modifiers of functions without implementation are ignored.
+   function subTotalBalance(uint256 _amount) onlyContract public ;
+   ^-------------------------------------------------------------^
+/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol:209:4: Warning: Modifiers of functions without implementation are ignored.
+   function setInviteTeam(address _addr) onlyContract public ;
+   ^---------------------------------------------------------^
+/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol:473:5: Warning: Failure condition of 'send' ignored. Consider using 'transfer' instead.
+    reciever.send(address(this).balance);
+    ^----------------------------------^
+
+INFO:Detectors:[91m
+KOLP.draw (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#164-165) is never initialized. It is used in:
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-state-variables[0m
+INFO:Detectors:[93m
+ERC20Basic (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#82-93) has incorrect ERC20 function interface(s):
+	-transfer (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#87)
+ERC20 (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#93-103) has incorrect ERC20 function interface(s):
+	-transferFrom (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#98-99)
+	-approve (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#99-101)
+BasicToken (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#104-118) has incorrect ERC20 function interface(s):
+	-transfer (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#108-114)
+StandardToken (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#120-158) has incorrect ERC20 function interface(s):
+	-transferFrom (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#127-144)
+	-approve (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#144-154)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[93m
+KOLWithDraw.withdraw (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#386-481) uses a dangerous strict equality:
+	- theDayIB.theDayLastSecond == yestodayLastSecond
+	- theDayTB.theDayLastSecond == yestodayLastSecond
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Reentrancy in KOLWithDraw.withdraw (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#386-481):
+	External calls:
+	- bonus = querySelfBonus(msg.sender) (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#393-394)
+	State variables written after the call(s):
+	- DrawTime (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#394)
+Reentrancy in KOLWithDraw.withdraw (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#386-481):
+	External calls:
+	- bonus = querySelfBonus(msg.sender) (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#393-394)
+	- last = kolp.getLockInviteBonusLen(msg.sender) (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#394)
+	- yestodayLastSecond = kolp.getYestodayLastSecond(now) (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#394-396)
+	- last = kolp.getLockTeamBonusLen(msg.sender) (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#418-421)
+	- balance = kolp.LockBalance(msg.sender) (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#466-469)
+	- kolp.subTotalBalance(balance) (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#475)
+	- kolp.clearLock(msg.sender) (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#475-476)
+	- afterWithdraw(msg.sender,balance) (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#477-478)
+	- kol.transfer(msg.sender,realBonus) (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol)
+	- kol.transfer(reciever,tax) (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol)
+	State variables written after the call(s):
+	- leftBonus (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+selfBonus in KOLWithDraw.querySelfBonus (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#314) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[92m
+KOLWithDraw.querySelfBonus has external calls inside a loop:
+	- (begin,amount,end,withDrawed) = kolp.LockHistory(_addr,i) (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#317)
+KOLWithDraw.querySelfBonus has external calls inside a loop:
+	- lastingDays = (kolp.getYestodayLastSecond(now) - kolp.getYestodayLastSecond(begin)) / every (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#320-321)
+KOLWithDraw.querySelfBonus has external calls inside a loop:
+	- kolp.USDTOrCoin(_addr) (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#321-333)
+KOLWithDraw.querySelfBonus has external calls inside a loop:
+	- begin = kolp.getYestodayLastSecond(begin) + every (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#321-322)
+KOLWithDraw.querySelfBonus has external calls inside a loop:
+	- selfBonus += amount * 3 / 1000 * kolp.ClosePrice(begin) / kolp.ClosePrice(theTime) (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#329-330)
+KOLWithDraw.queryInviteBonus has external calls inside a loop:
+	- (theDayIB.theDayLastSecond,theDayIB.theDayInviteBonus,theDayIB.totalInviteBonus) = kolp.LockInviteBonus(_addr,last - 1) (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#341-342)
+KOLWithDraw.queryTeamBonus has external calls inside a loop:
+	- (theDayTB.theDayLastSecond,theDayTB.theDayTeamBonus,theDayTB.totalTeamBonus,theDayTB.theDayRate) = kolp.LockTeamBonus(_addr,last - 1) (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#368-372)
+KOLWithDraw.afterWithdraw has external calls inside a loop:
+	- father = kolp.InviteList(_addr,i) (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#381-382)
+KOLWithDraw.afterWithdraw has external calls inside a loop:
+	- kolp.subTotalUsers(father) (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#382)
+KOLWithDraw.afterWithdraw has external calls inside a loop:
+	- kolp.subTotalLockingAmount(father,_amount) (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#382-383)
+KOLWithDraw.afterWithdraw has external calls inside a loop:
+	- kolp.qsLevel(father) (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#383)
+KOLWithDraw.afterWithdraw has external calls inside a loop:
+	- kolp.setInviteTeam(_addr) (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#383-384)
+KOLWithDraw.withdraw has external calls inside a loop:
+	- (theDayIB.theDayLastSecond,theDayIB.theDayInviteBonus,theDayIB.totalInviteBonus) = kolp.LockInviteBonus(msg.sender,realLast - 1) (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#398-400)
+KOLWithDraw.withdraw has external calls inside a loop:
+	- kolp.pushInvite(msg.sender,yestodayLastSecond,theDayIB.theDayInviteBonus,0) (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#409-412)
+KOLWithDraw.withdraw has external calls inside a loop:
+	- kolp.setLastInvite(msg.sender,theDayIB.theDayInviteBonus,0) (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#415-417)
+KOLWithDraw.withdraw has external calls inside a loop:
+	- (theDayTB.theDayLastSecond,theDayTB.theDayTeamBonus,theDayTB.totalTeamBonus,theDayTB.theDayRate) = kolp.LockTeamBonus(msg.sender,last - 1) (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#424-430)
+KOLWithDraw.withdraw has external calls inside a loop:
+	- kolp.pushTeam(msg.sender,yestodayLastSecond,theDayTB.theDayTeamBonus,0,theDayTB.theDayRate) (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#442-446)
+KOLWithDraw.withdraw has external calls inside a loop:
+	- kolp.setLastTeam(msg.sender,theDayTB.theDayTeamBonus,0,theDayTB.theDayRate) (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#447-449)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in KOLWithDraw.withdraw (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#386-481):
+	External calls:
+	- bonus = querySelfBonus(msg.sender) (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#393-394)
+	- last = kolp.getLockInviteBonusLen(msg.sender) (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#394)
+	- yestodayLastSecond = kolp.getYestodayLastSecond(now) (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#394-396)
+	- last = kolp.getLockTeamBonusLen(msg.sender) (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#418-421)
+	- balance = kolp.LockBalance(msg.sender) (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#466-469)
+	- kolp.subTotalBalance(balance) (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#475)
+	- kolp.clearLock(msg.sender) (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#475-476)
+	- afterWithdraw(msg.sender,balance) (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#477-478)
+	- kol.transfer(msg.sender,realBonus) (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol)
+	State variables written after the call(s):
+	- TotalWithDraws (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+ERC20Basic.totalSupply should be constant (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#83)
+KOLP.draw should be constant (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#164-165)
+KOLP.going should be constant (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#166)
+KOLWithDraw.every should be constant (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#289)
+KOLWithDraw.minBonus should be constant (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#290-291)
+KOLWithDraw.name should be constant (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#287-288)
+StandardToken.userSupplyed should be constant (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#125-126)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+BasicToken.balanceOf (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#114-118) should be declared external
+ERC20Basic.balanceOf (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#84-87) should be declared external
+ERC20Basic.transfer (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#87) should be declared external
+BasicToken.transfer (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#108-114) should be declared external
+StandardToken.allowance (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#154-158) should be declared external
+ERC20.allowance (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#94-98) should be declared external
+StandardToken.transferFrom (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#127-144) should be declared external
+ERC20.transferFrom (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#98-99) should be declared external
+ERC20.approve (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#99-101) should be declared external
+StandardToken.approve (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#144-154) should be declared external
+KOL.queryNode (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#161-162) should be declared external
+KOL.querySuperNode (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#162-163) should be declared external
+KOLP.qsLevel (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#202-203) should be declared external
+KOLP.queryLockBalance (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#204-206) should be declared external
+KOLP.getYestodayLastSecond (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#207) should be declared external
+KOLP.clearLock (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#208) should be declared external
+KOLP.pushInvite (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#208-212) should be declared external
+KOLP.setLastInvite (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#212-218) should be declared external
+KOLP.pushTeam (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#218-230) should be declared external
+KOLP.setLastTeam (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#230-240) should be declared external
+KOLP.subTotalUsers (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#240-241) should be declared external
+KOLP.subTotalLockingAmount (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#241-245) should be declared external
+KOLP.subTotalBalance (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#245-247) should be declared external
+KOLP.setInviteTeam (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#247-250) should be declared external
+KOLP.getLockLen (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#250-252) should be declared external
+KOLP.getFathersLength (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#252-254) should be declared external
+KOLP.getLockTeamBonusLen (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#256-259) should be declared external
+KOLP.getLockInviteBonusLen (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#259-263) should be declared external
+Ownable.transferOwnership (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#274-280) should be declared external
+KOLWithDraw.withdraw (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#386-481) should be declared external
+KOLWithDraw.calcuAllBonus (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol) should be declared external
+KOLWithDraw.addBonus (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol) should be declared external
+KOLWithDraw.setFee (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol) should be declared external
+KOLWithDraw.setKOLP (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol) should be declared external
+KOLWithDraw.draw (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol) should be declared external
+KOLWithDraw.setetherFee (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol) should be declared external
+KOLWithDraw.setReciever (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol:
+	- pragma solidity^0.4.23 (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#5-7): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Parameter '_owner' of BasicToken.balanceOf (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#114) is not in mixedCase
+Parameter '_to' of BasicToken.transfer (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#109) is not in mixedCase
+Parameter '_value' of BasicToken.transfer (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#109) is not in mixedCase
+Parameter '_owner' of StandardToken.allowance (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#155) is not in mixedCase
+Parameter '_spender' of StandardToken.allowance (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#155-157) is not in mixedCase
+Parameter '_from' of StandardToken.transferFrom (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#128-129) is not in mixedCase
+Parameter '_to' of StandardToken.transferFrom (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#129) is not in mixedCase
+Parameter '_value' of StandardToken.transferFrom (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#129-130) is not in mixedCase
+Parameter '_spender' of StandardToken.approve (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#146) is not in mixedCase
+Parameter '_value' of StandardToken.approve (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#147) is not in mixedCase
+Struct 'KOLP.lock' (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#166-169) is not in CapWords
+Struct 'KOLP.teamRate' (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#169-170) is not in CapWords
+Struct 'KOLP.inviteBonus' (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#170-172) is not in CapWords
+Struct 'KOLP.withDraws' (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#172-173) is not in CapWords
+Struct 'KOLP.dayTeamBonus' (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#173-177) is not in CapWords
+Struct 'KOLP.dayInviteBonus' (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#179-184) is not in CapWords
+Variable 'KOLP.LockTeamBonus' (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#184-185) is not in mixedCase
+Variable 'KOLP.LockInviteBonus' (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#185-186) is not in mixedCase
+Variable 'KOLP.InviteList' (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#186-187) is not in mixedCase
+Variable 'KOLP.ChildAddrs' (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#187) is not in mixedCase
+Variable 'KOLP.LockHistory' (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#187-188) is not in mixedCase
+Variable 'KOLP.LockBalance' (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#188-189) is not in mixedCase
+Variable 'KOLP.InviteHistoryBonus' (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#190-191) is not in mixedCase
+Variable 'KOLP.InviteCurrentDayBonus' (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#191-192) is not in mixedCase
+Variable 'KOLP.ClosePrice' (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#192) is not in mixedCase
+Variable 'KOLP.TotalUsers' (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#193-194) is not in mixedCase
+Variable 'KOLP.TotalLockingAmount' (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#194-195) is not in mixedCase
+Variable 'KOLP.InviteCode' (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#195) is not in mixedCase
+Variable 'KOLP.RInviteCode' (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#196-197) is not in mixedCase
+Variable 'KOLP.USDTOrCoin' (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#199-200) is not in mixedCase
+Struct 'KOLWithDraw.dayTeamBonus' (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#292-295) is not in CapWords
+Struct 'KOLWithDraw.dayInviteBonus' (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#295-297) is not in CapWords
+Parameter '_kolAddress' of KOLWithDraw. (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#304-305) is not in mixedCase
+Parameter '_kolpAddress' of KOLWithDraw. (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#305-309) is not in mixedCase
+Parameter '_reciever' of KOLWithDraw. (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#309) is not in mixedCase
+Parameter '_addr' of KOLWithDraw.querySelfBonus (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#312) is not in mixedCase
+Parameter '_addr' of KOLWithDraw.queryInviteBonus (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#335-336) is not in mixedCase
+Parameter '_addr' of KOLWithDraw.queryTeamBonus (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#357) is not in mixedCase
+Parameter '_addr' of KOLWithDraw.afterWithdraw (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#379) is not in mixedCase
+Parameter '_amount' of KOLWithDraw.afterWithdraw (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#379) is not in mixedCase
+Parameter '_onlyBonus' of KOLWithDraw.withdraw (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#389) is not in mixedCase
+Parameter '_onlyBonus' of KOLWithDraw.calcuAllBonus (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol) is not in mixedCase
+Parameter '_amount' of KOLWithDraw.addBonus (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol) is not in mixedCase
+Parameter '_fee' of KOLWithDraw.setFee (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol) is not in mixedCase
+Parameter '_paddr' of KOLWithDraw.setKOLP (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol) is not in mixedCase
+Parameter '_fee' of KOLWithDraw.setetherFee (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol) is not in mixedCase
+Parameter '_reciever' of KOLWithDraw.setReciever (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol) is not in mixedCase
+Variable 'KOLWithDraw.TotalWithDraws' (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#297-298) is not in mixedCase
+Variable 'KOLWithDraw.DrawTime' (/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol#298-300) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x9190d289e7054dab91a2f5ed77a7d57fe8381def.sol analyzed (9 contracts), 116 result(s) found

@@ -1,0 +1,168 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol:
+/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol:33:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function Ownable() public {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol:11:5: Warning: Functions in interfaces should be declared external.
+    function totalSupply() public view returns (uint);
+    ^------------------------------------------------^
+/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol:12:5: Warning: Functions in interfaces should be declared external.
+    function balanceOf(address owner) public view returns (uint);
+    ^-----------------------------------------------------------^
+/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol:13:5: Warning: Functions in interfaces should be declared external.
+    function allowance(address owner, address spender) public view returns (uint);
+    ^----------------------------------------------------------------------------^
+/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol:14:5: Warning: Functions in interfaces should be declared external.
+    function transfer(address to, uint value) public returns (bool);
+    ^--------------------------------------------------------------^
+/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol:15:5: Warning: Functions in interfaces should be declared external.
+    function transferFrom(address from, address to, uint value) public returns (bool);
+    ^--------------------------------------------------------------------------------^
+/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol:16:5: Warning: Functions in interfaces should be declared external.
+    function approve(address spender, uint value) public returns (bool);
+    ^------------------------------------------------------------------^
+/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol:312:5: Warning: Function state mutability can be restricted to view
+    function getActiveBucketIdxImpl(uint256 _prevIndex, uint256 _limit) internal returns(uint256 count, uint256[] indexes) {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol:333:16: Warning: Function declared as view, but this expression (potentially) modifies the state and thus requires non-payable (the default) or payable.
+        return getActiveBucketIdxImpl(_prevIndex, _limit);
+               ^----------------------------------------^
+/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol:346:28: Warning: Function declared as view, but this expression (potentially) modifies the state and thus requires non-payable (the default) or payable.
+        (count, indexes) = getActiveBucketIdxImpl(_prevIndex, _limit);
+                           ^----------------------------------------^
+/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol:371:28: Warning: Function declared as view, but this expression (potentially) modifies the state and thus requires non-payable (the default) or payable.
+        (count, indexes) = getActiveBucketIdxImpl(_prevIndex, _limit);
+                           ^----------------------------------------^
+
+INFO:Detectors:[93m
+Staking.canTouchBucket (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#291-295) uses a dangerous strict equality:
+	- require(bool,string)(buckets[_bucketIndex].bucketOwner == msg.sender,sender is not the owner.)
+	- require(bool,string)(buckets[_bucketIndex].bucketOwner == msg.sender,sender is not the owner.)
+Staking.canTouchBucket (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#291-295) uses a dangerous strict equality:
+	- require(bool,string)(buckets[_bucketIndex].bucketOwner == msg.sender,sender is not the owner.)
+	- require(bool,string)(buckets[_bucketIndex].bucketOwner == msg.sender,sender is not the owner.)
+Staking.getActiveBucketIdxImpl (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#317-338) uses a dangerous strict equality:
+	- bucket.next == 0
+Staking.canTouchBucket (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#291-295) uses a dangerous strict equality:
+	- require(bool,string)(buckets[_bucketIndex].bucketOwner == msg.sender,sender is not the owner.)
+	- require(bool,string)(buckets[_bucketIndex].bucketOwner == msg.sender,sender is not the owner.)
+Staking.getActiveBucketIdxImpl (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#317-338) uses a dangerous strict equality:
+	- bucket.next == 0
+Staking.revote (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#426-432) uses a dangerous strict equality:
+	- require(bool,string)(buckets[_bucketIndex].unstakeStartTime == 0,cannot revote during unstaking.)
+Staking.canTouchBucket (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#291-295) uses a dangerous strict equality:
+	- require(bool,string)(buckets[_bucketIndex].bucketOwner == msg.sender,sender is not the owner.)
+	- require(bool,string)(buckets[_bucketIndex].bucketOwner == msg.sender,sender is not the owner.)
+Staking.getActiveBucketIdxImpl (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#317-338) uses a dangerous strict equality:
+	- bucket.next == 0
+Staking.revote (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#426-432) uses a dangerous strict equality:
+	- require(bool,string)(buckets[_bucketIndex].unstakeStartTime == 0,cannot revote during unstaking.)
+Staking.unstake (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#451-465) uses a dangerous strict equality:
+	- require(bool,string)(buckets[_bucketIndex].unstakeStartTime == 0,Unstaked already. No need to unstake again.)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Reentrancy in Staking.createBucket (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#526-550):
+	External calls:
+	- require(bool,string)(stakingToken.transferFrom(msg.sender,this,_amount),Stake required) (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#532)
+	State variables written after the call(s):
+	- stakeholders (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#542-545)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+Staking.removeBucketIndex.owner (local variable @ /sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol) shadows:
+	- Ownable.owner (state variable @ /sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#28)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+Reentrancy in Staking.createBucket (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#526-550):
+	External calls:
+	- require(bool,string)(stakingToken.transferFrom(msg.sender,this,_amount),Stake required) (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#532)
+	State variables written after the call(s):
+	- bucketCount (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#545)
+	- buckets (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#538-541)
+	- buckets (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#541-542)
+	- buckets (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#542)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Staking.getActiveBucketIdxImpl (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#317-338) uses timestamp for comparisons
+	Dangerous comparisons:
+	- bucket.next > 0 && buckets[bucket.next].unstakeStartTime > 0 (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#327-332)
+	- bucket.next == 0 (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#332-336)
+	- require(bool,string)(bucket.next > 0,cannot find bucket based on input index.) (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#321-323)
+Staking.restake (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#400-418) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(_stakeDuration >= buckets[_bucketIndex].stakeDuration,cannot reduce the stake duration.) (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#411-412)
+	- require(bool,string)(block.timestamp.add(_stakeDuration * secondsPerEpoch) >= buckets[_bucketIndex].stakeStartTime.add(buckets[_bucketIndex].stakeDuration * secondsPerEpoch),current stake duration not finished.) (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#403-408)
+Staking.revote (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#426-432) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(buckets[_bucketIndex].unstakeStartTime == 0,cannot revote during unstaking.) (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#428-429)
+Staking.unstake (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#451-465) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(buckets[_bucketIndex].stakeStartTime.add(buckets[_bucketIndex].stakeDuration * secondsPerEpoch) <= block.timestamp,Staking time does not expire yet. Please wait until staking expires.) (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#455-460)
+	- require(bool,string)(buckets[_bucketIndex].unstakeStartTime == 0,Unstaked already. No need to unstake again.) (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#460-462)
+	- require(bool,string)(! buckets[_bucketIndex].nonDecay,Cannot unstake with nonDecay flag. Need to disable non-decay mode first.) (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#454-455)
+Staking.withdraw (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#471-501) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(buckets[_bucketIndex].unstakeStartTime.add(unStakeDuration * secondsPerEpoch) <= block.timestamp,Stakeholder needs to wait for 3 days before withdrawing tokens.) (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#477-481)
+	- require(bool,string)(stakingToken.transfer(bucketowner,amount),Unable to withdraw stake) (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#497-498)
+	- require(bool,string)(buckets[_bucketIndex].unstakeStartTime > 0,Please unstake first before withdraw.) (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#474-477)
+Staking.removeBucketIndex (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#553-555) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(stakeholders[owner].length > 0,Expect the owner has at least one bucket index) (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+ERC20.totalSupply (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#11-12) should be declared external
+ERC20.balanceOf (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#12-13) should be declared external
+ERC20.allowance (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#13-14) should be declared external
+ERC20.transfer (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#14-15) should be declared external
+ERC20.transferFrom (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#15-16) should be declared external
+ERC20.approve (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#16-20) should be declared external
+Ownable.transferOwnership (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#37-41) should be declared external
+Pausable.pause (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#134-136) should be declared external
+Pausable.unpause (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#142-150) should be declared external
+Whitelist.addAddressesToWhitelist (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#189-198) should be declared external
+Whitelist.removeAddressesFromWhitelist (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#217-241) should be declared external
+Staking.totalStaked (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#508-509) should be declared external
+Staking.token (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#514-515) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Function 'Ownable.Ownable' (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#34-37) is not in mixedCase
+Parameter '_newOwner' of Ownable.transferOwnership (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#37-38) is not in mixedCase
+Parameter '_address' of Ownable.isOwner (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#41-42) is not in mixedCase
+Parameter '_stakingTokenAddr' of Staking. (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#309-312) is not in mixedCase
+Parameter '_prevIndex' of Staking.getActiveBucketIdxImpl (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#318) is not in mixedCase
+Parameter '_limit' of Staking.getActiveBucketIdxImpl (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#319) is not in mixedCase
+Parameter '_prevIndex' of Staking.getActiveBucketIdx (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#338-339) is not in mixedCase
+Parameter '_limit' of Staking.getActiveBucketIdx (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#339) is not in mixedCase
+Parameter '_prevIndex' of Staking.getActiveBuckets (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#347-348) is not in mixedCase
+Parameter '_limit' of Staking.getActiveBuckets (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#348) is not in mixedCase
+Parameter '_prevIndex' of Staking.getActiveBucketCreateTimes (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#376) is not in mixedCase
+Parameter '_limit' of Staking.getActiveBucketCreateTimes (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#376) is not in mixedCase
+Parameter '_owner' of Staking.getBucketIndexesByAddress (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#393) is not in mixedCase
+Parameter '_bucketIndex' of Staking.restake (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#400) is not in mixedCase
+Parameter '_stakeDuration' of Staking.restake (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#400-401) is not in mixedCase
+Parameter '_nonDecay' of Staking.restake (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#401) is not in mixedCase
+Parameter '_data' of Staking.restake (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#401) is not in mixedCase
+Parameter '_bucketIndex' of Staking.revote (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#426) is not in mixedCase
+Parameter '_canName' of Staking.revote (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#426-427) is not in mixedCase
+Parameter '_data' of Staking.revote (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#427) is not in mixedCase
+Parameter '_bucketIndex' of Staking.setBucketOwner (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#442) is not in mixedCase
+Parameter '_newOwner' of Staking.setBucketOwner (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#442-443) is not in mixedCase
+Parameter '_data' of Staking.setBucketOwner (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#443) is not in mixedCase
+Parameter '_bucketIndex' of Staking.unstake (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#451-452) is not in mixedCase
+Parameter '_data' of Staking.unstake (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#452) is not in mixedCase
+Parameter '_bucketIndex' of Staking.withdraw (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#472) is not in mixedCase
+Parameter '_data' of Staking.withdraw (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#472) is not in mixedCase
+Parameter '_bucketIndex' of Staking.emitBucketUpdated (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#516-517) is not in mixedCase
+Parameter '_data' of Staking.emitBucketUpdated (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#517) is not in mixedCase
+Parameter '_canName' of Staking.createBucket (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#526) is not in mixedCase
+Parameter '_amount' of Staking.createBucket (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#526) is not in mixedCase
+Parameter '_stakeDuration' of Staking.createBucket (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#526-527) is not in mixedCase
+Parameter '_nonDecay' of Staking.createBucket (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#527) is not in mixedCase
+Parameter '_data' of Staking.createBucket (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#527) is not in mixedCase
+Parameter '_bucketidx' of Staking.removeBucketIndex (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#555) is not in mixedCase
+Constant 'Staking.minStakeDuration' (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#257-258) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'Staking.maxStakeDuration' (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#258-260) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'Staking.minStakeAmount' (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#260-262) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'Staking.unStakeDuration' (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#262) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'Staking.maxBucketsPerAddr' (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#262-263) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'Staking.secondsPerEpoch' (/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol#263-264) is not in UPPER_CASE_WITH_UNDERSCORES
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x87c9dbff0016af23f5b1ab9b8e072124ab729193.sol analyzed (6 contracts), 67 result(s) found

@@ -1,0 +1,72 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xb0cc6b00920631cfc5d8b5f15f9886d9f3a48ea3.sol:
+/sb/0xb0cc6b00920631cfc5d8b5f15f9886d9f3a48ea3.sol:133:5: Warning: Defining constructors as functions with the same name as the contract is deprecated. Use "constructor(...) { ... }" instead.
+    function UUC () public {
+    ^ (Relevant source part starts here and spans across multiple lines).
+/sb/0xb0cc6b00920631cfc5d8b5f15f9886d9f3a48ea3.sol:189:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Transfer(msg.sender, _to, _amount);
+        ^--------------------------------^
+/sb/0xb0cc6b00920631cfc5d8b5f15f9886d9f3a48ea3.sol:215:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Transfer(_from, _to, _amount);
+        ^---------------------------^
+/sb/0xb0cc6b00920631cfc5d8b5f15f9886d9f3a48ea3.sol:227:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Approval(msg.sender, _spender, _value);
+        ^------------------------------------^
+/sb/0xb0cc6b00920631cfc5d8b5f15f9886d9f3a48ea3.sol:245:32: Warning: Using contract member "balance" inherited from the address type is deprecated. Convert the contract to "address" type to access the member, for example use "address(contract).balance" instead.
+        uint256 etherBalance = this.balance;
+                               ^----------^
+/sb/0xb0cc6b00920631cfc5d8b5f15f9886d9f3a48ea3.sol:265:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Burn(burner, _value);
+        ^------------------^
+/sb/0xb0cc6b00920631cfc5d8b5f15f9886d9f3a48ea3.sol:275:9: Warning: Invoking events without "emit" prefix is deprecated.
+        Approval(msg.sender, _spender, _value);
+        ^------------------------------------^
+
+INFO:Detectors:[93m
+UUC.totalSupply (/sb/0xb0cc6b00920631cfc5d8b5f15f9886d9f3a48ea3.sol#115-117) shadows:
+	- ERC20Basic.totalSupply (/sb/0xb0cc6b00920631cfc5d8b5f15f9886d9f3a48ea3.sol#65)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variable-shadowing-from-abstract-contracts[0m
+INFO:Detectors:[92m
+ERC20Basic.totalSupply should be constant (/sb/0xb0cc6b00920631cfc5d8b5f15f9886d9f3a48ea3.sol#65)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+ERC20Basic.balanceOf (/sb/0xb0cc6b00920631cfc5d8b5f15f9886d9f3a48ea3.sol#65-67) should be declared external
+UUC.balanceOf (/sb/0xb0cc6b00920631cfc5d8b5f15f9886d9f3a48ea3.sol#163-171) should be declared external
+UUC.transfer (/sb/0xb0cc6b00920631cfc5d8b5f15f9886d9f3a48ea3.sol#181-203) should be declared external
+ERC20Basic.transfer (/sb/0xb0cc6b00920631cfc5d8b5f15f9886d9f3a48ea3.sol#67-69) should be declared external
+ERC20.allowance (/sb/0xb0cc6b00920631cfc5d8b5f15f9886d9f3a48ea3.sol#77-79) should be declared external
+UUC.allowance (/sb/0xb0cc6b00920631cfc5d8b5f15f9886d9f3a48ea3.sol#245-255) should be declared external
+UUC.transferFrom (/sb/0xb0cc6b00920631cfc5d8b5f15f9886d9f3a48ea3.sol#203-231) should be declared external
+ERC20.transferFrom (/sb/0xb0cc6b00920631cfc5d8b5f15f9886d9f3a48ea3.sol#79-82) should be declared external
+ERC20.approve (/sb/0xb0cc6b00920631cfc5d8b5f15f9886d9f3a48ea3.sol#83) should be declared external
+UUC.approve (/sb/0xb0cc6b00920631cfc5d8b5f15f9886d9f3a48ea3.sol#235-245) should be declared external
+UUC.transferOwnership (/sb/0xb0cc6b00920631cfc5d8b5f15f9886d9f3a48ea3.sol#149-163) should be declared external
+UUC.withdraw (/sb/0xb0cc6b00920631cfc5d8b5f15f9886d9f3a48ea3.sol#257-263) should be declared external
+UUC.burn (/sb/0xb0cc6b00920631cfc5d8b5f15f9886d9f3a48ea3.sol#265-279) should be declared external
+UUC.approveAndCall (/sb/0xb0cc6b00920631cfc5d8b5f15f9886d9f3a48ea3.sol#279-285) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0xb0cc6b00920631cfc5d8b5f15f9886d9f3a48ea3.sol:
+	- pragma solidity^0.4.18 (/sb/0xb0cc6b00920631cfc5d8b5f15f9886d9f3a48ea3.sol#9-13): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Low level call in UUC.approveAndCall (/sb/0xb0cc6b00920631cfc5d8b5f15f9886d9f3a48ea3.sol#279-285):
+	-require(bool)(_spender.call(bytes4(bytes32(keccak256()(receiveApproval(address,uint256,address,bytes)))),msg.sender,_value,this,_extraData)) /sb/0xb0cc6b00920631cfc5d8b5f15f9886d9f3a48ea3.sol
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Parameter '_owner' of UUC.balanceOf (/sb/0xb0cc6b00920631cfc5d8b5f15f9886d9f3a48ea3.sol#165) is not in mixedCase
+Parameter '_to' of UUC.transfer (/sb/0xb0cc6b00920631cfc5d8b5f15f9886d9f3a48ea3.sol#181-183) is not in mixedCase
+Parameter '_amount' of UUC.transfer (/sb/0xb0cc6b00920631cfc5d8b5f15f9886d9f3a48ea3.sol#185) is not in mixedCase
+Parameter '_owner' of UUC.allowance (/sb/0xb0cc6b00920631cfc5d8b5f15f9886d9f3a48ea3.sol#247) is not in mixedCase
+Parameter '_spender' of UUC.allowance (/sb/0xb0cc6b00920631cfc5d8b5f15f9886d9f3a48ea3.sol#247-251) is not in mixedCase
+Parameter '_from' of UUC.transferFrom (/sb/0xb0cc6b00920631cfc5d8b5f15f9886d9f3a48ea3.sol#205) is not in mixedCase
+Parameter '_to' of UUC.transferFrom (/sb/0xb0cc6b00920631cfc5d8b5f15f9886d9f3a48ea3.sol#205) is not in mixedCase
+Parameter '_amount' of UUC.transferFrom (/sb/0xb0cc6b00920631cfc5d8b5f15f9886d9f3a48ea3.sol#205) is not in mixedCase
+Parameter '_spender' of UUC.approve (/sb/0xb0cc6b00920631cfc5d8b5f15f9886d9f3a48ea3.sol#235) is not in mixedCase
+Parameter '_value' of UUC.approve (/sb/0xb0cc6b00920631cfc5d8b5f15f9886d9f3a48ea3.sol#235) is not in mixedCase
+Function 'UUC.UUC' (/sb/0xb0cc6b00920631cfc5d8b5f15f9886d9f3a48ea3.sol#143-147) is not in mixedCase
+Parameter '_value' of UUC.burn (/sb/0xb0cc6b00920631cfc5d8b5f15f9886d9f3a48ea3.sol#265-267) is not in mixedCase
+Parameter '_spender' of UUC.approveAndCall (/sb/0xb0cc6b00920631cfc5d8b5f15f9886d9f3a48ea3.sol#279) is not in mixedCase
+Parameter '_value' of UUC.approveAndCall (/sb/0xb0cc6b00920631cfc5d8b5f15f9886d9f3a48ea3.sol#279) is not in mixedCase
+Parameter '_extraData' of UUC.approveAndCall (/sb/0xb0cc6b00920631cfc5d8b5f15f9886d9f3a48ea3.sol#279) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0xb0cc6b00920631cfc5d8b5f15f9886d9f3a48ea3.sol analyzed (4 contracts), 33 result(s) found

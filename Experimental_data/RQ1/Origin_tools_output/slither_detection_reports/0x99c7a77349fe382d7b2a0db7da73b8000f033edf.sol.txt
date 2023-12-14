@@ -1,0 +1,250 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol:
+/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol:1197:5: Warning: Function state mutability can be restricted to pure
+    function fireEventOnTokenTransfer(address /*_from */, uint256 /* _value */) internal {
+    ^
+Spanning multiple lines.
+/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol:1265:27: Warning: Function declared as view, but this expression (potentially) modifies the state and thus requires non-payable (the default) or payable.
+            let result := callcode(gas, feeManager, 0x0, x, 4, 0, 32)
+                          ^------^
+/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol:1297:27: Warning: Function declared as view, but this expression (potentially) modifies the state and thus requires non-payable (the default) or payable.
+            let result := callcode(gas, feeManager, 0x0, x, 4, 0, 4)
+                          ^------^
+/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol:1375:27: Warning: Function declared as view, but this expression (potentially) modifies the state and thus requires non-payable (the default) or payable.
+            let result := callcode(gas, _impl, 0x0, callData, 100, 0, 32)
+                          ^------^
+
+INFO:Detectors:[91m
+RewardableBridge._setFee (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1399-1411) uses delegatecall to a input-controlled function id
+	require(bool)(_feeManager.delegatecall(bytes4(keccak256()(method)),_fee)) (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1403-1411)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#controlled-delegatecall[0m
+INFO:Detectors:[93m
+BasicBridge.isContract (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#745-765) is declared view but contains assembly code
+Message.parseMessage (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#973-1001) is declared view but contains assembly code
+Message.recoverAddressFromSignedMessage (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1019-1037) is declared view but contains assembly code
+RewardableBridge._getFee (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1323-1349) is declared view but contains assembly code
+RewardableBridge.getFeeManagerMode (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1350-1375) is declared view but contains assembly code
+RewardableBridge.isContract (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1411-1429) is declared view but contains assembly code
+RewardableBridge.calculateFee (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1429-1489) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+Reentrancy in ForeignBridgeNativeToErc.rewardableInitialize (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1633-1673):
+	External calls:
+	- _setFee(_feeManager,_homeFee,HOME_FEE) (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1669-1671)
+	State variables written after the call(s):
+	- boolStorage (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1671)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+Message.hasEnoughValidSignatures has external calls inside a loop:
+	- require(bool)(_validatorContract.isValidator(recoveredAddress)) (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1095-1097)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+BasicBridge.isContract uses assembly (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#745-765)
+	- /sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#763-765
+Message.parseMessage uses assembly (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#973-1001)
+	- /sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#985-1001
+Message.recoverAddressFromSignedMessage uses assembly (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1019-1037)
+	- /sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1029-1035
+RewardableBridge._getFee uses assembly (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1323-1349)
+	- /sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1335-1349
+RewardableBridge.getFeeManagerMode uses assembly (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1350-1375)
+	- /sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1361-1375
+RewardableBridge.isContract uses assembly (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1411-1429)
+	- /sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1423-1427
+RewardableBridge.calculateFee uses assembly (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1429-1489)
+	- /sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1445-1489
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+Different versions of Solidity is used in /sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol:
+	- Version used: ['0.4.19', '^0.4.18']
+	- /sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#13-21 declares pragma solidity0.4.19
+	- /sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#123-125 declares pragma solidity0.4.19
+	- /sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#151 declares pragma solidity0.4.19
+	- /sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#169 declares pragma solidity0.4.19
+	- /sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#207-211 declares pragma solidity0.4.19
+	- /sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#248-253 declares pragma solidity0.4.19
+	- /sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#301 declares pragma solidity0.4.19
+	- /sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#407 declares pragma solidity^0.4.18
+	- /sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#453 declares pragma solidity0.4.19
+	- /sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#769 declares pragma solidity^0.4.18
+	- /sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#819-821 declares pragma solidity0.4.19
+	- /sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#841-843 declares pragma solidity0.4.19
+	- /sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#859-861 declares pragma solidity0.4.19
+	- /sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#873 declares pragma solidity0.4.19
+	- /sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1111-1117 declares pragma solidity0.4.19
+	- /sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1221-1223 declares pragma solidity0.4.19
+	- /sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1297 declares pragma solidity0.4.19
+	- /sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1317 declares pragma solidity0.4.19
+	- /sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1527-1529 declares pragma solidity0.4.19
+	- /sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1559-1561 declares pragma solidity0.4.19
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#different-pragma-directives-are-used[0m
+INFO:Detectors:[92m
+IBridgeValidators.isValidator (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#125-131) should be declared external
+IBridgeValidators.requiredSignatures (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#133-137) should be declared external
+IBridgeValidators.owner (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#137-144) should be declared external
+IOwnedUpgradeabilityProxy.proxyOwner (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#155-167) should be declared external
+Validatable.requiredSignatures (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#291-299) should be declared external
+Ownable.transferOwnership (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#371-393) should be declared external
+ERC20Basic.totalSupply (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#437) should be declared external
+ERC20Basic.balanceOf (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#437-443) should be declared external
+ERC20Basic.transfer (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#443-445) should be declared external
+BasicBridge.getBridgeInterfacesVersion (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#477-485) should be declared external
+BasicBridge.setGasPrice (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#485-493) should be declared external
+BasicBridge.gasPrice (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#493-501) should be declared external
+BasicBridge.setRequiredBlockConfirmations (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#501-517) should be declared external
+BasicBridge.requiredBlockConfirmations (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#517-525) should be declared external
+BasicBridge.deployedAtBlock (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#525-533) should be declared external
+BasicBridge.setDailyLimit (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#619-627) should be declared external
+BasicBridge.setExecutionDailyLimit (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#635-647) should be declared external
+BasicBridge.claimTokens (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#722-745) should be declared external
+ERC20.allowance (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#791-793) should be declared external
+ERC20.transferFrom (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#793-801) should be declared external
+ERC20.approve (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#801-811) should be declared external
+IBurnableMintableERC677Token.mint (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#847-851) should be declared external
+IBurnableMintableERC677Token.burn (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#851-852) should be declared external
+IBurnableMintableERC677Token.claimTokens (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#853-855) should be declared external
+RewardableBridge.getFeeManagerMode (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1350-1375) should be declared external
+RewardableBridge.setFeeManagerContract (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1385-1395) should be declared external
+RewardableForeignBridgeNativeToErc.getHomeFee (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1547-1551) should be declared external
+ForeignBridgeNativeToErc.initialize (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1583-1633) should be declared external
+ForeignBridgeNativeToErc.rewardableInitialize (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1633-1673) should be declared external
+ForeignBridgeNativeToErc.getBridgeMode (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1673-1681) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol:
+	- pragma solidity0.4.19 (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#13-21): it allows old versions
+	- pragma solidity0.4.19 (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#123-125): it allows old versions
+	- pragma solidity0.4.19 (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#151): it allows old versions
+	- pragma solidity0.4.19 (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#169): it allows old versions
+	- pragma solidity0.4.19 (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#207-211): it allows old versions
+	- pragma solidity0.4.19 (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#248-253): it allows old versions
+	- pragma solidity0.4.19 (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#301): it allows old versions
+	- pragma solidity^0.4.18 (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#407): it allows old versions
+	- pragma solidity0.4.19 (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#453): it allows old versions
+	- pragma solidity^0.4.18 (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#769): it allows old versions
+	- pragma solidity0.4.19 (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#819-821): it allows old versions
+	- pragma solidity0.4.19 (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#841-843): it allows old versions
+	- pragma solidity0.4.19 (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#859-861): it allows old versions
+	- pragma solidity0.4.19 (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#873): it allows old versions
+	- pragma solidity0.4.19 (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1111-1117): it allows old versions
+	- pragma solidity0.4.19 (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1221-1223): it allows old versions
+	- pragma solidity0.4.19 (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1297): it allows old versions
+	- pragma solidity0.4.19 (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1317): it allows old versions
+	- pragma solidity0.4.19 (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1527-1529): it allows old versions
+	- pragma solidity0.4.19 (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1559-1561): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Low level call in RewardableBridge._setFee (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1399-1411):
+	-require(bool)(_feeManager.delegatecall(bytes4(keccak256()(method)),_fee)) /sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1403-1411
+Low level call in RewardableBridge.distributeFeeFromSignatures (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1491-1503):
+	-require(bool)(_feeManager.delegatecall(bytes4(keccak256()(distributeFeeFromSignatures(uint256))),_fee)) /sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1495-1503
+Low level call in RewardableBridge.distributeFeeFromAffirmation (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1503-1519):
+	-require(bool)(_feeManager.delegatecall(bytes4(keccak256()(distributeFeeFromAffirmation(uint256))),_fee)) /sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1511-1519
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Parameter '_gasPrice' of BasicBridge.setGasPrice (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#485) is not in mixedCase
+Parameter '_blockConfirmations' of BasicBridge.setRequiredBlockConfirmations (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#503) is not in mixedCase
+Parameter '_day' of BasicBridge.setTotalSpentPerDay (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#535) is not in mixedCase
+Parameter '_value' of BasicBridge.setTotalSpentPerDay (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#535) is not in mixedCase
+Parameter '_day' of BasicBridge.totalSpentPerDay (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#543) is not in mixedCase
+Parameter '_day' of BasicBridge.setTotalExecutedPerDay (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#557) is not in mixedCase
+Parameter '_value' of BasicBridge.setTotalExecutedPerDay (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#557) is not in mixedCase
+Parameter '_day' of BasicBridge.totalExecutedPerDay (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#565) is not in mixedCase
+Parameter '_status' of BasicBridge.setInitialize (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#601) is not in mixedCase
+Parameter '_dailyLimit' of BasicBridge.setDailyLimit (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#619) is not in mixedCase
+Parameter '_dailyLimit' of BasicBridge.setExecutionDailyLimit (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#637-639) is not in mixedCase
+Parameter '_maxPerTx' of BasicBridge.setExecutionMaxPerTx (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#657) is not in mixedCase
+Parameter '_maxPerTx' of BasicBridge.setMaxPerTx (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#665) is not in mixedCase
+Parameter '_minPerTx' of BasicBridge.setMinPerTx (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#669) is not in mixedCase
+Parameter '_amount' of BasicBridge.withinLimit (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#681) is not in mixedCase
+Parameter '_amount' of BasicBridge.withinExecutionLimit (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#701) is not in mixedCase
+Parameter '_token' of BasicBridge.claimTokens (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#731) is not in mixedCase
+Parameter '_to' of BasicBridge.claimTokens (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#731-733) is not in mixedCase
+Parameter '' of ERC677.transferAndCall (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#835) is not in mixedCase
+Parameter '_scope_0' of ERC677.transferAndCall (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#835) is not in mixedCase
+Parameter '_scope_1' of ERC677.transferAndCall (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#835) is not in mixedCase
+Parameter '' of IBurnableMintableERC677Token.mint (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#849) is not in mixedCase
+Parameter '_scope_0' of IBurnableMintableERC677Token.mint (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#849) is not in mixedCase
+Parameter '_msg' of Message.isMessageValid (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1001-1003) is not in mixedCase
+Parameter '_message' of Message.hasEnoughValidSignatures (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1073) is not in mixedCase
+Parameter '_vs' of Message.hasEnoughValidSignatures (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1073-1075) is not in mixedCase
+Parameter '_rs' of Message.hasEnoughValidSignatures (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1075-1077) is not in mixedCase
+Parameter '_ss' of Message.hasEnoughValidSignatures (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1077) is not in mixedCase
+Parameter '_validatorContract' of Message.hasEnoughValidSignatures (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1077-1079) is not in mixedCase
+Parameter '' of BasicForeignBridge.onExecuteMessage (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1181) is not in mixedCase
+Parameter '_scope_0' of BasicForeignBridge.onExecuteMessage (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1181) is not in mixedCase
+Parameter '_txHash' of BasicForeignBridge.setRelayedMessages (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1185) is not in mixedCase
+Parameter '_status' of BasicForeignBridge.setRelayedMessages (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1185) is not in mixedCase
+Parameter '_txHash' of BasicForeignBridge.relayedMessages (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1189-1190) is not in mixedCase
+Parameter '' of BasicForeignBridge.messageWithinLimits (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1199-1201) is not in mixedCase
+Parameter '' of BasicForeignBridge.onFailedMessage (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1211-1213) is not in mixedCase
+Parameter '_scope_0' of BasicForeignBridge.onFailedMessage (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1213) is not in mixedCase
+Parameter '_scope_1' of BasicForeignBridge.onFailedMessage (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1213) is not in mixedCase
+Parameter '_token' of ERC677Bridge.setErc677token (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1247-1249) is not in mixedCase
+Parameter '_from' of ERC677Bridge.onTokenTransfer (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1255) is not in mixedCase
+Parameter '_value' of ERC677Bridge.onTokenTransfer (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1255-1259) is not in mixedCase
+Parameter '' of ERC677Bridge.onTokenTransfer (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1259) is not in mixedCase
+Parameter '' of ERC677Bridge.fireEventOnTokenTransfer (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1287) is not in mixedCase
+Parameter '_scope_0' of ERC677Bridge.fireEventOnTokenTransfer (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1287-1288) is not in mixedCase
+Function 'RewardableBridge._getFee' (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1323-1349) is not in mixedCase
+Parameter '_feeType' of RewardableBridge._getFee (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1323) is not in mixedCase
+Parameter '_feeManager' of RewardableBridge.setFeeManagerContract (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1389-1393) is not in mixedCase
+Function 'RewardableBridge._setFee' (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1399-1411) is not in mixedCase
+Parameter '_feeManager' of RewardableBridge._setFee (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1401) is not in mixedCase
+Parameter '_fee' of RewardableBridge._setFee (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1401) is not in mixedCase
+Parameter '_feeType' of RewardableBridge._setFee (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1401) is not in mixedCase
+Parameter '_fee' of RewardableBridge.distributeFeeFromSignatures (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1493) is not in mixedCase
+Parameter '_feeManager' of RewardableBridge.distributeFeeFromSignatures (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1493-1495) is not in mixedCase
+Parameter '_fee' of RewardableBridge.distributeFeeFromAffirmation (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1507) is not in mixedCase
+Parameter '_feeManager' of RewardableBridge.distributeFeeFromAffirmation (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1507-1509) is not in mixedCase
+Parameter '_fee' of RewardableForeignBridgeNativeToErc.setHomeFee (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1539) is not in mixedCase
+Parameter '_recipient' of ForeignBridgeNativeToErc.onExecuteMessage (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol) is not in mixedCase
+Parameter '_amount' of ForeignBridgeNativeToErc.onExecuteMessage (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol) is not in mixedCase
+Parameter '_amount' of ForeignBridgeNativeToErc.messageWithinLimits (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol) is not in mixedCase
+Parameter '' of ForeignBridgeNativeToErc.onFailedMessage (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol) is not in mixedCase
+Parameter '_scope_0' of ForeignBridgeNativeToErc.onFailedMessage (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol) is not in mixedCase
+Parameter '_scope_1' of ForeignBridgeNativeToErc.onFailedMessage (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol) is not in mixedCase
+Parameter '_from' of ForeignBridgeNativeToErc.fireEventOnTokenTransfer (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol) is not in mixedCase
+Parameter '_value' of ForeignBridgeNativeToErc.fireEventOnTokenTransfer (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol) is not in mixedCase
+Parameter '_validatorContract' of ForeignBridgeNativeToErc.initialize (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1585-1589) is not in mixedCase
+Parameter '_erc677token' of ForeignBridgeNativeToErc.initialize (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1589) is not in mixedCase
+Parameter '_dailyLimit' of ForeignBridgeNativeToErc.initialize (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1591) is not in mixedCase
+Parameter '_maxPerTx' of ForeignBridgeNativeToErc.initialize (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1591) is not in mixedCase
+Parameter '_minPerTx' of ForeignBridgeNativeToErc.initialize (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1591-1593) is not in mixedCase
+Parameter '_foreignGasPrice' of ForeignBridgeNativeToErc.initialize (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1593-1594) is not in mixedCase
+Parameter '_requiredBlockConfirmations' of ForeignBridgeNativeToErc.initialize (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1595-1597) is not in mixedCase
+Parameter '_homeDailyLimit' of ForeignBridgeNativeToErc.initialize (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1597-1603) is not in mixedCase
+Parameter '_homeMaxPerTx' of ForeignBridgeNativeToErc.initialize (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1603) is not in mixedCase
+Parameter '_owner' of ForeignBridgeNativeToErc.initialize (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1603-1605) is not in mixedCase
+Parameter '_validatorContract' of ForeignBridgeNativeToErc.rewardableInitialize (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1635-1637) is not in mixedCase
+Parameter '_erc677token' of ForeignBridgeNativeToErc.rewardableInitialize (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1639-1640) is not in mixedCase
+Parameter '_dailyLimit' of ForeignBridgeNativeToErc.rewardableInitialize (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1641-1643) is not in mixedCase
+Parameter '_maxPerTx' of ForeignBridgeNativeToErc.rewardableInitialize (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1643-1645) is not in mixedCase
+Parameter '_minPerTx' of ForeignBridgeNativeToErc.rewardableInitialize (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1645) is not in mixedCase
+Parameter '_foreignGasPrice' of ForeignBridgeNativeToErc.rewardableInitialize (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1645) is not in mixedCase
+Parameter '_requiredBlockConfirmations' of ForeignBridgeNativeToErc.rewardableInitialize (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1647) is not in mixedCase
+Parameter '_homeDailyLimit' of ForeignBridgeNativeToErc.rewardableInitialize (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1647) is not in mixedCase
+Parameter '_homeMaxPerTx' of ForeignBridgeNativeToErc.rewardableInitialize (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1649) is not in mixedCase
+Parameter '_owner' of ForeignBridgeNativeToErc.rewardableInitialize (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1649-1651) is not in mixedCase
+Parameter '_feeManager' of ForeignBridgeNativeToErc.rewardableInitialize (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1651) is not in mixedCase
+Parameter '_homeFee' of ForeignBridgeNativeToErc.rewardableInitialize (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1653) is not in mixedCase
+Parameter '_token' of ForeignBridgeNativeToErc.claimTokensFromErc677 (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1681-1683) is not in mixedCase
+Parameter '_to' of ForeignBridgeNativeToErc.claimTokensFromErc677 (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1683) is not in mixedCase
+Function 'ForeignBridgeNativeToErc._initialize' (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1685-1731) is not in mixedCase
+Parameter '_validatorContract' of ForeignBridgeNativeToErc._initialize (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1687) is not in mixedCase
+Parameter '_erc677token' of ForeignBridgeNativeToErc._initialize (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1689) is not in mixedCase
+Parameter '_dailyLimit' of ForeignBridgeNativeToErc._initialize (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1689-1691) is not in mixedCase
+Parameter '_maxPerTx' of ForeignBridgeNativeToErc._initialize (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1691) is not in mixedCase
+Parameter '_minPerTx' of ForeignBridgeNativeToErc._initialize (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1691) is not in mixedCase
+Parameter '_foreignGasPrice' of ForeignBridgeNativeToErc._initialize (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1693-1695) is not in mixedCase
+Parameter '_requiredBlockConfirmations' of ForeignBridgeNativeToErc._initialize (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1695) is not in mixedCase
+Parameter '_homeDailyLimit' of ForeignBridgeNativeToErc._initialize (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1695-1697) is not in mixedCase
+Parameter '_homeMaxPerTx' of ForeignBridgeNativeToErc._initialize (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1697-1699) is not in mixedCase
+Parameter '_owner' of ForeignBridgeNativeToErc._initialize (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1701-1703) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+EternalStorage.stringStorage (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#219-221) is never used in ForeignBridgeNativeToErc
+EternalStorage.bytesStorage (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#229-243) is never used in ForeignBridgeNativeToErc
+EternalStorage.intStorage (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#245-247) is never used in ForeignBridgeNativeToErc
+FeeTypes.FOREIGN_FEE (/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol#1305-1311) is never used in ForeignBridgeNativeToErc
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0x99c7a77349fe382d7b2a0db7da73b8000f033edf.sol analyzed (20 contracts), 152 result(s) found

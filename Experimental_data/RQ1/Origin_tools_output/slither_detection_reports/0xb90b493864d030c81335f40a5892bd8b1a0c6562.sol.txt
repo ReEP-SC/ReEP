@@ -1,0 +1,101 @@
+INFO:Detectors:[93m
+ERC721 (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#297-349) has incorrect ERC20 function interface(s):
+	-approve (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#309)
+	-transfer (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#313-315)
+	-transferFrom (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#315-319)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-erc20-interface[0m
+INFO:Detectors:[93m
+Reentrancy in Offers.fulfillOffer (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#1453-1555):
+	External calls:
+	- owner = nonFungibleContract.ownerOf(_tokenId) (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#1487-1489)
+	State variables written after the call(s):
+	- tokenIdToOffer (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#1515-1519)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+previousBidder in Offers.createOffer (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#1293-1295) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[92m
+Reentrancy in Offers.constructor (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#1119-1143):
+	External calls:
+	- require(bool,string)(candidateContract.supportsInterface(InterfaceSignature_ERC721),NFT Contract needs to support ERC721 Interface) (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#1129-1131)
+	State variables written after the call(s):
+	- cooAddress (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#1133-1135)
+	- globalDuration (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#1137)
+	- minimumPriceIncrement (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#1141)
+	- minimumTotalValue (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#1143)
+	- nonFungibleContract (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#1131-1133)
+	- offerCut (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#1139-1141)
+	- unsuccessfulFee (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#1137-1139)
+Reentrancy in Offers.fulfillOffer (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#1453-1555):
+	External calls:
+	- owner = nonFungibleContract.ownerOf(_tokenId) (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#1487-1489)
+	- nonFungibleContract.transferFrom(owner,bidder,_tokenId) (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#1521-1527)
+	State variables written after the call(s):
+	- totalCFOEarnings (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#1537-1539)
+Reentrancy in Offers.fulfillOffer (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#1453-1555):
+	External calls:
+	- owner = nonFungibleContract.ownerOf(_tokenId) (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#1487-1489)
+	- nonFungibleContract.transferFrom(owner,bidder,_tokenId) (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#1521-1527)
+	External calls sending eth:
+	- _tryPushFunds(_tokenId,owner,offerPrice) (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#1543-1545)
+	State variables written after the call(s):
+	- totalLostAndFoundBalance (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#1543-1545)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+ERC721.totalSupply (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#299-301) should be declared external
+ERC721.balanceOf (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#301-305) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Parameter '_newCEO' of OffersAccessControl.setCEO (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#163-167) is not in mixedCase
+Parameter '_newCOO' of OffersAccessControl.setCOO (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#181) is not in mixedCase
+Parameter '_newCFO' of OffersAccessControl.setCFO (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#195) is not in mixedCase
+Parameter '_newLostAndFound' of OffersAccessControl.setLostAndFound (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#205-209) is not in mixedCase
+Parameter '_newMinTotal' of OffersConfig.setMinimumTotalValue (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#475) is not in mixedCase
+Parameter '_newDuration' of OffersConfig.setGlobalDuration (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#499) is not in mixedCase
+Parameter '_newOfferCut' of OffersConfig.setOfferCut (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#519) is not in mixedCase
+Parameter '_newUnsuccessfulFee' of OffersConfig.setUnsuccessfulFee (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#547-549) is not in mixedCase
+Parameter '_newMinimumPriceIncrement' of OffersConfig.setMinimumPriceIncrement (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#569) is not in mixedCase
+Function 'OffersConfig._setMinimumTotalValue' (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#605-609) is not in mixedCase
+Parameter '_newMinTotal' of OffersConfig._setMinimumTotalValue (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#605) is not in mixedCase
+Parameter '_unsuccessfulFee' of OffersConfig._setMinimumTotalValue (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#605) is not in mixedCase
+Function 'OffersConfig._setOfferCut' (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#613-629) is not in mixedCase
+Parameter '_newOfferCut' of OffersConfig._setOfferCut (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#615-621) is not in mixedCase
+Function 'OffersConfig._setMinimumPriceIncrement' (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#635-645) is not in mixedCase
+Parameter '_newMinimumPriceIncrement' of OffersConfig._setMinimumPriceIncrement (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#637) is not in mixedCase
+Function 'OffersBase._computeMinimumOverbidPrice' (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#909-913) is not in mixedCase
+Parameter '_offerPrice' of OffersBase._computeMinimumOverbidPrice (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#909) is not in mixedCase
+Function 'OffersBase._computeOfferPrice' (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#931-935) is not in mixedCase
+Parameter '_total' of OffersBase._computeOfferPrice (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#931) is not in mixedCase
+Parameter '_offerCut' of OffersBase._computeOfferPrice (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#931-933) is not in mixedCase
+Function 'OffersBase._offerExists' (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#955-959) is not in mixedCase
+Parameter '_expiresAt' of OffersBase._offerExists (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#955-957) is not in mixedCase
+Function 'OffersBase._isOfferActive' (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#971-973) is not in mixedCase
+Parameter '_expiresAt' of OffersBase._isOfferActive (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#973) is not in mixedCase
+Function 'OffersBase._tryPushFunds' (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#1001-1023) is not in mixedCase
+Parameter '_tokenId' of OffersBase._tryPushFunds (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#1001) is not in mixedCase
+Parameter '_to' of OffersBase._tryPushFunds (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#1003) is not in mixedCase
+Parameter '_amount' of OffersBase._tryPushFunds (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#1003-1005) is not in mixedCase
+Parameter '_nftAddress' of Offers. (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#1121) is not in mixedCase
+Parameter '_cooAddress' of Offers. (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#1121) is not in mixedCase
+Parameter '_globalDuration' of Offers. (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#1121-1123) is not in mixedCase
+Parameter '_minimumTotalValue' of Offers. (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#1123) is not in mixedCase
+Parameter '_minimumPriceIncrement' of Offers. (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#1123) is not in mixedCase
+Parameter '_unsuccessfulFee' of Offers. (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#1123-1125) is not in mixedCase
+Parameter '_offerCut' of Offers. (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#1125) is not in mixedCase
+Parameter '_tokenId' of Offers.createOffer (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#1181) is not in mixedCase
+Parameter '_tokenId' of Offers.cancelOffer (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#1363) is not in mixedCase
+Parameter '_tokenId' of Offers.fulfillOffer (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#1455) is not in mixedCase
+Parameter '_minOfferPrice' of Offers.fulfillOffer (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#1455-1457) is not in mixedCase
+Parameter '_tokenIds' of Offers.batchRemoveExpired (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#1580-1583) is not in mixedCase
+Parameter '_tokenId' of Offers.updateOffer (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#1693) is not in mixedCase
+Parameter '_tokenId' of Offers.bidderWithdrawFunds (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol) is not in mixedCase
+Constant 'Offers.InterfaceSignature_ERC721' (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#1083-1085) is not in UPPER_CASE_WITH_UNDERSCORES
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+ERC721 (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#297-349) does not mark important ERC20 parameters as 'indexed':
+	-Transfer (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#319-321) does not index parameter 'from'
+	-Transfer (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#319-321) does not index parameter 'to'
+	-Approval (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#321) does not index parameter 'owner'
+	-Approval (/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol#321) does not index parameter 'approved'
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unindexed-erc20-event-parameters[0m
+INFO:Slither:/sb/0xb90b493864d030c81335f40a5892bd8b1a0c6562.sol analyzed (5 contracts), 53 result(s) found

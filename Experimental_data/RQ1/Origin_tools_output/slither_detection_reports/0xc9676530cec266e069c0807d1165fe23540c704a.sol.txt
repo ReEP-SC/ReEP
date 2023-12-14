@@ -1,0 +1,159 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol:
+/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol:11:1: Warning: Experimental features are turned on. Do not use experimental features on live deployments.
+pragma experimental ABIEncoderV2;
+^-------------------------------^
+
+INFO:Detectors:[93m
+ldoh.mul (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#1073-1097) uses a dangerous strict equality:
+	- a == 0
+	- assert(bool)(c / a == b)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#dangerous-strict-equalities[0m
+INFO:Detectors:[93m
+Reentrancy in ldoh.HodlTokens (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#332-405):
+	External calls:
+	- require(bool)(token.transferFrom(msg.sender,address(this),amount)) (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#341-346)
+	- _safes[_currentIndex] = Safe(_currentIndex,amount,now + hodlingTime,msg.sender,tokenAddress,token.symbol(),data_amountbalance,data_cashbackbalance,now,percent,0,0,0,0xA15C7Ebe1f07CaF6bFF097D8a589fb8AC49Ae5B3) (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#365-381)
+	State variables written after the call(s):
+	- _currentIndex (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#393)
+Reentrancy in ldoh.RetireHodl (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#429-543):
+	External calls:
+	- PayToken(s.user,s.tokenAddress,s.amountbalance) (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#465)
+	State variables written after the call(s):
+	- _safes (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#475-477)
+Reentrancy in ldoh.ReturnAllTokens (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#1012-1055):
+	External calls:
+	- PayToken(s.user,s.tokenAddress,s.amount) (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#1041)
+	State variables written after the call(s):
+	- _safes (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#1043)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+returned in ldoh.ReturnAllTokens (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#1020-1021) is a local variable never initialiazed
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-local-variables[0m
+INFO:Detectors:[93m
+ldoh.PayToken (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#589-613) does not use the value returned by external calls:
+	-token.transfer(user,amount) (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#603-607)
+ldoh.WithdrawTokenFees (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#829-857) does not use the value returned by external calls:
+	-token.transfer(msg.sender,amount) (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#851-856)
+ldoh.WithdrawAllFees (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#865-915) does not use the value returned by external calls:
+	-token.transfer(msg.sender,x) (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#907-911)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+ldoh.WithdrawAllFees has external calls inside a loop:
+	- token.transfer(msg.sender,x) (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#907-911)
+ldoh.GetTokensAddressesWithFees has external calls inside a loop:
+	- tokenSymbol[i] = token.symbol() (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#983-991)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in ldoh.HodlTokens (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#332-405):
+	External calls:
+	- require(bool)(token.transferFrom(msg.sender,address(this),amount)) (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#341-346)
+	State variables written after the call(s):
+	- _userSafes (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#361-365)
+Reentrancy in ldoh.HodlTokens (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#332-405):
+	External calls:
+	- require(bool)(token.transferFrom(msg.sender,address(this),amount)) (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#341-346)
+	- _safes[_currentIndex] = Safe(_currentIndex,amount,now + hodlingTime,msg.sender,tokenAddress,token.symbol(),data_amountbalance,data_cashbackbalance,now,percent,0,0,0,0xA15C7Ebe1f07CaF6bFF097D8a589fb8AC49Ae5B3) (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#365-381)
+	State variables written after the call(s):
+	- _countSafes (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#395)
+	- _safes (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#365-381)
+	- _totalSaved (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#387-391)
+Reentrancy in ldoh.RetireHodl (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#429-543):
+	External calls:
+	- PayToken(s.user,s.tokenAddress,s.amountbalance) (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#465)
+	State variables written after the call(s):
+	- _countSafes (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#481)
+	- _totalSaved (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#469-473)
+	- _totalSaved (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#475-477)
+	- _userSafes (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#475-477)
+Reentrancy in ldoh.ReturnAllTokens (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#1012-1055):
+	External calls:
+	- PayToken(s.user,s.tokenAddress,s.amount) (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#1041)
+	State variables written after the call(s):
+	- _countSafes (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#1051)
+	- _totalSaved (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#1043)
+	- _userSafes (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#1043)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+ERC20Interface.decimals should be constant (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol)
+ERC20Interface.totalSupply should be constant (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol)
+ldoh.percent should be constant (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#173)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Different versions of Solidity is used in /sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol:
+	- Version used: ['ABIEncoderV2', '^0.4.25']
+	- /sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#9-11 declares pragma solidity^0.4.25
+	- /sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#11-15 declares pragma experimentalABIEncoderV2
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#different-pragma-directives-are-used[0m
+INFO:Detectors:[92m
+OwnableContract.viewSuperOwner (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#43-51) should be declared external
+OwnableContract.changeOwner (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#51-73) should be declared external
+BlockableContract.doBlockContract (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#109-121) should be declared external
+BlockableContract.unBlockContract (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#121-137) should be declared external
+ldoh.fallback (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#297-311) should be declared external
+ldoh.storeProfileHashed (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#315-329) should be declared external
+ldoh.HodlTokens (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#332-405) should be declared external
+ldoh.ClaimTokens (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#409-429) should be declared external
+ldoh.GetHodlTokensBalance (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#655-667) should be declared external
+ldoh.GetUserSafesLength (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#667-677) should be declared external
+ldoh.GetSafe (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#679-721) should be declared external
+ldoh.GetContractBalance (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#749-751) should be declared external
+ldoh.OwnerRetireHodl (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#763-779) should be declared external
+ldoh.ChangeHodlingTime (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#783-791) should be declared external
+ldoh.ChangeAllTimeHighPrice (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#795-811) should be declared external
+ldoh.ChangeComission (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#815-823) should be declared external
+ldoh.WithdrawTokenFees (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#829-857) should be declared external
+ldoh.WithdrawAllFees (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#865-915) should be declared external
+ldoh.WithdrawEth (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#919-935) should be declared external
+ldoh.GetTokensAddressesWithFees (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#939-1008) should be declared external
+ldoh.ReturnAllTokens (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#1012-1055) should be declared external
+ERC20Interface.symbol (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol) should be declared external
+ERC20Interface.balanceOf (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol) should be declared external
+ERC20Interface.transfer (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol) should be declared external
+ERC20Interface.transferFrom (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol) should be declared external
+ERC20Interface.approve (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol) should be declared external
+ERC20Interface.allowance (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Event 'OwnableContract.onTransferOwnership' (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#21-23) is not in CapWords
+Event 'BlockableContract.onBlockHODLs' (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#84-87) is not in CapWords
+Contract 'ldoh' (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#139-1117) is not in CapWords
+Event 'ldoh.onStoreProfileHash' (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#139-141) is not in CapWords
+Event 'ldoh.onHodlTokens' (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#141-143) is not in CapWords
+Event 'ldoh.onClaimTokens' (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#143-153) is not in CapWords
+Event 'ldoh.onReturnAll' (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#153-157) is not in CapWords
+Parameter '_profileHashed' of ldoh.storeProfileHashed (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#317) is not in mixedCase
+Function 'ldoh.HodlTokens' (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#332-405) is not in mixedCase
+Function 'ldoh.ClaimTokens' (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#409-429) is not in mixedCase
+Function 'ldoh.RetireHodl' (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#429-543) is not in mixedCase
+Function 'ldoh.StoreComission' (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#553-583) is not in mixedCase
+Function 'ldoh.PayToken' (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#589-613) is not in mixedCase
+Function 'ldoh.DeleteSafe' (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#619-645) is not in mixedCase
+Function 'ldoh.GetHodlTokensBalance' (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#655-667) is not in mixedCase
+Function 'ldoh.GetUserSafesLength' (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#667-677) is not in mixedCase
+Function 'ldoh.GetSafe' (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#679-721) is not in mixedCase
+Parameter '_id' of ldoh.GetSafe (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#679-681) is not in mixedCase
+Function 'ldoh.GetTokenFees' (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#733-741) is not in mixedCase
+Function 'ldoh.GetContractBalance' (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#749-751) is not in mixedCase
+Function 'ldoh.OwnerRetireHodl' (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#763-779) is not in mixedCase
+Function 'ldoh.ChangeHodlingTime' (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#783-791) is not in mixedCase
+Function 'ldoh.ChangeAllTimeHighPrice' (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#795-811) is not in mixedCase
+Function 'ldoh.ChangeComission' (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#815-823) is not in mixedCase
+Function 'ldoh.WithdrawTokenFees' (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#829-857) is not in mixedCase
+Function 'ldoh.WithdrawAllFees' (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#865-915) is not in mixedCase
+Function 'ldoh.WithdrawEth' (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#919-935) is not in mixedCase
+Function 'ldoh.GetTokensAddressesWithFees' (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#939-1008) is not in mixedCase
+Function 'ldoh.ReturnAllTokens' (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#1012-1055) is not in mixedCase
+Variable 'ldoh.AXPRtoken' (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#161-165) is not in mixedCase
+Constant 'ldoh.affiliate' (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#175) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'ldoh.cashback' (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#177-178) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'ldoh.totalreceive' (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#183-187) is not in UPPER_CASE_WITH_UNDERSCORES
+Constant 'ldoh.seconds30days' (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#191-193) is not in UPPER_CASE_WITH_UNDERSCORES
+Variable 'ldoh._userSafes' (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#229-233) is not in mixedCase
+Variable 'ldoh._countSafes' (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#243) is not in mixedCase
+Variable 'ldoh._totalSaved' (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#245-249) is not in mixedCase
+Variable 'ldoh._listedReserves' (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#265-271) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+ldoh.totalreceive (/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol#183-187) is never used in ldoh
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0xc9676530cec266e069c0807d1165fe23540c704a.sol analyzed (4 contracts), 82 result(s) found

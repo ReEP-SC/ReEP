@@ -1,0 +1,191 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol:
+/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol:740:13: Warning: Different number of components on the left hand side (2) than on the right hand side (1).
+            (bool success, ) = uniSyncPairs[i].call(abi.encodeWithSignature('sync()'));
+            ^------------------------------------------------------------------------^
+/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol:786:13: Warning: Different number of components on the left hand side (2) than on the right hand side (1).
+            (bool success, ) = uniSyncPairs[i].call(abi.encodeWithSignature('sync()'));
+            ^------------------------------------------------------------------------^
+/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol:740:14: Warning: Unused local variable.
+            (bool success, ) = uniSyncPairs[i].call(abi.encodeWithSignature('sync()'));
+             ^----------^
+/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol:786:14: Warning: Unused local variable.
+            (bool success, ) = uniSyncPairs[i].call(abi.encodeWithSignature('sync()'));
+             ^----------^
+
+INFO:Detectors:[91m
+ERC20Detailed.______gap (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#376-378) shadows:
+	- Initializable.______gap (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#290-292)
+Ownable.______gap (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#459-461) shadows:
+	- Initializable.______gap (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#290-292)
+Dollars._symbol (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#602-604) shadows:
+	- ERC20Detailed._symbol (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#346-347)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variable-shadowing[0m
+INFO:Detectors:[91m
+Dollars.bondAddress (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#597-598) is never initialized. It is used in:
+	- redeemFinal (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#671-681)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#uninitialized-state-variables[0m
+INFO:Detectors:[93m
+Initializable.isConstructor (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#278-289) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+Reentrancy in Dollars.positiveRebaseHelper (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#808-824):
+	External calls:
+	- IPool(poolRewardAddress).setLastRebase(dollarsToLPs) (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#815-816)
+	State variables written after the call(s):
+	- _dollarBalances (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#816-817)
+Reentrancy in Dollars.rebase (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#749-797):
+	External calls:
+	- positiveRebaseHelper(supplyDelta) (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#774-776)
+	State variables written after the call(s):
+	- _totalSupply (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#781-782)
+Reentrancy in Dollars.rebase (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#749-797):
+	External calls:
+	- IPool(poolRewardAddress).setLastRebase(0) (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#760-762)
+	- IPool(poolRewardAddress).setLastRebase(0) (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#768-770)
+	- positiveRebaseHelper(supplyDelta) (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#774-776)
+	- (success) = uniSyncPairs[i].call(abi.encodeWithSignature(sync())) (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#786-787)
+	State variables written after the call(s):
+	- _dollarBalances (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#789-790)
+	- _totalSupply (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#790-791)
+	- reEntrancyRebaseMutex (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#793-794)
+Reentrancy in Dollars.updateAccount (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#1016-1046):
+	External calls:
+	- owing = dividendsOwing(account) (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#1017-1018)
+	- Shares.setDividendPoints(account,_totalDividendPoints) (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#1040-1041)
+	State variables written after the call(s):
+	- debtPoints (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#1041-1043)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[93m
+Dollars.updateAccount (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#1016-1046) does not use the value returned by external calls:
+	-Shares.setDividendPoints(account,_totalDividendPoints) (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#1040-1041)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+ERC20Detailed.initialize.name (local variable @ /sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#349) shadows:
+	- ERC20Detailed.name (function @ /sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#358-362)
+ERC20Detailed.initialize.symbol (local variable @ /sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#349) shadows:
+	- ERC20Detailed.symbol (function @ /sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#365-369)
+ERC20Detailed.initialize.decimals (local variable @ /sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#349) shadows:
+	- ERC20Detailed.decimals (function @ /sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#372-376)
+Dollars.changeSymbol.symbol (local variable @ /sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#625) shadows:
+	- Dollars.symbol (function @ /sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#635-639)
+	- ERC20Detailed.symbol (function @ /sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#365-369)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+Dollars.syncUniswapV2 has external calls inside a loop:
+	- (success) = uniSyncPairs[i].call(abi.encodeWithSignature(sync())) (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#740-741)
+Dollars.rebase has external calls inside a loop:
+	- (success) = uniSyncPairs[i].call(abi.encodeWithSignature(sync())) (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#786-787)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation/_edit#calls-inside-a-loop[0m
+INFO:Detectors:[92m
+Reentrancy in Dollars.disburse (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#1046-1052):
+	External calls:
+	- _totalDividendPoints = _totalDividendPoints.add(amount.mul(POINT_MULTIPLIER).div(Shares.totalStaked())) (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#1047-1048)
+	State variables written after the call(s):
+	- _unclaimedDividends (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#1048-1050)
+Reentrancy in Dollars.positiveRebaseHelper (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#808-824):
+	External calls:
+	- IPool(poolRewardAddress).setLastRebase(dollarsToLPs) (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#815-816)
+	State variables written after the call(s):
+	- _totalSupply (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#819-821)
+Reentrancy in Dollars.rebase (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#749-797):
+	External calls:
+	- IPool(poolRewardAddress).setLastRebase(0) (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#760-762)
+	State variables written after the call(s):
+	- lastRebaseNeutral (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#763-764)
+	- lastRebasePositive (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#762-763)
+Reentrancy in Dollars.rebase (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#749-797):
+	External calls:
+	- IPool(poolRewardAddress).setLastRebase(0) (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#768-770)
+	State variables written after the call(s):
+	- _totalDebtPoints (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#771-772)
+	- _unclaimedDebt (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#771-772)
+Reentrancy in Dollars.rebase (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#749-797):
+	External calls:
+	- positiveRebaseHelper(supplyDelta) (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#774-776)
+	State variables written after the call(s):
+	- lastRebaseNeutral (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#778-780)
+	- lastRebasePositive (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#777-778)
+Reentrancy in Dollars.redeemFinal (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#671-681):
+	External calls:
+	- currentBondBalance = IBond(bondAddress).balanceOf(msg.sender) (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#672-673)
+	- success = IBond(bondAddress).redeem(msg.sender) (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#673-674)
+	State variables written after the call(s):
+	- _dollarBalances (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#676-677)
+	- _dollarBalances (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#677-679)
+Reentrancy in Dollars.updateAccount (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#1016-1046):
+	External calls:
+	- owing = dividendsOwing(account) (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#1017-1018)
+	State variables written after the call(s):
+	- _dollarBalances (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#1022-1023)
+	- _dollarBalances (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#1034-1035)
+	- _totalSupply (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#1023-1024)
+	- _totalSupply (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#1035-1036)
+	- _unclaimedDebt (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#1028-1030)
+	- _unclaimedDebt (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#1028-1030)
+	- _unclaimedDividends (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#1021-1022)
+	- _unclaimedDividends (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#1021-1022)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Initializable.isConstructor uses assembly (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#278-289)
+	- /sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#285-286
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+Dollars.bondAddress should be constant (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#597-598)
+Dollars.deprecateVar1 should be constant (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#594-595)
+Dollars.deprecateVar2 should be constant (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#596-597)
+Dollars.emptyVariable1 should be constant (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#586)
+Dollars.reEntrancyMutex should be constant (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#560-561)
+Dollars.redeemingBonus should be constant (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#584-586)
+Dollars.remainingUsdToMint should be constant (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#583-584)
+Dollars.usdDeletion should be constant (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#566-568)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#state-variables-that-could-be-declared-constant[0m
+INFO:Detectors:[92m
+Different versions of Solidity is used in /sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol:
+	- Version used: ['>=0.4.24', '>=0.4.24<0.6.0', '^0.4.24']
+	- /sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#7-10 declares pragma solidity>=0.4.24
+	- /sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#56-59 declares pragma solidity>=0.4.24
+	- /sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#139-142 declares pragma solidity>=0.4.24
+	- /sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#162-165 declares pragma solidity^0.4.24
+	- /sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#231-234 declares pragma solidity>=0.4.24<0.6.0
+	- /sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#295-298 declares pragma solidity^0.4.24
+	- /sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#333-337 declares pragma solidity^0.4.24
+	- /sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#381-384 declares pragma solidity^0.4.24
+	- /sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#464-468 declares pragma solidity>=0.4.24
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#different-pragma-directives-are-used[0m
+INFO:Detectors:[92m
+ERC20Detailed.name (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#358-362) should be declared external
+ERC20Detailed.symbol (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#365-369) should be declared external
+Dollars.symbol (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#635-639) should be declared external
+ERC20Detailed.decimals (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#372-376) should be declared external
+Ownable.owner (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#411-415) should be declared external
+Ownable.renounceOwnership (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#436-441) should be declared external
+Ownable.transferOwnership (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#445-449) should be declared external
+IERC20.balanceOf (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#305-307) should be declared external
+Dollars.balanceOf (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#859-870) should be declared external
+Dollars.changeSymbol (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#625-630) should be declared external
+Dollars.addSyncPairs (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#700-709) should be declared external
+Dollars.initialize (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#824-844) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Low level call in Dollars.syncUniswapV2 (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#736-744):
+	-(success) = uniSyncPairs[i].call(abi.encodeWithSignature(sync())) /sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#740-741
+Low level call in Dollars.rebase (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#749-797):
+	-(success) = uniSyncPairs[i].call(abi.encodeWithSignature(sync())) /sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#786-787
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Variable 'Initializable.______gap' (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#290-292) is not in mixedCase
+Variable 'ERC20Detailed.______gap' (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#376-378) is not in mixedCase
+Function 'Ownable._transferOwnership' (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#453-459) is not in mixedCase
+Variable 'Ownable.______gap' (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#459-461) is not in mixedCase
+Parameter '_val' of Dollars.setTenPercentCap (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#709-710) is not in mixedCase
+Variable 'Dollars.Shares' (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#545-547) is not in mixedCase
+Variable 'Dollars.DollarPolicy' (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#553-554) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+SafeMathInt.MAX_INT256 (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#65-67) is never used in SafeMathInt
+Ownable.______gap (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#459-461) is never used in Dollars
+Dollars.MAX_UINT256 (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#526-527) is never used in Dollars
+Dollars.reEntrancyMutex (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#560-561) is never used in Dollars
+Dollars.usdDeletion (/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol#566-568) is never used in Dollars
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0xce853d2f62992a226d939602b04cd5bbc75eb5b2.sol analyzed (12 contracts), 49 result(s) found

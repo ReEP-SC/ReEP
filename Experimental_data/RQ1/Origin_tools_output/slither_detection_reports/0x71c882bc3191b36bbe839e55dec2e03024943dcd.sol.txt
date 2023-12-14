@@ -1,0 +1,106 @@
+INFO:Slither:Compilation warnings/errors on /sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol:
+/sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol:17:1: Warning: Experimental features are turned on. Do not use experimental features on live deployments.
+pragma experimental ABIEncoderV2;
+^-------------------------------^
+
+INFO:Detectors:[93m
+Governance.getChainId (/sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#499-502) is declared view but contains assembly code
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#constant-functions-changing-the-state[0m
+INFO:Detectors:[93m
+Reentrancy in Governance._castVote (/sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#477-499):
+	External calls:
+	- require(bool,string)(state(proposalId) == ProposalState.Active,Governance::_castVote: voting is closed) (/sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#479-483)
+	- votes = VOTER.getPriorVotes(voter,proposal.startBlock) (/sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#491-493)
+	State variables written after the call(s):
+	- proposals (/sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#496-497)
+	- proposals (/sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#497)
+Reentrancy in Governance.cancel (/sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#418-432):
+	External calls:
+	- state = state(proposalId) (/sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#419-420)
+	- require(bool,string)(VOTER.getPriorVotes(proposal.proposer,block.number.sub(1)) < proposalThreshold(),Governance::cancel: proposer above threshold) (/sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#423-426)
+	State variables written after the call(s):
+	- proposals (/sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#426)
+Reentrancy in Governance.execute (/sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#406-416):
+	External calls:
+	- require(bool,string)(state(proposalId) == ProposalState.Queued,Governance::execute: proposal can only be executed if it is queued) (/sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#406-412)
+	State variables written after the call(s):
+	- proposals (/sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#413)
+Reentrancy in Governance.propose (/sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#347-390):
+	External calls:
+	- require(bool,string)(VOTER.getPriorVotes(msg.sender,block.number.sub(1)) > proposalThreshold(),Governance::propose: proposer votes below proposal threshold) (/sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#348-349)
+	- proposersLatestProposalState = state(latestProposalId) (/sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#355-358)
+	State variables written after the call(s):
+	- latestProposalIds (/sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#386-387)
+	- proposalCount (/sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#372-373)
+	- proposals (/sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#386)
+Reentrancy in Governance.queue (/sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#390-401):
+	External calls:
+	- require(bool,string)(state(proposalId) == ProposalState.Succeeded,Governance::queue: proposal can only be queued if it is succeeded) (/sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#390-396)
+	State variables written after the call(s):
+	- proposals (/sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#398)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-1[0m
+INFO:Detectors:[92m
+Governance.cancel.state (local variable @ /sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#419-420) shadows:
+	- Governance.state (function @ /sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#442-464)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+Reentrancy in Governance.cancel (/sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#418-432):
+	External calls:
+	- state = state(proposalId) (/sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#419-420)
+	- require(bool,string)(VOTER.getPriorVotes(proposal.proposer,block.number.sub(1)) < proposalThreshold(),Governance::cancel: proposer above threshold) (/sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#423-426)
+	State variables written after the call(s):
+	- queuedTransactions (/sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#428-431)
+Reentrancy in Governance.queue (/sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#390-401):
+	External calls:
+	- require(bool,string)(state(proposalId) == ProposalState.Succeeded,Governance::queue: proposal can only be queued if it is succeeded) (/sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#390-396)
+	State variables written after the call(s):
+	- queuedTransactions (/sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#397-398)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#reentrancy-vulnerabilities-2[0m
+INFO:Detectors:[92m
+Governance._queueOrRevert (/sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#401-406) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(! queuedTransactions[keccak256(bytes)(abi.encode(target,value,signature,data,eta))],Governance::_queueOrRevert: proposal action already queued at eta) (/sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#402-405)
+Governance.state (/sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#442-464) uses timestamp for comparisons
+	Dangerous comparisons:
+	- block.timestamp >= proposal.eta.add(GRACE_PERIOD) (/sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#462-464)
+Governance.queueTransaction (/sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#531-544) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(eta >= getBlockTimestamp().add(delay),Timelock::queueTransaction: Estimated execution block must satisfy delay.) (/sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#536-538)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#block-timestamp[0m
+INFO:Detectors:[92m
+Governance.getChainId uses assembly (/sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#499-502)
+	- /sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#499-501
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+Different versions of Solidity is used in /sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol:
+	- Version used: ['ABIEncoderV2', '^0.5.17']
+	- /sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#16-17 declares pragma solidity^0.5.17
+	- /sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#17-19 declares pragma experimentalABIEncoderV2
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#different-pragma-directives-are-used[0m
+INFO:Detectors:[92m
+Governance.propose (/sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#347-390) should be declared external
+Governance.queue (/sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#390-401) should be declared external
+Governance.execute (/sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#406-416) should be declared external
+Governance.cancel (/sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#418-432) should be declared external
+Governance.getActions (/sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#432-438) should be declared external
+Governance.getReceipt (/sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#439-442) should be declared external
+Governance.castVote (/sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#464-465) should be declared external
+Governance.castVoteBySig (/sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#465-477) should be declared external
+Governance.setDelay (/sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#524-531) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Detected issues with version pragma in /sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol:
+	- pragma solidity^0.5.17 (/sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#16-17): it allows old versions
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#incorrect-version-of-solidity[0m
+INFO:Detectors:[92m
+Low level call in Governance.executeTransaction (/sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#549-586):
+	-(success,returnData) = target.call.value(value)(callData) /sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#578-582
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Function 'Governance._queueOrRevert' (/sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#401-406) is not in mixedCase
+Function 'Governance._castVote' (/sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#477-499) is not in mixedCase
+Variable 'Governance._quorumVotes' (/sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#215-216) is not in mixedCase
+Variable 'Governance._proposalThreshold' (/sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#218-219) is not in mixedCase
+Variable 'Governance.VOTER' (/sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol#254-255) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Slither:/sb/0x71c882bc3191b36bbe839e55dec2e03024943dcd.sol analyzed (4 contracts), 30 result(s) found

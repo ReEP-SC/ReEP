@@ -1,0 +1,118 @@
+INFO:Slither:Compilation warnings/errors on /sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol:
+/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol:19:5: Warning: Functions in interfaces should be declared external.
+    function initialize(uint256 _requiredSignatures, address[] _initialValidators, address _owner) public returns(bool);
+    ^------------------------------------------------------------------------------------------------------------------^
+/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol:21:5: Warning: Functions in interfaces should be declared external.
+    function isValidator(address _validator) public view returns(bool);
+    ^-----------------------------------------------------------------^
+/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol:23:5: Warning: Functions in interfaces should be declared external.
+    function requiredSignatures() public view returns(uint256);
+    ^---------------------------------------------------------^
+/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol:25:5: Warning: Functions in interfaces should be declared external.
+    function owner() public view returns(address);
+    ^--------------------------------------------^
+
+INFO:Detectors:[93m
+ForeignBridgeFactory.deployForeignBridge (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#1119-1175) does not use the value returned by external calls:
+	-bridgeValidators.initialize(requiredSignatures(),initialValidators(),bridgeValidatorsOwner()) (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#1135-1141)
+	-foreignBridge.initialize(bridgeValidators,_erc20Token,requiredBlockConfirmations(),gasPrice(),foreignMaxPerTx(),homeDailyLimit(),homeMaxPerTx(),foreignBridgeOwner()) (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#1159-1167)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-return[0m
+INFO:Detectors:[92m
+UpgradeabilityProxy._upgradeTo.version (local variable @ /sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#535) shadows:
+	- UpgradeabilityStorage.version (function @ /sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#457-467)
+UpgradeabilityProxy._upgradeTo.implementation (local variable @ /sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#535) shadows:
+	- UpgradeabilityStorage.implementation (function @ /sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#475-479)
+	- Proxy.implementation (function @ /sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#201-203)
+OwnedUpgradeabilityProxy.upgradeTo.version (local variable @ /sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#647) shadows:
+	- UpgradeabilityStorage.version (function @ /sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#457-467)
+OwnedUpgradeabilityProxy.upgradeTo.implementation (local variable @ /sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#647) shadows:
+	- UpgradeabilityStorage.implementation (function @ /sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#475-479)
+	- Proxy.implementation (function @ /sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#201-203)
+OwnedUpgradeabilityProxy.upgradeToAndCall.version (local variable @ /sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#679-683) shadows:
+	- UpgradeabilityStorage.version (function @ /sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#457-467)
+OwnedUpgradeabilityProxy.upgradeToAndCall.implementation (local variable @ /sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#683) shadows:
+	- UpgradeabilityStorage.implementation (function @ /sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#475-479)
+	- Proxy.implementation (function @ /sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#201-203)
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#local-variable-shadowing[0m
+INFO:Detectors:[92m
+Proxy.fallback uses assembly (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#219-419)
+	- /sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#239-419
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#assembly-usage[0m
+INFO:Detectors:[92m
+IBridgeValidators.initialize (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#19-21) should be declared external
+IBridgeValidators.isValidator (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#21-23) should be declared external
+IBridgeValidators.requiredSignatures (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#23-25) should be declared external
+IBridgeValidators.owner (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#25-31) should be declared external
+IForeignBridge.initialize (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#41-65) should be declared external
+Proxy.fallback (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#219-419) should be declared external
+UpgradeabilityStorage.version (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#457-467) should be declared external
+OwnedUpgradeabilityProxy.transferProxyOwnership (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#627-639) should be declared external
+OwnedUpgradeabilityProxy.upgradeToAndCall (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#679-695) should be declared external
+EternalOwnable.transferOwnership (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#795-803) should be declared external
+BasicBridgeFactory.getBridgeFactoryVersion (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#819-823) should be declared external
+ForeignBridgeFactory.initialize (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#1033-1119) should be declared external
+ForeignBridgeFactory.deployForeignBridge (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#1119-1175) should be declared external
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#public-function-that-could-be-declared-as-external[0m
+INFO:Detectors:[92m
+Low level call in Proxy.fallback (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#219-419):
+	-_impl.call(0x5c60da1b) /sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#227-239
+Low level call in OwnedUpgradeabilityProxy.upgradeToAndCall (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#679-695):
+	-require(bool)(address(this).call.value(msg.value)(data)) /sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#691-695
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#low-level-calls[0m
+INFO:Detectors:[92m
+Parameter '_newImplementation' of UpgradeabilityStorage.setImplementation (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#483) is not in mixedCase
+Variable 'UpgradeabilityStorage._version' (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#441-443) is not in mixedCase
+Variable 'UpgradeabilityStorage._implementation' (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#447) is not in mixedCase
+Function 'UpgradeabilityProxy._upgradeTo' (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#531-547) is not in mixedCase
+Parameter '_bridgeValidatorsImplementation' of BasicBridgeFactory.setBridgeValidatorsImplementation (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#837) is not in mixedCase
+Parameter '_requiredSignatures' of BasicBridgeFactory.setRequiredSignatures (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#855) is not in mixedCase
+Parameter '_initialValidators' of BasicBridgeFactory.setInitialValidators (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#871) is not in mixedCase
+Parameter '_bridgeValidatorsOwner' of BasicBridgeFactory.setBridgeValidatorsOwner (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#889) is not in mixedCase
+Parameter '_bridgeValidatorsProxyOwner' of BasicBridgeFactory.setBridgeValidatorsProxyOwner (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#911) is not in mixedCase
+Parameter '_requiredBlockConfirmations' of BasicBridgeFactory.setRequiredBlockConfirmations (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#929-934) is not in mixedCase
+Parameter '_gasPrice' of BasicBridgeFactory.setGasPrice (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#951) is not in mixedCase
+Parameter '_homeDailyLimit' of BasicBridgeFactory.setHomeDailyLimit (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#967) is not in mixedCase
+Parameter '_homeMaxPerTx' of BasicBridgeFactory.setHomeMaxPerTx (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#985) is not in mixedCase
+Parameter '_foreignMaxPerTx' of BasicBridgeFactory.setForeignMaxPerTx (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#999) is not in mixedCase
+Parameter '_status' of BasicBridgeFactory.setInitialize (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#1007-1009) is not in mixedCase
+Parameter '_owner' of ForeignBridgeFactory.initialize (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#1033-1035) is not in mixedCase
+Parameter '_bridgeValidatorsImplementation' of ForeignBridgeFactory.initialize (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#1035-1037) is not in mixedCase
+Parameter '_requiredSignatures' of ForeignBridgeFactory.initialize (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#1037) is not in mixedCase
+Parameter '_initialValidators' of ForeignBridgeFactory.initialize (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#1039) is not in mixedCase
+Parameter '_bridgeValidatorsOwner' of ForeignBridgeFactory.initialize (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#1041) is not in mixedCase
+Parameter '_foreignBridgeErcToErcImplementation' of ForeignBridgeFactory.initialize (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#1041-1045) is not in mixedCase
+Parameter '_requiredBlockConfirmations' of ForeignBridgeFactory.initialize (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#1045-1047) is not in mixedCase
+Parameter '_gasPrice' of ForeignBridgeFactory.initialize (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#1047) is not in mixedCase
+Parameter '_foreignMaxPerTx' of ForeignBridgeFactory.initialize (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#1047-1049) is not in mixedCase
+Parameter '_homeDailyLimit' of ForeignBridgeFactory.initialize (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#1049) is not in mixedCase
+Parameter '_homeMaxPerTx' of ForeignBridgeFactory.initialize (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#1051) is not in mixedCase
+Parameter '_foreignBridgeOwner' of ForeignBridgeFactory.initialize (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#1051-1053) is not in mixedCase
+Parameter '_foreignProxyOwner' of ForeignBridgeFactory.initialize (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#1053-1055) is not in mixedCase
+Parameter '_erc20Token' of ForeignBridgeFactory.deployForeignBridge (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#1119) is not in mixedCase
+Parameter '_foreignBridgeErcToErcImplementation' of ForeignBridgeFactory.setForeignBridgeErcToErcImplementation (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol) is not in mixedCase
+Parameter '_foreignBridgeOwner' of ForeignBridgeFactory.setForeignBridgeOwner (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol) is not in mixedCase
+Parameter '_foreignBridgeProxyOwner' of ForeignBridgeFactory.setForeignBridgeProxyOwner (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol) is not in mixedCase
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#conformance-to-solidity-naming-conventions[0m
+INFO:Detectors:[92m
+EternalStorage.uintStorage (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#83-85) is never used in EternalStorageProxy
+EternalStorage.stringStorage (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#85-87) is never used in EternalStorageProxy
+EternalStorage.addressStorage (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#87-89) is never used in EternalStorageProxy
+EternalStorage.bytesStorage (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#89-91) is never used in EternalStorageProxy
+EternalStorage.boolStorage (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#91-97) is never used in EternalStorageProxy
+EternalStorage.intStorage (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#97-99) is never used in EternalStorageProxy
+EternalStorage.uintArrayStorage (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#99-101) is never used in EternalStorageProxy
+EternalStorage.stringArrayStorage (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#101-103) is never used in EternalStorageProxy
+EternalStorage.addressArrayStorage (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#103-105) is never used in EternalStorageProxy
+EternalStorage.boolArrayStorage (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#107-109) is never used in EternalStorageProxy
+EternalStorage.intArrayStorage (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#109-115) is never used in EternalStorageProxy
+EternalStorage.bytes32ArrayStorage (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#115-121) is never used in EternalStorageProxy
+EternalStorage.stringStorage (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#85-87) is never used in ForeignBridgeFactory
+EternalStorage.bytesStorage (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#89-91) is never used in ForeignBridgeFactory
+EternalStorage.intStorage (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#97-99) is never used in ForeignBridgeFactory
+EternalStorage.uintArrayStorage (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#99-101) is never used in ForeignBridgeFactory
+EternalStorage.stringArrayStorage (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#101-103) is never used in ForeignBridgeFactory
+EternalStorage.boolArrayStorage (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#107-109) is never used in ForeignBridgeFactory
+EternalStorage.intArrayStorage (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#109-115) is never used in ForeignBridgeFactory
+EternalStorage.bytes32ArrayStorage (/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol#115-121) is never used in ForeignBridgeFactory
+Reference: https://github.com/trailofbits/slither/wiki/Detectors-Documentation#unused-state-variables[0m
+INFO:Slither:/sb/0xc8d865b2b3b4a91491ea600002b09913d58fd7cd.sol analyzed (12 contracts), 57 result(s) found
