@@ -1,0 +1,6 @@
+# Experiment Datasets
+
+We utilized two datasets in our study to comprehensively evaluate the performance of ReEP in detecting Reentrancy vulnerabilities. Dataset `DB1` was employed to validate RQ1, RQ3, and RQ4, while dataset `DB2` was used to validate RQ2.
+
+- `DB1`: The **_DB1_** dataset was initially collected by [Zheng et al](https://github.com/InPlusLab/ReentrancyStudy-Data), consisting of 230,548 verified contracts from Etherscan. These contracts underwent analysis using six state-of-the-art Reentrancy detection tools, identifying 21,212 contracts potentially vulnerable to Reentrancy vulnerabilities by at least one tool. Subsequently, two rounds of manual checks involving 50 participants confirmed 34 contracts as true positives (TP).
+- `DB2`: The **_DB2_** dataset comprises the widely used [SmartBugs](https://github.com/smartbugs/smartbugs-curated) dataset, containing 143 contracts. Among these contracts, 31 were identified as containing Reentrancy vulnerabilities. The inclusion of these labeled contracts enabled the evaluation of ReEP's recall performance in detecting Reentrancy vulnerabilities.
